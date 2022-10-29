@@ -1,0 +1,224 @@
+/*
+ * P2tools Copyright (C) 2019 W. Xaver W.Xaver[at]googlemail.com
+ * https://www.p2tools.de/
+ *
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with this program. If
+ * not, see <http://www.gnu.org/licenses/>.
+ */
+
+
+package de.p2tools.mtviewer.gui.configDialog.downloadPanes;
+
+import de.p2tools.mtviewer.controller.config.ProgConfig;
+import de.p2tools.mtviewer.controller.config.ProgConst;
+import de.p2tools.mtviewer.controller.config.ProgData;
+import de.p2tools.mtviewer.controller.data.ProgIcons;
+import de.p2tools.mtviewer.gui.tools.HelpText;
+import de.p2tools.p2Lib.dialogs.PDirFileChooser;
+import de.p2tools.p2Lib.guiTools.PButton;
+import de.p2tools.p2Lib.guiTools.PColumnConstraints;
+import de.p2tools.p2Lib.tools.PSystemUtils;
+import javafx.geometry.Insets;
+import javafx.geometry.VPos;
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+import java.util.Collection;
+
+public class DestinationPane {
+    private final VBox vBoxAll = new VBox(25);
+    private final TextField txtDestPath = new TextField();
+    private final TextField txtDestName = new TextField();
+    private final TextField txtProg = new TextField();
+    private final TextField txtParameter = new TextField();
+    private final Slider slCut = new Slider();
+    private final Slider slCutField = new Slider();
+    private final Stage stage;
+    private final ProgData progData;
+
+    public DestinationPane(Stage stage) {
+        this.stage = stage;
+        this.progData = ProgData.getInstance();
+        make();
+    }
+
+    public void close() {
+        unBindProgData();
+    }
+
+    public void makePane(Collection<TitledPane> result) {
+        TitledPane tpConfig = new TitledPane("Programme", vBoxAll);
+        result.add(tpConfig);
+    }
+
+    private void make() {
+        vBoxAll.setFillWidth(true);
+        vBoxAll.setPadding(new Insets(10));
+
+        final Button btnFileDest = new Button();
+        btnFileDest.setGraphic(ProgIcons.Icons.ICON_BUTTON_FILE_OPEN.getImageView());
+        btnFileDest.setTooltip(new Tooltip("Einen Ordner zum Speichern der Filme auswählen"));
+        btnFileDest.setOnAction(event -> PDirFileChooser.DirChooser(ProgData.getInstance().primaryStage, txtDestPath));
+
+        final Button btnFileProgram = new Button();
+        btnFileProgram.setGraphic(ProgIcons.Icons.ICON_BUTTON_FILE_OPEN.getImageView());
+        btnFileProgram.setTooltip(new Tooltip("Das Programm für den Download von Streams auswählen"));
+        btnFileProgram.setOnAction(event -> PDirFileChooser.FileChooserOpenFile(ProgData.getInstance().primaryStage, txtProg));
+
+        final Button btnDestReset = new Button();
+        btnDestReset.setGraphic(ProgIcons.Icons.ICON_BUTTON_RESET.getImageView());
+        btnDestReset.setTooltip(new Tooltip("Die Init-Parameter wieder herstellen"));
+        btnDestReset.setOnAction(event -> txtDestName.setText(ProgConfig.DOWNLOAD_FILE_NAME_INIT));
+
+        final Button btnParameterReset = new Button();
+        btnParameterReset.setGraphic(ProgIcons.Icons.ICON_BUTTON_RESET.getImageView());
+        btnParameterReset.setTooltip(new Tooltip("Die Init-Parameter wieder herstellen"));
+        btnParameterReset.setOnAction(event -> txtParameter.setText(ProgConfig.SYSTEM_PROG_SAVE_PARAMETER_INIT));
+
+        final Button btnHelpDestName = PButton.helpButton(stage, "Zieldateiname",
+                HelpText.PSET_FILE_NAME);
+
+        final Button btnHelpProgram = PButton.helpButton(stage, "Programm",
+                HelpText.PSET_FILE_HELP_PROGRAM);
+
+        final Button btnHelpParameter = PButton.helpButton(stage, "Parameter",
+                HelpText.PSET_FILE_HELP_PARAMETER);
+
+        int row = 0;
+        GridPane gridPane = new GridPane();
+        gridPane.setHgap(15);
+        gridPane.setVgap(10);
+        vBoxAll.getChildren().add(gridPane);
+
+        // path/name
+        gridPane.add(new Label("Zielpfad:"), 0, ++row);
+        gridPane.add(txtDestPath, 1, row);
+        gridPane.add(btnFileDest, 2, row);
+
+        gridPane.add(new Label("Zieldateiname:"), 0, ++row);
+        gridPane.add(txtDestName, 1, row);
+        gridPane.add(btnDestReset, 2, row);
+        gridPane.add(btnHelpDestName, 3, row);
+
+        // program/parameter
+        gridPane.add(new Label("Programm:"), 0, ++row);
+        gridPane.add(txtProg, 1, row);
+        gridPane.add(btnFileProgram, 2, row);
+        gridPane.add(btnHelpProgram, 3, row);
+
+        gridPane.add(new Label("Parameter:"), 0, ++row);
+        gridPane.add(txtParameter, 1, row);
+        gridPane.add(btnParameterReset, 2, row);
+        gridPane.add(btnHelpParameter, 3, row);
+
+        gridPane.getColumnConstraints().addAll(PColumnConstraints.getCcPrefSize(),
+                PColumnConstraints.getCcComputedSizeAndHgrow(),
+                PColumnConstraints.getCcPrefSize());
+
+        makeCut(vBoxAll);
+        bindProgData();
+    }
+
+    private void makeCut(VBox vBox) {
+        // cut
+        Label lblTxtAll = new Label("Länge\nganzer Dateiname:");
+        Label lblSizeAll = new Label();
+        Label lblTxtField = new Label("Länge\neinzelne Felder:");
+        Label lblSizeField = new Label();
+
+        final Button btnHelpDestSize = PButton.helpButton(stage, "Länge des Zieldateinamens",
+                HelpText.PSET_DEST_FILE_SIZE);
+
+        slCut.setMin(0);
+        slCut.setMax(ProgConst.LAENGE_DATEINAME_MAX);
+        slCut.setShowTickLabels(true);
+        slCut.setMinorTickCount(10);
+        slCut.setMajorTickUnit(50);
+        slCut.setBlockIncrement(10);
+        slCut.setSnapToTicks(true);
+
+        slCutField.setMin(0);
+        slCutField.setMax(ProgConst.LAENGE_FELD_MAX);
+        slCutField.setShowTickLabels(true);
+        slCutField.setMinorTickCount(10);
+        slCutField.setMajorTickUnit(50);
+        slCutField.setBlockIncrement(10);
+        slCutField.setSnapToTicks(true);
+
+        setValueSlider(slCut, lblSizeAll, "");
+        slCut.valueProperty().addListener((observable, oldValue, newValue) -> setValueSlider(slCut, lblSizeAll, ""));
+        setValueSlider(slCutField, lblSizeField, "");
+        slCutField.valueProperty().addListener((observable, oldValue, newValue) -> setValueSlider(slCutField, lblSizeField, ""));
+
+        GridPane.setValignment(btnHelpDestSize, VPos.CENTER);
+        GridPane.setValignment(lblTxtAll, VPos.CENTER);
+        GridPane.setValignment(lblSizeAll, VPos.CENTER);
+        GridPane.setValignment(slCutField, VPos.CENTER);
+        GridPane.setValignment(lblTxtField, VPos.CENTER);
+        GridPane.setValignment(lblSizeField, VPos.CENTER);
+        GridPane.setValignment(slCutField, VPos.CENTER);
+
+        GridPane gridPane = new GridPane();
+        gridPane.setHgap(15);
+        gridPane.setVgap(10);
+        vBox.getChildren().add(gridPane);
+
+        int row = 0;
+        gridPane.add(lblTxtAll, 0, ++row);//Platz nach oben!
+        gridPane.add(slCut, 1, row);
+        gridPane.add(lblSizeAll, 2, row);
+        gridPane.add(btnHelpDestSize, 3, row);
+
+        gridPane.add(lblTxtField, 0, ++row);
+        gridPane.add(slCutField, 1, row);
+        gridPane.add(lblSizeField, 2, row);
+
+        gridPane.getColumnConstraints().addAll(PColumnConstraints.getCcPrefSize(),
+                PColumnConstraints.getCcComputedSizeAndHgrow(),
+                PColumnConstraints.getCcPrefSize(), PColumnConstraints.getCcPrefSize());
+    }
+
+    private void setValueSlider(Slider sl, Label lb, String pre) {
+        int days = (int) sl.getValue();
+        lb.setText(pre + (days == 0 ? "nicht\nbeschränken" : "auf " + days + "\nZeichen beschränken"));
+    }
+
+    public void bindProgData() {
+        unBindProgData();
+        txtDestPath.textProperty().bindBidirectional(ProgConfig.DOWNLOAD_FILE_PATH);
+        if (txtDestPath.getText().isEmpty()) {
+            txtDestPath.setText(PSystemUtils.getStandardDownloadPath());
+        }
+        txtDestName.textProperty().bindBidirectional(ProgConfig.DOWNLOAD_FILE_NAME);
+        if (txtDestName.getText().isEmpty()) {
+            txtDestName.setText(ProgConfig.DOWNLOAD_FILE_NAME_INIT);
+        }
+        txtProg.textProperty().bindBidirectional(ProgConfig.SYSTEM_PROG_SAVE);
+        if (txtProg.getText().isEmpty()) {
+            txtProg.setText(ProgConfig.SYSTEM_PROG_SAVE_INIT);
+        }
+        txtParameter.textProperty().bindBidirectional(ProgConfig.SYSTEM_PROG_SAVE_PARAMETER);
+        if (txtParameter.getText().isEmpty()) {
+            txtParameter.setText(ProgConfig.SYSTEM_PROG_SAVE_PARAMETER_INIT);
+        }
+        slCut.valueProperty().bindBidirectional(ProgConfig.SYSTEM_SAVE_MAX_SIZE);
+        slCutField.valueProperty().bindBidirectional(ProgConfig.SYSTEM_SAVE_MAX_FIELD);
+    }
+
+    void unBindProgData() {
+        txtDestPath.textProperty().unbindBidirectional(ProgConfig.DOWNLOAD_FILE_PATH);
+        txtDestName.textProperty().unbindBidirectional(ProgConfig.DOWNLOAD_FILE_NAME);
+        slCut.valueProperty().unbindBidirectional(ProgConfig.SYSTEM_SAVE_MAX_SIZE);
+        slCutField.valueProperty().unbindBidirectional(ProgConfig.SYSTEM_SAVE_MAX_FIELD);
+    }
+}

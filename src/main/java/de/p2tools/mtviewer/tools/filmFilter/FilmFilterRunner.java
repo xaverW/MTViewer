@@ -1,0 +1,97 @@
+/*
+ * MTPlayer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
+ * https://www.p2tools.de
+ *
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with this program. If
+ * not, see <http://www.gnu.org/licenses/>.
+ */
+
+
+package de.p2tools.mtviewer.tools.filmFilter;
+
+import de.p2tools.mtviewer.controller.config.ProgData;
+import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ListenerFilmlistLoadEvent;
+import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ListenerLoadFilmlist;
+import de.p2tools.mtviewer.gui.tools.Listener;
+import de.p2tools.p2Lib.tools.duration.PDuration;
+import de.p2tools.p2Lib.tools.log.PLog;
+import javafx.application.Platform;
+
+import java.util.concurrent.atomic.AtomicBoolean;
+
+public class FilmFilterRunner {
+    private static final AtomicBoolean search = new AtomicBoolean(false);
+    private static final AtomicBoolean research = new AtomicBoolean(false);
+    private final ProgData progData;
+    int count = 0;
+
+    /**
+     * hier wird das Filtern der Filmliste "angestoßen"
+     *
+     * @param progData
+     */
+    public FilmFilterRunner(ProgData progData) {
+        this.progData = progData;
+
+        progData.actFilmFilterWorker.filterChangeProperty().addListener((observable, oldValue, newValue) -> filter()); // Filmfilter (User) haben sich geändert
+        progData.loadFilmlist.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
+            @Override
+            public void finished(ListenerFilmlistLoadEvent event) {
+                filterList();
+            }
+        });
+
+        Listener.addListener(new Listener(Listener.EVENT_BLACKLIST_CHANGED, FilmFilterRunner.class.getSimpleName()) {
+            @Override
+            public void pingFx() {
+                filterList();
+            }
+        });
+        Listener.addListener(new Listener(Listener.EVENT_DIACRITIC_CHANGED, FilmFilterRunner.class.getSimpleName()) {
+            @Override
+            public void pingFx() {
+                filterList();
+            }
+        });
+    }
+
+    private void filter() {
+        Platform.runLater(() -> filterList());
+    }
+
+    private void filterList() {
+        // ist etwas "umständlich", scheint aber am flüssigsten zu laufen
+        if (!search.getAndSet(true)) {
+            research.set(false);
+            try {
+                Platform.runLater(() -> {
+                    PLog.sysLog("========================================");
+                    PLog.sysLog("         === Filter: " + count++ + " ===");
+                    PLog.sysLog("========================================");
+
+                    PDuration.counterStart("FilmFilterRunner.filterList");
+                    progData.filmlist.filteredListSetPred(
+                            PredicateFactory.getPredicate(progData.actFilmFilterWorker.getActFilterSettings()));
+                    PDuration.counterStop("FilmFilterRunner.filterList");
+
+                    search.set(false);
+                    if (research.get()) {
+                        filterList();
+                    }
+                });
+            } catch (Exception ex) {
+                ex.printStackTrace(); //todo???
+            }
+        } else {
+            research.set(true);
+        }
+    }
+}
