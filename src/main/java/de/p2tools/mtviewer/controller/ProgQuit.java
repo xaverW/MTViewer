@@ -63,7 +63,7 @@ public class ProgQuit {
     }
 
     private static void exitProg() {
-        // dann jetzt beenden -> Thüss
+        // dann jetzt beenden -> Tschüss
         Platform.runLater(() -> {
             Platform.exit();
             System.exit(0);
@@ -80,6 +80,11 @@ public class ProgQuit {
             if (download.isStateStartedWaiting()) {
                 //wartende werden komplett zurückgesetzt
                 download.resetDownload();
+            }
+            Process p = download.getStart().getProcess();
+            if (p != null) {
+                //um Downloads mit ffmpeg zu stoppen!
+                p.destroy();
             }
         });
 
