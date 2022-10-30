@@ -76,12 +76,12 @@ public class MTPlayer extends Application {
             PDuration.onlyPing("Erster Start");
             firstProgramStart = true;
 
-            UpdateConfig.setUpdateDone(); // dann ists ja kein Programmupdate
-            progData.replaceList.init(); // einmal ein Muster anlegen, für Linux ist es bereits aktiv!
+            UpdateConfig.setUpdateDone(); //dann ists ja kein Programmupdate
+            progData.replaceList.init(); //einmal ein Muster anlegen, für Linux ist es bereits aktiv!
 
             StartDialogController startDialogController = new StartDialogController();
             if (!startDialogController.isOk()) {
-                // dann jetzt beenden -> Thüss
+                // dann jetzt beenden -> Tschüss
                 Platform.exit();
                 System.exit(0);
             }

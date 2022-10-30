@@ -206,7 +206,6 @@ public class DownloadList extends SimpleListProperty<DownloadData> implements PD
 
     public synchronized void cleanUpList() {
         // fertige Downloads löschen, fehlerhafte zurücksetzen
-
         boolean found = false;
         Iterator<DownloadData> it = this.iterator();
         while (it.hasNext()) {

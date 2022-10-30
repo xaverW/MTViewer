@@ -74,7 +74,12 @@ public class ProgQuit {
         //erst mal alle Downloads stoppen
         ProgData.getInstance().downloadList.forEach(download -> {
             if (download.isStateStartedRun()) {
+                //laufende werden nur gestoppt
                 download.stopDownload();
+            }
+            if (download.isStateStartedWaiting()) {
+                //wartende werden komplett zurückgesetzt
+                download.resetDownload();
             }
         });
 

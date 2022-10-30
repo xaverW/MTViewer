@@ -36,7 +36,7 @@ public class DownloadListStarts {
     }
 
     public DownloadData getRestartDownload() {
-        //Versuch einen fehlgeschlagenen Download zu finden, um ihn wieder zu starten
+        //Versuch einen fehlgeschlagenen Download zu finden, um ihn, wieder zu starten
         //die Fehler laufen aber einzeln, vorsichtshalber
         if (!getDown(1)) {
             // dann läuft noch einer
@@ -53,7 +53,7 @@ public class DownloadListStarts {
                     && !maxChannelPlay(download, 1)) {
 
                 int restarted = download.getStart().getRestartCounter();
-                download.restartDownload();
+                download.resetDownload();
                 progData.downloadList.startDownloads(download);
                 // UND jetzt den Restartcounter wieder setzen!!
                 download.getStart().setRestartCounter(++restarted);

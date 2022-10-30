@@ -131,18 +131,18 @@ public final class DownloadData extends DownloadDataProps {
         setState(DownloadConstants.STATE_INIT);
     }
 
-    public void restartDownload() {
-        // stoppen und alles zurücksetzen
-        final DownloadSize downSize = getDownloadSize();
-        downSize.reset();
-        setRemaining("");
-        setBandwidth("");
-        getStart().setBandwidth(0);
-        setNo(DownloadConstants.DOWNLOAD_NUMBER_NOT_STARTED);
-
-        setState(DownloadConstants.STATE_INIT);
-        setProgress(DownloadConstants.PROGRESS_NOT_STARTED);
-    }
+//    public void restartDownload() {
+//        // stoppen und alles zurücksetzen
+//        final DownloadSize downSize = getDownloadSize();
+//        downSize.reset();
+//        setRemaining("");
+//        setBandwidth("");
+//        getStart().setBandwidth(0);
+//        setNo(DownloadConstants.DOWNLOAD_NUMBER_NOT_STARTED);
+//
+//        setState(DownloadConstants.STATE_INIT);
+//        setProgress(DownloadConstants.PROGRESS_NOT_STARTED);
+//    }
 
     public void stopDownload() {
         if (isStateError()) {
