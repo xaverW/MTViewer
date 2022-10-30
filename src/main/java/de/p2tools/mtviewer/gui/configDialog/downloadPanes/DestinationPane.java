@@ -75,6 +75,11 @@ public class DestinationPane {
         btnFileProgram.setTooltip(new Tooltip("Das Programm für den Download von Streams auswählen"));
         btnFileProgram.setOnAction(event -> PDirFileChooser.FileChooserOpenFile(ProgData.getInstance().primaryStage, txtProg));
 
+        final Button btnDestPathReset = new Button();
+        btnDestPathReset.setGraphic(ProgIcons.Icons.ICON_BUTTON_RESET.getImageView());
+        btnDestPathReset.setTooltip(new Tooltip("Die Init-Parameter wieder herstellen"));
+        btnDestPathReset.setOnAction(event -> txtDestPath.setText(ProgConfig.DOWNLOAD_FILE_PATH_INIT));
+
         final Button btnDestReset = new Button();
         btnDestReset.setGraphic(ProgIcons.Icons.ICON_BUTTON_RESET.getImageView());
         btnDestReset.setTooltip(new Tooltip("Die Init-Parameter wieder herstellen"));
@@ -84,6 +89,11 @@ public class DestinationPane {
         btnParameterReset.setGraphic(ProgIcons.Icons.ICON_BUTTON_RESET.getImageView());
         btnParameterReset.setTooltip(new Tooltip("Die Init-Parameter wieder herstellen"));
         btnParameterReset.setOnAction(event -> txtParameter.setText(ProgConfig.SYSTEM_PROG_SAVE_PARAMETER_INIT));
+
+        final Button btnProgramReset = new Button();
+        btnProgramReset.setGraphic(ProgIcons.Icons.ICON_BUTTON_RESET.getImageView());
+        btnProgramReset.setTooltip(new Tooltip("Die Init-Parameter wieder herstellen"));
+        btnProgramReset.setOnAction(event -> txtProg.setText(ProgConfig.SYSTEM_PROG_SAVE_INIT));
 
         final Button btnHelpDestName = PButton.helpButton(stage, "Zieldateiname",
                 HelpText.PSET_FILE_NAME);
@@ -103,23 +113,25 @@ public class DestinationPane {
         // path/name
         gridPane.add(new Label("Zielpfad:"), 0, ++row);
         gridPane.add(txtDestPath, 1, row);
-        gridPane.add(btnFileDest, 2, row);
+        gridPane.add(btnDestPathReset, 2, 1);
+        gridPane.add(btnFileDest, 3, row);
 
         gridPane.add(new Label("Zieldateiname:"), 0, ++row);
         gridPane.add(txtDestName, 1, row);
         gridPane.add(btnDestReset, 2, row);
-        gridPane.add(btnHelpDestName, 3, row);
+        gridPane.add(btnHelpDestName, 4, row);
 
         // program/parameter
         gridPane.add(new Label("Programm:"), 0, ++row);
         gridPane.add(txtProg, 1, row);
-        gridPane.add(btnFileProgram, 2, row);
-        gridPane.add(btnHelpProgram, 3, row);
+        gridPane.add(btnProgramReset, 2, row);
+        gridPane.add(btnFileProgram, 3, row);
+        gridPane.add(btnHelpProgram, 4, row);
 
         gridPane.add(new Label("Parameter:"), 0, ++row);
         gridPane.add(txtParameter, 1, row);
         gridPane.add(btnParameterReset, 2, row);
-        gridPane.add(btnHelpParameter, 3, row);
+        gridPane.add(btnHelpParameter, 4, row);
 
         gridPane.getColumnConstraints().addAll(PColumnConstraints.getCcPrefSize(),
                 PColumnConstraints.getCcComputedSizeAndHgrow(),

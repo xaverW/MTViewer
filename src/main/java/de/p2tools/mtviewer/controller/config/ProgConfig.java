@@ -147,7 +147,8 @@ public class ProgConfig extends PDataProgConfig {
     public static BooleanProperty DOWNLOAD_START_NOW = addBool("download-start-now", Boolean.FALSE);
 
     //Download-SetDate
-    public static StringProperty DOWNLOAD_FILE_PATH = addStr("download-file-path");
+    public static String DOWNLOAD_FILE_PATH_INIT = PSystemUtils.getStandardDownloadPath();
+    public static StringProperty DOWNLOAD_FILE_PATH = addStr("download-file-path", DOWNLOAD_FILE_PATH_INIT);
     public static String DOWNLOAD_FILE_NAME_INIT = "%t-%T-%Z.mp4";
     public static StringProperty DOWNLOAD_FILE_NAME = addStr("download-file-name", DOWNLOAD_FILE_NAME_INIT);
     public static StringProperty DOWNLOAD_RESOLUTION = addStr("download-resolution", FilmData.RESOLUTION_NORMAL);
