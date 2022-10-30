@@ -37,9 +37,9 @@ public class PlayPane {
 
     private final Stage stage;
     private final RadioButton rbAsk = new RadioButton("Immer vorher fragen");
-    private final RadioButton rbHd = new RadioButton("Film in HD laden");
-    private final RadioButton rbHeight = new RadioButton("Film in hoher Auflösung laden");
-    private final RadioButton rbLow = new RadioButton("Film in kleiner Auflösung laden");
+    private final RadioButton rbHd = new RadioButton("Film in HD abspielen");
+    private final RadioButton rbHeight = new RadioButton("Film in hoher Auflösung abspielen");
+    private final RadioButton rbLow = new RadioButton("Film in kleiner Auflösung abspielen");
     StringProperty propProgram = ProgConfig.SYSTEM_PROG_PLAY;
     StringProperty propParameter = ProgConfig.SYSTEM_PROG_PLAY_PARAMETER;
 
