@@ -125,8 +125,7 @@ public class ProgConfig extends PDataProgConfig {
 
     //Download
     public static StringProperty DOWNLOAD_DIALOG_PATH_SAVING = addStr("download-dialog-path-saving"); // gesammelten Downloadpfade im Downloaddialog
-    public static StringProperty DOWNLOAD_DIALOG_ADD_SIZE = addStr("download-dialog-add-size");
-    public static StringProperty DOWNLOAD_DIALOG_ADD_MORE_SIZE = addStr("download-dialog-add-more-size");
+    public static StringProperty DOWNLOAD_ADD_DIALOG_SIZE = addStr("download-add-dialog-size", "800:600");
     public static IntegerProperty DOWNLOAD_MAX_BANDWIDTH_KBYTE = addInt("download-max-bandwidth-kilobyte", BandwidthTokenBucket.BANDWIDTH_MAX_KBYTE);
     public static StringProperty DOWNLOAD_DIALOG_ERROR_SIZE = addStr("download-dialog-error-size", "");
     public static IntegerProperty DOWNLOAD_MAX_DOWNLOADS = addInt("download-max-downloads", 1);

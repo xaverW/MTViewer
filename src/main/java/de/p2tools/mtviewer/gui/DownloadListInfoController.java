@@ -23,7 +23,6 @@ import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.data.download.DownloadDataFactory;
 import de.p2tools.mtviewer.controller.data.film.FilmData;
 import de.p2tools.mtviewer.controller.data.film.FilmTools;
-import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ListenerLoadFilmlist;
 import de.p2tools.mtviewer.gui.dialog.DownloadAddDialogController;
 import de.p2tools.mtviewer.gui.dialog.FilmInfoDialogController;
 import de.p2tools.mtviewer.gui.tools.table.Table;
@@ -33,8 +32,6 @@ import de.p2tools.p2Lib.alert.PAlert;
 import de.p2tools.p2Lib.guiTools.POpen;
 import de.p2tools.p2Lib.guiTools.PTableFactory;
 import de.p2tools.p2Lib.tools.PSystemUtils;
-import de.p2tools.p2Lib.tools.duration.PDuration;
-import de.p2tools.p2Lib.tools.log.PLog;
 import javafx.beans.property.DoubleProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.transformation.SortedList;
@@ -59,7 +56,6 @@ public class DownloadListInfoController extends AnchorPane {
     private final ProgData progData;
     private final SortedList<DownloadData> sortedDownloads;
     DoubleProperty doubleProperty; //sonst geht die Ref verloren
-    private boolean bound = false;
 
     public DownloadListInfoController() {
         progData = ProgData.getInstance();
@@ -124,29 +120,6 @@ public class DownloadListInfoController extends AnchorPane {
             listStopDownload.add(download);
         });
         progData.downloadList.stopDownloads(listStopDownload);
-    }
-
-    public void searchForAbosAndMaybeStart() {
-        if (progData.loadFilmlist.getPropLoadFilmlist()) {
-            // wird danach eh gemacht
-            progData.maskerPane.switchOffMasker();
-            return;
-        }
-
-        PDuration.counterStart("Worker.searchForAbosAndMaybeStart");
-        progData.maskerPane.setMaskerVisible(true, false);
-        progData.maskerPane.setMaskerProgress(ListenerLoadFilmlist.PROGRESS_INDETERMINATE, "Downloads suchen");
-
-        PLog.sysLog("Downloads aus Abos suchen");
-
-        if (ProgConfig.DOWNLOAD_START_NOW.getValue()) {
-            // und wenn gewollt auch gleich starten, kann kein Dialog aufgehen: false!
-            PLog.sysLog("Downloads aus Abos starten");
-            progData.downloadList.startDownloads();
-        }
-
-        progData.maskerPane.switchOffMasker();
-        PDuration.counterStop("Worker.searchForAbosAndMaybeStart");
     }
 
     public void deleteFilmFile() {
@@ -325,9 +298,7 @@ public class DownloadListInfoController extends AnchorPane {
     private synchronized void change() {
         final Optional<DownloadData> download = getSel();
         if (download.isPresent()) {
-
             DownloadData downloadCopy = download.get().getCopy();
-
 
             DownloadAddDialogController downloadAddDialogController =
                     new DownloadAddDialogController(progData, downloadCopy, downloadCopy.getFilm(), true);

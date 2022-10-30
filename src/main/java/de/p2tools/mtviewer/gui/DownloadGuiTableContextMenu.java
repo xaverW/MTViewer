@@ -58,8 +58,12 @@ public class DownloadGuiTableContextMenu {
         vBox.getChildren().addAll(new Label("max. Bandbreite:"), hBox);
         CustomMenuItem customMenuItem = new CustomMenuItem(vBox);
         customMenuItem.setHideOnClick(false);
-        contextMenu.getItems().addAll(customMenuItem);
-        contextMenu.getItems().add(new SeparatorMenuItem());
+
+        final MenuItem miCleanUp = new MenuItem("Liste der Downloads aufräumen");
+        miCleanUp.setOnAction(e -> downloadListInfoController.cleanUp());
+
+        contextMenu.getItems().addAll(customMenuItem, new SeparatorMenuItem(), miCleanUp, new SeparatorMenuItem());
+
 
         //dann die "echten" Menüpunkte
         final MenuItem miStart = new MenuItem("Download starten");
@@ -97,17 +101,13 @@ public class DownloadGuiTableContextMenu {
         miStopAll.setOnAction(a -> downloadListInfoController.stopDownload(true /* alle */));
         final MenuItem miStopWaiting = new MenuItem("Alle wartenden Downloads stoppen");
         miStopWaiting.setOnAction(a -> downloadListInfoController.stopWaitingDownloads());
-        final MenuItem miUpdate = new MenuItem("Liste der Downloads aktualisieren");
-        miUpdate.setOnAction(e -> downloadListInfoController.searchForAbosAndMaybeStart());
-        final MenuItem miCleanUp = new MenuItem("Liste der Downloads aufräumen");
-        miCleanUp.setOnAction(e -> downloadListInfoController.cleanUp());
 
         miStartAll.setDisable(download == null);
         miStopAll.setDisable(download == null);
         miStopWaiting.setDisable(download == null);
 
         final Menu submenuAllDownloads = new Menu("Alle Downloads");
-        submenuAllDownloads.getItems().addAll(miStartAll, miStopAll, miStopWaiting, miUpdate, miCleanUp);
+        submenuAllDownloads.getItems().addAll(miStartAll, miStopAll, miStopWaiting);
         contextMenu.getItems().addAll(submenuAllDownloads);
 
 

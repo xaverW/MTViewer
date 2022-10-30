@@ -73,7 +73,7 @@ public class DownloadAddDialogController extends PDialogExtra {
 
 
     public DownloadAddDialogController(ProgData progData, DownloadData downloadData, FilmData filmData, boolean onlyChange) {
-        super(progData.primaryStage, ProgConfig.DOWNLOAD_DIALOG_ADD_SIZE,
+        super(progData.primaryStage, ProgConfig.DOWNLOAD_ADD_DIALOG_SIZE,
                 onlyChange ? "Download ändern" : "Download anlegen",
                 true, false);
 

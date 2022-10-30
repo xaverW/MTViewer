@@ -97,13 +97,13 @@ public class PlayPane {
         gridPane.add(new Label("Videoplayer zum Abspielen der Filme"), 0, row, 2, 1);
         gridPane.add(new Label("Programm:"), 0, ++row);
         gridPane.add(txtPlay, 1, row);
-        gridPane.add(btnFile, 2, row);
-        gridPane.add(btnProgramReset, 3, row);
+        gridPane.add(btnProgramReset, 2, row);
+        gridPane.add(btnFile, 3, row);
         gridPane.add(btnHelpProgram, 4, row);
 
         gridPane.add(new Label("Parameter:"), 0, ++row);
         gridPane.add(txtParameter, 1, row);
-        gridPane.add(btnParameterReset, 3, row);
+        gridPane.add(btnParameterReset, 2, row);
         gridPane.add(btnHelpParameter, 4, row);
 
         return row;
