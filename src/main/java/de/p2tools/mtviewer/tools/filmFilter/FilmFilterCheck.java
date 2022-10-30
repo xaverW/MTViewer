@@ -50,27 +50,17 @@ public class FilmFilterCheck {
     }
 
     public static boolean checkTitle(Filter title, FilmData film) {
-//        if (!check(title, film.arr[FilmDataXml.FILM_TITLE])) {
-//            return false;
-//        }
-//        return true;
-        if (!film.getUrl().contains(".m3u8")) {
+        if (!check(title, film.arr[FilmDataXml.FILM_TITLE])) {
             return false;
         }
         return true;
-
     }
 
     public static boolean checkSomewhere(Filter somewhere, FilmData film) {
-//        if (!check(somewhere, film.arr[FilmDataXml.FILM_DATE])
-//                && !check(somewhere, film.arr[FilmDataXml.FILM_THEME])
-//                && !check(somewhere, film.arr[FilmDataXml.FILM_TITLE])
-//                && !check(somewhere, film.arr[FilmDataXml.FILM_DESCRIPTION])) {
-//            return false;
-//        }
-//        return true;
-
-        if (!check(somewhere, film.arr[FilmDataXml.FILM_URL])) {
+        if (!check(somewhere, film.arr[FilmDataXml.FILM_DATE])
+                && !check(somewhere, film.arr[FilmDataXml.FILM_THEME])
+                && !check(somewhere, film.arr[FilmDataXml.FILM_TITLE])
+                && !check(somewhere, film.arr[FilmDataXml.FILM_DESCRIPTION])) {
             return false;
         }
         return true;
