@@ -1,5 +1,5 @@
 /*
- * MTPlayer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
+ * MTViewer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
  * https://www.p2tools.de
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -65,8 +65,8 @@ public class Main {
 
         checkMemory(args);
 
-        MTPlayer.main(args);
-//        Application.launch(MTPlayer.class, args);
+        MTViewer.main(args);
+//        Application.launch(MTViewer.class, args);
     }
 
     private void checkMemory(final String[] args) {

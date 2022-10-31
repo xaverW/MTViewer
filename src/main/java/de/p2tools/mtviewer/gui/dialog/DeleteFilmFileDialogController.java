@@ -1,5 +1,5 @@
 /*
- * MTPlayer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
+ * MTViewer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
  * https://www.p2tools.de
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -47,7 +47,7 @@ public class DeleteFilmFileDialogController extends PDialogExtra {
     private Label lblSubtitle = new Label();
     private Label lblSubtitleSrt = new Label();
     private GridPane gridPane = new GridPane();
-    
+
     public DeleteFilmFileDialogController(String downloadPath, File filmFile, File infoFile, File subtitleFile, File subtitleFileSrt) {
         super(ProgData.getInstance().primaryStage, null, "Datei löschen", true, false);
 

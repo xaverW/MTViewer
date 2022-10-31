@@ -1,5 +1,5 @@
 /*
- * MTPlayer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
+ * MTViewer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
  * https://www.p2tools.de
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -30,14 +30,14 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-public class MTPlayerController extends StackPane {
+public class MTViewerPlayerController extends StackPane {
 
     private final ProgData progData;
     FilmGuiPack filmGuiPack = new FilmGuiPack();
     private PMaskerPane maskerPane = new PMaskerPane();
 
 
-    public MTPlayerController() {
+    public MTViewerPlayerController() {
         progData = ProgData.getInstance();
         init();
     }

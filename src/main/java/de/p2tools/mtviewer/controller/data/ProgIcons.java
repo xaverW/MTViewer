@@ -1,5 +1,5 @@
 /*
- * MTPlayer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
+ * MTViewer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
  * https://www.p2tools.de
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -55,7 +55,7 @@ public class ProgIcons {
         ICON_BUTTON_MOVE_BOTTOM("button-move-bottom.png", 16, 16),
 
         FX_ICON_TOOLBAR_MENU("toolbar-menu.png", 18, 15);
-        
+
         private String fileName;
         private String fileNameDark = "";
         private int w = 0;

@@ -1,5 +1,5 @@
 /*
- * MTPlayer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
+ * MTViewer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
  * https://www.p2tools.de
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -35,8 +35,12 @@ import javafx.stage.Stage;
 public class MTStartErrorWindow extends Application {
     // toDo für weitere Startfehlermeldungen vorbereiten -> nach P2Tools
 
+    private final String url = "https://www.p2tools.de/mtviewer/manual/start.html";
     private Stage primaryStage;
-    private final String url = "https://www.p2tools.de/mtplayer/manual/start.html";
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     @Override
     public void init() throws Exception {
@@ -95,9 +99,5 @@ public class MTStartErrorWindow extends Application {
     private void quitt() {
         Platform.exit();
         System.exit(3);
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

@@ -1,5 +1,5 @@
 /*
- * MTPlayer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
+ * MTViewer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
  * https://www.p2tools.de
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -87,9 +87,9 @@ public class ProgInfos {
     }
 
     /**
-     * Return the path to "mtplayer.xml"
+     * Return the path to "mtviewer.xml"
      *
-     * @return Path object to mtplayer.xml file
+     * @return Path object to mtviewer.xml file
      */
     public static Path getSettingsFile() {
         return SettingsDirectory.getSettingsFile(ProgData.configDir,
@@ -98,9 +98,9 @@ public class ProgInfos {
     }
 
     /**
-     * Return the path to "mtplayer.xml"
+     * Return the path to "mtviewer.xml"
      *
-     * @return Path object to mtplayer.xml file
+     * @return Path object to mtviewer.xml file
      */
     public static Path getSettingsFileOld() {
         return SettingsDirectory.getSettingsFile(ProgData.configDir,
@@ -109,9 +109,9 @@ public class ProgInfos {
     }
 
     /**
-     * Return the path to "mtplayer.xml"
+     * Return the path to "mtviewer.xml"
      *
-     * @return Path object to mtplayer.xml file
+     * @return Path object to mtviewer.xml file
      */
     public static Path getStyleFile() {
         return SettingsDirectory.getSettingsFile(ProgData.configDir,
@@ -136,11 +136,11 @@ public class ProgInfos {
     }
 
     /**
-     * Return the path to "mtplayer.xml_copy_" first copy exists
+     * Return the path to "mtviewer.xml_copy_" first copy exists
      *
      * @param xmlFilePath Path to file.
      */
-    public void getMTPlayerXmlCopyFilePath(ArrayList<Path> xmlFilePath) {
+    public void getMTViewerXmlCopyFilePath(ArrayList<Path> xmlFilePath) {
         for (int i = 1; i <= ProgConst.MAX_COPY_OF_BACKUPFILE; ++i) {
             final Path path = getSettingsDirectory().resolve(ProgConst.CONFIG_FILE_COPY + i);
             if (Files.exists(path)) {

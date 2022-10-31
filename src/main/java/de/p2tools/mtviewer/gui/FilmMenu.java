@@ -1,5 +1,5 @@
 /*
- * MTPlayer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
+ * MTViewer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
  * https://www.p2tools.de
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -56,7 +56,7 @@ public class FilmMenu {
         PShortcutWorker.addShortCut(miFilmInfo, MTShortcut.SHORTCUT_INFO_FILM);
 
         final MenuItem miShowInfo = new MenuItem("Infobereich unter der Tabelle ein-/ausblenden");
-        miShowInfo.setOnAction(a -> progData.mtPlayerController.setInfos());
+        miShowInfo.setOnAction(a -> progData.mtViewerPlayerController.setInfos());
         PShortcutWorker.addShortCut(miShowInfo, MTShortcut.SHORTCUT_SHOW_INFOS);
         mFilm.getItems().addAll(miPlay, miFilmInfo, miShowInfo);
         mb.getItems().add(mFilm);

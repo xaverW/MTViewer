@@ -1,5 +1,5 @@
 /*
- * MTPlayer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
+ * MTViewer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
  * https://www.p2tools.de
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -152,7 +152,7 @@ public class ProgStart {
         ProgData progData = ProgData.getInstance();
         boolean ret = false;
         final ArrayList<Path> path = new ArrayList<>();
-        new ProgInfos().getMTPlayerXmlCopyFilePath(path);
+        new ProgInfos().getMTViewerXmlCopyFilePath(path);
         if (path.isEmpty()) {
             PLog.sysLog("Es gibt kein Backup");
             return false;

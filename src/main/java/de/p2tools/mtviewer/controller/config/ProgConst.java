@@ -1,5 +1,5 @@
 /*
- * MTPlayer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
+ * MTViewer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
  * https://www.p2tools.de
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -56,12 +56,10 @@ public class ProgConst {
     public static final String ADRESSE_FILMLISTEN_SERVER_DIFF = "http://res.mediathekview.de/diff.xml";
     public static final String ADRESSE_FILMLISTEN_SERVER_AKT = "http://res.mediathekview.de/akt.xml";
 
-    // Website MTPlayer
-    public static final String URL_WEBSITE_P2TOOLS = "https://www.p2tools.de";
-    public static final String URL_WEBSITE = "https://www.p2tools.de/mtplayer/";
-    public static final String URL_WEBSITE_DOWNLOAD = "https://www.p2tools.de/mtplayer/download.html";
-    public static final String URL_WEBSITE_HELP = "https://www.p2tools.de/mtplayer/manual/";
-    public static final String URL_WEBSITE_DONATE = "https://www.p2tools.de/donate.html";//todo
+    // Website MTViewer
+    public static final String URL_WEBSITE = "https://www.p2tools.de/mtviewer/";
+    public static final String URL_WEBSITE_DOWNLOAD = "https://www.p2tools.de/mtviewer/download.html";
+    public static final String URL_WEBSITE_HELP = "https://www.p2tools.de/mtviewer/manual/";
 
     // ProgrammUrls
     public static final String ADRESSE_WEBSITE_VLC = "https://www.videolan.org";

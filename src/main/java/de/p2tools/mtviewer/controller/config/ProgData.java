@@ -1,5 +1,5 @@
 /*
- * MTPlayer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
+ * MTViewer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
  * https://www.p2tools.de
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -17,7 +17,7 @@
 
 package de.p2tools.mtviewer.controller.config;
 
-import de.p2tools.mtviewer.MTPlayerController;
+import de.p2tools.mtviewer.MTViewerPlayerController;
 import de.p2tools.mtviewer.controller.data.MTShortcut;
 import de.p2tools.mtviewer.controller.data.ReplaceList;
 import de.p2tools.mtviewer.controller.data.download.DownloadInfos;
@@ -62,7 +62,7 @@ public class ProgData {
     // Gui
     public Stage primaryStage = null;
     public PMaskerPane maskerPane = null;
-    public MTPlayerController mtPlayerController = null;
+    public MTViewerPlayerController mtViewerPlayerController = null;
     public FilmGuiController filmGuiController = null; // Tab mit den Filmen
     public QuitDialogController quitDialogController = null;
     // Worker

@@ -35,7 +35,7 @@ public class HttpDownloadFactory {
             if (path.isEmpty()) {
             } else if (!testPath.isDirectory()) {
             } else if (testPath.canWrite()) {
-                final File tmpFile = File.createTempFile("mtplayer", "tmp", testPath);
+                final File tmpFile = File.createTempFile("mtviewer", "tmp", testPath);
                 tmpFile.delete();
                 ret = true;
             }

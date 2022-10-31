@@ -1,5 +1,5 @@
 /*
- * MTPlayer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
+ * MTViewer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
  * https://www.p2tools.de
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -163,8 +163,8 @@ public class ProgConfig extends PDataProgConfig {
     public static StringProperty SYSTEM_PROG_SAVE = addStr("system-prog-save", SYSTEM_PROG_SAVE_INIT);
     public static String SYSTEM_PROG_SAVE_PARAMETER_INIT = "-user_agent \"Mozilla/5.0\" -i %f -c copy -bsf:a aac_adtstoasc **";
     public static StringProperty SYSTEM_PROG_SAVE_PARAMETER = addStr("system-prog-save-parameter", SYSTEM_PROG_SAVE_PARAMETER_INIT);
-    public static IntegerProperty SYSTEM_SAVE_MAX_SIZE = addInt("system-save-max-size", 50);
-    public static IntegerProperty SYSTEM_SAVE_MAX_FIELD = addInt("system-save-max-field", 10);
+    public static IntegerProperty SYSTEM_SAVE_MAX_SIZE = addInt("system-save-max-size", 150);
+    public static IntegerProperty SYSTEM_SAVE_MAX_FIELD = addInt("system-save-max-field", 50);
 
     // Configs
     public static StringProperty SYSTEM_USERAGENT = addStr("system-useragent", ProgConst.USER_AGENT_DEFAULT); //Useragent für direkte Downloads

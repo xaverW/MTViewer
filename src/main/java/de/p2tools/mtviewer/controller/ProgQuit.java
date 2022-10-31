@@ -1,5 +1,5 @@
 /*
- * MTPlayer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
+ * MTViewer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
  * https://www.p2tools.de
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -27,7 +27,7 @@ public class ProgQuit {
     }
 
     /**
-     * Quit the MTPlayer application
+     * Quit the MTViewer application
      */
     public static void quit() {
         saveConfig();
@@ -35,7 +35,7 @@ public class ProgQuit {
     }
 
     /**
-     * Quit the MTPlayer application and shutDown the computer
+     * Quit the MTViewer application and shutDown the computer
      */
     public static void quitShutDown() {
         saveConfig();
@@ -44,7 +44,7 @@ public class ProgQuit {
     }
 
     /**
-     * Quit the MTPlayer application and show QuitDialog
+     * Quit the MTViewer application and show QuitDialog
      *
      * @param startWithWaiting starts the dialog with the masker pane
      */

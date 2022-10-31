@@ -1,5 +1,5 @@
 /*
- * MTPlayer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
+ * MTViewer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
  * https://www.p2tools.de
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -29,7 +29,7 @@ import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class MTPlayer extends Application {
+public class MTViewer extends Application {
 
     private static final String LOG_TEXT_PROGRAMSTART = "Dauer Programmstart";
     protected ProgData progData;
@@ -91,9 +91,9 @@ public class MTPlayer extends Application {
     private void initRootLayout() {
         try {
             addThemeCss(); // damit es für die 2 schon mal stimmt
-            progData.mtPlayerController = new MTPlayerController();
+            progData.mtViewerPlayerController = new MTViewerPlayerController();
 
-            scene = new Scene(progData.mtPlayerController,
+            scene = new Scene(progData.mtViewerPlayerController,
                     PGuiSize.getWidth(ProgConfig.SYSTEM_SIZE_GUI),
                     PGuiSize.getHeight(ProgConfig.SYSTEM_SIZE_GUI));//Größe der scene!= Größe stage!!!
             addThemeCss(); // und jetzt noch für die neue Scene

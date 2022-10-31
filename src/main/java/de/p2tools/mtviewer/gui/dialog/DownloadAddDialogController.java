@@ -1,5 +1,5 @@
 /*
- * MTPlayer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
+ * MTViewer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
  * https://www.p2tools.de
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -463,7 +463,7 @@ public class DownloadAddDialogController extends PDialogExtra {
         }
 
         //damit der Focus nicht aus der Tabelle verloren geht
-        progData.mtPlayerController.setFocus();
+        progData.mtViewerPlayerController.setFocus();
         DialogFactory.saveComboPath(cboPath, path, ProgConfig.DOWNLOAD_DIALOG_PATH_SAVING);
 
         if (!onlyChange) {
