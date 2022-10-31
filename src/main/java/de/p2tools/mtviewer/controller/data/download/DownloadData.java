@@ -50,7 +50,6 @@ public final class DownloadData extends DownloadDataProps {
         setSizeDownloadFromFilm();
         // und endlich Aufruf bauen :)
         DownloadFileNameFactory.buildFileNamePath(this);
-//        DownloadProgramFactory.makeProgParameter(this, path);
     }
 
     //==============================================

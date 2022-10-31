@@ -62,7 +62,6 @@ public class DownloadAddDialogController extends PDialogExtra {
     private final boolean onlyChange;
     private PHyperlink pHyperlinkUrlFilm =
             new PHyperlink("", ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIcons.Icons.ICON_BUTTON_FILE_OPEN.getImageView());
-    private boolean info = false;
     private boolean ok = false;
     private FilmData filmData;
     private DownloadData downloadData;
@@ -81,25 +80,37 @@ public class DownloadAddDialogController extends PDialogExtra {
         this.filmData = filmData;
         this.downloadData = downloadData;
         this.onlyChange = onlyChange;
+        if (this.downloadData == null) {
+            this.downloadData = new DownloadData(filmData);
+        }
+
         init(true);
     }
 
     @Override
     public void make() {
         initCont();
-        if (!onlyChange && filmData == null) {
-            // Satz mit x, war wohl nix
-            ok = false;
-            quit();
-            return;
-        }
-
         initArrays();
         initButton();
         initPathAndName();
         pathNameBase();
         initResolution();
         initCheckBox();
+
+        if (this.downloadData.isStateStartedRun() || this.downloadData.isStateFinished()) {
+            cboPath.setDisable(true);
+            btnDest.setDisable(true);
+            btnPropose.setDisable(true);
+            btnOk.setDisable(true);
+            txtName.setDisable(true);
+            rbNot.setDisable(true);
+            rbStart.setDisable(true);
+            chkInfo.setDisable(true);
+            chkSubtitle.setDisable(true);
+            rbHd.setDisable(true);
+            rbHigh.setDisable(true);
+            rbSmall.setDisable(true);
+        }
     }
 
     public boolean isOk() {
@@ -196,15 +207,6 @@ public class DownloadAddDialogController extends PDialogExtra {
 
 
     private void initArrays() {
-        if (downloadData == null) {
-            String aktPath = "";
-            if (storedPath.length > 0) {
-                aktPath = storedPath[0];
-            }
-            downloadData = new DownloadData(filmData);
-        }
-
-        info = ProgConfig.DOWNLOAD_INFO_FILE.get();
         if (filmData != null) {
             fileSize_HD = filmData.isHd() ? FilmTools.getSizeFromWeb(filmData, filmData.getUrlForResolution(FilmData.RESOLUTION_HD)) : "";
             fileSize_high = FilmTools.getSizeFromWeb(filmData, filmData.getUrlForResolution(FilmData.RESOLUTION_NORMAL));
@@ -303,9 +305,6 @@ public class DownloadAddDialogController extends PDialogExtra {
                 cboPath.getItems().add(path);
                 cboPath.getSelectionModel().select(path);
             }
-//        } else {
-//            min. ein Eintrag und nicht leer
-//            cboPath.getSelectionModel().select(0);
         }
 
         if (!downloadData.getDestFileName().isEmpty()) {
@@ -322,15 +321,18 @@ public class DownloadAddDialogController extends PDialogExtra {
         rbSmall.setToggleGroup(toggleGroupSize);
 
         if (filmData == null) {
+            //dann gibts nix zum Ändern
             rbHd.setDisable(true);
             rbHigh.setDisable(true);
             rbSmall.setDisable(true);
             return;
         }
+
         rbHd.setDisable(!filmData.isHd());
         rbSmall.setDisable(!filmData.isSmall());
 
         if (onlyChange) {
+            //dann die Vorgaben evtl. anpassen
             if (downloadData.getUrl().equals(filmData.getUrlForResolution(FilmData.RESOLUTION_HD))) {
                 ProgConfig.DOWNLOAD_RESOLUTION.setValue(FilmData.RESOLUTION_HD);
 
@@ -341,6 +343,7 @@ public class DownloadAddDialogController extends PDialogExtra {
                 ProgConfig.DOWNLOAD_RESOLUTION.setValue(FilmData.RESOLUTION_NORMAL);
             }
         }
+
         selectResolution();
 
         rbHd.setOnAction(a -> {
@@ -360,11 +363,13 @@ public class DownloadAddDialogController extends PDialogExtra {
 
     private void selectResolution() {
         if (onlyChange) {
+            //dann nach dem zu änderndem Download setzen
             rbHd.setSelected(downloadData.getUrl().equals(filmData.getUrlForResolution(FilmData.RESOLUTION_HD)));
             rbSmall.setSelected(downloadData.getUrl().equals(filmData.getUrlForResolution(FilmData.RESOLUTION_SMALL)));
             rbHigh.setSelected(downloadData.getUrl().equals(filmData.getUrlForResolution(FilmData.RESOLUTION_NORMAL)));
 
         } else {
+            //oder nach den Standardvorgaben setzen
             switch (ProgConfig.DOWNLOAD_RESOLUTION.getValueSafe()) {
                 case FilmData.RESOLUTION_HD:
                     rbHd.setSelected(true);
@@ -399,13 +404,8 @@ public class DownloadAddDialogController extends PDialogExtra {
     }
 
     private void setResolution() {
-        if (onlyChange) {
-            downloadData.setUrl(filmData.getUrlForResolution(ProgConfig.DOWNLOAD_RESOLUTION.getValueSafe()));
-            pHyperlinkUrlFilm.setUrl(downloadData.urlProperty().getValueSafe());
-
-        } else {
-            pHyperlinkUrlFilm.setUrl(filmData.getUrlForResolution(ProgConfig.DOWNLOAD_RESOLUTION.getValueSafe()));
-        }
+        downloadData.setUrl(filmData.getUrlForResolution(ProgConfig.DOWNLOAD_RESOLUTION.getValueSafe()));
+        pHyperlinkUrlFilm.setUrl(downloadData.urlProperty().getValueSafe());
     }
 
     private void initCheckBox() {
@@ -416,19 +416,15 @@ public class DownloadAddDialogController extends PDialogExtra {
         rbStart.selectedProperty().bindBidirectional(ProgConfig.DOWNLOAD_DIALOG_START_DOWNLOAD_NOW);
         rbNot.selectedProperty().bindBidirectional(ProgConfig.DOWNLOAD_DIALOG_START_DOWNLOAD_NOT);
 
-        if (!onlyChange) {
-            chkInfo.selectedProperty().bindBidirectional(ProgConfig.DOWNLOAD_INFO_FILE);
-        } else {
-            chkInfo.selectedProperty().bindBidirectional(downloadData.infoFileProperty());
-        }
+        chkInfo.selectedProperty().bindBidirectional(downloadData.infoFileProperty());
+        chkInfo.selectedProperty().bindBidirectional(ProgConfig.DOWNLOAD_INFO_FILE);
 
         if (filmData == null || filmData.getUrlSubtitle().isEmpty()) {
             // dann gibts keinen Subtitle
             chkSubtitle.setDisable(true);
-        } else if (!onlyChange) {
-            chkSubtitle.selectedProperty().bindBidirectional(ProgConfig.DOWNLOAD_SUBTITLE);
         } else {
             chkSubtitle.selectedProperty().bindBidirectional(downloadData.subtitleProperty());
+            chkSubtitle.selectedProperty().bindBidirectional(ProgConfig.DOWNLOAD_SUBTITLE);
         }
     }
 

@@ -46,11 +46,20 @@ public class DownloadCont {
                 download.setDestPath(PSystemUtils.getStandardDownloadPath());
             }
 
-            MTInfoFile.writeInfoFile(download.getDestPath(), download.getDestPathFile(), download.getFileNameWithoutSuffix(),
-                    download.getUrl(), download.getDownloadSize().toString(),
-                    download.getFilm().getChannel(), download.getFilm().getTheme(), download.getFilm().getTitle(),
-                    download.getFilm().getDate().toString(), download.getFilm().getTime(), download.getFilm().getDuration(),
-                    download.getFilm().getWebsite(), download.getFilm().getDescription());
+            if (download.getFilm() == null) {
+                MTInfoFile.writeInfoFile(download.getDestPath(), download.getDestPathFile(), download.getFileNameWithoutSuffix(),
+                        download.getUrl(), download.getDownloadSize().toString(),
+                        download.getChannel(), download.getTheme(), download.getTitle(),
+                        download.getFilmDate().toString(), download.getTime(), download.getDurationMinute() + "",
+                        "", "");
+
+            } else {
+                MTInfoFile.writeInfoFile(download.getDestPath(), download.getDestPathFile(), download.getFileNameWithoutSuffix(),
+                        download.getUrl(), download.getDownloadSize().toString(),
+                        download.getFilm().getChannel(), download.getFilm().getTheme(), download.getFilm().getTitle(),
+                        download.getFilm().getDate().toString(), download.getFilm().getTime(), download.getFilm().getDuration(),
+                        download.getFilm().getWebsite(), download.getFilm().getDescription());
+            }
         }
 
         if (download.isSubtitle()) {
