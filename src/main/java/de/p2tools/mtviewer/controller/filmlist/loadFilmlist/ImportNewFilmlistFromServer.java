@@ -16,10 +16,12 @@
 
 package de.p2tools.mtviewer.controller.filmlist.loadFilmlist;
 
+import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.film.Filmlist;
 import de.p2tools.mtviewer.controller.filmlist.filmlistUrls.SearchFilmListUrls;
 import de.p2tools.p2Lib.tools.log.PLog;
+import javafx.application.Platform;
 
 import javax.swing.event.EventListenerList;
 import java.util.ArrayList;
@@ -30,6 +32,7 @@ public class ImportNewFilmlistFromServer {
     private final ReadFilmlist readFilmlist;
     private final ProgData progData;
     private final int REDUCED_BANDWIDTH = 55;//ist ein Wert, der nicht eingestellt werden kann
+    private int savedBandwidth = ProgConfig.DOWNLOAD_MAX_BANDWIDTH_KBYTE.getValue();
 
     public ImportNewFilmlistFromServer(ProgData progData) {
         this.progData = progData;
@@ -39,6 +42,16 @@ public class ImportNewFilmlistFromServer {
             @Override
             public synchronized void start(ListenerFilmlistLoadEvent event) {
                 // save download bandwidth
+                if (ProgConfig.DOWNLOAD_MAX_BANDWIDTH_KBYTE.getValue() == REDUCED_BANDWIDTH) {
+                    PLog.sysLog("Bandbreite reduzieren: Ist schon reduziert!!!!");
+                } else {
+                    savedBandwidth = ProgConfig.DOWNLOAD_MAX_BANDWIDTH_KBYTE.getValue();
+                    PLog.sysLog("Bandbreite zurücksetzen für das Laden der Filmliste von: " + savedBandwidth + " auf " + REDUCED_BANDWIDTH);
+                    Platform.runLater(() -> {
+                        ProgConfig.DOWNLOAD_MAX_BANDWIDTH_KBYTE.setValue(REDUCED_BANDWIDTH);
+                    });
+                }
+
                 for (final ListenerLoadFilmlist l : eventListenerList.getListeners(ListenerLoadFilmlist.class)) {
                     l.start(event);
                 }
@@ -53,6 +66,11 @@ public class ImportNewFilmlistFromServer {
 
             @Override
             public synchronized void finished(ListenerFilmlistLoadEvent event) {
+                // reset download bandwidth
+                PLog.sysLog("Bandbreite wieder herstellen: " + savedBandwidth);
+                Platform.runLater(() -> {
+                    ProgConfig.DOWNLOAD_MAX_BANDWIDTH_KBYTE.setValue(savedBandwidth);
+                });
             }
         });
     }
