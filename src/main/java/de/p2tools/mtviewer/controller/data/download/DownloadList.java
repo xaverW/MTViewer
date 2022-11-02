@@ -17,6 +17,7 @@
 package de.p2tools.mtviewer.controller.data.download;
 
 import de.p2tools.mtviewer.controller.config.ProgData;
+import de.p2tools.mtviewer.controller.data.film.Filmlist;
 import de.p2tools.p2Lib.configFile.pData.PDataList;
 import de.p2tools.p2Lib.tools.duration.PDuration;
 import javafx.beans.property.BooleanProperty;
@@ -129,7 +130,7 @@ public class DownloadList extends SimpleListProperty<DownloadData> implements PD
     }
 
 
-    public synchronized void addFilmInList() {
+    public synchronized void addFilmInList(Filmlist filmlist) {
         // bei einmal Downloads nach einem Programmstart/Neuladen der Filmliste
         // den Film wieder eintragen
         PDuration.counterStart("DownloadList.addFilmInList");
@@ -140,7 +141,7 @@ public class DownloadList extends SimpleListProperty<DownloadData> implements PD
             if (counter < 0) {
                 break;
             }
-            d.setFilm(progData.filmlist.getFilmByUrl_small_high_hd(d.getUrl())); //todo sollen da wirklich alle Filmfelder gesetzt werden??
+            d.setFilm(filmlist.getFilmByUrl_small_high_hd(d.getUrl())); //todo sollen da wirklich alle Filmfelder gesetzt werden??
             d.setSizeDownloadFromFilm();
         }
 

@@ -80,7 +80,7 @@ public class ImportNewFilmlistFromServer {
     }
 
     // #########################################################
-    // Filmeliste importieren, URL automatisch wählen
+    // Filmliste importieren, URL automatisch wählen
     // #########################################################
     public void importFilmListAuto(Filmlist filmlist, Filmlist filmlistDiff) {
         Thread th = new Thread(new ImportAutoThread(filmlist, filmlistDiff));
@@ -106,7 +106,7 @@ public class ImportNewFilmlistFromServer {
     }
 
     // #######################################
-    // Filmeliste importieren, mit fester URL/Pfad
+    // Filmliste importieren, mit fester URL/Pfad
     // #######################################
     public void importFilmlistFromFile(Filmlist filmlist, String path) {
         Thread th = new Thread(new FilmImportFileThread(filmlist, path));

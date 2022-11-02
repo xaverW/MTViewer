@@ -40,11 +40,10 @@ import java.util.Random;
  */
 public class SearchFilmListUrls {
 
-    private FilmlistUrlList filmlistUrlList_akt = new FilmlistUrlList(); // urls der kompletten Liste
-    private FilmlistUrlList filmlistUrlList_diff = new FilmlistUrlList(); // urls der diff-Liste
-
     private static boolean updateFilmlistUrls = false; // beim nächsten Abruf einer URL wird vorher neu geladen
     private final int UPDATE_LIST_MAX = 10; // die Downloadliste für die Filmlisten nur jeden xx Programmstart aktualisieren
+    private FilmlistUrlList filmlistUrlList_akt = new FilmlistUrlList(); // urls der kompletten Liste
+    private FilmlistUrlList filmlistUrlList_diff = new FilmlistUrlList(); // urls der diff-Liste
 
     public synchronized static void setUpdateFilmlistUrls() {
         updateFilmlistUrls = true;
@@ -144,11 +143,6 @@ public class SearchFilmListUrls {
         filmlistUrlList_akt.add(new FilmlistUrlData("https://liste.mediathekview.de/Filmliste-akt.xz", FilmlistUrlData.SERVER_TYPE_ACT));
 
         filmlistUrlList_akt.add(new FilmlistUrlData("http://verteiler1.mediathekview.de/Filmliste-akt.xz", FilmlistUrlData.SERVER_TYPE_ACT));
-        filmlistUrlList_akt.add(new FilmlistUrlData("http://verteiler2.mediathekview.de/Filmliste-akt.xz", FilmlistUrlData.SERVER_TYPE_ACT));
-        filmlistUrlList_akt.add(new FilmlistUrlData("http://verteiler3.mediathekview.de/Filmliste-akt.xz", FilmlistUrlData.SERVER_TYPE_ACT));
-        filmlistUrlList_akt.add(new FilmlistUrlData("http://verteiler4.mediathekview.de/Filmliste-akt.xz", FilmlistUrlData.SERVER_TYPE_ACT));
-        filmlistUrlList_akt.add(new FilmlistUrlData("http://verteiler5.mediathekview.de/Filmliste-akt.xz", FilmlistUrlData.SERVER_TYPE_ACT));
-        filmlistUrlList_akt.add(new FilmlistUrlData("http://verteiler6.mediathekview.de/Filmliste-akt.xz", FilmlistUrlData.SERVER_TYPE_ACT));
     }
 
     private void insertDefaultUrlForDiffList() {
@@ -161,11 +155,6 @@ public class SearchFilmListUrls {
         filmlistUrlList_diff.add(new FilmlistUrlData("https://liste.mediathekview.de/Filmliste-diff.xz", FilmlistUrlData.SERVER_TYPE_DIFF));
 
         filmlistUrlList_diff.add(new FilmlistUrlData("http://verteiler1.mediathekview.de/Filmliste-diff.xz", FilmlistUrlData.SERVER_TYPE_DIFF));
-        filmlistUrlList_diff.add(new FilmlistUrlData("http://verteiler2.mediathekview.de/Filmliste-diff.xz", FilmlistUrlData.SERVER_TYPE_DIFF));
-        filmlistUrlList_diff.add(new FilmlistUrlData("http://verteiler3.mediathekview.de/Filmliste-diff.xz", FilmlistUrlData.SERVER_TYPE_DIFF));
-        filmlistUrlList_diff.add(new FilmlistUrlData("http://verteiler4.mediathekview.de/Filmliste-diff.xz", FilmlistUrlData.SERVER_TYPE_DIFF));
-        filmlistUrlList_diff.add(new FilmlistUrlData("http://verteiler5.mediathekview.de/Filmliste-diff.xz", FilmlistUrlData.SERVER_TYPE_DIFF));
-        filmlistUrlList_diff.add(new FilmlistUrlData("http://verteiler6.mediathekview.de/Filmliste-diff.xz", FilmlistUrlData.SERVER_TYPE_DIFF));
     }
 
     private void callError() {

@@ -95,7 +95,6 @@ public class ReadFilmlist {
             notifyStart(sourceFileUrl); // für die Progressanzeige
 
             filmlist.clear();
-
             if (sourceFileUrl.startsWith("http")) {
                 // URL laden
                 logList.add("Filmliste aus URL laden: " + sourceFileUrl);
@@ -131,6 +130,7 @@ public class ReadFilmlist {
     private void countFoundChannel(Filmlist filmlist, List<String> list) {
         final int KEYSIZE = 12;
 
+        PDuration.counterStart("ReadFilmlist.countFoundChannel()");
         if (!filmsPerChannelFoundCompleteList.isEmpty()) {
             list.add(PLog.LILNE3);
             list.add(" ");
@@ -218,6 +218,7 @@ public class ReadFilmlist {
             list.add(PStringUtils.increaseString(KEYSIZE, "=> Summe") + ": " + sumFilms);
             list.add(" ");
         }
+        PDuration.counterStop("ReadFilmlist.countFoundChannel()");
     }
 
     private InputStream selectDecompressor(String source, InputStream in) throws Exception {
@@ -415,7 +416,7 @@ public class ReadFilmlist {
 
             }
         } catch (final Exception ex) {
-            PLog.errorLog(945123641, ex, "FilmListe: " + source);
+            PLog.errorLog(820147395, ex, "FilmListe: " + source);
             filmlist.clear();
         }
     }

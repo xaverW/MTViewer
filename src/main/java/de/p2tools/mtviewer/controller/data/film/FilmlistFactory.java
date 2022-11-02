@@ -35,14 +35,13 @@ public class FilmlistFactory {
     private FilmlistFactory() {
     }
 
-    public static void cleanFaultyCharacterFilmlist() {
+    public static void cleanFaultyCharacterFilmlist(Filmlist filmlist) {
         // damit werden Unicode-Zeichen korrigiert
         // gibt da einen Java-Bug
         // https://github.com/javafxports/openjdk-jfx/issues/287
 
         PDuration.counterStart("cleanFaultyCharacter");
 
-        Filmlist filmlist = ProgData.getInstance().filmlist;
         filmlist.stream().forEach(film -> {
 
             film.arr[FilmData.FILM_TITLE] = clean_1(film.getTitle(), true);

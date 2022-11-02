@@ -85,20 +85,27 @@ public class Filmlist extends SimpleListProperty<FilmData> {
         return ret;
     }
 
+    public void clearFilteredList() {
+        initFilterdList();
+        filteredList.clear();
+        sortedList.clear();
+    }
+
     public SortedList<FilmData> getSortedList() {
-        if (sortedList == null || filteredList == null) {
-            filteredList = new FilteredList<FilmData>(this, p -> true);
-            sortedList = new SortedList<>(filteredList);
-        }
+        initFilterdList();
         return sortedList;
     }
 
     public FilteredList<FilmData> getFilteredList() {
+        initFilterdList();
+        return filteredList;
+    }
+
+    private void initFilterdList() {
         if (sortedList == null || filteredList == null) {
-            filteredList = new FilteredList<>(this, p -> true);
+            filteredList = new FilteredList<FilmData>(this, p -> true);
             sortedList = new SortedList<>(filteredList);
         }
-        return filteredList;
     }
 
     public synchronized void filteredListSetPred(Predicate<FilmData> predicate) {
