@@ -28,12 +28,8 @@ import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ListenerFilmlistLoad
 import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ListenerLoadFilmlist;
 import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ReadFilmlist;
 import de.p2tools.mtviewer.controller.filmlist.writeFilmlist.WriteFilmlistJson;
-import de.p2tools.p2Lib.alert.PAlert;
 import de.p2tools.p2Lib.tools.duration.PDuration;
 import de.p2tools.p2Lib.tools.log.PLog;
-import javafx.application.Platform;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -50,7 +46,6 @@ public class LoadFilmlist {
     private final ProgData progData;
     private final ImportNewFilmlistFromServer importNewFilmlisteFromServer;
     private final NotifyProgress notifyProgress = new NotifyProgress();
-    private BooleanProperty propLoadFilmlist = new SimpleBooleanProperty(false);
 
     public LoadFilmlist(ProgData progData) {
         this.progData = progData;
@@ -59,44 +54,30 @@ public class LoadFilmlist {
         hashSet = new HashSet<>();
 
         importNewFilmlisteFromServer = new ImportNewFilmlistFromServer(progData);
-        importNewFilmlisteFromServer.addAdListener(new ListenerLoadFilmlist() {
-            @Override
-            public synchronized void start(ListenerFilmlistLoadEvent event) {
-                // Start ans Prog melden
-                notifyProgress.notifyEvent(NotifyProgress.NOTIFY.START, event);
-            }
-
-            @Override
-            public synchronized void progress(ListenerFilmlistLoadEvent event) {
-                notifyProgress.notifyEvent(NotifyProgress.NOTIFY.PROGRESS, event);
-            }
-
-            @Override
-            public synchronized void finished(ListenerFilmlistLoadEvent event) {
-                // Laden ist durch
-                notifyProgress.notifyEvent(NotifyProgress.NOTIFY.LOADED,
-                        new ListenerFilmlistLoadEvent("", "Filme verarbeiten",
-                                ListenerLoadFilmlist.PROGRESS_INDETERMINATE, 0, false/* Fehler */));
-
-
-                PDuration.onlyPing("Filme geladen: Nachbearbeiten");
-                afterImportNewFilmlistFromServer(event);
-                stopMsg();
-
-                PDuration.onlyPing("Filme nachbearbeiten: Ende");
-
-                // alles fertig ans Prog melden
-                notifyProgress.notifyEvent(NotifyProgress.NOTIFY.FINISHED, event);
-            }
-        });
     }
 
     public void addListenerLoadFilmlist(ListenerLoadFilmlist listener) {
         notifyProgress.listeners.add(ListenerLoadFilmlist.class, listener);
     }
 
-    public void removeListenerLoadFilmlist(ListenerLoadFilmlist listener) {
-        notifyProgress.listeners.remove(ListenerLoadFilmlist.class, listener);
+    public void setStart(ListenerFilmlistLoadEvent event) {
+        notifyProgress.notifyEvent(NotifyProgress.NOTIFY.START, event);
+    }
+
+    public void setProgress(ListenerFilmlistLoadEvent event) {
+        notifyProgress.notifyEvent(NotifyProgress.NOTIFY.PROGRESS, event);
+    }
+
+    public void setLoaded(ListenerFilmlistLoadEvent event) {
+        notifyProgress.notifyEvent(NotifyProgress.NOTIFY.LOADED, event);
+    }
+
+    public void setFinished(ListenerFilmlistLoadEvent event) {
+        notifyProgress.notifyEvent(NotifyProgress.NOTIFY.FINISHED, event);
+    }
+
+    public void setFinished() {
+        notifyProgress.notifyFinishedOk();
     }
 
     public synchronized boolean isStop() {
@@ -111,118 +92,155 @@ public class LoadFilmlist {
      * Filmliste beim Programmstart laden
      */
     public void loadFilmlistProgStart(boolean firstProgramStart) {
+        new Thread(() -> {
+            final List<String> logList = new ArrayList<>();
+            loadFilmlistStart(logList, firstProgramStart);
+            PLog.addSysLog(logList);
+        }).start();
+    }
+
+    public void loadNewFilmlist(boolean alwaysLoadNew) {
+        new Thread(() -> {
+            final List<String> logList = new ArrayList<>();
+            loadNewFilmlistFromServer(logList, alwaysLoadNew);
+            PLog.addSysLog(logList);
+
+        }).start();
+    }
+
+    /**
+     * Filmliste beim Programmstart laden
+     */
+    private void loadFilmlistStart(List<String> logList, boolean firstProgramStart) {
         // Start des Ladens, gibts keine Fortschrittsanzeige und kein Abbrechen
         if (LoadFactory.checkAllSenderSelectedNotToLoad(progData.primaryStage)) {
             // alle Sender sind vom Laden ausgenommen
             return;
         }
 
-        propLoadFilmlist.set(true);
         PDuration.onlyPing("Programmstart Filmliste laden: start");
         startMsg();
-        notifyProgress.notifyEvent(NotifyProgress.NOTIFY.START,
-                new ListenerFilmlistLoadEvent("", "gespeicherte Filmliste laden",
-                        ListenerLoadFilmlist.PROGRESS_INDETERMINATE, 0, false));
+        setStart(new ListenerFilmlistLoadEvent("", "gespeicherte Filmliste laden",
+                ListenerLoadFilmlist.PROGRESS_INDETERMINATE, 0, false));
 
         filmListNew.setMeta(progData.filmlist);
         filmListNew.setAll(progData.filmlist);
 
-        // Gui startet ein wenig flüssiger
-        Thread thread = new Thread(() -> {
-            final List<String> logList = new ArrayList<>();
+        if (!firstProgramStart) {
+            // gespeicherte Filmliste laden, macht beim ersten Programmstart keinen Sinn
+            loadStoredList(logList);
+            PDuration.onlyPing("Programmstart Filmliste laden: geladen");
+        }
 
-            if (!firstProgramStart) {
-                // gespeicherte Filmliste laden, macht beim ersten Programmstart keinen Sinn
-                ReadFilmlist.readSavedFilmlist(filmListNew);
-                PDuration.onlyPing("Programmstart Filmliste laden: geladen");
-            }
+        if (filmListNew.isTooOld() && ProgConfig.SYSTEM_LOAD_FILMS_ON_START.getValue()) {
+            //eine neue Filmliste laden wenn die gespeicherte zu alt ist
+            final String text;
+            logList.add("Filmliste zu alt, neue Filmliste laden");
+            logList.add("Alter|min]: " + filmListNew.getAge() / 60);
+            text = "Filmliste ist zu alt, eine neue downloaden";
+            logList.add(PLog.LILNE3);
 
-            if (filmListNew.isTooOld() && ProgConfig.SYSTEM_LOAD_FILMS_ON_START.getValue()) {
-                //eine neue Filmliste laden wenn die gespeicherte zu alt ist
-                final String text;
-                logList.add("Filmliste zu alt, neue Filmliste laden");
-                text = "Filmliste ist zu alt, eine neue downloaden";
-                logList.add(PLog.LILNE3);
-                PLog.addSysLog(logList);
+            setProgress(new ListenerFilmlistLoadEvent("", text,
+                    ListenerLoadFilmlist.PROGRESS_INDETERMINATE, 0, false/* Fehler */));
 
-                notifyProgress.notifyEvent(NotifyProgress.NOTIFY.PROGRESS,
-                        new ListenerFilmlistLoadEvent("", text,
-                                ListenerLoadFilmlist.PROGRESS_INDETERMINATE, 0, false/* Fehler */));
+            PDuration.onlyPing("Programmstart Filmliste laden: neue Liste laden");
+            loadNewList(logList, false, true);
+            PDuration.onlyPing("Programmstart Filmliste laden: neue Liste geladen");
+        }
 
-                PDuration.onlyPing("Programmstart Filmliste laden: neue Liste laden");
-                propLoadFilmlist.set(false);
-                loadNewFilmlistFromServer(false, true);
-                PDuration.onlyPing("Programmstart Filmliste laden: neue Liste geladen");
-
-            } else {
-                notifyProgress.notifyEvent(NotifyProgress.NOTIFY.LOADED,
-                        new ListenerFilmlistLoadEvent("", "Filme verarbeiten",
-                                ListenerLoadFilmlist.PROGRESS_INDETERMINATE, 0, false/* Fehler */));
-
-                afterLoadingFilmlist(logList);
-                PLog.addSysLog(logList);
-                stopMsg();
-                notifyProgress.notifyFinishedOk();
-            }
-        });
-        thread.setName("loadFilmlistProgStart");
-        thread.start();
+        setLoaded(new ListenerFilmlistLoadEvent("", "Filme verarbeiten",
+                ListenerLoadFilmlist.PROGRESS_INDETERMINATE, 0, false/* Fehler */));
+        afterLoading(logList);
     }
 
-    public void loadNewFilmlistFromServer(boolean alwaysLoadNew) {
-        loadNewFilmlistFromServer(alwaysLoadNew, false);
-    }
-
-    public void loadNewFilmlistFromServer(boolean alwaysLoadNew, boolean intern) {
+    private void loadNewFilmlistFromServer(List<String> logList, boolean alwaysLoadNew) {
         // damit wird eine neue Filmliste (Web) geladen UND auch gleich im Config-Ordner gespeichert
         if (LoadFactory.checkAllSenderSelectedNotToLoad(progData.primaryStage)) {
             // alle Sender sind vom Laden ausgenommen
             return;
         }
+
         progData.maskerPane.setButtonVisible(true);
+        PDuration.onlyPing("Filmliste laden: start");
+        startMsg();
+        logList.add("");
+        logList.add("Alte Liste erstellt  am: " + progData.filmlist.genDate());
+        logList.add("           Anzahl Filme: " + progData.filmlist.size());
+        logList.add("           Anzahl  Neue: " + progData.filmlist.countNewFilms());
+        logList.add(" ");
 
-        if (!propLoadFilmlist.get()) {
-            propLoadFilmlist.set(true);
-            // nicht doppelt starten
-
-            PDuration.onlyPing("Filmliste laden: start");
-            final List<String> logList = new ArrayList<>();
-            startMsg();
-            logList.add("");
-            logList.add("Alte Liste erstellt  am: " + filmListNew.genDate());
-            logList.add("           Anzahl Filme: " + filmListNew.size());
-            logList.add("           Anzahl  Neue: " + filmListNew.countNewFilms());
-            logList.add(" ");
-
-
-            if (intern) {
-                // Hash mit URLs füllen
-                fillHash(logList, filmListNew);
-
-            } else {
-                // Hash mit URLs füllen
-                fillHash(logList, progData.filmlist);
-
-                filmListNew.setMeta(progData.filmlist);
-                if (!alwaysLoadNew) {
-                    //dann die alte Filmliste nicht löschen, aber erst nach dem Hash!!
-                    filmListNew.addAll(progData.filmlist);
-                }
-                progData.filmlist.clear();
-            }
-
-            setStop(false);
-
-            // Filmliste laden und Url automatisch ermitteln
-            logList.add("Filmliste laden (auto)");
-            importNewFilmlisteFromServer.importFilmListAuto(filmListNew, filmListDiff);
-
-            PLog.addSysLog(logList);
-        }
+        loadNewList(logList, alwaysLoadNew, false);
+        afterLoading(logList);
     }
 
     // #######################################
     // #######################################
+
+    private void afterLoading(List<String> logList) {
+        logList.add("");
+        logList.add("Jetzige Liste erstellt am: " + filmListNew.genDate());
+        logList.add("  Anzahl Filme: " + filmListNew.size());
+        logList.add("  Anzahl Neue:  " + filmListNew.countNewFilms());
+        logList.add("");
+        logList.add(PLog.LILNE2);
+        logList.add("");
+
+        setLoaded(new ListenerFilmlistLoadEvent("", "Diacritics setzen/ändern, Diacritics suchen",
+                ListenerLoadFilmlist.PROGRESS_INDETERMINATE, 0, false/* Fehler */));
+        FilmlistFactory.setDiacritic(filmListNew, false);
+
+        setLoaded(new ListenerFilmlistLoadEvent("", "Filme markieren, Themen suchen",
+                ListenerLoadFilmlist.PROGRESS_INDETERMINATE, 0, false/* Fehler */));
+        logList.add("Filme markieren");
+        final int count = filmListNew.markFilms();
+        logList.add("Anzahl doppelte Filme: " + count);
+
+        progData.filmlist.loadSender();
+
+        setLoaded(new ListenerFilmlistLoadEvent("", "Filme in Downloads eingetragen",
+                ListenerLoadFilmlist.PROGRESS_INDETERMINATE, 0, false/* Fehler */));
+        logList.add("Filme in Downloads eingetragen");
+        progData.downloadList.addFilmInList(filmListNew);
+
+        //die FilmList wieder füllen
+        logList.add("==> und jetzt die Filmliste wieder füllen :)");
+        progData.filmlist.metaData = filmListNew.metaData;
+        progData.filmlist.sender = filmListNew.sender;
+        progData.filmlist.addAll(filmListNew);
+        filmListNew.clear();
+
+        stopMsg();
+
+        setFinished();
+    }
+
+    private void loadStoredList(List<String> logList) {
+        new ReadFilmlist().readFilmlist(logList, ProgInfos.getFilmListFile(), filmListNew);
+    }
+
+    private void loadNewList(List<String> logList, boolean alwaysLoadNew, boolean intern) {
+        if (intern) {
+            // Hash mit URLs füllen
+            fillHash(logList, filmListNew);
+
+        } else {
+            // Hash mit URLs füllen
+            fillHash(logList, progData.filmlist);
+
+            filmListNew.setMeta(progData.filmlist);
+            if (!alwaysLoadNew) {
+                //dann die alte Filmliste nicht löschen, aber erst nach dem Hash!!
+                filmListNew.addAll(progData.filmlist);
+            }
+            progData.filmlist.clear();
+        }
+
+        setStop(false);
+        logList.add("Filmliste laden (auto)");
+        // Filmliste laden und Url automatisch ermitteln
+        importNewFilmlisteFromServer.importFilmListAuto(logList, filmListNew, filmListDiff);
+        afterImportNewFilmlistFromServer(logList);
+    }
 
     private void startMsg() {
         PLog.addSysLog("");
@@ -238,11 +256,8 @@ public class LoadFilmlist {
 
     /**
      * wird nach dem Import einer neuen Liste gemacht
-     *
-     * @param event
      */
-    private void afterImportNewFilmlistFromServer(ListenerFilmlistLoadEvent event) {
-        final List<String> logList = new ArrayList<>();
+    private void afterImportNewFilmlistFromServer(List<String> logList) {
         logList.add(PLog.LILNE3);
 
         if (!filmListDiff.isEmpty()) {
@@ -253,83 +268,18 @@ public class LoadFilmlist {
             filmListDiff.clear();
         }
 
-        if (event.error) {
-            // Laden war fehlerhaft
-            logList.add("");
-            logList.add("Filmliste laden war fehlerhaft, alte Liste wird wieder geladen");
-            final boolean stopped = isStop();
-            Platform.runLater(() -> PAlert.showErrorAlert("Filmliste laden",
-                    stopped ? "Das Laden einer neuen Filmliste wurde abgebrochen!" :
-                            "Das Laden einer neuen Filmliste hat nicht geklappt!")
-            );
+        logList.add("Neue Filme markieren");
+        findAndMarkNewFilms(logList, filmListNew);
 
-            // dann die alte Liste wieder laden
-            filmListNew.clear();
-            setStop(false);
-            ReadFilmlist.readSavedFilmlist(filmListNew);
-            logList.add("");
-
-        } else {
-            // dann war alles OK
-            logList.add("Neue Filme markieren");
-            findAndMarkNewFilms(logList, filmListNew);
-
-            logList.add("Unicode-Zeichen korrigieren");
-            FilmlistFactory.cleanFaultyCharacterFilmlist(filmListNew);
-
-            logList.add("");
-            logList.add("Filme schreiben (" + filmListNew.size() + " Filme) :");
-            logList.add("   --> Start Schreiben nach: " + ProgInfos.getFilmListFile());
-            new WriteFilmlistJson().write(ProgInfos.getFilmListFile(), filmListNew);
-            logList.add("   --> geschrieben!");
-            logList.add("");
-        }
-
-        afterLoadingFilmlist(logList);
-        PLog.addSysLog(logList);
-    }
-
-    /**
-     * alles was nach einem Neuladen oder Einlesen einer gespeicherten Filmliste ansteht
-     */
-    private void afterLoadingFilmlist(List<String> logList) {
+        logList.add("Unicode-Zeichen korrigieren");
+        FilmlistFactory.cleanFaultyCharacterFilmlist(filmListNew);
 
         logList.add("");
-        logList.add("Jetzige Liste erstellt am: " + filmListNew.genDate());
-        logList.add("  Anzahl Filme: " + filmListNew.size());
-        logList.add("  Anzahl Neue:  " + filmListNew.countNewFilms());
+        logList.add("Filme schreiben (" + filmListNew.size() + " Filme) :");
+        logList.add("   --> Start Schreiben nach: " + ProgInfos.getFilmListFile());
+        new WriteFilmlistJson().write(ProgInfos.getFilmListFile(), filmListNew);
+        logList.add("   --> geschrieben!");
         logList.add("");
-        logList.add(PLog.LILNE2);
-        logList.add("");
-
-        notifyProgress.notifyEvent(NotifyProgress.NOTIFY.LOADED,
-                new ListenerFilmlistLoadEvent("", "Diacritics setzen/ändern, Diacritics suchen",
-                        ListenerLoadFilmlist.PROGRESS_INDETERMINATE, 0, false/* Fehler */));
-        FilmlistFactory.setDiacritic(filmListNew, false);
-
-        notifyProgress.notifyEvent(NotifyProgress.NOTIFY.LOADED,
-                new ListenerFilmlistLoadEvent("", "Filme markieren, Themen suchen",
-                        ListenerLoadFilmlist.PROGRESS_INDETERMINATE, 0, false/* Fehler */));
-        logList.add("Filme markieren");
-        final int count = filmListNew.markFilms();
-        logList.add("Anzahl doppelte Filme: " + count);
-
-        progData.filmlist.loadSender();
-
-        notifyProgress.notifyEvent(NotifyProgress.NOTIFY.LOADED,
-                new ListenerFilmlistLoadEvent("", "Filme in Downloads eingetragen",
-                        ListenerLoadFilmlist.PROGRESS_INDETERMINATE, 0, false/* Fehler */));
-        logList.add("Filme in Downloads eingetragen");
-        progData.downloadList.addFilmInList(filmListNew);
-
-        //die FilmList wieder füllen
-        logList.add("==> und jetzt die Filmliste wieder füllen :)");
-        progData.filmlist.metaData = filmListNew.metaData;
-        progData.filmlist.sender = filmListNew.sender;
-        progData.filmlist.addAll(filmListNew);
-        filmListNew.clear();
-
-        propLoadFilmlist.set(false);
     }
 
     private void fillHash(List<String> logList, Filmlist filmlist) {

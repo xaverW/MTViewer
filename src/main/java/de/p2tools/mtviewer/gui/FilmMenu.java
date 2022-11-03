@@ -64,7 +64,7 @@ public class FilmMenu {
         //=========================
         //Filmliste/Einstellungen
         final MenuItem miLoad = new MenuItem("Eine neue Filmliste laden");
-        miLoad.setOnAction(e -> progData.loadFilmlist.loadNewFilmlistFromServer(false));
+        miLoad.setOnAction(e -> progData.loadFilmlist.loadNewFilmlist(false));
 
         final MenuItem miConfig = new MenuItem("Einstellungen des Programms");
         miConfig.setOnAction(e -> new ConfigDialogController(ProgData.getInstance()).showDialog());
