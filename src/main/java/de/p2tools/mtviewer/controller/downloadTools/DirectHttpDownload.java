@@ -67,7 +67,6 @@ public class DirectHttpDownload extends Thread {
     @Override
     public synchronized void run() {
         StarterClass.startMsg(download);
-
         try {
             Files.createDirectories(Paths.get(download.getDestPath()));
         } catch (final IOException ignored) {
@@ -86,10 +85,10 @@ public class DirectHttpDownload extends Thread {
                 if (download.isStateStartedRun()) {
                     new DownloadCont().downloadContent(this, progData, download, conn, bandwidthCalculationTimer, file, downloaded);
                 }
+
             } catch (final Exception ex) {
                 if ((ex instanceof IOException)
                         && restartCount < ProgConfig.SYSTEM_PARAMETER_DOWNLOAD_MAX_RESTART_HTTP.getValue()) {
-
                     if (ex instanceof java.net.SocketTimeoutException) {
                         // Timeout Fehlermeldung für zxd :)
                         final ArrayList<String> text = new ArrayList<>();
@@ -98,9 +97,9 @@ public class DirectHttpDownload extends Thread {
                         text.add("URL: " + download.getUrl());
                         PLog.sysLog(text.toArray(new String[text.size()]));
                     }
-
                     restartCount++;
                     restart = true;
+
                 } else {
                     // dann weiß der Geier!
                     exMessage = ex.getMessage();
