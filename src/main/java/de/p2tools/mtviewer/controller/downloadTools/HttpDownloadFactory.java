@@ -50,12 +50,12 @@ public class HttpDownloadFactory {
             if (downloadData.getFilm().getDurationMinute() > 0
                     && downloadData.getStart().getTimeLeftSeconds() > 0
                     && downloadData.getDownloadSize().getActFileSize() > 0
-                    && downloadData.getDownloadSize().getFilmSize() > 0) {
+                    && downloadData.getDownloadSize().getFileSize() > 0) {
 
                 // macht nur dann Sinn
                 final long filetimeAlreadyLoadedSeconds = downloadData.getFilm().getDurationMinute() * 60
                         * downloadData.getDownloadSize().getActFileSize()
-                        / downloadData.getDownloadSize().getFilmSize();
+                        / downloadData.getDownloadSize().getFileSize();
 
                 if (filetimeAlreadyLoadedSeconds > (downloadData.getStart().getTimeLeftSeconds() * 1.1 /* plus 10% zur Sicherheit */)) {
                     downloadData.getStart().setStartViewing(true);

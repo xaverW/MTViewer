@@ -48,7 +48,7 @@ public class DownloadMp4 {
         downloadData.getStart().setInputStream(new MTInputStream(conn.getInputStream(),
                 bandwidthCalculationTimer, ProgConfig.DOWNLOAD_MAX_BANDWIDTH_KBYTE));
         FileOutputStream fos = new FileOutputStream(file, (downloaded.get() != 0));
-        downloadData.getDownloadSize().addAktFileSize(downloaded.get());
+        downloadData.getDownloadSize().addActFileSize(downloaded.get());
         final byte[] buffer = new byte[BandwidthTokenBucket.DEFAULT_BUFFER_SIZE];
         double percent, ppercent = DownloadConstants.PROGRESS_WAITING, startPercent = DownloadConstants.PROGRESS_NOT_STARTED;
         int len;
@@ -57,14 +57,14 @@ public class DownloadMp4 {
         while ((len = downloadData.getStart().getInputStream().read(buffer)) != -1 && (!downloadData.isStateStoped())) {
             downloaded.set(downloaded.get() + len);
             fos.write(buffer, 0, len);
-            downloadData.getDownloadSize().addAktFileSize(len);
+            downloadData.getDownloadSize().addActFileSize(len);
 
             // für die Anzeige prüfen ob sich was geändert hat
             if (aktSize != downloadData.getDownloadSize().getActFileSize()) {
                 aktSize = downloadData.getDownloadSize().getActFileSize();
             }
-            if (downloadData.getDownloadSize().getFilmSize() > 0) {
-                percent = 1.0 * aktSize / downloadData.getDownloadSize().getFilmSize();
+            if (downloadData.getDownloadSize().getFileSize() > 0) {
+                percent = 1.0 * aktSize / downloadData.getDownloadSize().getFileSize();
                 if (startPercent == DownloadConstants.PROGRESS_NOT_STARTED) {
                     startPercent = percent;
                 }
@@ -83,7 +83,7 @@ public class DownloadMp4 {
                     if (percent > (DownloadConstants.PROGRESS_STARTED) && percent > startPercent) {
                         // sonst macht es noch keinen Sinn
                         long timeLeft = 0;
-                        long sizeLeft = downloadData.getDownloadSize().getFilmSize() - downloadData.getDownloadSize().getActFileSize();
+                        long sizeLeft = downloadData.getDownloadSize().getFileSize() - downloadData.getDownloadSize().getActFileSize();
                         if (sizeLeft <= 0) {
                             timeLeft = 0;
                         } else if (aktBandwidth > 0) {

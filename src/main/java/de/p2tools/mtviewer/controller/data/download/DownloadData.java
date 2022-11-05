@@ -22,6 +22,7 @@ import de.p2tools.mtviewer.controller.data.film.FilmDataXml;
 import de.p2tools.mtviewer.controller.data.film.FilmTools;
 import de.p2tools.mtviewer.controller.downloadTools.DownloadFileNameFactory;
 import de.p2tools.mtviewer.controller.starter.Start;
+import de.p2tools.p2Lib.MTDownload.DownloadSize;
 import de.p2tools.p2Lib.alert.PAlert;
 import de.p2tools.p2Lib.tools.PSystemUtils;
 import de.p2tools.p2Lib.tools.date.PDateFactory;
@@ -171,18 +172,18 @@ public final class DownloadData extends DownloadDataProps {
 
     public void setSizeDownloadFromWeb(String size) {
         if (!size.isEmpty()) {
-            getDownloadSize().setSize(size);
+            getDownloadSize().setFileSize(size);
         } else if (film != null) {
-            getDownloadSize().setSize(FilmTools.getSizeFromWeb(film, getUrl()));
+            getDownloadSize().setFileSize(FilmTools.getSizeFromWeb(film, getUrl()));
         }
     }
 
     public void setSizeDownloadFromFilm() {
         if (film != null) {
             if (film.arr[FilmData.FILM_URL].equals(getUrl())) {
-                getDownloadSize().setSize(film.arr[FilmData.FILM_SIZE]);
+                getDownloadSize().setFileSize(film.arr[FilmData.FILM_SIZE]);
             } else {
-                getDownloadSize().setSize("");
+                getDownloadSize().setFileSize("");
             }
         }
     }
@@ -282,7 +283,7 @@ public final class DownloadData extends DownloadDataProps {
             properties[i].setValue(download.properties[i].getValue());
         }
         film = download.film;
-        getDownloadSize().setSize(download.getDownloadSize().getFilmSize());// die Auflösung des Films kann sich ändern
+        getDownloadSize().setFileSize(download.getDownloadSize().getFileSize());// die Auflösung des Films kann sich ändern
         setStart(download.getStart());
     }
 }

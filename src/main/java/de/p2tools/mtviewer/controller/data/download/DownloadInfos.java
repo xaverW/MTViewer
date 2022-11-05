@@ -193,17 +193,17 @@ public class DownloadInfos {
             if (download.isStateInit()) {
                 // noch nicht gestartet
                 ++numberNotStartedDownloads;
-                byteNotStartedDownloads += (download.getDownloadSize().getFilmSize() > 0 ? download.getDownloadSize().getFilmSize() : 0);
+                byteNotStartedDownloads += (download.getDownloadSize().getFileSize() > 0 ? download.getDownloadSize().getFileSize() : 0);
 
             } else if (download.isStateStartedWaiting()) {
                 // gestartet und warten auf den Download
                 ++numberWaitingDownloads;
-                byteWaitingDownloads += (download.getDownloadSize().getFilmSize() > 0 ? download.getDownloadSize().getFilmSize() : 0);
+                byteWaitingDownloads += (download.getDownloadSize().getFileSize() > 0 ? download.getDownloadSize().getFileSize() : 0);
 
             } else if (download.isStateStartedRun()) {
                 // die Downloads laufen gerade
                 ++numberLoadingDownloads;
-                byteLoadingDownloads += (download.getDownloadSize().getFilmSize() > 0 ? download.getDownloadSize().getFilmSize() : 0);
+                byteLoadingDownloads += (download.getDownloadSize().getFileSize() > 0 ? download.getDownloadSize().getFileSize() : 0);
 
                 bandwidth += download.getStart().getBandwidth(); // bytes per second
                 if (bandwidth < 0) {

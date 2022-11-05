@@ -22,8 +22,8 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
-import de.p2tools.mtviewer.controller.data.download.DownloadSizeData;
 import de.p2tools.mtviewer.controller.data.film.FilmTools;
+import de.p2tools.p2Lib.MTDownload.DownloadSize;
 import de.p2tools.p2Lib.guiTools.PCheckBoxCell;
 import de.p2tools.p2Lib.guiTools.POpen;
 import de.p2tools.p2Lib.tools.GermanStringIntSorter;
@@ -336,7 +336,7 @@ public class TableDownload extends PTable<DownloadData> {
         speedColumn.setCellValueFactory(new PropertyValueFactory<>("bandwidth"));
         speedColumn.getStyleClass().add("alignCenterRightPadding_25");
 
-        final TableColumn<DownloadData, DownloadSizeData> sizeColumn = new TableColumn<>("Größe [MB]");
+        final TableColumn<DownloadData, DownloadSize> sizeColumn = new TableColumn<>("Größe [MB]");
         sizeColumn.setCellValueFactory(new PropertyValueFactory<>("downloadSize"));
         sizeColumn.getStyleClass().add("alignCenterRightPadding_25");
 

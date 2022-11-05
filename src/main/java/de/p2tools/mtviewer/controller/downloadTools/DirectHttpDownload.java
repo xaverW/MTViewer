@@ -133,7 +133,7 @@ public class DirectHttpDownload extends Thread {
         //If the server uses self-signed X.509 certificate, we will get SSLHandshakeException -> BR!!
         //https://nakov.com/blog/2009/07/16/disable-certificate-validation-in-java-ssl-connections/
 
-        download.getDownloadSize().setSize(DownloadFactory.getContentLength(url, ProgInfos.getUserAgent()));
+        download.getDownloadSize().setFileSize(DownloadFactory.getContentLength(url, ProgInfos.getUserAgent()));
         download.getDownloadSize().setActFileSize(0);
         conn = DownloadFactory.getConn(url, ProgInfos.getUserAgent(),
                 ProgConfig.SYSTEM_PARAMETER_DOWNLOAD_TIMEOUT_SECOND.getValue(), downloaded.getValue(),
