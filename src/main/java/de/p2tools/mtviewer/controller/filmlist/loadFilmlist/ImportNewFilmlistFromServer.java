@@ -65,7 +65,7 @@ public class ImportNewFilmlistFromServer {
             }
         }
         if (!ret) {
-            logList.add(951235497, "Es konnten keine Filme geladen werden!");
+            logList.add("Es konnten keine Filme geladen werden!");
         }
         reportFinished(ret);
     }
