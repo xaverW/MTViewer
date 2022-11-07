@@ -21,6 +21,8 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.p2Lib.tools.DiacriticFactory;
 
 public class FilmDataFactory {
+//    static int count = 0;
+
     private FilmDataFactory() {
     }
 
@@ -30,6 +32,8 @@ public class FilmDataFactory {
         //6,2s 829MB wenn alle Felder gesetzt würden
         String s = DiacriticFactory.flattenDiacritic(filmData.getTitle());
         if (!s.equals(filmData.getTitle())) {
+//            ++count;
+//            System.out.println("Diakrit: " + count + " - " + filmData.getChannel() + " - " + filmData.getTheme() + " - " + filmData.getTitle());
             filmData.arr[FilmData.FILM_TITLE2] = s;
         } else {
             filmData.arr[FilmData.FILM_TITLE2] = "";

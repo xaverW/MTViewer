@@ -195,7 +195,7 @@ public class LoadFilmlist {
         final int count = filmListNew.markFilms();
         logList.add("Anzahl doppelte Filme: " + count);
 
-        progData.filmlist.loadSender();
+        filmListNew.loadSender();
 
         setLoaded(new ListenerFilmlistLoadEvent("", "Filme in Downloads eingetragen",
                 ListenerLoadFilmlist.PROGRESS_INDETERMINATE, 0, false/* Fehler */));
