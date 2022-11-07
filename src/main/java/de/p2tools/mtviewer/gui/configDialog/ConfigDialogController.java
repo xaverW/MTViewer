@@ -55,19 +55,6 @@ public class ConfigDialogController extends PDialogExtra {
         init(false);
     }
 
-//    public synchronized static final ConfigDialogController getInstanceAndShow() {
-//        if (instance == null) {
-//            instance = new ConfigDialogController(ProgData.getInstance());
-//        }
-//
-//        if (!instance.isShowing()) {
-//            instance.showDialog();
-//        }
-//        instance.getStage().toFront();
-//
-//        return instance;
-//    }
-
     @Override
     public void make() {
         setMaskerPane();

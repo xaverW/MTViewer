@@ -34,7 +34,7 @@ public class PlayPaneController extends PAccordionPane {
     private EditFilterPane editFilterPane;
 
     public PlayPaneController(Stage stage) {
-        super(stage, ProgConfig.CONFIG_DIALOG_ACCORDION, ProgConfig.SYSTEM_CONFIG_DIALOG_CONFIG);
+        super(stage, ProgConfig.CONFIG_DIALOG_ACCORDION, ProgConfig.SYSTEM_CONFIG_DIALOG_PLAY);
         this.stage = stage;
 
         init();
