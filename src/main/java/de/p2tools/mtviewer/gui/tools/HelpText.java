@@ -215,7 +215,11 @@ public class HelpText {
                     "Zeichen* in Titel, Thema und Beschreibung verwendet. Es werden dann z.B. " +
                     "\"Dvořak\", \"Noël\" und \"Niño\" nicht mehr gefunden, aber stattdessen " +
                     "\"Dvorak\", \"Noel\" und \"Nino\".\n" +
-                    "\n";
+                    "\n\n" +
+                    "Nach dem Einschalten der Funktion und dem " +
+                    "Schließen des Dialogs wird die Filmliste sofort geändert. " +
+                    "Wird die Funktion dagegen wieder *ausgeschaltet*, werden die Änderungen erst " +
+                    "nach dem Neuladen einer Filmliste wirksam.";
 
     public static final String TIP_OF_DAY =
             "Beim Programmstart wird (einmal täglich) ein Tip zur Verwendung " +

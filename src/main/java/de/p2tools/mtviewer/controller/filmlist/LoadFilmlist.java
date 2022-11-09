@@ -112,6 +112,7 @@ public class LoadFilmlist {
      * Filmliste beim Programmstart laden
      */
     private void loadFilmlistStart(List<String> logList, boolean firstProgramStart) {
+        PDuration.counterStart("LoadFilmlist.loadFilmlistStart");
         // Start des Ladens, gibts keine Fortschrittsanzeige und kein Abbrechen
         if (LoadFactory.checkAllSenderSelectedNotToLoad(progData.primaryStage)) {
             // alle Sender sind vom Laden ausgenommen
@@ -151,9 +152,11 @@ public class LoadFilmlist {
         setLoaded(new ListenerFilmlistLoadEvent("", "Filme verarbeiten",
                 ListenerLoadFilmlist.PROGRESS_INDETERMINATE, 0, false/* Fehler */));
         afterLoading(logList);
+        PDuration.counterStop("LoadFilmlist.loadFilmlistStart");
     }
 
     private void loadNewFilmlistFromServer(List<String> logList, boolean alwaysLoadNew) {
+        PDuration.counterStart("LoadFilmlist.loadNewFilmlistFromServer");
         // damit wird eine neue Filmliste (Web) geladen UND auch gleich im Config-Ordner gespeichert
         if (LoadFactory.checkAllSenderSelectedNotToLoad(progData.primaryStage)) {
             // alle Sender sind vom Laden ausgenommen
@@ -171,6 +174,7 @@ public class LoadFilmlist {
 
         loadNewList(logList, alwaysLoadNew, false);
         afterLoading(logList);
+        PDuration.counterStop("LoadFilmlist.loadNewFilmlistFromServer");
     }
 
     // #######################################
@@ -184,10 +188,6 @@ public class LoadFilmlist {
         logList.add("");
         logList.add(PLog.LILNE2);
         logList.add("");
-
-        setLoaded(new ListenerFilmlistLoadEvent("", "Diacritics setzen/ändern, Diacritics suchen",
-                ListenerLoadFilmlist.PROGRESS_INDETERMINATE, 0, false/* Fehler */));
-        FilmlistFactory.setDiacritic(filmListNew, false);
 
         setLoaded(new ListenerFilmlistLoadEvent("", "Filme markieren, Themen suchen",
                 ListenerLoadFilmlist.PROGRESS_INDETERMINATE, 0, false/* Fehler */));
@@ -273,6 +273,9 @@ public class LoadFilmlist {
 
         logList.add("Unicode-Zeichen korrigieren");
         FilmlistFactory.cleanFaultyCharacterFilmlist(filmListNew);
+
+        logList.add("Diacritics setzen/ändern, Diacritics suchen");
+        FilmlistFactory.setDiacritic(filmListNew, false);
 
         logList.add("");
         logList.add("Filme schreiben (" + filmListNew.size() + " Filme) :");

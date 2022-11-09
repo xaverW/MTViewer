@@ -24,6 +24,7 @@ import de.p2tools.p2Lib.dialogs.dialog.PDialogExtra;
 import de.p2tools.p2Lib.tools.log.PLog;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
@@ -45,14 +46,14 @@ public class ConfigDialogController extends PDialogExtra {
     private TabPane tabPane = new TabPane();
     private Button btnOk = new Button("_Ok");
     private String geo = ProgConfig.SYSTEM_GEO_HOME_PLACE.get();
-    private BooleanProperty diacriticChanged;
+    private BooleanProperty diacriticChanged = new SimpleBooleanProperty();
 
     public ConfigDialogController(ProgData progData) {
         super(progData.primaryStage, ProgConfig.CONFIG_DIALOG_SIZE, "Einstellungen",
                 true, false, DECO.NONE, true);
 
         this.progData = progData;
-        this.diacriticChanged = ProgConfig.SYSTEM_SHOW_DIACRITICS;
+        this.diacriticChanged.setValue(ProgConfig.SYSTEM_REMOVE_DIACRITICS.getValue());
         init(false);
     }
 
@@ -81,7 +82,7 @@ public class ConfigDialogController extends PDialogExtra {
             progData.filmlist.markGeoBlocked();
         }
 
-        if (diacriticChanged.getValue()) {
+        if (diacriticChanged.getValue() != ProgConfig.SYSTEM_REMOVE_DIACRITICS.getValue()) {
             //dann hats sich geändert!!!
             FilmlistFactory.setDiacritic(progData.filmlist, true);
             Listener.notify(Listener.EVENT_DIACRITIC_CHANGED, ConfigDialogController.class.getSimpleName());

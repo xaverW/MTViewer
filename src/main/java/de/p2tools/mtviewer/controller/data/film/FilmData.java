@@ -17,7 +17,6 @@
 package de.p2tools.mtviewer.controller.data.film;
 
 import de.p2tools.mtviewer.controller.config.ProgConst;
-import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.tools.FilmDate;
 import de.p2tools.p2Lib.configFile.config.Config;
 import de.p2tools.p2Lib.configFile.pData.PData;
@@ -82,17 +81,17 @@ public class FilmData extends FilmDataProps implements PData {
         // Filmzeit
         setFilmTime();
 
-        //=================================
-        // Diacritic
-        initDiacritic();
+//        //=================================
+//        // Diacritic
+//        initDiacritic();
     }
 
-    private void initDiacritic() {
-        if (ProgData.generatingDiacriticDone) {
-            //dann müssen die Diacritic erstellt werden
-            FilmDataFactory.generateDiacritic(this);
-        }
-    }
+//    private void initDiacritic() {
+//        if (ProgData.generatingDiacriticDone) {
+//            //dann müssen die Diacritic erstellt werden
+//            FilmDataFactory.generateDiacritic(this);
+//        }
+//    }
 
     public void initDate() {
         // ActList braucht nur das, geht schneller

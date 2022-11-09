@@ -81,26 +81,8 @@ public class WriteFilmlistJson {
                             if (film.arr[m].equals(theme)) {
                                 jg.writeString("");
                             } else {
-                                if (film.showDiacritic) {
-                                    theme = film.arr[m];
-                                } else {
-                                    theme = film.arr[FilmDataXml.FILM_THEME2];
-                                }
-                                jg.writeString(theme);
-                            }
-
-                        } else if (m == FilmDataXml.FILM_TITLE) {
-                            if (film.showDiacritic) {
+                                theme = film.arr[m];
                                 jg.writeString(film.arr[m]);
-                            } else {
-                                jg.writeString(film.arr[FilmDataXml.FILM_TITLE2]);
-                            }
-
-                        } else if (m == FilmDataXml.FILM_DESCRIPTION) {
-                            if (film.showDiacritic) {
-                                jg.writeString(film.arr[m]);
-                            } else {
-                                jg.writeString(film.arr[FilmDataXml.FILM_DESCRIPTION2]);
                             }
 
                         } else {

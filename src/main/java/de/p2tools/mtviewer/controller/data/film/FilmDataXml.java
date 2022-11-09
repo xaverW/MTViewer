@@ -46,10 +46,10 @@ public class FilmDataXml extends Data<FilmDataXml> {
     public static final int FILM_URL_HISTORY = 22;
     public static final int FILM_NEW = 23;
     public static final int FILM_DATE_LONG = 24;
-    public static final int FILM_THEME2 = 25;
-    public static final int FILM_TITLE2 = 26;
-    public static final int FILM_DESCRIPTION2 = 27;
-    public static final int MAX_ELEM = 28;
+    //    public static final int FILM_THEME2 = 25;
+//    public static final int FILM_TITLE2 = 26;
+//    public static final int FILM_DESCRIPTION2 = 27;
+    public static final int MAX_ELEM = 25;
     //
     public static final String TAG = "Filme";
     public static final String TAG_JSON_LIST = "X";
@@ -79,9 +79,9 @@ public class FilmDataXml extends Data<FilmDataXml> {
             "neu",
             "DatumL",
 
-            "Thema2",
-            "Titel2",
-            "Beschreibung2"
+//            "Thema2",
+//            "Titel2",
+//            "Beschreibung2"
     };
 
     //!! wird zum Laden/Schreiben der Filmliste gebraucht !!

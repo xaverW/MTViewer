@@ -67,10 +67,8 @@ public class FilmlistFactory {
     }
 
     public static void setDiacritic(Filmlist filmlist, boolean inAThread) {
-        if (!ProgData.generatingDiacriticDone && !ProgConfig.SYSTEM_SHOW_DIACRITICS.getValue()) {
-            //dann sollen die Diacritic *nicht* angezeigt werden und
-            //müssen erst mal erstellt werden
-            ProgData.generatingDiacriticDone = true;
+        if (ProgConfig.SYSTEM_REMOVE_DIACRITICS.getValue()) {
+            //dann sollen die Diacritic *nicht* angezeigt werden
 
             if (inAThread) {
                 ProgData.getInstance().maskerPane.setMaskerVisible(true, false);
@@ -82,22 +80,19 @@ public class FilmlistFactory {
                 });
                 th.setName("generateDiacritic");
                 th.start();
+
             } else {
                 genDiacriticAndSet(filmlist);
             }
-
-        } else {
-            //oder nur noch setzen
-            ProgData.getInstance().filmlist.stream().forEach(film -> FilmDataFactory.setDiacritic(film));
         }
     }
 
     private static void genDiacriticAndSet(Filmlist filmlist) {
-        PDuration.counterStart("genDiacriticAndSet");
+        PDuration.counterStart("FilmlistFactory.genDiacriticAndSet");
         filmlist.stream().forEach(film -> {
             FilmDataFactory.generateDiacritic(film);
         });
-        PDuration.counterStop("genDiacriticAndSet");
+        PDuration.counterStop("FilmlistFactory.genDiacriticAndSet");
     }
 
     public static String cleanUnicode(String ret) {

@@ -23,11 +23,9 @@ import de.p2tools.p2Lib.guiTools.PButton;
 import de.p2tools.p2Lib.guiTools.PColumnConstraints;
 import de.p2tools.p2Lib.guiTools.pToggleSwitch.PToggleSwitch;
 import javafx.beans.property.BooleanProperty;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Separator;
-import javafx.scene.control.TitledPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -35,7 +33,6 @@ import java.util.Collection;
 
 public class LoadFilmsPane {
 
-    private final PToggleSwitch tglLoad = new PToggleSwitch("Filmliste beim Programmstart laden");
     private final ProgData progData;
     private final Stage stage;
     BooleanProperty propLoad = ProgConfig.SYSTEM_LOAD_FILMS_ON_START;
@@ -46,11 +43,6 @@ public class LoadFilmsPane {
     }
 
     public void close() {
-        tglLoad.selectedProperty().unbindBidirectional(propLoad);
-    }
-
-    public TitledPane make() {
-        return make(null);
     }
 
     public TitledPane make(Collection<TitledPane> result) {
@@ -59,18 +51,16 @@ public class LoadFilmsPane {
         gridPane.setVgap(5);
         gridPane.setPadding(new Insets(20));
 
+        final PToggleSwitch tglLoad = new PToggleSwitch("Filmliste beim Programmstart laden");
         tglLoad.selectedProperty().bindBidirectional(propLoad);
         final Button btnHelpLoad = PButton.helpButton(stage, "Filmliste laden",
                 HelpText.LOAD_FILMLIST_PROGRAMSTART);
 
 
         //Diacritic
-        PToggleSwitch tglRemoveDiacritic = new PToggleSwitch("Diakritische Zeichen ändern");
+        final PToggleSwitch tglRemoveDiacritic = new PToggleSwitch("Diakritische Zeichen ändern");
         tglRemoveDiacritic.setMaxWidth(Double.MAX_VALUE);
-        tglRemoveDiacritic.setSelected(!ProgConfig.SYSTEM_SHOW_DIACRITICS.getValue());
-        tglRemoveDiacritic.selectedProperty().addListener((observableValue, aBoolean, t1) -> {
-            ProgConfig.SYSTEM_SHOW_DIACRITICS.setValue(!tglRemoveDiacritic.isSelected());
-        });
+        tglRemoveDiacritic.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_REMOVE_DIACRITICS);
         final Button btnHelpDia = PButton.helpButton(stage, "Diakritische Zeichen",
                 HelpText.DIAKRITISCHE_ZEICHEN);
 
@@ -79,16 +69,27 @@ public class LoadFilmsPane {
         sp2.setMinHeight(0);
 
         int row = 0;
-        gridPane.add(tglLoad, 0, ++row, 2, 1);
-        gridPane.add(btnHelpLoad, 2, row);
+        gridPane.add(tglLoad, 0, ++row);
+        gridPane.add(btnHelpLoad, 1, row);
 
         gridPane.add(new Label(" "), 0, ++row);
-        gridPane.add(tglRemoveDiacritic, 0, ++row, 2, 1);
-        gridPane.add(btnHelpDia, 2, row);
+        gridPane.add(new Label(" "), 0, ++row);
+
+        gridPane.add(tglRemoveDiacritic, 0, ++row);
+        gridPane.add(btnHelpDia, 1, row);
+
+        Button btnLoad = new Button("_Filmliste mit dieser Einstellung neu laden");
+        btnLoad.setTooltip(new Tooltip("Eine komplette neue Filmliste laden.\n" +
+                "Geänderte Einstellungen für das Laden der Filmliste werden so sofort übernommen"));
+        btnLoad.setOnAction(event -> {
+            progData.loadFilmlist.loadNewFilmlist(true);
+        });
+        gridPane.add(btnLoad, 0, ++row, 2, 1);
+        GridPane.setHalignment(btnLoad, HPos.RIGHT);
 
         gridPane.getColumnConstraints().addAll(PColumnConstraints.getCcComputedSizeAndHgrow(),
-                PColumnConstraints.getCcPrefSize(),
-                PColumnConstraints.getCcPrefSize());
+                PColumnConstraints.getCcPrefSize()
+        );
 
         TitledPane tpConfig = new TitledPane("Filmliste laden", gridPane);
         result.add(tpConfig);

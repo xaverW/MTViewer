@@ -46,7 +46,7 @@ public class ProgData {
     public static boolean debug = false; // Debugmodus
     public static boolean duration = false; // Duration ausgeben
     public static boolean reset = false; // Programm auf Starteinstellungen zurücksetzen
-    public static boolean generatingDiacriticDone = false; //dann ist die Erstellung der "Diacritic" schon erledigt
+
     // Infos
     public static String configDir = ""; // Verzeichnis zum Speichern der Programmeinstellungen
     private static ProgData instance;
