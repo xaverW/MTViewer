@@ -210,7 +210,6 @@ public class LoadFilmlist {
         filmListNew.clear();
 
         stopMsg();
-
         setFinished();
     }
 

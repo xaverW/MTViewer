@@ -38,18 +38,18 @@ public class FilmDataXml extends Data<FilmDataXml> {
     public static final int FILM_URL = 14;
     public static final int FILM_WEBSITE = 15;
     public static final int FILM_URL_SUBTITLE = 16;
-    public static final int FILM_URL_RTMP = 17;
-    public static final int FILM_URL_SMALL = 18;
-    public static final int FILM_URL_RTMP_SMALL = 19;
-    public static final int FILM_URL_HD = 20;
-    public static final int FILM_URL_RTMP_HD = 21;
-    public static final int FILM_URL_HISTORY = 22;
-    public static final int FILM_NEW = 23;
-    public static final int FILM_DATE_LONG = 24;
+    //    public static final int FILM_URL_RTMP = 17;
+    public static final int FILM_URL_SMALL = 17;
+    //    public static final int FILM_URL_RTMP_SMALL = 19;
+    public static final int FILM_URL_HD = 18;
+    //    public static final int FILM_URL_RTMP_HD = 21;
+    public static final int FILM_URL_HISTORY = 19;
+    public static final int FILM_NEW = 20;
+    public static final int FILM_DATE_LONG = 21;
     //    public static final int FILM_THEME2 = 25;
 //    public static final int FILM_TITLE2 = 26;
 //    public static final int FILM_DESCRIPTION2 = 27;
-    public static final int MAX_ELEM = 25;
+    public static final int MAX_ELEM = 22;
     //
     public static final String TAG = "Filme";
     public static final String TAG_JSON_LIST = "X";
@@ -70,11 +70,11 @@ public class FilmDataXml extends Data<FilmDataXml> {
             "Url",
             "Website",
             "Url Untertitel",
-            "Url RTMP",
+//            "Url RTMP",
             "Url Klein",
-            "Url RTMP Klein",
+//            "Url RTMP Klein",
             "Url HD",
-            "Url RTMP HD",
+//            "Url RTMP HD",
             "Url History",
             "neu",
             "DatumL",
@@ -96,11 +96,11 @@ public class FilmDataXml extends Data<FilmDataXml> {
             FILM_URL,
             FILM_WEBSITE,
             FILM_URL_SUBTITLE,
-            FILM_URL_RTMP,
+//            FILM_URL_RTMP,
             FILM_URL_SMALL,
-            FILM_URL_RTMP_SMALL,
+//            FILM_URL_RTMP_SMALL,
             FILM_URL_HD,
-            FILM_URL_RTMP_HD,
+//            FILM_URL_RTMP_HD,
             FILM_DATE_LONG,
             FILM_URL_HISTORY,
             FILM_GEO,
@@ -108,12 +108,7 @@ public class FilmDataXml extends Data<FilmDataXml> {
     };
     static final FastDateFormat sdf_date_time = FastDateFormat.getInstance("dd.MM.yyyyHH:mm:ss");
     static final FastDateFormat sdf_date = FastDateFormat.getInstance("dd.MM.yyyy");
-    public final String[] arr = new String[]{"",
-            "",
-            "",
-            "",
-            "",
-            "",
+    public final String[] arr = new String[]{
             "",
             "",
             "",
