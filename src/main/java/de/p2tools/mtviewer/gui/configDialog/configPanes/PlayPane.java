@@ -16,6 +16,7 @@
 
 package de.p2tools.mtviewer.gui.configDialog.configPanes;
 
+import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
@@ -31,6 +32,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.Collection;
 
 public class PlayPane {
@@ -70,6 +72,14 @@ public class PlayPane {
     private int addVideoPlayer(GridPane gridPane, int row) {
         TextField txtPlay = new TextField();
         txtPlay.textProperty().bindBidirectional(propProgram);
+        txtPlay.textProperty().addListener((l, o, n) -> {
+            File file = new File(txtPlay.getText());
+            if (!file.exists() || !file.isFile()) {
+                txtPlay.setStyle(ProgColorList.ERROR.getCssBackground());
+            } else {
+                txtPlay.setStyle("");
+            }
+        });
 
         TextField txtParameter = new TextField();
         txtParameter.textProperty().bindBidirectional(propParameter);

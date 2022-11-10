@@ -39,7 +39,7 @@ public class FilmDataProps extends FilmDataXml {
     // todo?? die Property brauchts nicht alle aber dann müssen die checkboxen in der Tabelle
     // ersetzt werden
     private boolean newFilm = false;
-    private boolean shown = false;
+    //    private boolean shown = false;
     private boolean actHist = false;
 
     public int getDurationMinute() {
@@ -200,15 +200,15 @@ public class FilmDataProps extends FilmDataXml {
         this.newFilm = newFilm;
     }
 
-    public boolean isShown() {
-        return shown;
-    }
-
-    public void setShown(boolean shown) {
-        if (!isLive()) {
-            this.shown = shown;
-        }
-    }
+//    public boolean isShown() {
+//        return shown;
+//    }
+//
+//    public void setShown(boolean shown) {
+//        if (!isLive()) {
+//            this.shown = shown;
+//        }
+//    }
 
     public boolean getActHist() {
         return actHist;

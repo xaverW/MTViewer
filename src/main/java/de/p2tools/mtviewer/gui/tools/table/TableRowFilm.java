@@ -64,12 +64,12 @@ public class TableRowFilm<T> extends TableRow {
                 }
             }
 
-            if (film.isShown()) {
-                setStyle(ProgColorList.FILM_HISTORY.getCssBackgroundAndSel());
-
-            } else {
-                setStyle("");
-            }
+//            if (film.isShown()) {
+//                setStyle(ProgColorList.FILM_HISTORY.getCssBackgroundAndSel());
+//
+//            } else {
+//                setStyle("");
+//            }
 
         }
     }

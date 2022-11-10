@@ -17,6 +17,7 @@
 
 package de.p2tools.mtviewer.gui.configDialog.downloadPanes;
 
+import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
@@ -33,6 +34,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.Collection;
 
 public class DestinationPane {
@@ -219,6 +221,15 @@ public class DestinationPane {
         if (txtProg.getText().isEmpty()) {
             txtProg.setText(ProgConfig.SYSTEM_PROG_SAVE_INIT);
         }
+        txtProg.textProperty().addListener((observable, oldValue, newValue) -> {
+            File file = new File(txtProg.getText());
+            if (!file.exists() || !file.isFile()) {
+                txtProg.setStyle(ProgColorList.ERROR.getCssBackground());
+            } else {
+                txtProg.setStyle("");
+            }
+        });
+
         txtParameter.textProperty().bindBidirectional(ProgConfig.SYSTEM_PROG_SAVE_PARAMETER);
         if (txtParameter.getText().isEmpty()) {
             txtParameter.setText(ProgConfig.SYSTEM_PROG_SAVE_PARAMETER_INIT);
