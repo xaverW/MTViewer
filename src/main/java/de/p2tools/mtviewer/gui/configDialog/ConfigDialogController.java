@@ -18,7 +18,10 @@ package de.p2tools.mtviewer.gui.configDialog;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
+import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.data.film.FilmlistFactory;
+import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ListenerFilmlistLoadEvent;
+import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ListenerLoadFilmlist;
 import de.p2tools.mtviewer.gui.tools.Listener;
 import de.p2tools.p2Lib.dialogs.dialog.PDialogExtra;
 import de.p2tools.p2Lib.tools.log.PLog;
@@ -64,6 +67,40 @@ public class ConfigDialogController extends PDialogExtra {
             setMaskerPane();
         });
 
+        Button btnStop = getMaskerPane().getButton();
+        getMaskerPane().setButtonText("");
+        btnStop.setGraphic(ProgIcons.Icons.ICON_BUTTON_STOP.getImageView());
+        btnStop.setOnAction(a -> progData.loadFilmlist.setStop(true));
+
+        progData.loadFilmlist.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
+            @Override
+            public void start(ListenerFilmlistLoadEvent event) {
+                if (event.progress == ListenerLoadFilmlist.PROGRESS_INDETERMINATE) {
+                    // ist dann die gespeicherte Filmliste
+                    getMaskerPane().setMaskerVisible(true, false);
+                } else {
+                    getMaskerPane().setMaskerVisible(true, true);
+                }
+                getMaskerPane().setMaskerProgress(event.progress, event.text);
+            }
+
+            @Override
+            public void progress(ListenerFilmlistLoadEvent event) {
+                getMaskerPane().setMaskerProgress(event.progress, event.text);
+            }
+
+            @Override
+            public void loaded(ListenerFilmlistLoadEvent event) {
+                getMaskerPane().setMaskerVisible(true, false);
+                getMaskerPane().setMaskerProgress(ListenerLoadFilmlist.PROGRESS_INDETERMINATE, "Filmliste verarbeiten");
+            }
+
+            @Override
+            public void finished(ListenerFilmlistLoadEvent event) {
+                getMaskerPane().setMaskerVisible(false);
+            }
+        });
+
         VBox.setVgrow(tabPane, Priority.ALWAYS);
         getvBoxCont().getChildren().add(tabPane);
         getvBoxCont().setPadding(new Insets(0));
@@ -99,7 +136,7 @@ public class ConfigDialogController extends PDialogExtra {
 
     private void setMaskerPane() {
         if (progData.maskerPane.isVisible()) {
-            this.setMaskerVisible(true);
+            this.setMaskerVisible(true, true);
         } else {
             this.setMaskerVisible(false);
         }

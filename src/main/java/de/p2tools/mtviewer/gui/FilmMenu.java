@@ -86,7 +86,7 @@ public class FilmMenu {
         final MenuItem miSearchUpdate = new MenuItem("Gibts ein Update?");
         miSearchUpdate.setOnAction(a -> new SearchProgramUpdate(progData, progData.primaryStage).searchNewProgramVersion(true));
         final MenuItem miAbout = new MenuItem("Über dieses Programm");
-        miAbout.setOnAction(event -> AboutDialogController.getInstanceAndShow());
+        miAbout.setOnAction(event -> new AboutDialogController(ProgData.getInstance()));
 
         final Menu mHelp = new Menu("Hilfe");
         mHelp.getItems().addAll(miUrlHelp, miReset, miToolTip, miSearchUpdate, new SeparatorMenuItem(), miAbout);

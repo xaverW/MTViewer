@@ -61,7 +61,7 @@ public class ProgData {
 
     // Gui
     public Stage primaryStage = null;
-    public PMaskerPane maskerPane = null;
+    public PMaskerPane maskerPane = new PMaskerPane();
     public MTViewerPlayerController mtViewerPlayerController = null;
     public FilmGuiController filmGuiController = null; // Tab mit den Filmen
     public QuitDialogController quitDialogController = null;

@@ -21,7 +21,6 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.gui.FilmGuiPack;
 import de.p2tools.mtviewer.gui.StatusBarController;
-import de.p2tools.p2Lib.guiTools.pMask.PMaskerPane;
 import de.p2tools.p2Lib.tools.log.PLog;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -34,8 +33,6 @@ public class MTViewerPlayerController extends StackPane {
 
     private final ProgData progData;
     FilmGuiPack filmGuiPack = new FilmGuiPack();
-    private PMaskerPane maskerPane = new PMaskerPane();
-
 
     public MTViewerPlayerController() {
         progData = ProgData.getInstance();
@@ -55,7 +52,7 @@ public class MTViewerPlayerController extends StackPane {
             VBox.setVgrow(vBoxFilm, Priority.ALWAYS);
 
             this.setPadding(new Insets(0));
-            this.getChildren().addAll(vBox, maskerPane);
+            this.getChildren().addAll(vBox, progData.maskerPane);
             initMaskerPane();
         } catch (Exception ex) {
             PLog.errorLog(597841023, ex);
@@ -63,12 +60,11 @@ public class MTViewerPlayerController extends StackPane {
     }
 
     private void initMaskerPane() {
-        StackPane.setAlignment(maskerPane, Pos.CENTER);
-        progData.maskerPane = maskerPane;
-        maskerPane.setPadding(new Insets(4, 1, 1, 1));
-        maskerPane.toFront();
-        Button btnStop = maskerPane.getButton();
-        maskerPane.setButtonText("");
+        StackPane.setAlignment(progData.maskerPane, Pos.CENTER);
+        progData.maskerPane.setPadding(new Insets(4, 1, 1, 1));
+        progData.maskerPane.toFront();
+        Button btnStop = progData.maskerPane.getButton();
+        progData.maskerPane.setButtonText("");
         btnStop.setGraphic(ProgIcons.Icons.ICON_BUTTON_STOP.getImageView());
         btnStop.setOnAction(a -> progData.loadFilmlist.setStop(true));
     }
