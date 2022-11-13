@@ -14,7 +14,7 @@
  * not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.p2tools.mtviewer.controller.filmlist;
+package de.p2tools.mtviewer.controller.filmlist.loadFilmlist;
 
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
@@ -23,11 +23,8 @@ import de.p2tools.mtviewer.controller.config.ProgInfos;
 import de.p2tools.mtviewer.controller.data.film.FilmData;
 import de.p2tools.mtviewer.controller.data.film.Filmlist;
 import de.p2tools.mtviewer.controller.data.film.FilmlistFactory;
-import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ImportNewFilmlistFromServer;
-import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ListenerFilmlistLoadEvent;
-import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ListenerLoadFilmlist;
-import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ReadFilmlist;
-import de.p2tools.mtviewer.controller.filmlist.writeFilmlist.WriteFilmlistJson;
+import de.p2tools.mtviewer.controller.filmlist.readWriteFilmlist.ReadFilmlist;
+import de.p2tools.mtviewer.controller.filmlist.readWriteFilmlist.WriteFilmlistJson;
 import de.p2tools.p2Lib.tools.duration.PDuration;
 import de.p2tools.p2Lib.tools.log.PLog;
 
@@ -129,7 +126,7 @@ public class LoadFilmlist {
 
         if (!firstProgramStart) {
             // gespeicherte Filmliste laden, macht beim ersten Programmstart keinen Sinn
-            loadStoredList(logList);
+            loadStoredList(logList, filmListNew);
             PDuration.onlyPing("Programmstart Filmliste laden: geladen");
         }
 
@@ -155,6 +152,9 @@ public class LoadFilmlist {
         PDuration.counterStop("LoadFilmlist.loadFilmlistStart");
     }
 
+    // #######################################
+    // #######################################
+
     private void loadNewFilmlistFromServer(List<String> logList, boolean alwaysLoadNew) {
         PDuration.counterStart("LoadFilmlist.loadNewFilmlistFromServer");
         // damit wird eine neue Filmliste (Web) geladen UND auch gleich im Config-Ordner gespeichert
@@ -176,9 +176,6 @@ public class LoadFilmlist {
         afterLoading(logList);
         PDuration.counterStop("LoadFilmlist.loadNewFilmlistFromServer");
     }
-
-    // #######################################
-    // #######################################
 
     private void afterLoading(List<String> logList) {
         logList.add("");
@@ -213,8 +210,8 @@ public class LoadFilmlist {
         setFinished();
     }
 
-    private void loadStoredList(List<String> logList) {
-        new ReadFilmlist().readFilmlist(logList, ProgInfos.getFilmListFile(), filmListNew);
+    private void loadStoredList(List<String> logList, Filmlist filmlist) {
+        new ReadFilmlist().readFilmlist(logList, ProgInfos.getFilmListFile(), filmlist);
     }
 
     private void loadNewList(List<String> logList, boolean alwaysLoadNew, boolean intern) {
@@ -297,17 +294,10 @@ public class LoadFilmlist {
         filmlist.stream() //genauso schnell wie "parallel": ~90ms
                 .peek(film -> film.setNewFilm(false))
                 .filter(film -> !hashSet.contains(film.getUrlHistory()))
-                .forEach(film -> film.setNewFilm(true));
+                .forEach(film -> {
+                    film.setNewFilm(true);
+                });
 
-        cleanHash(logList, filmlist);
-    }
-
-    private void cleanHash(List<String> logList, Filmlist filmlist) {
-        logList.add(PLog.LILNE3);
-        logList.add("Hash bereinigen, Größe vorher: " + hashSet.size());
-
-        filmlist.stream().forEach(film -> hashSet.remove(film.getUrlHistory()));
-        logList.add("                      nachher: " + hashSet.size());
-        logList.add(PLog.LILNE3);
+        hashSet.clear();
     }
 }

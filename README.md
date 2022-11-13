@@ -43,7 +43,8 @@ OpenJDK11 empfohlen. (FX-Runtime bringt das Programm bereits mit und muss nicht 
   werden. Es bringt Startdateien für Linux und Windows mit.
 
 Windows:
-Der VLC-Player muss installiert sein. Linux:
+Der VLC-Player muss installiert sein. 
+Linux:
 Der VLC-Player und ffmpeg müssen installiert sein.
 
 Weitere Infos zum Programm (Start und Benutzung) sind im Download-Paket enthalten.

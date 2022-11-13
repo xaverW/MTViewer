@@ -129,8 +129,6 @@ public class DownloadFileNameFactory {
         }
 
         int length = ProgConfig.SYSTEM_SAVE_MAX_FIELD.getValue();
-        System.out.println("length: " + length);
-
         replStr = replStr.replace("%t", getField(film.arr[FilmDataXml.FILM_THEME], length));
         replStr = replStr.replace("%T", getField(film.arr[FilmDataXml.FILM_TITLE], length));
         replStr = replStr.replace("%s", getField(film.arr[FilmDataXml.FILM_CHANNEL], length));

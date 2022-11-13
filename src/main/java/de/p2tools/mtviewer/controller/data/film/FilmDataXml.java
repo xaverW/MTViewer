@@ -52,7 +52,6 @@ public class FilmDataXml extends Data<FilmDataXml> {
     public static final int MAX_ELEM = 22;
     //
     public static final String TAG = "Filme";
-    public static final String TAG_JSON_LIST = "X";
     public static final String[] COLUMN_NAMES = {"Nr",
             "Sender",
             "Thema",
@@ -84,28 +83,6 @@ public class FilmDataXml extends Data<FilmDataXml> {
 //            "Beschreibung2"
     };
 
-    //!! wird zum Laden/Schreiben der Filmliste gebraucht !!
-    public static final int[] JSON_NAMES = {FILM_CHANNEL,
-            FILM_THEME,
-            FILM_TITLE,
-            FILM_DATE,
-            FILM_TIME,
-            FILM_DURATION,
-            FILM_SIZE,
-            FILM_DESCRIPTION,
-            FILM_URL,
-            FILM_WEBSITE,
-            FILM_URL_SUBTITLE,
-//            FILM_URL_RTMP,
-            FILM_URL_SMALL,
-//            FILM_URL_RTMP_SMALL,
-            FILM_URL_HD,
-//            FILM_URL_RTMP_HD,
-            FILM_DATE_LONG,
-            FILM_URL_HISTORY,
-            FILM_GEO,
-            FILM_NEW
-    };
     static final FastDateFormat sdf_date_time = FastDateFormat.getInstance("dd.MM.yyyyHH:mm:ss");
     static final FastDateFormat sdf_date = FastDateFormat.getInstance("dd.MM.yyyy");
     public final String[] arr = new String[]{

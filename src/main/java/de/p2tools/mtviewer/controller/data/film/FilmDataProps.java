@@ -176,20 +176,20 @@ public class FilmDataProps extends FilmDataXml {
         return arr[FILM_URL];
     }
 
-    public String getWebsite() {
-        return arr[FILM_WEBSITE];
-    }
-
-    public String getUrlSubtitle() {
-        return arr[FILM_URL_SUBTITLE];
-    }
-
     public String getUrlHistory() {
         if (arr[FILM_URL_HISTORY].isEmpty()) {
             return arr[FILM_URL];
         } else {
             return arr[FILM_URL_HISTORY];
         }
+    }
+
+    public String getWebsite() {
+        return arr[FILM_WEBSITE];
+    }
+
+    public String getUrlSubtitle() {
+        return arr[FILM_URL_SUBTITLE];
     }
 
     public boolean isNewFilm() {

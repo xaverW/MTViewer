@@ -14,7 +14,7 @@
  * not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.p2tools.mtviewer.controller.filmlist.loadFilmlist;
+package de.p2tools.mtviewer.controller.filmlist.readWriteFilmlist;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
@@ -27,7 +27,9 @@ import de.p2tools.mtviewer.controller.data.film.FilmData;
 import de.p2tools.mtviewer.controller.data.film.FilmDataXml;
 import de.p2tools.mtviewer.controller.data.film.Filmlist;
 import de.p2tools.mtviewer.controller.data.film.FilmlistXml;
-import de.p2tools.mtviewer.controller.filmlist.LoadFactory;
+import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ListenerFilmlistLoadEvent;
+import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ListenerLoadFilmlist;
+import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.LoadFactory;
 import de.p2tools.mtviewer.tools.InputStreamProgressMonitor;
 import de.p2tools.mtviewer.tools.ProgressMonitorInputStream;
 import de.p2tools.p2Lib.MTDownload.MLHttpClient;
@@ -305,40 +307,76 @@ public class ReadFilmlist {
     }
 
     private void addValue(FilmData film, JsonParser jp) throws IOException {
-        for (int i = 0; i < FilmDataXml.JSON_NAMES.length; ++i) {
+        for (int i = 0; i < ReadWriteFactory.MAX_JSON_NAMES; ++i) {
             String str = jp.nextTextValue();
 
-            switch (FilmDataXml.JSON_NAMES[i]) {
-                case FilmDataXml.FILM_NEW:
-                    // This value is unused...
-                    // datenFilm.arr[DatenFilm.FILM_NEU_NR] = value;
-                    film.setNewFilm(Boolean.parseBoolean(str));
-                    break;
-
-                case FilmDataXml.FILM_CHANNEL:
+            switch (i) {
+                case ReadWriteFactory.JSON_NAMES_CHANNEL:
                     if (!str.isEmpty()) {
                         channel = str.intern();
                     }
                     film.arr[FilmDataXml.FILM_CHANNEL] = channel;
                     break;
-
-                case FilmDataXml.FILM_THEME:
+                case ReadWriteFactory.JSON_NAMES_THEME:
                     if (!str.isEmpty()) {
                         theme = str.intern();
                     }
                     film.arr[FilmDataXml.FILM_THEME] = theme;
                     break;
+                case ReadWriteFactory.JSON_NAMES_TITLE:
+                    film.arr[FilmDataXml.FILM_TITLE] = str;
+                    break;
 
-                default:
-                    film.arr[FilmDataXml.JSON_NAMES[i]] = str;
+                case ReadWriteFactory.JSON_NAMES_DATE:
+                    film.arr[FilmDataXml.FILM_DATE] = str;
+                    break;
+                case ReadWriteFactory.JSON_NAMES_TIME:
+                    film.arr[FilmDataXml.FILM_TIME] = str;
+                    break;
+                case ReadWriteFactory.JSON_NAMES_DURATION:
+                    film.arr[FilmDataXml.FILM_DURATION] = str;
+                    break;
+                case ReadWriteFactory.JSON_NAMES_SIZE:
+                    film.arr[FilmDataXml.FILM_SIZE] = str;
+                    break;
+
+                case ReadWriteFactory.JSON_NAMES_DESCRIPTION:
+                    film.arr[FilmDataXml.FILM_DESCRIPTION] = str;
+                    break;
+                case ReadWriteFactory.JSON_NAMES_URL:
+                    film.arr[FilmDataXml.FILM_URL] = str;
+                    break;
+                case ReadWriteFactory.JSON_NAMES_WEBSITE:
+                    film.arr[FilmDataXml.FILM_WEBSITE] = str;
+                    break;
+                case ReadWriteFactory.JSON_NAMES_URL_SUBTITLE:
+                    film.arr[FilmDataXml.FILM_URL_SUBTITLE] = str;
+                    break;
+
+                case ReadWriteFactory.JSON_NAMES_URL_SMALL:
+                    film.arr[FilmDataXml.FILM_URL_SMALL] = str;
+                    break;
+                case ReadWriteFactory.JSON_NAMES_URL_HD:
+                    film.arr[FilmDataXml.FILM_URL_HD] = str;
+                    break;
+                case ReadWriteFactory.JSON_NAMES_DATE_LONG:
+                    film.arr[FilmDataXml.FILM_DATE_LONG] = str;
+                    break;
+
+                case ReadWriteFactory.JSON_NAMES_GEO:
+                    film.arr[FilmDataXml.FILM_GEO] = str;
+                    break;
+                case ReadWriteFactory.JSON_NAMES_NEW:
+                    film.arr[FilmDataXml.FILM_NEW] = str;
+                    film.setNewFilm(Boolean.parseBoolean(str));
+                    break;
+
+                case ReadWriteFactory.JSON_NAMES_URL_RTMP:
+                case ReadWriteFactory.JSON_NAMES_URL_RTMP_SMALL:
+                case ReadWriteFactory.JSON_NAMES_URL_RTMP_HD:
+                case ReadWriteFactory.JSON_NAMES_URL_HISTORY:
                     break;
             }
-
-            /// für die Entwicklungszeit
-            if (film.arr[FilmDataXml.JSON_NAMES[i]] == null) {
-                film.arr[FilmDataXml.JSON_NAMES[i]] = "";
-            }
-
         }
     }
 

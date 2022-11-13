@@ -15,7 +15,7 @@
  */
 
 
-package de.p2tools.mtviewer.controller.filmlist;
+package de.p2tools.mtviewer.controller.filmlist.loadFilmlist;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;

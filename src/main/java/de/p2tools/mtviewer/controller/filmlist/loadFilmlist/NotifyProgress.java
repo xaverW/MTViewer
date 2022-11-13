@@ -15,18 +15,14 @@
  */
 
 
-package de.p2tools.mtviewer.controller.filmlist;
+package de.p2tools.mtviewer.controller.filmlist.loadFilmlist;
 
-import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ListenerFilmlistLoadEvent;
-import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ListenerLoadFilmlist;
 import de.p2tools.p2Lib.tools.log.PLog;
 import javafx.application.Platform;
 
 import javax.swing.event.EventListenerList;
 
 public class NotifyProgress {
-    public enum NOTIFY {START, PROGRESS, LOADED, FINISHED}
-
     public final EventListenerList listeners = new EventListenerList();
 
     public void notifyFinishedOk() {
@@ -59,4 +55,6 @@ public class NotifyProgress {
             PLog.errorLog(912045120, ex);
         }
     }
+
+    public enum NOTIFY {START, PROGRESS, LOADED, FINISHED}
 }
