@@ -53,8 +53,6 @@ public class TableFilm extends PTable<FilmData> {
                     return;
                 }
 
-                FilmData film = getTableView().getItems().get(getIndex());
-
                 final HBox hbox = new HBox();
                 hbox.setSpacing(4);
                 hbox.setAlignment(Pos.CENTER);
@@ -65,6 +63,9 @@ public class TableFilm extends PTable<FilmData> {
                 btnPlay = new Button("");
                 btnPlay.setGraphic(ProgIcons.Icons.IMAGE_TABLE_FILM_PLAY.getImageView());
                 btnPlay.setOnAction((ActionEvent event) -> {
+                    int col = getIndex();
+                    FilmData film = getTableView().getItems().get(col);
+                    getSelectionModel().clearAndSelect(col);
                     FilmTools.playFilm(film);
                 });
 
@@ -72,6 +73,9 @@ public class TableFilm extends PTable<FilmData> {
                 btnSave = new Button("");
                 btnSave.setGraphic(ProgIcons.Icons.IMAGE_TABLE_FILM_SAVE.getImageView());
                 btnSave.setOnAction(event -> {
+                    int col = getIndex();
+                    FilmData film = getTableView().getItems().get(col);
+                    getSelectionModel().clearAndSelect(col);
                     ProgData.getInstance().filmlist.saveFilm(film);
                 });
 
