@@ -24,10 +24,12 @@ import de.p2tools.mtviewer.controller.data.download.DownloadDataFactory;
 import de.p2tools.p2Lib.MTDownload.MTInfoFile;
 import de.p2tools.p2Lib.MTDownload.MTSubtitle;
 import de.p2tools.p2Lib.tools.PSystemUtils;
+import de.p2tools.p2Lib.tools.date.PDateFactory;
 import javafx.beans.property.LongProperty;
 
 import java.io.File;
 import java.net.HttpURLConnection;
+import java.util.Date;
 import java.util.Timer;
 
 public class DownloadCont {
@@ -40,22 +42,27 @@ public class DownloadCont {
     public void downloadContent(DirectHttpDownload directHttpDownload, ProgData progData, DownloadData download,
                                 HttpURLConnection conn, Timer bandwidthCalculationTimer,
                                 File file, LongProperty downloaded) throws Exception {
+
+        if (download.getDestPath().isEmpty()) {
+            download.setDestPath(PSystemUtils.getStandardDownloadPath());
+        }
+        if (download.getDestFileName().isEmpty()) {
+            download.setDestFileName(PDateFactory.F_FORMAT_yyyyMMdd.format(new Date())
+                    + "_" + download.getTheme() + "-" + download.getTitle() + ".mp4");
+        }
+
         if (download.isInfoFile()) {
             //Infofile laden
-            if (download.getDestPath().isEmpty()) {
-                download.setDestPath(PSystemUtils.getStandardDownloadPath());
-            }
-
             if (download.getFilm() == null) {
                 MTInfoFile.writeInfoFile(download.getDestPath(), download.getDestPathFile(), download.getFileNameWithoutSuffix(),
-                        download.getUrl(), download.getDownloadSize().toString(),
+                        download.getUrl(), download.getDownloadSize().getFileSizeString(),
                         download.getChannel(), download.getTheme(), download.getTitle(),
                         download.getFilmDate().toString(), download.getTime(), download.getDurationMinute() + "",
                         "", "");
 
             } else {
                 MTInfoFile.writeInfoFile(download.getDestPath(), download.getDestPathFile(), download.getFileNameWithoutSuffix(),
-                        download.getUrl(), download.getDownloadSize().toString(),
+                        download.getUrl(), download.getDownloadSize().getFileSizeString(),
                         download.getFilm().getChannel(), download.getFilm().getTheme(), download.getFilm().getTitle(),
                         download.getFilm().getDate().toString(), download.getFilm().getTime(), download.getFilm().getDuration(),
                         download.getFilm().getWebsite(), download.getFilm().getDescription());
