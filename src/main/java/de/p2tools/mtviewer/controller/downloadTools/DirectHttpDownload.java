@@ -83,7 +83,8 @@ public class DirectHttpDownload extends Thread {
                 }
                 //und wenn klar, dann jetzt laden :)
                 if (download.isStateStartedRun()) {
-                    new DownloadCont().downloadContent(this, progData, download, conn, bandwidthCalculationTimer, file, downloaded);
+                    new DownloadCont().downloadContent(this, progData, download, conn,
+                            bandwidthCalculationTimer, file, downloaded);
                 }
 
             } catch (final Exception ex) {

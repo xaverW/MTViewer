@@ -23,6 +23,7 @@ import de.p2tools.p2Lib.configFile.pData.PDataSample;
 import de.p2tools.p2Lib.tools.date.PDate;
 import de.p2tools.p2Lib.tools.date.PDateFactory;
 import de.p2tools.p2Lib.tools.date.PDateProperty;
+import de.p2tools.p2Lib.tools.file.PFileUtils;
 import javafx.application.Platform;
 import javafx.beans.property.*;
 
@@ -54,7 +55,7 @@ public class DownloadDataProps extends PDataSample<DownloadData> {
     private final StringProperty urlSubtitle = new SimpleStringProperty("");
     private final StringProperty destFileName = new SimpleStringProperty("");
     private final StringProperty destPath = new SimpleStringProperty("");
-    private final StringProperty destPathFile = new SimpleStringProperty("");
+    //    private final StringProperty destPathFile = new SimpleStringProperty("");
     private final BooleanProperty placedBack = new SimpleBooleanProperty(false);
     private final BooleanProperty infoFile = new SimpleBooleanProperty(false);
     private final BooleanProperty subtitle = new SimpleBooleanProperty(false);
@@ -62,7 +63,7 @@ public class DownloadDataProps extends PDataSample<DownloadData> {
             state, progress, remaining, bandwidth, downloadSize,
             filmDate, time, durationMinute,
             hd, ut, geoBlocked, filmUrl, url, urlSubtitle,
-            destFileName, destPath, destPathFile,
+            destFileName, destPath, /*destPathFile,*/
             placedBack, infoFile, subtitle};
 
     DownloadDataProps() {
@@ -100,7 +101,7 @@ public class DownloadDataProps extends PDataSample<DownloadData> {
         list.add(new ConfigStringPropExtra("urlSubtitle", DownloadFieldNames.DOWNLOAD_URL_SUBTITLE, urlSubtitle));
         list.add(new ConfigStringPropExtra("destFileName", DownloadFieldNames.DOWNLOAD_DEST_FILE_NAME, destFileName));
         list.add(new ConfigStringPropExtra("destPath", DownloadFieldNames.DOWNLOAD_DEST_PATH, destPath));
-        list.add(new ConfigStringPropExtra("destPathFile", DownloadFieldNames.DOWNLOAD_DEST_PATH_FILE_NAME, destPathFile));
+//        list.add(new ConfigStringPropExtra("destPathFile", DownloadFieldNames.DOWNLOAD_DEST_PATH_FILE_NAME, destPathFile));
         list.add(new ConfigBoolPropExtra("placedBack", DownloadFieldNames.DOWNLOAD_PLACED_BACK, placedBack));
         list.add(new ConfigBoolPropExtra("infoFile", DownloadFieldNames.DOWNLOAD_INFO_FILE, infoFile));
         list.add(new ConfigBoolPropExtra("subtitle", DownloadFieldNames.DOWNLOAD_SUBTITLE, subtitle));
@@ -391,16 +392,12 @@ public class DownloadDataProps extends PDataSample<DownloadData> {
     }
 
     public String getDestPathFile() {
-        return destPathFile.get();
+        return PFileUtils.addsPath(destPath.getValueSafe(), destFileName.getValueSafe());
     }
 
-    public void setDestPathFile(String destPathFile) {
-        this.destPathFile.set(destPathFile);
-    }
-
-    public StringProperty destPathFileProperty() {
-        return destPathFile;
-    }
+//    public StringProperty destPathFileProperty() {
+//        return destPathFile;
+//    }
 
     public boolean isPlacedBack() {
         return placedBack.get();

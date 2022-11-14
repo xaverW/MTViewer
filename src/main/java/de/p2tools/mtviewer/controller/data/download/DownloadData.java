@@ -255,7 +255,7 @@ public final class DownloadData extends DownloadDataProps {
         //=====================================================
         setDestFileName(name);
         setDestPath(path);
-        setDestPathFile(PFileUtils.addsPath(path, name));
+//        setDestPathFile(PFileUtils.addsPath(path, name));
     }
 
     public String getErrorMessage() {

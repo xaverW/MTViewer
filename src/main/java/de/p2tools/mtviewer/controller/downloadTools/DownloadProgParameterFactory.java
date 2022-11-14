@@ -45,7 +45,6 @@ public class DownloadProgParameterFactory {
             String program = ProgConfig.SYSTEM_PROG_SAVE.getValueSafe();
             String progParameter = ProgConfig.SYSTEM_PROG_SAVE_PARAMETER.getValueSafe();
 
-            DownloadFileNameFactory.buildFileNamePath(downloadData);
             commandCall = program + " " + progParameter;
             commandCall = replaceExec(downloadData, commandCall);
         } catch (final Exception ex) {
@@ -58,8 +57,6 @@ public class DownloadProgParameterFactory {
         //Zieldatei und Pfad bauen und eintragen
         String progArray = "";
         try {
-            DownloadFileNameFactory.buildFileNamePath(downloadData);
-
             progArray = getProgParameterArray();
             progArray = replaceExec(downloadData, progArray);
         } catch (final Exception ex) {

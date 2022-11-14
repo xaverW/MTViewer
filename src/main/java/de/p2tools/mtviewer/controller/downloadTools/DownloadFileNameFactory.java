@@ -116,7 +116,7 @@ public class DownloadFileNameFactory {
 
         downloadData.setDestFileName(pathName[1]);
         downloadData.setDestPath(pathName[0]);
-        downloadData.setDestPathFile(PFileUtils.addsPath(pathName[0], pathName[1]));
+//        downloadData.setDestPathFile(PFileUtils.addsPath(pathName[0], pathName[1]));
     }
 
     private static String replaceString(DownloadData downloadData, String replStr) {

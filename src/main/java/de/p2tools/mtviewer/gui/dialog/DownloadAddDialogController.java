@@ -270,8 +270,6 @@ public class DownloadAddDialogController extends PDialogExtra {
 
         txtName.setText(downloadData.getDestFileName());
         txtName.textProperty().addListener((observable, oldValue, newValue) -> {
-            downloadData.setDestFileName(txtName.getText());
-
             if (!txtName.getText().equals(FileNameUtils.checkFileName(txtName.getText(), false /* pfad */))) {
                 txtName.setStyle(ProgColorList.DOWNLOAD_NAME_ERROR.getCssBackground());
             } else {
@@ -458,6 +456,9 @@ public class DownloadAddDialogController extends PDialogExtra {
             return;
         }
 
+        downloadData.setDestFileName(txtName.getText());
+        downloadData.setDestPath(cboPath.getValue());
+
         //damit der Focus nicht aus der Tabelle verloren geht
         progData.mtViewerPlayerController.setFocus();
         DialogFactory.saveComboPath(cboPath, path, ProgConfig.DOWNLOAD_DIALOG_PATH_SAVING);
@@ -469,6 +470,7 @@ public class DownloadAddDialogController extends PDialogExtra {
                 progData.downloadList.startDownloads(downloadData);
             }
         }
+
         close();
     }
 
