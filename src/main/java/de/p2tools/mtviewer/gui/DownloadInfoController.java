@@ -37,7 +37,10 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.transformation.SortedList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
@@ -201,8 +204,6 @@ public class DownloadInfoController extends AnchorPane {
         vBoxTable.getChildren().add(scrollPane);
         VBox.setVgrow(scrollPane, Priority.ALWAYS);
 
-        MenuButton mbMenu;
-        mbMenu = FilmMenu.getFilmMenu(progData);
         Button btnClearFilter = new Button();
         Button btnStartAll = new Button();
         Button btnStopAll = new Button();

@@ -19,7 +19,7 @@ package de.p2tools.mtviewer.controller;
 import de.p2tools.mtviewer.controller.config.*;
 import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ListenerFilmlistLoadEvent;
 import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ListenerLoadFilmlist;
-import de.p2tools.mtviewer.gui.tools.ProgTipOfDay;
+import de.p2tools.mtviewer.gui.tools.TipOfDay;
 import de.p2tools.mtviewer.tools.update.SearchProgramUpdate;
 import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.alert.PAlert;
@@ -79,7 +79,7 @@ public class ProgStart {
                 if (!doneAtProgramstart) {
                     doneAtProgramstart = true;
                     checkProgUpdate(progData);
-                    new ProgTipOfDay().showDialog(progData, false);
+                    new TipOfDay().showDialog(progData, false);
                 }
             }
         });

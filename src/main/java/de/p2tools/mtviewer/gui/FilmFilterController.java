@@ -57,7 +57,7 @@ public class FilmFilterController extends VBox {
 
     public FilmFilterController() {
         progData = ProgData.getInstance();
-        mbMenu = FilmMenu.getFilmMenu(progData);
+        mbMenu = ProgMenu.getMenu(progData);
 
         setPadding(new Insets(10, 15, 5, 15));
         setSpacing(FILTER_SPACING_TEXTFILTER);

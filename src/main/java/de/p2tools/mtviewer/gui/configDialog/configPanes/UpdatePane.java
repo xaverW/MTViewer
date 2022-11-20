@@ -84,7 +84,7 @@ public class UpdatePane {
         tglSearchBeta.selectedProperty().addListener((ob, ol, ne) -> checkBeta());
 
         btnNow.setOnAction(event -> new SearchProgramUpdate(progData, stage).searchNewProgramVersion(true));
-        PHyperlink hyperlink = new PHyperlink(ProgConst.URL_WEBSITE,
+        PHyperlink hyperlink = new PHyperlink(ProgConst.URL_WEBSITE_MTVIEWER,
                 ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIcons.Icons.ICON_BUTTON_FILE_OPEN.getImageView());
         HBox hBoxHyper = new HBox();
         hBoxHyper.setAlignment(Pos.CENTER_LEFT);

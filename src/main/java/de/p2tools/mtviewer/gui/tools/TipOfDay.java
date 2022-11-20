@@ -18,6 +18,7 @@
 package de.p2tools.mtviewer.gui.tools;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
+import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.guiTools.pTipOfDay.PTipOfDay;
@@ -30,12 +31,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ProgTipOfDay {
+public class TipOfDay {
 
     private final String START = "                                                     " + P2LibConst.LINE_SEPARATOR;
     private final int listSize = 17;
 
-    public ProgTipOfDay() {
+    public TipOfDay() {
     }
 
     public void showDialog(ProgData progData, boolean showAlways) {
@@ -65,8 +66,9 @@ public class ProgTipOfDay {
         // private final int listSize = 1
         String text = START;
         text += "Der Infobereich unter der Filmliste\n" +
-                "kann mit dem Tastenkürzel \"alt+i\" oder\n" +
-                "im Menü ein- und ausgeblendet werden.";
+                "kann mit dem Tastenkürzel \"alt+i\"\n" +
+                "oder über das Menü\n" +
+                "ein- und ausgeblendet werden.";
         String image = "/de/p2tools/mtviewer/res/toolTips/Info.png";
         PTipOfDay pToolTip = new PTipOfDay(text, image);
         pToolTipList.add(pToolTip);
@@ -102,7 +104,7 @@ public class ProgTipOfDay {
         text += "In den Programmeinstellungen\n" +
                 "(erreichbar über das Menü)\n" +
                 "kann die verwendete\n" +
-                "Schriftgröße imProgramm\n" +
+                "Schriftgröße im Programm,\n" +
                 "eingestellt werden.";
         image = "/de/p2tools/mtviewer/res/toolTips/Keysize.png";
         pToolTip = new PTipOfDay(text, image);
@@ -141,6 +143,15 @@ public class ProgTipOfDay {
                 "wie beim ersten Mal.";
         image = "/de/p2tools/mtviewer/res/toolTips/Reset.png";
         pToolTip = new PTipOfDay(text, image);
+        pToolTipList.add(pToolTip);
+
+        text = START;
+        text += "Weitere Tips und Infos\n" +
+                "finden sich auch auf der\n" +
+                "Website zum Programm: \n\n" +
+                "";
+        image = "/de/p2tools/mtviewer/res/toolTips/Website.png";
+        pToolTip = new PTipOfDay(text, image, ProgConst.URL_WEBSITE, ProgConfig.SYSTEM_PROG_OPEN_URL);
         pToolTipList.add(pToolTip);
     }
 }

@@ -57,7 +57,8 @@ public class ProgConst {
     public static final String ADRESSE_FILMLISTEN_SERVER_AKT = "http://res.mediathekview.de/akt.xml";
 
     // Website MTViewer
-    public static final String URL_WEBSITE = "https://www.p2tools.de/mtviewer/";
+    public static final String URL_WEBSITE = "https://www.p2tools.de";
+    public static final String URL_WEBSITE_MTVIEWER = "https://www.p2tools.de/mtviewer/";
     public static final String URL_WEBSITE_DOWNLOAD = "https://www.p2tools.de/mtviewer/download.html";
     public static final String URL_WEBSITE_HELP = "https://www.p2tools.de/mtviewer/manual/";
 

@@ -25,19 +25,19 @@ import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.gui.configDialog.ConfigDialogController;
 import de.p2tools.mtviewer.gui.dialog.AboutDialogController;
 import de.p2tools.mtviewer.gui.dialog.ResetDialogController;
-import de.p2tools.mtviewer.gui.tools.ProgTipOfDay;
+import de.p2tools.mtviewer.gui.tools.TipOfDay;
 import de.p2tools.mtviewer.tools.update.SearchProgramUpdate;
 import de.p2tools.p2Lib.guiTools.POpen;
 import de.p2tools.p2Lib.tools.shortcut.PShortcutWorker;
 import javafx.scene.control.*;
 
 
-public class FilmMenu {
+public class ProgMenu {
 
-    private FilmMenu() {
+    private ProgMenu() {
     }
 
-    public static MenuButton getFilmMenu(ProgData progData) {
+    public static MenuButton getMenu(ProgData progData) {
         final MenuButton mb = new MenuButton("");
         mb.setTooltip(new Tooltip("Filmmenü anzeigen"));
         mb.setGraphic(ProgIcons.Icons.FX_ICON_TOOLBAR_MENU.getImageView());
@@ -78,7 +78,7 @@ public class FilmMenu {
         final MenuItem miReset = new MenuItem("Alle Programmeinstellungen zurücksetzen");
         miReset.setOnAction(event -> new ResetDialogController(progData));
         final MenuItem miToolTip = new MenuItem("Tip des Tages");
-        miToolTip.setOnAction(a -> new ProgTipOfDay().showDialog(progData, true));
+        miToolTip.setOnAction(a -> new TipOfDay().showDialog(progData, true));
         final MenuItem miSearchUpdate = new MenuItem("Gibts ein Update?");
         miSearchUpdate.setOnAction(a -> new SearchProgramUpdate(progData, progData.primaryStage).searchNewProgramVersion(true));
         final MenuItem miAbout = new MenuItem("Über dieses Programm");
