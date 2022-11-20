@@ -22,15 +22,15 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
-import de.p2tools.mtviewer.controller.data.film.FilmData;
-import de.p2tools.mtviewer.controller.data.film.FilmTools;
 import de.p2tools.mtviewer.controller.downloadTools.HttpDownloadFactory;
-import de.p2tools.mtviewer.tools.FileNameUtils;
 import de.p2tools.p2Lib.alert.PAlert;
 import de.p2tools.p2Lib.dialogs.PDirFileChooser;
 import de.p2tools.p2Lib.dialogs.dialog.PDialogExtra;
 import de.p2tools.p2Lib.guiTools.PColumnConstraints;
 import de.p2tools.p2Lib.guiTools.PHyperlink;
+import de.p2tools.p2Lib.mtFilm.film.FilmData;
+import de.p2tools.p2Lib.mtFilm.film.FilmFactory;
+import de.p2tools.p2Lib.mtFilm.tools.FileNameUtils;
 import de.p2tools.p2Lib.tools.PSystemUtils;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -208,9 +208,9 @@ public class DownloadAddDialogController extends PDialogExtra {
 
     private void initArrays() {
         if (filmData != null) {
-            fileSize_HD = filmData.isHd() ? FilmTools.getSizeFromWeb(filmData, filmData.getUrlForResolution(FilmData.RESOLUTION_HD)) : "";
-            fileSize_high = FilmTools.getSizeFromWeb(filmData, filmData.getUrlForResolution(FilmData.RESOLUTION_NORMAL));
-            fileSize_small = filmData.isSmall() ? FilmTools.getSizeFromWeb(filmData, filmData.getUrlForResolution(FilmData.RESOLUTION_SMALL)) : "";
+            fileSize_HD = filmData.isHd() ? FilmFactory.getSizeFromWeb(filmData, filmData.getUrlForResolution(FilmData.RESOLUTION_HD)) : "";
+            fileSize_high = FilmFactory.getSizeFromWeb(filmData, filmData.getUrlForResolution(FilmData.RESOLUTION_NORMAL));
+            fileSize_small = filmData.isSmall() ? FilmFactory.getSizeFromWeb(filmData, filmData.getUrlForResolution(FilmData.RESOLUTION_SMALL)) : "";
 
             // die Werte passend zum Film setzen: Auflösung
             if (ProgConfig.DOWNLOAD_RESOLUTION.get().equals(FilmData.RESOLUTION_HD) && filmData.isHd()) {

@@ -18,7 +18,6 @@
 package de.p2tools.mtviewer.gui.tools;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
-import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.guiTools.pTipOfDay.PTipOfDay;
@@ -100,6 +99,8 @@ public class TipOfDay {
         pToolTip = new PTipOfDay(text, image);
         pToolTipList.add(pToolTip);
 
+        pToolTipList.add(PTipOfDay.getTipWebsite(ProgConfig.SYSTEM_PROG_OPEN_URL));
+
         text = START;
         text += "In den Programmeinstellungen\n" +
                 "(erreichbar über das Menü)\n" +
@@ -143,15 +144,6 @@ public class TipOfDay {
                 "wie beim ersten Mal.";
         image = "/de/p2tools/mtviewer/res/toolTips/Reset.png";
         pToolTip = new PTipOfDay(text, image);
-        pToolTipList.add(pToolTip);
-
-        text = START;
-        text += "Weitere Tips und Infos\n" +
-                "finden sich auch auf der\n" +
-                "Website zum Programm: \n\n" +
-                "";
-        image = "/de/p2tools/mtviewer/res/toolTips/Website.png";
-        pToolTip = new PTipOfDay(text, image, ProgConst.URL_WEBSITE, ProgConfig.SYSTEM_PROG_OPEN_URL);
         pToolTipList.add(pToolTip);
     }
 }

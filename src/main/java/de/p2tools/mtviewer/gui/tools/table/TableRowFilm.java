@@ -19,7 +19,7 @@ package de.p2tools.mtviewer.gui.tools.table;
 
 import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
-import de.p2tools.mtviewer.controller.data.film.FilmData;
+import de.p2tools.p2Lib.mtFilm.film.FilmData;
 import javafx.beans.property.BooleanProperty;
 import javafx.scene.control.TableRow;
 

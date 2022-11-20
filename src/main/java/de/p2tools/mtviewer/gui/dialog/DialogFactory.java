@@ -20,7 +20,7 @@ package de.p2tools.mtviewer.gui.dialog;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.data.download.DownloadTools;
-import de.p2tools.p2Lib.MTDownload.SizeTools;
+import de.p2tools.p2Lib.mtDownload.SizeTools;
 import de.p2tools.p2Lib.tools.PStringUtils;
 import de.p2tools.p2Lib.tools.log.PLog;
 import javafx.beans.property.StringProperty;

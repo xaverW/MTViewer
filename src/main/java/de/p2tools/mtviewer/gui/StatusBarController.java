@@ -17,10 +17,11 @@
 package de.p2tools.mtviewer.gui;
 
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.film.FilmTools;
-import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ListenerFilmlistLoadEvent;
-import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ListenerLoadFilmlist;
+import de.p2tools.mtviewer.controller.data.film.LoadFilmFactory;
+import de.p2tools.mtviewer.controller.data.film.PlayFilmFactory;
 import de.p2tools.mtviewer.gui.tools.Listener;
+import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerFilmlistLoadEvent;
+import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerLoadFilmlist;
 import de.p2tools.p2Lib.tools.log.PLog;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -71,7 +72,7 @@ public class StatusBarController extends AnchorPane {
     private void make() {
         setInfoFilm();
         setTextForRightDisplay();
-        progData.loadFilmlist.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
+        LoadFilmFactory.getInstance().loadFilmlist.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
             @Override
             public void start(ListenerFilmlistLoadEvent event) {
                 stopTimer = true;
@@ -103,7 +104,7 @@ public class StatusBarController extends AnchorPane {
     }
 
     private void setInfoFilm() {
-        lblLeftFilm.setText(FilmTools.getStatusInfosFilm());
+        lblLeftFilm.setText(PlayFilmFactory.getStatusInfosFilm());
         final int selCount = progData.filmGuiController.getSelCount();
         lblSelFilm.setText(selCount > 0 ? selCount + "" : " ");
     }

@@ -17,13 +17,14 @@
 package de.p2tools.mtviewer.controller;
 
 import de.p2tools.mtviewer.controller.config.*;
-import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ListenerFilmlistLoadEvent;
-import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ListenerLoadFilmlist;
+import de.p2tools.mtviewer.controller.data.film.LoadFilmFactory;
 import de.p2tools.mtviewer.gui.tools.TipOfDay;
 import de.p2tools.mtviewer.tools.update.SearchProgramUpdate;
 import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.alert.PAlert;
 import de.p2tools.p2Lib.icons.GetIcon;
+import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerFilmlistLoadEvent;
+import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerLoadFilmlist;
 import de.p2tools.p2Lib.tools.ProgramToolsFactory;
 import de.p2tools.p2Lib.tools.date.PDateFactory;
 import de.p2tools.p2Lib.tools.duration.PDuration;
@@ -73,7 +74,7 @@ public class ProgStart {
         startMsg();
         setTitle(progData);
         progData.startTimer();
-        progData.loadFilmlist.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
+        LoadFilmFactory.getInstance().loadFilmlist.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
             @Override
             public void finished(ListenerFilmlistLoadEvent event) {
                 if (!doneAtProgramstart) {
@@ -84,7 +85,7 @@ public class ProgStart {
             }
         });
 
-        progData.loadFilmlist.loadFilmlistProgStart(firstProgramStart);
+        LoadFilmFactory.getInstance().loadProgStart(firstProgramStart);
     }
 
     /**

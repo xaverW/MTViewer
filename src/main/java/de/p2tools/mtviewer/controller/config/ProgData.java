@@ -22,9 +22,6 @@ import de.p2tools.mtviewer.controller.data.MTShortcut;
 import de.p2tools.mtviewer.controller.data.ReplaceList;
 import de.p2tools.mtviewer.controller.data.download.DownloadInfos;
 import de.p2tools.mtviewer.controller.data.download.DownloadList;
-import de.p2tools.mtviewer.controller.data.film.Filmlist;
-import de.p2tools.mtviewer.controller.filmlist.filmlistUrls.SearchFilmListUrls;
-import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.LoadFilmlist;
 import de.p2tools.mtviewer.controller.starter.StarterClass;
 import de.p2tools.mtviewer.controller.worker.Worker;
 import de.p2tools.mtviewer.gui.FilmGuiController;
@@ -33,6 +30,8 @@ import de.p2tools.mtviewer.gui.tools.Listener;
 import de.p2tools.mtviewer.tools.filmFilter.ActFilmFilterWorker;
 import de.p2tools.mtviewer.tools.filmFilter.FilmFilterRunner;
 import de.p2tools.p2Lib.guiTools.pMask.PMaskerPane;
+import de.p2tools.p2Lib.mtFilm.film.Filmlist;
+import de.p2tools.p2Lib.mtFilm.filmlistUrls.SearchFilmListUrls;
 import de.p2tools.p2Lib.tools.duration.PDuration;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -51,7 +50,8 @@ public class ProgData {
     public static String configDir = ""; // Verzeichnis zum Speichern der Programmeinstellungen
     private static ProgData instance;
     // zentrale Klassen
-    public LoadFilmlist loadFilmlist; // erledigt das updaten der Filmliste
+//    public LoadFilmlist loadFilmlist; // erledigt das updaten der Filmliste
+//    public LoadFilmFactory loadFilmFactory;
     public SearchFilmListUrls searchFilmListUrls; // da werden die DownloadURLs der Filmliste verwaltet
     public MTShortcut mtShortcut; // verwendete Shortcuts
     public ActFilmFilterWorker actFilmFilterWorker; // gespeicherte Filterprofile
@@ -79,7 +79,9 @@ public class ProgData {
         replaceList = new ReplaceList();
         searchFilmListUrls = new SearchFilmListUrls();
 
-        loadFilmlist = new LoadFilmlist(this);
+//        loadFilmlist = new de.p2tools.p2Lib.mtFilm.loadFilmlist.LoadFilmlist();
+//        loadFilmlist = new LoadFilmlist(this);
+//        loadFilmFactory = new LoadFilmFactory();
         actFilmFilterWorker = new ActFilmFilterWorker(this);
         filmlist = new Filmlist();
         downloadList = new DownloadList(this);

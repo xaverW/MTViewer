@@ -18,8 +18,8 @@
 package de.p2tools.mtviewer.controller.data.download;
 
 import de.p2tools.mtviewer.gui.dialog.DeleteFilmFileDialogController;
-import de.p2tools.p2Lib.MTDownload.MTInfoFile;
-import de.p2tools.p2Lib.MTDownload.MTSubtitle;
+import de.p2tools.p2Lib.mtDownload.MTInfoFile;
+import de.p2tools.p2Lib.mtDownload.MTSubtitle;
 import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.alert.PAlert;
 import de.p2tools.p2Lib.tools.log.PLog;

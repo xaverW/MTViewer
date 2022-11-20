@@ -17,8 +17,8 @@
 
 package de.p2tools.mtviewer.tools.filmFilter;
 
-import de.p2tools.mtviewer.controller.data.film.FilmData;
-import de.p2tools.mtviewer.controller.data.film.FilmDataXml;
+import de.p2tools.p2Lib.mtFilm.film.FilmData;
+import de.p2tools.p2Lib.mtFilm.film.FilmDataXml;
 
 import java.util.regex.Pattern;
 

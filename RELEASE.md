@@ -4,7 +4,7 @@
 
 **Release 0**
 
-* Erste veröffentlichte Version
+* Erste veröffentlichte Beta-Version
 
 <br />
 <br />

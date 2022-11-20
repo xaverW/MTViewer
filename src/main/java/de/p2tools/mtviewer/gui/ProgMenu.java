@@ -22,6 +22,7 @@ import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.MTShortcut;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
+import de.p2tools.mtviewer.controller.data.film.LoadFilmFactory;
 import de.p2tools.mtviewer.gui.configDialog.ConfigDialogController;
 import de.p2tools.mtviewer.gui.dialog.AboutDialogController;
 import de.p2tools.mtviewer.gui.dialog.ResetDialogController;
@@ -60,7 +61,7 @@ public class ProgMenu {
         //=========================
         //Filmliste, Info, Einstellungen
         final MenuItem miLoad = new MenuItem("Eine neue Filmliste laden");
-        miLoad.setOnAction(e -> progData.loadFilmlist.loadNewFilmlist(false));
+        miLoad.setOnAction(e -> LoadFilmFactory.getInstance().loadList(false));
         final MenuItem miShowInfo = new MenuItem("Infobereich unter der Tabelle ein-/ausblenden");
         miShowInfo.setOnAction(a -> progData.mtViewerPlayerController.setInfos());
         PShortcutWorker.addShortCut(miShowInfo, MTShortcut.SHORTCUT_SHOW_INFOS);

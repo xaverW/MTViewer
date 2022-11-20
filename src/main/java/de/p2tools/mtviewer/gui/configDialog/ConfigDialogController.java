@@ -19,11 +19,12 @@ package de.p2tools.mtviewer.gui.configDialog;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
-import de.p2tools.mtviewer.controller.data.film.FilmlistFactory;
-import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ListenerFilmlistLoadEvent;
-import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ListenerLoadFilmlist;
+import de.p2tools.mtviewer.controller.data.film.LoadFilmFactory;
 import de.p2tools.mtviewer.gui.tools.Listener;
 import de.p2tools.p2Lib.dialogs.dialog.PDialogExtra;
+import de.p2tools.p2Lib.mtFilm.film.FilmFactory;
+import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerFilmlistLoadEvent;
+import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerLoadFilmlist;
 import de.p2tools.p2Lib.tools.log.PLog;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
@@ -38,7 +39,6 @@ import javafx.scene.layout.VBox;
 
 public class ConfigDialogController extends PDialogExtra {
 
-    //    private static ConfigDialogController instance;
     private final ProgData progData;
     IntegerProperty propSelectedTab = ProgConfig.SYSTEM_CONFIG_DIALOG_TAB;
     ConfigPaneController configPaneController;
@@ -70,9 +70,9 @@ public class ConfigDialogController extends PDialogExtra {
         Button btnStop = getMaskerPane().getButton();
         getMaskerPane().setButtonText("");
         btnStop.setGraphic(ProgIcons.Icons.ICON_BUTTON_STOP.getImageView());
-        btnStop.setOnAction(a -> progData.loadFilmlist.setStop(true));
+        btnStop.setOnAction(a -> LoadFilmFactory.getInstance().loadFilmlist.setStop(true));
 
-        progData.loadFilmlist.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
+        LoadFilmFactory.getInstance().loadFilmlist.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
             @Override
             public void start(ListenerFilmlistLoadEvent event) {
                 if (event.progress == ListenerLoadFilmlist.PROGRESS_INDETERMINATE) {
@@ -121,8 +121,15 @@ public class ConfigDialogController extends PDialogExtra {
 
         if (diacriticChanged.getValue() != ProgConfig.SYSTEM_REMOVE_DIACRITICS.getValue()) {
             //dann hats sich geändert!!!
-            FilmlistFactory.setDiacritic(progData.filmlist, true);
-            Listener.notify(Listener.EVENT_DIACRITIC_CHANGED, ConfigDialogController.class.getSimpleName());
+            ProgData.getInstance().maskerPane.setMaskerVisible(true, false);
+            ProgData.getInstance().maskerPane.setMaskerText("");
+            Thread th = new Thread(() -> {
+                FilmFactory.setDiacritic(progData.filmlist, ProgConfig.SYSTEM_REMOVE_DIACRITICS.getValue());
+                Listener.notify(Listener.EVENT_DIACRITIC_CHANGED, ConfigDialogController.class.getSimpleName());
+                ProgData.getInstance().maskerPane.setMaskerVisible(false);
+            });
+            th.setName("generateDiacritic");
+            th.start();
         }
 
         configPaneController.close();

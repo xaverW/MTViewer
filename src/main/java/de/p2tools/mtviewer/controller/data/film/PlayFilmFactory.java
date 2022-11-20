@@ -18,34 +18,24 @@ package de.p2tools.mtviewer.controller.data.film;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.config.ProgInfos;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.downloadTools.DownloadProgParameterFactory;
 import de.p2tools.mtviewer.gui.dialog.DownloadAddDialogController;
 import de.p2tools.mtviewer.gui.dialog.FilmPlayDialogController;
-import de.p2tools.p2Lib.MTDownload.DownloadFactory;
 import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.alert.PAlert;
 import de.p2tools.p2Lib.guiTools.POpen;
+import de.p2tools.p2Lib.mtFilm.film.FilmData;
 
 import java.text.NumberFormat;
 import java.util.Locale;
 
 import static de.p2tools.mtviewer.controller.downloadTools.RuntimeExec.TRENNER_PROG_ARRAY;
 
-public class FilmTools {
+public class PlayFilmFactory {
 
-    public static final String THEME_LIVE = "Livestream";
     private static final NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.GERMANY);
-
-    public static String getSizeFromWeb(FilmData film, String url) {
-        if (url.equals(film.arr[FilmDataXml.FILM_URL])) {
-            return film.arr[FilmDataXml.FILM_SIZE];
-        } else {
-            return DownloadFactory.getContentLengthMB(url, ProgInfos.getUserAgent());
-        }
-    }
 
     public static void playFilm(FilmData film) {
         String resolution = ProgConfig.FILM_RESOLUTION.getValueSafe();

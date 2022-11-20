@@ -34,8 +34,8 @@ public class ProgConst {
     public static final String CSS_FILE = "de/p2tools/mtviewer/mtfx.css";
     public static final String CSS_FILE_DARK_THEME = "de/p2tools/mtviewer/mtfx-dark.css";
 
-    public static final String FORMAT_ZIP = ".zip";
-    public static final String FORMAT_XZ = ".xz";
+//    public static final String FORMAT_ZIP = ".zip";
+//    public static final String FORMAT_XZ = ".xz";
 
     public static final int SYSTEM_LOAD_FILMLIST_MAX_DAYS = 300; // Filter beim Programmstart/Blacklist: nur Filme der letzten xx Tage laden
     public static final int SYSTEM_LOAD_FILMLIST_MIN_DURATION = 30; // Filter Programmstart: nur Filme mit mind. xx Minuten länge laden
@@ -46,15 +46,15 @@ public class ProgConst {
     // prüfen ob es eine neue Filmliste gibt: alle ... Min. oder ... nach dem Programmstart
     public static final int CHECK_FILMLIST_UPDATE = 30 * 60; // 30 Minuten
 
-    // beim Programmstart wird die Liste geladen wenn sie älter ist als ..
-    public static final int ALTER_FILMLISTE_SEKUNDEN_FUER_AUTOUPDATE = 4 * 60 * 60;
+//    // beim Programmstart wird die Liste geladen wenn sie älter ist als ..
+//    public static final int ALTER_FILMLISTE_SEKUNDEN_FUER_AUTOUPDATE = 4 * 60 * 60;
 
-    // Uhrzeit ab der die Diffliste alle Änderungen abdeckt, die Filmliste darf also nicht vor xx erstellt worden sein
-    public static final String TIME_MAX_AGE_FOR_DIFF = "09";
+//    // Uhrzeit ab der die Diffliste alle Änderungen abdeckt, die Filmliste darf also nicht vor xx erstellt worden sein
+//    public static final String TIME_MAX_AGE_FOR_DIFF = "09";
 
-    // MediathekView URLs
-    public static final String ADRESSE_FILMLISTEN_SERVER_DIFF = "http://res.mediathekview.de/diff.xml";
-    public static final String ADRESSE_FILMLISTEN_SERVER_AKT = "http://res.mediathekview.de/akt.xml";
+//    // MediathekView URLs
+//    public static final String ADRESSE_FILMLISTEN_SERVER_DIFF = "http://res.mediathekview.de/diff.xml";
+//    public static final String ADRESSE_FILMLISTEN_SERVER_AKT = "http://res.mediathekview.de/akt.xml";
 
     // Website MTViewer
     public static final String URL_WEBSITE = "https://www.p2tools.de";
@@ -87,36 +87,36 @@ public class ProgConst {
     public static final int LAENGE_FELD_MAX = 100; // Standardwert für die Länge des Feldes des
 
 
-    public static final String DREISAT = "3Sat";
-    public static final String ARD = "ARD";
-
-    public static final String ARTE_DE = "ARTE.DE";
-    public static final String ARTE_EN = "ARTE.EN";
-    public static final String ARTE_ES = "ARTE.ES";
-    public static final String ARTE_FR = "ARTE.FR";
-    public static final String ARTE_IT = "ARTE.IT";
-    public static final String ARTE_PL = "ARTE.PL";
-
-    public static final String BR = "BR";
-    public static final String DW = "DW";
-    public static final String HR = "HR";
-    public static final String KIKA = "KiKA";
-    public static final String MDR = "MDR";
-    public static final String NDR = "NDR";
-    public static final String ORF = "ORF";
-    public static final String PHOENIX = "PHOENIX";
-    public static final String RBB = "RBB";
-    public static final String RBB_TV = "rbtv";
-    public static final String SR = "SR";
-    public static final String SRF = "SRF";
-    public static final String SRF_PODCAST = "SRF.Podcast";
-    public static final String SWR = "SWR";
-    public static final String WDR = "WDR";
-    public static final String ZDF = "ZDF";
-    public static final String ZDF_TIVI = "ZDF-tivi";
-
-    public static final String[] SENDER = {DREISAT, ARD,
-            ARTE_DE, ARTE_EN, ARTE_ES, ARTE_FR, ARTE_IT, ARTE_PL,
-            BR, DW, HR, KIKA, MDR, NDR, ORF, PHOENIX, RBB, RBB_TV, SR,
-            SRF, SRF_PODCAST, SWR, WDR, ZDF, ZDF_TIVI};
+//    public static final String DREISAT = "3Sat";
+//    public static final String ARD = "ARD";
+//
+//    public static final String ARTE_DE = "ARTE.DE";
+//    public static final String ARTE_EN = "ARTE.EN";
+//    public static final String ARTE_ES = "ARTE.ES";
+//    public static final String ARTE_FR = "ARTE.FR";
+//    public static final String ARTE_IT = "ARTE.IT";
+//    public static final String ARTE_PL = "ARTE.PL";
+//
+//    public static final String BR = "BR";
+//    public static final String DW = "DW";
+//    public static final String HR = "HR";
+//    public static final String KIKA = "KiKA";
+//    public static final String MDR = "MDR";
+//    public static final String NDR = "NDR";
+//    public static final String ORF = "ORF";
+//    public static final String PHOENIX = "PHOENIX";
+//    public static final String RBB = "RBB";
+//    public static final String RBB_TV = "rbtv";
+//    public static final String SR = "SR";
+//    public static final String SRF = "SRF";
+//    public static final String SRF_PODCAST = "SRF.Podcast";
+//    public static final String SWR = "SWR";
+//    public static final String WDR = "WDR";
+//    public static final String ZDF = "ZDF";
+//    public static final String ZDF_TIVI = "ZDF-tivi";
+//
+//    public static final String[] SENDER = {DREISAT, ARD,
+//            ARTE_DE, ARTE_EN, ARTE_ES, ARTE_FR, ARTE_IT, ARTE_PL,
+//            BR, DW, HR, KIKA, MDR, NDR, ORF, PHOENIX, RBB, RBB_TV, SR,
+//            SRF, SRF_PODCAST, SWR, WDR, ZDF, ZDF_TIVI};
 }

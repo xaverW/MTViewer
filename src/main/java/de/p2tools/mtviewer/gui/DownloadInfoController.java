@@ -21,8 +21,7 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.data.download.DownloadDataFactory;
-import de.p2tools.mtviewer.controller.data.film.FilmData;
-import de.p2tools.mtviewer.controller.data.film.FilmTools;
+import de.p2tools.mtviewer.controller.data.film.PlayFilmFactory;
 import de.p2tools.mtviewer.gui.dialog.DownloadAddDialogController;
 import de.p2tools.mtviewer.gui.dialog.FilmInfoDialogController;
 import de.p2tools.mtviewer.gui.tools.table.Table;
@@ -31,6 +30,7 @@ import de.p2tools.mtviewer.gui.tools.table.TableRowDownload;
 import de.p2tools.p2Lib.alert.PAlert;
 import de.p2tools.p2Lib.guiTools.POpen;
 import de.p2tools.p2Lib.guiTools.PTableFactory;
+import de.p2tools.p2Lib.mtFilm.film.FilmData;
 import de.p2tools.p2Lib.tools.PSystemUtils;
 import javafx.beans.property.DoubleProperty;
 import javafx.collections.ListChangeListener;
@@ -167,7 +167,7 @@ public class DownloadInfoController extends AnchorPane {
         film.arr[FilmData.FILM_URL] = download.get().getUrl();
         film.arr[FilmData.FILM_URL_SMALL] = "";
         // und starten
-        FilmTools.playFilm(film);
+        PlayFilmFactory.playFilm(film);
     }
 
     public void copyUrl() {
@@ -189,7 +189,7 @@ public class DownloadInfoController extends AnchorPane {
     public void playFilm() {
         final Optional<DownloadData> download = getSel();
         if (download.isPresent()) {
-            FilmTools.playFilm(download.get().getDestPathFile());
+            PlayFilmFactory.playFilm(download.get().getDestPathFile());
         }
     }
 

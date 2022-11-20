@@ -21,11 +21,11 @@ import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ReplaceData;
-import de.p2tools.mtviewer.controller.data.film.FilmData;
-import de.p2tools.mtviewer.controller.filmlist.filmlistUrls.FilmlistUrlData;
 import de.p2tools.mtviewer.tools.filmFilter.FilmFilter;
 import de.p2tools.mtviewer.tools.filmFilter.FilmFilterToXml;
 import de.p2tools.p2Lib.configFile.config.Config;
+import de.p2tools.p2Lib.mtFilm.film.FilmData;
+import de.p2tools.p2Lib.mtFilm.filmlistUrls.FilmlistUrlData;
 import de.p2tools.p2Lib.tools.duration.PDuration;
 import de.p2tools.p2Lib.tools.log.PLog;
 

@@ -20,12 +20,12 @@ import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
-import de.p2tools.mtviewer.controller.data.film.FilmData;
-import de.p2tools.mtviewer.controller.data.film.FilmSize;
-import de.p2tools.mtviewer.controller.data.film.FilmTools;
+import de.p2tools.mtviewer.controller.data.film.PlayFilmFactory;
 import de.p2tools.mtviewer.gui.dialog.FilmInfoDialogController;
 import de.p2tools.p2Lib.guiTools.PCheckBoxCell;
 import de.p2tools.p2Lib.guiTools.PTableFactory;
+import de.p2tools.p2Lib.mtFilm.film.FilmData;
+import de.p2tools.p2Lib.mtFilm.film.FilmSize;
 import de.p2tools.p2Lib.tools.date.PDate;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -66,7 +66,7 @@ public class TableFilm extends PTable<FilmData> {
                     int col = getIndex();
                     FilmData film = getTableView().getItems().get(col);
                     getSelectionModel().clearAndSelect(col);
-                    FilmTools.playFilm(film);
+                    PlayFilmFactory.playFilm(film);
                 });
 
                 final Button btnSave;
@@ -76,7 +76,7 @@ public class TableFilm extends PTable<FilmData> {
                     int col = getIndex();
                     FilmData film = getTableView().getItems().get(col);
                     getSelectionModel().clearAndSelect(col);
-                    FilmTools.saveFilm(film);
+                    PlayFilmFactory.saveFilm(film);
                 });
 
                 hbox.getChildren().addAll(btnPlay, btnSave);

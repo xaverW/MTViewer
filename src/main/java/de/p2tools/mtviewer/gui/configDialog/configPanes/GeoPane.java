@@ -17,11 +17,11 @@
 package de.p2tools.mtviewer.gui.configDialog.configPanes;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
-import de.p2tools.mtviewer.controller.data.film.FilmData;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2Lib.guiTools.PButton;
 import de.p2tools.p2Lib.guiTools.PColumnConstraints;
 import de.p2tools.p2Lib.guiTools.pToggleSwitch.PToggleSwitch;
+import de.p2tools.p2Lib.mtFilm.film.FilmData;
 import javafx.beans.property.BooleanProperty;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;

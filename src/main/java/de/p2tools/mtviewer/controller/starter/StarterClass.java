@@ -21,12 +21,13 @@ import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
+import de.p2tools.mtviewer.controller.data.film.LoadFilmFactory;
 import de.p2tools.mtviewer.controller.downloadTools.DirectHttpDownload;
-import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ListenerFilmlistLoadEvent;
-import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ListenerLoadFilmlist;
-import de.p2tools.p2Lib.MTDownload.SizeTools;
 import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.guiTools.pNotification.PNotification;
+import de.p2tools.p2Lib.mtDownload.SizeTools;
+import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerFilmlistLoadEvent;
+import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerLoadFilmlist;
 import de.p2tools.p2Lib.tools.date.PDate;
 import de.p2tools.p2Lib.tools.date.PDateFactory;
 import de.p2tools.p2Lib.tools.log.PLog;
@@ -49,7 +50,7 @@ public class StarterClass {
         starterThread = new StarterThread();
         starterThread.start();
 
-        progData.loadFilmlist.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
+        LoadFilmFactory.getInstance().loadFilmlist.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
             @Override
             public void start(ListenerFilmlistLoadEvent event) {
                 searchFilms = true;

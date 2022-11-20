@@ -17,13 +17,13 @@
 package de.p2tools.mtviewer.controller.data.download;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
-import de.p2tools.mtviewer.controller.data.film.FilmData;
-import de.p2tools.mtviewer.controller.data.film.FilmDataXml;
-import de.p2tools.mtviewer.controller.data.film.FilmTools;
 import de.p2tools.mtviewer.controller.downloadTools.DownloadFileNameFactory;
 import de.p2tools.mtviewer.controller.starter.Start;
-import de.p2tools.p2Lib.MTDownload.DownloadSize;
 import de.p2tools.p2Lib.alert.PAlert;
+import de.p2tools.p2Lib.mtDownload.DownloadSize;
+import de.p2tools.p2Lib.mtFilm.film.FilmData;
+import de.p2tools.p2Lib.mtFilm.film.FilmDataXml;
+import de.p2tools.p2Lib.mtFilm.film.FilmFactory;
 import de.p2tools.p2Lib.tools.PSystemUtils;
 import de.p2tools.p2Lib.tools.date.PDateFactory;
 import de.p2tools.p2Lib.tools.file.PFileUtils;
@@ -174,7 +174,7 @@ public final class DownloadData extends DownloadDataProps {
         if (!size.isEmpty()) {
             getDownloadSize().setFileSize(size);
         } else if (film != null) {
-            getDownloadSize().setFileSize(FilmTools.getSizeFromWeb(film, getUrl()));
+            getDownloadSize().setFileSize(FilmFactory.getSizeFromWeb(film, getUrl()));
         }
     }
 

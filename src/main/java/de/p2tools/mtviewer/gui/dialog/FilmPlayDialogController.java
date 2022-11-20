@@ -18,10 +18,10 @@ package de.p2tools.mtviewer.gui.dialog;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.film.FilmData;
-import de.p2tools.mtviewer.controller.data.film.FilmDataXml;
 import de.p2tools.p2Lib.dialogs.dialog.PDialogExtra;
 import de.p2tools.p2Lib.guiTools.PColumnConstraints;
+import de.p2tools.p2Lib.mtFilm.film.FilmData;
+import de.p2tools.p2Lib.mtFilm.film.FilmDataXml;
 import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;

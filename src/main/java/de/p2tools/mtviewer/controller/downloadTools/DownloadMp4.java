@@ -22,8 +22,8 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.starter.StarterClass;
-import de.p2tools.p2Lib.MTDownload.BandwidthTokenBucket;
-import de.p2tools.p2Lib.MTDownload.MTInputStream;
+import de.p2tools.p2Lib.mtDownload.BandwidthTokenBucket;
+import de.p2tools.p2Lib.mtDownload.MTInputStream;
 import javafx.beans.property.LongProperty;
 
 import java.io.File;

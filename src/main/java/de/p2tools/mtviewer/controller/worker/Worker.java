@@ -18,9 +18,10 @@ package de.p2tools.mtviewer.controller.worker;
 
 import de.p2tools.mtviewer.controller.ProgSave;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ListenerFilmlistLoadEvent;
-import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.ListenerLoadFilmlist;
+import de.p2tools.mtviewer.controller.data.film.LoadFilmFactory;
 import de.p2tools.mtviewer.tools.filmFilter.FilmFilter;
+import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerFilmlistLoadEvent;
+import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerLoadFilmlist;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -35,7 +36,7 @@ public class Worker {
     public Worker(ProgData progData) {
         this.progData = progData;
 
-        progData.loadFilmlist.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
+        LoadFilmFactory.getInstance().loadFilmlist.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
             @Override
             public void start(ListenerFilmlistLoadEvent event) {
                 if (event.progress == ListenerLoadFilmlist.PROGRESS_INDETERMINATE) {

@@ -18,8 +18,7 @@ package de.p2tools.mtviewer.gui;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.film.FilmData;
-import de.p2tools.mtviewer.controller.data.film.FilmTools;
+import de.p2tools.mtviewer.controller.data.film.PlayFilmFactory;
 import de.p2tools.mtviewer.gui.dialog.FilmInfoDialogController;
 import de.p2tools.mtviewer.gui.tools.Listener;
 import de.p2tools.mtviewer.gui.tools.table.Table;
@@ -27,6 +26,7 @@ import de.p2tools.mtviewer.gui.tools.table.TableFilm;
 import de.p2tools.p2Lib.alert.PAlert;
 import de.p2tools.p2Lib.guiTools.PTableFactory;
 import de.p2tools.p2Lib.guiTools.pClosePane.PClosePaneH;
+import de.p2tools.p2Lib.mtFilm.film.FilmData;
 import de.p2tools.p2Lib.tools.log.PLog;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
@@ -107,14 +107,14 @@ public class FilmGuiController extends AnchorPane {
         // Menü/Button Film (URL) abspielen
         final Optional<FilmData> filmSelection = getSel();
         if (filmSelection.isPresent()) {
-            FilmTools.playFilm(filmSelection.get());
+            PlayFilmFactory.playFilm(filmSelection.get());
         }
     }
 
     public synchronized void saveFilm() {
         final Optional<FilmData> filmSelection = getSel();
         if (filmSelection.isPresent()) {
-            FilmTools.saveFilm(filmSelection.get());
+            PlayFilmFactory.saveFilm(filmSelection.get());
         }
     }
 

@@ -16,10 +16,10 @@
 
 package de.p2tools.mtviewer.controller.data.download;
 
-import de.p2tools.mtviewer.tools.Data;
-import de.p2tools.p2Lib.MTDownload.DownloadSize;
 import de.p2tools.p2Lib.configFile.config.*;
 import de.p2tools.p2Lib.configFile.pData.PDataSample;
+import de.p2tools.p2Lib.mtDownload.DownloadSize;
+import de.p2tools.p2Lib.mtFilm.tools.Data;
 import de.p2tools.p2Lib.tools.date.PDate;
 import de.p2tools.p2Lib.tools.date.PDateFactory;
 import de.p2tools.p2Lib.tools.date.PDateProperty;

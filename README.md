@@ -2,66 +2,65 @@
 
 # MTViewer
 
-Das Programm MTPViewer ist eine Art Suchmaschine für Filme der Mediatheken der Öffentlich-Rechtlichen Sender. Das
-Programm stellt eine Liste mit Links zu den Filmen zur Verfügung. Es ist möglich, diese URLs an externe Programme
-weiterzugeben. Mit diesen Programmen können dann diese Filme angesehen oder aufgezeichnet werden.
+Das Programm MTPViewer ist eine Art Suchmaschine für Filme der Mediatheken der Öffentlich-Rechtlichen Sender. Das Programm stellt eine Liste mit Links zu den Filmen zur Verfügung. Es ist möglich, diese URLs an externe Programme weiterzugeben. Mit diesen Programmen können dann diese Filme angesehen oder aufgezeichnet werden.
 
-Das Programm MTPViewer ist eine Alternative zu meinem Programm MTViewer. MTViewer konzentriert sich auf das Nötigste,
-Film ansehen und Film speichern. Es ist daher schnell und einfach zu bedienen.
-
+Das Programm MTViewer ist eine Alternative zu meinem Programm MTPlayer. MTViewer konzentriert sich auf das Nötigste: Film ansehen und Film speichern. Es ist daher schnell und einfach zu bedienen.
 <br />
+
 
 ## Infos
 
-Das Programm nutzt den Ordner ".p2Mtviewer" unter Linux oder den versteckten Ordner "p2Mtviewer" unter Windows als
-Konfig-Ordner, es kann also parallel zu MTViewer benutzt werden. Man kann dem Programm auch einen Ordner für die
-Einstellungen mitgeben (und es z.B. auf einem USB-Stick verwenden):
+Das Programm nutzt den Ordner ".p2Mtviewer" unter Linux oder den versteckten Ordner "p2Mtviewer" unter Windows als Konfig-Ordner, es kann also parallel zu MTPlayer benutzt werden. Man kann dem Programm auch einen Ordner für die Einstellungen mitgeben (und es z.B. auf einem USB-Stick verwenden):
 
 ```
 java -jar MTViewer.jar ORDNER 
 ```
 
 https://www.p2tools.de
-
-
 <br />
+
 
 ## Systemvoraussetzungen
 
-Unterstützt wird Windows und Linux.
-
-Das Programm benötigt unter Windows und Linux eine aktuelle Java-VM ab Version: Java 11. Für Linux-Benutzer wird
-OpenJDK11 empfohlen. (FX-Runtime bringt das Programm bereits mit und muss nicht installiert werden).
-
+Unterstützt wird Windows und Linux. Das Programm benötigt eine aktuelle Java-VM ab Version: Java 11. Für Linux-Benutzer wird OpenJDK11 empfohlen. (FX-Runtime bringt das Programm bereits mit und muss nicht installiert werden).
 <br />
+
 
 ## Download
 
-- **MTViewer-XX.zip**  
-  Das Programmpaket bringt das Programm und die benötigten "Hilfsprogramme" aber kein Java mit. Auf dem Rechner muss
-  eine Java-Laufzeitumgebung ab Java11 installiert sein. Dieses Programmpaket kann auf allen Betriebssystemen verwendet
-  werden. Es bringt Startdateien für Linux und Windows mit.
+Das Programm wird in drei Paketen angeboten. Diese unterscheiden sich nur im “Zubehör”, das Programm selbst ist in allen Paketen identisch:
 
-Windows:
-Der VLC-Player muss installiert sein. 
-Linux:
-Der VLC-Player und ffmpeg müssen installiert sein.
+MTViewer-XX.zip
 
-Weitere Infos zum Programm (Start und Benutzung) sind im Download-Paket enthalten.
+Das Programmpaket bringt nur das Programm und die benötigten Hilfsprogramme aber kein Java mit. Auf dem Rechner muss eine Java-Laufzeitumgebung ab Java11 installiert sein. Dieses Programmpaket kann auf allen Betriebssystemen verwendet werden. Es bringt Startdateien für Linux und Windows mit.
 
-zum Download: [github.com/xaverW/MTViewer/releases](https://github.com/xaverW/MTViewer/releases)
 
+MTViewer-XX__Linux+Java.zip  
+MTPlayer-XX__Windows+Java.zip
+
+Diese Programmpakete bringen die Java-Laufzeitumgebung mit und sind nur für das angegebene     Betriebssystem: Linux oder Windows. Es muss kein Java auf dem System installiert sein. (Die Java-Laufzeitumgebung liegt im Ordner “Java” und kommt von jdk.java.net).
+
+Windows:  
+Der VLC-Player muss installiert sein.  
+Linux:  
+Der VLC-Player und ffmpeg müssen installiert sein.  
+
+Weitere Infos zum Programm (Start und Benutzung) sind im Download-Paket enthalten oder auf der Website.
+
+zum Download:  
+[github.com/xaverW/MTViewer/releases](https://github.com/xaverW/MTViewer/releases)  
+[https://www.p2tools.de/mtviewer/download.html](https://www.p2tools.de/mtviewer/download.html)
 <br />
+
 
 ## Installation
 
-MTViewer muss nicht installiert werden, das Entpacken der heruntergeladenen ZIP-Datei ist quasi die Installation. Die
-heruntergeladene ZIP-Datei entpacken und den entpackten Ordner “MTViewer...” ins Benutzerverzeichnis verschieben. Das
-Programm kann dann mit Doppelklick auf:
-Windows: “MTViewer__Windows.exe” Linux: “MTViewer__Linux.sh” gestartet werden.
-
-
+MTViewer muss nicht installiert werden, das Entpacken der heruntergeladenen ZIP-Datei ist quasi die Installation. Die heruntergeladene ZIP-Datei entpacken und den entpackten Ordner “MTViewer...” ins Benutzerverzeichnis verschieben. Das Programm kann dann mit Doppelklick auf:  
+Linux: “MTViewer__Linux.sh” oder  
+Windows: “MTViewer__Windows.exe”  
+gestartet werden.
 <br />
+
 
 ## Website
 

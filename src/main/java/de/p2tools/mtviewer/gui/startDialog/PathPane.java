@@ -21,7 +21,7 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.gui.tools.HelpText;
-import de.p2tools.p2Lib.MTDownload.GetProgramStandardPath;
+import de.p2tools.p2Lib.mtDownload.GetProgramStandardPath;
 import de.p2tools.p2Lib.dialogs.PDirFileChooser;
 import de.p2tools.p2Lib.guiTools.PButton;
 import de.p2tools.p2Lib.guiTools.PColumnConstraints;

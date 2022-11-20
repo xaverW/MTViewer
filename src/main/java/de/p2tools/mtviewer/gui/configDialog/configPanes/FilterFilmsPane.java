@@ -19,10 +19,12 @@ package de.p2tools.mtviewer.gui.configDialog.configPanes;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.filmlist.loadFilmlist.LoadFactory;
+import de.p2tools.mtviewer.controller.data.film.LoadFilmFactory;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2Lib.guiTools.PButton;
 import de.p2tools.p2Lib.guiTools.PColumnConstraints;
+import de.p2tools.p2Lib.mtFilm.loadFilmlist.LoadFactory;
+import de.p2tools.p2Lib.mtFilm.tools.LoadFactoryConst;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
@@ -81,13 +83,13 @@ public class FilterFilmsPane {
         tilePaneSender.setVgap(10);
         ArrayList aListChannel = LoadFactory.getSenderListNotToLoad();
         ArrayList<CheckBox> aListCb = new ArrayList<>();
-        for (String s : ProgConst.SENDER) {
+        for (String s : LoadFactoryConst.SENDER) {
             final CheckBox cb = new CheckBox(s);
             aListCb.add(cb);
             cb.setSelected(aListChannel.contains(s));
             cb.setOnAction(a -> {
                 makePropSender(aListCb);
-                LoadFactory.checkAllSenderSelectedNotToLoad(stage);
+                LoadFactory.checkAllSenderSelectedNotToLoad();
             });
 
             tilePaneSender.getChildren().add(cb);
@@ -147,9 +149,7 @@ public class FilterFilmsPane {
             Button btnLoad = new Button("_Filmliste mit diesen Einstellungen neu laden");
             btnLoad.setTooltip(new Tooltip("Eine komplette neue Filmliste laden.\n" +
                     "Geänderte Einstellungen für das Laden der Filmliste werden so sofort übernommen"));
-            btnLoad.setOnAction(event -> {
-                progData.loadFilmlist.loadNewFilmlist(true);
-            });
+            btnLoad.setOnAction(event -> LoadFilmFactory.getInstance().loadList(true));
 
             hBox = new HBox();
             hBox.setAlignment(Pos.CENTER_LEFT);
