@@ -76,7 +76,7 @@ public class TableFilm extends PTable<FilmData> {
                     int col = getIndex();
                     FilmData film = getTableView().getItems().get(col);
                     getSelectionModel().clearAndSelect(col);
-                    ProgData.getInstance().filmlist.saveFilm(film);
+                    FilmTools.saveFilm(film);
                 });
 
                 hbox.getChildren().addAll(btnPlay, btnSave);

@@ -36,38 +36,40 @@ import javafx.beans.property.DoubleProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.transformation.SortedList;
 import javafx.geometry.Insets;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.ScrollPane;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class DownloadListInfoController extends AnchorPane {
+public class DownloadInfoController extends AnchorPane {
 
-    private final VBox vBoxFilter = new VBox();
+    private final HBox hBoxAll = new HBox(5);
     private final VBox vBoxTable = new VBox();
     private final TableDownload tableView;
     private final ScrollPane scrollPane = new ScrollPane();
     private final ProgData progData;
     private final SortedList<DownloadData> sortedDownloads;
+
     DoubleProperty doubleProperty; //sonst geht die Ref verloren
 
-    public DownloadListInfoController() {
+    public DownloadInfoController() {
         progData = ProgData.getInstance();
         tableView = new TableDownload(Table.TABLE_ENUM.DOWNLOAD);
         this.doubleProperty = ProgConfig.DOWNLOAD_GUI_FILTER_DIVIDER;
         sortedDownloads = new SortedList<>(progData.downloadList);
 
-        AnchorPane.setLeftAnchor(vBoxTable, 0.0);
-        AnchorPane.setBottomAnchor(vBoxTable, 0.0);
-        AnchorPane.setRightAnchor(vBoxTable, 0.0);
-        AnchorPane.setTopAnchor(vBoxTable, 0.0);
-        getChildren().add(vBoxTable);
+        AnchorPane.setLeftAnchor(hBoxAll, 0.0);
+        AnchorPane.setBottomAnchor(hBoxAll, 0.0);
+        AnchorPane.setRightAnchor(hBoxAll, 0.0);
+        AnchorPane.setTopAnchor(hBoxAll, 0.0);
+        getChildren().add(hBoxAll);
         make();
     }
 
@@ -189,16 +191,43 @@ public class DownloadListInfoController extends AnchorPane {
     }
 
     private void make() {
-        vBoxFilter.setSpacing(10);
-        vBoxFilter.setPadding(new Insets(10));
+        hBoxAll.setSpacing(10);
+        hBoxAll.setPadding(new Insets(10));
         vBoxTable.setSpacing(10);
-        vBoxTable.setPadding(new Insets(10));
 
         scrollPane.setFitToHeight(true);
         scrollPane.setFitToWidth(true);
         scrollPane.setContent(tableView);
         vBoxTable.getChildren().add(scrollPane);
         VBox.setVgrow(scrollPane, Priority.ALWAYS);
+
+        MenuButton mbMenu;
+        mbMenu = FilmMenu.getFilmMenu(progData);
+        Button btnClearFilter = new Button();
+        Button btnStartAll = new Button();
+        Button btnStopAll = new Button();
+
+        VBox vBox = new VBox(10);
+        vBox.setAlignment(Pos.TOP_CENTER);
+        vBox.getChildren().addAll(/*mbMenu, PGuiTools.getVDistance(5),*/ btnStartAll, btnStopAll, btnClearFilter);
+
+        hBoxAll.getChildren().addAll(vBoxTable, vBox);
+
+        btnClearFilter.setGraphic(ProgIcons.Icons.ICON_BUTTON_CLEAN.getImageView());
+        btnClearFilter.setTooltip(new Tooltip("Tabelle aufräumen"));
+        btnClearFilter.getStyleClass().add("btnFunction");
+        btnClearFilter.setOnAction(a -> cleanUp());
+
+        btnStartAll.setGraphic(ProgIcons.Icons.ICON_BUTTON_START_ALL.getImageView());
+        btnStartAll.setTooltip(new Tooltip("Alle Downloads starten"));
+        btnStartAll.getStyleClass().add("btnFunction");
+        btnStartAll.setOnAction(a -> startDownload(true /* alle */));
+
+        btnStopAll.setGraphic(ProgIcons.Icons.ICON_BUTTON_STOP_ALL.getImageView());
+        btnStopAll.setTooltip(new Tooltip("Alle Downloads stoppen"));
+        btnStopAll.getStyleClass().add("btnFunction");
+        btnStopAll.setOnAction(a -> stopDownload(true /* alle */));
+
         initTable();
     }
 
@@ -253,7 +282,7 @@ public class DownloadListInfoController extends AnchorPane {
                 } else {
                     download = null;
                 }
-                ContextMenu contextMenu = new DownloadGuiTableContextMenu(progData, this, tableView).getContextMenu(download);
+                ContextMenu contextMenu = new DownloadTableContextMenu(progData, this, tableView).getContextMenu(download);
                 tableView.setContextMenu(contextMenu);
             }
         });

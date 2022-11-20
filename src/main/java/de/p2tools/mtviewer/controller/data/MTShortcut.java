@@ -47,6 +47,10 @@ public class MTShortcut {
             new PShortcut(ProgConfig.SHORTCUT_PLAY_FILM, ProgConfig.SHORTCUT_PLAY_FILM_INIT,
                     "Film abspielen",
                     "Der markierte Film in der Tabelle \"Filme\" wird abgespielt.");
+    public static final PShortcut SHORTCUT_SAVE_FILM =
+            new PShortcut(ProgConfig.SHORTCUT_SAVE_FILM, ProgConfig.SHORTCUT_SAVE_FILM_INIT,
+                    "Film speichern",
+                    "Der markierte Film in der Tabelle \"Filme\" wird gespeichert.");
 
     private static ObservableList<PShortcut> shortcutList = FXCollections.observableArrayList();
 

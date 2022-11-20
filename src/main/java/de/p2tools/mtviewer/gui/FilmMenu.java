@@ -46,31 +46,27 @@ public class FilmMenu {
         //=========================
         //Filme
         final Menu mFilm = new Menu("Filme");
-
         final MenuItem miPlay = new MenuItem("Film abspielen");
-        miPlay.setOnAction(a -> progData.filmGuiController.playFilmUrl());
+        miPlay.setOnAction(a -> progData.filmGuiController.playFilm());
         PShortcutWorker.addShortCut(miPlay, MTShortcut.SHORTCUT_PLAY_FILM);
-
+        final MenuItem miSave = new MenuItem("Film speichern");
+        miSave.setOnAction(a -> progData.filmGuiController.saveFilm());
+        PShortcutWorker.addShortCut(miSave, MTShortcut.SHORTCUT_SAVE_FILM);
         final MenuItem miFilmInfo = new MenuItem("Filminformation anzeigen");
         miFilmInfo.setOnAction(a -> progData.filmGuiController.showFilmInfo());
         PShortcutWorker.addShortCut(miFilmInfo, MTShortcut.SHORTCUT_INFO_FILM);
+        mFilm.getItems().addAll(miPlay, miSave, miFilmInfo);
 
+        //=========================
+        //Filmliste, Info, Einstellungen
+        final MenuItem miLoad = new MenuItem("Eine neue Filmliste laden");
+        miLoad.setOnAction(e -> progData.loadFilmlist.loadNewFilmlist(false));
         final MenuItem miShowInfo = new MenuItem("Infobereich unter der Tabelle ein-/ausblenden");
         miShowInfo.setOnAction(a -> progData.mtViewerPlayerController.setInfos());
         PShortcutWorker.addShortCut(miShowInfo, MTShortcut.SHORTCUT_SHOW_INFOS);
-        mFilm.getItems().addAll(miPlay, miFilmInfo, miShowInfo);
-        mb.getItems().add(mFilm);
-
-        //=========================
-        //Filmliste/Einstellungen
-        final MenuItem miLoad = new MenuItem("Eine neue Filmliste laden");
-        miLoad.setOnAction(e -> progData.loadFilmlist.loadNewFilmlist(false));
-
-        final MenuItem miConfig = new MenuItem("Einstellungen des Programms");
+        final MenuItem miConfig = new MenuItem("Einstellungen");
         miConfig.setOnAction(e -> new ConfigDialogController(ProgData.getInstance()).showDialog());
-        mb.getItems().add(new SeparatorMenuItem());
-        mb.getItems().addAll(miLoad, miConfig);
-
+        mb.getItems().addAll(mFilm, miLoad, miShowInfo, miConfig, new SeparatorMenuItem());
 
         //=========================
         //Hilfe
@@ -79,7 +75,7 @@ public class FilmMenu {
             POpen.openURL(ProgConst.URL_WEBSITE_HELP,
                     ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIcons.Icons.ICON_BUTTON_FILE_OPEN.getImageView());
         });
-        final MenuItem miReset = new MenuItem("Einstellungen zurücksetzen");
+        final MenuItem miReset = new MenuItem("Alle Programmeinstellungen zurücksetzen");
         miReset.setOnAction(event -> new ResetDialogController(progData));
         final MenuItem miToolTip = new MenuItem("Tip des Tages");
         miToolTip.setOnAction(a -> new ProgTipOfDay().showDialog(progData, true));
@@ -90,15 +86,15 @@ public class FilmMenu {
 
         final Menu mHelp = new Menu("Hilfe");
         mHelp.getItems().addAll(miUrlHelp, miReset, miToolTip, miSearchUpdate, new SeparatorMenuItem(), miAbout);
-        mb.getItems().add(new SeparatorMenuItem());
-        mb.getItems().add(mHelp);
+        mb.getItems().addAll(mHelp);
 
         //=========================
         //Quitt
         final MenuItem miQuit = new MenuItem("Beenden");
         miQuit.setOnAction(e -> ProgQuit.quit(false));
         PShortcutWorker.addShortCut(miQuit, MTShortcut.SHORTCUT_QUIT_PROGRAM);
-        mb.getItems().add(miQuit);
+
+        mb.getItems().addAll(miQuit);
 
         return mb;
     }

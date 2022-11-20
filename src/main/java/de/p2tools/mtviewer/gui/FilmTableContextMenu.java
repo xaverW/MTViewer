@@ -25,13 +25,13 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 
-public class FilmGuiTableContextMenu {
+public class FilmTableContextMenu {
 
     private final ProgData progData;
     private final FilmGuiController filmGuiController;
     private final TableFilm tableView;
 
-    public FilmGuiTableContextMenu(ProgData progData, FilmGuiController filmGuiController, TableFilm tableView) {
+    public FilmTableContextMenu(ProgData progData, FilmGuiController filmGuiController, TableFilm tableView) {
         this.progData = progData;
         this.filmGuiController = filmGuiController;
         this.tableView = tableView;
@@ -46,10 +46,12 @@ public class FilmGuiTableContextMenu {
     private void getMenu(ContextMenu contextMenu, FilmData film) {
         // Start/Save
         MenuItem miStart = new MenuItem("Film abspielen");
-        miStart.setOnAction(a -> filmGuiController.playFilmUrl());
-        contextMenu.getItems().addAll(miStart);
-
+        miStart.setOnAction(a -> filmGuiController.playFilm());
         miStart.setDisable(film == null);
+        MenuItem miSave = new MenuItem("Film speichern");
+        miSave.setOnAction(a -> filmGuiController.saveFilm());
+        miSave.setDisable(film == null);
+        contextMenu.getItems().addAll(miStart, miSave);
 
         Menu mFilter = addFilter(film);// Filter
         contextMenu.getItems().add(new SeparatorMenuItem());

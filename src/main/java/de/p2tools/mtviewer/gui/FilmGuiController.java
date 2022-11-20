@@ -58,7 +58,7 @@ public class FilmGuiController extends AnchorPane {
     private boolean boundSplitPaneDivPos = false;
 
     private FilmInfoController filmInfoController;
-    private DownloadListInfoController downloadListInfoController;
+    private DownloadInfoController downloadInfoController;
 
     public FilmGuiController() {
         progData = ProgData.getInstance();
@@ -67,7 +67,7 @@ public class FilmGuiController extends AnchorPane {
         tabPaneInfo = new TabPane();
         tableView = new TableFilm(Table.TABLE_ENUM.FILM, progData);
 
-        downloadListInfoController = new DownloadListInfoController();
+        downloadInfoController = new DownloadInfoController();
 
         AnchorPane.setLeftAnchor(splitPane, 0.0);
         AnchorPane.setBottomAnchor(splitPane, 0.0);
@@ -103,14 +103,24 @@ public class FilmGuiController extends AnchorPane {
         FilmInfoDialogController.getInstanceAndShow().showFilmInfo();
     }
 
-    public void playFilmUrl() {
+    public synchronized void playFilm() {
         // Menü/Button Film (URL) abspielen
-        startFilmUrl();
+        final Optional<FilmData> filmSelection = getSel();
+        if (filmSelection.isPresent()) {
+            FilmTools.playFilm(filmSelection.get());
+        }
+    }
+
+    public synchronized void saveFilm() {
+        final Optional<FilmData> filmSelection = getSel();
+        if (filmSelection.isPresent()) {
+            FilmTools.saveFilm(filmSelection.get());
+        }
     }
 
     public void saveTable() {
         Table.saveTable(tableView, Table.TABLE_ENUM.FILM);
-        downloadListInfoController.saveTable();
+        downloadInfoController.saveTable();
     }
 
     public void refreshTable() {
@@ -197,7 +207,7 @@ public class FilmGuiController extends AnchorPane {
                 } else {
                     film = null;
                 }
-                ContextMenu contextMenu = new FilmGuiTableContextMenu(progData, this, tableView).getContextMenu(film);
+                ContextMenu contextMenu = new FilmTableContextMenu(progData, this, tableView).getContextMenu(film);
                 tableView.setContextMenu(contextMenu);
             }
         });
@@ -266,7 +276,7 @@ public class FilmGuiController extends AnchorPane {
 
         Tab tabDownloads = new Tab("Downloads");
         tabDownloads.setClosable(false);
-        tabDownloads.setContent(downloadListInfoController);
+        tabDownloads.setContent(downloadInfoController);
 
         tabPaneInfo.getTabs().clear();
         tabPaneInfo.getTabs().addAll(tabInfo, tabDownloads);
@@ -274,12 +284,5 @@ public class FilmGuiController extends AnchorPane {
         pClosePaneHInfo.getVBoxAll().getChildren().clear();
         pClosePaneHInfo.getVBoxAll().getChildren().add(tabPaneInfo);
         VBox.setVgrow(tabPaneInfo, Priority.ALWAYS);
-    }
-
-    private synchronized void startFilmUrl() {
-        final Optional<FilmData> filmSelection = getSel();
-        if (filmSelection.isPresent()) {
-            FilmTools.playFilm(filmSelection.get());
-        }
     }
 }

@@ -118,11 +118,7 @@ public class Filmlist extends SimpleListProperty<FilmData> {
     public String getFilmlistId() {
         return metaData[FilmlistXml.FILMLIST_ID_NR];
     }
-
-    public synchronized void saveFilm(FilmData film) {
-        FilmTools.saveFilm(film);
-    }
-
+    
     public synchronized boolean importFilmOnlyWithNr(FilmData film) {
         // hier nur beim Laden aus einer fertigen Filmliste mit der GUI
         // die Filme sind schon sortiert, nur die Nummer muss noch ergänzt werden

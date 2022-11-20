@@ -53,6 +53,9 @@ public class ProgIcons {
         ICON_BUTTON_MOVE_UP("button-move-up.png", 16, 16),
         ICON_BUTTON_MOVE_TOP("button-move-top.png", 16, 16),
         ICON_BUTTON_MOVE_BOTTOM("button-move-bottom.png", 16, 16),
+        ICON_BUTTON_CLEAN("clean_16.png", 16, 16),
+        ICON_BUTTON_START_ALL("button-start-all.png", 16, 16),
+        ICON_BUTTON_STOP_ALL("button-stop-all.png", 16, 16),
 
         FX_ICON_TOOLBAR_MENU("toolbar-menu.png", 18, 15);
 
