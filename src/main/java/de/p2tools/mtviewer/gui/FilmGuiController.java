@@ -18,7 +18,7 @@ package de.p2tools.mtviewer.gui;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.film.PlayFilmFactory;
+import de.p2tools.mtviewer.controller.film.FilmTools;
 import de.p2tools.mtviewer.gui.dialog.FilmInfoDialogController;
 import de.p2tools.mtviewer.gui.tools.Listener;
 import de.p2tools.mtviewer.gui.tools.table.Table;
@@ -107,14 +107,14 @@ public class FilmGuiController extends AnchorPane {
         // Menü/Button Film (URL) abspielen
         final Optional<FilmData> filmSelection = getSel();
         if (filmSelection.isPresent()) {
-            PlayFilmFactory.playFilm(filmSelection.get());
+            FilmTools.playFilm(filmSelection.get());
         }
     }
 
     public synchronized void saveFilm() {
         final Optional<FilmData> filmSelection = getSel();
         if (filmSelection.isPresent()) {
-            PlayFilmFactory.saveFilm(filmSelection.get());
+            FilmTools.saveFilm(filmSelection.get());
         }
     }
 

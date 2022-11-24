@@ -22,7 +22,7 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
-import de.p2tools.mtviewer.controller.data.film.PlayFilmFactory;
+import de.p2tools.mtviewer.controller.film.FilmTools;
 import de.p2tools.p2Lib.guiTools.PCheckBoxCell;
 import de.p2tools.p2Lib.guiTools.POpen;
 import de.p2tools.p2Lib.tools.GermanStringIntSorter;
@@ -114,7 +114,7 @@ public class TableDownload extends PTable<DownloadData> {
                     btnFilmStart.setGraphic(ProgIcons.Icons.IMAGE_TABLE_FILM_PLAY.getImageView());
                     btnFilmStart.setOnAction((ActionEvent event) -> {
                         DownloadData download = getTableView().getItems().get(getIndex());
-                        PlayFilmFactory.playFilm(download.getDestPathFile());
+                        FilmTools.playFilm(download.getDestPathFile());
                     });
 
                     btnOpenDirectory = new Button();

@@ -20,7 +20,7 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.config.ProgInfos;
-import de.p2tools.mtviewer.tools.update.SearchProgramUpdate;
+import de.p2tools.mtviewer.controller.update.SearchProgramUpdate;
 import de.p2tools.p2Lib.dialogs.AboutDialog;
 
 public class AboutDialogController extends AboutDialog {

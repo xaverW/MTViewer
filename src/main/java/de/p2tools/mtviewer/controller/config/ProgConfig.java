@@ -18,8 +18,8 @@
 package de.p2tools.mtviewer.controller.config;
 
 import de.p2tools.mtviewer.controller.downloadTools.DownloadState;
-import de.p2tools.mtviewer.tools.filmFilter.ActFilmFilterWorker;
-import de.p2tools.mtviewer.tools.filmFilter.FilmFilter;
+import de.p2tools.mtviewer.controller.filmFilter.ActFilmFilterWorker;
+import de.p2tools.mtviewer.controller.filmFilter.FilmFilter;
 import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.configFile.ConfigFile;
 import de.p2tools.p2Lib.configFile.config.Config;

@@ -16,12 +16,8 @@
 
 package de.p2tools.mtviewer.controller.worker;
 
-import de.p2tools.mtviewer.controller.ProgSave;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.film.LoadFilmFactory;
-import de.p2tools.mtviewer.tools.filmFilter.FilmFilter;
-import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerFilmlistLoadEvent;
-import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerLoadFilmlist;
+import de.p2tools.mtviewer.controller.filmFilter.FilmFilter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -35,50 +31,14 @@ public class Worker {
 
     public Worker(ProgData progData) {
         this.progData = progData;
-
-        LoadFilmFactory.getInstance().loadFilmlist.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
-            @Override
-            public void start(ListenerFilmlistLoadEvent event) {
-                if (event.progress == ListenerLoadFilmlist.PROGRESS_INDETERMINATE) {
-                    // ist dann die gespeicherte Filmliste
-                    progData.maskerPane.setMaskerVisible(true, false);
-                } else {
-                    progData.maskerPane.setMaskerVisible(true, true);
-                }
-                progData.maskerPane.setMaskerProgress(event.progress, event.text);
-
-                // the channel combo will be reseted, therefore save the filter
-                saveFilter();
-            }
-
-            @Override
-            public void progress(ListenerFilmlistLoadEvent event) {
-                progData.maskerPane.setMaskerProgress(event.progress, event.text);
-            }
-
-            @Override
-            public void loaded(ListenerFilmlistLoadEvent event) {
-                progData.maskerPane.setMaskerVisible(true, false);
-                progData.maskerPane.setMaskerProgress(ListenerLoadFilmlist.PROGRESS_INDETERMINATE, "Filmliste verarbeiten");
-            }
-
-            @Override
-            public void finished(ListenerFilmlistLoadEvent event) {
-                new ProgSave().saveAll(); // damit nichts verloren geht
-                allChannelList.setAll(Arrays.asList(progData.filmlist.sender));//alle Sender laden
-                progData.maskerPane.setMaskerVisible(false);
-
-                // activate the saved filter
-                resetFilter();
-            }
-        });
     }
 
-    private void saveFilter() {
+    public void saveFilter() {
         progData.actFilmFilterWorker.getActFilterSettings().copyTo(sfTemp);
     }
 
-    private void resetFilter() {
+    public void resetFilter() {
+        allChannelList.setAll(Arrays.asList(progData.filmlist.sender));//alle Sender laden
         sfTemp.copyTo(progData.actFilmFilterWorker.getActFilterSettings());
     }
 

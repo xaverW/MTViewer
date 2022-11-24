@@ -17,9 +17,9 @@
 package de.p2tools.mtviewer.controller;
 
 import de.p2tools.mtviewer.controller.config.*;
-import de.p2tools.mtviewer.controller.data.film.LoadFilmFactory;
+import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
+import de.p2tools.mtviewer.controller.update.SearchProgramUpdate;
 import de.p2tools.mtviewer.gui.tools.TipOfDay;
-import de.p2tools.mtviewer.tools.update.SearchProgramUpdate;
 import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.alert.PAlert;
 import de.p2tools.p2Lib.icons.GetIcon;

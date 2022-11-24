@@ -15,11 +15,14 @@
  */
 
 
-package de.p2tools.mtviewer.controller.data.film;
+package de.p2tools.mtviewer.controller.film;
 
+import de.p2tools.mtviewer.controller.ProgSave;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.config.ProgInfos;
+import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerFilmlistLoadEvent;
+import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerLoadFilmlist;
 import de.p2tools.p2Lib.mtFilm.loadFilmlist.LoadFilmlist;
 import de.p2tools.p2Lib.mtFilm.tools.LoadFactoryConst;
 
@@ -29,6 +32,41 @@ public class LoadFilmFactory {
 
     private LoadFilmFactory() {
         loadFilmlist = new LoadFilmlist();
+        LoadFilmFactory.getInstance().loadFilmlist.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
+            @Override
+            public void start(ListenerFilmlistLoadEvent event) {
+                if (event.progress == ListenerLoadFilmlist.PROGRESS_INDETERMINATE) {
+                    // ist dann die gespeicherte Filmliste
+                    ProgData.getInstance().maskerPane.setMaskerVisible(true, false);
+                } else {
+                    ProgData.getInstance().maskerPane.setMaskerVisible(true, true);
+                }
+                ProgData.getInstance().maskerPane.setMaskerProgress(event.progress, event.text);
+
+                // the channel combo will be reseted, therefore save the filter
+                ProgData.getInstance().worker.saveFilter();
+            }
+
+            @Override
+            public void progress(ListenerFilmlistLoadEvent event) {
+                ProgData.getInstance().maskerPane.setMaskerProgress(event.progress, event.text);
+            }
+
+            @Override
+            public void loaded(ListenerFilmlistLoadEvent event) {
+                ProgData.getInstance().maskerPane.setMaskerVisible(true, false);
+                ProgData.getInstance().maskerPane.setMaskerProgress(ListenerLoadFilmlist.PROGRESS_INDETERMINATE, "Filmliste verarbeiten");
+            }
+
+            @Override
+            public void finished(ListenerFilmlistLoadEvent event) {
+                new ProgSave().saveAll(); // damit nichts verloren geht
+                // activate the saved filter
+                ProgData.getInstance().worker.resetFilter();
+                ProgData.getInstance().filmFilterRunner.filter();
+                ProgData.getInstance().maskerPane.setMaskerVisible(false);
+            }
+        });
     }
 
     public void loadProgStart(boolean firstProgramStart) {

@@ -20,7 +20,7 @@ import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
-import de.p2tools.mtviewer.controller.data.film.PlayFilmFactory;
+import de.p2tools.mtviewer.controller.film.FilmTools;
 import de.p2tools.mtviewer.gui.dialog.FilmInfoDialogController;
 import de.p2tools.p2Lib.guiTools.PCheckBoxCell;
 import de.p2tools.p2Lib.guiTools.PTableFactory;
@@ -66,7 +66,7 @@ public class TableFilm extends PTable<FilmData> {
                     int col = getIndex();
                     FilmData film = getTableView().getItems().get(col);
                     getSelectionModel().clearAndSelect(col);
-                    PlayFilmFactory.playFilm(film);
+                    FilmTools.playFilm(film);
                 });
 
                 final Button btnSave;
@@ -76,7 +76,7 @@ public class TableFilm extends PTable<FilmData> {
                     int col = getIndex();
                     FilmData film = getTableView().getItems().get(col);
                     getSelectionModel().clearAndSelect(col);
-                    PlayFilmFactory.saveFilm(film);
+                    FilmTools.saveFilm(film);
                 });
 
                 hbox.getChildren().addAll(btnPlay, btnSave);

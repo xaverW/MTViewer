@@ -14,7 +14,7 @@
  * not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.p2tools.mtviewer.tools.filmFilter;
+package de.p2tools.mtviewer.controller.filmFilter;
 
 import de.p2tools.mtviewer.controller.config.ProgConst;
 

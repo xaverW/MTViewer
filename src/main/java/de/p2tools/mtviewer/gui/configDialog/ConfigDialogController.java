@@ -19,7 +19,7 @@ package de.p2tools.mtviewer.gui.configDialog;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
-import de.p2tools.mtviewer.controller.data.film.LoadFilmFactory;
+import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
 import de.p2tools.mtviewer.gui.tools.Listener;
 import de.p2tools.p2Lib.dialogs.dialog.PDialogExtra;
 import de.p2tools.p2Lib.mtFilm.film.FilmFactory;
@@ -45,7 +45,7 @@ public class ConfigDialogController extends PDialogExtra {
     PlayPaneController playPaneController;
     FilmPaneController filmPaneController;
     DownloadPaneController downloadPaneController;
-
+    private ListenerLoadFilmlist listener;
     private TabPane tabPane = new TabPane();
     private Button btnOk = new Button("_Ok");
     private String geo = ProgConfig.SYSTEM_GEO_HOME_PLACE.get();
@@ -66,13 +66,11 @@ public class ConfigDialogController extends PDialogExtra {
         progData.maskerPane.visibleProperty().addListener((u, o, n) -> {
             setMaskerPane();
         });
-
         Button btnStop = getMaskerPane().getButton();
         getMaskerPane().setButtonText("");
         btnStop.setGraphic(ProgIcons.Icons.ICON_BUTTON_STOP.getImageView());
         btnStop.setOnAction(a -> LoadFilmFactory.getInstance().loadFilmlist.setStop(true));
-
-        LoadFilmFactory.getInstance().loadFilmlist.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
+        listener = new ListenerLoadFilmlist() {
             @Override
             public void start(ListenerFilmlistLoadEvent event) {
                 if (event.progress == ListenerLoadFilmlist.PROGRESS_INDETERMINATE) {
@@ -99,7 +97,8 @@ public class ConfigDialogController extends PDialogExtra {
             public void finished(ListenerFilmlistLoadEvent event) {
                 getMaskerPane().setMaskerVisible(false);
             }
-        });
+        };
+        LoadFilmFactory.getInstance().loadFilmlist.addListenerLoadFilmlist(listener);
 
         VBox.setVgrow(tabPane, Priority.ALWAYS);
         getvBoxCont().getChildren().add(tabPane);
@@ -137,6 +136,7 @@ public class ConfigDialogController extends PDialogExtra {
         filmPaneController.close();
         downloadPaneController.close();
 
+        LoadFilmFactory.getInstance().loadFilmlist.removeListenerLoadFilmlist(listener);
         Listener.notify(Listener.EVEMT_SETDATA_CHANGED, ConfigDialogController.class.getSimpleName());
         super.close();
     }

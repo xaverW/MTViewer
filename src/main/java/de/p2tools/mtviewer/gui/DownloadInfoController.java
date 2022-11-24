@@ -21,7 +21,7 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.data.download.DownloadDataFactory;
-import de.p2tools.mtviewer.controller.data.film.PlayFilmFactory;
+import de.p2tools.mtviewer.controller.film.FilmTools;
 import de.p2tools.mtviewer.gui.dialog.DownloadAddDialogController;
 import de.p2tools.mtviewer.gui.dialog.FilmInfoDialogController;
 import de.p2tools.mtviewer.gui.tools.table.Table;
@@ -167,7 +167,7 @@ public class DownloadInfoController extends AnchorPane {
         film.arr[FilmData.FILM_URL] = download.get().getUrl();
         film.arr[FilmData.FILM_URL_SMALL] = "";
         // und starten
-        PlayFilmFactory.playFilm(film);
+        FilmTools.playFilm(film);
     }
 
     public void copyUrl() {
@@ -189,7 +189,7 @@ public class DownloadInfoController extends AnchorPane {
     public void playFilm() {
         final Optional<DownloadData> download = getSel();
         if (download.isPresent()) {
-            PlayFilmFactory.playFilm(download.get().getDestPathFile());
+            FilmTools.playFilm(download.get().getDestPathFile());
         }
     }
 

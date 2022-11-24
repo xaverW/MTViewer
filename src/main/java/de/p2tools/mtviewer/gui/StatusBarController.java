@@ -17,8 +17,8 @@
 package de.p2tools.mtviewer.gui;
 
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.film.LoadFilmFactory;
-import de.p2tools.mtviewer.controller.data.film.PlayFilmFactory;
+import de.p2tools.mtviewer.controller.film.FilmTools;
+import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
 import de.p2tools.mtviewer.gui.tools.Listener;
 import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerFilmlistLoadEvent;
 import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerLoadFilmlist;
@@ -104,7 +104,7 @@ public class StatusBarController extends AnchorPane {
     }
 
     private void setInfoFilm() {
-        lblLeftFilm.setText(PlayFilmFactory.getStatusInfosFilm());
+        lblLeftFilm.setText(FilmTools.getStatusInfosFilm());
         final int selCount = progData.filmGuiController.getSelCount();
         lblSelFilm.setText(selCount > 0 ? selCount + "" : " ");
     }

@@ -14,7 +14,7 @@
  * not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.p2tools.mtviewer.controller.data.film;
+package de.p2tools.mtviewer.controller.film;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
@@ -33,7 +33,7 @@ import java.util.Locale;
 
 import static de.p2tools.mtviewer.controller.downloadTools.RuntimeExec.TRENNER_PROG_ARRAY;
 
-public class PlayFilmFactory {
+public class FilmTools {
 
     private static final NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.GERMANY);
 

@@ -15,7 +15,7 @@
  */
 
 
-package de.p2tools.mtviewer.tools.filmFilter;
+package de.p2tools.mtviewer.controller.filmFilter;
 
 import de.p2tools.p2Lib.mtFilm.film.FilmData;
 

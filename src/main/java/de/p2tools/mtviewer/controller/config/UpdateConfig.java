@@ -17,7 +17,7 @@
 
 package de.p2tools.mtviewer.controller.config;
 
-import de.p2tools.mtviewer.tools.filmFilter.FilmFilterCheck;
+import de.p2tools.mtviewer.controller.filmFilter.FilmFilterCheck;
 
 public class UpdateConfig {
 
