@@ -32,7 +32,7 @@ public class LoadFilmFactory {
 
     private LoadFilmFactory() {
         loadFilmlist = new LoadFilmlist();
-        LoadFilmFactory.getInstance().loadFilmlist.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
+        loadFilmlist.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
             @Override
             public void start(ListenerFilmlistLoadEvent event) {
                 if (event.progress == ListenerLoadFilmlist.PROGRESS_INDETERMINATE) {

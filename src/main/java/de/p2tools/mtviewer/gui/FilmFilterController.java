@@ -31,6 +31,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.util.StringConverter;
 
@@ -51,13 +52,11 @@ public class FilmFilterController extends VBox {
     private final Button btnClearFilter = new Button();
     private final Button btnGoBack = new Button("");
     private final Button btnGoForward = new Button("");
-    private final MenuButton mbMenu;
     private final ArrayList<MenuItemClass> menuItemsList = new ArrayList<>();
     private final ProgData progData;
 
     public FilmFilterController() {
         progData = ProgData.getInstance();
-        mbMenu = ProgMenu.getMenu(progData);
 
         setPadding(new Insets(10, 15, 5, 15));
         setSpacing(FILTER_SPACING_TEXTFILTER);
@@ -244,6 +243,11 @@ public class FilmFilterController extends VBox {
                 progData.actFilmFilterWorker.getActFilterSettings().reportFilterReturn();
             }
         });
+        cbo.getEditor().setOnMouseClicked(event -> {
+            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
+                cbo.getEditor().clear();
+            }
+        });
         strProp.addListener((u, o, n) -> cbo.valueProperty().setValue(strProp.getValueSafe()));
     }
 
@@ -372,7 +376,7 @@ public class FilmFilterController extends VBox {
         HBox hBoxClear = new HBox(10);
         hBoxClear.setAlignment(Pos.CENTER_RIGHT);
         hBoxClear.getChildren().addAll(PGuiTools.getHBoxGrower(), btnGoBack, btnGoForward,
-                btnClearFilter, mbMenu);
+                btnClearFilter, new ProgMenu());
 
 
         gridPane.add(vBox, 0, 1);

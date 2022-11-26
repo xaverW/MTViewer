@@ -33,16 +33,18 @@ import de.p2tools.p2Lib.tools.shortcut.PShortcutWorker;
 import javafx.scene.control.*;
 
 
-public class ProgMenu {
+public class ProgMenu extends MenuButton {
 
-    private ProgMenu() {
+    public ProgMenu() {
+        makeMenue();
     }
 
-    public static MenuButton getMenu(ProgData progData) {
-        final MenuButton mb = new MenuButton("");
-        mb.setTooltip(new Tooltip("Filmmenü anzeigen"));
-        mb.setGraphic(ProgIcons.Icons.FX_ICON_TOOLBAR_MENU.getImageView());
-        mb.getStyleClass().add("btnFunctionWide");
+    private void makeMenue() {
+        ProgData progData = ProgData.getInstance();
+
+        setTooltip(new Tooltip("Filmmenü anzeigen"));
+        setGraphic(ProgIcons.Icons.FX_ICON_TOOLBAR_MENU.getImageView());
+        getStyleClass().add("btnFunctionWide");
 
         //=========================
         //Filme
@@ -67,7 +69,7 @@ public class ProgMenu {
         PShortcutWorker.addShortCut(miShowInfo, MTShortcut.SHORTCUT_SHOW_INFOS);
         final MenuItem miConfig = new MenuItem("Einstellungen");
         miConfig.setOnAction(e -> new ConfigDialogController(ProgData.getInstance()).showDialog());
-        mb.getItems().addAll(mFilm, miLoad, miShowInfo, miConfig, new SeparatorMenuItem());
+        getItems().addAll(mFilm, miLoad, miShowInfo, miConfig, new SeparatorMenuItem());
 
         //=========================
         //Hilfe
@@ -87,7 +89,7 @@ public class ProgMenu {
 
         final Menu mHelp = new Menu("Hilfe");
         mHelp.getItems().addAll(miUrlHelp, miReset, miToolTip, miSearchUpdate, new SeparatorMenuItem(), miAbout);
-        mb.getItems().addAll(mHelp);
+        getItems().addAll(mHelp);
 
         //=========================
         //Quitt
@@ -95,8 +97,6 @@ public class ProgMenu {
         miQuit.setOnAction(e -> ProgQuit.quit(false));
         PShortcutWorker.addShortCut(miQuit, MTShortcut.SHORTCUT_QUIT_PROGRAM);
 
-        mb.getItems().addAll(miQuit);
-
-        return mb;
+        getItems().addAll(miQuit);
     }
 }
