@@ -19,13 +19,14 @@ package de.p2tools.mtviewer.gui.startDialog;
 import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
+import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.gui.tools.HelpText;
-import de.p2tools.p2Lib.mtDownload.GetProgramStandardPath;
 import de.p2tools.p2Lib.dialogs.PDirFileChooser;
 import de.p2tools.p2Lib.guiTools.PButton;
 import de.p2tools.p2Lib.guiTools.PColumnConstraints;
 import de.p2tools.p2Lib.guiTools.PHyperlink;
+import de.p2tools.p2Lib.mtDownload.GetProgramStandardPath;
 import de.p2tools.p2Lib.tools.PSystemUtils;
 import de.p2tools.p2Lib.tools.ProgramToolsFactory;
 import javafx.beans.property.StringProperty;
@@ -88,6 +89,10 @@ public class PathPane {
         txtDownloadPath.textProperty().bindBidirectional(ProgConfig.DOWNLOAD_FILE_PATH);
         unbindList.add(new UnBind(txtDownloadPath, ProgConfig.DOWNLOAD_FILE_PATH));
 
+        if (ProgData.debug) {
+            //dann einen anderen Downloadpfad
+            ProgConfig.DOWNLOAD_FILE_PATH.setValue("/tmp/Download");
+        }
         if (txtDownloadPath.getText().isEmpty()) {
             txtDownloadPath.setText(PSystemUtils.getStandardDownloadPath());
         }
