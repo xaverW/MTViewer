@@ -45,7 +45,7 @@ public class ProgLoadFactory {
             return false;
         }
 
-        PLog.sysLog("Konfig wurde gelesen!");
+        PLog.sysLog("Config wurde gelesen!");
         return true;
     }
 
