@@ -82,29 +82,29 @@ public class DownloadDataProps extends PDataSample<DownloadData> {
     @Override
     public Config[] getConfigsArr() {
         ArrayList<Config> list = new ArrayList<>();
-        list.add(new ConfigIntPropExtra("no", DownloadFieldNames.DOWNLOAD_NO, no));
-        list.add(new ConfigIntPropExtra("filmNr", DownloadFieldNames.DOWNLOAD_FILM_NO, filmNr));
-        list.add(new ConfigStringPropExtra("channel", DownloadFieldNames.DOWNLOAD_CHANNEL, channel));
-        list.add(new ConfigStringPropExtra("theme", DownloadFieldNames.DOWNLOAD_THEME, theme));
-        list.add(new ConfigStringPropExtra("title", DownloadFieldNames.DOWNLOAD_TITLE, title));
-        list.add(new ConfigIntPropExtra("state", DownloadFieldNames.DOWNLOAD_STATE, state));
-        list.add(new ConfigDoublePropExtra("progress", DownloadFieldNames.DOWNLOAD_PROGRESS, progress));
-        list.add(new ConfigStringPropExtra("remaining", DownloadFieldNames.DOWNLOAD_REMAINING_TIME, remaining));
-        list.add(new ConfigStringPropExtra("bandwidth", DownloadFieldNames.DOWNLOAD_BANDWIDTH, bandwidth));
-        list.add(new ConfigStringPropExtra("time", DownloadFieldNames.DOWNLOAD_TIME, time));
-        list.add(new ConfigIntPropExtra("durationMinute", DownloadFieldNames.DOWNLOAD_DURATION, durationMinute));
-        list.add(new ConfigBoolPropExtra("hd", DownloadFieldNames.DOWNLOAD_HD, hd));
-        list.add(new ConfigBoolPropExtra("ut", DownloadFieldNames.DOWNLOAD_UT, ut));
-        list.add(new ConfigBoolPropExtra("geoBlocked", DownloadFieldNames.DOWNLOAD_GEO, geoBlocked));
-        list.add(new ConfigStringPropExtra("filmUrl", DownloadFieldNames.DOWNLOAD_FILM_URL, filmUrl));
-        list.add(new ConfigStringPropExtra("url", DownloadFieldNames.DOWNLOAD_URL, url));
-        list.add(new ConfigStringPropExtra("urlSubtitle", DownloadFieldNames.DOWNLOAD_URL_SUBTITLE, urlSubtitle));
-        list.add(new ConfigStringPropExtra("destFileName", DownloadFieldNames.DOWNLOAD_DEST_FILE_NAME, destFileName));
-        list.add(new ConfigStringPropExtra("destPath", DownloadFieldNames.DOWNLOAD_DEST_PATH, destPath));
-//        list.add(new ConfigStringPropExtra("destPathFile", DownloadFieldNames.DOWNLOAD_DEST_PATH_FILE_NAME, destPathFile));
-        list.add(new ConfigBoolPropExtra("placedBack", DownloadFieldNames.DOWNLOAD_PLACED_BACK, placedBack));
-        list.add(new ConfigBoolPropExtra("infoFile", DownloadFieldNames.DOWNLOAD_INFO_FILE, infoFile));
-        list.add(new ConfigBoolPropExtra("subtitle", DownloadFieldNames.DOWNLOAD_SUBTITLE, subtitle));
+        list.add(new ConfigExtra_intProp("no", DownloadFieldNames.DOWNLOAD_NO, no));
+        list.add(new ConfigExtra_intProp("filmNr", DownloadFieldNames.DOWNLOAD_FILM_NO, filmNr));
+        list.add(new ConfigExtra_stringProp("channel", DownloadFieldNames.DOWNLOAD_CHANNEL, channel));
+        list.add(new ConfigExtra_stringProp("theme", DownloadFieldNames.DOWNLOAD_THEME, theme));
+        list.add(new ConfigExtra_stringProp("title", DownloadFieldNames.DOWNLOAD_TITLE, title));
+        list.add(new ConfigExtra_intProp("state", DownloadFieldNames.DOWNLOAD_STATE, state));
+        list.add(new ConfigExtra_doubleProp("progress", DownloadFieldNames.DOWNLOAD_PROGRESS, progress));
+        list.add(new ConfigExtra_stringProp("remaining", DownloadFieldNames.DOWNLOAD_REMAINING_TIME, remaining));
+        list.add(new ConfigExtra_stringProp("bandwidth", DownloadFieldNames.DOWNLOAD_BANDWIDTH, bandwidth));
+        list.add(new ConfigExtra_stringProp("time", DownloadFieldNames.DOWNLOAD_TIME, time));
+        list.add(new ConfigExtra_intProp("durationMinute", DownloadFieldNames.DOWNLOAD_DURATION, durationMinute));
+        list.add(new ConfigExtra_boolProp("hd", DownloadFieldNames.DOWNLOAD_HD, hd));
+        list.add(new ConfigExtra_boolProp("ut", DownloadFieldNames.DOWNLOAD_UT, ut));
+        list.add(new ConfigExtra_boolProp("geoBlocked", DownloadFieldNames.DOWNLOAD_GEO, geoBlocked));
+        list.add(new ConfigExtra_stringProp("filmUrl", DownloadFieldNames.DOWNLOAD_FILM_URL, filmUrl));
+        list.add(new ConfigExtra_stringProp("url", DownloadFieldNames.DOWNLOAD_URL, url));
+        list.add(new ConfigExtra_stringProp("urlSubtitle", DownloadFieldNames.DOWNLOAD_URL_SUBTITLE, urlSubtitle));
+        list.add(new ConfigExtra_stringProp("destFileName", DownloadFieldNames.DOWNLOAD_DEST_FILE_NAME, destFileName));
+        list.add(new ConfigExtra_stringProp("destPath", DownloadFieldNames.DOWNLOAD_DEST_PATH, destPath));
+//        list.add(new ConfigExtra_stringProp("destPathFile", DownloadFieldNames.DOWNLOAD_DEST_PATH_FILE_NAME, destPathFile));
+        list.add(new ConfigExtra_boolProp("placedBack", DownloadFieldNames.DOWNLOAD_PLACED_BACK, placedBack));
+        list.add(new ConfigExtra_boolProp("infoFile", DownloadFieldNames.DOWNLOAD_INFO_FILE, infoFile));
+        list.add(new ConfigExtra_boolProp("subtitle", DownloadFieldNames.DOWNLOAD_SUBTITLE, subtitle));
 
         return list.toArray(new Config[]{});
     }

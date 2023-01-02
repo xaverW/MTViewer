@@ -17,9 +17,9 @@
 package de.p2tools.mtviewer.controller.filmFilter;
 
 import de.p2tools.p2Lib.configFile.config.Config;
-import de.p2tools.p2Lib.configFile.config.ConfigBoolPropExtra;
-import de.p2tools.p2Lib.configFile.config.ConfigIntPropExtra;
-import de.p2tools.p2Lib.configFile.config.ConfigStringPropExtra;
+import de.p2tools.p2Lib.configFile.config.ConfigExtra_boolProp;
+import de.p2tools.p2Lib.configFile.config.ConfigExtra_intProp;
+import de.p2tools.p2Lib.configFile.config.ConfigExtra_stringProp;
 import de.p2tools.p2Lib.configFile.pData.PDataSample;
 import javafx.beans.property.*;
 
@@ -47,14 +47,14 @@ public class FilmFilterProps extends PDataSample<FilmFilter> implements Comparab
     @Override
     public Config[] getConfigsArr() {
         ArrayList<Config> list = new ArrayList<>();
-        list.add(new ConfigStringPropExtra("name", FilmFilterToXml.SELECTED_FILTER_NAME, name));
-        list.add(new ConfigStringPropExtra("channel", FilmFilterToXml.SELECTED_FILTER_CHANNEL, channel));
-        list.add(new ConfigStringPropExtra("theme", FilmFilterToXml.SELECTED_FILTER_THEME, theme));
-        list.add(new ConfigStringPropExtra("title", FilmFilterToXml.SELECTED_FILTER_TITLE, title));
-        list.add(new ConfigStringPropExtra("somewhere", FilmFilterToXml.SELECTED_FILTER_SOMEWHERE, somewhere));
-        list.add(new ConfigIntPropExtra("timeRange", FilmFilterToXml.SELECTED_FILTER_TIME_RANGE, timeRange));
-        list.add(new ConfigBoolPropExtra("onlyNew", FilmFilterToXml.SELECTED_FILTER_ONLY_NEW, onlyNew));
-        list.add(new ConfigBoolPropExtra("onlyLive", FilmFilterToXml.SELECTED_FILTER_ONLY_LIVE, onlyLive));
+        list.add(new ConfigExtra_stringProp("name", FilmFilterToXml.SELECTED_FILTER_NAME, name));
+        list.add(new ConfigExtra_stringProp("channel", FilmFilterToXml.SELECTED_FILTER_CHANNEL, channel));
+        list.add(new ConfigExtra_stringProp("theme", FilmFilterToXml.SELECTED_FILTER_THEME, theme));
+        list.add(new ConfigExtra_stringProp("title", FilmFilterToXml.SELECTED_FILTER_TITLE, title));
+        list.add(new ConfigExtra_stringProp("somewhere", FilmFilterToXml.SELECTED_FILTER_SOMEWHERE, somewhere));
+        list.add(new ConfigExtra_intProp("timeRange", FilmFilterToXml.SELECTED_FILTER_TIME_RANGE, timeRange));
+        list.add(new ConfigExtra_boolProp("onlyNew", FilmFilterToXml.SELECTED_FILTER_ONLY_NEW, onlyNew));
+        list.add(new ConfigExtra_boolProp("onlyLive", FilmFilterToXml.SELECTED_FILTER_ONLY_LIVE, onlyLive));
 
         return list.toArray(new Config[]{});
     }

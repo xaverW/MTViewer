@@ -82,7 +82,7 @@ public class ProgMenu extends MenuButton {
         miReset.setOnAction(event -> new ResetDialogController(progData));
         final MenuItem miToolTip = new MenuItem("Tip des Tages");
         miToolTip.setOnAction(a -> new TipOfDay().showDialog(progData, true));
-        final MenuItem miSearchUpdate = new MenuItem("Gibts ein Update?");
+        final MenuItem miSearchUpdate = new MenuItem("Gibt's ein Update?");
         miSearchUpdate.setOnAction(a -> new SearchProgramUpdate(progData, progData.primaryStage).searchNewProgramVersion(true));
         final MenuItem miAbout = new MenuItem("Über dieses Programm");
         miAbout.setOnAction(event -> new AboutDialogController(ProgData.getInstance()).showDialog());
