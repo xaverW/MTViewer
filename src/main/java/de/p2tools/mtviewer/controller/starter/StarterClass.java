@@ -28,8 +28,8 @@ import de.p2tools.p2Lib.guiTools.pNotification.PNotification;
 import de.p2tools.p2Lib.mtDownload.SizeTools;
 import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerFilmlistLoadEvent;
 import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerLoadFilmlist;
+import de.p2tools.p2Lib.tools.date.DateFactory;
 import de.p2tools.p2Lib.tools.date.PDate;
-import de.p2tools.p2Lib.tools.date.PDateFactory;
 import de.p2tools.p2Lib.tools.log.PLog;
 
 import java.io.File;
@@ -123,7 +123,7 @@ public class StarterClass {
         }
         list.add("Ziel: " + download.getDestPathFile());
         list.add("URL: " + download.getUrl());
-        list.add("Startzeit: " + PDateFactory.F_FORMAT_HH_mm_ss.format(download.getStart().getStartTime()));
+        list.add("Startzeit: " + DateFactory.F_FORMAT_HH__mm__ss.format(download.getStart().getStartTime()));
         list.add(DownloadConstants.TYPE_DOWNLOAD);
         list.add(PLog.LILNE_EMPTY);
         PLog.sysLog(list.toArray(new String[list.size()]));
@@ -146,8 +146,8 @@ public class StarterClass {
             list.add("Ziel: " + download.getDestPathFile());
         }
 
-        list.add("Startzeit: " + PDateFactory.F_FORMAT_HH_mm_ss.format(start.getStartTime()));
-        list.add("Endzeit: " + PDateFactory.F_FORMAT_HH_mm_ss.format(new PDate().getTime()));
+        list.add("Startzeit: " + DateFactory.F_FORMAT_HH__mm__ss.format(start.getStartTime()));
+        list.add("Endzeit: " + DateFactory.F_FORMAT_HH__mm__ss.format(new PDate().getTime()));
 
         if (start.getRestartCounter() > 0) {
             list.add("Restarts: " + start.getRestartCounter());

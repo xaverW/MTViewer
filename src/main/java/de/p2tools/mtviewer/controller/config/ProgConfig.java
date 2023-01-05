@@ -45,24 +45,24 @@ public class ProgConfig extends PDataProgConfig {
     // ============================================
     // 250 Sekunden, wie bei Firefox
     public static int SYSTEM_PARAMETER_DOWNLOAD_TIMEOUT_SECOND_INIT = 250;
-    public static IntegerProperty SYSTEM_PARAMETER_DOWNLOAD_TIMEOUT_SECOND = addInt("__system-parameter__download-timeout-second_250__", SYSTEM_PARAMETER_DOWNLOAD_TIMEOUT_SECOND_INIT);
+    public static IntegerProperty SYSTEM_PARAMETER_DOWNLOAD_TIMEOUT_SECOND = addIntProp("__system-parameter__download-timeout-second_250__", SYSTEM_PARAMETER_DOWNLOAD_TIMEOUT_SECOND_INIT);
     // max. Startversuche für fehlgeschlagene Downloads (insgesamt: restart * restart_http Versuche)
     public static int SYSTEM_PARAMETER_DOWNLOAD_MAX_RESTART_INIT = 3;
-    public static IntegerProperty SYSTEM_PARAMETER_DOWNLOAD_MAX_RESTART = addInt("__system-parameter__download-max-restart_5__", SYSTEM_PARAMETER_DOWNLOAD_MAX_RESTART_INIT);
+    public static IntegerProperty SYSTEM_PARAMETER_DOWNLOAD_MAX_RESTART = addIntProp("__system-parameter__download-max-restart_5__", SYSTEM_PARAMETER_DOWNLOAD_MAX_RESTART_INIT);
     // max. Startversuche für fehlgeschlagene Downloads, direkt beim Download
     public static int SYSTEM_PARAMETER_DOWNLOAD_MAX_RESTART_HTTP_INIT = 5;
-    public static IntegerProperty SYSTEM_PARAMETER_DOWNLOAD_MAX_RESTART_HTTP = addInt("__system-parameter__download-max-restart-http_10__", SYSTEM_PARAMETER_DOWNLOAD_MAX_RESTART_HTTP_INIT);
+    public static IntegerProperty SYSTEM_PARAMETER_DOWNLOAD_MAX_RESTART_HTTP = addIntProp("__system-parameter__download-max-restart-http_10__", SYSTEM_PARAMETER_DOWNLOAD_MAX_RESTART_HTTP_INIT);
     // Beim Dialog "Download weiterführen" wird nach dieser Zeit der Download weitergeführt
     public static int SYSTEM_PARAMETER_DOWNLOAD_CONTINUE_IN_SECONDS_INIT = 60;
-    public static IntegerProperty SYSTEM_PARAMETER_DOWNLOAD_CONTINUE_IN_SECONDS = addInt("__system-parameter__download-continue-second_60__", SYSTEM_PARAMETER_DOWNLOAD_CONTINUE_IN_SECONDS_INIT);
+    public static IntegerProperty SYSTEM_PARAMETER_DOWNLOAD_CONTINUE_IN_SECONDS = addIntProp("__system-parameter__download-continue-second_60__", SYSTEM_PARAMETER_DOWNLOAD_CONTINUE_IN_SECONDS_INIT);
     // Beim Dialog "Automode" wird nach dieser Zeit der das Programm beendet
     public static int SYSTEM_PARAMETER_AUTOMODE_QUITT_IN_SECONDS_INIT = 15;
-    public static IntegerProperty SYSTEM_PARAMETER_AUTOMODE_QUITT_IN_SECONDS = addInt("__system-parameter__automode-quitt-second_60__", SYSTEM_PARAMETER_AUTOMODE_QUITT_IN_SECONDS_INIT);
+    public static IntegerProperty SYSTEM_PARAMETER_AUTOMODE_QUITT_IN_SECONDS = addIntProp("__system-parameter__automode-quitt-second_60__", SYSTEM_PARAMETER_AUTOMODE_QUITT_IN_SECONDS_INIT);
     // Downloadfehlermeldung wird xx Sedunden lang angezeigt
     public static int SYSTEM_PARAMETER_DOWNLOAD_ERRORMSG_IN_SECOND_INIT = 30;
-    public static IntegerProperty SYSTEM_PARAMETER_DOWNLOAD_ERRORMSG_IN_SECOND = addInt("__system-parameter__download-errormsg-in-second_30__", SYSTEM_PARAMETER_DOWNLOAD_ERRORMSG_IN_SECOND_INIT);
+    public static IntegerProperty SYSTEM_PARAMETER_DOWNLOAD_ERRORMSG_IN_SECOND = addIntProp("__system-parameter__download-errormsg-in-second_30__", SYSTEM_PARAMETER_DOWNLOAD_ERRORMSG_IN_SECOND_INIT);
     // Downloadprogress im Terminal anzeigen
-    public static BooleanProperty SYSTEM_PARAMETER_DOWNLOAD_PROGRESS = addBool("__system-parameter__download_progress_", Boolean.TRUE);
+    public static BooleanProperty SYSTEM_PARAMETER_DOWNLOAD_PROGRESS = addBoolProp("__system-parameter__download_progress_", Boolean.TRUE);
     public static String PARAMETER_INFO = P2LibConst.LINE_SEPARATOR + "\t"
             + "\"__system-parameter__xxx\" können nur im Konfigfile geändert werden" + P2LibConst.LINE_SEPARATOR
             + "\t" + "und sind auch nicht für ständige Änderungen gedacht." + P2LibConst.LINE_SEPARATOR
@@ -94,28 +94,28 @@ public class ProgConfig extends PDataProgConfig {
             + SYSTEM_PARAMETER_DOWNLOAD_PROGRESS.getValue() + P2LibConst.LINE_SEPARATOR;
     // ===========================================
     // Configs der Programmversion, nur damit sie (zur Update-Suche) im Config-File stehen
-    public static StringProperty SYSTEM_PROG_VERSION = addStr("system-prog-version", ProgramToolsFactory.getProgVersion());
-    public static StringProperty SYSTEM_PROG_BUILD_NO = addStr("system-prog-build-no", ProgramToolsFactory.getBuild());
-    public static StringProperty SYSTEM_PROG_BUILD_DATE = addStr("system-prog-build-date", ProgramToolsFactory.getCompileDate());//z.B.: 27.07.2
+    public static StringProperty SYSTEM_PROG_VERSION = addStrProp("system-prog-version", ProgramToolsFactory.getProgVersion());
+    public static StringProperty SYSTEM_PROG_BUILD_NO = addStrProp("system-prog-build-no", ProgramToolsFactory.getBuild());
+    public static StringProperty SYSTEM_PROG_BUILD_DATE = addStrProp("system-prog-build-date", ProgramToolsFactory.getCompileDate());//z.B.: 27.07.2
 
     //Configs zur Anzeige der Diacritics in der Filmliste
     //TRUE: dann werden Diacritics entfernt
-    public static BooleanProperty SYSTEM_REMOVE_DIACRITICS = addBool("system-remove-diacritics", Boolean.FALSE);
+    public static BooleanProperty SYSTEM_REMOVE_DIACRITICS = addBoolProp("system-remove-diacritics", Boolean.FALSE);
 
     // Configs zum Aktualisieren beim Programmupdate
-    public static BooleanProperty SYSTEM_AFTER_UPDATE_FILTER = addBool("system-after-update-filter", Boolean.FALSE);
+    public static BooleanProperty SYSTEM_AFTER_UPDATE_FILTER = addBoolProp("system-after-update-filter", Boolean.FALSE);
 
     // Configs zur Programmupdatesuche
-    public static StringProperty SYSTEM_UPDATE_DATE = addStr("system-update-date"); // Datum der letzten Prüfung
+    public static StringProperty SYSTEM_UPDATE_DATE = addStrProp("system-update-date"); // Datum der letzten Prüfung
 
-    public static BooleanProperty SYSTEM_UPDATE_SEARCH_ACT = addBool("system-update-search-act", Boolean.TRUE); //Infos und Programm
-    public static BooleanProperty SYSTEM_UPDATE_SEARCH_BETA = addBool("system-update-search-beta", Boolean.FALSE); //beta suchen
-    public static BooleanProperty SYSTEM_UPDATE_SEARCH_DAILY = addBool("system-update-search-daily", Boolean.FALSE); //daily suchen
+    public static BooleanProperty SYSTEM_UPDATE_SEARCH_ACT = addBoolProp("system-update-search-act", Boolean.TRUE); //Infos und Programm
+    public static BooleanProperty SYSTEM_UPDATE_SEARCH_BETA = addBoolProp("system-update-search-beta", Boolean.FALSE); //beta suchen
+    public static BooleanProperty SYSTEM_UPDATE_SEARCH_DAILY = addBoolProp("system-update-search-daily", Boolean.FALSE); //daily suchen
 
-    public static StringProperty SYSTEM_UPDATE_LAST_INFO = addStr("system-update-last-info");
-    public static StringProperty SYSTEM_UPDATE_LAST_ACT = addStr("system-update-last-act");
-    public static StringProperty SYSTEM_UPDATE_LAST_BETA = addStr("system-update-last-beta");
-    public static StringProperty SYSTEM_UPDATE_LAST_DAILY = addStr("system-update-last-daily");
+    public static StringProperty SYSTEM_UPDATE_LAST_INFO = addStrProp("system-update-last-info");
+    public static StringProperty SYSTEM_UPDATE_LAST_ACT = addStrProp("system-update-last-act");
+    public static StringProperty SYSTEM_UPDATE_LAST_BETA = addStrProp("system-update-last-beta");
+    public static StringProperty SYSTEM_UPDATE_LAST_DAILY = addStrProp("system-update-last-daily");
 
     // ConfigDialog, Dialog nach Start immer gleich öffnen
     public static IntegerProperty SYSTEM_CONFIG_DIALOG_TAB = new SimpleIntegerProperty(0);
@@ -125,117 +125,117 @@ public class ProgConfig extends PDataProgConfig {
     public static IntegerProperty SYSTEM_CONFIG_DIALOG_PLAY = new SimpleIntegerProperty(-1);
 
     //Download
-    public static StringProperty DOWNLOAD_DIALOG_PATH_SAVING = addStr("download-dialog-path-saving"); // gesammelten Downloadpfade im Downloaddialog
-    public static StringProperty DOWNLOAD_ADD_DIALOG_SIZE = addStr("download-add-dialog-size", "800:600");
-    public static IntegerProperty DOWNLOAD_MAX_BANDWIDTH_KBYTE = addInt("download-max-bandwidth-kilobyte", BandwidthTokenBucket.BANDWIDTH_MAX_KBYTE);
-    public static StringProperty DOWNLOAD_DIALOG_ERROR_SIZE = addStr("download-dialog-error-size", "");
-    public static IntegerProperty DOWNLOAD_MAX_DOWNLOADS = addInt("download-max-downloads", 1);
-    public static IntegerProperty DOWNLOAD_CONTINUE = addInt("download-contineu", DownloadState.DOWNLOAD_RESTART__ASK);
-    public static StringProperty DOWNLOAD_DIALOG_CONTINUE_SIZE = addStr("download-dialog-continue-size");
-    public static BooleanProperty DOWNLOAD_SHOW_NOTIFICATION = addBool("download-show-notification", Boolean.TRUE);
-    public static BooleanProperty DOWNLOAD_DIALOG_START_DOWNLOAD_NOW = addBool("download-dialog-start-download-now", Boolean.TRUE);
-    public static BooleanProperty DOWNLOAD_DIALOG_START_DOWNLOAD_NOT = addBool("download-dialog-start-download-not", Boolean.FALSE);
-    public static IntegerProperty DOWNLOAD_BANDWIDTH_KBYTE = addInt("download-bandwidth-byte"); // da wird die genutzte Bandbreite gespeichert
-    public static DoubleProperty DOWNLOAD_GUI_FILTER_DIVIDER = addDouble("download-gui-filter-divider", ProgConst.GUI_DOWNLOAD_FILTER_DIVIDER_LOCATION);
-    public static BooleanProperty DOWNLOAD_INFO_DIALOG_SHOW_URL = addBool("download-info-dialog-show-url", Boolean.TRUE);
-    public static StringProperty DOWNLOAD_DIALOG_EDIT_SIZE = addStr("download-dialog-edit-size", "800:800");
-    public static StringProperty DOWNLOAD_GUI_TABLE_WIDTH = addStr("download-gui-table-width");
-    public static StringProperty DOWNLOAD_GUI_TABLE_SORT = addStr("download-gui-table-sort");
-    public static StringProperty DOWNLOAD_GUI_TABLE_UP_DOWN = addStr("download-gui-table-up-down");
-    public static StringProperty DOWNLOAD_GUI_TABLE_VIS = addStr("download-gui-table-vis");
-    public static StringProperty DOWNLOAD_GUI_TABLE_ORDER = addStr("download-gui-table-order");
-    public static BooleanProperty DOWNLOAD_START_NOW = addBool("download-start-now", Boolean.FALSE);
+    public static StringProperty DOWNLOAD_DIALOG_PATH_SAVING = addStrProp("download-dialog-path-saving"); // gesammelten Downloadpfade im Downloaddialog
+    public static StringProperty DOWNLOAD_ADD_DIALOG_SIZE = addStrProp("download-add-dialog-size", "800:600");
+    public static IntegerProperty DOWNLOAD_MAX_BANDWIDTH_KBYTE = addIntProp("download-max-bandwidth-kilobyte", BandwidthTokenBucket.BANDWIDTH_MAX_KBYTE);
+    public static StringProperty DOWNLOAD_DIALOG_ERROR_SIZE = addStrProp("download-dialog-error-size", "");
+    public static IntegerProperty DOWNLOAD_MAX_DOWNLOADS = addIntProp("download-max-downloads", 1);
+    public static IntegerProperty DOWNLOAD_CONTINUE = addIntProp("download-contineu", DownloadState.DOWNLOAD_RESTART__ASK);
+    public static StringProperty DOWNLOAD_DIALOG_CONTINUE_SIZE = addStrProp("download-dialog-continue-size");
+    public static BooleanProperty DOWNLOAD_SHOW_NOTIFICATION = addBoolProp("download-show-notification", Boolean.TRUE);
+    public static BooleanProperty DOWNLOAD_DIALOG_START_DOWNLOAD_NOW = addBoolProp("download-dialog-start-download-now", Boolean.TRUE);
+    public static BooleanProperty DOWNLOAD_DIALOG_START_DOWNLOAD_NOT = addBoolProp("download-dialog-start-download-not", Boolean.FALSE);
+    public static IntegerProperty DOWNLOAD_BANDWIDTH_KBYTE = addIntProp("download-bandwidth-byte"); // da wird die genutzte Bandbreite gespeichert
+    public static DoubleProperty DOWNLOAD_GUI_FILTER_DIVIDER = addDoubleProp("download-gui-filter-divider", ProgConst.GUI_DOWNLOAD_FILTER_DIVIDER_LOCATION);
+    public static BooleanProperty DOWNLOAD_INFO_DIALOG_SHOW_URL = addBoolProp("download-info-dialog-show-url", Boolean.TRUE);
+    public static StringProperty DOWNLOAD_DIALOG_EDIT_SIZE = addStrProp("download-dialog-edit-size", "800:800");
+    public static StringProperty DOWNLOAD_GUI_TABLE_WIDTH = addStrProp("download-gui-table-width");
+    public static StringProperty DOWNLOAD_GUI_TABLE_SORT = addStrProp("download-gui-table-sort");
+    public static StringProperty DOWNLOAD_GUI_TABLE_UP_DOWN = addStrProp("download-gui-table-up-down");
+    public static StringProperty DOWNLOAD_GUI_TABLE_VIS = addStrProp("download-gui-table-vis");
+    public static StringProperty DOWNLOAD_GUI_TABLE_ORDER = addStrProp("download-gui-table-order");
+    public static BooleanProperty DOWNLOAD_START_NOW = addBoolProp("download-start-now", Boolean.FALSE);
 
     //Download-SetDate
     public static String DOWNLOAD_FILE_PATH_INIT = PSystemUtils.getStandardDownloadPath();
-    public static StringProperty DOWNLOAD_FILE_PATH = addStr("download-file-path", DOWNLOAD_FILE_PATH_INIT);
+    public static StringProperty DOWNLOAD_FILE_PATH = addStrProp("download-file-path", DOWNLOAD_FILE_PATH_INIT);
     public static String DOWNLOAD_FILE_NAME_INIT = "%t-%T-%Z.mp4";
-    public static StringProperty DOWNLOAD_FILE_NAME = addStr("download-file-name", DOWNLOAD_FILE_NAME_INIT);
-    public static StringProperty DOWNLOAD_RESOLUTION = addStr("download-resolution", FilmData.RESOLUTION_NORMAL);
-    public static BooleanProperty DOWNLOAD_SUBTITLE = addBool("download-subtitle", false);
-    public static BooleanProperty DOWNLOAD_INFO_FILE = addBool("download-info-file", false);
+    public static StringProperty DOWNLOAD_FILE_NAME = addStrProp("download-file-name", DOWNLOAD_FILE_NAME_INIT);
+    public static StringProperty DOWNLOAD_RESOLUTION = addStrProp("download-resolution", FilmData.RESOLUTION_NORMAL);
+    public static BooleanProperty DOWNLOAD_SUBTITLE = addBoolProp("download-subtitle", false);
+    public static BooleanProperty DOWNLOAD_INFO_FILE = addBoolProp("download-info-file", false);
 
-    public static StringProperty SYSTEM_PROG_OPEN_DIR = addStr("system-prog-open-dir");
-    public static StringProperty SYSTEM_PROG_OPEN_URL = addStr("system-prog-open-url");
-    public static StringProperty SYSTEM_PROG_PLAY = addStr("system-prog-play", GetProgramStandardPath.getTemplatePathVlc());
+    public static StringProperty SYSTEM_PROG_OPEN_DIR = addStrProp("system-prog-open-dir");
+    public static StringProperty SYSTEM_PROG_OPEN_URL = addStrProp("system-prog-open-url");
+    public static StringProperty SYSTEM_PROG_PLAY = addStrProp("system-prog-play", GetProgramStandardPath.getTemplatePathVlc());
     public static String SYSTEM_PROG_PLAY_PARAMETER_INIT = "%f";
-    public static StringProperty SYSTEM_PROG_PLAY_PARAMETER = addStr("system-prog-play-parameter", SYSTEM_PROG_PLAY_PARAMETER_INIT);
+    public static StringProperty SYSTEM_PROG_PLAY_PARAMETER = addStrProp("system-prog-play-parameter", SYSTEM_PROG_PLAY_PARAMETER_INIT);
     public static String SYSTEM_PROG_SAVE_INIT = GetProgramStandardPath.getTemplatePathFFmpeg();
-    public static StringProperty SYSTEM_PROG_SAVE = addStr("system-prog-save", SYSTEM_PROG_SAVE_INIT);
+    public static StringProperty SYSTEM_PROG_SAVE = addStrProp("system-prog-save", SYSTEM_PROG_SAVE_INIT);
     public static String SYSTEM_PROG_SAVE_PARAMETER_INIT = "-user_agent \"Mozilla/5.0\" -i %f -c copy -bsf:a aac_adtstoasc **";
-    public static StringProperty SYSTEM_PROG_SAVE_PARAMETER = addStr("system-prog-save-parameter", SYSTEM_PROG_SAVE_PARAMETER_INIT);
-    public static IntegerProperty SYSTEM_SAVE_MAX_SIZE = addInt("system-save-max-size", 150);
-    public static IntegerProperty SYSTEM_SAVE_MAX_FIELD = addInt("system-save-max-field", 50);
+    public static StringProperty SYSTEM_PROG_SAVE_PARAMETER = addStrProp("system-prog-save-parameter", SYSTEM_PROG_SAVE_PARAMETER_INIT);
+    public static IntegerProperty SYSTEM_SAVE_MAX_SIZE = addIntProp("system-save-max-size", 150);
+    public static IntegerProperty SYSTEM_SAVE_MAX_FIELD = addIntProp("system-save-max-field", 50);
 
     // Configs
-    public static StringProperty SYSTEM_USERAGENT = addStr("system-useragent", ProgConst.USER_AGENT_DEFAULT); //Useragent für direkte Downloads
-    public static BooleanProperty SYSTEM_USE_REPLACETABLE = addBool("system-use-replacetable", SystemUtils.IS_OS_LINUX ? Boolean.TRUE : Boolean.FALSE);
-    public static BooleanProperty SYSTEM_ONLY_ASCII = addBool("system-only-ascii", Boolean.FALSE);
-    public static BooleanProperty SYSTEM_MARK_GEO = addBool("system-mark-geo", Boolean.TRUE);
-    public static StringProperty SYSTEM_GEO_HOME_PLACE = addStr("system-geo-home-place", FilmData.GEO_DE);
-    public static BooleanProperty SYSTEM_STYLE = addBool("system-style", Boolean.FALSE);
-    public static IntegerProperty SYSTEM_STYLE_SIZE = addInt("system-style-size", 14);
-    public static StringProperty SYSTEM_LOG_DIR = addStr("system-log-dir", "");
-    public static BooleanProperty SYSTEM_LOG_ON = addBool("system-log-on", Boolean.TRUE);
-    public static BooleanProperty SYSTEM_DARK_THEME = addBool("system-dark-theme", Boolean.FALSE);
-    public static BooleanProperty SYSTEM_THEME_CHANGED = addBool("system-theme-changed");
-    public static BooleanProperty SYSTEM_SSL_ALWAYS_TRUE = addBool("system-ssl-always-true");
-    public static BooleanProperty TIP_OF_DAY_SHOW = addBool("tip-of-day-show", Boolean.TRUE);//Tips anzeigen
-    public static StringProperty TIP_OF_DAY_WAS_SHOWN = addStr("tip-of-day-was-shown");//bereits angezeigte Tips
-    public static StringProperty TIP_OF_DAY_DATE = addStr("tip-of-day-date"); //Datum des letzten Tips
-    public static IntegerProperty SYSTEM_FILTER_WAIT_TIME = addInt("system-filter-wait-time", 100);
-    public static BooleanProperty SYSTEM_FILTER_RETURN = addBool("system-filter-return", Boolean.FALSE);
-    public static StringProperty SYSTEM_DOWNLOAD_DIR_NEW_VERSION = addStr("system-download-dir-new-version", "");
+    public static StringProperty SYSTEM_USERAGENT = addStrProp("system-useragent", ProgConst.USER_AGENT_DEFAULT); //Useragent für direkte Downloads
+    public static BooleanProperty SYSTEM_USE_REPLACETABLE = addBoolProp("system-use-replacetable", SystemUtils.IS_OS_LINUX ? Boolean.TRUE : Boolean.FALSE);
+    public static BooleanProperty SYSTEM_ONLY_ASCII = addBoolProp("system-only-ascii", Boolean.FALSE);
+    public static BooleanProperty SYSTEM_MARK_GEO = addBoolProp("system-mark-geo", Boolean.TRUE);
+    public static StringProperty SYSTEM_GEO_HOME_PLACE = addStrProp("system-geo-home-place", FilmData.GEO_DE);
+    public static BooleanProperty SYSTEM_STYLE = addBoolProp("system-style", Boolean.FALSE);
+    public static IntegerProperty SYSTEM_STYLE_SIZE = addIntProp("system-style-size", 14);
+    public static StringProperty SYSTEM_LOG_DIR = addStrProp("system-log-dir", "");
+    public static BooleanProperty SYSTEM_LOG_ON = addBoolProp("system-log-on", Boolean.TRUE);
+    public static BooleanProperty SYSTEM_DARK_THEME = addBoolProp("system-dark-theme", Boolean.FALSE);
+    public static BooleanProperty SYSTEM_THEME_CHANGED = addBoolProp("system-theme-changed");
+    public static BooleanProperty SYSTEM_SSL_ALWAYS_TRUE = addBoolProp("system-ssl-always-true");
+    public static BooleanProperty TIP_OF_DAY_SHOW = addBoolProp("tip-of-day-show", Boolean.TRUE);//Tips anzeigen
+    public static StringProperty TIP_OF_DAY_WAS_SHOWN = addStrProp("tip-of-day-was-shown");//bereits angezeigte Tips
+    public static StringProperty TIP_OF_DAY_DATE = addStrProp("tip-of-day-date"); //Datum des letzten Tips
+    public static IntegerProperty SYSTEM_FILTER_WAIT_TIME = addIntProp("system-filter-wait-time", 100);
+    public static BooleanProperty SYSTEM_FILTER_RETURN = addBoolProp("system-filter-return", Boolean.FALSE);
+    public static StringProperty SYSTEM_DOWNLOAD_DIR_NEW_VERSION = addStrProp("system-download-dir-new-version", "");
 
     // Fenstereinstellungen
-    public static StringProperty SYSTEM_SIZE_GUI = addStr("system-size-gui", "1000:800");
-    public static StringProperty SYSTEM_SIZE_DIALOG_FILMINFO = addStr("system-size-dialog-filminfo", "600:800");
+    public static StringProperty SYSTEM_SIZE_GUI = addStrProp("system-size-gui", "1000:800");
+    public static StringProperty SYSTEM_SIZE_DIALOG_FILMINFO = addStrProp("system-size-dialog-filminfo", "600:800");
 
     // Einstellungen Filmliste
-    public static BooleanProperty SYSTEM_LOAD_FILMS_ON_START = addBool("system-load-films-on-start", Boolean.TRUE);
-    public static StringProperty SYSTEM_LOAD_NOT_SENDER = addStr("system-load-not-sender", "");
-    public static IntegerProperty SYSTEM_LOAD_FILMLIST_MAX_DAYS = addInt("system-load-filmlist-max-days", 0); //es werden nur die x letzten Tage geladen
-    public static IntegerProperty SYSTEM_LOAD_FILMLIST_MIN_DURATION = addInt("system-load-filmlist-min-duration", 0); //es werden nur Filme mit mind. x Minuten geladen
-    public static StringProperty SYSTEM_PATH_VLC = addStr("system-path-vlc", GetProgramStandardPath.getTemplatePathVlc());
+    public static BooleanProperty SYSTEM_LOAD_FILMS_ON_START = addBoolProp("system-load-films-on-start", Boolean.TRUE);
+    public static StringProperty SYSTEM_LOAD_NOT_SENDER = addStrProp("system-load-not-sender", "");
+    public static IntegerProperty SYSTEM_LOAD_FILMLIST_MAX_DAYS = addIntProp("system-load-filmlist-max-days", 0); //es werden nur die x letzten Tage geladen
+    public static IntegerProperty SYSTEM_LOAD_FILMLIST_MIN_DURATION = addIntProp("system-load-filmlist-min-duration", 0); //es werden nur Filme mit mind. x Minuten geladen
+    public static StringProperty SYSTEM_PATH_VLC = addStrProp("system-path-vlc", GetProgramStandardPath.getTemplatePathVlc());
 
     // Gui Film
-    public static BooleanProperty FILM_GUI_FILTER_DIVIDER_ON = addBool("film-gui-filter-divider-on", Boolean.TRUE);
-    public static DoubleProperty FILM_GUI_DIVIDER = addDouble("film-gui-divider", ProgConst.GUI_FILME_DIVIDER_LOCATION);
-    public static BooleanProperty FILM_GUI_DIVIDER_ON = addBool("film-gui-divider-on", Boolean.TRUE);
-    public static StringProperty FILM_GUI_TABLE_WIDTH = addStr("film-gui-table-width");
-    public static StringProperty FILM_GUI_TABLE_SORT = addStr("film-gui-table-sort");
-    public static StringProperty FILM_GUI_TABLE_UP_DOWN = addStr("film-gui-table-up-down");
-    public static StringProperty FILM_GUI_TABLE_VIS = addStr("film-gui-table-vis");
-    public static StringProperty FILM_GUI_TABLE_ORDER = addStr("film-gui-table-order");
-    public static StringProperty FILM_RESOLUTION = addStr("film-resolution", FilmData.RESOLUTION_NORMAL);
-    public static StringProperty FILM_PLAY_DIALOG_SIZE = addStr("film-play-dialog-size");
+    public static BooleanProperty FILM_GUI_FILTER_DIVIDER_ON = addBoolProp("film-gui-filter-divider-on", Boolean.TRUE);
+    public static DoubleProperty FILM_GUI_DIVIDER = addDoubleProp("film-gui-divider", ProgConst.GUI_FILME_DIVIDER_LOCATION);
+    public static BooleanProperty FILM_GUI_DIVIDER_ON = addBoolProp("film-gui-divider-on", Boolean.TRUE);
+    public static StringProperty FILM_GUI_TABLE_WIDTH = addStrProp("film-gui-table-width");
+    public static StringProperty FILM_GUI_TABLE_SORT = addStrProp("film-gui-table-sort");
+    public static StringProperty FILM_GUI_TABLE_UP_DOWN = addStrProp("film-gui-table-up-down");
+    public static StringProperty FILM_GUI_TABLE_VIS = addStrProp("film-gui-table-vis");
+    public static StringProperty FILM_GUI_TABLE_ORDER = addStrProp("film-gui-table-order");
+    public static StringProperty FILM_RESOLUTION = addStrProp("film-resolution", FilmData.RESOLUTION_NORMAL);
+    public static StringProperty FILM_PLAY_DIALOG_SIZE = addStrProp("film-play-dialog-size");
 
     // ConfigDialog
-    public static StringProperty CONFIG_DIALOG_SIZE = addStr("config-dialog-size", "900:700");
-    public static BooleanProperty CONFIG_DIALOG_ACCORDION = addBool("config_dialog-accordion", Boolean.TRUE);
+    public static StringProperty CONFIG_DIALOG_SIZE = addStrProp("config-dialog-size", "900:700");
+    public static BooleanProperty CONFIG_DIALOG_ACCORDION = addBoolProp("config_dialog-accordion", Boolean.TRUE);
 
     // StartDialog
-    public static StringProperty START_DIALOG_DOWNLOAD_PATH = addStr("start-dialog-download-path", PSystemUtils.getStandardDownloadPath());
+    public static StringProperty START_DIALOG_DOWNLOAD_PATH = addStrProp("start-dialog-download-path", PSystemUtils.getStandardDownloadPath());
 
     //     FilmInfoDialog
-    public static BooleanProperty FILM_INFO_DIALOG_SHOW_URL = addBool("film-info-dialog-show-url", Boolean.FALSE);
+    public static BooleanProperty FILM_INFO_DIALOG_SHOW_URL = addBoolProp("film-info-dialog-show-url", Boolean.FALSE);
 
     // Shorcuts Hauptmenü
     public static String SHORTCUT_QUIT_PROGRAM_INIT = "Ctrl+Q";
-    public static StringProperty SHORTCUT_QUIT_PROGRAM = addStr("SHORTCUT_QUIT_PROGRAM", SHORTCUT_QUIT_PROGRAM_INIT);
+    public static StringProperty SHORTCUT_QUIT_PROGRAM = addStrProp("SHORTCUT_QUIT_PROGRAM", SHORTCUT_QUIT_PROGRAM_INIT);
 
     // Shortcuts Filmmenü
     public static String SHORTCUT_SHOW_INFOS_INIT = "Alt+I";
-    public static StringProperty SHORTCUT_SHOW_INFOS = addStr("SHORTCUT_SHOW_INFO", SHORTCUT_SHOW_INFOS_INIT);
+    public static StringProperty SHORTCUT_SHOW_INFOS = addStrProp("SHORTCUT_SHOW_INFO", SHORTCUT_SHOW_INFOS_INIT);
 
     public static String SHORTCUT_INFO_FILM_INIT = "Ctrl+I";
-    public static StringProperty SHORTCUT_INFO_FILM = addStr("SHORTCUT_INFO_FILM", SHORTCUT_INFO_FILM_INIT);
+    public static StringProperty SHORTCUT_INFO_FILM = addStrProp("SHORTCUT_INFO_FILM", SHORTCUT_INFO_FILM_INIT);
 
     public static String SHORTCUT_PLAY_FILM_INIT = "Ctrl+P";
-    public static StringProperty SHORTCUT_PLAY_FILM = addStr("SHORTCUT_PLAY_FILM", SHORTCUT_PLAY_FILM_INIT);
+    public static StringProperty SHORTCUT_PLAY_FILM = addStrProp("SHORTCUT_PLAY_FILM", SHORTCUT_PLAY_FILM_INIT);
 
     public static String SHORTCUT_SAVE_FILM_INIT = "Ctrl+S";
-    public static StringProperty SHORTCUT_SAVE_FILM = addStr("SHORTCUT_SAVE_FILM", SHORTCUT_SAVE_FILM_INIT);
+    public static StringProperty SHORTCUT_SAVE_FILM = addStrProp("SHORTCUT_SAVE_FILM", SHORTCUT_SAVE_FILM_INIT);
 
     private static ProgConfig instance;
 
@@ -249,7 +249,7 @@ public class ProgConfig extends PDataProgConfig {
     }
 
     private ProgConfig() {
-        super(arrayList, "ProgConfig");
+        super("ProgConfig");
     }
 
     public static final ProgConfig getInstance() {
@@ -318,65 +318,5 @@ public class ProgConfig extends PDataProgConfig {
         if (v < min || v > max) {
             mlConfigs.setValue(init);
         }
-    }
-
-    private static StringProperty addStr(String key) {
-        return addStrProp(arrayList, key);
-    }
-
-    private static StringProperty addStrC(String comment, String key) {
-        return addStrPropC(comment, arrayList, key);
-    }
-
-    private static StringProperty addStr(String key, String init) {
-        return addStrProp(arrayList, key, init);
-    }
-
-    private static StringProperty addStrC(String comment, String key, String init) {
-        return addStrPropC(comment, arrayList, key, init);
-    }
-
-    private static DoubleProperty addDouble(String key, double init) {
-        return addDoubleProp(arrayList, key, init);
-    }
-
-    private static DoubleProperty addDoubleC(String comment, String key, double init) {
-        return addDoublePropC(comment, arrayList, key, init);
-    }
-
-    private static IntegerProperty addInt(String key) {
-        return addIntProp(arrayList, key, 0);
-    }
-
-    private static IntegerProperty addInt(String key, int init) {
-        return addIntProp(arrayList, key, init);
-    }
-
-    private static IntegerProperty addIntC(String comment, String key, int init) {
-        return addIntPropC(comment, arrayList, key, init);
-    }
-
-    private static LongProperty addLong(String key) {
-        return addLongProp(arrayList, key, 0);
-    }
-
-    private static LongProperty addLong(String key, long init) {
-        return addLongProp(arrayList, key, init);
-    }
-
-    private static LongProperty addLongC(String comment, String key, long init) {
-        return addLongPropC(comment, arrayList, key, init);
-    }
-
-    private static BooleanProperty addBool(String key, boolean init) {
-        return addBoolProp(arrayList, key, init);
-    }
-
-    private static BooleanProperty addBool(String key) {
-        return addBoolProp(arrayList, key, Boolean.FALSE);
-    }
-
-    private static BooleanProperty addBoolC(String comment, String key, boolean init) {
-        return addBoolPropC(comment, arrayList, key, init);
     }
 }

@@ -24,7 +24,7 @@ import de.p2tools.mtviewer.controller.data.download.DownloadDataFactory;
 import de.p2tools.p2Lib.mtDownload.MTInfoFile;
 import de.p2tools.p2Lib.mtDownload.MTSubtitle;
 import de.p2tools.p2Lib.tools.PSystemUtils;
-import de.p2tools.p2Lib.tools.date.PDateFactory;
+import de.p2tools.p2Lib.tools.date.DateFactory;
 import javafx.beans.property.LongProperty;
 
 import java.io.File;
@@ -47,7 +47,7 @@ public class DownloadCont {
             download.setDestPath(PSystemUtils.getStandardDownloadPath());
         }
         if (download.getDestFileName().isEmpty()) {
-            download.setDestFileName(PDateFactory.F_FORMAT_yyyyMMdd.format(new Date())
+            download.setDestFileName(DateFactory.F_FORMAT_yyyyMMdd.format(new Date())
                     + "_" + download.getTheme() + "-" + download.getTitle() + ".mp4");
         }
 
