@@ -216,17 +216,17 @@ public class DownloadInfoController extends AnchorPane {
 
         btnClearFilter.setGraphic(ProgIcons.Icons.ICON_BUTTON_CLEAN.getImageView());
         btnClearFilter.setTooltip(new Tooltip("Tabelle aufräumen"));
-        btnClearFilter.getStyleClass().add("btnFunction");
+        btnClearFilter.getStyleClass().add("buttonSmall");
         btnClearFilter.setOnAction(a -> cleanUp());
 
         btnStartAll.setGraphic(ProgIcons.Icons.ICON_BUTTON_START_ALL.getImageView());
         btnStartAll.setTooltip(new Tooltip("Alle Downloads starten"));
-        btnStartAll.getStyleClass().add("btnFunction");
+        btnStartAll.getStyleClass().add("buttonSmall");
         btnStartAll.setOnAction(a -> startDownload(true /* alle */));
 
         btnStopAll.setGraphic(ProgIcons.Icons.ICON_BUTTON_STOP_ALL.getImageView());
         btnStopAll.setTooltip(new Tooltip("Alle Downloads stoppen"));
-        btnStopAll.getStyleClass().add("btnFunction");
+        btnStopAll.getStyleClass().add("buttonSmall");
         btnStopAll.setOnAction(a -> stopDownload(true /* alle */));
 
         initTable();

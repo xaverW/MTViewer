@@ -79,12 +79,12 @@ public class FilmFilterController extends VBox {
         progData.actFilmFilterWorker.forwardPossibleProperty().addListener((v, o, n) -> System.out.println(progData.actFilmFilterWorker.forwardPossibleProperty().getValue().toString()));
         btnGoForward.setTooltip(new Tooltip("letzte Filtereinstellung wieder herstellen"));
 
-        btnGoBack.getStyleClass().add("btnFunction");
-        btnGoForward.getStyleClass().add("btnFunction");
+//        btnGoBack.getStyleClass().add("btnFunction");
+//        btnGoForward.getStyleClass().add("btnFunction");
 
         btnClearFilter.setGraphic(de.p2tools.p2Lib.ProgIcons.Icons.ICON_BUTTON_CLEAR_FILTER.getImageView());
         btnClearFilter.setTooltip(new Tooltip("Filter löschen"));
-        btnClearFilter.getStyleClass().add("btnFunction");
+//        btnClearFilter.getStyleClass().add("btnFunction");
         btnClearFilter.setOnAction(a -> {
             PDuration.onlyPing("Filter löschen");
             progData.actFilmFilterWorker.clearFilter();
@@ -92,7 +92,7 @@ public class FilmFilterController extends VBox {
     }
 
     private void initSenderFilter() {
-        mbChannel.getStyleClass().add("channel-menu");
+//        mbChannel.getStyleClass().add("channel-menu");
         mbChannel.setMaxWidth(Double.MAX_VALUE);
 
         initChannelMenu();
@@ -122,7 +122,7 @@ public class FilmFilterController extends VBox {
         miCheckAll.setVisible(false);
 
         Button btnAll = new Button("Auswahl löschen");
-        btnAll.getStyleClass().add("channel-button");
+//        btnAll.getStyleClass().add("channel-button");
         btnAll.setMaxWidth(Double.MAX_VALUE);
         btnAll.minWidthProperty().bind(mbChannel.widthProperty().add(-50));
         btnAll.setOnAction(e -> {
@@ -152,7 +152,7 @@ public class FilmFilterController extends VBox {
             menuItemsList.add(menuItemClass);
 
             Button btnChannel = new Button(s);
-            btnChannel.getStyleClass().add("channel-button");
+//            btnChannel.getStyleClass().add("channel-button");
             btnChannel.setMaxWidth(Double.MAX_VALUE);
             btnChannel.minWidthProperty().bind(mbChannel.widthProperty().add(-50));
             btnChannel.setOnAction(e -> {

@@ -1,4 +1,5 @@
 /*  style sheet for the dark-theme */
+/*
 
 .root {
     -clear-filter-tab-button-1: #565656;
@@ -8,7 +9,9 @@
     -clear-filter-rad-grad-1: radial-gradient(center 50% -40%, radius 200%, -clear-filter-tab-button-2 45%, -clear-filter-tab-button-3 50%);
 }
 
-/* ist die abgesetzte Zeile im Downloaddialog */
+*/
+/* ist die abgesetzte Zeile im Downloaddialog *//*
+
 .downloadDialog {
     -fx-background-color: #64696b;
 }
@@ -17,7 +20,9 @@
     -fx-font-size: 1em;
 }
 
-/* Download Chart */
+*/
+/* Download Chart *//*
+
 .chart-plot-background {
     -fx-background-color: #5e6264;
 }
@@ -30,3 +35,4 @@
 .update-grid-cell {
     -fx-background-color: #46494c ;
 }
+*/

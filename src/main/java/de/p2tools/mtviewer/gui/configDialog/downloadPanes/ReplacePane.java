@@ -74,6 +74,7 @@ public class ReplacePane {
 
     private void make() {
         vBox.setFillWidth(true);
+        vBox.setPadding(new Insets(15));
         vBox.setSpacing(10);
 
         makeAscii(vBox);
@@ -85,7 +86,6 @@ public class ReplacePane {
         final GridPane gridPane = new GridPane();
         gridPane.setHgap(15);
         gridPane.setVgap(15);
-        gridPane.setPadding(new Insets(20));
         vBox.getChildren().add(gridPane);
 
         tglAscii.selectedProperty().bindBidirectional(propAscii);

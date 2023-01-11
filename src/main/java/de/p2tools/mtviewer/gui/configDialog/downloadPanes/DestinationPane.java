@@ -65,7 +65,7 @@ public class DestinationPane {
 
     private void make() {
         vBoxAll.setFillWidth(true);
-        vBoxAll.setPadding(new Insets(10));
+        vBoxAll.setPadding(new Insets(20));
 
         final Button btnFileDest = new Button();
         btnFileDest.setGraphic(ProgIcons.Icons.ICON_BUTTON_FILE_OPEN.getImageView());
