@@ -61,7 +61,7 @@ public class TableFilm extends PTable<FilmData> {
 
                 final Button btnPlay;
                 btnPlay = new Button("");
-                btnPlay.getStyleClass().add("btnTable");
+                btnPlay.getStyleClass().addAll("btnFunction", "btnFuncTable");
                 btnPlay.setGraphic(ProgIcons.Icons.IMAGE_TABLE_FILM_PLAY.getImageView());
                 btnPlay.setOnAction((ActionEvent event) -> {
                     int col = getIndex();
@@ -72,7 +72,7 @@ public class TableFilm extends PTable<FilmData> {
 
                 final Button btnSave;
                 btnSave = new Button("");
-                btnSave.getStyleClass().add("btnTable");
+                btnSave.getStyleClass().addAll("btnFunction", "btnFuncTable");
                 btnSave.setGraphic(ProgIcons.Icons.IMAGE_TABLE_FILM_SAVE.getImageView());
                 btnSave.setOnAction(event -> {
                     int col = getIndex();
