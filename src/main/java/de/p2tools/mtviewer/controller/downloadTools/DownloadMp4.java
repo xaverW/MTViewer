@@ -63,8 +63,8 @@ public class DownloadMp4 {
             if (aktSize != downloadData.getDownloadSize().getActFileSize()) {
                 aktSize = downloadData.getDownloadSize().getActFileSize();
             }
-            if (downloadData.getDownloadSize().getFileSize() > 0) {
-                percent = 1.0 * aktSize / downloadData.getDownloadSize().getFileSize();
+            if (downloadData.getDownloadSize().getSize() > 0) {
+                percent = 1.0 * aktSize / downloadData.getDownloadSize().getSize();
                 if (startPercent == DownloadConstants.PROGRESS_NOT_STARTED) {
                     startPercent = percent;
                 }
@@ -83,7 +83,7 @@ public class DownloadMp4 {
                     if (percent > (DownloadConstants.PROGRESS_STARTED) && percent > startPercent) {
                         // sonst macht es noch keinen Sinn
                         long timeLeft = 0;
-                        long sizeLeft = downloadData.getDownloadSize().getFileSize() - downloadData.getDownloadSize().getActFileSize();
+                        long sizeLeft = downloadData.getDownloadSize().getSize() - downloadData.getDownloadSize().getActFileSize();
                         if (sizeLeft <= 0) {
                             timeLeft = 0;
                         } else if (aktBandwidth > 0) {

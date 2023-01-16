@@ -23,8 +23,8 @@ import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.starter.StarterClass;
 import de.p2tools.mtviewer.gui.dialog.DownloadContinueDialogController;
 import de.p2tools.mtviewer.gui.dialog.DownloadErrorDialogController;
-import de.p2tools.p2Lib.mtDownload.DownloadFactory;
 import de.p2tools.p2Lib.P2LibConst;
+import de.p2tools.p2Lib.mtDownload.DownloadFactory;
 import de.p2tools.p2Lib.tools.log.PLog;
 import javafx.application.Platform;
 import javafx.beans.property.LongProperty;
@@ -133,7 +133,7 @@ public class DirectHttpDownload extends Thread {
         //If the server uses self-signed X.509 certificate, we will get SSLHandshakeException -> BR!!
         //https://nakov.com/blog/2009/07/16/disable-certificate-validation-in-java-ssl-connections/
 
-        download.getDownloadSize().setFileSize(DownloadFactory.getContentLength(url));
+        download.getDownloadSize().setSize(DownloadFactory.getContentLength(url));
         download.getDownloadSize().setActFileSize(0);
         conn = DownloadFactory.getConn(url, ProgInfos.getUserAgent(),
                 ProgConfig.SYSTEM_PARAMETER_DOWNLOAD_TIMEOUT_SECOND.getValue(), downloaded.getValue(),

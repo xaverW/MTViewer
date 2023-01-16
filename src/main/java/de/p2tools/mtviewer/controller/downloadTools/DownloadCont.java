@@ -55,14 +55,14 @@ public class DownloadCont {
             //Infofile laden
             if (download.getFilm() == null) {
                 MTInfoFile.writeInfoFile(download.getDestPath(), download.getDestPathFile(), download.getFileNameWithoutSuffix(),
-                        download.getUrl(), download.getDownloadSize().getFileSizeString(),
+                        download.getUrl(), download.getDownloadSize().toString(),
                         download.getChannel(), download.getTheme(), download.getTitle(),
                         download.getFilmDate().toString(), download.getTime(), download.getDurationMinute() + "",
                         "", "");
 
             } else {
                 MTInfoFile.writeInfoFile(download.getDestPath(), download.getDestPathFile(), download.getFileNameWithoutSuffix(),
-                        download.getUrl(), download.getDownloadSize().getFileSizeString(),
+                        download.getUrl(), download.getDownloadSize().toString(),
                         download.getFilm().getChannel(), download.getFilm().getTheme(), download.getFilm().getTitle(),
                         download.getFilm().getDate().toString(), download.getFilm().getTime(), download.getFilm().getDuration(),
                         download.getFilm().getWebsite(), download.getFilm().getDescription());

@@ -180,7 +180,7 @@ public class StarterClass {
         boolean error = download.isStateError();
         String text = ("Film:   " + download.getTitle() + P2LibConst.LINE_SEPARATOR +
                 "Sender: " + download.getChannel() + P2LibConst.LINE_SEPARATOR +
-                "Größe:  " + SizeTools.humanReadableByteCount(download.getDownloadSize().getFileSize(), true) + P2LibConst.LINE_SEPARATOR +
+                "Größe:  " + SizeTools.humanReadableByteCount(download.getDownloadSize().getSize(), true) + P2LibConst.LINE_SEPARATOR +
                 (error ? "Download war fehlerhaft" : "Download war erfolgreich"));
         PNotification.addNotification("Download beendet", text, error);
     }
@@ -232,9 +232,9 @@ public class StarterClass {
             if (destFile.exists()) {
                 final long length = destFile.length();
                 if (length > 0)
-                    if (download.getDownloadSize().getFileSize() > 0) {
+                    if (download.getDownloadSize().getSize() > 0) {
                         //nur wenn der Download schon eine Größe hatte, nicht bei m3u8!
-                        download.getDownloadSize().setFileSize(length);
+                        download.getDownloadSize().setSize(length);
                     } else {
                         //bei m3u8 nur die aktSize setzen!
                         download.getDownloadSize().setActFileSize(length);

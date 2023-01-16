@@ -25,6 +25,7 @@ import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.film.FilmTools;
 import de.p2tools.p2Lib.guiTools.PCheckBoxCell;
 import de.p2tools.p2Lib.guiTools.POpen;
+import de.p2tools.p2Lib.mtDownload.DownloadSize;
 import de.p2tools.p2Lib.tools.GermanStringIntSorter;
 import de.p2tools.p2Lib.tools.date.PDate;
 import javafx.beans.property.BooleanProperty;
@@ -242,6 +243,27 @@ public class TableDownload extends PTable<DownloadData> {
         };
         return cell;
     };
+    //    private Callback<TableColumn<DownloadData, Long>, TableCell<DownloadData, Long>> cellFactorySize
+//            = (final TableColumn<DownloadData, Long> param) -> {
+//
+//        final TableCell<DownloadData, Long> cell = new TableCell<>() {
+//
+//            @Override
+//            public void updateItem(Long item, boolean empty) {
+//                super.updateItem(item, empty);
+//
+//                setGraphic(null);
+//                if (item == null || empty) {
+//                    setText(null);
+//                    return;
+//                }
+//
+//                DownloadData downloadData = getTableView().getItems().get(getIndex());
+//                setText(downloadData.getDownloadSize().toString());
+//            }
+//        };
+//        return cell;
+//    };
     private Callback<TableColumn<DownloadData, Integer>, TableCell<DownloadData, Integer>> cellFactoryDuration
             = (final TableColumn<DownloadData, Integer> param) -> {
 
@@ -343,8 +365,9 @@ public class TableDownload extends PTable<DownloadData> {
         speedColumn.setCellValueFactory(new PropertyValueFactory<>("bandwidth"));
         speedColumn.getStyleClass().add("alignCenterRightPadding_25");
 
-        final TableColumn<DownloadData, String> sizeColumn = new TableColumn<>("Größe [MB]");
+        final TableColumn<DownloadData, DownloadSize> sizeColumn = new TableColumn<>("Größe [MB]");
         sizeColumn.setCellValueFactory(new PropertyValueFactory<>("downloadSize"));
+//        sizeColumn.setCellFactory(cellFactorySize);
         sizeColumn.getStyleClass().add("alignCenterRightPadding_25");
 
         final TableColumn<DownloadData, PDate> datumColumn = new TableColumn<>("Datum");
