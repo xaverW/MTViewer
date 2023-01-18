@@ -19,7 +19,6 @@ import de.p2tools.mtviewer.controller.ProgQuit;
 import de.p2tools.mtviewer.controller.ProgStart;
 import de.p2tools.mtviewer.controller.config.*;
 import de.p2tools.mtviewer.gui.startDialog.StartDialogController;
-import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.P2LibInit;
 import de.p2tools.p2Lib.configFile.IoReadWriteStyle;
 import de.p2tools.p2Lib.guiTools.PGuiSize;
@@ -55,7 +54,6 @@ public class MTViewer extends Application {
         progData.primaryStage = primaryStage;
 
         initP2lib();
-
         workBeforeGui();
         initRootLayout();
         progStart.doWorkAfterGui(progData, firstProgramStart);
@@ -66,8 +64,8 @@ public class MTViewer extends Application {
 
     private void initP2lib() {
         P2LibInit.initLib(primaryStage, ProgConst.PROGRAM_NAME,
-                "", ProgData.debug, ProgData.duration);
-        P2LibInit.addCssFile(P2LibConst.CSS_GUI);
+                "", ProgConfig.SYSTEM_DARK_THEME,
+                ProgData.debug, ProgData.duration);
         P2LibInit.addCssFile(ProgConst.CSS_FILE);
     }
 
@@ -97,6 +95,7 @@ public class MTViewer extends Application {
                     PGuiSize.getWidth(ProgConfig.SYSTEM_SIZE_GUI),
                     PGuiSize.getHeight(ProgConfig.SYSTEM_SIZE_GUI));//Größe der scene!= Größe stage!!!
             addThemeCss(); // und jetzt noch für die neue Scene
+            ProgColorList.setColorTheme(); // Farben einrichten
 
             if (ProgConfig.SYSTEM_STYLE.getValue()) {
                 P2LibInit.setStyleFile(ProgInfos.getStyleFile().toString());
@@ -135,12 +134,10 @@ public class MTViewer extends Application {
 
     private void addThemeCss() {
         if (ProgConfig.SYSTEM_DARK_THEME.getValue()) {
-            P2LibInit.addCssFile(P2LibConst.CSS_GUI_DARK);
             P2LibInit.addCssFile(ProgConst.CSS_FILE_DARK_THEME);
         } else {
-            P2LibInit.removeCssFile(P2LibConst.CSS_GUI_DARK);
             P2LibInit.removeCssFile(ProgConst.CSS_FILE_DARK_THEME);
         }
-        P2LibInit.addP2LibCssToScene(scene);
+        P2LibInit.addP2CssToScene(scene);
     }
 }

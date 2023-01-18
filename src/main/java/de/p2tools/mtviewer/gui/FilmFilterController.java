@@ -26,7 +26,6 @@ import de.p2tools.p2Lib.tools.duration.PDuration;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -79,12 +78,8 @@ public class FilmFilterController extends VBox {
         progData.actFilmFilterWorker.forwardPossibleProperty().addListener((v, o, n) -> System.out.println(progData.actFilmFilterWorker.forwardPossibleProperty().getValue().toString()));
         btnGoForward.setTooltip(new Tooltip("letzte Filtereinstellung wieder herstellen"));
 
-//        btnGoBack.getStyleClass().add("btnFunction");
-//        btnGoForward.getStyleClass().add("btnFunction");
-
         btnClearFilter.setGraphic(de.p2tools.p2Lib.ProgIcons.Icons.ICON_BUTTON_CLEAR_FILTER.getImageView());
         btnClearFilter.setTooltip(new Tooltip("Filter löschen"));
-//        btnClearFilter.getStyleClass().add("btnFunction");
         btnClearFilter.setOnAction(a -> {
             PDuration.onlyPing("Filter löschen");
             progData.actFilmFilterWorker.clearFilter();
@@ -92,9 +87,7 @@ public class FilmFilterController extends VBox {
     }
 
     private void initSenderFilter() {
-//        mbChannel.getStyleClass().add("channel-menu");
         mbChannel.setMaxWidth(Double.MAX_VALUE);
-
         initChannelMenu();
         progData.actFilmFilterWorker.getActFilterSettings().channelProperty().addListener((observable, oldValue, newValue) -> {
             initChannelMenu();
@@ -122,9 +115,7 @@ public class FilmFilterController extends VBox {
         miCheckAll.setVisible(false);
 
         Button btnAll = new Button("Auswahl löschen");
-//        btnAll.getStyleClass().add("channel-button");
         btnAll.setMaxWidth(Double.MAX_VALUE);
-        btnAll.minWidthProperty().bind(mbChannel.widthProperty().add(-50));
         btnAll.setOnAction(e -> {
             clearMenuText();
             mbChannel.hide();
@@ -152,17 +143,17 @@ public class FilmFilterController extends VBox {
             menuItemsList.add(menuItemClass);
 
             Button btnChannel = new Button(s);
-//            btnChannel.getStyleClass().add("channel-button");
             btnChannel.setMaxWidth(Double.MAX_VALUE);
-            btnChannel.minWidthProperty().bind(mbChannel.widthProperty().add(-50));
             btnChannel.setOnAction(e -> {
                 setCheckBoxAndMenuText(menuItemClass);
                 mbChannel.hide();
             });
 
             HBox hBox = new HBox(10);
+            hBox.prefWidthProperty().bind(hBoxAll.widthProperty());
             hBox.setAlignment(Pos.CENTER_LEFT);
             hBox.getChildren().addAll(miCheck, btnChannel);
+            HBox.setHgrow(btnChannel, Priority.ALWAYS);
 
             CustomMenuItem cmi = new CustomMenuItem(hBox);
             mbChannel.getItems().add(cmi);
@@ -320,46 +311,46 @@ public class FilmFilterController extends VBox {
     }
 
     private void addFilter() {
-        VBox vBox;
-        final GridPane gridPane = new GridPane();
-        gridPane.setHgap(15);
-        gridPane.setVgap(15);
-
+        //erste Zeile
+        final GridPane gridPaneLine1 = new GridPane();
+        gridPaneLine1.setHgap(15);
+        gridPaneLine1.setVgap(15);
         ColumnConstraints col1 = new ColumnConstraints();
         col1.setPercentWidth(25);
-        ColumnConstraints col2 = new ColumnConstraints();
-        col2.setPercentWidth(37);
-        gridPane.getColumnConstraints().addAll(col1, col1, col1, col1);
+        gridPaneLine1.getColumnConstraints().addAll(col1, col1, col1, col1);
 
-        //erste Zeile
+        VBox vBox;
         vBox = addTxt("Sender", mbChannel);
         GridPane.setHgrow(vBox, Priority.ALWAYS);
-        gridPane.add(vBox, 0, 0);
+        gridPaneLine1.add(vBox, 0, 0);
 
         vBox = addTxt("Thema", cboTheme);
         GridPane.setHgrow(vBox, Priority.ALWAYS);
-        gridPane.add(vBox, 1, 0);
+        gridPaneLine1.add(vBox, 1, 0);
 
         vBox = addTxt("Titel", cboTitle);
         GridPane.setHgrow(vBox, Priority.ALWAYS);
-        gridPane.add(vBox, 2, 0);
+        gridPaneLine1.add(vBox, 2, 0);
 
         vBox = addTxt("Irgendwo", cboSomewhere);
         GridPane.setHgrow(vBox, Priority.ALWAYS);
-        gridPane.add(vBox, 3, 0);
+        gridPaneLine1.add(vBox, 3, 0);
+
 
         //zweite Zeile
-        vBox = addSlider();
+        HBox hBoxLine2 = new HBox();
+        hBoxLine2.setSpacing(20);
 
+        vBox = addSlider();
+        hBoxLine2.getChildren().add(vBox);
 
         CheckBox chkOnlyNew = new CheckBox();
+        chkOnlyNew.selectedProperty().bindBidirectional(progData.actFilmFilterWorker.getActFilterSettings().onlyNewProperty());
         HBox hBoxNew = new HBox(5, new Label("nur neue Filme:"), chkOnlyNew);
         hBoxNew.setAlignment(Pos.CENTER);
-        chkOnlyNew.selectedProperty().bindBidirectional(progData.actFilmFilterWorker.getActFilterSettings().onlyNewProperty());
+        hBoxLine2.getChildren().add(hBoxNew);
 
         CheckBox chkLive = new CheckBox();
-        HBox hBoxLive = new HBox(5, new Label("nur Live-Streams:"), chkLive);
-        hBoxLive.setAlignment(Pos.CENTER);
         chkLive.setSelected(progData.actFilmFilterWorker.getActFilterSettings().onlyLiveProperty().get());
         chkLive.setOnAction(a -> {
             if (chkLive.isSelected()) {
@@ -369,22 +360,21 @@ public class FilmFilterController extends VBox {
                 progData.actFilmFilterWorker.getActFilterSettings().setOnlyLive(false);
             }
         });
+        HBox hBoxLive = new HBox(5, new Label("nur Live-Streams:"), chkLive);
+        hBoxLive.setAlignment(Pos.CENTER);
         progData.actFilmFilterWorker.getActFilterSettings().onlyLiveProperty().addListener((u, o, n) -> {
             chkLive.setSelected(n.booleanValue());
         });
+        hBoxLine2.getChildren().add(hBoxLive);
 
         HBox hBoxClear = new HBox(10);
         hBoxClear.setAlignment(Pos.CENTER_RIGHT);
         hBoxClear.getChildren().addAll(PGuiTools.getHBoxGrower(), btnGoBack, btnGoForward,
                 btnClearFilter, new ProgMenu());
+        hBoxLine2.getChildren().addAll(PGuiTools.getHBoxGrower(), hBoxClear);
 
-
-        gridPane.add(vBox, 0, 1);
-        gridPane.add(hBoxNew, 1, 1);
-        gridPane.add(hBoxLive, 2, 1);
-        gridPane.add(hBoxClear, 3, 1);
-        GridPane.setHalignment(hBoxClear, HPos.RIGHT);
-        getChildren().add(gridPane);
+        getChildren().add(gridPaneLine1);
+        getChildren().add(hBoxLine2);
     }
 
     private VBox addTxt(String txt, Control control) {
@@ -396,7 +386,6 @@ public class FilmFilterController extends VBox {
     }
 
     private class MenuItemClass {
-
         private final String text;
         private final CheckBox checkBox;
 
