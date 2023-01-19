@@ -213,7 +213,7 @@ public class StarterClass {
             }
         }
 
-        download.setNo(DownloadConstants.DOWNLOAD_NUMBER_NOT_STARTED);
+        download.setNo(ProgConst.NUMBER_NOT_EXISTS);
         start.setProcess(null);
         start.setInputStream(null);
         start.setStartTime(null);

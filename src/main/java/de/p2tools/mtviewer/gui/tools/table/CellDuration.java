@@ -17,22 +17,16 @@
 
 package de.p2tools.mtviewer.gui.tools.table;
 
-import de.p2tools.mtviewer.controller.config.ProgColorList;
-import de.p2tools.mtviewer.controller.config.ProgConfig;
-import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
-import de.p2tools.mtviewer.controller.data.download.DownloadData;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.ProgressBarTableCell;
 import javafx.util.Callback;
 
-public class CellFilmNo<S, T> extends TableCell<S, T> {
+public class CellDuration<S, T> extends TableCell<S, T> {
 
-    public final Callback<TableColumn<DownloadData, Integer>, TableCell<DownloadData, Integer>> cellFactory
-            = (final TableColumn<DownloadData, Integer> param) -> {
+    public final Callback<TableColumn<S, Integer>, TableCell<S, Integer>> cellFactory
+            = (final TableColumn<S, Integer> param) -> {
 
-        final TableCell<DownloadData, Integer> cell = new TableCell<DownloadData, Integer>() {
+        final TableCell<S, Integer> cell = new TableCell<>() {
 
             @Override
             public void updateItem(Integer item, boolean empty) {
@@ -43,7 +37,7 @@ public class CellFilmNo<S, T> extends TableCell<S, T> {
                     return;
                 }
 
-                if (item == DownloadConstants.FILM_NUMBER_NOT_FOUND) {
+                if (item == 0) {
                     setGraphic(null);
                     setText(null);
                 } else {

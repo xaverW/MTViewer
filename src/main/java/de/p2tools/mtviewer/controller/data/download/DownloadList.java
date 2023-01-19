@@ -16,6 +16,7 @@
 
 package de.p2tools.mtviewer.controller.data.download;
 
+import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.p2Lib.configFile.pData.PDataList;
 import de.p2tools.p2Lib.mtFilm.film.Filmlist;
@@ -160,7 +161,7 @@ public class DownloadList extends SimpleListProperty<DownloadData> implements PD
         List<DownloadData> list = new ArrayList<>();
         for (final DownloadData download : this) {
             final int i = download.getNo();
-            if (i < DownloadConstants.DOWNLOAD_NUMBER_NOT_STARTED) {
+            if (i < ProgConst.NUMBER_NOT_EXISTS) {
                 list.add(download);
             }
         }
@@ -302,13 +303,13 @@ public class DownloadList extends SimpleListProperty<DownloadData> implements PD
         for (final DownloadData download : this) {
             if (download.isStarted()) {
                 // gestartete Downloads ohne!! Nummer nummerieren
-                if (download.getNo() == DownloadConstants.DOWNLOAD_NUMBER_NOT_STARTED) {
+                if (download.getNo() == ProgConst.NUMBER_NOT_EXISTS) {
                     download.setNo(i++);
                 }
 
             } else {
                 // nicht gestartete Downloads
-                download.setNo(DownloadConstants.DOWNLOAD_NUMBER_NOT_STARTED);
+                download.setNo(ProgConst.NUMBER_NOT_EXISTS);
             }
         }
     }
@@ -316,7 +317,7 @@ public class DownloadList extends SimpleListProperty<DownloadData> implements PD
     public synchronized void renumberList(int addNr) {
         for (final DownloadData download : this) {
             final int i = download.getNo();
-            if (i < DownloadConstants.DOWNLOAD_NUMBER_NOT_STARTED) {
+            if (i < ProgConst.NUMBER_NOT_EXISTS) {
                 download.setNo(i + addNr);
             }
         }
@@ -325,7 +326,7 @@ public class DownloadList extends SimpleListProperty<DownloadData> implements PD
     private int getNextNumber() {
         int i = 1;
         for (final DownloadData download : this) {
-            if (download.getNo() < DownloadConstants.DOWNLOAD_NUMBER_NOT_STARTED && download.getNo() >= i) {
+            if (download.getNo() < ProgConst.NUMBER_NOT_EXISTS && download.getNo() >= i) {
                 i = download.getNo() + 1;
             }
         }

@@ -91,7 +91,7 @@ public class TableFilm extends PTable<FilmData> {
         timeColumn.getStyleClass().add("alignCenter");
 
         final TableColumn<FilmData, Integer> durationColumn = new TableColumn<>("Dauer [min]");
-        durationColumn.setCellFactory(new CellDurationFilm<>().cellFactory);
+        durationColumn.setCellFactory(new CellDuration<FilmData, Integer>().cellFactory);
         durationColumn.setCellValueFactory(new PropertyValueFactory<>("durationMinute"));
         durationColumn.getStyleClass().add("alignCenterRightPadding_25");
 

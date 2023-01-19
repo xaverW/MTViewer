@@ -17,6 +17,7 @@
 package de.p2tools.mtviewer.controller.data.download;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
+import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.downloadTools.DownloadFileNameFactory;
 import de.p2tools.mtviewer.controller.starter.Start;
 import de.p2tools.p2Lib.alert.PAlert;
@@ -158,7 +159,7 @@ public final class DownloadData extends DownloadDataProps {
         setRemaining("");
         setBandwidth("");
         getStart().setBandwidth(0);
-        setNo(DownloadConstants.DOWNLOAD_NUMBER_NOT_STARTED);
+        setNo(ProgConst.NUMBER_NOT_EXISTS);
     }
 
     public String getFileNameWithoutSuffix() {
@@ -206,7 +207,7 @@ public final class DownloadData extends DownloadDataProps {
     public void setFilm(FilmData film) {
         if (film == null) {
             // bei gespeicherten Downloads kann es den Film nicht mehr geben
-            setFilmNr(DownloadConstants.FILM_NUMBER_NOT_FOUND);
+            setFilmNr(ProgConst.NUMBER_NOT_EXISTS);
             return;
         }
 

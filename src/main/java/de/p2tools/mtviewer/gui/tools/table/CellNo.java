@@ -17,7 +17,7 @@
 
 package de.p2tools.mtviewer.gui.tools.table;
 
-import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
+import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -39,7 +39,7 @@ public class CellNo<S, T> extends TableCell<S, T> {
                     return;
                 }
 
-                if (item == DownloadConstants.DOWNLOAD_NUMBER_NOT_STARTED) {
+                if (item == ProgConst.NUMBER_NOT_EXISTS) {
                     setGraphic(null);
                     setText(null);
                 } else {
