@@ -19,101 +19,19 @@ package de.p2tools.mtviewer.gui.tools.table;
 import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.ProgIcons;
-import de.p2tools.mtviewer.controller.film.FilmTools;
 import de.p2tools.mtviewer.gui.dialog.FilmInfoDialogController;
 import de.p2tools.p2Lib.guiTools.PCheckBoxCell;
 import de.p2tools.p2Lib.guiTools.PTableFactory;
 import de.p2tools.p2Lib.mtFilm.film.FilmData;
 import de.p2tools.p2Lib.mtFilm.film.FilmSize;
 import de.p2tools.p2Lib.tools.date.PDate;
-import javafx.event.ActionEvent;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.HBox;
-import javafx.util.Callback;
 
 public class TableFilm extends PTable<FilmData> {
-
-    private Callback<TableColumn<FilmData, String>, TableCell<FilmData, String>> cellFactoryStart
-            = (final TableColumn<FilmData, String> param) -> {
-
-        final TableCell<FilmData, String> cell = new TableCell<>() {
-
-            @Override
-            public void updateItem(String item, boolean empty) {
-                super.updateItem(item, empty);
-
-                if (empty) {
-                    setGraphic(null);
-                    setText(null);
-                    return;
-                }
-
-                final HBox hbox = new HBox();
-                hbox.setSpacing(4);
-                hbox.setAlignment(Pos.CENTER);
-                hbox.setPadding(new Insets(0, 2, 0, 2));
-                setGraphic(hbox);
-
-                final Button btnPlay;
-                btnPlay = new Button("");
-                btnPlay.getStyleClass().addAll("btnFunction", "btnFuncTable");
-                btnPlay.setGraphic(ProgIcons.Icons.IMAGE_TABLE_FILM_PLAY.getImageView());
-                btnPlay.setOnAction((ActionEvent event) -> {
-                    int col = getIndex();
-                    FilmData film = getTableView().getItems().get(col);
-                    getSelectionModel().clearAndSelect(col);
-                    FilmTools.playFilm(film);
-                });
-
-                final Button btnSave;
-                btnSave = new Button("");
-                btnSave.getStyleClass().addAll("btnFunction", "btnFuncTable");
-                btnSave.setGraphic(ProgIcons.Icons.IMAGE_TABLE_FILM_SAVE.getImageView());
-                btnSave.setOnAction(event -> {
-                    int col = getIndex();
-                    FilmData film = getTableView().getItems().get(col);
-                    getSelectionModel().clearAndSelect(col);
-                    FilmTools.saveFilm(film);
-                });
-
-                hbox.getChildren().addAll(btnPlay, btnSave);
-            }
-        };
-        return cell;
-    };
-
-    private Callback<TableColumn<FilmData, Integer>, TableCell<FilmData, Integer>> cellFactoryDuration
-            = (final TableColumn<FilmData, Integer> param) -> {
-
-        final TableCell<FilmData, Integer> cell = new TableCell<>() {
-
-            @Override
-            public void updateItem(Integer item, boolean empty) {
-                super.updateItem(item, empty);
-
-                if (item == null || empty) {
-                    setGraphic(null);
-                    setText(null);
-                    return;
-                }
-
-                if (item == 0) {
-                    setGraphic(null);
-                    setText(null);
-                } else {
-                    setGraphic(null);
-                    setText(item + "");
-                }
-
-            }
-        };
-        return cell;
-    };
 
     public TableFilm(Table.TABLE_ENUM table_enum, ProgData progData) {
         super(table_enum);
@@ -143,7 +61,6 @@ public class TableFilm extends PTable<FilmData> {
         ProgColorList.FILM_LIVESTREAM.colorProperty().addListener((a, b, c) -> PTableFactory.refreshTable(this));
         ProgColorList.FILM_GEOBLOCK.colorProperty().addListener((a, b, c) -> PTableFactory.refreshTable(this));
         ProgColorList.FILM_NEW.colorProperty().addListener((a, b, c) -> PTableFactory.refreshTable(this));
-//        ProgColorList.FILM_HISTORY.colorProperty().addListener((a, b, c) -> PTableFactory.refreshTable(this));
 
         final TableColumn<FilmData, Integer> nrColumn = new TableColumn<>("Nr");
         nrColumn.setCellValueFactory(new PropertyValueFactory<>("no"));
@@ -162,7 +79,7 @@ public class TableFilm extends PTable<FilmData> {
         titleColumn.getStyleClass().add("alignCenterLeft");
 
         final TableColumn<FilmData, String> startColumn = new TableColumn<>("");
-        startColumn.setCellFactory(cellFactoryStart);
+        startColumn.setCellFactory(new CellStartFilm<>().cellFactory);
         startColumn.getStyleClass().add("alignCenter");
 
         final TableColumn<FilmData, PDate> datumColumn = new TableColumn<>("Datum");
@@ -174,7 +91,7 @@ public class TableFilm extends PTable<FilmData> {
         timeColumn.getStyleClass().add("alignCenter");
 
         final TableColumn<FilmData, Integer> durationColumn = new TableColumn<>("Dauer [min]");
-        durationColumn.setCellFactory(cellFactoryDuration);
+        durationColumn.setCellFactory(new CellDurationFilm<>().cellFactory);
         durationColumn.setCellValueFactory(new PropertyValueFactory<>("durationMinute"));
         durationColumn.getStyleClass().add("alignCenterRightPadding_25");
 

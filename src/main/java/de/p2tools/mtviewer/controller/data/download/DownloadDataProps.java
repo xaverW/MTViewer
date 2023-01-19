@@ -20,13 +20,13 @@ import de.p2tools.p2Lib.configFile.config.*;
 import de.p2tools.p2Lib.configFile.pData.PDataSample;
 import de.p2tools.p2Lib.mtDownload.DownloadSize;
 import de.p2tools.p2Lib.mtFilm.tools.Data;
-import de.p2tools.p2Lib.tools.date.DateFactory;
-import de.p2tools.p2Lib.tools.date.PDate;
-import de.p2tools.p2Lib.tools.date.PDateProperty;
+import de.p2tools.p2Lib.tools.date.PLDateFactory;
+import de.p2tools.p2Lib.tools.date.PLDateProperty;
 import de.p2tools.p2Lib.tools.file.PFileUtils;
 import javafx.application.Platform;
 import javafx.beans.property.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class DownloadDataProps extends PDataSample<DownloadData> {
@@ -44,8 +44,8 @@ public class DownloadDataProps extends PDataSample<DownloadData> {
     private final StringProperty remaining = new SimpleStringProperty("");
     private final StringProperty bandwidth = new SimpleStringProperty("");
     private final DownloadSize downloadSize = new DownloadSize();
-    private final PDateProperty filmDate = new PDateProperty(new PDate(0));
-    private final StringProperty time = new SimpleStringProperty("");
+    private final PLDateProperty filmDate = new PLDateProperty(LocalDate.MIN.MIN);//zum Sortieren in der Tabelle
+    private final StringProperty filmTime = new SimpleStringProperty("");
     private final IntegerProperty durationMinute = new SimpleIntegerProperty(0);
     private final BooleanProperty hd = new SimpleBooleanProperty(false);
     private final BooleanProperty ut = new SimpleBooleanProperty(false);
@@ -55,13 +55,12 @@ public class DownloadDataProps extends PDataSample<DownloadData> {
     private final StringProperty urlSubtitle = new SimpleStringProperty("");
     private final StringProperty destFileName = new SimpleStringProperty("");
     private final StringProperty destPath = new SimpleStringProperty("");
-    //    private final StringProperty destPathFile = new SimpleStringProperty("");
     private final BooleanProperty placedBack = new SimpleBooleanProperty(false);
     private final BooleanProperty infoFile = new SimpleBooleanProperty(false);
     private final BooleanProperty subtitle = new SimpleBooleanProperty(false);
     public final Property[] properties = {no, filmNr, channel, theme, title,
             state, progress, remaining, bandwidth, downloadSize,
-            filmDate, time, durationMinute,
+            filmDate, filmTime, durationMinute,
             hd, ut, geoBlocked, filmUrl, url, urlSubtitle,
             destFileName, destPath, /*destPathFile,*/
             placedBack, infoFile, subtitle};
@@ -91,7 +90,8 @@ public class DownloadDataProps extends PDataSample<DownloadData> {
         list.add(new Config_doubleProp("progress", DownloadFieldNames.DOWNLOAD_PROGRESS, progress));
         list.add(new Config_stringProp("remaining", DownloadFieldNames.DOWNLOAD_REMAINING_TIME, remaining));
         list.add(new Config_stringProp("bandwidth", DownloadFieldNames.DOWNLOAD_BANDWIDTH, bandwidth));
-        list.add(new Config_stringProp("time", DownloadFieldNames.DOWNLOAD_TIME, time));
+        list.add(new Config_lDateProp("filmDate", DownloadFieldNames.DOWNLOAD_DATE, filmDate));
+        list.add(new Config_stringProp("filmTime", DownloadFieldNames.DOWNLOAD_TIME, filmTime));
         list.add(new Config_intProp("durationMinute", DownloadFieldNames.DOWNLOAD_DURATION, durationMinute));
         list.add(new Config_boolProp("hd", DownloadFieldNames.DOWNLOAD_HD, hd));
         list.add(new Config_boolProp("ut", DownloadFieldNames.DOWNLOAD_UT, ut));
@@ -101,7 +101,6 @@ public class DownloadDataProps extends PDataSample<DownloadData> {
         list.add(new Config_stringProp("urlSubtitle", DownloadFieldNames.DOWNLOAD_URL_SUBTITLE, urlSubtitle));
         list.add(new Config_stringProp("destFileName", DownloadFieldNames.DOWNLOAD_DEST_FILE_NAME, destFileName));
         list.add(new Config_stringProp("destPath", DownloadFieldNames.DOWNLOAD_DEST_PATH, destPath));
-//        list.add(new ConfigExtra_stringProp("destPathFile", DownloadFieldNames.DOWNLOAD_DEST_PATH_FILE_NAME, destPathFile));
         list.add(new Config_boolProp("placedBack", DownloadFieldNames.DOWNLOAD_PLACED_BACK, placedBack));
         list.add(new Config_boolProp("infoFile", DownloadFieldNames.DOWNLOAD_INFO_FILE, infoFile));
         list.add(new Config_boolProp("subtitle", DownloadFieldNames.DOWNLOAD_SUBTITLE, subtitle));
@@ -118,22 +117,33 @@ public class DownloadDataProps extends PDataSample<DownloadData> {
         return ret;
     }
 
-    public PDate getFilmDate() {
+    public LocalDate getFilmDate() {
         return filmDate.get();
     }
 
-    public void setFilmDate(PDate filmDate) {
+    public void setFilmDate(LocalDate filmDate) {
         this.filmDate.set(filmDate);
     }
 
-    public ObjectProperty<PDate> filmDateProperty() {
+    public void setFilmDate(String date) {
+        LocalDate d = PLDateFactory.fromString(date);
+        this.filmDate.setValue(d);
+    }
+
+    public PLDateProperty filmDateProperty() {
         return filmDate;
     }
 
-    public void setFilmDate(String date, String time) {
-        PDate d = new PDate();
-        d.setPDate(date, time, DateFactory.F_FORMAT_dd_MM_yyyy, DateFactory.F_FORMAT_dd_MM_yyyyHH_mm_ss);
-        this.filmDate.setValue(d);
+    public String getFilmTime() {
+        return filmTime.get();
+    }
+
+    public void setFilmTime(String filmTime) {
+        this.filmTime.set(filmTime);
+    }
+
+    public StringProperty filmTimeProperty() {
+        return filmTime;
     }
 
     // GuiProps
@@ -269,18 +279,6 @@ public class DownloadDataProps extends PDataSample<DownloadData> {
 
     public DownloadSize downloadSizeProperty() {
         return downloadSize;
-    }
-
-    public String getTime() {
-        return time.get();
-    }
-
-    public void setTime(String time) {
-        this.time.set(time);
-    }
-
-    public StringProperty timeProperty() {
-        return time;
     }
 
     public int getDurationMinute() {

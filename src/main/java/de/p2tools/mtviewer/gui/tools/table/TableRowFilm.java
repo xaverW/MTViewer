@@ -63,14 +63,6 @@ public class TableRowFilm<T> extends TableRow {
                     getChildren().get(i).setStyle("");
                 }
             }
-
-//            if (film.isShown()) {
-//                setStyle(ProgColorList.FILM_HISTORY.getCssBackgroundAndSel());
-//
-//            } else {
-//                setStyle("");
-//            }
-
         }
     }
 }

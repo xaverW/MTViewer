@@ -17,283 +17,23 @@
 package de.p2tools.mtviewer.gui.tools.table;
 
 import de.p2tools.mtviewer.controller.config.ProgColorList;
-import de.p2tools.mtviewer.controller.config.ProgConfig;
-import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.ProgIcons;
-import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
-import de.p2tools.mtviewer.controller.film.FilmTools;
 import de.p2tools.p2Lib.guiTools.PCheckBoxCell;
-import de.p2tools.p2Lib.guiTools.POpen;
 import de.p2tools.p2Lib.mtDownload.DownloadSize;
 import de.p2tools.p2Lib.tools.GermanStringIntSorter;
-import de.p2tools.p2Lib.tools.date.PDate;
-import javafx.beans.property.BooleanProperty;
-import javafx.event.ActionEvent;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.ProgressBarTableCell;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
-import javafx.util.Callback;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.Comparator;
-import java.util.List;
 
 public class TableDownload extends PTable<DownloadData> {
-
-    private final BooleanProperty geoMelden;
-    private Callback<TableColumn<DownloadData, Integer>, TableCell<DownloadData, Integer>> cellFactoryState
-            = (final TableColumn<DownloadData, Integer> param) -> {
-
-        final TableCell<DownloadData, Integer> cell = new TableCell<DownloadData, Integer>() {
-
-            @Override
-            public void updateItem(Integer item, boolean empty) {
-                super.updateItem(item, empty);
-
-                if (item == null || empty) {
-                    setGraphic(null);
-                    setText(null);
-                    return;
-                }
-
-                final HBox hbox = new HBox();
-                hbox.setSpacing(5);
-                hbox.setAlignment(Pos.CENTER);
-                hbox.setPadding(new Insets(0, 2, 0, 2));
-
-                final Button btnDownStart;
-                final Button btnDownDel;
-                final Button btnDownStop;
-                final Button btnFilmStart;
-                final Button btnOpenDirectory;
-
-                if (item <= DownloadConstants.STATE_STOPPED) {
-                    btnDownStart = new Button("");
-                    btnDownStart.getStyleClass().addAll("btnFunction", "btnFuncTable");
-                    btnDownStart.setTooltip(new Tooltip("Download starten"));
-                    btnDownStart.setGraphic(ProgIcons.Icons.IMAGE_TABLE_DOWNLOAD_START.getImageView());
-                    btnDownStart.setOnAction((ActionEvent event) -> {
-                        DownloadData download = getTableView().getItems().get(getIndex());
-                        ProgData.getInstance().downloadList.startDownloads(download);
-                    });
-
-                    btnDownDel = new Button("");
-                    btnDownDel.getStyleClass().addAll("btnFunction", "btnFuncTable");
-                    btnDownDel.setTooltip(new Tooltip("Download löschen"));
-                    btnDownDel.setGraphic(ProgIcons.Icons.IMAGE_TABLE_DOWNLOAD_DEL.getImageView());
-                    btnDownDel.setOnAction(event -> {
-                        DownloadData download = getTableView().getItems().get(getIndex());
-                        ProgData.getInstance().downloadList.delDownloads(download);
-                    });
-                    hbox.getChildren().addAll(btnDownStart, btnDownDel);
-                    setGraphic(hbox);
-
-                } else if (item < DownloadConstants.STATE_FINISHED) {
-                    btnDownStop = new Button("");
-                    btnDownStop.getStyleClass().addAll("btnFunction", "btnFuncTable");
-                    btnDownStop.setTooltip(new Tooltip("Download stoppen"));
-                    btnDownStop.setGraphic(ProgIcons.Icons.IMAGE_TABLE_DOWNLOAD_STOP.getImageView());
-                    btnDownStop.setOnAction((ActionEvent event) -> {
-                        DownloadData download = getTableView().getItems().get(getIndex());
-                        download.stopDownload();
-                    });
-
-                    btnDownDel = new Button("");
-                    btnDownDel.getStyleClass().addAll("btnFunction", "btnFuncTable");
-                    btnDownDel.setTooltip(new Tooltip("Download löschen"));
-                    btnDownDel.setGraphic(ProgIcons.Icons.IMAGE_TABLE_DOWNLOAD_DEL.getImageView());
-                    btnDownDel.setOnAction(event -> {
-                        DownloadData download = getTableView().getItems().get(getIndex());
-                        ProgData.getInstance().downloadList.delDownloads(download);
-                    });
-                    hbox.getChildren().addAll(btnDownStop, btnDownDel);
-                    setGraphic(hbox);
-
-                } else if (item == DownloadConstants.STATE_FINISHED) {
-                    btnFilmStart = new Button("");
-                    btnFilmStart.getStyleClass().addAll("btnFunction", "btnFuncTable");
-                    btnFilmStart.setTooltip(new Tooltip("gespeicherten Film abspielen"));
-                    btnFilmStart.setGraphic(ProgIcons.Icons.IMAGE_TABLE_FILM_PLAY.getImageView());
-                    btnFilmStart.setOnAction((ActionEvent event) -> {
-                        DownloadData download = getTableView().getItems().get(getIndex());
-                        FilmTools.playFilm(download.getDestPathFile());
-                    });
-
-                    btnOpenDirectory = new Button();
-                    btnOpenDirectory.getStyleClass().addAll("btnFunction", "btnFuncTable");
-                    btnOpenDirectory.setTooltip(new Tooltip("Ordner mit gespeichertem Film öffnen"));
-                    btnOpenDirectory.setGraphic(ProgIcons.Icons.IMAGE_TABLE_DOWNLOAD_OPEN_DIR.getImageView());
-                    btnOpenDirectory.setOnAction((ActionEvent event) -> {
-                        DownloadData download = getTableView().getItems().get(getIndex());
-                        POpen.openDir(download.getDestPath(),
-                                ProgConfig.SYSTEM_PROG_OPEN_DIR, ProgIcons.Icons.ICON_BUTTON_FILE_OPEN.getImageView());
-                    });
-                    hbox.getChildren().addAll(btnFilmStart, btnOpenDirectory);
-                    setGraphic(hbox);
-
-                } else if (item == DownloadConstants.STATE_ERROR) {
-                    btnDownStart = new Button("");
-                    btnDownStart.getStyleClass().addAll("btnFunction", "btnFuncTable");
-                    btnDownStart.setTooltip(new Tooltip("Download wieder starten"));
-                    btnDownStart.setGraphic(ProgIcons.Icons.IMAGE_TABLE_DOWNLOAD_START.getImageView());
-                    btnDownStart.setOnAction((ActionEvent event) -> {
-                        DownloadData download = getTableView().getItems().get(getIndex());
-                        List<DownloadData> list = new ArrayList<>();
-                        list.add(download);
-                        ProgData.getInstance().downloadList.startDownloads(list, true);
-                    });
-
-                    btnDownDel = new Button("");
-                    btnDownDel.getStyleClass().addAll("btnFunction", "btnFuncTable");
-                    btnDownDel.setTooltip(new Tooltip("Download löschen"));
-                    btnDownDel.setGraphic(ProgIcons.Icons.IMAGE_TABLE_DOWNLOAD_DEL.getImageView());
-                    btnDownDel.setOnAction(event -> {
-                        DownloadData download = getTableView().getItems().get(getIndex());
-                        ProgData.getInstance().downloadList.delDownloads(download);
-                    });
-                    hbox.getChildren().addAll(btnDownStart, btnDownDel);
-                    setGraphic(hbox);
-
-                } else {
-                    setGraphic(null);
-                    setText(null);
-                }
-
-                setCellStyle(this, item);
-            }
-        };
-        return cell;
-    };
-    private Callback<TableColumn<DownloadData, Integer>, TableCell<DownloadData, Integer>> cellFactoryNr
-            = (final TableColumn<DownloadData, Integer> param) -> {
-
-        final TableCell<DownloadData, Integer> cell = new TableCell<DownloadData, Integer>() {
-
-            @Override
-            public void updateItem(Integer item, boolean empty) {
-                super.updateItem(item, empty);
-                if (item == null || empty) {
-                    setGraphic(null);
-                    setText(null);
-                    return;
-                }
-
-                if (item == DownloadConstants.DOWNLOAD_NUMBER_NOT_STARTED) {
-                    setGraphic(null);
-                    setText(null);
-                } else {
-                    setGraphic(null);
-                    setText(item + "");
-                }
-            }
-        };
-        return cell;
-    };
-    private Callback<TableColumn<DownloadData, Integer>, TableCell<DownloadData, Integer>> cellFactoryFilmNr
-            = (final TableColumn<DownloadData, Integer> param) -> {
-
-        final TableCell<DownloadData, Integer> cell = new TableCell<DownloadData, Integer>() {
-
-            @Override
-            public void updateItem(Integer item, boolean empty) {
-                super.updateItem(item, empty);
-                if (item == null || empty) {
-                    setGraphic(null);
-                    setText(null);
-                    return;
-                }
-
-                if (item == DownloadConstants.FILM_NUMBER_NOT_FOUND) {
-                    setGraphic(null);
-                    setText(null);
-                } else {
-                    setGraphic(null);
-                    setText(item + "");
-                }
-            }
-        };
-        return cell;
-    };
-    private Callback<TableColumn<DownloadData, Double>, TableCell<DownloadData, Double>> cellFactoryProgress
-            = (final TableColumn<DownloadData, Double> param) -> {
-
-        final ProgressBarTableCell<DownloadData> cell = new ProgressBarTableCell<>() {
-
-            @Override
-            public void updateItem(Double item, boolean empty) {
-                super.updateItem(item, empty);
-                if (item != null) {
-                    DownloadData download = getTableView().getItems().get(getIndex());
-                    if (item <= DownloadConstants.PROGRESS_STARTED || item >= DownloadConstants.PROGRESS_FINISHED) {
-                        String text = DownloadConstants.getTextProgress(download.getState(), item.doubleValue());
-                        Label label = new Label(text);
-                        if (geoMelden.get() && download.isGeoBlocked()) {
-                            // geogeblockt
-                            label.setStyle("");
-                            label.setStyle(ProgColorList.FILM_GEOBLOCK.getCssFontBold());
-                        }
-                        setGraphic(label);
-                    }
-                }
-            }
-        };
-        return cell;
-    };
-    //    private Callback<TableColumn<DownloadData, Long>, TableCell<DownloadData, Long>> cellFactorySize
-//            = (final TableColumn<DownloadData, Long> param) -> {
-//
-//        final TableCell<DownloadData, Long> cell = new TableCell<>() {
-//
-//            @Override
-//            public void updateItem(Long item, boolean empty) {
-//                super.updateItem(item, empty);
-//
-//                setGraphic(null);
-//                if (item == null || empty) {
-//                    setText(null);
-//                    return;
-//                }
-//
-//                DownloadData downloadData = getTableView().getItems().get(getIndex());
-//                setText(downloadData.getDownloadSize().toString());
-//            }
-//        };
-//        return cell;
-//    };
-    private Callback<TableColumn<DownloadData, Integer>, TableCell<DownloadData, Integer>> cellFactoryDuration
-            = (final TableColumn<DownloadData, Integer> param) -> {
-
-        final TableCell<DownloadData, Integer> cell = new TableCell<>() {
-
-            @Override
-            public void updateItem(Integer item, boolean empty) {
-                super.updateItem(item, empty);
-                if (item == null || empty) {
-                    setGraphic(null);
-                    setText(null);
-                    return;
-                }
-
-                if (item == 0) {
-                    setGraphic(null);
-                    setText(null);
-                } else {
-                    setGraphic(null);
-                    setText(item + "");
-                }
-            }
-        };
-        return cell;
-    };
 
     public TableDownload(Table.TABLE_ENUM table_enum) {
         super(table_enum);
         this.table_enum = table_enum;
-        geoMelden = ProgConfig.SYSTEM_MARK_GEO;
         initFileRunnerColumn();
     }
 
@@ -324,12 +64,12 @@ public class TableDownload extends PTable<DownloadData> {
 
         final TableColumn<DownloadData, Integer> nrColumn = new TableColumn<>("Nr");
         nrColumn.setCellValueFactory(new PropertyValueFactory<>("no"));
-        nrColumn.setCellFactory(cellFactoryNr);
+        nrColumn.setCellFactory(new CellNo<>().cellFactory);
         nrColumn.getStyleClass().add("alignCenterRightPadding_10");
 
         final TableColumn<DownloadData, Integer> filmNrColumn = new TableColumn<>("Filmnr");
         filmNrColumn.setCellValueFactory(new PropertyValueFactory<>("filmNr"));
-        filmNrColumn.setCellFactory(cellFactoryFilmNr);
+        filmNrColumn.setCellFactory(new CellFilmNo<>().cellFactory);
         filmNrColumn.getStyleClass().add("alignCenterRightPadding_10");
 
         final TableColumn<DownloadData, String> senderColumn = new TableColumn<>("Sender");
@@ -349,12 +89,12 @@ public class TableDownload extends PTable<DownloadData> {
         // die zwei Spalten mit eigenen propertys
         final TableColumn<DownloadData, Integer> startColumn = new TableColumn<>("");
         startColumn.setCellValueFactory(new PropertyValueFactory<>("guiState"));
-        startColumn.setCellFactory(cellFactoryState);
+        startColumn.setCellFactory(new CellStartDownload<>().cellFactory);
         startColumn.getStyleClass().add("alignCenter");
 
         final TableColumn<DownloadData, Double> progressColumn = new TableColumn<>("Fortschritt"); //müssen sich unterscheiden!!
         progressColumn.setCellValueFactory(new PropertyValueFactory<>("guiProgress"));
-        progressColumn.setCellFactory(cellFactoryProgress);
+        progressColumn.setCellFactory(new CellProgress<>().cellFactory);
         progressColumn.getStyleClass().add("alignCenterLeft");
 
         final TableColumn<DownloadData, Integer> remainingColumn = new TableColumn<>("Restzeit");
@@ -367,19 +107,19 @@ public class TableDownload extends PTable<DownloadData> {
 
         final TableColumn<DownloadData, DownloadSize> sizeColumn = new TableColumn<>("Größe [MB]");
         sizeColumn.setCellValueFactory(new PropertyValueFactory<>("downloadSize"));
-//        sizeColumn.setCellFactory(cellFactorySize);
         sizeColumn.getStyleClass().add("alignCenterRightPadding_25");
 
-        final TableColumn<DownloadData, PDate> datumColumn = new TableColumn<>("Datum");
+        final TableColumn<DownloadData, LocalDate> datumColumn = new TableColumn<>("Datum");
         datumColumn.setCellValueFactory(new PropertyValueFactory<>("filmDate"));
+        datumColumn.setCellFactory(new CellLocalDate().cellFactory);
         datumColumn.getStyleClass().add("alignCenter");
 
         final TableColumn<DownloadData, String> timeColumn = new TableColumn<>("Zeit");
-        timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
+        timeColumn.setCellValueFactory(new PropertyValueFactory<>("filmTime"));
         timeColumn.getStyleClass().add("alignCenter");
 
         final TableColumn<DownloadData, Integer> durationColumn = new TableColumn<>("Dauer [min]");
-        durationColumn.setCellFactory(cellFactoryDuration);
+        durationColumn.setCellFactory(new CellDurationDownload<>().cellFactory);
         durationColumn.setCellValueFactory(new PropertyValueFactory<>("durationMinute"));
         durationColumn.getStyleClass().add("alignCenterRightPadding_25");
 
@@ -424,30 +164,5 @@ public class TableDownload extends PTable<DownloadData> {
                 progressColumn, remainingColumn, speedColumn, sizeColumn,
                 datumColumn, timeColumn, durationColumn,
                 hdColumn, utColumn, geoColumn, urlColumn, fileNameColumn, pathColumn);
-    }
-
-    private void setCellStyle(TableCell<DownloadData, Integer> cell, Integer item) {
-        TableRow<DownloadData> currentRow = cell.getTableRow();
-        if (currentRow == null) {
-            return;
-        }
-        switch (item) {
-            case DownloadConstants.STATE_INIT:
-            case DownloadConstants.STATE_STOPPED:
-                currentRow.setStyle("");
-                break;
-            case DownloadConstants.STATE_STARTED_WAITING:
-                currentRow.setStyle(ProgColorList.DOWNLOAD_WAIT.getCssBackground());
-                break;
-            case DownloadConstants.STATE_STARTED_RUN:
-                currentRow.setStyle(ProgColorList.DOWNLOAD_RUN.getCssBackground());
-                break;
-            case DownloadConstants.STATE_FINISHED:
-                currentRow.setStyle(ProgColorList.DOWNLOAD_FINISHED.getCssBackground());
-                break;
-            case DownloadConstants.STATE_ERROR:
-                currentRow.setStyle(ProgColorList.DOWNLOAD_ERROR.getCssBackground());
-                break;
-        }
     }
 }

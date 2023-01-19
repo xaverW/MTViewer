@@ -57,7 +57,7 @@ public class DownloadCont {
                 MTInfoFile.writeInfoFile(download.getDestPath(), download.getDestPathFile(), download.getFileNameWithoutSuffix(),
                         download.getUrl(), download.getDownloadSize().toString(),
                         download.getChannel(), download.getTheme(), download.getTitle(),
-                        download.getFilmDate().toString(), download.getTime(), download.getDurationMinute() + "",
+                        download.getFilmDate().toString(), download.getFilmTime(), download.getDurationMinute() + "",
                         "", "");
 
             } else {
