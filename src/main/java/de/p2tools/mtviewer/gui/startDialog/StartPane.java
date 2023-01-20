@@ -89,14 +89,19 @@ public class StartPane {
 
         hBox.getChildren().addAll(iv);
 
-        Label text = new Label("1) Hier werden die" + P2LibConst.LINE_SEPARATOR +
+        Label text = new Label("1) Mit dem Pluszeichen können" + P2LibConst.LINE_SEPARATOR +
+                "Spalten in der Tabelle" + P2LibConst.LINE_SEPARATOR +
+                "ein- und ausgeblendet werden." +
+
+                P2LibConst.LINE_SEPARATORx2 +
+                "2) Hier werden die" + P2LibConst.LINE_SEPARATOR +
                 "Downloads angezeigt." +
 
                 P2LibConst.LINE_SEPARATORx2 +
-                "2) Das ist die Liste aller" + P2LibConst.LINE_SEPARATOR +
+                "3) Das ist die Liste aller" + P2LibConst.LINE_SEPARATOR +
                 "angelegter Downloads.");
-        hBox.getChildren().add(text);
 
+        hBox.getChildren().add(text);
         TitledPane tpConfig = new TitledPane("Infos zum Filmfilter", hBox);
         return tpConfig;
     }
