@@ -37,6 +37,7 @@ public class CellProgress<S, T> extends TableCell<S, T> {
             @Override
             public void updateItem(Double item, boolean empty) {
                 super.updateItem(item, empty);
+
                 if (item != null) {
                     DownloadData download = getTableView().getItems().get(getIndex());
                     if (item <= DownloadConstants.PROGRESS_STARTED || item >= DownloadConstants.PROGRESS_FINISHED) {
