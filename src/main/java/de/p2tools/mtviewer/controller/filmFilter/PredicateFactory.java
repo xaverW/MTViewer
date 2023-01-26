@@ -76,6 +76,15 @@ public class PredicateFactory {
             predicate = predicate.and(f -> FilmFilterCheck.checkDays(d, f));
         }
 
+        //Filmlänge
+        if (filmFilter.getMinDur() != FilmFilterCheck.FILTER_DURATION_MIN_MINUTE) {
+            predicate = predicate.and(f -> FilmFilterCheck.checkMinDur(filmFilter.getMinDur(), f));
+        }
+        if (filmFilter.getMaxDur() != FilmFilterCheck.FILTER_DURATION_MAX_MINUTE) {
+            predicate = predicate.and(f -> FilmFilterCheck.checkMaxDur(filmFilter.getMaxDur(), f));
+        }
+
+        //Textfilter
         if (!fChannel.empty) {
             predicate = predicate.and(f -> FilmFilterCheck.checkChannelSmart(fChannel, f));
         }

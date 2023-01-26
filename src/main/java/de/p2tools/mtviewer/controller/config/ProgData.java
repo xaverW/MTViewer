@@ -49,9 +49,6 @@ public class ProgData {
     // Infos
     public static String configDir = ""; // Verzeichnis zum Speichern der Programmeinstellungen
     private static ProgData instance;
-    // zentrale Klassen
-//    public LoadFilmlist loadFilmlist; // erledigt das updaten der Filmliste
-//    public LoadFilmFactory loadFilmFactory;
     public SearchFilmListUrls searchFilmListUrls; // da werden die DownloadURLs der Filmliste verwaltet
     public MTShortcut mtShortcut; // verwendete Shortcuts
     public ActFilmFilterWorker actFilmFilterWorker; // gespeicherte Filterprofile
@@ -79,9 +76,6 @@ public class ProgData {
         replaceList = new ReplaceList();
         searchFilmListUrls = new SearchFilmListUrls();
 
-//        loadFilmlist = new de.p2tools.p2Lib.mtFilm.loadFilmlist.LoadFilmlist();
-//        loadFilmlist = new LoadFilmlist(this);
-//        loadFilmFactory = new LoadFilmFactory();
         actFilmFilterWorker = new ActFilmFilterWorker(this);
         filmlist = new Filmlist();
         downloadList = new DownloadList(this);

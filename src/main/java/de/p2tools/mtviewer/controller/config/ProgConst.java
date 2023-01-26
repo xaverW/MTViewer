@@ -34,27 +34,10 @@ public class ProgConst {
     public static final String CSS_FILE = "de/p2tools/mtviewer/mtfx.css";
     public static final String CSS_FILE_DARK_THEME = "de/p2tools/mtviewer/mtfx-dark.css";
 
-//    public static final String FORMAT_ZIP = ".zip";
-//    public static final String FORMAT_XZ = ".xz";
-
     public static final int SYSTEM_LOAD_FILMLIST_MAX_DAYS = 300; // Filter beim Programmstart/Blacklist: nur Filme der letzten xx Tage laden
     public static final int SYSTEM_LOAD_FILMLIST_MIN_DURATION = 30; // Filter Programmstart: nur Filme mit mind. xx Minuten länge laden
 
     public static final int SYSTEM_FILTER_MAX_WAIT_TIME = 2_000; // 1.000 ms
-
-
-    // prüfen ob es eine neue Filmliste gibt: alle ... Min. oder ... nach dem Programmstart
-    public static final int CHECK_FILMLIST_UPDATE = 30 * 60; // 30 Minuten
-
-//    // beim Programmstart wird die Liste geladen wenn sie älter ist als ..
-//    public static final int ALTER_FILMLISTE_SEKUNDEN_FUER_AUTOUPDATE = 4 * 60 * 60;
-
-//    // Uhrzeit ab der die Diffliste alle Änderungen abdeckt, die Filmliste darf also nicht vor xx erstellt worden sein
-//    public static final String TIME_MAX_AGE_FOR_DIFF = "09";
-
-//    // MediathekView URLs
-//    public static final String ADRESSE_FILMLISTEN_SERVER_DIFF = "http://res.mediathekview.de/diff.xml";
-//    public static final String ADRESSE_FILMLISTEN_SERVER_AKT = "http://res.mediathekview.de/akt.xml";
 
     // Website MTViewer
     public static final String URL_WEBSITE = "https://www.p2tools.de";
@@ -78,7 +61,6 @@ public class ProgConst {
     public static final int MIN_TABLE_HEIGHT = 200;
     public static final int MIN_TEXTAREA_HEIGHT_LOW = 50;
 
-    public static final String FILTER_ALL = "alles"; // im config bei "alles" steht das dann
     public static final int MAX_SENDER_FILME_LADEN = 2;
     public static final int MIN_DATEI_GROESSE_FILM = 256 * 1000;
     public static final int MAX_DEST_PATH_IN_DIALOG_DOWNLOAD = 10;

@@ -36,25 +36,30 @@ public class FilmFilterProps extends PDataSample<FilmFilter> implements Comparab
     private final StringProperty somewhere = new SimpleStringProperty();
 
     private final IntegerProperty timeRange = new SimpleIntegerProperty(15);
+    private final IntegerProperty minDur = new SimpleIntegerProperty(0);
+    private final IntegerProperty maxDur = new SimpleIntegerProperty(FilmFilterCheck.FILTER_DURATION_MAX_MINUTE);
+
     private final BooleanProperty onlyNew = new SimpleBooleanProperty(false);
     private final BooleanProperty onlyLive = new SimpleBooleanProperty(false);
 
     public BooleanProperty[] sfBooleanPropArr = {onlyNew, onlyLive};
 
     public StringProperty[] sfStringPropArr = {name, channel, theme, title, somewhere};
-    public IntegerProperty[] sfIntegerPropArr = {timeRange};
+    public IntegerProperty[] sfIntegerPropArr = {timeRange, minDur, maxDur};
 
     @Override
     public Config[] getConfigsArr() {
         ArrayList<Config> list = new ArrayList<>();
-        list.add(new Config_stringProp("name", FilmFilterToXml.SELECTED_FILTER_NAME, name));
-        list.add(new Config_stringProp("channel", FilmFilterToXml.SELECTED_FILTER_CHANNEL, channel));
-        list.add(new Config_stringProp("theme", FilmFilterToXml.SELECTED_FILTER_THEME, theme));
-        list.add(new Config_stringProp("title", FilmFilterToXml.SELECTED_FILTER_TITLE, title));
-        list.add(new Config_stringProp("somewhere", FilmFilterToXml.SELECTED_FILTER_SOMEWHERE, somewhere));
-        list.add(new Config_intProp("timeRange", FilmFilterToXml.SELECTED_FILTER_TIME_RANGE, timeRange));
-        list.add(new Config_boolProp("onlyNew", FilmFilterToXml.SELECTED_FILTER_ONLY_NEW, onlyNew));
-        list.add(new Config_boolProp("onlyLive", FilmFilterToXml.SELECTED_FILTER_ONLY_LIVE, onlyLive));
+        list.add(new Config_stringProp("name", name));
+        list.add(new Config_stringProp("channel", channel));
+        list.add(new Config_stringProp("theme", theme));
+        list.add(new Config_stringProp("title", title));
+        list.add(new Config_stringProp("somewhere", somewhere));
+        list.add(new Config_intProp("timeRange", timeRange));
+        list.add(new Config_intProp("minDur", minDur));
+        list.add(new Config_intProp("maxDur", maxDur));
+        list.add(new Config_boolProp("onlyNew", onlyNew));
+        list.add(new Config_boolProp("onlyLive", onlyLive));
 
         return list.toArray(new Config[]{});
     }
@@ -178,6 +183,30 @@ public class FilmFilterProps extends PDataSample<FilmFilter> implements Comparab
 
     public IntegerProperty timeRangeProperty() {
         return timeRange;
+    }
+
+    public int getMinDur() {
+        return minDur.get();
+    }
+
+    public IntegerProperty minDurProperty() {
+        return minDur;
+    }
+
+    public void setMinDur(int minDur) {
+        this.minDur.set(minDur);
+    }
+
+    public int getMaxDur() {
+        return maxDur.get();
+    }
+
+    public IntegerProperty maxDurProperty() {
+        return maxDur;
+    }
+
+    public void setMaxDur(int maxDur) {
+        this.maxDur.set(maxDur);
     }
 
     public boolean isOnlyNew() {

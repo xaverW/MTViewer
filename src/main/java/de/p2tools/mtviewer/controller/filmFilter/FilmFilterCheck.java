@@ -27,6 +27,8 @@ public class FilmFilterCheck {
     public static final int FILTER_TIME_RANGE_ALL_VALUE = 0;
     public static final int FILTER_TIME_RANGE_MIN_VALUE = 0;
     public static final int FILTER_TIME_RANGE_MAX_VALUE = 50;
+    public static final int FILTER_DURATION_MIN_MINUTE = 0;
+    public static final int FILTER_DURATION_MAX_MINUTE = 150;
 
     private FilmFilterCheck() {
     }
@@ -73,6 +75,32 @@ public class FilmFilterCheck {
 
         final long filmTime = film.filmDate.getTime();
         if (filmTime != 0 && filmTime < days) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean checkMinDur(int minDur, FilmData film) {
+        if (minDur == FILTER_DURATION_MIN_MINUTE) {
+            return true;
+        }
+
+        final int durationMinute = film.getDurationMinute();
+        if (durationMinute != 0 && durationMinute < minDur) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean checkMaxDur(int maxDur, FilmData film) {
+        if (maxDur == FILTER_DURATION_MAX_MINUTE) {
+            return true;
+        }
+
+        final int durationMinute = film.getDurationMinute();
+        if (durationMinute != 0 && durationMinute > maxDur) {
             return false;
         }
 

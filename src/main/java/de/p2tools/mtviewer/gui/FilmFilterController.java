@@ -21,7 +21,10 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.filmFilter.FilmFilterCheck;
 import de.p2tools.mtviewer.controller.filmFilter.FilterCheckRegEx;
+import de.p2tools.mtviewer.gui.tools.HelpText;
+import de.p2tools.p2Lib.guiTools.PButton;
 import de.p2tools.p2Lib.guiTools.PGuiTools;
+import de.p2tools.p2Lib.guiTools.pRange.PRangeBox;
 import de.p2tools.p2Lib.tools.duration.PDuration;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ListChangeListener;
@@ -41,13 +44,16 @@ import java.util.List;
 public class FilmFilterController extends VBox {
 
     public static final int FILTER_SPACING_TEXTFILTER = 10;
+
     private final MenuButton mbChannel = new MenuButton("");
     private final ComboBox<String> cboTheme = new ComboBox();
     private final ComboBox<String> cboTitle = new ComboBox();
     private final ComboBox<String> cboSomewhere = new ComboBox();
     private final Slider slTimeRange = new Slider();
-    private final Label lblTimeRange = new Label("Zeitraum:");
     private final Label lblTimeRangeValue = new Label();
+    private final PRangeBox slDur = new PRangeBox(FilmFilterCheck.FILTER_DURATION_MIN_MINUTE,
+            FilmFilterCheck.FILTER_DURATION_MAX_MINUTE);
+
     private final Button btnClearFilter = new Button();
     private final Button btnGoBack = new Button("");
     private final Button btnGoForward = new Button("");
@@ -62,6 +68,8 @@ public class FilmFilterController extends VBox {
 
         // Sender, Thema, ..
         initButton();
+        initDaysFilter();
+        initDurFilter();
         initSenderFilter();
         initStringFilter();
         addFilter();
@@ -84,6 +92,55 @@ public class FilmFilterController extends VBox {
             PDuration.onlyPing("Filter löschen");
             progData.actFilmFilterWorker.clearFilter();
         });
+    }
+
+    private void initDaysFilter() {
+        slTimeRange.setMin(FilmFilterCheck.FILTER_TIME_RANGE_MIN_VALUE);
+        slTimeRange.setMax(FilmFilterCheck.FILTER_TIME_RANGE_MAX_VALUE);
+        slTimeRange.setShowTickLabels(true);
+
+        slTimeRange.setMajorTickUnit(10);
+        slTimeRange.setBlockIncrement(5);
+
+        slTimeRange.setLabelFormatter(new StringConverter<>() {
+            @Override
+            public String toString(Double x) {
+                if (x == FilmFilterCheck.FILTER_TIME_RANGE_ALL_VALUE) return "alles";
+
+                return x.intValue() + "";
+            }
+
+            @Override
+            public Double fromString(String string) {
+                return null;
+            }
+        });
+
+        slTimeRange.setValue(progData.actFilmFilterWorker.getActFilterSettings().getTimeRange());
+        setLabelSlider();
+        progData.actFilmFilterWorker.getActFilterSettings().timeRangeProperty().addListener(
+                l -> slTimeRange.setValue(progData.actFilmFilterWorker.getActFilterSettings().getTimeRange()));
+
+        // kein direktes binding wegen: valueChangingProperty, nur melden wenn "steht"
+        slTimeRange.valueProperty().addListener((o, oldV, newV) -> {
+            setLabelSlider();
+            if (!slTimeRange.isValueChanging()) {
+                progData.actFilmFilterWorker.getActFilterSettings().setTimeRange((int) slTimeRange.getValue());
+            }
+        });
+
+        slTimeRange.valueChangingProperty().addListener((observable, oldvalue, newvalue) -> {
+                    if (!newvalue) {
+                        progData.actFilmFilterWorker.getActFilterSettings().setTimeRange((int) slTimeRange.getValue());
+                    }
+                }
+        );
+    }
+
+    private void initDurFilter() {
+        slDur.minValueProperty().bindBidirectional(progData.actFilmFilterWorker.getActFilterSettings().minDurProperty());
+        slDur.maxValueProperty().bindBidirectional(progData.actFilmFilterWorker.getActFilterSettings().maxDurProperty());
+        slDur.setValuePrefix("");
     }
 
     private void initSenderFilter() {
@@ -243,58 +300,23 @@ public class FilmFilterController extends VBox {
     }
 
     private VBox addSlider() {
-        initDaysFilter();
         VBox vBox;
         vBox = new VBox(2);
         vBox.setPadding(new Insets(0, 10, 0, 10));
-        HBox h = new HBox(lblTimeRange, PGuiTools.getHBoxGrower(), lblTimeRangeValue);
-        lblTimeRange.setMinWidth(0);
+        HBox h = new HBox(new Label("Zeitraum:"), PGuiTools.getHBoxGrower(), lblTimeRangeValue);
         vBox.getChildren().addAll(h, slTimeRange);
         getChildren().addAll(vBox);
         return vBox;
     }
 
-    private void initDaysFilter() {
-        slTimeRange.setMin(FilmFilterCheck.FILTER_TIME_RANGE_MIN_VALUE);
-        slTimeRange.setMax(FilmFilterCheck.FILTER_TIME_RANGE_MAX_VALUE);
-        slTimeRange.setShowTickLabels(true);
-
-        slTimeRange.setMajorTickUnit(10);
-        slTimeRange.setBlockIncrement(5);
-
-        slTimeRange.setLabelFormatter(new StringConverter<>() {
-            @Override
-            public String toString(Double x) {
-                if (x == FilmFilterCheck.FILTER_TIME_RANGE_ALL_VALUE) return "alles";
-
-                return x.intValue() + "";
-            }
-
-            @Override
-            public Double fromString(String string) {
-                return null;
-            }
-        });
-
-        slTimeRange.setValue(progData.actFilmFilterWorker.getActFilterSettings().getTimeRange());
-        setLabelSlider();
-        progData.actFilmFilterWorker.getActFilterSettings().timeRangeProperty().addListener(
-                l -> slTimeRange.setValue(progData.actFilmFilterWorker.getActFilterSettings().getTimeRange()));
-
-        // kein direktes binding wegen: valueChangingProperty, nur melden wenn "steht"
-        slTimeRange.valueProperty().addListener((o, oldV, newV) -> {
-            setLabelSlider();
-            if (!slTimeRange.isValueChanging()) {
-                progData.actFilmFilterWorker.getActFilterSettings().setTimeRange((int) slTimeRange.getValue());
-            }
-        });
-
-        slTimeRange.valueChangingProperty().addListener((observable, oldvalue, newvalue) -> {
-                    if (!newvalue) {
-                        progData.actFilmFilterWorker.getActFilterSettings().setTimeRange((int) slTimeRange.getValue());
-                    }
-                }
-        );
+    private VBox addDuration() {
+        VBox vBox;
+        vBox = new VBox(2);
+        vBox.setPadding(new Insets(0, 10, 0, 10));
+        HBox h = new HBox(new Label("Filmlänge:"), PGuiTools.getHBoxGrower());
+        vBox.getChildren().addAll(h, slDur);
+        getChildren().addAll(vBox);
+        return vBox;
     }
 
     private void setLabelSlider() {
@@ -336,19 +358,37 @@ public class FilmFilterController extends VBox {
         GridPane.setHgrow(vBox, Priority.ALWAYS);
         gridPaneLine1.add(vBox, 3, 0);
 
+        final Button btnHelpFilter = PButton.helpButton(progData.primaryStage, "Infos über die Filter",
+                HelpText.FILTER_INFO);
+
+        HBox hBoxLine1 = new HBox(15);
+        hBoxLine1.setAlignment(Pos.BOTTOM_RIGHT);
+        HBox.setHgrow(gridPaneLine1, Priority.ALWAYS);
+        hBoxLine1.getChildren().addAll(gridPaneLine1, btnHelpFilter, new ProgMenu());
+
 
         //zweite Zeile
-        HBox hBoxLine2 = new HBox();
-        hBoxLine2.setSpacing(20);
+        final GridPane gridPaneLine2 = new GridPane();
+        gridPaneLine2.setHgap(15);
+        gridPaneLine2.setVgap(15);
+
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setPercentWidth(50);
+        col2.setHgrow(Priority.ALWAYS);
+        gridPaneLine2.getColumnConstraints().addAll(col2, col2);
 
         vBox = addSlider();
-        hBoxLine2.getChildren().add(vBox);
+        gridPaneLine2.add(vBox, 0, 0);
+        GridPane.setHgrow(vBox, Priority.ALWAYS);
+
+        vBox = addDuration();
+        gridPaneLine2.add(vBox, 1, 0);
+        GridPane.setHgrow(vBox, Priority.ALWAYS);
 
         CheckBox chkOnlyNew = new CheckBox();
         chkOnlyNew.selectedProperty().bindBidirectional(progData.actFilmFilterWorker.getActFilterSettings().onlyNewProperty());
-        HBox hBoxNew = new HBox(5, new Label("nur neue Filme:"), chkOnlyNew);
-        hBoxNew.setAlignment(Pos.CENTER);
-        hBoxLine2.getChildren().add(hBoxNew);
+        HBox hBoxNew = new HBox(5, new Label("Nur neue Filme:"), chkOnlyNew);
+        hBoxNew.setAlignment(Pos.CENTER_RIGHT);
 
         CheckBox chkLive = new CheckBox();
         chkLive.setSelected(progData.actFilmFilterWorker.getActFilterSettings().onlyLiveProperty().get());
@@ -360,20 +400,27 @@ public class FilmFilterController extends VBox {
                 progData.actFilmFilterWorker.getActFilterSettings().setOnlyLive(false);
             }
         });
-        HBox hBoxLive = new HBox(5, new Label("nur Live-Streams:"), chkLive);
-        hBoxLive.setAlignment(Pos.CENTER);
+        HBox hBoxLive = new HBox(5, new Label("Nur Live-Streams:"), chkLive);
+        hBoxLive.setAlignment(Pos.CENTER_RIGHT);
         progData.actFilmFilterWorker.getActFilterSettings().onlyLiveProperty().addListener((u, o, n) -> {
             chkLive.setSelected(n.booleanValue());
         });
-        hBoxLine2.getChildren().add(hBoxLive);
+        VBox vBoxChk = new VBox(5);
+        vBoxChk.setAlignment(Pos.CENTER_RIGHT);
+        vBoxChk.getChildren().addAll(hBoxNew, hBoxLive);
+
 
         HBox hBoxClear = new HBox(10);
         hBoxClear.setAlignment(Pos.CENTER_RIGHT);
-        hBoxClear.getChildren().addAll(PGuiTools.getHBoxGrower(), btnGoBack, btnGoForward,
-                btnClearFilter, new ProgMenu());
-        hBoxLine2.getChildren().addAll(PGuiTools.getHBoxGrower(), hBoxClear);
+        hBoxClear.getChildren().addAll(btnGoBack, btnGoForward, btnClearFilter);
 
-        getChildren().add(gridPaneLine1);
+        HBox hBoxLine2 = new HBox();
+        hBoxLine2.setSpacing(15);
+        hBoxLine2.getChildren().addAll(gridPaneLine2, vBoxChk, hBoxClear);
+        HBox.setHgrow(gridPaneLine2, Priority.ALWAYS);
+
+        //add
+        getChildren().add(hBoxLine1);
         getChildren().add(hBoxLine2);
     }
 

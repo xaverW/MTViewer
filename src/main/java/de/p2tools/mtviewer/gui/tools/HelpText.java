@@ -20,6 +20,81 @@ import de.p2tools.p2Lib.P2LibConst;
 
 public class HelpText {
 
+    public static final String FILTER_INFO =
+            "Die Menüs, Textfelder und Schieberegler erlauben ein detailliertes " +
+                    "Durchsuchen und Filtern der vorhandenen Filme." +
+                    "\n" +
+                    "\n" +
+
+                    "Mit dem Filter \"Sender\" können ein oder mehrere Sender vorgegeben werden, " +
+                    "in denen die Sendungen gesucht werden." +
+                    "\n" +
+                    "Die Filter \"Thema\" und \"Titel\" suchen im jeweiligen Feld: Thema oder Titel." +
+                    "\n" +
+                    "Der Filter \"Irgendwo\" sucht in den Felder: Thema, Titel, Beschreibung und " +
+                    "Datum (z.B. nach \"20.11.\")." +
+                    "\n" +
+                    "Mit dem Filtern \"Zeitraum\" und \"Nur neue Filme\" können die Ergebnisse auf " +
+                    "einen kleineren Zeitraum oder auf nur \"neue Filme\" eingeschränkt werden." +
+                    "\n" +
+                    "Nur Live-Streams\" zeigt auch nur \"Live-Streams\" an." +
+                    "\n" +
+                    "\n" +
+                    "[=====================================]" +
+                    "\n" +
+                    "Mit den Textfeldern kann entweder nach einem wörtlichen Suchtext oder nach " +
+                    "regulären Ausdrücken (RegExp) gesucht werden.\n" +
+                    "\n" +
+                    "Groß- und Kleinschreibung wird bei beiden Arten der Suche nicht unterschieden.\n" +
+                    "\n" +
+                    "==== Wörtlicher Suchtext ====\n" +
+                    "Ein wörtlicher Suchtext findet alle Dateien bei denen der Suchtext an beliebiger " +
+                    "Stelle im durchsuchten Bereich enthalten ist.\n" +
+                    "\n" +
+                    "Um mehrere Begriffe zu suchen müssen diese durch Komma oder Doppelpunkt " +
+                    "getrennt werden. Das Komma verknüpft die Begriffe mit ODER " +
+                    "(=> mindestens einer der Begriffe muss vorkommen), " +
+                    "der Doppelpunkt mit UND (=> alle Begriffe müssen vorkommen).\n" +
+                    "\n" +
+                    "Suchtext und Suchbegriffe dürfen Leerzeichen enthalten, aber kein Komma und keinen Doppelpunkt.\n" +
+                    "\n" +
+                    "Beispiele:" +
+                    "\n" +
+                    "\n" +
+                    "'Tagesschau' findet u.a. 'Tagesschau, 12:00 Uhr', 'ARD Tagesschau Livestream', 'Bei Logo und der Tagesschau'." +
+                    "\n" +
+                    "\n" +
+                    "'Sport,Fussball' (Komma-getrennt) findet Filme bei denen 'Sport' oder 'Fussball' " +
+                    "oder beides vorkommt, u.a. 'Wintersport im Mumintal' und 'Wie wird man Fussballprofi?'." +
+                    "\n" +
+                    "\n" +
+                    "'Sport:Fussball' (Doppelpunkt-getrennt) findet nur Dateien bei denen " +
+                    "beides ('Sport' und 'Fussball') vorkommt, z.B. 'Wintersport, Fussball und Formel 1'." +
+                    "\n" +
+                    "\n" +
+                    "==== Reguläre Ausdrücke ====\n" +
+                    "Ein Suchtext aus regulären Ausdrücken (RegExp) muss mit '#:' (ohne die ' ') beginnen.\n" +
+                    "\n" +
+                    "Beliebige Zeichen mit in die Suche aufnehmen (als '.+', '.*' oder '.?'') macht einen Unterschied!\n" +
+                    "\n" +
+                    "Beispiele:" +
+                    "\n" +
+                    "\n" +
+                    "'#:Burger' oder '#:^burger$' -- beide finden 'Burger' und 'burger' und nichts sonst." +
+                    "\n" +
+                    "\n" +
+                    "'#:Burger.+' findet nicht 'Burger', aber alles was nach 'Burger' noch Zeichen " +
+                    "enthält (z.B. 'Burger für die Straubing Tigers')." +
+                    "\n" +
+                    "\n" +
+                    "'#:.+burger' findet alles was auf 'burger' oder 'Burger' " +
+                    "endet (z.B. 'Der Hamburger' und '1. Burger')." +
+                    "\n" +
+                    "\n" +
+                    "Mehr zu regulären Ausdrücken:\n" +
+                    "https://de.wikipedia.org/wiki/Regul%C3%A4rer_Ausdruck" +
+                    "\n";
+
     public static final String PROG_PATH_VLC =
             "Hier muss ein Standardprogramme zum Ansehen der Filme eingetragen werden. VLC ist " +
                     "ein gutes Programm dafür.\n" +

@@ -102,17 +102,6 @@ public class ProgInfos {
      *
      * @return Path object to mtviewer.xml file
      */
-    public static Path getSettingsFileOld() {
-        return SettingsDirectory.getSettingsFile(ProgData.configDir,
-                ProgConst.CONFIG_DIRECTORY,
-                ProgConst.CONFIG_FILE_OLD);
-    }
-
-    /**
-     * Return the path to "mtviewer.xml"
-     *
-     * @return Path object to mtviewer.xml file
-     */
     public static Path getStyleFile() {
         return SettingsDirectory.getSettingsFile(ProgData.configDir,
                 ProgConst.CONFIG_DIRECTORY,

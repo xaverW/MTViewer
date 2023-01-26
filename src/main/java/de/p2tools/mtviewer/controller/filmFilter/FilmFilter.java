@@ -73,6 +73,8 @@ public final class FilmFilter extends FilmFilterProps {
         titleProperty().addListener(l -> setTxtFilterChange());
         somewhereProperty().addListener(l -> setTxtFilterChange());
         timeRangeProperty().addListener(l -> setFilterChange());
+        minDurProperty().addListener(l -> setFilterChange());
+        maxDurProperty().addListener(l -> setFilterChange());
         onlyNewProperty().addListener(l -> setFilterChange());
         onlyLiveProperty().addListener(l -> setFilterChange());
     }
@@ -108,6 +110,8 @@ public final class FilmFilter extends FilmFilterProps {
         setTitle("");
         setSomewhere("");
         setTimeRange(FilmFilterCheck.FILTER_TIME_RANGE_ALL_VALUE);
+        setMinDur(FilmFilterCheck.FILTER_DURATION_MIN_MINUTE);
+        setMaxDur(FilmFilterCheck.FILTER_DURATION_MAX_MINUTE);
         setOnlyNew(false);
         setOnlyLive(false);
     }
