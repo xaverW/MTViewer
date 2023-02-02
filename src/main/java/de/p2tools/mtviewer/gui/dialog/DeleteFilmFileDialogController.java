@@ -57,7 +57,7 @@ public class DeleteFilmFileDialogController extends PDialogExtra {
         this.subtitleFile = subtitleFile;
         this.subtitleFileSrt = subtitleFileSrt;
 
-        vBoxCont = getvBoxCont();
+        vBoxCont = getVBoxCont();
         init(true);
     }
 

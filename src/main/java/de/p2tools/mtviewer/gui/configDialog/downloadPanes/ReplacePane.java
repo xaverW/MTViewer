@@ -53,7 +53,6 @@ public class ReplacePane {
     private final Stage stage;
     private TableView<ReplaceData> tableView = new TableView<>();
     private ObjectProperty<ReplaceData> replaceDateProp = new SimpleObjectProperty<>(null);
-//    private ReplaceData replaceData = null;
 
     public ReplacePane(Stage stage) {
         this.stage = stage;

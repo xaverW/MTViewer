@@ -196,8 +196,8 @@ public class DownloadAddDialogController extends PDialogExtra {
 
         gridPane.getColumnConstraints().addAll(PColumnConstraints.getCcPrefSize(),
                 PColumnConstraints.getCcComputedSizeAndHgrow());
-        getvBoxCont().setSpacing(20);
-        getvBoxCont().getChildren().addAll(gridPane);
+        getVBoxCont().setSpacing(20);
+        getVBoxCont().getChildren().addAll(gridPane);
 
         addOkCancelButtons(btnOk, btnCancel);
         if (!onlyChange) {
