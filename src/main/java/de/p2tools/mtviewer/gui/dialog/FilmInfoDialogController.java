@@ -65,9 +65,8 @@ public class FilmInfoDialogController extends PDialogExtra {
 
     private FilmInfoDialogController() {
         super(ProgData.getInstance().primaryStage, ProgConfig.SYSTEM_SIZE_DIALOG_FILMINFO,
-                "Filminfos", false, false, DECO.BORDER);
+                "Filminfos", false, false, DECO.BORDER_SMALL);
 
-        getHBoxTitle().getChildren().add(new Label("Titel"));
         init(false);
     }
 
