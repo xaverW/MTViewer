@@ -23,6 +23,7 @@ import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.gui.tools.HelpText;
+import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.dialogs.PDirFileChooser;
 import de.p2tools.p2Lib.guiTools.PButton;
 import de.p2tools.p2Lib.guiTools.PColumnConstraints;
@@ -38,7 +39,7 @@ import java.io.File;
 import java.util.Collection;
 
 public class DestinationPane {
-    private final VBox vBoxAll = new VBox(25);
+    private final VBox vBoxAll = new VBox();
     private final TextField txtDestPath = new TextField();
     private final TextField txtDestName = new TextField();
     private final TextField txtProg = new TextField();
@@ -59,13 +60,14 @@ public class DestinationPane {
     }
 
     public void makePane(Collection<TitledPane> result) {
-        TitledPane tpConfig = new TitledPane("Programme", vBoxAll);
+        TitledPane tpConfig = new TitledPane("Programm", vBoxAll);
         result.add(tpConfig);
     }
 
     private void make() {
         vBoxAll.setFillWidth(true);
-        vBoxAll.setPadding(new Insets(20));
+        vBoxAll.setPadding(new Insets(P2LibConst.DIST_EDGE));
+        vBoxAll.setSpacing(25);
 
         final Button btnFileDest = new Button();
         btnFileDest.setGraphic(ProgIcons.Icons.ICON_BUTTON_FILE_OPEN.getImageView());
@@ -108,8 +110,8 @@ public class DestinationPane {
 
         int row = 0;
         GridPane gridPane = new GridPane();
-        gridPane.setHgap(15);
-        gridPane.setVgap(10);
+        gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
+        gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
         vBoxAll.getChildren().add(gridPane);
 
         // path/name
@@ -134,6 +136,8 @@ public class DestinationPane {
         gridPane.add(txtParameter, 1, row);
         gridPane.add(btnParameterReset, 2, row);
         gridPane.add(btnHelpParameter, 4, row);
+
+        gridPane.add(new Label(), 1, ++row);
 
         gridPane.getColumnConstraints().addAll(PColumnConstraints.getCcPrefSize(),
                 PColumnConstraints.getCcComputedSizeAndHgrow(),
@@ -183,8 +187,8 @@ public class DestinationPane {
         GridPane.setValignment(slCutField, VPos.CENTER);
 
         GridPane gridPane = new GridPane();
-        gridPane.setHgap(15);
-        gridPane.setVgap(10);
+        gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
+        gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
         vBox.getChildren().add(gridPane);
 
         int row = 0;
@@ -193,6 +197,7 @@ public class DestinationPane {
         gridPane.add(lblSizeAll, 2, row);
         gridPane.add(btnHelpDestSize, 3, row);
 
+        ++row;
         gridPane.add(lblTxtField, 0, ++row);
         gridPane.add(slCutField, 1, row);
         gridPane.add(lblSizeField, 2, row);

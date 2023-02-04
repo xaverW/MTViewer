@@ -22,6 +22,7 @@ import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.filmFilter.FilmFilterCheck;
 import de.p2tools.mtviewer.controller.filmFilter.FilterCheckRegEx;
 import de.p2tools.mtviewer.gui.tools.HelpText;
+import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.guiTools.PButton;
 import de.p2tools.p2Lib.guiTools.PGuiTools;
 import de.p2tools.p2Lib.guiTools.pRange.PRangeBox;
@@ -178,7 +179,7 @@ public class FilmFilterController extends VBox {
             mbChannel.hide();
         });
 
-        HBox hBoxAll = new HBox(10);
+        HBox hBoxAll = new HBox(P2LibConst.DIST_BUTTON);
         hBoxAll.setAlignment(Pos.CENTER_LEFT);
         hBoxAll.getChildren().addAll(miCheckAll, btnAll);
 
@@ -302,7 +303,7 @@ public class FilmFilterController extends VBox {
     private VBox addSlider() {
         VBox vBox;
         vBox = new VBox(2);
-        vBox.setPadding(new Insets(0, 10, 0, 10));
+//        vBox.setPadding(new Insets(0, 10, 0, 10));
         HBox h = new HBox(new Label("Zeitraum:"), PGuiTools.getHBoxGrower(), lblTimeRangeValue);
         vBox.getChildren().addAll(h, slTimeRange);
         getChildren().addAll(vBox);
@@ -312,7 +313,7 @@ public class FilmFilterController extends VBox {
     private VBox addDuration() {
         VBox vBox;
         vBox = new VBox(2);
-        vBox.setPadding(new Insets(0, 10, 0, 10));
+//        vBox.setPadding(new Insets(0, 10, 0, 10));
         HBox h = new HBox(new Label("Filmlänge:"), PGuiTools.getHBoxGrower());
         vBox.getChildren().addAll(h, slDur);
         getChildren().addAll(vBox);
@@ -333,10 +334,12 @@ public class FilmFilterController extends VBox {
     }
 
     private void addFilter() {
+        final int distLine = 15;
+
         //erste Zeile
         final GridPane gridPaneLine1 = new GridPane();
-        gridPaneLine1.setHgap(15);
-        gridPaneLine1.setVgap(15);
+        gridPaneLine1.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
+        gridPaneLine1.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
         ColumnConstraints col1 = new ColumnConstraints();
         col1.setPercentWidth(25);
         gridPaneLine1.getColumnConstraints().addAll(col1, col1, col1, col1);
@@ -361,16 +364,17 @@ public class FilmFilterController extends VBox {
         final Button btnHelpFilter = PButton.helpButton(progData.primaryStage, "Infos über die Filter",
                 HelpText.FILTER_INFO);
 
-        HBox hBoxLine1 = new HBox(15);
+        HBox hBoxLine1 = new HBox();
         hBoxLine1.setAlignment(Pos.BOTTOM_RIGHT);
         HBox.setHgrow(gridPaneLine1, Priority.ALWAYS);
-        hBoxLine1.getChildren().addAll(gridPaneLine1, btnHelpFilter, new ProgMenu());
+        hBoxLine1.getChildren().addAll(gridPaneLine1, PGuiTools.getVDistance(distLine),
+                btnHelpFilter, PGuiTools.getVDistance(P2LibConst.DIST_BUTTON), new ProgMenu());
 
 
         //zweite Zeile
         final GridPane gridPaneLine2 = new GridPane();
-        gridPaneLine2.setHgap(15);
-        gridPaneLine2.setVgap(15);
+        gridPaneLine2.setHgap(distLine);
+        gridPaneLine2.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
 
         ColumnConstraints col2 = new ColumnConstraints();
         col2.setPercentWidth(50);
@@ -387,7 +391,7 @@ public class FilmFilterController extends VBox {
 
         CheckBox chkOnlyNew = new CheckBox();
         chkOnlyNew.selectedProperty().bindBidirectional(progData.actFilmFilterWorker.getActFilterSettings().onlyNewProperty());
-        HBox hBoxNew = new HBox(5, new Label("Nur neue Filme:"), chkOnlyNew);
+        HBox hBoxNew = new HBox(P2LibConst.DIST_BUTTON, new Label("Nur neue Filme:"), chkOnlyNew);
         hBoxNew.setAlignment(Pos.CENTER_RIGHT);
 
         CheckBox chkLive = new CheckBox();
@@ -400,23 +404,23 @@ public class FilmFilterController extends VBox {
                 progData.actFilmFilterWorker.getActFilterSettings().setOnlyLive(false);
             }
         });
-        HBox hBoxLive = new HBox(5, new Label("Nur Live-Streams:"), chkLive);
+        HBox hBoxLive = new HBox(P2LibConst.DIST_BUTTON, new Label("Nur Live-Streams:"), chkLive);
         hBoxLive.setAlignment(Pos.CENTER_RIGHT);
         progData.actFilmFilterWorker.getActFilterSettings().onlyLiveProperty().addListener((u, o, n) -> {
             chkLive.setSelected(n.booleanValue());
         });
-        VBox vBoxChk = new VBox(5);
+        VBox vBoxChk = new VBox(P2LibConst.DIST_BUTTON);
         vBoxChk.setAlignment(Pos.CENTER_RIGHT);
         vBoxChk.getChildren().addAll(hBoxNew, hBoxLive);
 
-
-        HBox hBoxClear = new HBox(10);
+        HBox hBoxClear = new HBox(P2LibConst.DIST_BUTTON);
         hBoxClear.setAlignment(Pos.CENTER_RIGHT);
         hBoxClear.getChildren().addAll(btnGoBack, btnGoForward, btnClearFilter);
 
         HBox hBoxLine2 = new HBox();
-        hBoxLine2.setSpacing(15);
-        hBoxLine2.getChildren().addAll(gridPaneLine2, vBoxChk, hBoxClear);
+        hBoxLine2.setSpacing(distLine);
+        hBoxLine2.getChildren().addAll(gridPaneLine2, vBoxChk,
+                /*PGuiTools.getVDistance(P2LibConst.DIST_BUTTON_BLOCK),*/ hBoxClear);
         HBox.setHgrow(gridPaneLine2, Priority.ALWAYS);
 
         //add

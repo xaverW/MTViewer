@@ -21,10 +21,11 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.gui.tools.HelpText;
-import de.p2tools.p2Lib.mtDownload.GetProgramStandardPath;
+import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.dialogs.PDirFileChooser;
 import de.p2tools.p2Lib.guiTools.PButton;
 import de.p2tools.p2Lib.guiTools.PColumnConstraints;
+import de.p2tools.p2Lib.mtDownload.GetProgramStandardPath;
 import de.p2tools.p2Lib.mtFilm.film.FilmData;
 import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
@@ -54,9 +55,9 @@ public class PlayPane {
 
     public TitledPane make(Collection<TitledPane> result) {
         final GridPane gridPane = new GridPane();
-        gridPane.setHgap(15);
-        gridPane.setVgap(15);
-        gridPane.setPadding(new Insets(20));
+        gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
+        gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
+        gridPane.setPadding(new Insets(P2LibConst.DIST_EDGE));
         gridPane.getColumnConstraints().addAll(PColumnConstraints.getCcPrefSize(),
                 PColumnConstraints.getCcComputedSizeAndHgrow(), PColumnConstraints.getCcPrefSize(),
                 PColumnConstraints.getCcPrefSize());
@@ -105,6 +106,7 @@ public class PlayPane {
         final Button btnHelpParameter = PButton.helpButton(stage, "Videoplayer", HelpText.PLAY_FILE_HELP_PARAMETER);
 
         gridPane.add(new Label("Videoplayer zum Abspielen der Filme"), 0, row, 2, 1);
+
         gridPane.add(new Label("Programm:"), 0, ++row);
         gridPane.add(txtPlay, 1, row);
         gridPane.add(btnProgramReset, 2, row);

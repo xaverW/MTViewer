@@ -20,6 +20,7 @@ import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.MTShortcut;
 import de.p2tools.mtviewer.gui.tools.HelpText;
+import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.alert.PAlert;
 import de.p2tools.p2Lib.guiTools.PButton;
 import de.p2tools.p2Lib.tools.log.PLog;
@@ -110,7 +111,7 @@ public class ShortcutPane {
                 });
 
                 final HBox hbox = new HBox();
-                hbox.setSpacing(5);
+                hbox.setSpacing(P2LibConst.DIST_BUTTON);
                 hbox.setAlignment(Pos.CENTER);
                 hbox.setPadding(new Insets(0, 2, 0, 2));
                 hbox.getChildren().addAll(btnChange);
@@ -143,8 +144,7 @@ public class ShortcutPane {
                     pShortcut.resetShortcut();
                 });
 
-                final HBox hbox = new HBox();
-                hbox.setSpacing(5);
+                final HBox hbox = new HBox(P2LibConst.DIST_BUTTON);
                 hbox.setAlignment(Pos.CENTER);
                 hbox.setPadding(new Insets(0, 2, 0, 2));
                 hbox.getChildren().add(btnReset);
@@ -165,7 +165,6 @@ public class ShortcutPane {
                 HelpText.SHORTCUT);
 
         SplitPane splitPane = new SplitPane();
-
         initTable(tableView);
 
         txtLongDescription.setMinHeight(ProgConst.MIN_TEXTAREA_HEIGHT_LOW);
@@ -180,7 +179,7 @@ public class ShortcutPane {
         SplitPane.setResizableWithParent(txtLongDescription, Boolean.FALSE);
         splitPane.getItems().addAll(tableView, txtLongDescription);
 
-        HBox hBox = new HBox(5);
+        HBox hBox = new HBox(P2LibConst.DIST_BUTTON);
         hBox.setMaxHeight(Double.MAX_VALUE);
         hBox.getChildren().addAll(splitPane, btnHelp);
         HBox.setHgrow(splitPane, Priority.ALWAYS);

@@ -20,6 +20,7 @@ import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.gui.tools.HelpText;
+import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.data.PColorData;
 import de.p2tools.p2Lib.guiTools.PButton;
 import de.p2tools.p2Lib.guiTools.PColumnConstraints;
@@ -59,8 +60,7 @@ public class ColorPane {
                 }
 
                 PColorData pColorData = getTableView().getItems().get(getIndex());
-                final HBox hbox = new HBox();
-                hbox.setSpacing(5);
+                final HBox hbox = new HBox(P2LibConst.DIST_BUTTON);
                 hbox.setAlignment(Pos.CENTER);
                 hbox.setPadding(new Insets(0, 2, 0, 2));
 
@@ -93,8 +93,7 @@ public class ColorPane {
                 }
 
                 PColorData pColorData = getTableView().getItems().get(getIndex());
-                final HBox hbox = new HBox();
-                hbox.setSpacing(5);
+                final HBox hbox = new HBox(P2LibConst.DIST_BUTTON);
                 hbox.setAlignment(Pos.CENTER);
                 hbox.setPadding(new Insets(0, 2, 0, 2));
 
@@ -176,16 +175,19 @@ public class ColorPane {
 
         int row = 0;
         final GridPane gridPane = new GridPane();
-        gridPane.setHgap(15);
-        gridPane.setVgap(15);
-        gridPane.setPadding(new Insets(10));
+        gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
+        gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
+        gridPane.setPadding(new Insets(P2LibConst.DIST_EDGE));
 
         gridPane.add(tglDarkTheme, 0, row);
         gridPane.add(btnHelpTheme, 1, row);
         GridPane.setHalignment(btnHelpTheme, HPos.RIGHT);
 
+        ++row;
+        ++row;
         gridPane.add(new Label("Schriftfarben"), 0, ++row, 2, 1);
         gridPane.add(tableViewFont, 0, ++row, 2, 1);
+
         ++row;
         gridPane.add(new Label("Hintergrundfarben"), 0, ++row, 2, 1);
         gridPane.add(tableViewBackground, 0, ++row, 2, 1);

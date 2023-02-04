@@ -20,13 +20,17 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
 import de.p2tools.mtviewer.gui.tools.HelpText;
+import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.guiTools.PButton;
 import de.p2tools.p2Lib.guiTools.PColumnConstraints;
 import de.p2tools.p2Lib.guiTools.pToggleSwitch.PToggleSwitch;
 import javafx.beans.property.BooleanProperty;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TitledPane;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -48,15 +52,14 @@ public class LoadFilmsPane {
 
     public TitledPane make(Collection<TitledPane> result) {
         final GridPane gridPane = new GridPane();
-        gridPane.setHgap(15);
-        gridPane.setVgap(5);
-        gridPane.setPadding(new Insets(20));
+        gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
+        gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
+        gridPane.setPadding(new Insets(P2LibConst.DIST_EDGE));
 
         final PToggleSwitch tglLoad = new PToggleSwitch("Filmliste beim Programmstart laden");
         tglLoad.selectedProperty().bindBidirectional(propLoad);
         final Button btnHelpLoad = PButton.helpButton(stage, "Filmliste laden",
                 HelpText.LOAD_FILMLIST_PROGRAMSTART);
-
 
         //Diacritic
         final PToggleSwitch tglRemoveDiacritic = new PToggleSwitch("Diakritische Zeichen ändern");
@@ -65,24 +68,21 @@ public class LoadFilmsPane {
         final Button btnHelpDia = PButton.helpButton(stage, "Diakritische Zeichen",
                 HelpText.DIAKRITISCHE_ZEICHEN);
 
-        Separator sp2 = new Separator();
-        sp2.getStyleClass().add("pseperator2");
-        sp2.setMinHeight(0);
+        Button btnLoad = new Button("_Filmliste mit dieser Einstellung neu laden");
+        btnLoad.setTooltip(new Tooltip("Eine komplette neue Filmliste laden.\n" +
+                "Geänderte Einstellungen für das Laden der Filmliste werden so sofort übernommen"));
+        btnLoad.setOnAction(event -> LoadFilmFactory.getInstance().loadList(true));
 
         int row = 0;
         gridPane.add(tglLoad, 0, ++row);
         gridPane.add(btnHelpLoad, 1, row);
 
         gridPane.add(new Label(" "), 0, ++row);
-        gridPane.add(new Label(" "), 0, ++row);
-
         gridPane.add(tglRemoveDiacritic, 0, ++row);
         gridPane.add(btnHelpDia, 1, row);
 
-        Button btnLoad = new Button("_Filmliste mit dieser Einstellung neu laden");
-        btnLoad.setTooltip(new Tooltip("Eine komplette neue Filmliste laden.\n" +
-                "Geänderte Einstellungen für das Laden der Filmliste werden so sofort übernommen"));
-        btnLoad.setOnAction(event -> LoadFilmFactory.getInstance().loadList(true));
+        gridPane.add(new Label(" "), 0, ++row);
+        gridPane.add(new Label(" "), 0, ++row);
         gridPane.add(btnLoad, 0, ++row, 2, 1);
         GridPane.setHalignment(btnLoad, HPos.RIGHT);
 

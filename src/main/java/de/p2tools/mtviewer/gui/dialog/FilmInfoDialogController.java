@@ -19,6 +19,7 @@ package de.p2tools.mtviewer.gui.dialog;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
+import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.dialogs.dialog.PDialogExtra;
 import de.p2tools.p2Lib.guiTools.PColumnConstraints;
 import de.p2tools.p2Lib.guiTools.PHyperlink;
@@ -64,7 +65,7 @@ public class FilmInfoDialogController extends PDialogExtra {
 
     private FilmInfoDialogController() {
         super(ProgData.getInstance().primaryStage, ProgConfig.SYSTEM_SIZE_DIALOG_FILMINFO,
-                "Filminfos", false, false);
+                "Filminfos", false, false, DECO.BORDER);
 
         init(false);
     }
@@ -165,9 +166,9 @@ public class FilmInfoDialogController extends PDialogExtra {
         btnOk.setOnAction(a -> close());
         getVBoxCont().getChildren().add(gridPane);
 
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
-        gridPane.setPadding(new Insets(5));
+        gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
+        gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
+        gridPane.setPadding(new Insets(P2LibConst.DIST_EDGE));
         gridPane.getColumnConstraints().addAll(PColumnConstraints.getCcPrefSize(),
                 PColumnConstraints.getCcComputedSizeAndHgrow());
 
@@ -186,12 +187,6 @@ public class FilmInfoDialogController extends PDialogExtra {
                 case FilmDataXml.FILM_URL_HISTORY:
                 case FilmDataXml.FILM_URL_SMALL:
                 case FilmDataXml.FILM_URL_SUBTITLE:
-//                case FilmDataXml.FILM_THEME2:
-//                case FilmDataXml.FILM_TITLE2:
-//                case FilmDataXml.FILM_DESCRIPTION2:
-//                case FilmDataXml.FILM_URL_RTMP:
-//                case FilmDataXml.FILM_URL_RTMP_HD:
-//                case FilmDataXml.FILM_URL_RTMP_SMALL:
                     // bis hier nicht anzeigen
                     break;
 

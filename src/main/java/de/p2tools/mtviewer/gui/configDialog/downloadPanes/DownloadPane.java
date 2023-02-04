@@ -20,6 +20,7 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.downloadTools.DownloadState;
 import de.p2tools.mtviewer.gui.tools.HelpText;
+import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.guiTools.PButton;
 import de.p2tools.p2Lib.guiTools.PColumnConstraints;
 import de.p2tools.p2Lib.guiTools.pToggleSwitch.PToggleSwitch;
@@ -65,9 +66,9 @@ public class DownloadPane {
     }
 
     private void make() {
-        gridPane.setHgap(20);
-        gridPane.setVgap(15);
-        gridPane.setPadding(new Insets(20));
+        gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
+        gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
+        gridPane.setPadding(new Insets(P2LibConst.DIST_EDGE));
 
         tglFinished.selectedProperty().bindBidirectional(ProgConfig.DOWNLOAD_SHOW_NOTIFICATION);
         final Button btnHelpFinished = PButton.helpButton(stage, "Download",
@@ -93,9 +94,11 @@ public class DownloadPane {
         hBox.getChildren().addAll(new Label("            "), rbAsk, rbContinue, rbRestart);
         vBox.getChildren().addAll(new Label("Beim Neustart bereits angefangener Downloads:"), hBox);
 
+        gridPane.add(new Label(), 0, ++row);
         gridPane.add(vBox, 0, ++row);
         gridPane.add(btnHelpContinue, 1, row);
 
+        gridPane.add(new Label(), 0, ++row);
         gridPane.add(tglSSL, 0, ++row);
         gridPane.add(btnHelpSSL, 1, row);
 

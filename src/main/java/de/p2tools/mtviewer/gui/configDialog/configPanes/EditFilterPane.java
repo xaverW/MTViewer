@@ -19,6 +19,7 @@ package de.p2tools.mtviewer.gui.configDialog.configPanes;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.gui.tools.HelpText;
+import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.guiTools.PButton;
 import de.p2tools.p2Lib.guiTools.PColumnConstraints;
 import javafx.beans.property.IntegerProperty;
@@ -42,7 +43,6 @@ public class EditFilterPane {
     }
 
     public void close() {
-
     }
 
     public TitledPane make(Collection<TitledPane> result) {
@@ -82,28 +82,21 @@ public class EditFilterPane {
 
 
         final GridPane gridPane = new GridPane();
-//        gridPane.setGridLinesVisible(true);
-        gridPane.setHgap(15);
-        gridPane.setVgap(15);
-        gridPane.setPadding(new Insets(20));
+        gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
+        gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
+        gridPane.setPadding(new Insets(P2LibConst.DIST_EDGE));
 
         int row = 0;
         HBox hBox = new HBox(20);
         hBox.getChildren().addAll(new Label("Suchbeginn nach Eingabe verzögern  um: "), lblValue);
         gridPane.add(hBox, 0, row);
-
-//        gridPane.add(new Label("Suchbeginn nach Eingabe verzögern  um  "), 0, row);
-//        gridPane.add(lblValue, 1, row);
         gridPane.add(slider, 0, ++row);
-//        GridPane.setHgrow(slider, Priority.ALWAYS);
 
         gridPane.add(new Label(), 0, ++row);
-
         gridPane.add(new Label("In Textfeldern:"), 0, ++row);
         gridPane.add(cbkReturn, 0, ++row);
 
         gridPane.add(new Label(), 0, ++row);
-
         gridPane.add(btnHelp, 2, ++row);
         GridPane.setHalignment(btnHelp, HPos.RIGHT);
 
@@ -111,8 +104,6 @@ public class EditFilterPane {
                 PColumnConstraints.getCcPrefSize(),
                 PColumnConstraints.getCcPrefSize(),
                 PColumnConstraints.getCcComputedSizeAndHgrow());
-
-
         return gridPane;
     }
 

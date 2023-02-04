@@ -20,6 +20,7 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.gui.tools.HelpText;
+import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.dialogs.PDirFileChooser;
 import de.p2tools.p2Lib.guiTools.PButton;
 import de.p2tools.p2Lib.guiTools.PColumnConstraints;
@@ -53,11 +54,11 @@ public class ProgPane {
 
     public TitledPane make(Collection<TitledPane> result) {
         final GridPane gridPane = new GridPane();
-        gridPane.setHgap(15);
-        gridPane.setVgap(15);
-        gridPane.setPadding(new Insets(20));
+        gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
+        gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
+        gridPane.setPadding(new Insets(P2LibConst.DIST_EDGE));
 
-        addWebbrowser(gridPane, 2);
+        addWebbrowser(gridPane);
         gridPane.getColumnConstraints().addAll(PColumnConstraints.getCcComputedSizeAndHgrow());
 
         TitledPane tpConfig = new TitledPane("Programme", gridPane);
@@ -65,7 +66,7 @@ public class ProgPane {
         return tpConfig;
     }
 
-    private void addWebbrowser(GridPane gridPane, int row) {
+    private void addWebbrowser(GridPane gridPane) {
         txtFileManagerWeb = new TextField();
         txtFileManagerWeb.textProperty().bindBidirectional(propUrl);
 
@@ -79,10 +80,10 @@ public class ProgPane {
         final Button btnHelp = PButton.helpButton(stage, "Webbrowser", HelpText.WEBBROWSER);
 
         VBox vBox = new VBox(2);
-        HBox hBox = new HBox(5);
+        HBox hBox = new HBox(P2LibConst.DIST_BUTTON);
         hBox.getChildren().addAll(txtFileManagerWeb, btnFile, btnHelp);
         HBox.setHgrow(txtFileManagerWeb, Priority.ALWAYS);
         vBox.getChildren().addAll(new Label("Webbrowser zum Öffnen von URLs"), hBox);
-        gridPane.add(vBox, 0, row);
+        gridPane.add(vBox, 0, 0);
     }
 }

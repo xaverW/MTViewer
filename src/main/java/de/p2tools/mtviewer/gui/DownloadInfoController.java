@@ -27,6 +27,7 @@ import de.p2tools.mtviewer.gui.dialog.FilmInfoDialogController;
 import de.p2tools.mtviewer.gui.tools.table.Table;
 import de.p2tools.mtviewer.gui.tools.table.TableDownload;
 import de.p2tools.mtviewer.gui.tools.table.TableRowDownload;
+import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.alert.PAlert;
 import de.p2tools.p2Lib.guiTools.POpen;
 import de.p2tools.p2Lib.guiTools.PTableFactory;
@@ -53,7 +54,7 @@ import java.util.Optional;
 
 public class DownloadInfoController extends AnchorPane {
 
-    private final HBox hBoxAll = new HBox(5);
+    private final HBox hBoxAll = new HBox();
     private final VBox vBoxTable = new VBox();
     private final TableDownload tableView;
     private final ScrollPane scrollPane = new ScrollPane();
@@ -194,9 +195,8 @@ public class DownloadInfoController extends AnchorPane {
     }
 
     private void make() {
-        hBoxAll.setSpacing(10);
-        hBoxAll.setPadding(new Insets(10));
-        vBoxTable.setSpacing(10);
+        hBoxAll.setSpacing(P2LibConst.DIST_BUTTON);
+        hBoxAll.setPadding(new Insets(P2LibConst.DIST_EDGE));
 
         scrollPane.setFitToHeight(true);
         scrollPane.setFitToWidth(true);
@@ -208,11 +208,11 @@ public class DownloadInfoController extends AnchorPane {
         Button btnStartAll = new Button();
         Button btnStopAll = new Button();
 
-        VBox vBox = new VBox(10);
-        vBox.setAlignment(Pos.TOP_CENTER);
-        vBox.getChildren().addAll(/*mbMenu, PGuiTools.getVDistance(5),*/ btnStartAll, btnStopAll, btnClearFilter);
+        VBox vBoxButton = new VBox(P2LibConst.DIST_BUTTON);
+        vBoxButton.setAlignment(Pos.TOP_CENTER);
+        vBoxButton.getChildren().addAll(btnStartAll, btnStopAll, btnClearFilter);
 
-        hBoxAll.getChildren().addAll(vBoxTable, vBox);
+        hBoxAll.getChildren().addAll(vBoxTable, vBoxButton);
 
         btnClearFilter.setGraphic(ProgIcons.Icons.ICON_BUTTON_CLEAN.getImageView());
         btnClearFilter.setTooltip(new Tooltip("Tabelle aufräumen"));

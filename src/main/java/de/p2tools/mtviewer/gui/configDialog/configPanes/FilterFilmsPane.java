@@ -21,6 +21,7 @@ import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
 import de.p2tools.mtviewer.gui.tools.HelpText;
+import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.guiTools.PButton;
 import de.p2tools.p2Lib.guiTools.PColumnConstraints;
 import de.p2tools.p2Lib.mtFilm.loadFilmlist.LoadFactory;
@@ -104,11 +105,11 @@ public class FilterFilmsPane {
         checkPropSender(aListCb);
 
         final VBox vBox = new VBox(20);
-        vBox.setPadding(new Insets(20));
+        vBox.setPadding(new Insets(P2LibConst.DIST_EDGE));
 
         final GridPane gridPane = new GridPane();
-        gridPane.setHgap(15);
-        gridPane.setVgap(15);
+        gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
+        gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
         gridPane.setPadding(new Insets(0));
 
         int row = 0;
@@ -130,7 +131,7 @@ public class FilterFilmsPane {
                 PColumnConstraints.getCcPrefSize());
         vBox.getChildren().add(gridPane);
 
-        HBox hBox = new HBox(10);
+        HBox hBox = new HBox(P2LibConst.DIST_BUTTON);
         hBox.setAlignment(Pos.CENTER_LEFT);
         Label lbl = new Label("diese Sender  *nicht*  laden:");
         lbl.setMaxWidth(Double.MAX_VALUE);
@@ -138,7 +139,7 @@ public class FilterFilmsPane {
         HBox.setHgrow(lbl, Priority.ALWAYS);
         vBox.getChildren().addAll(new Label(" "), hBox);
 
-        hBox = new HBox(10);
+        hBox = new HBox();
         hBox.setAlignment(Pos.CENTER_LEFT);
         hBox.getChildren().addAll(tilePaneSender);
         HBox.setHgrow(tilePaneSender, Priority.ALWAYS);
@@ -152,7 +153,7 @@ public class FilterFilmsPane {
             btnLoad.setOnAction(event -> LoadFilmFactory.getInstance().loadList(true));
 
             hBox = new HBox();
-            hBox.setAlignment(Pos.CENTER_LEFT);
+            hBox.setAlignment(Pos.CENTER_RIGHT);
             hBox.getChildren().add(btnLoad);
             vBox.getChildren().addAll(new Label(" "), hBox);
         }
