@@ -53,7 +53,7 @@ public class ConfigDialogController extends PDialogExtra {
 
     public ConfigDialogController(ProgData progData) {
         super(progData.primaryStage, ProgConfig.CONFIG_DIALOG_SIZE, "Einstellungen",
-                true, false, DECO.NONE, true);
+                true, false, DECO.NO_BORDER, true);
 
         this.progData = progData;
         this.diacriticChanged.setValue(ProgConfig.SYSTEM_REMOVE_DIACRITICS.getValue());
