@@ -87,7 +87,7 @@ public class FilmFilterController extends VBox {
         progData.actFilmFilterWorker.forwardPossibleProperty().addListener((v, o, n) -> System.out.println(progData.actFilmFilterWorker.forwardPossibleProperty().getValue().toString()));
         btnGoForward.setTooltip(new Tooltip("letzte Filtereinstellung wieder herstellen"));
 
-        btnClearFilter.setGraphic(de.p2tools.p2Lib.ProgIcons.Icons.ICON_BUTTON_CLEAR_FILTER.getImageView());
+        btnClearFilter.setGraphic(de.p2tools.p2Lib.ProgIcons.Icons.ICON_BUTTON_CLEAR_FILTER_SMALL.getImageView());
         btnClearFilter.setTooltip(new Tooltip("Filter löschen"));
         btnClearFilter.setOnAction(a -> {
             PDuration.onlyPing("Filter löschen");
@@ -368,7 +368,7 @@ public class FilmFilterController extends VBox {
         hBoxLine1.setAlignment(Pos.BOTTOM_RIGHT);
         HBox.setHgrow(gridPaneLine1, Priority.ALWAYS);
         hBoxLine1.getChildren().addAll(gridPaneLine1, PGuiTools.getVDistance(distLine),
-                btnHelpFilter, PGuiTools.getVDistance(P2LibConst.DIST_BUTTON), new ProgMenu());
+                /* btnHelpFilter, PGuiTools.getVDistance(P2LibConst.DIST_BUTTON),*/ new ProgMenu());
 
 
         //zweite Zeile
@@ -413,14 +413,20 @@ public class FilmFilterController extends VBox {
         vBoxChk.setAlignment(Pos.CENTER_RIGHT);
         vBoxChk.getChildren().addAll(hBoxNew, hBoxLive);
 
-        HBox hBoxClear = new HBox(P2LibConst.DIST_BUTTON);
-        hBoxClear.setAlignment(Pos.CENTER_RIGHT);
-        hBoxClear.getChildren().addAll(btnGoBack, btnGoForward, btnClearFilter);
+        HBox hBoxClear1 = new HBox(P2LibConst.DIST_BUTTON);
+        hBoxClear1.setAlignment(Pos.CENTER_RIGHT);
+        hBoxClear1.getChildren().addAll(btnGoBack, btnGoForward);
+        HBox hBoxClear2 = new HBox(P2LibConst.DIST_BUTTON);
+        hBoxClear2.setAlignment(Pos.CENTER_RIGHT);
+        hBoxClear2.getChildren().addAll(btnHelpFilter, btnClearFilter);
+        VBox vBoxClear = new VBox(P2LibConst.DIST_BUTTON);
+        vBoxClear.getChildren().addAll(hBoxClear2, hBoxClear1);
+        vBoxClear.setAlignment(Pos.CENTER_RIGHT);
 
         HBox hBoxLine2 = new HBox();
+        hBoxLine2.setAlignment(Pos.CENTER_RIGHT);
         hBoxLine2.setSpacing(distLine);
-        hBoxLine2.getChildren().addAll(gridPaneLine2, vBoxChk,
-                /*PGuiTools.getVDistance(P2LibConst.DIST_BUTTON_BLOCK),*/ hBoxClear);
+        hBoxLine2.getChildren().addAll(gridPaneLine2, vBoxChk, vBoxClear);
         HBox.setHgrow(gridPaneLine2, Priority.ALWAYS);
 
         //add

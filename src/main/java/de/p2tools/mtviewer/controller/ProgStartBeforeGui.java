@@ -17,31 +17,42 @@
 package de.p2tools.mtviewer.controller;
 
 import de.p2tools.mtviewer.controller.config.*;
-import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
-import de.p2tools.mtviewer.controller.update.SearchProgramUpdate;
-import de.p2tools.mtviewer.gui.tools.TipOfDay;
+import de.p2tools.mtviewer.gui.startDialog.StartDialogController;
 import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.alert.PAlert;
-import de.p2tools.p2Lib.icons.GetIcon;
-import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerFilmlistLoadEvent;
-import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerLoadFilmlist;
-import de.p2tools.p2Lib.tools.ProgramToolsFactory;
-import de.p2tools.p2Lib.tools.date.DateFactory;
+import de.p2tools.p2Lib.configFile.ConfigFile;
+import de.p2tools.p2Lib.configFile.ReadConfigFile;
 import de.p2tools.p2Lib.tools.duration.PDuration;
 import de.p2tools.p2Lib.tools.log.LogMessage;
 import de.p2tools.p2Lib.tools.log.PLog;
 import de.p2tools.p2Lib.tools.log.PLogger;
+import javafx.application.Platform;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
-public class ProgStart {
-    private boolean doneAtProgramstart = false;
+public class ProgStartBeforeGui {
+    private static boolean firstProgramStart = false; // ist der allererste Programmstart: Init wird gemacht
 
-    public ProgStart() {
+    private ProgStartBeforeGui() {
+    }
+
+    public static void workBeforeGui() {
+        if (!ProgStartBeforeGui.loadAll()) {
+            PDuration.onlyPing("Erster Start");
+            firstProgramStart = true;
+
+            UpdateConfig.setUpdateDone(); //dann ists ja kein Programmupdate
+            ProgData.getInstance().replaceList.init(); //einmal ein Muster anlegen, für Linux ist es bereits aktiv!
+
+            StartDialogController startDialogController = new StartDialogController();
+            if (!startDialogController.isOk()) {
+                // dann jetzt beenden -> Tschüss
+                Platform.exit();
+                System.exit(0);
+            }
+        }
     }
 
     public static void shortStartMsg() {
@@ -54,46 +65,12 @@ public class ProgStart {
         PLog.sysLog(list);
     }
 
-    public static void startMsg() {
-        shortStartMsg();
-        ProgConfig.logAllConfigs();
-    }
-
-    private static boolean updateCheckTodayDone() {
-        return ProgConfig.SYSTEM_UPDATE_DATE.get().equals(DateFactory.F_FORMAT_yyyy_MM_dd.format(new Date()));
-    }
-
-    /**
-     * alles was nach der GUI gemacht werden soll z.B.
-     * Filmliste beim Programmstart!! laden
-     *
-     * @param firstProgramStart
-     */
-    public void doWorkAfterGui(ProgData progData, boolean firstProgramStart) {
-        GetIcon.addWindowP2Icon(progData.primaryStage);
-        startMsg();
-        setTitle(progData);
-        progData.startTimer();
-        LoadFilmFactory.getInstance().loadFilmlist.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
-            @Override
-            public void finished(ListenerFilmlistLoadEvent event) {
-                if (!doneAtProgramstart) {
-                    doneAtProgramstart = true;
-                    checkProgUpdate(progData);
-                    new TipOfDay().showDialog(progData, false);
-                }
-            }
-        });
-
-        LoadFilmFactory.getInstance().loadProgStart(firstProgramStart);
-    }
-
     /**
      * Config beim  Programmstart laden
      *
      * @return
      */
-    public boolean loadAll() {
+    public static boolean loadAll() {
         boolean loadOk = load();
         if (ProgConfig.SYSTEM_LOG_ON.getValue()) {
             PLogger.setFileHandler(ProgInfos.getLogDirectory_String());
@@ -110,19 +87,18 @@ public class ProgStart {
         return true;
     }
 
-    private void clearConfig() {
+    private static void clearConfig() {
         ProgData progData = ProgData.getInstance();
         progData.replaceList.clear();
     }
 
-    private boolean load() {
+    private static boolean load() {
         boolean ret = false;
-        ProgData progData = ProgData.getInstance();
         final Path xmlFilePath = new ProgInfos().getSettingsFile();
 
         try {
             if (Files.exists(xmlFilePath)) {
-                if (ProgLoadFactory.loadProgConfigData(progData, xmlFilePath)) {
+                if (loadProgConfigData(xmlFilePath)) {
                     return true;
                 } else {
                     // dann hat das Laden nicht geklappt
@@ -143,8 +119,7 @@ public class ProgStart {
         return ret;
     }
 
-    private boolean loadBackup() {
-        ProgData progData = ProgData.getInstance();
+    private static boolean loadBackup() {
         boolean ret = false;
         final ArrayList<Path> path = new ArrayList<>();
         new ProgInfos().getMTViewerXmlCopyFilePath(path);
@@ -174,7 +149,7 @@ public class ProgStart {
             clearConfig();
             PLog.sysLog(new String[]{"Versuch Backup zu laden:", p.toString()});
             try {
-                if (ProgLoadFactory.loadProgConfigData(progData, p)) {
+                if (loadProgConfigData(p)) {
                     PLog.sysLog(new String[]{"Backup hat geklappt:", p.toString()});
                     ret = true;
                     break;
@@ -187,46 +162,30 @@ public class ProgStart {
         return ret;
     }
 
-    private void checkProgUpdate(ProgData progData) {
-        // Prüfen obs ein Programmupdate gibt
-        PDuration.onlyPing("checkProgUpdate");
+    private static boolean loadProgConfigData(Path path) {
+        PDuration.onlyPing("ProgStartFactory.loadProgConfigData");
+        boolean loadOk = loadProgConfig(path);
 
-      /*  if (ProgData.debug) {
-            // damits bei jedem Start gemacht wird
-            PLog.sysLog("DEBUG: Update-Check");
-            runUpdateCheck(progData, true);
-
-        } else*/
-
-        if (ProgConfig.SYSTEM_UPDATE_SEARCH_ACT.getValue() &&
-                !updateCheckTodayDone()) {
-            // nach Updates suchen
-            runUpdateCheck(progData, false);
-
-        } else {
-            // will der User nicht --oder-- wurde heute schon gemacht
-            List list = new ArrayList(5);
-            list.add("Kein Update-Check:");
-            if (!ProgConfig.SYSTEM_UPDATE_SEARCH_ACT.getValue()) {
-                list.add("  der User will nicht");
-            }
-            if (updateCheckTodayDone()) {
-                list.add("  heute schon gemacht");
-            }
-            PLog.sysLog(list);
+        if (ProgConfig.SYSTEM_LOG_ON.getValue()) {
+            PLogger.setFileHandler(ProgInfos.getLogDirectory_String());
         }
+
+        if (!loadOk) {
+            return false;
+        }
+
+        PLog.sysLog("Config wurde gelesen!");
+        return true;
     }
 
-    private void runUpdateCheck(ProgData progData, boolean showAlways) {
-        ProgConfig.SYSTEM_UPDATE_DATE.setValue(DateFactory.F_FORMAT_yyyy_MM_dd.format(new Date()));
-        new SearchProgramUpdate(progData).searchNewProgramVersion(showAlways);
-    }
+    private static boolean loadProgConfig(Path path) {
+        PLog.sysLog("Programmstart und ProgConfig laden von: " + path);
 
-    private void setTitle(ProgData progData) {
-        if (ProgData.debug) {
-            progData.primaryStage.setTitle(ProgConst.PROGRAM_NAME + " " + ProgramToolsFactory.getProgVersion() + " / DEBUG");
-        } else {
-            progData.primaryStage.setTitle(ProgConst.PROGRAM_NAME + " " + ProgramToolsFactory.getProgVersion());
-        }
+        ConfigFile configFile = new ConfigFile(ProgConst.XML_START, path);
+        ProgConfig.addConfigData(configFile);
+        ReadConfigFile readConfigFile = new ReadConfigFile();
+        readConfigFile.addConfigFile(configFile);
+
+        return readConfigFile.readConfigFile();
     }
 }

@@ -16,15 +16,14 @@
 package de.p2tools.mtviewer;
 
 import de.p2tools.mtviewer.controller.ProgQuit;
-import de.p2tools.mtviewer.controller.ProgStart;
+import de.p2tools.mtviewer.controller.ProgStartAfterGui;
+import de.p2tools.mtviewer.controller.ProgStartBeforeGui;
 import de.p2tools.mtviewer.controller.config.*;
-import de.p2tools.mtviewer.gui.startDialog.StartDialogController;
 import de.p2tools.p2Lib.P2LibInit;
 import de.p2tools.p2Lib.configFile.IoReadWriteStyle;
 import de.p2tools.p2Lib.guiTools.PGuiSize;
 import de.p2tools.p2Lib.tools.duration.PDuration;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -32,7 +31,6 @@ public class MTViewer extends Application {
 
     private static final String LOG_TEXT_PROGRAMSTART = "Dauer Programmstart";
     protected ProgData progData;
-    ProgStart progStart = new ProgStart();
     Scene scene = null;
     private Stage primaryStage;
     private boolean firstProgramStart = false; // ist der allererste Programmstart: Programminit wird gemacht
@@ -54,9 +52,9 @@ public class MTViewer extends Application {
         progData.primaryStage = primaryStage;
 
         initP2lib();
-        workBeforeGui();
+        ProgStartBeforeGui.workBeforeGui();
         initRootLayout();
-        progStart.doWorkAfterGui(progData, firstProgramStart);
+        ProgStartAfterGui.doWorkAfterGui(firstProgramStart);
 
         PDuration.onlyPing("Gui steht!");
         PDuration.counterStop(LOG_TEXT_PROGRAMSTART);
@@ -67,23 +65,6 @@ public class MTViewer extends Application {
                 "", ProgConfig.SYSTEM_DARK_THEME,
                 ProgData.debug, ProgData.duration);
         P2LibInit.addCssFile(ProgConst.CSS_FILE);
-    }
-
-    private void workBeforeGui() {
-        if (!progStart.loadAll()) {
-            PDuration.onlyPing("Erster Start");
-            firstProgramStart = true;
-
-            UpdateConfig.setUpdateDone(); //dann ists ja kein Programmupdate
-            progData.replaceList.init(); //einmal ein Muster anlegen, für Linux ist es bereits aktiv!
-
-            StartDialogController startDialogController = new StartDialogController();
-            if (!startDialogController.isOk()) {
-                // dann jetzt beenden -> Tschüss
-                Platform.exit();
-                System.exit(0);
-            }
-        }
     }
 
     private void initRootLayout() {

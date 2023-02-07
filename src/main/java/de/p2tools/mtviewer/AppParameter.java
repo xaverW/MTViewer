@@ -17,7 +17,7 @@
 
 package de.p2tools.mtviewer;
 
-import de.p2tools.mtviewer.controller.ProgStart;
+import de.p2tools.mtviewer.controller.ProgStartBeforeGui;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.p2Lib.tools.log.LogMessage;
@@ -70,7 +70,7 @@ public class AppParameter {
 
             if (hasOption(line, ProgParameter.VERSION)) {
                 EventQueue.invokeLater(() -> {
-                    ProgStart.shortStartMsg();
+                    ProgStartBeforeGui.shortStartMsg();
                     LogMessage.endMsg();
                     System.exit(0);
                 });

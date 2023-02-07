@@ -60,7 +60,7 @@ public class LoadFilmFactory {
 
             @Override
             public void finished(ListenerFilmlistLoadEvent event) {
-                new ProgSave().saveAll(); // damit nichts verloren geht
+                ProgSave.saveAll(); // damit nichts verloren geht
                 // activate the saved filter
                 ProgData.getInstance().worker.resetFilter();
                 ProgData.getInstance().filmFilterRunner.filter();
