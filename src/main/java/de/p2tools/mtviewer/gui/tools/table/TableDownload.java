@@ -18,7 +18,7 @@ package de.p2tools.mtviewer.gui.tools.table;
 
 import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
-import de.p2tools.p2Lib.guiTools.PCheckBoxCell;
+import de.p2tools.p2Lib.guiTools.pTable.CellCheckBox;
 import de.p2tools.p2Lib.mtDownload.DownloadSize;
 import de.p2tools.p2Lib.tools.GermanStringIntSorter;
 import javafx.scene.control.SelectionMode;
@@ -125,17 +125,17 @@ public class TableDownload extends PTable<DownloadData> {
 
         final TableColumn<DownloadData, Boolean> hdColumn = new TableColumn<>("HD");
         hdColumn.setCellValueFactory(new PropertyValueFactory<>("hd"));
-        hdColumn.setCellFactory(new PCheckBoxCell().cellFactoryBool);
+        hdColumn.setCellFactory(new CellCheckBox().cellFactoryBool);
         hdColumn.getStyleClass().add("alignCenter");
 
         final TableColumn<DownloadData, Boolean> utColumn = new TableColumn<>("UT");
         utColumn.setCellValueFactory(new PropertyValueFactory<>("ut"));
-        utColumn.setCellFactory(new PCheckBoxCell().cellFactoryBool);
+        utColumn.setCellFactory(new CellCheckBox().cellFactoryBool);
         utColumn.getStyleClass().add("alignCenter");
 
         final TableColumn<DownloadData, Boolean> geoColumn = new TableColumn<>("Geo");
         geoColumn.setCellValueFactory(new PropertyValueFactory<>("geoBlocked"));
-        geoColumn.setCellFactory(new PCheckBoxCell().cellFactoryBool);
+        geoColumn.setCellFactory(new CellCheckBox().cellFactoryBool);
         geoColumn.getStyleClass().add("alignCenter");
 
         final TableColumn<DownloadData, String> urlColumn = new TableColumn<>("URL");

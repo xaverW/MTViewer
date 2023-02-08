@@ -20,8 +20,8 @@ import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.gui.dialog.FilmInfoDialogController;
-import de.p2tools.p2Lib.guiTools.PCheckBoxCell;
 import de.p2tools.p2Lib.guiTools.PTableFactory;
+import de.p2tools.p2Lib.guiTools.pTable.CellCheckBox;
 import de.p2tools.p2Lib.mtFilm.film.FilmData;
 import de.p2tools.p2Lib.mtFilm.film.FilmSize;
 import de.p2tools.p2Lib.tools.date.PDate;
@@ -101,12 +101,12 @@ public class TableFilm extends PTable<FilmData> {
 
         final TableColumn<FilmData, Boolean> hdColumn = new TableColumn<>("HD");
         hdColumn.setCellValueFactory(new PropertyValueFactory<>("hd"));
-        hdColumn.setCellFactory(new PCheckBoxCell().cellFactoryBool);
+        hdColumn.setCellFactory(new CellCheckBox().cellFactoryBool);
         hdColumn.getStyleClass().add("alignCenter");
 
         final TableColumn<FilmData, Boolean> utColumn = new TableColumn<>("UT");
         utColumn.setCellValueFactory(new PropertyValueFactory<>("ut"));
-        utColumn.setCellFactory(new PCheckBoxCell().cellFactoryBool);
+        utColumn.setCellFactory(new CellCheckBox().cellFactoryBool);
         utColumn.getStyleClass().add("alignCenter");
 
         final TableColumn<FilmData, String> geoColumn = new TableColumn<>("Geo");

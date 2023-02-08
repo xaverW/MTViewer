@@ -24,6 +24,7 @@ import de.p2tools.mtviewer.controller.starter.StarterClass;
 import de.p2tools.mtviewer.gui.dialog.DownloadContinueDialogController;
 import de.p2tools.mtviewer.gui.dialog.DownloadErrorDialogController;
 import de.p2tools.p2Lib.P2LibConst;
+import de.p2tools.p2Lib.alert.PAlert;
 import de.p2tools.p2Lib.mtDownload.DownloadFactory;
 import de.p2tools.p2Lib.tools.log.PLog;
 import javafx.application.Platform;
@@ -38,6 +39,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Timer;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class DirectHttpDownload extends Thread {
 
@@ -67,6 +69,7 @@ public class DirectHttpDownload extends Thread {
     @Override
     public synchronized void run() {
         StarterClass.startMsg(download);
+        boolean restartWithOutSSL = false;
         try {
             Files.createDirectories(Paths.get(download.getDestPath()));
         } catch (final IOException ignored) {
@@ -81,6 +84,7 @@ public class DirectHttpDownload extends Thread {
                 if (!cancelDownload()) {
                     checkConn();
                 }
+
                 //und wenn klar, dann jetzt laden :)
                 if (download.isStateStartedRun()) {
                     new DownloadCont().downloadContent(this, progData, download, conn,
@@ -88,7 +92,26 @@ public class DirectHttpDownload extends Thread {
                 }
 
             } catch (final Exception ex) {
-                if ((ex instanceof IOException)
+                if (ex instanceof javax.net.ssl.SSLHandshakeException
+                        && restartCount < ProgConfig.SYSTEM_PARAMETER_DOWNLOAD_MAX_RESTART_HTTP.getValue()) {
+
+                    //der mehrfache Versuch, fehlerhafte Downloads zu starten, macht hier keinen sinn
+                    download.getStart().setRestartCounter(ProgConfig.SYSTEM_PARAMETER_DOWNLOAD_MAX_RESTART.getValue());
+
+                    //dann gabs Probleme bei https
+                    if (!restartWithOutSSL) {
+                        //nur dann nochmal fragen
+                        restartWithOutSSL = restartHttps(restartCount);
+                    }
+                    if (restartWithOutSSL) {
+                        restartCount++;
+                        restart = true;
+                    } else {
+                        download.setErrorMessage(ex.getMessage());
+                        download.setStateError();
+                    }
+
+                } else if ((ex instanceof IOException)
                         && restartCount < ProgConfig.SYSTEM_PARAMETER_DOWNLOAD_MAX_RESTART_HTTP.getValue()) {
                     if (ex instanceof java.net.SocketTimeoutException) {
                         // Timeout Fehlermeldung für zxd :)
@@ -126,6 +149,35 @@ public class DirectHttpDownload extends Thread {
         }
 
         StarterClass.finalizeDownload(download);
+    }
+
+    private boolean restartHttps(int restartCount) {
+        final ArrayList<String> text = new ArrayList<>();
+        text.add("https, Download Restarts: " + restartCount);
+        text.add("Ziel: " + download.getDestPathFile());
+        text.add("URL: " + download.getUrl());
+        PLog.sysLog(text.toArray(new String[text.size()]));
+
+        AtomicBoolean dialog = new AtomicBoolean(true);
+        AtomicBoolean ret = new AtomicBoolean(false);
+        Platform.runLater(() -> {
+            ret.set(PAlert.showAlertOkCancel("HTTPS",
+                    "Problem mit der HTTPS-Verbindung",
+                    "Beim Verbindungsaufbau mit der HTTPS-URL trat ein Problem auf. Soll " +
+                            "versucht werden, die Verbindung ohne die Prüfung des Zertifikats " +
+                            "aufzubauen?\n\n" +
+                            download.getTitle() + "\n\n" +
+                            download.getUrl()));
+            dialog.set(false);
+        });
+
+        while (dialog.get()) {
+            try {
+                wait(100);
+            } catch (final Exception ignored) {
+            }
+        }
+        return ret.get();
     }
 
     private void checkConn() throws IOException {
