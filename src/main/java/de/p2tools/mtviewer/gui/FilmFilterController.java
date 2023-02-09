@@ -19,13 +19,13 @@ package de.p2tools.mtviewer.gui;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
-import de.p2tools.mtviewer.controller.filmFilter.FilmFilterCheck;
-import de.p2tools.mtviewer.controller.filmFilter.FilterCheckRegEx;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.guiTools.PButton;
 import de.p2tools.p2Lib.guiTools.PGuiTools;
 import de.p2tools.p2Lib.guiTools.pRange.PRangeBox;
+import de.p2tools.p2Lib.mtFilter.FilterCheck;
+import de.p2tools.p2Lib.mtFilter.FilterCheckRegEx;
 import de.p2tools.p2Lib.tools.duration.PDuration;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ListChangeListener;
@@ -52,8 +52,8 @@ public class FilmFilterController extends VBox {
     private final ComboBox<String> cboSomewhere = new ComboBox();
     private final Slider slTimeRange = new Slider();
     private final Label lblTimeRangeValue = new Label();
-    private final PRangeBox slDur = new PRangeBox(FilmFilterCheck.FILTER_DURATION_MIN_MINUTE,
-            FilmFilterCheck.FILTER_DURATION_MAX_MINUTE);
+    private final PRangeBox slDur = new PRangeBox(FilterCheck.FILTER_ALL_OR_MIN,
+            FilterCheck.FILTER_DURATION_MAX_MINUTE);
 
     private final Button btnClearFilter = new Button();
     private final Button btnGoBack = new Button("");
@@ -96,8 +96,8 @@ public class FilmFilterController extends VBox {
     }
 
     private void initDaysFilter() {
-        slTimeRange.setMin(FilmFilterCheck.FILTER_TIME_RANGE_MIN_VALUE);
-        slTimeRange.setMax(FilmFilterCheck.FILTER_TIME_RANGE_MAX_VALUE);
+        slTimeRange.setMin(FilterCheck.FILTER_ALL_OR_MIN);
+        slTimeRange.setMax(FilterCheck.FILTER_TIME_RANGE_MAX_VALUE);
         slTimeRange.setShowTickLabels(true);
 
         slTimeRange.setMajorTickUnit(10);
@@ -106,7 +106,7 @@ public class FilmFilterController extends VBox {
         slTimeRange.setLabelFormatter(new StringConverter<>() {
             @Override
             public String toString(Double x) {
-                if (x == FilmFilterCheck.FILTER_TIME_RANGE_ALL_VALUE) return "alles";
+                if (x == FilterCheck.FILTER_ALL_OR_MIN) return "alles";
 
                 return x.intValue() + "";
             }
@@ -326,7 +326,7 @@ public class FilmFilterController extends VBox {
         int i = (int) slTimeRange.getValue();
         String tNr = i + "";
 
-        if (i == FilmFilterCheck.FILTER_TIME_RANGE_ALL_VALUE) {
+        if (i == FilterCheck.FILTER_ALL_OR_MIN) {
             lblTimeRangeValue.setText(txtAll);
         } else {
             lblTimeRangeValue.setText(tNr + (i == 1 ? " Tag" : " Tage"));

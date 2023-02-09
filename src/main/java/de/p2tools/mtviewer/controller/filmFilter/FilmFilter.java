@@ -17,6 +17,7 @@
 package de.p2tools.mtviewer.controller.filmFilter;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
+import de.p2tools.p2Lib.mtFilter.FilterCheck;
 import de.p2tools.p2Lib.tools.log.PDebugLog;
 import javafx.animation.PauseTransition;
 import javafx.beans.property.BooleanProperty;
@@ -109,9 +110,9 @@ public final class FilmFilter extends FilmFilterProps {
         setTheme("");
         setTitle("");
         setSomewhere("");
-        setTimeRange(FilmFilterCheck.FILTER_TIME_RANGE_ALL_VALUE);
-        setMinDur(FilmFilterCheck.FILTER_DURATION_MIN_MINUTE);
-        setMaxDur(FilmFilterCheck.FILTER_DURATION_MAX_MINUTE);
+        setTimeRange(FilterCheck.FILTER_ALL_OR_MIN);
+        setMinDur(FilterCheck.FILTER_ALL_OR_MIN);
+        setMaxDur(FilterCheck.FILTER_DURATION_MAX_MINUTE);
         setOnlyNew(false);
         setOnlyLive(false);
     }

@@ -18,6 +18,9 @@
 package de.p2tools.mtviewer.controller.filmFilter;
 
 import de.p2tools.p2Lib.mtFilm.film.FilmData;
+import de.p2tools.p2Lib.mtFilter.FilmFilterCheck;
+import de.p2tools.p2Lib.mtFilter.Filter;
+import de.p2tools.p2Lib.mtFilter.FilterCheck;
 
 import java.util.function.Predicate;
 
@@ -51,7 +54,7 @@ public class PredicateFactory {
         final boolean onlyLive = filmFilter.isOnlyLive();
         long days;
         try {
-            if (filmFilter.getTimeRange() == FilmFilterCheck.FILTER_TIME_RANGE_ALL_VALUE) {
+            if (filmFilter.getTimeRange() == FilterCheck.FILTER_ALL_OR_MIN) {
                 days = 0;
             } else {
                 final long max = 1000L * 60L * 60L * 24L * filmFilter.getTimeRange();
@@ -77,10 +80,10 @@ public class PredicateFactory {
         }
 
         //Filmlänge
-        if (filmFilter.getMinDur() != FilmFilterCheck.FILTER_DURATION_MIN_MINUTE) {
+        if (filmFilter.getMinDur() != FilterCheck.FILTER_ALL_OR_MIN) {
             predicate = predicate.and(f -> FilmFilterCheck.checkMinDur(filmFilter.getMinDur(), f));
         }
-        if (filmFilter.getMaxDur() != FilmFilterCheck.FILTER_DURATION_MAX_MINUTE) {
+        if (filmFilter.getMaxDur() != FilterCheck.FILTER_DURATION_MAX_MINUTE) {
             predicate = predicate.and(f -> FilmFilterCheck.checkMaxDur(filmFilter.getMaxDur(), f));
         }
 

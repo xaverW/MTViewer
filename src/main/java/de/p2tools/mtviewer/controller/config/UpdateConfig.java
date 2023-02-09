@@ -17,7 +17,7 @@
 
 package de.p2tools.mtviewer.controller.config;
 
-import de.p2tools.mtviewer.controller.filmFilter.FilmFilterCheck;
+import de.p2tools.p2Lib.mtFilter.FilterCheck;
 
 public class UpdateConfig {
 
@@ -34,7 +34,7 @@ public class UpdateConfig {
             final int FILTER_DAYS_MAX__OLD = 30; // ist der alte Wert für "alles"
 
             if (ProgData.getInstance().actFilmFilterWorker.getActFilterSettings().getTimeRange() == FILTER_DAYS_MAX__OLD) {
-                ProgData.getInstance().actFilmFilterWorker.getActFilterSettings().setTimeRange(FilmFilterCheck.FILTER_TIME_RANGE_ALL_VALUE);
+                ProgData.getInstance().actFilmFilterWorker.getActFilterSettings().setTimeRange(FilterCheck.FILTER_ALL_OR_MIN);
             }
         }
         setUpdateDone();

@@ -38,11 +38,11 @@ public class ProgColorList extends PColorList {
     public static final PColorData FILM_GEOBLOCK = addNewKey("COLOR_FILM_GEOBLOCK_BACKGROUND",
             Color.rgb(255, 168, 0), Color.rgb(236, 153, 0), "Tabelle Filme, geogeblockt");
 
-    // Filter wenn RegEx
-    public static final PColorData FILTER_REGEX = new PColorData("COLOR_FILTER_REGEX",
-            Color.rgb(225, 255, 225), Color.rgb(128, 179, 213));
-    public static final PColorData FILTER_REGEX_ERROR = new PColorData("COLOR_FILTER_REGEX_ERROR",
-            Color.rgb(255, 230, 230), Color.rgb(170, 0, 0));
+    //    // Filter wenn RegEx
+//    public static final PColorData FILTER_REGEX = new PColorData("COLOR_FILTER_REGEX",
+//            Color.rgb(225, 255, 225), Color.rgb(128, 179, 213));
+//    public static final PColorData FILTER_REGEX_ERROR = new PColorData("COLOR_FILTER_REGEX_ERROR",
+//            Color.rgb(255, 230, 230), Color.rgb(170, 0, 0));
     public static final PColorData ERROR = new PColorData("COLOR_ERROR", Color.rgb(255, 233, 233), Color.rgb(163, 82, 82));
     // DialogDownload
     public static final PColorData DOWNLOAD_NAME_ERROR = new PColorData("COLOR_DOWNLOAD_NAME_ERROR",

@@ -21,6 +21,7 @@ import de.p2tools.p2Lib.configFile.config.Config_boolProp;
 import de.p2tools.p2Lib.configFile.config.Config_intProp;
 import de.p2tools.p2Lib.configFile.config.Config_stringProp;
 import de.p2tools.p2Lib.configFile.pData.PDataSample;
+import de.p2tools.p2Lib.mtFilter.FilterCheck;
 import javafx.beans.property.*;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class FilmFilterProps extends PDataSample<FilmFilter> implements Comparab
 
     private final IntegerProperty timeRange = new SimpleIntegerProperty(15);
     private final IntegerProperty minDur = new SimpleIntegerProperty(0);
-    private final IntegerProperty maxDur = new SimpleIntegerProperty(FilmFilterCheck.FILTER_DURATION_MAX_MINUTE);
+    private final IntegerProperty maxDur = new SimpleIntegerProperty(FilterCheck.FILTER_DURATION_MAX_MINUTE);
 
     private final BooleanProperty onlyNew = new SimpleBooleanProperty(false);
     private final BooleanProperty onlyLive = new SimpleBooleanProperty(false);
