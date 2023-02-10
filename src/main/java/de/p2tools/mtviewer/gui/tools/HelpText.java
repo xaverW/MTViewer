@@ -42,54 +42,62 @@ public class HelpText {
                     "\n" +
                     "[=====================================]" +
                     "\n" +
-                    "Mit den Textfeldern kann entweder nach einem wörtlichen Suchtext oder nach " +
+
+
+                    "Mit den Textfeldern kann nach einem wörtlichen Suchtext (Suchtext muss enthalten sein/" +
+                    "oder darf nicht enthalten sein) oder nach " +
                     "regulären Ausdrücken (RegExp) gesucht werden.\n" +
                     "\n" +
                     "Groß- und Kleinschreibung wird bei beiden Arten der Suche nicht unterschieden.\n" +
                     "\n" +
-                    "==== Wörtlicher Suchtext ====\n" +
+                    "-- Wörtlicher Suchtext muss enthalten sein --\n" +
                     "Ein wörtlicher Suchtext findet alle Dateien bei denen der Suchtext an beliebiger " +
                     "Stelle im durchsuchten Bereich enthalten ist.\n" +
                     "\n" +
                     "Um mehrere Begriffe zu suchen müssen diese durch Komma oder Doppelpunkt " +
-                    "getrennt werden. Das Komma verknüpft die Begriffe mit ODER " +
-                    "(=> mindestens einer der Begriffe muss vorkommen), " +
-                    "der Doppelpunkt mit UND (=> alle Begriffe müssen vorkommen).\n" +
+                    "getrennt werden. Das Komma verknüpft die Begriffe mit ODER (=> mindestens einer der Begriffe " +
+                    "muss vorkommen), der Doppelpunkt mit UND (=> alle Begriffe müssen vorkommen).\n" +
                     "\n" +
+                    "\n" +
+
+                    "-- Wörtlicher Suchtext darf nicht enthalten sein --\n" +
+                    "Der Suchtext muss mit '!:' (ohne die ' ') beginnen.\n" +
+                    "Ein wörtlicher Suchtext schließt alle Dateien aus, bei denen der Suchtext an beliebiger " +
+                    "Stelle im durchsuchten Bereich enthalten ist.\n" +
+                    "\n" +
+                    "Um mehrere Begriffe auszuschließen, müssen diese durch Komma oder Doppelpunkt " +
+                    "getrennt werden. Das Komma verknüpft die Begriffe mit ODER (=> mindestens einer der Begriffe " +
+                    "muss enthalten sein). Der Doppelpunkt verknüpft die Begriffe mit UND " +
+                    "(=> alle Begriffe müssen enthalten sein, damit der Beitrag ein Treffer ist).\n" +
+                    "\n" +
+                    "\n" +
+
                     "Suchtext und Suchbegriffe dürfen Leerzeichen enthalten, aber kein Komma und keinen Doppelpunkt.\n" +
                     "\n" +
-                    "Beispiele:" +
-                    "\n" +
-                    "\n" +
-                    "'Tagesschau' findet u.a. 'Tagesschau, 12:00 Uhr', 'ARD Tagesschau Livestream', 'Bei Logo und der Tagesschau'." +
-                    "\n" +
-                    "\n" +
+                    "Beispiele:\n" +
+                    "'Tagesschau' findet u.a. 'Tagesschau, 12:00 Uhr', 'ARD Tagesschau Livestream', 'Bei Logo und der Tagesschau'.\n" +
                     "'Sport,Fussball' (Komma-getrennt) findet Filme bei denen 'Sport' oder 'Fussball' " +
-                    "oder beides vorkommt, u.a. 'Wintersport im Mumintal' und 'Wie wird man Fussballprofi?'." +
-                    "\n" +
-                    "\n" +
+                    "oder beides vorkommt, u.a. 'Wintersport im Mumintal' und 'Wie wird man Fussballprofi?'.\n" +
                     "'Sport:Fussball' (Doppelpunkt-getrennt) findet nur Dateien bei denen " +
-                    "beides ('Sport' und 'Fussball') vorkommt, z.B. 'Wintersport, Fussball und Formel 1'." +
+                    "beides ('Sport' und 'Fussball') vorkommt, z.B. 'Wintersport, Fussball und Formel 1'.\n" +
                     "\n" +
+                    "'!:Auto,Motorrad', es werden nur Beiträge gefunden, die weder \"Auto\" noch \"Motorrad\" " +
+                    "enthalten.\n" +
+                    "'!:Auto:Motorrad', es werden Beiträge gefunden, die \"Auto\" *und* \"Motorrad\" " +
+                    "*nicht* enthalten.\n" +
+
                     "\n" +
-                    "==== Reguläre Ausdrücke ====\n" +
+                    "-- Reguläre Ausdrücke --\n" +
                     "Ein Suchtext aus regulären Ausdrücken (RegExp) muss mit '#:' (ohne die ' ') beginnen.\n" +
                     "\n" +
                     "Beliebige Zeichen mit in die Suche aufnehmen (als '.+', '.*' oder '.?'') macht einen Unterschied!\n" +
                     "\n" +
-                    "Beispiele:" +
-                    "\n" +
-                    "\n" +
-                    "'#:Burger' oder '#:^burger$' -- beide finden 'Burger' und 'burger' und nichts sonst." +
-                    "\n" +
-                    "\n" +
+                    "Beispiele:\n" +
+                    "'#:Burger' oder '#:^burger$' -- beide finden 'Burger' und 'burger' und nichts sonst.\n" +
                     "'#:Burger.+' findet nicht 'Burger', aber alles was nach 'Burger' noch Zeichen " +
-                    "enthält (z.B. 'Burger für die Straubing Tigers')." +
-                    "\n" +
-                    "\n" +
+                    "enthält (z.B. 'Burger für die Straubing Tigers').\n" +
                     "'#:.+burger' findet alles was auf 'burger' oder 'Burger' " +
-                    "endet (z.B. 'Der Hamburger' und '1. Burger')." +
-                    "\n" +
+                    "endet (z.B. 'Der Hamburger' und '1. Burger').\n" +
                     "\n" +
                     "Mehr zu regulären Ausdrücken:\n" +
                     "https://de.wikipedia.org/wiki/Regul%C3%A4rer_Ausdruck" +

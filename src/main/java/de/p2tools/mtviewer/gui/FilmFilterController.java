@@ -303,7 +303,6 @@ public class FilmFilterController extends VBox {
     private VBox addSlider() {
         VBox vBox;
         vBox = new VBox(2);
-//        vBox.setPadding(new Insets(0, 10, 0, 10));
         HBox h = new HBox(new Label("Zeitraum:"), PGuiTools.getHBoxGrower(), lblTimeRangeValue);
         vBox.getChildren().addAll(h, slTimeRange);
         getChildren().addAll(vBox);
@@ -313,7 +312,6 @@ public class FilmFilterController extends VBox {
     private VBox addDuration() {
         VBox vBox;
         vBox = new VBox(2);
-//        vBox.setPadding(new Insets(0, 10, 0, 10));
         HBox h = new HBox(new Label("Filmlänge:"), PGuiTools.getHBoxGrower());
         vBox.getChildren().addAll(h, slDur);
         getChildren().addAll(vBox);
