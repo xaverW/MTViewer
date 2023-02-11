@@ -27,7 +27,6 @@ import de.p2tools.p2Lib.data.PDataProgConfig;
 import de.p2tools.p2Lib.mtDownload.BandwidthTokenBucket;
 import de.p2tools.p2Lib.mtDownload.GetProgramStandardPath;
 import de.p2tools.p2Lib.mtFilm.film.FilmData;
-import de.p2tools.p2Lib.mtFilm.filmlistUrls.FilmlistUrlList;
 import de.p2tools.p2Lib.tools.PStringUtils;
 import de.p2tools.p2Lib.tools.PSystemUtils;
 import de.p2tools.p2Lib.tools.ProgramToolsFactory;
@@ -165,6 +164,7 @@ public class ProgConfig extends PDataProgConfig {
     public static IntegerProperty SYSTEM_SAVE_MAX_FIELD = addIntProp("system-save-max-field", 50);
 
     // Configs
+    public static IntegerProperty SYSTEM_FILMLIST_AGE = addIntProp("system-FILM_AGE", P2LibConst.NUMBER_NULL);
     public static StringProperty SYSTEM_USERAGENT = addStrProp("system-useragent", ProgConst.USER_AGENT_DEFAULT); //Useragent für direkte Downloads
     public static BooleanProperty SYSTEM_USE_REPLACETABLE = addBoolProp("system-use-replacetable", SystemUtils.IS_OS_LINUX ? Boolean.TRUE : Boolean.FALSE);
     public static BooleanProperty SYSTEM_ONLY_ASCII = addBoolProp("system-only-ascii", Boolean.FALSE);
@@ -270,14 +270,6 @@ public class ProgConfig extends PDataProgConfig {
 
         configFile.addConfigs(progData.replaceList);
         configFile.addConfigs(progData.downloadList);
-
-        FilmlistUrlList filmlistUrlList = progData.searchFilmListUrls.getFilmlistUrlList_akt();
-        filmlistUrlList.setTag("filmlistUrlList-akt");
-        configFile.addConfigs(filmlistUrlList);
-
-        filmlistUrlList = progData.searchFilmListUrls.getFilmlistUrlList_diff();
-        filmlistUrlList.setTag("filmlistUrlList-diff");
-        configFile.addConfigs(filmlistUrlList);
     }
 
     public static void logAllConfigs() {

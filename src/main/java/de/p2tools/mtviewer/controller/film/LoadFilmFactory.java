@@ -72,7 +72,8 @@ public class LoadFilmFactory {
     public void loadProgStart(boolean firstProgramStart) {
         initLoadFactoryConst();
         loadFilmlist.loadFilmlistProgStart(firstProgramStart,
-                ProgInfos.getFilmListFile(), ProgConfig.SYSTEM_LOAD_FILMS_ON_START.getValue());
+                ProgInfos.getFilmListFile(), ProgConfig.SYSTEM_LOAD_FILMS_ON_START.getValue(),
+                ProgConfig.SYSTEM_FILMLIST_AGE.getValue());
     }
 
     public void loadList(boolean alwaysLoadNew) {

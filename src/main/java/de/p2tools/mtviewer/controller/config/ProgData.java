@@ -31,7 +31,6 @@ import de.p2tools.mtviewer.gui.dialog.QuitDialogController;
 import de.p2tools.mtviewer.gui.tools.Listener;
 import de.p2tools.p2Lib.guiTools.pMask.PMaskerPane;
 import de.p2tools.p2Lib.mtFilm.film.Filmlist;
-import de.p2tools.p2Lib.mtFilm.filmlistUrls.SearchFilmListUrls;
 import de.p2tools.p2Lib.tools.duration.PDuration;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -49,7 +48,6 @@ public class ProgData {
     // Infos
     public static String configDir = ""; // Verzeichnis zum Speichern der Programmeinstellungen
     private static ProgData instance;
-    public SearchFilmListUrls searchFilmListUrls; // da werden die DownloadURLs der Filmliste verwaltet
     public MTShortcut mtShortcut; // verwendete Shortcuts
     public ActFilmFilterWorker actFilmFilterWorker; // gespeicherte Filterprofile
     public FilmFilterRunner filmFilterRunner;
@@ -74,7 +72,6 @@ public class ProgData {
     private ProgData() {
         mtShortcut = new MTShortcut();
         replaceList = new ReplaceList();
-        searchFilmListUrls = new SearchFilmListUrls();
 
         actFilmFilterWorker = new ActFilmFilterWorker(this);
         filmlist = new Filmlist();

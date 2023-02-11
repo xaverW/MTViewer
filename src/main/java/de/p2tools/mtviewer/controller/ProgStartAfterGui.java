@@ -23,7 +23,9 @@ import de.p2tools.mtviewer.controller.config.ProgInfos;
 import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
 import de.p2tools.mtviewer.controller.update.SearchProgramUpdate;
 import de.p2tools.mtviewer.gui.tools.TipOfDay;
+import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.icons.GetIcon;
+import de.p2tools.p2Lib.mtFilm.film.FilmlistFactory;
 import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerFilmlistLoadEvent;
 import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerLoadFilmlist;
 import de.p2tools.p2Lib.tools.ProgramToolsFactory;
@@ -56,6 +58,9 @@ public class ProgStartAfterGui {
         LoadFilmFactory.getInstance().loadFilmlist.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
             @Override
             public void finished(ListenerFilmlistLoadEvent event) {
+                int age = FilmlistFactory.getAge(ProgData.getInstance().filmlist.metaData);
+                ProgConfig.SYSTEM_FILMLIST_AGE.setValue(ProgData.getInstance().filmlist.isEmpty() ? P2LibConst.NUMBER_NOT_STARTED : age);
+
                 if (!doneAtProgramstart) {
                     doneAtProgramstart = true;
                     checkProgUpdate();
