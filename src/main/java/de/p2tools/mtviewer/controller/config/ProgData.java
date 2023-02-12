@@ -25,6 +25,7 @@ import de.p2tools.mtviewer.controller.data.download.DownloadList;
 import de.p2tools.mtviewer.controller.filmFilter.ActFilmFilterWorker;
 import de.p2tools.mtviewer.controller.filmFilter.FilmFilterRunner;
 import de.p2tools.mtviewer.controller.starter.StarterClass;
+import de.p2tools.mtviewer.controller.worker.CheckForNewFilmlist;
 import de.p2tools.mtviewer.controller.worker.Worker;
 import de.p2tools.mtviewer.gui.FilmGuiController;
 import de.p2tools.mtviewer.gui.dialog.QuitDialogController;
@@ -62,6 +63,7 @@ public class ProgData {
     public QuitDialogController quitDialogController = null;
     // Worker
     public Worker worker; // Liste aller Sender, Themen, ...
+    public CheckForNewFilmlist checkForNewFilmlist;
 
     // Programmdaten
     public Filmlist filmlist; // ist die komplette Filmliste
@@ -80,6 +82,8 @@ public class ProgData {
         downloadInfos = new DownloadInfos(this);
         filmFilterRunner = new FilmFilterRunner(this);
         worker = new Worker(this);
+        checkForNewFilmlist = new CheckForNewFilmlist();
+
     }
 
     public synchronized static final ProgData getInstance(String dir) {

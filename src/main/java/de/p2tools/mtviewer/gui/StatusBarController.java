@@ -96,6 +96,13 @@ public class StatusBarController extends AnchorPane {
                 }
             }
         });
+        progData.checkForNewFilmlist.foundNewListProperty().addListener((u, o, n) -> {
+            if (progData.checkForNewFilmlist.isFoundNewList()) {
+                lblRightFilm.setStyle("-fx-underline: true;");
+            } else {
+                lblRightFilm.setStyle("-fx-underline: false;");
+            }
+        });
     }
 
     public void setStatusbarIndex() {
