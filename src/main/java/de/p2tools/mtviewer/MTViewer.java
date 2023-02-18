@@ -20,8 +20,8 @@ import de.p2tools.mtviewer.controller.ProgStartAfterGui;
 import de.p2tools.mtviewer.controller.ProgStartBeforeGui;
 import de.p2tools.mtviewer.controller.config.*;
 import de.p2tools.p2Lib.P2LibInit;
-import de.p2tools.p2Lib.configFile.IoReadWriteStyle;
 import de.p2tools.p2Lib.guiTools.PGuiSize;
+import de.p2tools.p2Lib.tools.IoReadWriteStyle;
 import de.p2tools.p2Lib.tools.duration.PDuration;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -54,7 +54,7 @@ public class MTViewer extends Application {
         initP2lib();
         ProgStartBeforeGui.workBeforeGui();
         initRootLayout();
-        ProgStartAfterGui.doWorkAfterGui(firstProgramStart);
+        ProgStartAfterGui.doWorkAfterGui();
 
         PDuration.onlyPing("Gui steht!");
         PDuration.counterStop(LOG_TEXT_PROGRAMSTART);

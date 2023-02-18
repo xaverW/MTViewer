@@ -60,7 +60,9 @@ public class LoadFilmFactory {
 
             @Override
             public void finished(ListenerFilmlistLoadEvent event) {
-                ProgSave.saveAll(); // damit nichts verloren geht
+                if (ProgData.firstProgramStart) {
+                    ProgSave.saveAll(); // damit nichts verloren geht
+                }
                 // activate the saved filter
                 ProgData.getInstance().worker.resetFilter();
                 ProgData.getInstance().filmFilterRunner.filter();
@@ -69,9 +71,9 @@ public class LoadFilmFactory {
         });
     }
 
-    public void loadProgStart(boolean firstProgramStart) {
+    public void loadProgStart() {
         initLoadFactoryConst();
-        loadFilmlist.loadFilmlistProgStart(firstProgramStart,
+        loadFilmlist.loadFilmlistProgStart(ProgData.firstProgramStart,
                 ProgInfos.getFilmListFile(), ProgConfig.SYSTEM_LOAD_FILMS_ON_START.getValue(),
                 ProgConfig.SYSTEM_FILMLIST_AGE.getValue());
     }

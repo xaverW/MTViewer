@@ -47,10 +47,8 @@ public class ProgStartAfterGui {
     /**
      * alles was nach der GUI gemacht werden soll z.B.
      * Filmliste beim Programmstart!! laden
-     *
-     * @param firstProgramStart
      */
-    public static void doWorkAfterGui(boolean firstProgramStart) {
+    public static void doWorkAfterGui() {
         GetIcon.addWindowP2Icon(ProgData.getInstance().primaryStage);
         startMsg();
         setTitle();
@@ -69,10 +67,11 @@ public class ProgStartAfterGui {
             }
         });
 
-        LoadFilmFactory.getInstance().loadProgStart(firstProgramStart);
+        //die gespeicherte Filmliste laden
+        LoadFilmFactory.getInstance().loadProgStart();
     }
 
-    public static void shortStartMsg() {
+    public static void startMsg() {
         ArrayList<String> list = new ArrayList<>();
         list.add("Verzeichnisse:");
         list.add("Programmpfad: " + ProgInfos.getPathJar());
@@ -80,28 +79,12 @@ public class ProgStartAfterGui {
 
         LogMessage.startMsg(ProgConst.PROGRAM_NAME, list);
         PLog.sysLog(list);
-    }
-
-    public static void startMsg() {
-        shortStartMsg();
         ProgConfig.logAllConfigs();
-    }
-
-    private static boolean updateCheckTodayDone() {
-        return ProgConfig.SYSTEM_UPDATE_DATE.get().equals(DateFactory.F_FORMAT_yyyy_MM_dd.format(new Date()));
     }
 
     private static void checkProgUpdate() {
         // Prüfen obs ein Programmupdate gibt
         PDuration.onlyPing("checkProgUpdate");
-
-      /*  if (ProgData.debug) {
-            // damits bei jedem Start gemacht wird
-            PLog.sysLog("DEBUG: Update-Check");
-            runUpdateCheck(progData, true);
-
-        } else*/
-
         if (ProgConfig.SYSTEM_UPDATE_SEARCH_ACT.getValue() &&
                 !updateCheckTodayDone()) {
             // nach Updates suchen
@@ -119,6 +102,10 @@ public class ProgStartAfterGui {
             }
             PLog.sysLog(list);
         }
+    }
+
+    private static boolean updateCheckTodayDone() {
+        return ProgConfig.SYSTEM_UPDATE_DATE.get().equals(DateFactory.F_FORMAT_yyyy_MM_dd.format(new Date()));
     }
 
     private static void runUpdateCheck(boolean showAlways) {
