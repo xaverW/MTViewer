@@ -30,15 +30,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TipOfDay {
+public class TipOfDayFactory {
 
-    private final String START = "                                                     " + P2LibConst.LINE_SEPARATOR;
-    private final int listSize = 17;
+    private static final String START = "                                                     " + P2LibConst.LINE_SEPARATOR;
+    private static final int listSize = 17;
 
-    public TipOfDay() {
+    private TipOfDayFactory() {
     }
 
-    public void showDialog(ProgData progData, boolean showAlways) {
+    public static void showDialog(ProgData progData, boolean showAlways) {
         if (!showAlways && !ProgConfig.TIP_OF_DAY_SHOW.getValue()) {
             //dann wills der User nicht :(
             PLog.sysLog("TipOfDay: Will der User nicht");
@@ -61,7 +61,7 @@ public class TipOfDay {
         }
     }
 
-    private void addTips(List<PTipOfDay> pToolTipList) {
+    private static void addTips(List<PTipOfDay> pToolTipList) {
         // private final int listSize = 1
         String text = START;
         text += "Der Infobereich unter der Filmliste\n" +

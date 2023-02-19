@@ -18,9 +18,13 @@
 package de.p2tools.mtviewer.controller.film;
 
 import de.p2tools.mtviewer.controller.ProgSave;
+import de.p2tools.mtviewer.controller.UpdateCheckFactory;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.config.ProgInfos;
+import de.p2tools.mtviewer.gui.tools.TipOfDayFactory;
+import de.p2tools.p2Lib.P2LibConst;
+import de.p2tools.p2Lib.mtFilm.film.FilmlistFactory;
 import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerFilmlistLoadEvent;
 import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerLoadFilmlist;
 import de.p2tools.p2Lib.mtFilm.loadFilmlist.LoadFilmlist;
@@ -29,6 +33,7 @@ import de.p2tools.p2Lib.mtFilm.tools.LoadFactoryConst;
 public class LoadFilmFactory {
     private static LoadFilmFactory instance;
     public LoadFilmlist loadFilmlist; //erledigt das Update der Filmliste
+    private static boolean doneAtProgramStart = false;
 
     private LoadFilmFactory() {
         loadFilmlist = new LoadFilmlist();
@@ -67,6 +72,15 @@ public class LoadFilmFactory {
                 ProgData.getInstance().worker.resetFilter();
                 ProgData.getInstance().filmFilterRunner.filter();
                 ProgData.getInstance().maskerPane.setMaskerVisible(false);
+
+                int age = FilmlistFactory.getAge(ProgData.getInstance().filmlist.metaData);
+                ProgConfig.SYSTEM_FILMLIST_AGE.setValue(ProgData.getInstance().filmlist.isEmpty() ? P2LibConst.NUMBER_NOT_STARTED : age);
+
+                if (!doneAtProgramStart) {
+                    doneAtProgramStart = true;
+                    UpdateCheckFactory.checkProgUpdate();
+                    TipOfDayFactory.showDialog(ProgData.getInstance(), false);
+                }
             }
         });
     }
