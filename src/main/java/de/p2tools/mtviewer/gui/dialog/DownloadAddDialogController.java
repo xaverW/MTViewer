@@ -460,7 +460,7 @@ public class DownloadAddDialogController extends PDialogExtra {
         downloadData.setDestPath(cboPath.getValue());
 
         //damit der Focus nicht aus der Tabelle verloren geht
-        progData.mtViewerPlayerController.setFocus();
+        progData.mtViewerController.setFocus();
         DialogFactory.saveComboPath(cboPath, path, ProgConfig.DOWNLOAD_DIALOG_PATH_SAVING);
 
         if (!onlyChange) {

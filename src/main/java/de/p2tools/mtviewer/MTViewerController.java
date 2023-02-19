@@ -30,12 +30,12 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-public class MTViewerPlayerController extends StackPane {
+public class MTViewerController extends StackPane {
 
     private final ProgData progData;
     FilmGuiPack filmGuiPack = new FilmGuiPack();
 
-    public MTViewerPlayerController() {
+    public MTViewerController() {
         progData = ProgData.getInstance();
         init();
     }

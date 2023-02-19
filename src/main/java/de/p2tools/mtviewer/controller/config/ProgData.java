@@ -17,7 +17,7 @@
 
 package de.p2tools.mtviewer.controller.config;
 
-import de.p2tools.mtviewer.MTViewerPlayerController;
+import de.p2tools.mtviewer.MTViewerController;
 import de.p2tools.mtviewer.controller.data.MTShortcut;
 import de.p2tools.mtviewer.controller.data.ReplaceList;
 import de.p2tools.mtviewer.controller.data.download.DownloadInfos;
@@ -59,7 +59,7 @@ public class ProgData {
     // Gui
     public Stage primaryStage = null;
     public PMaskerPane maskerPane = new PMaskerPane();
-    public MTViewerPlayerController mtViewerPlayerController = null;
+    public MTViewerController mtViewerController = null;
     public FilmGuiController filmGuiController = null; // Tab mit den Filmen
     public QuitDialogController quitDialogController = null;
     // Worker

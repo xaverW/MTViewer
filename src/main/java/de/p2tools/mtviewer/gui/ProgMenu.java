@@ -65,7 +65,7 @@ public class ProgMenu extends MenuButton {
         final MenuItem miLoad = new MenuItem("Eine neue Filmliste laden");
         miLoad.setOnAction(e -> LoadFilmFactory.getInstance().loadList(false));
         final MenuItem miShowInfo = new MenuItem("Infobereich unter der Tabelle ein-/ausblenden");
-        miShowInfo.setOnAction(a -> progData.mtViewerPlayerController.setInfos());
+        miShowInfo.setOnAction(a -> progData.mtViewerController.setInfos());
         PShortcutWorker.addShortCut(miShowInfo, MTShortcut.SHORTCUT_SHOW_INFOS);
         final MenuItem miConfig = new MenuItem("Einstellungen");
         miConfig.setOnAction(e -> new ConfigDialogController(ProgData.getInstance()).showDialog());

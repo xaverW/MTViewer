@@ -70,9 +70,9 @@ public class MTViewer extends Application {
     private void initRootLayout() {
         try {
             addThemeCss(); // damit es für die 2 schon mal stimmt
-            progData.mtViewerPlayerController = new MTViewerPlayerController();
+            progData.mtViewerController = new MTViewerController();
 
-            scene = new Scene(progData.mtViewerPlayerController,
+            scene = new Scene(progData.mtViewerController,
                     PGuiSize.getWidth(ProgConfig.SYSTEM_SIZE_GUI),
                     PGuiSize.getHeight(ProgConfig.SYSTEM_SIZE_GUI));//Größe der scene!= Größe stage!!!
             addThemeCss(); // und jetzt noch für die neue Scene
