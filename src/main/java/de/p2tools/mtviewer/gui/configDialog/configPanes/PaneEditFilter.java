@@ -22,7 +22,6 @@ import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.guiTools.PButton;
 import de.p2tools.p2Lib.guiTools.PColumnConstraints;
-import javafx.beans.property.IntegerProperty;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -33,12 +32,11 @@ import javafx.stage.Stage;
 
 import java.util.Collection;
 
-public class EditFilterPane {
+public class PaneEditFilter {
 
     private final Stage stage;
-    IntegerProperty waitTime = ProgConfig.SYSTEM_FILTER_WAIT_TIME;
 
-    public EditFilterPane(Stage stage) {
+    public PaneEditFilter(Stage stage) {
         this.stage = stage;
     }
 
@@ -71,10 +69,10 @@ public class EditFilterPane {
         slider.setShowTickLabels(true);
         slider.setSnapToTicks(true);
         slider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            waitTime.setValue(Double.valueOf(slider.getValue()).intValue());
+            ProgConfig.SYSTEM_FILTER_WAIT_TIME.setValue(Double.valueOf(slider.getValue()).intValue());
             setLabel(lblValue);
         });
-        slider.setValue(waitTime.getValue());
+        slider.setValue(ProgConfig.SYSTEM_FILTER_WAIT_TIME.getValue());
         setLabel(lblValue);
 
         final Button btnHelp = PButton.helpButton(stage, "Filtereinstellungen",
@@ -108,7 +106,7 @@ public class EditFilterPane {
     }
 
     private int setLabel(Label lblValue) {
-        int intValue = waitTime.getValue();
+        int intValue = ProgConfig.SYSTEM_FILTER_WAIT_TIME.getValue();
         lblValue.setText("  " + intValue + " ms");
         return intValue;
     }

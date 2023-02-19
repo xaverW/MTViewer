@@ -17,8 +17,8 @@
 package de.p2tools.mtviewer.gui.configDialog;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
-import de.p2tools.mtviewer.gui.configDialog.configPanes.EditFilterPane;
-import de.p2tools.mtviewer.gui.configDialog.configPanes.PlayPane;
+import de.p2tools.mtviewer.gui.configDialog.configPanes.PaneEditFilter;
+import de.p2tools.mtviewer.gui.configDialog.configPanes.PanePlay;
 import de.p2tools.p2Lib.dialogs.accordion.PAccordionPane;
 import javafx.scene.control.TitledPane;
 import javafx.stage.Stage;
@@ -26,14 +26,14 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class PlayPaneController extends PAccordionPane {
+public class ControllerPlay extends PAccordionPane {
 
     private final Stage stage;
 
-    private PlayPane playPane;
-    private EditFilterPane editFilterPane;
+    private PanePlay panePlay;
+    private PaneEditFilter paneEditFilter;
 
-    public PlayPaneController(Stage stage) {
+    public ControllerPlay(Stage stage) {
         super(stage, ProgConfig.CONFIG_DIALOG_ACCORDION, ProgConfig.SYSTEM_CONFIG_DIALOG_PLAY);
         this.stage = stage;
 
@@ -43,17 +43,17 @@ public class PlayPaneController extends PAccordionPane {
     @Override
     public void close() {
         super.close();
-        playPane.close();
-        editFilterPane.close();
+        panePlay.close();
+        paneEditFilter.close();
     }
 
     @Override
     public Collection<TitledPane> createPanes() {
         Collection<TitledPane> result = new ArrayList<TitledPane>();
-        playPane = new PlayPane(stage);
-        playPane.make(result);
-        editFilterPane = new EditFilterPane(stage);
-        editFilterPane.make(result);
+        panePlay = new PanePlay(stage);
+        panePlay.make(result);
+        paneEditFilter = new PaneEditFilter(stage);
+        paneEditFilter.make(result);
 
         return result;
     }

@@ -36,7 +36,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.util.Collection;
 
-public class PlayPane {
+public class PanePlay {
 
     private final Stage stage;
     private final RadioButton rbAsk = new RadioButton("Immer vorher fragen");
@@ -46,7 +46,7 @@ public class PlayPane {
     StringProperty propProgram = ProgConfig.SYSTEM_PROG_PLAY;
     StringProperty propParameter = ProgConfig.SYSTEM_PROG_PLAY_PARAMETER;
 
-    public PlayPane(Stage stage) {
+    public PanePlay(Stage stage) {
         this.stage = stage;
     }
 

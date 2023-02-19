@@ -25,6 +25,7 @@ import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.guiTools.PButton;
 import de.p2tools.p2Lib.guiTools.PColumnConstraints;
+import de.p2tools.p2Lib.guiTools.PGuiTools;
 import de.p2tools.p2Lib.guiTools.PHyperlink;
 import de.p2tools.p2Lib.guiTools.pToggleSwitch.PToggleSwitch;
 import javafx.beans.property.BooleanProperty;
@@ -37,16 +38,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.Collection;
 
-public class UpdatePane {
+public class PaneUpdate {
 
     private final ProgData progData;
 
-    private final PToggleSwitch tglSearch = new PToggleSwitch("einmal am Tag nach einer neuen Programmversion suchen");
-    private final PToggleSwitch tglSearchBeta = new PToggleSwitch("auch nach neuen Vorabversionen suchen");
+    private final PToggleSwitch tglSearch = new PToggleSwitch("Einmal am Tag nach einer neuen Programmversion suchen");
+    private final PToggleSwitch tglSearchBeta = new PToggleSwitch("Auch nach neuen Vorabversionen suchen");
     private final CheckBox chkDaily = new CheckBox("Zwischenschritte (Dailys) mit einbeziehen");
     private final Button btnNow = new Button("_Jetzt suchen");
     private final Stage stage;
@@ -55,7 +57,7 @@ public class UpdatePane {
     BooleanProperty propUpdateDailySearch = ProgConfig.SYSTEM_UPDATE_SEARCH_DAILY;
     private Button btnHelpBeta;
 
-    public UpdatePane(Stage stage) {
+    public PaneUpdate(Stage stage) {
         this.stage = stage;
         progData = ProgData.getInstance();
     }
@@ -66,10 +68,13 @@ public class UpdatePane {
     }
 
     public TitledPane make(Collection<TitledPane> result) {
+        final VBox vBox = new VBox(P2LibConst.DIST_BUTTON);
+        vBox.setPadding(new Insets(P2LibConst.DIST_EDGE));
+
         final GridPane gridPane = new GridPane();
         gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
         gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
-        gridPane.setPadding(new Insets(P2LibConst.DIST_EDGE));
+        gridPane.setPadding(new Insets(0));
 
         //einmal am Tag Update suchen
         tglSearch.selectedProperty().bindBidirectional(propUpdateSearch);
@@ -87,33 +92,36 @@ public class UpdatePane {
         btnNow.setOnAction(event -> new SearchProgramUpdate(progData, stage).searchNewProgramVersion(true));
         PHyperlink hyperlink = new PHyperlink(ProgConst.URL_WEBSITE_MTVIEWER,
                 ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIcons.Icons.ICON_BUTTON_FILE_OPEN.getImageView());
+
+        int row = 0;
+        gridPane.add(tglSearch, 0, row);
+        gridPane.add(btnHelp, 1, row);
+
+        ++row;
+        gridPane.add(tglSearchBeta, 0, ++row);
+        gridPane.add(btnHelpBeta, 1, row);
+
+        ++row;
+        gridPane.add(chkDaily, 0, ++row, 2, 1);
+        GridPane.setHalignment(chkDaily, HPos.RIGHT);
+
+        ++row;
+        ++row;
+        gridPane.add(btnNow, 0, ++row, 3, 1);
+        GridPane.setHalignment(btnNow, HPos.RIGHT);
+
+        gridPane.getColumnConstraints().addAll(PColumnConstraints.getCcComputedSizeAndHgrow(),
+                PColumnConstraints.getCcPrefSize());
+
         HBox hBoxHyper = new HBox();
         hBoxHyper.setAlignment(Pos.CENTER_LEFT);
         hBoxHyper.setPadding(new Insets(10, 0, 0, 0));
         hBoxHyper.setSpacing(10);
         hBoxHyper.getChildren().addAll(new Label("Infos auch auf der Website:"), hyperlink);
 
-        int row = 0;
-        gridPane.add(tglSearch, 0, row);
-        gridPane.add(btnHelp, 1, row);
+        vBox.getChildren().addAll(gridPane, PGuiTools.getVBoxGrower(), hBoxHyper);
 
-        gridPane.add(new Label(""), 0, ++row);
-        gridPane.add(tglSearchBeta, 0, ++row);
-        gridPane.add(btnHelpBeta, 1, row);
-        gridPane.add(chkDaily, 0, ++row, 2, 1);
-        GridPane.setHalignment(chkDaily, HPos.RIGHT);
-
-        gridPane.add(btnNow, 0, ++row);
-
-        gridPane.add(new Label(" "), 0, ++row);
-        gridPane.add(hBoxHyper, 0, ++row);
-
-        gridPane.getColumnConstraints().addAll(PColumnConstraints.getCcComputedSizeAndHgrow(),
-                PColumnConstraints.getCcPrefSize());
-        gridPane.getRowConstraints().addAll(PColumnConstraints.getRcPrefSize(), PColumnConstraints.getRcPrefSize(),
-                PColumnConstraints.getRcPrefSize(), PColumnConstraints.getRcVgrow(), PColumnConstraints.getRcPrefSize());
-
-        TitledPane tpConfig = new TitledPane("Programmupdate", gridPane);
+        TitledPane tpConfig = new TitledPane("Programmupdate", vBox);
         result.add(tpConfig);
         return tpConfig;
     }
@@ -121,7 +129,6 @@ public class UpdatePane {
     private void checkBeta() {
         tglSearchBeta.setDisable(!tglSearch.isSelected());
         btnHelpBeta.setDisable(!tglSearch.isSelected());
-
         if (!tglSearchBeta.isSelected()) {
             chkDaily.setSelected(false);
         }

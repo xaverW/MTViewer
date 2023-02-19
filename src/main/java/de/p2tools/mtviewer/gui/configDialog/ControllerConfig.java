@@ -26,21 +26,21 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class ConfigPaneController extends PAccordionPane {
+public class ControllerConfig extends PAccordionPane {
 
     private final ProgData progData;
     private final Stage stage;
 
-    private LogPane logPane;
-    private ColorPane colorPane;
-    private ShortcutPane shortcutPane;
-    private GeoPane geoPane;
-    private StylePane stylePane;
-    private ProgPane progPane;
-    private ConfigPane configPane;
-    private UpdatePane updatePane;
+    private PaneLog paneLog;
+    private PaneColor paneColor;
+    private PaneShortcut paneShortcut;
+    private PaneGeo paneGeo;
+    private PaneKeySize paneKeySize;
+    private PaneProg paneProg;
+    private PaneConfig paneConfig;
+    private PaneUpdate paneUpdate;
 
-    public ConfigPaneController(Stage stage) {
+    public ControllerConfig(Stage stage) {
         super(stage, ProgConfig.CONFIG_DIALOG_ACCORDION, ProgConfig.SYSTEM_CONFIG_DIALOG_CONFIG);
         this.stage = stage;
         progData = ProgData.getInstance();
@@ -51,35 +51,35 @@ public class ConfigPaneController extends PAccordionPane {
     @Override
     public void close() {
         super.close();
-        configPane.close();
-        colorPane.close();
-        geoPane.close();
-        stylePane.close();
-        shortcutPane.close();
-        progPane.close();
-        logPane.close();
-        updatePane.close();
+        paneConfig.close();
+        paneColor.close();
+        paneGeo.close();
+        paneKeySize.close();
+        paneShortcut.close();
+        paneProg.close();
+        paneLog.close();
+        paneUpdate.close();
     }
 
     @Override
     public Collection<TitledPane> createPanes() {
         Collection<TitledPane> result = new ArrayList<TitledPane>();
-        configPane = new ConfigPane(stage);
-        configPane.make(result);
-        colorPane = new ColorPane(stage);
-        colorPane.makeColor(result);
-        geoPane = new GeoPane(stage);
-        geoPane.makeGeo(result);
-        stylePane = new StylePane(stage, progData);
-        stylePane.makeStyle(result);
-        shortcutPane = new ShortcutPane(stage);
-        shortcutPane.makeShortcut(result);
-        progPane = new ProgPane(stage);
-        progPane.make(result);
-        logPane = new LogPane(stage);
-        logPane.make(result);
-        updatePane = new UpdatePane(stage);
-        updatePane.make(result);
+        paneConfig = new PaneConfig(stage);
+        paneConfig.make(result);
+        paneColor = new PaneColor(stage);
+        paneColor.makeColor(result);
+        paneGeo = new PaneGeo(stage);
+        paneGeo.makeGeo(result);
+        paneKeySize = new PaneKeySize(stage, progData);
+        paneKeySize.makeStyle(result);
+        paneShortcut = new PaneShortcut(stage);
+        paneShortcut.makeShortcut(result);
+        paneProg = new PaneProg(stage);
+        paneProg.make(result);
+        paneLog = new PaneLog(stage);
+        paneLog.make(result);
+        paneUpdate = new PaneUpdate(stage);
+        paneUpdate.make(result);
         return result;
     }
 }

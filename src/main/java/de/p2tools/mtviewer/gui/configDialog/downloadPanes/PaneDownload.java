@@ -34,20 +34,20 @@ import javafx.stage.Stage;
 
 import java.util.Collection;
 
-public class DownloadPane {
+public class PaneDownload {
 
     final GridPane gridPane = new GridPane();
     private final PToggleSwitch tglFinished = new PToggleSwitch("Benachrichtigung wenn abgeschlossen");
     private final ToggleGroup group = new ToggleGroup();
-    private final RadioButton rbAsk = new RadioButton("vorher fragen");
-    private final RadioButton rbContinue = new RadioButton("immer weiterführen");
-    private final RadioButton rbRestart = new RadioButton("immer neu starten");
+    private final RadioButton rbAsk = new RadioButton("Vorher fragen");
+    private final RadioButton rbContinue = new RadioButton("Immer weiterführen");
+    private final RadioButton rbRestart = new RadioButton("Immer neu starten");
 
     private final PToggleSwitch tglSSL = new PToggleSwitch("SSL-Download-URLs: Bei Problemen SSL abschalten");
     private final ProgData progData;
     private final Stage stage;
 
-    public DownloadPane(Stage stage) {
+    public PaneDownload(Stage stage) {
         this.stage = stage;
         progData = ProgData.getInstance();
 
@@ -94,11 +94,11 @@ public class DownloadPane {
         hBox.getChildren().addAll(new Label("            "), rbAsk, rbContinue, rbRestart);
         vBox.getChildren().addAll(new Label("Beim Neustart bereits angefangener Downloads:"), hBox);
 
-        gridPane.add(new Label(), 0, ++row);
+        ++row;
         gridPane.add(vBox, 0, ++row);
         gridPane.add(btnHelpContinue, 1, row);
 
-        gridPane.add(new Label(), 0, ++row);
+        ++row;
         gridPane.add(tglSSL, 0, ++row);
         gridPane.add(btnHelpSSL, 1, row);
 

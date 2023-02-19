@@ -18,9 +18,9 @@ package de.p2tools.mtviewer.gui.configDialog;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.gui.configDialog.downloadPanes.DestinationPane;
-import de.p2tools.mtviewer.gui.configDialog.downloadPanes.DownloadPane;
-import de.p2tools.mtviewer.gui.configDialog.downloadPanes.ReplacePane;
+import de.p2tools.mtviewer.gui.configDialog.downloadPanes.PaneDownload;
+import de.p2tools.mtviewer.gui.configDialog.downloadPanes.PaneReplace;
+import de.p2tools.mtviewer.gui.configDialog.downloadPanes.PaneSet;
 import de.p2tools.p2Lib.dialogs.accordion.PAccordionPane;
 import javafx.scene.control.TitledPane;
 import javafx.stage.Stage;
@@ -28,14 +28,14 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class DownloadPaneController extends PAccordionPane {
+public class ControllerDownload extends PAccordionPane {
     private final ProgData progData;
     private final Stage stage;
-    private DownloadPane downloadPane;
-    private DestinationPane destinationPane;
-    private ReplacePane replacePane;
+    private PaneDownload paneDownload;
+    private PaneSet paneSet;
+    private PaneReplace paneReplace;
 
-    public DownloadPaneController(Stage stage) {
+    public ControllerDownload(Stage stage) {
         super(stage, ProgConfig.CONFIG_DIALOG_ACCORDION, ProgConfig.SYSTEM_CONFIG_DIALOG_DOWNLOAD);
         this.stage = stage;
         progData = ProgData.getInstance();
@@ -45,20 +45,20 @@ public class DownloadPaneController extends PAccordionPane {
     @Override
     public void close() {
         super.close();
-        downloadPane.close();
-        destinationPane.close();
-        replacePane.close();
+        paneDownload.close();
+        paneSet.close();
+        paneReplace.close();
     }
 
     @Override
     public Collection<TitledPane> createPanes() {
         Collection<TitledPane> titledPanes = new ArrayList<>();
-        downloadPane = new DownloadPane(stage);
-        downloadPane.makePane(titledPanes);
-        destinationPane = new DestinationPane(stage);
-        destinationPane.makePane(titledPanes);
-        replacePane = new ReplacePane(stage);
-        replacePane.makePane(titledPanes);
+        paneDownload = new PaneDownload(stage);
+        paneDownload.makePane(titledPanes);
+        paneSet = new PaneSet(stage);
+        paneSet.makePane(titledPanes);
+        paneReplace = new PaneReplace(stage);
+        paneReplace.makePane(titledPanes);
         return titledPanes;
     }
 }

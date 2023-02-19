@@ -38,7 +38,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.util.Collection;
 
-public class DestinationPane {
+public class PaneSet {
     private final VBox vBoxAll = new VBox();
     private final TextField txtDestPath = new TextField();
     private final TextField txtDestName = new TextField();
@@ -49,7 +49,7 @@ public class DestinationPane {
     private final Stage stage;
     private final ProgData progData;
 
-    public DestinationPane(Stage stage) {
+    public PaneSet(Stage stage) {
         this.stage = stage;
         this.progData = ProgData.getInstance();
         make();
@@ -112,6 +112,7 @@ public class DestinationPane {
         GridPane gridPane = new GridPane();
         gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
         gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
+        gridPane.setPadding(new Insets(0));
         vBoxAll.getChildren().add(gridPane);
 
         // path/name
@@ -209,7 +210,7 @@ public class DestinationPane {
 
     private void setValueSlider(Slider sl, Label lb, String pre) {
         int days = (int) sl.getValue();
-        lb.setText(pre + (days == 0 ? "nicht\nbeschränken" : "auf " + days + "\nZeichen beschränken"));
+        lb.setText(pre + (days == 0 ? "Nicht\nbeschränken" : "Auf " + days + "\nZeichen beschränken"));
     }
 
     public void bindProgData() {

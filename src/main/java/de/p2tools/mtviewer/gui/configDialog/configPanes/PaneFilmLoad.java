@@ -24,7 +24,6 @@ import de.p2tools.p2Lib.P2LibConst;
 import de.p2tools.p2Lib.guiTools.PButton;
 import de.p2tools.p2Lib.guiTools.PColumnConstraints;
 import de.p2tools.p2Lib.guiTools.pToggleSwitch.PToggleSwitch;
-import javafx.beans.property.BooleanProperty;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -36,18 +35,21 @@ import javafx.stage.Stage;
 
 import java.util.Collection;
 
-public class LoadFilmsPane {
+public class PaneFilmLoad {
 
     private final ProgData progData;
+    private final PToggleSwitch tglLoad = new PToggleSwitch("Filmliste beim Programmstart laden");
+    private final PToggleSwitch tglRemoveDiacritic = new PToggleSwitch("Diakritische Zeichen ändern");
     private final Stage stage;
-    BooleanProperty propLoad = ProgConfig.SYSTEM_LOAD_FILMS_ON_START;
 
-    public LoadFilmsPane(Stage stage) {
+    public PaneFilmLoad(Stage stage) {
         this.stage = stage;
         progData = ProgData.getInstance();
     }
 
     public void close() {
+        tglLoad.selectedProperty().unbindBidirectional(ProgConfig.SYSTEM_LOAD_FILMS_ON_START);
+        tglRemoveDiacritic.selectedProperty().unbindBidirectional(ProgConfig.SYSTEM_REMOVE_DIACRITICS);
     }
 
     public TitledPane make(Collection<TitledPane> result) {
@@ -56,13 +58,11 @@ public class LoadFilmsPane {
         gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
         gridPane.setPadding(new Insets(P2LibConst.DIST_EDGE));
 
-        final PToggleSwitch tglLoad = new PToggleSwitch("Filmliste beim Programmstart laden");
-        tglLoad.selectedProperty().bindBidirectional(propLoad);
+        tglLoad.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_LOAD_FILMS_ON_START);
         final Button btnHelpLoad = PButton.helpButton(stage, "Filmliste laden",
                 HelpText.LOAD_FILMLIST_PROGRAMSTART);
 
         //Diacritic
-        final PToggleSwitch tglRemoveDiacritic = new PToggleSwitch("Diakritische Zeichen ändern");
         tglRemoveDiacritic.setMaxWidth(Double.MAX_VALUE);
         tglRemoveDiacritic.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_REMOVE_DIACRITICS);
         final Button btnHelpDia = PButton.helpButton(stage, "Diakritische Zeichen",
@@ -74,14 +74,13 @@ public class LoadFilmsPane {
         btnLoad.setOnAction(event -> LoadFilmFactory.getInstance().loadList(true));
 
         int row = 0;
-        gridPane.add(tglLoad, 0, ++row);
+        gridPane.add(tglLoad, 0, row);
         gridPane.add(btnHelpLoad, 1, row);
 
-        gridPane.add(new Label(" "), 0, ++row);
+        ++row;
         gridPane.add(tglRemoveDiacritic, 0, ++row);
         gridPane.add(btnHelpDia, 1, row);
 
-        gridPane.add(new Label(" "), 0, ++row);
         gridPane.add(new Label(" "), 0, ++row);
         gridPane.add(btnLoad, 0, ++row, 2, 1);
         GridPane.setHalignment(btnLoad, HPos.RIGHT);

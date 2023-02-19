@@ -46,12 +46,13 @@ public class StartPane {
         iv.setImage(im);
 
         hBox.getChildren().addAll(iv);
-        Label text = new Label("1) Die Filmliste kann hier" + P2LibConst.LINE_SEPARATOR +
-                "zeitlich eingeschränkt werden." +
+        Label text = new Label("1) Das sind Filter, die das Suchen" + P2LibConst.LINE_SEPARATOR +
+                "in der Filmliste ermöglichen." +
 
                 P2LibConst.LINE_SEPARATORx2 +
-                "2) Das sind Filter, die das Suchen" + P2LibConst.LINE_SEPARATOR +
-                "in der Filmliste ermöglichen." +
+                "2) Das ist das Programm-Menü" + P2LibConst.LINE_SEPARATOR +
+                "mit den Einstellungen und Infos über" + P2LibConst.LINE_SEPARATOR +
+                "das Programm." +
 
                 P2LibConst.LINE_SEPARATORx2 +
                 "3) Hier können alte Filereinstellungen" + P2LibConst.LINE_SEPARATOR +
@@ -59,16 +60,11 @@ public class StartPane {
                 "Filter gelöscht werden." +
 
                 P2LibConst.LINE_SEPARATORx2 +
-                "4) Das ist das Programm-Menü" + P2LibConst.LINE_SEPARATOR +
-                "mit den Einstellungen und Infos über" + P2LibConst.LINE_SEPARATOR +
-                "das Programm." +
-
-                P2LibConst.LINE_SEPARATORx2 +
-                "5) Ein Film oder ein Download kann" + P2LibConst.LINE_SEPARATOR +
+                "4) Ein Film oder ein Download kann" + P2LibConst.LINE_SEPARATOR +
                 "hier gestartet werden." +
 
                 P2LibConst.LINE_SEPARATORx2 +
-                "6) Infos zum markierten Film" + P2LibConst.LINE_SEPARATOR +
+                "5) Infos zum markierten Film" + P2LibConst.LINE_SEPARATOR +
                 "werden hier angezeigt.");
 
         hBox.getChildren().add(text);
@@ -102,7 +98,7 @@ public class StartPane {
                 "angelegter Downloads.");
 
         hBox.getChildren().add(text);
-        TitledPane tpConfig = new TitledPane("Infos zum Filmfilter", hBox);
+        TitledPane tpConfig = new TitledPane("Infos zur Programmoberfläche", hBox);
         return tpConfig;
     }
 

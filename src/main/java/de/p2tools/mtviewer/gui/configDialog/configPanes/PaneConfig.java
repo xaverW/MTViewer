@@ -25,7 +25,6 @@ import de.p2tools.p2Lib.guiTools.PButton;
 import de.p2tools.p2Lib.guiTools.PColumnConstraints;
 import de.p2tools.p2Lib.guiTools.pToggleSwitch.PToggleSwitch;
 import de.p2tools.p2Lib.tools.PStringUtils;
-import javafx.beans.property.BooleanProperty;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -37,22 +36,21 @@ import javafx.stage.Stage;
 
 import java.util.Collection;
 
-public class ConfigPane {
+public class PaneConfig {
 
     private final ProgData progData;
 
     private final PToggleSwitch tglTipOfDay = new PToggleSwitch("Tip des Tages anzeigen");
     private final Stage stage;
-    BooleanProperty propTipOfDay = ProgConfig.TIP_OF_DAY_SHOW;
     private TextField txtUserAgent;
 
-    public ConfigPane(Stage stage) {
+    public PaneConfig(Stage stage) {
         this.stage = stage;
         progData = ProgData.getInstance();
     }
 
     public void close() {
-        tglTipOfDay.selectedProperty().unbindBidirectional(propTipOfDay);
+        tglTipOfDay.selectedProperty().unbindBidirectional(ProgConfig.TIP_OF_DAY_SHOW);
         txtUserAgent.textProperty().unbindBidirectional(ProgConfig.SYSTEM_USERAGENT);
     }
 
@@ -62,7 +60,7 @@ public class ConfigPane {
         gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
         gridPane.setPadding(new Insets(P2LibConst.DIST_EDGE));
 
-        tglTipOfDay.selectedProperty().bindBidirectional(propTipOfDay);
+        tglTipOfDay.selectedProperty().bindBidirectional(ProgConfig.TIP_OF_DAY_SHOW);
         final Button btnHelpTipOfDay = PButton.helpButton(stage, "Tip des Tages anzeigen",
                 HelpText.TIP_OF_DAY);
         GridPane.setHalignment(btnHelpTipOfDay, HPos.RIGHT);
@@ -98,7 +96,7 @@ public class ConfigPane {
         txtUserAgent.textProperty().bindBidirectional(ProgConfig.SYSTEM_USERAGENT);
 
         int row = 0;
-        gridPane.add(tglTipOfDay, 0, ++row, 2, 1);
+        gridPane.add(tglTipOfDay, 0, row, 2, 1);
         gridPane.add(btnHelpTipOfDay, 2, row);
 
         gridPane.add(new Label(" "), 0, ++row);

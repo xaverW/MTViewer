@@ -44,19 +44,19 @@ import javafx.stage.Stage;
 
 import java.util.Collection;
 
-public class ReplacePane {
+public class PaneReplace {
 
     private final VBox vBox = new VBox();
     private final TextField txtFrom = new TextField();
     private final TextField txtTo = new TextField();
     private final GridPane gridPane = new GridPane();
-    private final PToggleSwitch tglAscii = new PToggleSwitch("nur ASCII-Zeichen erlauben");
+    private final PToggleSwitch tglAscii = new PToggleSwitch("Nur ASCII-Zeichen erlauben");
     private final PToggleSwitch tglReplace = new PToggleSwitch("Ersetzungstabelle");
-    private final Stage stage;
     private TableView<ReplaceData> tableView = new TableView<>();
     private ObjectProperty<ReplaceData> replaceDateProp = new SimpleObjectProperty<>(null);
+    private final Stage stage;
 
-    public ReplacePane(Stage stage) {
+    public PaneReplace(Stage stage) {
         this.stage = stage;
         make();
     }

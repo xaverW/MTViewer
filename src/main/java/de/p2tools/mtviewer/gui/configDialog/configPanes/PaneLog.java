@@ -29,7 +29,6 @@ import de.p2tools.p2Lib.guiTools.pToggleSwitch.PToggleSwitch;
 import de.p2tools.p2Lib.tools.log.PLogger;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -37,25 +36,23 @@ import javafx.stage.Stage;
 
 import java.util.Collection;
 
-public class LogPane {
+public class PaneLog {
 
     private final ProgData progData;
 
     private final PToggleSwitch tglEnableLog = new PToggleSwitch("Ein Logfile anlegen:");
     private final Stage stage;
     BooleanProperty logfileChanged = new SimpleBooleanProperty(false);
-    BooleanProperty propLog = ProgConfig.SYSTEM_LOG_ON;
-    StringProperty propLogDir = ProgConfig.SYSTEM_LOG_DIR;
     private TextField txtLogFile;
 
-    public LogPane(Stage stage) {
+    public PaneLog(Stage stage) {
         this.stage = stage;
         progData = ProgData.getInstance();
     }
 
     public void close() {
-        tglEnableLog.selectedProperty().unbindBidirectional(propLog);
-        txtLogFile.textProperty().unbindBidirectional(propLogDir);
+        tglEnableLog.selectedProperty().unbindBidirectional(ProgConfig.SYSTEM_LOG_ON);
+        txtLogFile.textProperty().unbindBidirectional(ProgConfig.SYSTEM_LOG_DIR);
     }
 
     public TitledPane make(Collection<TitledPane> result) {
@@ -64,7 +61,7 @@ public class LogPane {
         gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
         gridPane.setPadding(new Insets(P2LibConst.DIST_EDGE));
 
-        tglEnableLog.selectedProperty().bindBidirectional(propLog);
+        tglEnableLog.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_LOG_ON);
         tglEnableLog.selectedProperty().addListener(((observable, oldValue, newValue) -> {
             if (newValue == null) {
                 return;
@@ -79,7 +76,7 @@ public class LogPane {
         final Button btnHelp = PButton.helpButton(stage, "Logfile", HelpText.LOGFILE);
 
         txtLogFile = new TextField();
-        txtLogFile.textProperty().bindBidirectional(propLogDir);
+        txtLogFile.textProperty().bindBidirectional(ProgConfig.SYSTEM_LOG_DIR);
         if (txtLogFile.getText().isEmpty()) {
             txtLogFile.setText(ProgInfos.getLogDirectory_String());
         }
@@ -114,8 +111,7 @@ public class LogPane {
         gridPane.add(tglEnableLog, 0, row, 3, 1);
         gridPane.add(btnHelp, 3, row);
 
-        gridPane.add(new Label(""), 0, ++row);
-
+        ++row;
         gridPane.add(lblPath, 0, ++row);
         gridPane.add(txtLogFile, 1, row);
         gridPane.add(btnFile, 2, row);

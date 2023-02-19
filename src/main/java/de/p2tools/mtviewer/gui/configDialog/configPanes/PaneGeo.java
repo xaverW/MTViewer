@@ -31,18 +31,18 @@ import javafx.stage.Stage;
 
 import java.util.Collection;
 
-public class GeoPane {
+public class PaneGeo {
     private final RadioButton rbDe = new RadioButton("DE - Deutschland");
     private final RadioButton rbCh = new RadioButton("CH - Schweiz");
     private final RadioButton rbAt = new RadioButton("AT - Österreich");
     private final RadioButton rbEu = new RadioButton("EU (EBU - European Broadcasting Union)");
     private final RadioButton rbSonst = new RadioButton("sonst");
 
-    private final PToggleSwitch tglGeo = new PToggleSwitch("geblockte Sendungen gelb markieren:");
+    private final PToggleSwitch tglGeo = new PToggleSwitch("Geblockte Sendungen gelb markieren:");
     private final Stage stage;
     BooleanProperty geoProperty = ProgConfig.SYSTEM_MARK_GEO;
 
-    public GeoPane(Stage stage) {
+    public PaneGeo(Stage stage) {
         this.stage = stage;
     }
 

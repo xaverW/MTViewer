@@ -26,8 +26,6 @@ import de.p2tools.p2Lib.guiTools.PButton;
 import de.p2tools.p2Lib.guiTools.PColumnConstraints;
 import de.p2tools.p2Lib.mtFilm.loadFilmlist.LoadFactory;
 import de.p2tools.p2Lib.mtFilm.tools.LoadFactoryConst;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -37,9 +35,9 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class FilterFilmsPane {
+public class PaneFilmFilter {
 
-    final Button btnClearall = new Button("_wieder alle Sender laden");
+    final Button btnClearall = new Button("_Wieder alle Sender laden");
     private final Slider slDays = new Slider();
     private final Slider slDuration = new Slider();
     private final Label lblDays = new Label("");
@@ -47,23 +45,19 @@ public class FilterFilmsPane {
     private final Stage stage;
     private final ProgData progData;
 
-    StringProperty propChannel = ProgConfig.SYSTEM_LOAD_NOT_SENDER;
-    IntegerProperty propDay = ProgConfig.SYSTEM_LOAD_FILMLIST_MAX_DAYS;
-    IntegerProperty propDuration = ProgConfig.SYSTEM_LOAD_FILMLIST_MIN_DURATION;
-
-    public FilterFilmsPane(Stage stage) {
+    public PaneFilmFilter(Stage stage) {
         this.stage = stage;
         this.progData = null;
     }
 
-    public FilterFilmsPane(Stage stage, ProgData progData) {
+    public PaneFilmFilter(Stage stage, ProgData progData) {
         this.stage = stage;
         this.progData = progData;
     }
 
     public void close() {
-        slDays.valueProperty().unbindBidirectional(propDay);
-        slDuration.valueProperty().unbindBidirectional(propDuration);
+        slDays.valueProperty().unbindBidirectional(ProgConfig.SYSTEM_LOAD_FILMLIST_MAX_DAYS);
+        slDuration.valueProperty().unbindBidirectional(ProgConfig.SYSTEM_LOAD_FILMLIST_MIN_DURATION);
     }
 
     public TitledPane make() {
@@ -113,14 +107,14 @@ public class FilterFilmsPane {
         gridPane.setPadding(new Insets(0));
 
         int row = 0;
-        gridPane.add(new Label("nur Filme der letzten Tage laden:"), 0, row, 2, 1);
+        gridPane.add(new Label("Nur Filme der letzten Tage laden:"), 0, row, 2, 1);
         gridPane.add(new Label("Filme laden:"), 0, ++row);
         gridPane.add(slDays, 1, row);
         gridPane.add(lblDays, 2, row);
         gridPane.add(btnHelpDays, 3, row);
 
         gridPane.add(new Label(" "), 0, ++row);
-        gridPane.add(new Label("nur Filme mit Mindestlänge laden:"), 0, ++row, 2, 1);
+        gridPane.add(new Label("Nur Filme mit Mindestlänge laden:"), 0, ++row, 2, 1);
         gridPane.add(new Label("Filme laden:"), 0, ++row);
         gridPane.add(slDuration, 1, row);
         gridPane.add(lblDuration, 2, row);
@@ -133,7 +127,7 @@ public class FilterFilmsPane {
 
         HBox hBox = new HBox(P2LibConst.DIST_BUTTON);
         hBox.setAlignment(Pos.CENTER_LEFT);
-        Label lbl = new Label("diese Sender  *nicht*  laden:");
+        Label lbl = new Label("Diese Sender  *nicht*  laden:");
         lbl.setMaxWidth(Double.MAX_VALUE);
         hBox.getChildren().addAll(lbl, btnClearall, btnHelpSender);
         HBox.setHgrow(lbl, Priority.ALWAYS);
@@ -172,7 +166,7 @@ public class FilterFilmsPane {
         slDays.setMajorTickUnit(100);
         slDays.setBlockIncrement(5);
 
-        slDays.valueProperty().bindBidirectional(propDay);
+        slDays.valueProperty().bindBidirectional(ProgConfig.SYSTEM_LOAD_FILMLIST_MAX_DAYS);
         slDays.valueProperty().addListener((observable, oldValue, newValue) -> setValueSlider());
 
         slDuration.setMin(0);
@@ -181,7 +175,7 @@ public class FilterFilmsPane {
         slDuration.setMajorTickUnit(10);
         slDuration.setBlockIncrement(1);
 
-        slDuration.valueProperty().bindBidirectional(propDuration);
+        slDuration.valueProperty().bindBidirectional(ProgConfig.SYSTEM_LOAD_FILMLIST_MIN_DURATION);
         slDuration.valueProperty().addListener((observable, oldValue, newValue) -> setValueSlider());
 
         setValueSlider();
@@ -189,10 +183,10 @@ public class FilterFilmsPane {
 
     private void setValueSlider() {
         int days = (int) slDays.getValue();
-        lblDays.setText(days == 0 ? "alles laden" : "nur Filme der letzten " + days + " Tage");
+        lblDays.setText(days == 0 ? "Alles laden" : "Nur Filme der letzten " + days + " Tage");
 
         int duration = (int) slDuration.getValue();
-        lblDuration.setText(duration == 0 ? "alles laden" : "nur Filme mit mindestens " + duration + " Minuten Länge");
+        lblDuration.setText(duration == 0 ? "Alles laden" : "Nur Filme mit mindestens " + duration + " Minuten Länge");
     }
 
     private void checkPropSender(ArrayList<CheckBox> aListCb) {
@@ -217,7 +211,7 @@ public class FilterFilmsPane {
             String s = cb.getText();
             str = str.isEmpty() ? s : str + "," + s;
         }
-        propChannel.setValue(str);
+        ProgConfig.SYSTEM_LOAD_NOT_SENDER.setValue(str);
         checkPropSender(aListCb);
     }
 }

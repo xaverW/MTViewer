@@ -41,7 +41,7 @@ import javafx.util.Callback;
 
 import java.util.Collection;
 
-public class ColorPane {
+public class PaneColor {
     private final Stage stage;
     private final PToggleSwitch tglDarkTheme = new PToggleSwitch("Dunkles Erscheinungsbild der Programmoberfläche");
     BooleanProperty propDarkTheme = ProgConfig.SYSTEM_DARK_THEME;
@@ -150,7 +150,7 @@ public class ColorPane {
         return cell;
     };
 
-    public ColorPane(Stage stage) {
+    public PaneColor(Stage stage) {
         this.stage = stage;
     }
 

@@ -41,10 +41,10 @@ public class ConfigDialogController extends PDialogExtra {
 
     private final ProgData progData;
     IntegerProperty propSelectedTab = ProgConfig.SYSTEM_CONFIG_DIALOG_TAB;
-    ConfigPaneController configPaneController;
-    PlayPaneController playPaneController;
-    FilmPaneController filmPaneController;
-    DownloadPaneController downloadPaneController;
+    ControllerConfig controllerConfig;
+    ControllerPlay controllerPlay;
+    ControllerFilm controllerFilm;
+    ControllerDownload controllerDownload;
     private ListenerLoadFilmlist listener;
     private TabPane tabPane = new TabPane();
     private Button btnOk = new Button("_Ok");
@@ -131,10 +131,10 @@ public class ConfigDialogController extends PDialogExtra {
             th.start();
         }
 
-        configPaneController.close();
-        playPaneController.close();
-        filmPaneController.close();
-        downloadPaneController.close();
+        controllerConfig.close();
+        controllerPlay.close();
+        controllerFilm.close();
+        controllerDownload.close();
 
         LoadFilmFactory.getInstance().loadFilmlist.removeListenerLoadFilmlist(listener);
         Listener.notify(Listener.EVEMT_SETDATA_CHANGED, ConfigDialogController.class.getSimpleName());
@@ -151,28 +151,28 @@ public class ConfigDialogController extends PDialogExtra {
 
     private void initPanel() {
         try {
-            configPaneController = new ConfigPaneController(getStage());
+            controllerConfig = new ControllerConfig(getStage());
             Tab tab = new Tab("Allgemein");
             tab.setClosable(false);
-            tab.setContent(configPaneController);
+            tab.setContent(controllerConfig);
             tabPane.getTabs().add(tab);
 
-            playPaneController = new PlayPaneController(getStage());
+            controllerPlay = new ControllerPlay(getStage());
             tab = new Tab("Filme");
             tab.setClosable(false);
-            tab.setContent(playPaneController);
+            tab.setContent(controllerPlay);
             tabPane.getTabs().add(tab);
 
-            filmPaneController = new FilmPaneController(getStage());
+            controllerFilm = new ControllerFilm(getStage());
             tab = new Tab("Filmliste laden");
             tab.setClosable(false);
-            tab.setContent(filmPaneController);
+            tab.setContent(controllerFilm);
             tabPane.getTabs().add(tab);
 
-            downloadPaneController = new DownloadPaneController(getStage());
+            controllerDownload = new ControllerDownload(getStage());
             tab = new Tab("Download");
             tab.setClosable(false);
-            tab.setContent(downloadPaneController);
+            tab.setContent(controllerDownload);
             tabPane.getTabs().add(tab);
 
             tabPane.getSelectionModel().select(propSelectedTab.get());

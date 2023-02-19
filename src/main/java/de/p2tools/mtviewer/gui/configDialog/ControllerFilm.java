@@ -18,8 +18,8 @@ package de.p2tools.mtviewer.gui.configDialog;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.gui.configDialog.configPanes.FilterFilmsPane;
-import de.p2tools.mtviewer.gui.configDialog.configPanes.LoadFilmsPane;
+import de.p2tools.mtviewer.gui.configDialog.configPanes.PaneFilmFilter;
+import de.p2tools.mtviewer.gui.configDialog.configPanes.PaneFilmLoad;
 import de.p2tools.p2Lib.dialogs.accordion.PAccordionPane;
 import javafx.scene.control.TitledPane;
 import javafx.stage.Stage;
@@ -27,14 +27,14 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class FilmPaneController extends PAccordionPane {
+public class ControllerFilm extends PAccordionPane {
 
     private final ProgData progData;
     private final Stage stage;
-    private LoadFilmsPane loadFilmsPane;
-    private FilterFilmsPane filterFilmsPane;
+    private PaneFilmLoad paneFilmLoad;
+    private PaneFilmFilter paneFilmFilter;
 
-    public FilmPaneController(Stage stage) {
+    public ControllerFilm(Stage stage) {
         super(stage, ProgConfig.CONFIG_DIALOG_ACCORDION, ProgConfig.SYSTEM_CONFIG_DIALOG_FILM);
         this.stage = stage;
         progData = ProgData.getInstance();
@@ -45,17 +45,17 @@ public class FilmPaneController extends PAccordionPane {
     @Override
     public void close() {
         super.close();
-        loadFilmsPane.close();
-        filterFilmsPane.close();
+        paneFilmLoad.close();
+        paneFilmFilter.close();
     }
 
     @Override
     public Collection<TitledPane> createPanes() {
         Collection<TitledPane> result = new ArrayList<TitledPane>();
-        loadFilmsPane = new LoadFilmsPane(stage);
-        loadFilmsPane.make(result);
-        filterFilmsPane = new FilterFilmsPane(stage, progData);
-        filterFilmsPane.make(result);
+        paneFilmLoad = new PaneFilmLoad(stage);
+        paneFilmLoad.make(result);
+        paneFilmFilter = new PaneFilmFilter(stage, progData);
+        paneFilmFilter.make(result);
         return result;
     }
 }

@@ -35,7 +35,7 @@ import javafx.stage.Stage;
 
 import java.util.Collection;
 
-public class ProgPane {
+public class PaneProg {
 
     private final ProgData progData;
 
@@ -43,7 +43,7 @@ public class ProgPane {
     StringProperty propUrl = ProgConfig.SYSTEM_PROG_OPEN_URL;
     private TextField txtFileManagerWeb;
 
-    public ProgPane(Stage stage) {
+    public PaneProg(Stage stage) {
         this.stage = stage;
         progData = ProgData.getInstance();
     }
@@ -80,6 +80,7 @@ public class ProgPane {
         final Button btnHelp = PButton.helpButton(stage, "Webbrowser", HelpText.WEBBROWSER);
 
         VBox vBox = new VBox(2);
+        vBox.setPadding(new Insets(0));
         HBox hBox = new HBox(P2LibConst.DIST_BUTTON);
         hBox.getChildren().addAll(txtFileManagerWeb, btnFile, btnHelp);
         HBox.setHgrow(txtFileManagerWeb, Priority.ALWAYS);
