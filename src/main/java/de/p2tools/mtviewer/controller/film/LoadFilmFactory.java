@@ -23,12 +23,12 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.config.ProgInfos;
 import de.p2tools.mtviewer.gui.tools.TipOfDayFactory;
-import de.p2tools.p2Lib.P2LibConst;
-import de.p2tools.p2Lib.mtFilm.film.FilmlistFactory;
-import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerFilmlistLoadEvent;
-import de.p2tools.p2Lib.mtFilm.loadFilmlist.ListenerLoadFilmlist;
-import de.p2tools.p2Lib.mtFilm.loadFilmlist.LoadFilmlist;
-import de.p2tools.p2Lib.mtFilm.tools.LoadFactoryConst;
+import de.p2tools.p2lib.P2LibConst;
+import de.p2tools.p2lib.mtfilm.film.FilmlistFactory;
+import de.p2tools.p2lib.mtfilm.loadfilmlist.ListenerFilmlistLoadEvent;
+import de.p2tools.p2lib.mtfilm.loadfilmlist.ListenerLoadFilmlist;
+import de.p2tools.p2lib.mtfilm.loadfilmlist.LoadFilmlist;
+import de.p2tools.p2lib.mtfilm.tools.LoadFactoryConst;
 
 public class LoadFilmFactory {
     private static LoadFilmFactory instance;

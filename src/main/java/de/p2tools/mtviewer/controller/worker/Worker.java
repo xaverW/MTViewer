@@ -17,7 +17,7 @@
 package de.p2tools.mtviewer.controller.worker;
 
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.filmFilter.FilmFilter;
+import de.p2tools.mtviewer.controller.filmfilter.FilmFilter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

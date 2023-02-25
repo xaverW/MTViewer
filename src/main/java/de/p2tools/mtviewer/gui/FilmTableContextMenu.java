@@ -18,8 +18,8 @@ package de.p2tools.mtviewer.gui;
 
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.gui.tools.table.TableFilm;
-import de.p2tools.p2Lib.mtFilm.film.FilmData;
-import de.p2tools.p2Lib.tools.PSystemUtils;
+import de.p2tools.p2lib.mtfilm.film.FilmData;
+import de.p2tools.p2lib.tools.PSystemUtils;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;

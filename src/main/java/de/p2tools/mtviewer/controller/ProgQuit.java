@@ -17,8 +17,8 @@
 package de.p2tools.mtviewer.controller;
 
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.p2Lib.tools.PShutDown;
-import de.p2tools.p2Lib.tools.log.LogMessage;
+import de.p2tools.p2lib.tools.PShutDown;
+import de.p2tools.p2lib.tools.log.LogMessage;
 import javafx.application.Platform;
 
 public class ProgQuit {

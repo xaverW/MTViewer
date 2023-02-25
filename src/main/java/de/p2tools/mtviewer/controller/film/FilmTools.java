@@ -20,18 +20,18 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
-import de.p2tools.mtviewer.controller.downloadTools.DownloadProgParameterFactory;
+import de.p2tools.mtviewer.controller.downloadtools.DownloadProgParameterFactory;
 import de.p2tools.mtviewer.gui.dialog.DownloadAddDialogController;
 import de.p2tools.mtviewer.gui.dialog.FilmPlayDialogController;
-import de.p2tools.p2Lib.P2LibConst;
-import de.p2tools.p2Lib.alert.PAlert;
-import de.p2tools.p2Lib.guiTools.POpen;
-import de.p2tools.p2Lib.mtFilm.film.FilmData;
+import de.p2tools.p2lib.P2LibConst;
+import de.p2tools.p2lib.alert.PAlert;
+import de.p2tools.p2lib.guitools.POpen;
+import de.p2tools.p2lib.mtfilm.film.FilmData;
 
 import java.text.NumberFormat;
 import java.util.Locale;
 
-import static de.p2tools.mtviewer.controller.downloadTools.RuntimeExec.TRENNER_PROG_ARRAY;
+import static de.p2tools.mtviewer.controller.downloadtools.RuntimeExec.TRENNER_PROG_ARRAY;
 
 public class FilmTools {
 

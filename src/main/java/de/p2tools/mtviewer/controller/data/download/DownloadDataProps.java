@@ -17,13 +17,13 @@
 package de.p2tools.mtviewer.controller.data.download;
 
 import de.p2tools.mtviewer.controller.config.ProgConst;
-import de.p2tools.p2Lib.configFile.config.*;
-import de.p2tools.p2Lib.configFile.pData.PDataSample;
-import de.p2tools.p2Lib.mtDownload.DownloadSize;
-import de.p2tools.p2Lib.mtFilm.tools.Data;
-import de.p2tools.p2Lib.tools.date.PLDateFactory;
-import de.p2tools.p2Lib.tools.date.PLDateProperty;
-import de.p2tools.p2Lib.tools.file.PFileUtils;
+import de.p2tools.p2lib.configfile.config.*;
+import de.p2tools.p2lib.configfile.pdata.PDataSample;
+import de.p2tools.p2lib.mtdownload.DownloadSize;
+import de.p2tools.p2lib.mtfilm.tools.Data;
+import de.p2tools.p2lib.tools.date.PLDateFactory;
+import de.p2tools.p2lib.tools.date.PLDateProperty;
+import de.p2tools.p2lib.tools.file.PFileUtils;
 import javafx.application.Platform;
 import javafx.beans.property.*;
 

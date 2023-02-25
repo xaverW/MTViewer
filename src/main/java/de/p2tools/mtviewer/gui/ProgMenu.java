@@ -24,12 +24,12 @@ import de.p2tools.mtviewer.controller.data.MTShortcut;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
 import de.p2tools.mtviewer.controller.update.SearchProgramUpdate;
-import de.p2tools.mtviewer.gui.configDialog.ConfigDialogController;
+import de.p2tools.mtviewer.gui.configdialog.ConfigDialogController;
 import de.p2tools.mtviewer.gui.dialog.AboutDialogController;
 import de.p2tools.mtviewer.gui.dialog.ResetDialogController;
 import de.p2tools.mtviewer.gui.tools.TipOfDayFactory;
-import de.p2tools.p2Lib.guiTools.POpen;
-import de.p2tools.p2Lib.tools.shortcut.PShortcutWorker;
+import de.p2tools.p2lib.guitools.POpen;
+import de.p2tools.p2lib.tools.shortcut.PShortcutWorker;
 import javafx.scene.control.*;
 
 

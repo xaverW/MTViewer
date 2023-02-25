@@ -18,9 +18,9 @@ package de.p2tools.mtviewer.gui;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
-import de.p2tools.p2Lib.guiTools.PHyperlink;
-import de.p2tools.p2Lib.mtFilm.film.FilmData;
-import de.p2tools.p2Lib.mtFilm.film.FilmDataXml;
+import de.p2tools.p2lib.guitools.PHyperlink;
+import de.p2tools.p2lib.mtfilm.film.FilmData;
+import de.p2tools.p2lib.mtfilm.film.FilmDataXml;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

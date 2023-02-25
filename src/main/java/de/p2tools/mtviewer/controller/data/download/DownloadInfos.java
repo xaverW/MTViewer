@@ -20,8 +20,8 @@ package de.p2tools.mtviewer.controller.data.download;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.gui.tools.Listener;
-import de.p2tools.p2Lib.mtDownload.SizeTools;
-import de.p2tools.p2Lib.tools.log.PLog;
+import de.p2tools.p2lib.mtdownload.SizeTools;
+import de.p2tools.p2lib.tools.log.PLog;
 
 import java.text.DecimalFormat;
 

@@ -18,9 +18,9 @@ package de.p2tools.mtviewer.gui.tools.table;
 
 import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
-import de.p2tools.p2Lib.guiTools.pTable.CellCheckBox;
-import de.p2tools.p2Lib.mtDownload.DownloadSize;
-import de.p2tools.p2Lib.tools.GermanStringIntSorter;
+import de.p2tools.p2lib.guitools.ptable.CellCheckBox;
+import de.p2tools.p2lib.mtdownload.DownloadSize;
+import de.p2tools.p2lib.tools.GermanStringIntSorter;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;

@@ -17,20 +17,20 @@
 
 package de.p2tools.mtviewer.controller.config;
 
-import de.p2tools.mtviewer.controller.downloadTools.DownloadState;
-import de.p2tools.mtviewer.controller.filmFilter.ActFilmFilterWorker;
-import de.p2tools.mtviewer.controller.filmFilter.FilmFilter;
-import de.p2tools.p2Lib.P2LibConst;
-import de.p2tools.p2Lib.configFile.ConfigFile;
-import de.p2tools.p2Lib.configFile.config.Config;
-import de.p2tools.p2Lib.data.PDataProgConfig;
-import de.p2tools.p2Lib.mtDownload.BandwidthTokenBucket;
-import de.p2tools.p2Lib.mtDownload.GetProgramStandardPath;
-import de.p2tools.p2Lib.mtFilm.film.FilmData;
-import de.p2tools.p2Lib.tools.PStringUtils;
-import de.p2tools.p2Lib.tools.PSystemUtils;
-import de.p2tools.p2Lib.tools.ProgramToolsFactory;
-import de.p2tools.p2Lib.tools.log.PLog;
+import de.p2tools.mtviewer.controller.downloadtools.DownloadState;
+import de.p2tools.mtviewer.controller.filmfilter.ActFilmFilterWorker;
+import de.p2tools.mtviewer.controller.filmfilter.FilmFilter;
+import de.p2tools.p2lib.P2LibConst;
+import de.p2tools.p2lib.configfile.ConfigFile;
+import de.p2tools.p2lib.configfile.config.Config;
+import de.p2tools.p2lib.data.PDataProgConfig;
+import de.p2tools.p2lib.mtdownload.BandwidthTokenBucket;
+import de.p2tools.p2lib.mtdownload.GetProgramStandardPath;
+import de.p2tools.p2lib.mtfilm.film.FilmData;
+import de.p2tools.p2lib.tools.PStringUtils;
+import de.p2tools.p2lib.tools.PSystemUtils;
+import de.p2tools.p2lib.tools.ProgramToolsFactory;
+import de.p2tools.p2lib.tools.log.PLog;
 import javafx.beans.property.*;
 import org.apache.commons.lang3.SystemUtils;
 

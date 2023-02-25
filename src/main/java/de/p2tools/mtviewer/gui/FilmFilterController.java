@@ -20,13 +20,13 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.gui.tools.HelpText;
-import de.p2tools.p2Lib.P2LibConst;
-import de.p2tools.p2Lib.guiTools.PButton;
-import de.p2tools.p2Lib.guiTools.PGuiTools;
-import de.p2tools.p2Lib.guiTools.pRange.PRangeBox;
-import de.p2tools.p2Lib.mtFilter.FilterCheck;
-import de.p2tools.p2Lib.mtFilter.FilterCheckRegEx;
-import de.p2tools.p2Lib.tools.duration.PDuration;
+import de.p2tools.p2lib.P2LibConst;
+import de.p2tools.p2lib.guitools.PButton;
+import de.p2tools.p2lib.guitools.PGuiTools;
+import de.p2tools.p2lib.guitools.prange.PRangeBox;
+import de.p2tools.p2lib.mtfilter.FilterCheck;
+import de.p2tools.p2lib.mtfilter.FilterCheckRegEx;
+import de.p2tools.p2lib.tools.duration.PDuration;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -87,7 +87,7 @@ public class FilmFilterController extends VBox {
         progData.actFilmFilterWorker.forwardPossibleProperty().addListener((v, o, n) -> System.out.println(progData.actFilmFilterWorker.forwardPossibleProperty().getValue().toString()));
         btnGoForward.setTooltip(new Tooltip("letzte Filtereinstellung wieder herstellen"));
 
-        btnClearFilter.setGraphic(de.p2tools.p2Lib.ProgIcons.Icons.ICON_BUTTON_CLEAR_FILTER_SMALL.getImageView());
+        btnClearFilter.setGraphic(de.p2tools.p2lib.ProgIcons.Icons.ICON_BUTTON_CLEAR_FILTER_SMALL.getImageView());
         btnClearFilter.setTooltip(new Tooltip("Filter löschen"));
         btnClearFilter.setOnAction(a -> {
             PDuration.onlyPing("Filter löschen");

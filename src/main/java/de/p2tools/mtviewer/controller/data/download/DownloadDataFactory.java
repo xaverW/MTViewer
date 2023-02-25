@@ -18,11 +18,11 @@
 package de.p2tools.mtviewer.controller.data.download;
 
 import de.p2tools.mtviewer.gui.dialog.DeleteFilmFileDialogController;
-import de.p2tools.p2Lib.mtDownload.MTInfoFile;
-import de.p2tools.p2Lib.mtDownload.MTSubtitle;
-import de.p2tools.p2Lib.P2LibConst;
-import de.p2tools.p2Lib.alert.PAlert;
-import de.p2tools.p2Lib.tools.log.PLog;
+import de.p2tools.p2lib.P2LibConst;
+import de.p2tools.p2lib.alert.PAlert;
+import de.p2tools.p2lib.mtdownload.MTInfoFile;
+import de.p2tools.p2lib.mtdownload.MTSubtitle;
+import de.p2tools.p2lib.tools.log.PLog;
 
 import java.io.File;
 import java.nio.file.Path;

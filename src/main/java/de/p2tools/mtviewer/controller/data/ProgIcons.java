@@ -18,7 +18,7 @@
 package de.p2tools.mtviewer.controller.data;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
-import de.p2tools.p2Lib.icons.GetIcon;
+import de.p2tools.p2lib.icons.GetIcon;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 

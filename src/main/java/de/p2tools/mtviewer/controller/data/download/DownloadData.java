@@ -18,17 +18,17 @@ package de.p2tools.mtviewer.controller.data.download;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
-import de.p2tools.mtviewer.controller.downloadTools.DownloadFileNameFactory;
+import de.p2tools.mtviewer.controller.downloadtools.DownloadFileNameFactory;
 import de.p2tools.mtviewer.controller.starter.Start;
-import de.p2tools.p2Lib.alert.PAlert;
-import de.p2tools.p2Lib.mtDownload.DownloadSize;
-import de.p2tools.p2Lib.mtFilm.film.FilmData;
-import de.p2tools.p2Lib.mtFilm.film.FilmDataXml;
-import de.p2tools.p2Lib.mtFilm.film.FilmFactory;
-import de.p2tools.p2Lib.tools.PSystemUtils;
-import de.p2tools.p2Lib.tools.date.PLDateFactory;
-import de.p2tools.p2Lib.tools.file.PFileUtils;
-import de.p2tools.p2Lib.tools.net.PUrlTools;
+import de.p2tools.p2lib.alert.PAlert;
+import de.p2tools.p2lib.mtdownload.DownloadSize;
+import de.p2tools.p2lib.mtfilm.film.FilmData;
+import de.p2tools.p2lib.mtfilm.film.FilmDataXml;
+import de.p2tools.p2lib.mtfilm.film.FilmFactory;
+import de.p2tools.p2lib.tools.PSystemUtils;
+import de.p2tools.p2lib.tools.date.PLDateFactory;
+import de.p2tools.p2lib.tools.file.PFileUtils;
+import de.p2tools.p2lib.tools.net.PUrlTools;
 import javafx.application.Platform;
 
 import java.io.File;

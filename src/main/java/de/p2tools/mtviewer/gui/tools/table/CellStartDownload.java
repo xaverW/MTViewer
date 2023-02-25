@@ -24,7 +24,7 @@ import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.film.FilmTools;
-import de.p2tools.p2Lib.guiTools.POpen;
+import de.p2tools.p2lib.guitools.POpen;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

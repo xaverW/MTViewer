@@ -18,9 +18,9 @@ package de.p2tools.mtviewer.controller.data.download;
 
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.p2Lib.configFile.pData.PDataList;
-import de.p2tools.p2Lib.mtFilm.film.Filmlist;
-import de.p2tools.p2Lib.tools.duration.PDuration;
+import de.p2tools.p2lib.configfile.pdata.PDataList;
+import de.p2tools.p2lib.mtfilm.film.Filmlist;
+import de.p2tools.p2lib.tools.duration.PDuration;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleListProperty;

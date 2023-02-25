@@ -19,12 +19,12 @@ package de.p2tools.mtviewer.gui.tools;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.p2Lib.P2LibConst;
-import de.p2tools.p2Lib.guiTools.pTipOfDay.PTipOfDay;
-import de.p2tools.p2Lib.guiTools.pTipOfDay.PTipOfDayDialog;
-import de.p2tools.p2Lib.guiTools.pTipOfDay.PTipOfDayFactory;
-import de.p2tools.p2Lib.tools.date.DateFactory;
-import de.p2tools.p2Lib.tools.log.PLog;
+import de.p2tools.p2lib.P2LibConst;
+import de.p2tools.p2lib.guitools.ptipofday.PTipOfDay;
+import de.p2tools.p2lib.guitools.ptipofday.PTipOfDayDialog;
+import de.p2tools.p2lib.guitools.ptipofday.PTipOfDayFactory;
+import de.p2tools.p2lib.tools.date.DateFactory;
+import de.p2tools.p2lib.tools.log.PLog;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -68,7 +68,7 @@ public class TipOfDayFactory {
                 "kann mit dem Tastenkürzel \"alt+i\"\n" +
                 "oder über das Menü\n" +
                 "ein- und ausgeblendet werden.";
-        String image = "/de/p2tools/mtviewer/res/toolTips/Info.png";
+        String image = "/de/p2tools/mtviewer/res/tooltips/Info.png";
         PTipOfDay pToolTip = new PTipOfDay(text, image);
         pToolTipList.add(pToolTip);
 
@@ -76,7 +76,7 @@ public class TipOfDayFactory {
         text += "Hier können vorherige Filtereinstellung\n" +
                 "zurückgeholt werden. Der Filter kann\n" +
                 "hier auch gelöscht werden.";
-        image = "/de/p2tools/mtviewer/res/toolTips/ClearFilter.png";
+        image = "/de/p2tools/mtviewer/res/tooltips/ClearFilter.png";
         pToolTip = new PTipOfDay(text, image);
         pToolTipList.add(pToolTip);
 
@@ -85,7 +85,7 @@ public class TipOfDayFactory {
                 "(erreichbar über das Menü)\n" +
                 "können spezielle Einstellungen\n" +
                 "zum Filtern vorgenommen werden.";
-        image = "/de/p2tools/mtviewer/res/toolTips/Filter.png";
+        image = "/de/p2tools/mtviewer/res/tooltips/Filter.png";
         pToolTip = new PTipOfDay(text, image);
         pToolTipList.add(pToolTip);
 
@@ -95,7 +95,7 @@ public class TipOfDayFactory {
                 "können Download-Einstellungen\n" +
                 "(Pfad, Zieldateiname, ..)\n" +
                 "vorgenommen werden.";
-        image = "/de/p2tools/mtviewer/res/toolTips/DownloadPath.png";
+        image = "/de/p2tools/mtviewer/res/tooltips/DownloadPath.png";
         pToolTip = new PTipOfDay(text, image);
         pToolTipList.add(pToolTip);
 
@@ -107,7 +107,7 @@ public class TipOfDayFactory {
                 "kann die verwendete\n" +
                 "Schriftgröße im Programm,\n" +
                 "eingestellt werden.";
-        image = "/de/p2tools/mtviewer/res/toolTips/Keysize.png";
+        image = "/de/p2tools/mtviewer/res/tooltips/Keysize.png";
         pToolTip = new PTipOfDay(text, image);
         pToolTipList.add(pToolTip);
 
@@ -119,7 +119,7 @@ public class TipOfDayFactory {
                 "werden. Bei schwachen Rechnern\n" +
                 "reagiert das Programm dann\n" +
                 "schneller.";
-        image = "/de/p2tools/mtviewer/res/toolTips/LoadFilmlist.png";
+        image = "/de/p2tools/mtviewer/res/tooltips/LoadFilmlist.png";
         pToolTip = new PTipOfDay(text, image);
         pToolTipList.add(pToolTip);
 
@@ -129,7 +129,7 @@ public class TipOfDayFactory {
                 "kann auch der Videoplayer\n" +
                 "zum Abspielen der Filme\n" +
                 "geändert werden.";
-        image = "/de/p2tools/mtviewer/res/toolTips/Videoplayer.png";
+        image = "/de/p2tools/mtviewer/res/tooltips/Videoplayer.png";
         pToolTip = new PTipOfDay(text, image);
         pToolTipList.add(pToolTip);
 
@@ -142,7 +142,7 @@ public class TipOfDayFactory {
                 "zurückgesetzt werden. Das\n" +
                 "Programm startet dann wieder\n" +
                 "wie beim ersten Mal.";
-        image = "/de/p2tools/mtviewer/res/toolTips/Reset.png";
+        image = "/de/p2tools/mtviewer/res/tooltips/Reset.png";
         pToolTip = new PTipOfDay(text, image);
         pToolTipList.add(pToolTip);
     }

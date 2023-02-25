@@ -17,7 +17,7 @@
 
 package de.p2tools.mtviewer.gui.tools.table;
 
-import de.p2tools.p2Lib.tools.date.PLDateFactory;
+import de.p2tools.p2lib.tools.date.PLDateFactory;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
