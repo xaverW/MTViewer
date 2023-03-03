@@ -81,27 +81,27 @@ public class PredicateFactory {
 
         //Filmlänge
         if (filmFilter.getMinDur() != FilterCheck.FILTER_ALL_OR_MIN) {
-            predicate = predicate.and(f -> FilmFilterCheck.checkMinDur(filmFilter.getMinDur(), f));
+            predicate = predicate.and(f -> FilmFilterCheck.checkMatchMinDur(filmFilter.getMinDur(), f));
         }
         if (filmFilter.getMaxDur() != FilterCheck.FILTER_DURATION_MAX_MINUTE) {
-            predicate = predicate.and(f -> FilmFilterCheck.checkMaxDur(filmFilter.getMaxDur(), f));
+            predicate = predicate.and(f -> FilmFilterCheck.checkMatchMaxDur(filmFilter.getMaxDur(), f));
         }
 
         //Textfilter
-        if (!fChannel.empty) {
-            predicate = predicate.and(f -> FilmFilterCheck.checkChannelSmart(fChannel, f));
+        if (!fChannel.isEmpty) {
+            predicate = predicate.and(f -> FilmFilterCheck.checkMatchChannelSmart(fChannel, f));
         }
 
-        if (!fTheme.empty) {
-            predicate = predicate.and(f -> FilmFilterCheck.checkTheme(fTheme, f));
+        if (!fTheme.isEmpty) {
+            predicate = predicate.and(f -> FilmFilterCheck.checkMatchTheme(fTheme, f));
         }
 
-        if (!fTitle.empty) {
-            predicate = predicate.and(f -> FilmFilterCheck.checkTitle(fTitle, f));
+        if (!fTitle.isEmpty) {
+            predicate = predicate.and(f -> FilmFilterCheck.checkMatchTitle(fTitle, f));
         }
 
-        if (!fSomewhere.empty) {
-            predicate = predicate.and(f -> FilmFilterCheck.checkSomewhere(fSomewhere, f));
+        if (!fSomewhere.isEmpty) {
+            predicate = predicate.and(f -> FilmFilterCheck.checkMatchSomewhere(fSomewhere, f));
         }
 
         return predicate;
