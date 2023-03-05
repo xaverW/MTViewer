@@ -35,7 +35,7 @@ public class ControllerFilm extends PAccordionPane {
     private PaneFilmFilter paneFilmFilter;
 
     public ControllerFilm(Stage stage) {
-        super(stage, ProgConfig.CONFIG_DIALOG_ACCORDION, ProgConfig.SYSTEM_CONFIG_DIALOG_FILM);
+        super(ProgConfig.CONFIG_DIALOG_ACCORDION, ProgConfig.SYSTEM_CONFIG_DIALOG_FILM);
         this.stage = stage;
         progData = ProgData.getInstance();
 

@@ -36,7 +36,7 @@ public class ControllerDownload extends PAccordionPane {
     private PaneReplace paneReplace;
 
     public ControllerDownload(Stage stage) {
-        super(stage, ProgConfig.CONFIG_DIALOG_ACCORDION, ProgConfig.SYSTEM_CONFIG_DIALOG_DOWNLOAD);
+        super(ProgConfig.CONFIG_DIALOG_ACCORDION, ProgConfig.SYSTEM_CONFIG_DIALOG_DOWNLOAD);
         this.stage = stage;
         progData = ProgData.getInstance();
         init();
