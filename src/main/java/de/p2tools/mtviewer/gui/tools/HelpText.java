@@ -289,20 +289,22 @@ public class HelpText {
     public static final String DIAKRITISCHE_ZEICHEN =
             "\"Diakritische Zeichen ändern\" meint, dass bestimmte Zeichen in den " +
                     "Filmfeldern: \"Titel, Thema und Beschreibung\" " +
-                    "angepasst werden. Aus z.B.\n\n" +
+                    "angepasst werden. Aus z.B.\n" +
                     "\"äöü ń ǹ ň ñ ṅ ņ ṇ ṋ ç č c\" wird dann\n" +
                     "\"äöü n n n n n n n n c c c\".\n" +
                     "\n" +
                     "Das Programm arbeitet dann mit der angepassten " +
-                    "Filmliste. Beim Suchen nach Filmen werden die *angepassten " +
-                    "Zeichen* in Titel, Thema und Beschreibung verwendet. Es werden dann z.B. " +
+                    "Filmliste. Beim Suchen nach Filmen, Downloads und Abos werden die *angepassten " +
+                    "Zeichen* in Titel, Thema und Beschreibung verwendet. Dann werden z.B. " +
                     "\"Dvořak\", \"Noël\" und \"Niño\" nicht mehr gefunden, aber stattdessen " +
                     "\"Dvorak\", \"Noel\" und \"Nino\".\n" +
-                    "\n\n" +
-                    "Nach dem Einschalten der Funktion und dem " +
-                    "Schließen des Dialogs wird die Filmliste sofort geändert. " +
-                    "Wird die Funktion dagegen wieder *ausgeschaltet*, werden die Änderungen erst " +
-                    "nach dem Neuladen einer Filmliste wirksam.";
+                    "\n" +
+                    "Beim Suchen und Anlegen von Abos, muss also klar sein, ob die Funktion ein/ausgeschaltet ist, " +
+                    "ob man die Funktion nutzt oder nicht.\n" +
+                    "\n" +
+                    "Das Ändern wird sofort nach Beenden des Dialogs gemacht. Sollen Diakritische Zeichen " +
+                    "aber wieder eingeschaltet (also angezeigt) werden, muss dazu eine neue Filmliste geladen werden!" +
+                    "\n";
 
     public static final String TIP_OF_DAY =
             "Beim Programmstart wird (einmal täglich) ein Tip zur Verwendung " +

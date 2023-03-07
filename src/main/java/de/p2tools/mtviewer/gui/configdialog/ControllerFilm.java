@@ -21,6 +21,7 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.gui.configdialog.configpanes.PaneFilmFilter;
 import de.p2tools.mtviewer.gui.configdialog.configpanes.PaneFilmLoad;
 import de.p2tools.p2lib.dialogs.accordion.PAccordionPane;
+import javafx.beans.property.BooleanProperty;
 import javafx.scene.control.TitledPane;
 import javafx.stage.Stage;
 
@@ -33,10 +34,12 @@ public class ControllerFilm extends PAccordionPane {
     private final Stage stage;
     private PaneFilmLoad paneFilmLoad;
     private PaneFilmFilter paneFilmFilter;
+    private final BooleanProperty diacriticChanged;
 
-    public ControllerFilm(Stage stage) {
+    public ControllerFilm(Stage stage, BooleanProperty diacriticChanged) {
         super(ProgConfig.CONFIG_DIALOG_ACCORDION, ProgConfig.SYSTEM_CONFIG_DIALOG_FILM);
         this.stage = stage;
+        this.diacriticChanged = diacriticChanged;
         progData = ProgData.getInstance();
 
         init();
@@ -52,7 +55,7 @@ public class ControllerFilm extends PAccordionPane {
     @Override
     public Collection<TitledPane> createPanes() {
         Collection<TitledPane> result = new ArrayList<TitledPane>();
-        paneFilmLoad = new PaneFilmLoad(stage);
+        paneFilmLoad = new PaneFilmLoad(stage, diacriticChanged);
         paneFilmLoad.make(result);
         paneFilmFilter = new PaneFilmFilter(stage, progData);
         paneFilmFilter.make(result);

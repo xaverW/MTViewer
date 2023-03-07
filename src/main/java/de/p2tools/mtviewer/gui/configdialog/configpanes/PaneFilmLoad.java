@@ -17,13 +17,13 @@
 package de.p2tools.mtviewer.gui.configdialog.configpanes;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
-import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.guitools.PButton;
 import de.p2tools.p2lib.guitools.PColumnConstraints;
 import de.p2tools.p2lib.guitools.ptoggleswitch.PToggleSwitch;
+import javafx.beans.property.BooleanProperty;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -37,14 +37,14 @@ import java.util.Collection;
 
 public class PaneFilmLoad {
 
-    private final ProgData progData;
     private final PToggleSwitch tglLoad = new PToggleSwitch("Filmliste beim Programmstart laden");
     private final PToggleSwitch tglRemoveDiacritic = new PToggleSwitch("Diakritische Zeichen ändern");
+    private final BooleanProperty diacriticChanged;
     private final Stage stage;
 
-    public PaneFilmLoad(Stage stage) {
+    public PaneFilmLoad(Stage stage, BooleanProperty diacriticChanged) {
         this.stage = stage;
-        progData = ProgData.getInstance();
+        this.diacriticChanged = diacriticChanged;
     }
 
     public void close() {
@@ -65,6 +65,7 @@ public class PaneFilmLoad {
         //Diacritic
         tglRemoveDiacritic.setMaxWidth(Double.MAX_VALUE);
         tglRemoveDiacritic.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_REMOVE_DIACRITICS);
+        tglRemoveDiacritic.selectedProperty().addListener((u, o, n) -> diacriticChanged.setValue(true));
         final Button btnHelpDia = PButton.helpButton(stage, "Diakritische Zeichen",
                 HelpText.DIAKRITISCHE_ZEICHEN);
 

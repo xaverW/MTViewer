@@ -49,14 +49,13 @@ public class ConfigDialogController extends PDialogExtra {
     private TabPane tabPane = new TabPane();
     private Button btnOk = new Button("_Ok");
     private String geo = ProgConfig.SYSTEM_GEO_HOME_PLACE.get();
-    private BooleanProperty diacriticChanged = new SimpleBooleanProperty();
+    private BooleanProperty diacriticChanged = new SimpleBooleanProperty(false);
 
     public ConfigDialogController(ProgData progData) {
         super(progData.primaryStage, ProgConfig.CONFIG_DIALOG_SIZE, "Einstellungen",
                 true, false, DECO.NO_BORDER, true);
 
         this.progData = progData;
-        this.diacriticChanged.setValue(ProgConfig.SYSTEM_REMOVE_DIACRITICS.getValue());
         init(false);
     }
 
@@ -118,17 +117,17 @@ public class ConfigDialogController extends PDialogExtra {
             progData.filmlist.markGeoBlocked();
         }
 
-        if (diacriticChanged.getValue() != ProgConfig.SYSTEM_REMOVE_DIACRITICS.getValue()) {
-            //dann hats sich geändert!!!
-            ProgData.getInstance().maskerPane.setMaskerVisible(true, false);
-            ProgData.getInstance().maskerPane.setMaskerText("");
-            Thread th = new Thread(() -> {
-                FilmFactory.setDiacritic(progData.filmlist, ProgConfig.SYSTEM_REMOVE_DIACRITICS.getValue());
+        if (diacriticChanged.getValue() && ProgConfig.SYSTEM_REMOVE_DIACRITICS.getValue()) {
+            //hat sich geändert UND ist eingeschaltet
+            //Diakritika entfernen, macht nur dann Sinn
+            //zum Einfügen der Diakritika muss eine neue Filmliste geladen werden
+            new Thread(() -> {
+                ProgData.getInstance().maskerPane.setMaskerText("Diakritika entfernen");
+                ProgData.getInstance().maskerPane.setMaskerVisible(true);
+                FilmFactory.flattenDiacritic(progData.filmlist);
                 Listener.notify(Listener.EVENT_DIACRITIC_CHANGED, ConfigDialogController.class.getSimpleName());
                 ProgData.getInstance().maskerPane.setMaskerVisible(false);
-            });
-            th.setName("generateDiacritic");
-            th.start();
+            }).start();
         }
 
         controllerConfig.close();
@@ -163,7 +162,7 @@ public class ConfigDialogController extends PDialogExtra {
             tab.setContent(controllerPlay);
             tabPane.getTabs().add(tab);
 
-            controllerFilm = new ControllerFilm(getStage());
+            controllerFilm = new ControllerFilm(getStage(), diacriticChanged);
             tab = new Tab("Filmliste laden");
             tab.setClosable(false);
             tab.setContent(controllerFilm);
