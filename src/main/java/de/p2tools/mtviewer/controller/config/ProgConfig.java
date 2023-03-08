@@ -164,7 +164,8 @@ public class ProgConfig extends PDataProgConfig {
     public static IntegerProperty SYSTEM_SAVE_MAX_FIELD = addIntProp("system-save-max-field", 50);
 
     // Configs
-    public static IntegerProperty SYSTEM_FILMLIST_AGE = addIntProp("system-FILM_AGE", P2LibConst.NUMBER_NULL);
+    public static StringProperty SYSTEM_FILMLIST_DATE = addStrProp("system-filmlist-date", "");
+    //    public static IntegerProperty SYSTEM_FILMLIST_AGE = addIntProp("system-filmlist-age", P2LibConst.NUMBER_NULL);
     public static StringProperty SYSTEM_USERAGENT = addStrProp("system-useragent", ProgConst.USER_AGENT_DEFAULT); //Useragent für direkte Downloads
     public static BooleanProperty SYSTEM_USE_REPLACETABLE = addBoolProp("system-use-replacetable", SystemUtils.IS_OS_LINUX ? Boolean.TRUE : Boolean.FALSE);
     public static BooleanProperty SYSTEM_ONLY_ASCII = addBoolProp("system-only-ascii", Boolean.FALSE);
