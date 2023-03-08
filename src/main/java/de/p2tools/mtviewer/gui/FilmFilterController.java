@@ -416,7 +416,7 @@ public class FilmFilterController extends VBox {
         hBoxClear1.getChildren().addAll(btnGoBack, btnGoForward);
         HBox hBoxClear2 = new HBox(P2LibConst.DIST_BUTTON);
         hBoxClear2.setAlignment(Pos.CENTER_RIGHT);
-        hBoxClear2.getChildren().addAll(btnHelpFilter, btnClearFilter);
+        hBoxClear2.getChildren().addAll(btnClearFilter, btnHelpFilter);
         VBox vBoxClear = new VBox(P2LibConst.DIST_BUTTON);
         vBoxClear.getChildren().addAll(hBoxClear2, hBoxClear1);
         vBoxClear.setAlignment(Pos.CENTER_RIGHT);
