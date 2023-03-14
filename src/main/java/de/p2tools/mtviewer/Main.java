@@ -49,7 +49,6 @@ public class Main {
             Proxy.proxyAuthentication();
             new AppParameter().processArgs(args);
             startGuiFxMode(args);
-
         }
     }
 
@@ -64,7 +63,6 @@ public class Main {
 //        }
 
         checkMemory(args);
-
         MTViewer.main(args);
 //        Application.launch(MTViewer.class, args);
     }

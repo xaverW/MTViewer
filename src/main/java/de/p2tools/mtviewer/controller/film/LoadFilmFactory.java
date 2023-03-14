@@ -114,6 +114,7 @@ public class LoadFilmFactory {
 
         LoadFactoryConst.loadFilmlist = loadFilmlist;
         LoadFactoryConst.primaryStage = ProgData.getInstance().primaryStage;
+        LoadFactoryConst.filmListUrl = ProgData.filmListUrl;
     }
 
     public synchronized static final LoadFilmFactory getInstance() {

@@ -40,6 +40,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class ProgData {
+    private static ProgData instance;
 
     // flags
     public static boolean debug = false; // Debugmodus
@@ -49,7 +50,8 @@ public class ProgData {
 
     // Infos
     public static String configDir = ""; // Verzeichnis zum Speichern der Programmeinstellungen
-    private static ProgData instance;
+    public static String filmListUrl = ""; //URL von der die Filmliste geladen werde soll
+
     public MTShortcut mtShortcut; // verwendete Shortcuts
     public ActFilmFilterWorker actFilmFilterWorker; // gespeicherte Filterprofile
     public FilmFilterRunner filmFilterRunner;

@@ -32,17 +32,26 @@ public class AppParameter {
     public static final String TEXT_LINE = "===========================================";
     private static final String ARGUMENT_PREFIX = "-";
 
-    private static boolean hasOption(final CommandLine line, final ProgParameter parameter) {
-        return line.hasOption(parameter.name);
-    }
+    enum ProgParameter {
+        HELP("h", "help", false, "show help"),
+        VERSION("v", "version", false, "show version"),
+        PATH("p", "path", true, "path of configuration file"),
+        DEBUG("d", "debug", false, "show debug info"),
+        DURATION("t", "time", false, "show timekeeping info"),
+        FILMLIST_URL("u", "url", true, "use url for filmList download");
 
-    private static int extractInt(final CommandLine line, final ProgParameter parameter) {
-        return Integer.parseInt(line.getOptionValue(parameter.name));
-    }
+        final String shortname;
+        final String name;
+        final boolean hasArgs;
+        final String helpText;
 
-    private static void printHelp(final Options allowed) {
-        final HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp(ProgConst.PROGRAM_NAME, allowed);
+        ProgParameter(final String shortname, final String name,
+                      final boolean hasArgs, final String helpText) {
+            this.shortname = shortname;
+            this.name = name;
+            this.hasArgs = hasArgs;
+            this.helpText = helpText;
+        }
 
     }
 
@@ -89,6 +98,10 @@ public class AppParameter {
                 setConfigDir(path);
             }
 
+            if (hasOption(line, ProgParameter.FILMLIST_URL)) {
+                String url = line.getOptionValue(ProgParameter.FILMLIST_URL.name);
+                setFilmlistUrl(url);
+            }
         } catch (Exception ex) {
             PLog.errorLog(941237890, ex);
         }
@@ -111,6 +124,10 @@ public class AppParameter {
         ProgData.configDir = path;
     }
 
+    private void setFilmlistUrl(String url) {
+        ProgData.filmListUrl = url;
+    }
+
     private void printArguments(final String[] aArguments) {
         if (aArguments.length == 0) {
             return;
@@ -128,25 +145,17 @@ public class AppParameter {
         PLog.emptyLine();
     }
 
-    enum ProgParameter {
-        HELP("h", "help", false, "show help"),
-        VERSION("v", "version", false, "show version"),
-        PATH("p", "path", true, "path of configuration file"),
-        DEBUG("d", "debug", false, "show debug info"),
-        DURATION("t", "time", false, "show timekeeping info");
+    private static boolean hasOption(final CommandLine line, final ProgParameter parameter) {
+        return line.hasOption(parameter.name);
+    }
 
-        final String shortname;
-        final String name;
-        final boolean hasArgs;
-        final String helpText;
+    private static int extractInt(final CommandLine line, final ProgParameter parameter) {
+        return Integer.parseInt(line.getOptionValue(parameter.name));
+    }
 
-        ProgParameter(final String shortname, final String name,
-                      final boolean hasArgs, final String helpText) {
-            this.shortname = shortname;
-            this.name = name;
-            this.hasArgs = hasArgs;
-            this.helpText = helpText;
-        }
+    private static void printHelp(final Options allowed) {
+        final HelpFormatter formatter = new HelpFormatter();
+        formatter.printHelp(ProgConst.PROGRAM_NAME, allowed);
 
     }
 
