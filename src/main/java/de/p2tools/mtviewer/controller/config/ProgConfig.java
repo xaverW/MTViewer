@@ -22,7 +22,6 @@ import de.p2tools.mtviewer.controller.filmfilter.ActFilmFilterWorker;
 import de.p2tools.mtviewer.controller.filmfilter.FilmFilter;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.configfile.ConfigFile;
-import de.p2tools.p2lib.configfile.config.Config;
 import de.p2tools.p2lib.data.PDataProgConfig;
 import de.p2tools.p2lib.mtdownload.BandwidthTokenBucket;
 import de.p2tools.p2lib.mtdownload.GetProgramStandardPath;
@@ -35,11 +34,12 @@ import javafx.beans.property.*;
 import org.apache.commons.lang3.SystemUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ProgConfig extends PDataProgConfig {
 
-    public static final String SYSTEM = "system";
-    private static final ArrayList<Config> arrayList = new ArrayList<>();
+    //    public static final String SYSTEM = "system";
+//    private static final ArrayList<Config> arrayList = new ArrayList<>();
     // Programm-Configs, änderbar nur im Konfig-File
     // ============================================
     // 250 Sekunden, wie bei Firefox
@@ -281,7 +281,7 @@ public class ProgConfig extends PDataProgConfig {
         list.add(PLog.LILNE2);
         list.add("Programmeinstellungen");
         list.add("===========================");
-        arrayList.stream().forEach(c -> {
+        Arrays.stream(ProgConfig.getInstance().getConfigsArr()).forEach(c -> {
             String s = c.getKey();
             if (s.startsWith("_")) {
                 while (s.length() < 55) {
@@ -298,9 +298,8 @@ public class ProgConfig extends PDataProgConfig {
         list.add(PLog.LILNE2);
         PStringUtils.appendString(list, "|  ", "=");
 
-        PLog.emptyLine();
-        PLog.sysLog(list);
-        PLog.emptyLine();
+        list.add(PLog.LILNE1);
+        PLog.debugLog(list);
     }
 
     private static synchronized void check(IntegerProperty mlConfigs, int init, int min, int max) {

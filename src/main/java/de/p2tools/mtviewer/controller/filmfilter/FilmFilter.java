@@ -18,7 +18,7 @@ package de.p2tools.mtviewer.controller.filmfilter;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.p2lib.mtfilter.FilterCheck;
-import de.p2tools.p2lib.tools.log.PDebugLog;
+import de.p2tools.p2lib.tools.log.PLog;
 import javafx.animation.PauseTransition;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -54,7 +54,7 @@ public final class FilmFilter extends FilmFilterProps {
     }
 
     public void reportFilterReturn() {
-        PDebugLog.sysLog("reportFilterReturn");
+        PLog.debugLog("reportFilterReturn");
         pause.stop();
         filterChange.setValue(!filterChange.getValue());
     }
@@ -63,7 +63,7 @@ public final class FilmFilter extends FilmFilterProps {
         pause.setOnFinished(event -> reportFilterChange());
         pause.setDuration(Duration.millis(ProgConfig.SYSTEM_FILTER_WAIT_TIME.getValue()));
         ProgConfig.SYSTEM_FILTER_WAIT_TIME.addListener((observable, oldValue, newValue) -> {
-            PDebugLog.sysLog("SYSTEM_FILTER_WAIT_TIME: " + ProgConfig.SYSTEM_FILTER_WAIT_TIME.getValue());
+            PLog.debugLog("SYSTEM_FILTER_WAIT_TIME: " + ProgConfig.SYSTEM_FILTER_WAIT_TIME.getValue());
             pause.setDuration(Duration.millis(ProgConfig.SYSTEM_FILTER_WAIT_TIME.getValue()));
         });
 
@@ -82,7 +82,7 @@ public final class FilmFilter extends FilmFilterProps {
 
     private void setTxtFilterChange() {
         //wird auch ausgelöst durch Eintrag in die FilterHistory, da wird ein neuer SelectedFilter angelegt
-        PDebugLog.sysLog("setTxtFilterChange");
+        PLog.debugLog("setTxtFilterChange");
         if (ProgConfig.SYSTEM_FILTER_RETURN.getValue()) {
             //dann wird erst nach "RETURN" gestartet
             pause.stop();
@@ -94,7 +94,7 @@ public final class FilmFilter extends FilmFilterProps {
 
     private void setFilterChange() {
         //wird auch ausgelöst durch Eintrag in die FilterHistory, da wird ein neuer SelectedFilter angelegt
-        PDebugLog.sysLog("setFilterChange");
+        PLog.debugLog("setFilterChange");
         pause.playFromStart();
     }
 

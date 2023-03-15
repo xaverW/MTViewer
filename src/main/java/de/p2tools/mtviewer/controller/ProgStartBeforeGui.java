@@ -68,7 +68,6 @@ public class ProgStartBeforeGui {
             clearTheConfigs();
             return false;
         }
-        PLog.sysLog("Konfig wurde gelesen!");
         return true;
     }
 

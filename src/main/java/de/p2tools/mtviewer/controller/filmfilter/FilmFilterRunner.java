@@ -71,9 +71,9 @@ public class FilmFilterRunner {
             research.set(false);
             try {
                 Platform.runLater(() -> {
-                    PLog.sysLog("========================================");
-                    PLog.sysLog("         === Filter: " + count++ + " ===");
-                    PLog.sysLog("========================================");
+                    PLog.debugLog("========================================");
+                    PLog.debugLog("         === Filter: " + count++ + " ===");
+                    PLog.debugLog("========================================");
 
                     PDuration.counterStart("FilmFilterRunner.filterList");
                     progData.filmlist.filteredListSetPred(
