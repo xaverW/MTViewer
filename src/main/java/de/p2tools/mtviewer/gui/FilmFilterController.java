@@ -22,6 +22,7 @@ import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.guitools.PButton;
+import de.p2tools.p2lib.guitools.PButtonClearFilterFactory;
 import de.p2tools.p2lib.guitools.PGuiTools;
 import de.p2tools.p2lib.guitools.prange.PRangeBox;
 import de.p2tools.p2lib.mtfilter.FilterCheck;
@@ -55,7 +56,7 @@ public class FilmFilterController extends VBox {
     private final PRangeBox slDur = new PRangeBox(FilterCheck.FILTER_ALL_OR_MIN,
             FilterCheck.FILTER_DURATION_MAX_MINUTE);
 
-    private final Button btnClearFilter = new Button();
+    private final Button btnClearFilter = PButtonClearFilterFactory.getPButtonClearSmall();
     private final Button btnGoBack = new Button("");
     private final Button btnGoForward = new Button("");
     private final ArrayList<MenuItemClass> menuItemsList = new ArrayList<>();
@@ -87,8 +88,6 @@ public class FilmFilterController extends VBox {
         progData.actFilmFilterWorker.forwardPossibleProperty().addListener((v, o, n) -> System.out.println(progData.actFilmFilterWorker.forwardPossibleProperty().getValue().toString()));
         btnGoForward.setTooltip(new Tooltip("letzte Filtereinstellung wieder herstellen"));
 
-        btnClearFilter.setGraphic(de.p2tools.p2lib.ProgIcons.Icons.ICON_BUTTON_CLEAR_FILTER_SMALL.getImageView());
-        btnClearFilter.setTooltip(new Tooltip("Filter löschen"));
         btnClearFilter.setOnAction(a -> {
             PDuration.onlyPing("Filter löschen");
             progData.actFilmFilterWorker.clearFilter();
