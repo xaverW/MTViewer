@@ -74,9 +74,9 @@ public class ConfigDialogController extends PDialogExtra {
             public void start(ListenerFilmlistLoadEvent event) {
                 if (event.progress == ListenerLoadFilmlist.PROGRESS_INDETERMINATE) {
                     // ist dann die gespeicherte Filmliste
-                    getMaskerPane().setMaskerVisible(true, false);
+                    getMaskerPane().setMaskerVisible(true, false, false);
                 } else {
-                    getMaskerPane().setMaskerVisible(true, true);
+                    getMaskerPane().setMaskerVisible();
                 }
                 getMaskerPane().setMaskerProgress(event.progress, event.text);
             }
@@ -88,13 +88,13 @@ public class ConfigDialogController extends PDialogExtra {
 
             @Override
             public void loaded(ListenerFilmlistLoadEvent event) {
-                getMaskerPane().setMaskerVisible(true, false);
+                getMaskerPane().setMaskerVisible(true, false, false);
                 getMaskerPane().setMaskerProgress(ListenerLoadFilmlist.PROGRESS_INDETERMINATE, "Filmliste verarbeiten");
             }
 
             @Override
             public void finished(ListenerFilmlistLoadEvent event) {
-                getMaskerPane().setMaskerVisible(false);
+                getMaskerPane().switchOffMasker();
             }
         };
         LoadFilmFactory.getInstance().loadFilmlist.addListenerLoadFilmlist(listener);
@@ -123,10 +123,10 @@ public class ConfigDialogController extends PDialogExtra {
             //zum Einfügen der Diakritika muss eine neue Filmliste geladen werden
             new Thread(() -> {
                 ProgData.getInstance().maskerPane.setMaskerText("Diakritika entfernen");
-                ProgData.getInstance().maskerPane.setMaskerVisible(true);
+                ProgData.getInstance().maskerPane.setMaskerVisible();
                 FilmFactory.flattenDiacritic(progData.filmlist);
                 Listener.notify(Listener.EVENT_DIACRITIC_CHANGED, ConfigDialogController.class.getSimpleName());
-                ProgData.getInstance().maskerPane.setMaskerVisible(false);
+                ProgData.getInstance().maskerPane.switchOffMasker();
             }).start();
         }
 

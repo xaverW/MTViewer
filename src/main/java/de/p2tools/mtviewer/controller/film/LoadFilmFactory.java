@@ -41,9 +41,9 @@ public class LoadFilmFactory {
             public void start(ListenerFilmlistLoadEvent event) {
                 if (event.progress == ListenerLoadFilmlist.PROGRESS_INDETERMINATE) {
                     // ist dann die gespeicherte Filmliste
-                    ProgData.getInstance().maskerPane.setMaskerVisible(true, false);
+                    ProgData.getInstance().maskerPane.setMaskerVisible(true, false, false);
                 } else {
-                    ProgData.getInstance().maskerPane.setMaskerVisible(true, true);
+                    ProgData.getInstance().maskerPane.setMaskerVisible();
                 }
                 ProgData.getInstance().maskerPane.setMaskerProgress(event.progress, event.text);
 
@@ -58,7 +58,7 @@ public class LoadFilmFactory {
 
             @Override
             public void loaded(ListenerFilmlistLoadEvent event) {
-                ProgData.getInstance().maskerPane.setMaskerVisible(true, false);
+                ProgData.getInstance().maskerPane.setMaskerVisible(true, false, false);
                 ProgData.getInstance().maskerPane.setMaskerProgress(ListenerLoadFilmlist.PROGRESS_INDETERMINATE, "Filmliste verarbeiten");
             }
 
@@ -70,7 +70,7 @@ public class LoadFilmFactory {
                 // activate the saved filter
                 ProgData.getInstance().worker.resetFilter();
                 ProgData.getInstance().filmFilterRunner.filter();
-                ProgData.getInstance().maskerPane.setMaskerVisible(false);
+                ProgData.getInstance().maskerPane.switchOffMasker();
 
                 String filmDate = FilmlistFactory.getAgeAsStringDate(ProgData.getInstance().filmlist.metaData);
                 ProgConfig.SYSTEM_FILMLIST_DATE.setValue(ProgData.getInstance().filmlist.isEmpty() ? "" : filmDate);
