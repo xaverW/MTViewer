@@ -207,6 +207,7 @@ public class ProgConfig extends PDataProgConfig {
     public static StringProperty FILM_GUI_TABLE_ORDER = addStrProp("film-gui-table-order");
     public static StringProperty FILM_RESOLUTION = addStrProp("film-resolution", FilmData.RESOLUTION_NORMAL);
     public static StringProperty FILM_PLAY_DIALOG_SIZE = addStrProp("film-play-dialog-size");
+    public static DoubleProperty FILM_GUI_INFO_DIVIDER = addDoubleProp("film-gui-info-divider", 0.7);
 
     // ConfigDialog
     public static StringProperty CONFIG_DIALOG_SIZE = addStrProp("config-dialog-size", "900:700");
