@@ -91,7 +91,7 @@ public class PaneUpdate {
 
         btnNow.setOnAction(event -> new SearchProgramUpdate(progData, stage).searchNewProgramVersion(true));
         PHyperlink hyperlink = new PHyperlink(ProgConst.URL_WEBSITE_MTVIEWER,
-                ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIcons.Icons.ICON_BUTTON_FILE_OPEN.getImageView());
+                ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
 
         int row = 0;
         gridPane.add(tglSearch, 0, row);

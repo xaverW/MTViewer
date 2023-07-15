@@ -86,10 +86,10 @@ public class PaneLog {
         btnFile.setOnAction(event -> {
             PDirFileChooser.DirChooser(ProgData.getInstance().primaryStage, txtLogFile);
         });
-        btnFile.setGraphic(ProgIcons.Icons.ICON_BUTTON_FILE_OPEN.getImageView());
+        btnFile.setGraphic(ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
 
         final Button btnReset = new Button();
-        btnReset.setGraphic(ProgIcons.Icons.ICON_BUTTON_RESET.getImageView());
+        btnReset.setGraphic(ProgIcons.ICON_BUTTON_RESET.getImageView());
         btnReset.setTooltip(new Tooltip("Standardpfad für das Logfile wieder herstellen"));
         btnReset.setOnAction(event -> {
             txtLogFile.setText(ProgInfos.getStandardLogDirectory_String());

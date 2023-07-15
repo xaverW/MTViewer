@@ -57,7 +57,7 @@ public class FilmTools {
         arrProgCallArray = strProgCallArray.split(TRENNER_PROG_ARRAY);
 
         POpen.playStoredFilm(arrProgCallArray, ProgConfig.SYSTEM_PROG_PLAY,
-                url, ProgIcons.Icons.ICON_BUTTON_FILE_OPEN.getImageView());
+                url, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
     }
 
     public static void playFilm(String pathFile) {
@@ -67,7 +67,7 @@ public class FilmTools {
         arrProgCallArray = strProgCallArray.split(TRENNER_PROG_ARRAY);
 
         POpen.playStoredFilm(arrProgCallArray, ProgConfig.SYSTEM_PROG_PLAY,
-                pathFile, ProgIcons.Icons.ICON_BUTTON_FILE_OPEN.getImageView());
+                pathFile, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
     }
 
     public static synchronized String getStatusInfosFilm() {

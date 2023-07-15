@@ -89,16 +89,16 @@ public class PanePlay {
         btnFile.setOnAction(event -> {
             PDirFileChooser.FileChooserOpenFile(ProgData.getInstance().primaryStage, txtPlay);
         });
-        btnFile.setGraphic(ProgIcons.Icons.ICON_BUTTON_FILE_OPEN.getImageView());
+        btnFile.setGraphic(ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
         btnFile.setTooltip(new Tooltip("Einen Videoplayer zum Abspielen der Filme auswählen"));
 
         final Button btnProgramReset = new Button();
-        btnProgramReset.setGraphic(ProgIcons.Icons.ICON_BUTTON_RESET.getImageView());
+        btnProgramReset.setGraphic(ProgIcons.ICON_BUTTON_RESET.getImageView());
         btnProgramReset.setTooltip(new Tooltip("Die Init-Parameter wieder herstellen"));
         btnProgramReset.setOnAction(event -> txtPlay.setText(GetProgramStandardPath.getTemplatePathVlc()));
 
         final Button btnParameterReset = new Button();
-        btnParameterReset.setGraphic(ProgIcons.Icons.ICON_BUTTON_RESET.getImageView());
+        btnParameterReset.setGraphic(ProgIcons.ICON_BUTTON_RESET.getImageView());
         btnParameterReset.setTooltip(new Tooltip("Die Init-Parameter wieder herstellen"));
         btnParameterReset.setOnAction(event -> txtParameter.setText(ProgConfig.SYSTEM_PROG_PLAY_PARAMETER_INIT));
 

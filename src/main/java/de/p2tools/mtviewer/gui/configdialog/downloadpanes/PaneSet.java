@@ -70,32 +70,32 @@ public class PaneSet {
         vBoxAll.setSpacing(25);
 
         final Button btnFileDest = new Button();
-        btnFileDest.setGraphic(ProgIcons.Icons.ICON_BUTTON_FILE_OPEN.getImageView());
+        btnFileDest.setGraphic(ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
         btnFileDest.setTooltip(new Tooltip("Einen Ordner zum Speichern der Filme auswählen"));
         btnFileDest.setOnAction(event -> PDirFileChooser.DirChooser(ProgData.getInstance().primaryStage, txtDestPath));
 
         final Button btnFileProgram = new Button();
-        btnFileProgram.setGraphic(ProgIcons.Icons.ICON_BUTTON_FILE_OPEN.getImageView());
+        btnFileProgram.setGraphic(ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
         btnFileProgram.setTooltip(new Tooltip("Das Programm für den Download von Streams auswählen"));
         btnFileProgram.setOnAction(event -> PDirFileChooser.FileChooserOpenFile(ProgData.getInstance().primaryStage, txtProg));
 
         final Button btnDestPathReset = new Button();
-        btnDestPathReset.setGraphic(ProgIcons.Icons.ICON_BUTTON_RESET.getImageView());
+        btnDestPathReset.setGraphic(ProgIcons.ICON_BUTTON_RESET.getImageView());
         btnDestPathReset.setTooltip(new Tooltip("Die Init-Parameter wieder herstellen"));
         btnDestPathReset.setOnAction(event -> txtDestPath.setText(ProgConfig.DOWNLOAD_FILE_PATH_INIT));
 
         final Button btnDestReset = new Button();
-        btnDestReset.setGraphic(ProgIcons.Icons.ICON_BUTTON_RESET.getImageView());
+        btnDestReset.setGraphic(ProgIcons.ICON_BUTTON_RESET.getImageView());
         btnDestReset.setTooltip(new Tooltip("Die Init-Parameter wieder herstellen"));
         btnDestReset.setOnAction(event -> txtDestName.setText(ProgConfig.DOWNLOAD_FILE_NAME_INIT));
 
         final Button btnParameterReset = new Button();
-        btnParameterReset.setGraphic(ProgIcons.Icons.ICON_BUTTON_RESET.getImageView());
+        btnParameterReset.setGraphic(ProgIcons.ICON_BUTTON_RESET.getImageView());
         btnParameterReset.setTooltip(new Tooltip("Die Init-Parameter wieder herstellen"));
         btnParameterReset.setOnAction(event -> txtParameter.setText(ProgConfig.SYSTEM_PROG_SAVE_PARAMETER_INIT));
 
         final Button btnProgramReset = new Button();
-        btnProgramReset.setGraphic(ProgIcons.Icons.ICON_BUTTON_RESET.getImageView());
+        btnProgramReset.setGraphic(ProgIcons.ICON_BUTTON_RESET.getImageView());
         btnProgramReset.setTooltip(new Tooltip("Die Init-Parameter wieder herstellen"));
         btnProgramReset.setOnAction(event -> txtProg.setText(ProgConfig.SYSTEM_PROG_SAVE_INIT));
 

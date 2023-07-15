@@ -74,7 +74,7 @@ public class MTStartErrorWindow extends Application {
             HBox hBoxUrl = new HBox(10);
             hBoxUrl.setAlignment(Pos.CENTER_LEFT);
             PHyperlink hyperlink = new PHyperlink(url,
-                    ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIcons.Icons.ICON_BUTTON_FILE_OPEN.getImageView());
+                    ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
             hBoxUrl.getChildren().addAll(new Label("Infos:"), hyperlink);
 
             Button btnOk = new Button("_Ok");

@@ -144,7 +144,7 @@ public class DownloadInfoController extends AnchorPane {
         }
 
         String s = download.get().getDestPath();
-        POpen.openDir(s, ProgConfig.SYSTEM_PROG_OPEN_DIR, ProgIcons.Icons.ICON_BUTTON_FILE_OPEN.getImageView());
+        POpen.openDir(s, ProgConfig.SYSTEM_PROG_OPEN_DIR, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
     }
 
     public void showFilmInfo() {
@@ -214,17 +214,17 @@ public class DownloadInfoController extends AnchorPane {
 
         hBoxAll.getChildren().addAll(vBoxTable, vBoxButton);
 
-        btnClearFilter.setGraphic(ProgIcons.Icons.ICON_BUTTON_CLEAN.getImageView());
+        btnClearFilter.setGraphic(ProgIcons.ICON_BUTTON_CLEAN.getImageView());
         btnClearFilter.setTooltip(new Tooltip("Tabelle aufräumen"));
         btnClearFilter.getStyleClass().add("buttonSmall");
         btnClearFilter.setOnAction(a -> cleanUp());
 
-        btnStartAll.setGraphic(ProgIcons.Icons.ICON_BUTTON_START_ALL.getImageView());
+        btnStartAll.setGraphic(ProgIcons.ICON_BUTTON_START_ALL.getImageView());
         btnStartAll.setTooltip(new Tooltip("Alle Downloads starten"));
         btnStartAll.getStyleClass().add("buttonSmall");
         btnStartAll.setOnAction(a -> startDownload(true /* alle */));
 
-        btnStopAll.setGraphic(ProgIcons.Icons.ICON_BUTTON_STOP_ALL.getImageView());
+        btnStopAll.setGraphic(ProgIcons.ICON_BUTTON_STOP_ALL.getImageView());
         btnStopAll.setTooltip(new Tooltip("Alle Downloads stoppen"));
         btnStopAll.getStyleClass().add("buttonSmall");
         btnStopAll.setOnAction(a -> stopDownload(true /* alle */));

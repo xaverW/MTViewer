@@ -43,7 +43,7 @@ public class ProgMenu extends MenuButton {
         ProgData progData = ProgData.getInstance();
 
         setTooltip(new Tooltip("Filmmenü anzeigen"));
-        setGraphic(ProgIcons.Icons.FX_ICON_TOOLBAR_MENU.getImageView());
+        setGraphic(ProgIcons.FX_ICON_TOOLBAR_MENU.getImageView());
         getStyleClass().addAll("btnFunction", "btnFunc-1");
 
         //=========================
@@ -76,7 +76,7 @@ public class ProgMenu extends MenuButton {
         final MenuItem miUrlHelp = new MenuItem("Anleitung im Web");
         miUrlHelp.setOnAction(event -> {
             POpen.openURL(ProgConst.URL_WEBSITE_HELP,
-                    ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIcons.Icons.ICON_BUTTON_FILE_OPEN.getImageView());
+                    ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
         });
         final MenuItem miReset = new MenuItem("Alle Programmeinstellungen zurücksetzen");
         miReset.setOnAction(event -> new ResetDialogController(progData));

@@ -55,7 +55,7 @@ public class CellStartFilm<S, T> extends TableCell<S, T> {
                 final Button btnPlay;
                 btnPlay = new Button("");
                 btnPlay.getStyleClass().addAll("btnFunction", "btnFuncTable");
-                btnPlay.setGraphic(ProgIcons.Icons.IMAGE_TABLE_FILM_PLAY.getImageView());
+                btnPlay.setGraphic(ProgIcons.IMAGE_TABLE_FILM_PLAY.getImageView());
                 btnPlay.setOnAction((ActionEvent event) -> {
                     int col = getIndex();
                     FilmData film = getTableView().getItems().get(col);
@@ -66,7 +66,7 @@ public class CellStartFilm<S, T> extends TableCell<S, T> {
                 final Button btnSave;
                 btnSave = new Button("");
                 btnSave.getStyleClass().addAll("btnFunction", "btnFuncTable");
-                btnSave.setGraphic(ProgIcons.Icons.IMAGE_TABLE_FILM_SAVE.getImageView());
+                btnSave.setGraphic(ProgIcons.IMAGE_TABLE_FILM_SAVE.getImageView());
                 btnSave.setOnAction(event -> {
                     int col = getIndex();
                     FilmData film = getTableView().getItems().get(col);

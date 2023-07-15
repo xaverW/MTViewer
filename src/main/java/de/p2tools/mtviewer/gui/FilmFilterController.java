@@ -78,11 +78,11 @@ public class FilmFilterController extends VBox {
     }
 
     private void initButton() {
-        btnGoBack.setGraphic(ProgIcons.Icons.ICON_BUTTON_BACKWARD.getImageView());
+        btnGoBack.setGraphic(ProgIcons.ICON_BUTTON_BACKWARD.getImageView());
         btnGoBack.setOnAction(a -> progData.actFilmFilterWorker.goBackward());
         btnGoBack.disableProperty().bind(progData.actFilmFilterWorker.backwardPossibleProperty().not());
         btnGoBack.setTooltip(new Tooltip("letzte Filtereinstellung wieder herstellen"));
-        btnGoForward.setGraphic(ProgIcons.Icons.ICON_BUTTON_FORWARD.getImageView());
+        btnGoForward.setGraphic(ProgIcons.ICON_BUTTON_FORWARD.getImageView());
         btnGoForward.setOnAction(a -> progData.actFilmFilterWorker.goForward());
         btnGoForward.disableProperty().bind(progData.actFilmFilterWorker.forwardPossibleProperty().not());
         progData.actFilmFilterWorker.forwardPossibleProperty().addListener((v, o, n) -> System.out.println(progData.actFilmFilterWorker.forwardPossibleProperty().getValue().toString()));

@@ -22,7 +22,7 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.config.ProgInfos;
 import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
 import de.p2tools.mtviewer.controller.update.SearchProgramUpdate;
-import de.p2tools.p2lib.icons.GetIcon;
+import de.p2tools.p2lib.guitools.P2WindowIcon;
 import de.p2tools.p2lib.tools.ProgramToolsFactory;
 import de.p2tools.p2lib.tools.date.DateFactory;
 import de.p2tools.p2lib.tools.duration.PDuration;
@@ -44,7 +44,7 @@ public class ProgStartAfterGui {
      * Filmliste beim Programmstart!! laden
      */
     public static void doWorkAfterGui() {
-        GetIcon.addWindowP2Icon(ProgData.getInstance().primaryStage);
+        P2WindowIcon.addWindowP2Icon(ProgData.getInstance().primaryStage);
         startMsg();
         setTitle();
         ProgData.getInstance().startTimer();

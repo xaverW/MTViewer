@@ -66,7 +66,7 @@ public class MTViewerController extends StackPane {
         progData.maskerPane.toFront();
         Button btnStop = progData.maskerPane.getButton();
         progData.maskerPane.setButtonText("");
-        btnStop.setGraphic(ProgIcons.Icons.ICON_BUTTON_STOP.getImageView());
+        btnStop.setGraphic(ProgIcons.ICON_BUTTON_STOP.getImageView());
         btnStop.setOnAction(a -> LoadFilmFactory.getInstance().loadFilmlist.setStop(true));
     }
 
