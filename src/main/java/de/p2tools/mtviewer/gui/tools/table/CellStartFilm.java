@@ -17,7 +17,7 @@
 
 package de.p2tools.mtviewer.gui.tools.table;
 
-import de.p2tools.mtviewer.controller.data.ProgIcons;
+import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.mtviewer.controller.film.FilmTools;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 import javafx.event.ActionEvent;
@@ -55,7 +55,7 @@ public class CellStartFilm<S, T> extends TableCell<S, T> {
                 final Button btnPlay;
                 btnPlay = new Button("");
                 btnPlay.getStyleClass().addAll("btnFunction", "btnFuncTable");
-                btnPlay.setGraphic(ProgIcons.IMAGE_TABLE_FILM_PLAY.getImageView());
+                btnPlay.setGraphic(ProgIconsMTViewer.IMAGE_TABLE_FILM_PLAY.getImageView());
                 btnPlay.setOnAction((ActionEvent event) -> {
                     int col = getIndex();
                     FilmData film = getTableView().getItems().get(col);
@@ -66,7 +66,7 @@ public class CellStartFilm<S, T> extends TableCell<S, T> {
                 final Button btnSave;
                 btnSave = new Button("");
                 btnSave.getStyleClass().addAll("btnFunction", "btnFuncTable");
-                btnSave.setGraphic(ProgIcons.IMAGE_TABLE_FILM_SAVE.getImageView());
+                btnSave.setGraphic(ProgIconsMTViewer.IMAGE_TABLE_FILM_SAVE.getImageView());
                 btnSave.setOnAction(event -> {
                     int col = getIndex();
                     FilmData film = getTableView().getItems().get(col);

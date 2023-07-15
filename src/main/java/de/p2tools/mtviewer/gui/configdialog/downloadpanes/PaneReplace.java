@@ -19,7 +19,7 @@ package de.p2tools.mtviewer.gui.configdialog.downloadpanes;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.ProgIcons;
+import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.mtviewer.controller.data.ReplaceData;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
@@ -131,7 +131,7 @@ public class PaneReplace {
 
         Button btnDel = new Button("");
         btnDel.setTooltip(new Tooltip("Eintrag löschen"));
-        btnDel.setGraphic(ProgIcons.ICON_BUTTON_REMOVE.getImageView());
+        btnDel.setGraphic(ProgIconsMTViewer.ICON_BUTTON_REMOVE.getImageView());
         btnDel.setOnAction(event -> {
             final ObservableList<ReplaceData> sels = tableView.getSelectionModel().getSelectedItems();
 
@@ -145,7 +145,7 @@ public class PaneReplace {
 
         Button btnNew = new Button("");
         btnNew.setTooltip(new Tooltip("Einen neuen Eintrag erstellen"));
-        btnNew.setGraphic(ProgIcons.ICON_BUTTON_ADD.getImageView());
+        btnNew.setGraphic(ProgIconsMTViewer.ICON_BUTTON_ADD.getImageView());
         btnNew.setOnAction(event -> {
             ReplaceData replaceData = new ReplaceData();
             ProgData.getInstance().replaceList.add(replaceData);
@@ -157,7 +157,7 @@ public class PaneReplace {
 
         Button btnUp = new Button("");
         btnUp.setTooltip(new Tooltip("Eintrag nach oben schieben"));
-        btnUp.setGraphic(ProgIcons.ICON_BUTTON_MOVE_UP.getImageView());
+        btnUp.setGraphic(ProgIconsMTViewer.ICON_BUTTON_MOVE_UP.getImageView());
         btnUp.setOnAction(event -> {
             final int sel = tableView.getSelectionModel().getSelectedIndex();
             if (sel < 0) {
@@ -170,7 +170,7 @@ public class PaneReplace {
 
         Button btnDown = new Button("");
         btnDown.setTooltip(new Tooltip("Eintrag nach unten schieben"));
-        btnDown.setGraphic(ProgIcons.ICON_BUTTON_MOVE_DOWN.getImageView());
+        btnDown.setGraphic(ProgIconsMTViewer.ICON_BUTTON_MOVE_DOWN.getImageView());
         btnDown.setOnAction(event -> {
             final int sel = tableView.getSelectionModel().getSelectedIndex();
             if (sel < 0) {
@@ -183,7 +183,7 @@ public class PaneReplace {
 
         Button btnTop = new Button();
         btnTop.setTooltip(new Tooltip("Eintrag an den Anfang verschieben"));
-        btnTop.setGraphic(ProgIcons.ICON_BUTTON_MOVE_TOP.getImageView());
+        btnTop.setGraphic(ProgIconsMTViewer.ICON_BUTTON_MOVE_TOP.getImageView());
         btnTop.setOnAction(event -> {
             final int sel = tableView.getSelectionModel().getSelectedIndex();
             if (sel < 0) {
@@ -196,7 +196,7 @@ public class PaneReplace {
 
         Button btnBottom = new Button();
         btnBottom.setTooltip(new Tooltip("Eintrag an das Ende verschieben"));
-        btnBottom.setGraphic(ProgIcons.ICON_BUTTON_MOVE_BOTTOM.getImageView());
+        btnBottom.setGraphic(ProgIconsMTViewer.ICON_BUTTON_MOVE_BOTTOM.getImageView());
         btnBottom.setOnAction(event -> {
             final int sel = tableView.getSelectionModel().getSelectedIndex();
             if (sel < 0) {

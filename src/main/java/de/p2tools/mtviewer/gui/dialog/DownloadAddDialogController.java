@@ -19,7 +19,7 @@ package de.p2tools.mtviewer.gui.dialog;
 import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.ProgIcons;
+import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.downloadtools.HttpDownloadFactory;
@@ -61,7 +61,7 @@ public class DownloadAddDialogController extends PDialogExtra {
     private final Label lblFree = new Label("4M noch frei");
     private final boolean onlyChange;
     private PHyperlink pHyperlinkUrlFilm =
-            new PHyperlink("", ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
+            new PHyperlink("", ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
     private boolean ok = false;
     private FilmData filmData;
     private DownloadData downloadData;
@@ -228,12 +228,12 @@ public class DownloadAddDialogController extends PDialogExtra {
     }
 
     private void initButton() {
-        btnDest.setGraphic(ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
+        btnDest.setGraphic(ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
         btnDest.setText("");
         btnDest.setTooltip(new Tooltip("Einen Pfad zum Speichern auswählen."));
         btnDest.setOnAction(event -> PDirFileChooser.DirChooser(ProgData.getInstance().primaryStage, cboPath));
 
-        btnPropose.setGraphic(ProgIcons.ICON_BUTTON_PROPOSE.getImageView());
+        btnPropose.setGraphic(ProgIconsMTViewer.ICON_BUTTON_PROPOSE.getImageView());
         btnPropose.setText("");
         btnPropose.setTooltip(new Tooltip("Einen Pfad zum Speichern vorschlagen lassen."));
         btnPropose.setOnAction(event -> proposeDestination());

@@ -19,7 +19,7 @@ package de.p2tools.mtviewer.gui.dialog;
 
 import de.p2tools.mtviewer.controller.ProgQuit;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.ProgIcons;
+import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.p2lib.dialogs.dialog.PDialogExtra;
 import de.p2tools.p2lib.guitools.BigButton;
 import de.p2tools.p2lib.guitools.pmask.PMaskerPane;
@@ -58,21 +58,21 @@ public class QuitDialogController extends PDialogExtra {
         headerLabel.setStyle("-fx-font-size: 1.5em;");
 
         //nicht beenden
-        BigButton cancelButton = new BigButton(ProgIcons.ICON_BUTTON_QUIT.getImageView(),
+        BigButton cancelButton = new BigButton(ProgIconsMTViewer.ICON_BUTTON_QUIT.getImageView(),
                 "Nicht beenden", "");
         cancelButton.setOnAction(e -> {
             close();
         });
 
         //beenden
-        BigButton quitButton = new BigButton(ProgIcons.ICON_BUTTON_QUIT.getImageView(),
+        BigButton quitButton = new BigButton(ProgIconsMTViewer.ICON_BUTTON_QUIT.getImageView(),
                 "Beenden", "Alle Downloads abbrechen und das Programm beenden.");
         quitButton.setOnAction(e -> {
             ProgQuit.quit();
         });
 
         //warten, dann beenden
-        BigButton waitButton = new BigButton(ProgIcons.ICON_BUTTON_QUIT.getImageView(),
+        BigButton waitButton = new BigButton(ProgIconsMTViewer.ICON_BUTTON_QUIT.getImageView(),
                 "Warten", "Alle Downloads abwarten und dann das Programm beenden.");
         waitButton.setOnAction(e -> startWaiting());
         cbxShutDown.setSelected(false);
@@ -84,7 +84,7 @@ public class QuitDialogController extends PDialogExtra {
             }
         });
 
-        gridPane.add(ProgIcons.ICON_DIALOG_QUIT.getImageView(), 0, 0, 1, 1);
+        gridPane.add(ProgIconsMTViewer.ICON_DIALOG_QUIT.getImageView(), 0, 0, 1, 1);
         gridPane.add(headerLabel, 1, 0);
         gridPane.add(cancelButton, 1, 1);
         gridPane.add(quitButton, 1, 2);

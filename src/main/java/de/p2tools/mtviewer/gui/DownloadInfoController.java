@@ -18,7 +18,7 @@ package de.p2tools.mtviewer.gui;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.ProgIcons;
+import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.data.download.DownloadDataFactory;
 import de.p2tools.mtviewer.controller.film.FilmTools;
@@ -144,7 +144,7 @@ public class DownloadInfoController extends AnchorPane {
         }
 
         String s = download.get().getDestPath();
-        POpen.openDir(s, ProgConfig.SYSTEM_PROG_OPEN_DIR, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
+        POpen.openDir(s, ProgConfig.SYSTEM_PROG_OPEN_DIR, ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
     }
 
     public void showFilmInfo() {
@@ -214,17 +214,17 @@ public class DownloadInfoController extends AnchorPane {
 
         hBoxAll.getChildren().addAll(vBoxTable, vBoxButton);
 
-        btnClearFilter.setGraphic(ProgIcons.ICON_BUTTON_CLEAN.getImageView());
+        btnClearFilter.setGraphic(ProgIconsMTViewer.ICON_BUTTON_CLEAN.getImageView());
         btnClearFilter.setTooltip(new Tooltip("Tabelle aufräumen"));
         btnClearFilter.getStyleClass().add("buttonSmall");
         btnClearFilter.setOnAction(a -> cleanUp());
 
-        btnStartAll.setGraphic(ProgIcons.ICON_BUTTON_START_ALL.getImageView());
+        btnStartAll.setGraphic(ProgIconsMTViewer.ICON_BUTTON_START_ALL.getImageView());
         btnStartAll.setTooltip(new Tooltip("Alle Downloads starten"));
         btnStartAll.getStyleClass().add("buttonSmall");
         btnStartAll.setOnAction(a -> startDownload(true /* alle */));
 
-        btnStopAll.setGraphic(ProgIcons.ICON_BUTTON_STOP_ALL.getImageView());
+        btnStopAll.setGraphic(ProgIconsMTViewer.ICON_BUTTON_STOP_ALL.getImageView());
         btnStopAll.setTooltip(new Tooltip("Alle Downloads stoppen"));
         btnStopAll.getStyleClass().add("buttonSmall");
         btnStopAll.setOnAction(a -> stopDownload(true /* alle */));

@@ -18,7 +18,7 @@ package de.p2tools.mtviewer.gui;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.ProgIcons;
+import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.guitools.PButton;
@@ -78,11 +78,11 @@ public class FilmFilterController extends VBox {
     }
 
     private void initButton() {
-        btnGoBack.setGraphic(ProgIcons.ICON_BUTTON_BACKWARD.getImageView());
+        btnGoBack.setGraphic(ProgIconsMTViewer.ICON_BUTTON_BACKWARD.getImageView());
         btnGoBack.setOnAction(a -> progData.actFilmFilterWorker.goBackward());
         btnGoBack.disableProperty().bind(progData.actFilmFilterWorker.backwardPossibleProperty().not());
         btnGoBack.setTooltip(new Tooltip("letzte Filtereinstellung wieder herstellen"));
-        btnGoForward.setGraphic(ProgIcons.ICON_BUTTON_FORWARD.getImageView());
+        btnGoForward.setGraphic(ProgIconsMTViewer.ICON_BUTTON_FORWARD.getImageView());
         btnGoForward.setOnAction(a -> progData.actFilmFilterWorker.goForward());
         btnGoForward.disableProperty().bind(progData.actFilmFilterWorker.forwardPossibleProperty().not());
         progData.actFilmFilterWorker.forwardPossibleProperty().addListener((v, o, n) -> System.out.println(progData.actFilmFilterWorker.forwardPossibleProperty().getValue().toString()));

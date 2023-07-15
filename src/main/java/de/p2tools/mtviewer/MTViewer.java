@@ -19,7 +19,7 @@ import de.p2tools.mtviewer.controller.ProgQuit;
 import de.p2tools.mtviewer.controller.ProgStartAfterGui;
 import de.p2tools.mtviewer.controller.ProgStartBeforeGui;
 import de.p2tools.mtviewer.controller.config.*;
-import de.p2tools.mtviewer.controller.data.ProgIcons;
+import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.p2lib.P2LibInit;
 import de.p2tools.p2lib.ProgIconsP2Lib;
 import de.p2tools.p2lib.guitools.PGuiSize;
@@ -63,7 +63,7 @@ public class MTViewer extends Application {
     }
 
     private void initP2lib() {
-        ProgIcons.initIcons();
+        ProgIconsMTViewer.initIcons();
         ProgIconsP2Lib.initIcons();
         P2LibInit.initLib(primaryStage, ProgConst.PROGRAM_NAME,
                 "", ProgConfig.SYSTEM_DARK_THEME,
