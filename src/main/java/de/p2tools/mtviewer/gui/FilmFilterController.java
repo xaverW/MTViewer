@@ -21,9 +21,9 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
+import de.p2tools.p2lib.guitools.P2GuiTools;
 import de.p2tools.p2lib.guitools.PButton;
 import de.p2tools.p2lib.guitools.PButtonClearFilterFactory;
-import de.p2tools.p2lib.guitools.PGuiTools;
 import de.p2tools.p2lib.guitools.prange.PRangeBox;
 import de.p2tools.p2lib.mtfilter.FilterCheck;
 import de.p2tools.p2lib.mtfilter.FilterCheckRegEx;
@@ -302,7 +302,7 @@ public class FilmFilterController extends VBox {
     private VBox addSlider() {
         VBox vBox;
         vBox = new VBox(2);
-        HBox h = new HBox(new Label("Zeitraum:"), PGuiTools.getHBoxGrower(), lblTimeRangeValue);
+        HBox h = new HBox(new Label("Zeitraum:"), P2GuiTools.getHBoxGrower(), lblTimeRangeValue);
         vBox.getChildren().addAll(h, slTimeRange);
         getChildren().addAll(vBox);
         return vBox;
@@ -311,7 +311,7 @@ public class FilmFilterController extends VBox {
     private VBox addDuration() {
         VBox vBox;
         vBox = new VBox(2);
-        HBox h = new HBox(new Label("Filmlänge:"), PGuiTools.getHBoxGrower());
+        HBox h = new HBox(new Label("Filmlänge:"), P2GuiTools.getHBoxGrower());
         vBox.getChildren().addAll(h, slDur);
         getChildren().addAll(vBox);
         return vBox;
@@ -364,7 +364,7 @@ public class FilmFilterController extends VBox {
         HBox hBoxLine1 = new HBox();
         hBoxLine1.setAlignment(Pos.BOTTOM_RIGHT);
         HBox.setHgrow(gridPaneLine1, Priority.ALWAYS);
-        hBoxLine1.getChildren().addAll(gridPaneLine1, PGuiTools.getVDistance(distLine),
+        hBoxLine1.getChildren().addAll(gridPaneLine1, P2GuiTools.getVDistance(distLine),
                 /* btnHelpFilter, PGuiTools.getVDistance(P2LibConst.DIST_BUTTON),*/ new ProgMenu());
 
 

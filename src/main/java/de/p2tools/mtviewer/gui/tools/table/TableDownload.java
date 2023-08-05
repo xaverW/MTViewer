@@ -125,17 +125,17 @@ public class TableDownload extends PTable<DownloadData> {
 
         final TableColumn<DownloadData, Boolean> hdColumn = new TableColumn<>("HD");
         hdColumn.setCellValueFactory(new PropertyValueFactory<>("hd"));
-        hdColumn.setCellFactory(new CellCheckBox().cellFactoryBool);
+        hdColumn.setCellFactory(new CellCheckBox().cellFactory);
         hdColumn.getStyleClass().add("alignCenter");
 
         final TableColumn<DownloadData, Boolean> utColumn = new TableColumn<>("UT");
         utColumn.setCellValueFactory(new PropertyValueFactory<>("ut"));
-        utColumn.setCellFactory(new CellCheckBox().cellFactoryBool);
+        utColumn.setCellFactory(new CellCheckBox().cellFactory);
         utColumn.getStyleClass().add("alignCenter");
 
         final TableColumn<DownloadData, Boolean> geoColumn = new TableColumn<>("Geo");
         geoColumn.setCellValueFactory(new PropertyValueFactory<>("geoBlocked"));
-        geoColumn.setCellFactory(new CellCheckBox().cellFactoryBool);
+        geoColumn.setCellFactory(new CellCheckBox().cellFactory);
         geoColumn.getStyleClass().add("alignCenter");
 
         final TableColumn<DownloadData, String> urlColumn = new TableColumn<>("URL");

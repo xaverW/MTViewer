@@ -24,9 +24,9 @@ import de.p2tools.mtviewer.controller.data.ReplaceData;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.alert.PAlert;
+import de.p2tools.p2lib.guitools.P2GuiTools;
 import de.p2tools.p2lib.guitools.PButton;
 import de.p2tools.p2lib.guitools.PColumnConstraints;
-import de.p2tools.p2lib.guitools.PGuiTools;
 import de.p2tools.p2lib.guitools.ptoggleswitch.PToggleSwitch;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -214,8 +214,8 @@ public class PaneReplace {
         });
 
         HBox hBox = new HBox(P2LibConst.DIST_BUTTON);
-        hBox.getChildren().addAll(btnNew, btnDel, PGuiTools.getVDistance(P2LibConst.DIST_BUTTON_BLOCK),
-                btnTop, btnUp, btnDown, btnBottom, PGuiTools.getHBoxGrower(), btnReset);
+        hBox.getChildren().addAll(btnNew, btnDel, P2GuiTools.getVDistance(P2LibConst.DIST_BUTTON_BLOCK),
+                btnTop, btnUp, btnDown, btnBottom, P2GuiTools.getHBoxGrower(), btnReset);
         hBox.disableProperty().bind(ProgConfig.SYSTEM_USE_REPLACETABLE.not());
 
         vBox.getChildren().addAll(hBox);

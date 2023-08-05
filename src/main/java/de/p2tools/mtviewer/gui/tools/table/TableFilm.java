@@ -101,12 +101,12 @@ public class TableFilm extends PTable<FilmData> {
 
         final TableColumn<FilmData, Boolean> hdColumn = new TableColumn<>("HD");
         hdColumn.setCellValueFactory(new PropertyValueFactory<>("hd"));
-        hdColumn.setCellFactory(new CellCheckBox().cellFactoryBool);
+        hdColumn.setCellFactory(new CellCheckBox().cellFactory);
         hdColumn.getStyleClass().add("alignCenter");
 
         final TableColumn<FilmData, Boolean> utColumn = new TableColumn<>("UT");
         utColumn.setCellValueFactory(new PropertyValueFactory<>("ut"));
-        utColumn.setCellFactory(new CellCheckBox().cellFactoryBool);
+        utColumn.setCellFactory(new CellCheckBox().cellFactory);
         utColumn.getStyleClass().add("alignCenter");
 
         final TableColumn<FilmData, String> geoColumn = new TableColumn<>("Geo");

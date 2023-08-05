@@ -23,9 +23,9 @@ import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.mtviewer.controller.update.SearchProgramUpdate;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
+import de.p2tools.p2lib.guitools.P2GuiTools;
 import de.p2tools.p2lib.guitools.PButton;
 import de.p2tools.p2lib.guitools.PColumnConstraints;
-import de.p2tools.p2lib.guitools.PGuiTools;
 import de.p2tools.p2lib.guitools.PHyperlink;
 import de.p2tools.p2lib.guitools.ptoggleswitch.PToggleSwitch;
 import javafx.beans.property.BooleanProperty;
@@ -119,7 +119,7 @@ public class PaneUpdate {
         hBoxHyper.setSpacing(10);
         hBoxHyper.getChildren().addAll(new Label("Infos auch auf der Website:"), hyperlink);
 
-        vBox.getChildren().addAll(gridPane, PGuiTools.getVBoxGrower(), hBoxHyper);
+        vBox.getChildren().addAll(gridPane, P2GuiTools.getVBoxGrower(), hBoxHyper);
 
         TitledPane tpConfig = new TitledPane("Programmupdate", vBox);
         result.add(tpConfig);
