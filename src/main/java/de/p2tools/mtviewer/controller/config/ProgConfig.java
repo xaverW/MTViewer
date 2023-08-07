@@ -23,8 +23,8 @@ import de.p2tools.mtviewer.controller.filmfilter.FilmFilter;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.configfile.ConfigFile;
 import de.p2tools.p2lib.data.PDataProgConfig;
-import de.p2tools.p2lib.mtdownload.BandwidthTokenBucket;
 import de.p2tools.p2lib.mtdownload.GetProgramStandardPath;
+import de.p2tools.p2lib.mtdownload.MLBandwidthTokenBucket;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 import de.p2tools.p2lib.tools.PStringUtils;
 import de.p2tools.p2lib.tools.PSystemUtils;
@@ -126,7 +126,7 @@ public class ProgConfig extends PDataProgConfig {
     //Download
     public static StringProperty DOWNLOAD_DIALOG_PATH_SAVING = addStrProp("download-dialog-path-saving"); // gesammelten Downloadpfade im Downloaddialog
     public static StringProperty DOWNLOAD_ADD_DIALOG_SIZE = addStrProp("download-add-dialog-size", "800:600");
-    public static IntegerProperty DOWNLOAD_MAX_BANDWIDTH_KBYTE = addIntProp("download-max-bandwidth-kilobyte", BandwidthTokenBucket.BANDWIDTH_MAX_KBYTE);
+    public static IntegerProperty DOWNLOAD_MAX_BANDWIDTH_KBYTE = addIntProp("download-max-bandwidth-kilobyte", MLBandwidthTokenBucket.BANDWIDTH_MAX_KBYTE);
     public static StringProperty DOWNLOAD_DIALOG_ERROR_SIZE = addStrProp("download-dialog-error-size", "");
     public static IntegerProperty DOWNLOAD_MAX_DOWNLOADS = addIntProp("download-max-downloads", 1);
     public static IntegerProperty DOWNLOAD_CONTINUE = addIntProp("download-contineu", DownloadState.DOWNLOAD_RESTART__ASK);

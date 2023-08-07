@@ -22,8 +22,8 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.starter.StarterClass;
-import de.p2tools.p2lib.mtdownload.BandwidthTokenBucket;
-import de.p2tools.p2lib.mtdownload.MTInputStream;
+import de.p2tools.p2lib.mtdownload.MLBandwidthTokenBucket;
+import de.p2tools.p2lib.mtdownload.MLInputStream;
 import javafx.beans.property.LongProperty;
 
 import java.io.File;
@@ -45,11 +45,14 @@ public class DownloadMp4 {
                          File file, LongProperty downloaded) throws Exception {
 
 
-        downloadData.getStart().setInputStream(new MTInputStream(conn.getInputStream(),
-                bandwidthCalculationTimer, ProgConfig.DOWNLOAD_MAX_BANDWIDTH_KBYTE));
+        downloadData.getStart().setInputStream(new MLInputStream(conn.getInputStream(),
+                bandwidthCalculationTimer,
+                ProgConfig.DOWNLOAD_MAX_BANDWIDTH_KBYTE,
+                ProgData.FILMLIST_IS_DOWNLOADING));
+
         FileOutputStream fos = new FileOutputStream(file, (downloaded.get() != 0));
         downloadData.getDownloadSize().addActFileSize(downloaded.get());
-        final byte[] buffer = new byte[BandwidthTokenBucket.DEFAULT_BUFFER_SIZE];
+        final byte[] buffer = new byte[MLBandwidthTokenBucket.DEFAULT_BUFFER_SIZE];
         double percent, ppercent = DownloadConstants.PROGRESS_WAITING, startPercent = DownloadConstants.PROGRESS_NOT_STARTED;
         int len;
         long aktBandwidth = 0, aktSize = 0;

@@ -20,7 +20,7 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.gui.tools.table.TableDownload;
-import de.p2tools.p2lib.mtdownload.BandwidthTokenBucket;
+import de.p2tools.p2lib.mtdownload.MLBandwidthTokenBucket;
 import de.p2tools.p2lib.tools.PSystemUtils;
 import javafx.beans.property.IntegerProperty;
 import javafx.scene.control.*;
@@ -176,7 +176,7 @@ public class DownloadTableContextMenu {
                 "oder unbegrenzt wenn \"aus\""));
 
         sliderBandwidth.setMin(50);
-        sliderBandwidth.setMax(BandwidthTokenBucket.BANDWIDTH_MAX_KBYTE);
+        sliderBandwidth.setMax(MLBandwidthTokenBucket.BANDWIDTH_MAX_KBYTE);
         sliderBandwidth.setShowTickLabels(true);
         sliderBandwidth.setMinorTickCount(9);
         sliderBandwidth.setMajorTickUnit(250);
@@ -186,7 +186,7 @@ public class DownloadTableContextMenu {
         sliderBandwidth.setLabelFormatter(new StringConverter<>() {
             @Override
             public String toString(Double x) {
-                if (x == BandwidthTokenBucket.BANDWIDTH_MAX_KBYTE) {
+                if (x == MLBandwidthTokenBucket.BANDWIDTH_MAX_KBYTE) {
                     return "alles";
                 }
 
@@ -203,6 +203,7 @@ public class DownloadTableContextMenu {
         setTextBandwidth();
 
         sliderBandwidth.valueProperty().addListener((obs, oldValue, newValue) -> {
+            ProgData.FILMLIST_IS_DOWNLOADING.setValue(false); // vorsichtshalber
             setTextBandwidth();
         });
     }
@@ -211,7 +212,7 @@ public class DownloadTableContextMenu {
         int bandwidthKByte;
         String ret;
         bandwidthKByte = ProgConfig.DOWNLOAD_MAX_BANDWIDTH_KBYTE.getValue();
-        if (bandwidthKByte == BandwidthTokenBucket.BANDWIDTH_MAX_KBYTE) {
+        if (bandwidthKByte == MLBandwidthTokenBucket.BANDWIDTH_MAX_KBYTE) {
             ret = "alles";
         } else {
             ret = bandwidthKByte + " kB/s";
