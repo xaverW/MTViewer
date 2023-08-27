@@ -36,7 +36,7 @@ public class LoadFilmFactory {
 
     private LoadFilmFactory() {
         loadFilmlist = new LoadFilmlist();
-        loadFilmlist.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
+        loadFilmlist.filmListLoadNotifier.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
             @Override
             public void start(ListenerFilmlistLoadEvent event) {
                 ProgData.FILMLIST_IS_DOWNLOADING.setValue(true);

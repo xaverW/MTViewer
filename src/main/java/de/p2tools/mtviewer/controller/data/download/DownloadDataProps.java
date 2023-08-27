@@ -20,7 +20,6 @@ import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.p2lib.configfile.config.*;
 import de.p2tools.p2lib.configfile.pdata.PDataSample;
 import de.p2tools.p2lib.mtdownload.DownloadSize;
-import de.p2tools.p2lib.mtfilm.tools.Data;
 import de.p2tools.p2lib.tools.date.PLDateFactory;
 import de.p2tools.p2lib.tools.date.PLDateProperty;
 import de.p2tools.p2lib.tools.file.PFileUtils;
@@ -435,7 +434,6 @@ public class DownloadDataProps extends PDataSample<DownloadData> {
     }
 
     public int compareTo(DownloadDataProps arg0) {
-        return Data.sorter.compare(getChannel(), arg0.getChannel());
+        return getChannel().compareTo(arg0.getChannel());
     }
-
 }

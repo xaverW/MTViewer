@@ -24,7 +24,7 @@ import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.guitools.P2GuiTools;
 import de.p2tools.p2lib.guitools.PButton;
 import de.p2tools.p2lib.guitools.PButtonClearFilterFactory;
-import de.p2tools.p2lib.guitools.prange.PRangeBox;
+import de.p2tools.p2lib.guitools.prange.P2RangeBox;
 import de.p2tools.p2lib.mtfilter.FilterCheck;
 import de.p2tools.p2lib.mtfilter.FilterCheckRegEx;
 import de.p2tools.p2lib.tools.duration.PDuration;
@@ -48,12 +48,12 @@ public class FilmFilterController extends VBox {
     public static final int FILTER_SPACING_TEXTFILTER = 10;
 
     private final MenuButton mbChannel = new MenuButton("");
-    private final ComboBox<String> cboTheme = new ComboBox();
-    private final ComboBox<String> cboTitle = new ComboBox();
-    private final ComboBox<String> cboSomewhere = new ComboBox();
+    private final ComboBox<String> cboTheme = new ComboBox<>();
+    private final ComboBox<String> cboTitle = new ComboBox<>();
+    private final ComboBox<String> cboSomewhere = new ComboBox<>();
     private final Slider slTimeRange = new Slider();
     private final Label lblTimeRangeValue = new Label();
-    private final PRangeBox slDur = new PRangeBox(FilterCheck.FILTER_ALL_OR_MIN,
+    private final P2RangeBox slDur = new P2RangeBox("Filmlänge:", true, FilterCheck.FILTER_ALL_OR_MIN,
             FilterCheck.FILTER_DURATION_MAX_MINUTE);
 
     private final Button btnClearFilter = PButtonClearFilterFactory.getPButtonClearSmall();
@@ -63,7 +63,7 @@ public class FilmFilterController extends VBox {
     private final ProgData progData;
 
     public FilmFilterController() {
-        progData = ProgData.getInstance();
+        this.progData = ProgData.getInstance();
 
         setPadding(new Insets(10, 15, 5, 15));
         setSpacing(FILTER_SPACING_TEXTFILTER);
@@ -140,7 +140,7 @@ public class FilmFilterController extends VBox {
     private void initDurFilter() {
         slDur.minValueProperty().bindBidirectional(progData.actFilmFilterWorker.getActFilterSettings().minDurProperty());
         slDur.maxValueProperty().bindBidirectional(progData.actFilmFilterWorker.getActFilterSettings().maxDurProperty());
-        slDur.setValuePrefix("");
+// todo       slDur.setValuePrefix("");
     }
 
     private void initSenderFilter() {
@@ -308,14 +308,14 @@ public class FilmFilterController extends VBox {
         return vBox;
     }
 
-    private VBox addDuration() {
-        VBox vBox;
-        vBox = new VBox(2);
-        HBox h = new HBox(new Label("Filmlänge:"), P2GuiTools.getHBoxGrower());
-        vBox.getChildren().addAll(h, slDur);
-        getChildren().addAll(vBox);
-        return vBox;
-    }
+//    private VBox addDuration() {
+//        VBox vBox;
+//        vBox = new VBox(2);
+//        HBox h = new HBox(new Label("Filmlänge:"), P2GuiTools.getHBoxGrower());
+//        vBox.getChildren().addAll(h, slDur);
+//        getChildren().addAll(vBox);
+//        return vBox;
+//    }
 
     private void setLabelSlider() {
         final String txtAll = "alles";
@@ -382,7 +382,7 @@ public class FilmFilterController extends VBox {
         gridPaneLine2.add(vBox, 0, 0);
         GridPane.setHgrow(vBox, Priority.ALWAYS);
 
-        vBox = addDuration();
+        vBox = slDur;
         gridPaneLine2.add(vBox, 1, 0);
         GridPane.setHgrow(vBox, Priority.ALWAYS);
 

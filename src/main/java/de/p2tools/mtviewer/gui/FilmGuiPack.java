@@ -23,13 +23,14 @@ import javafx.scene.layout.VBox;
 
 public class FilmGuiPack {
 
-    final FilmFilterController filterController = new FilmFilterController();
+    final FilmFilterController filterController;
     final FilmGuiController filmGuiController;
     ProgData progData;
     private VBox vBox = new VBox();
 
     public FilmGuiPack() {
         progData = ProgData.getInstance();
+        filterController = new FilmFilterController();
         filmGuiController = new FilmGuiController();
         progData.filmGuiController = filmGuiController;
     }

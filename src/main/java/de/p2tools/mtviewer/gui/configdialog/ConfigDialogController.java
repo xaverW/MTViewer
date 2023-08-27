@@ -97,7 +97,7 @@ public class ConfigDialogController extends PDialogExtra {
                 getMaskerPane().switchOffMasker();
             }
         };
-        LoadFilmFactory.getInstance().loadFilmlist.addListenerLoadFilmlist(listener);
+        LoadFilmFactory.getInstance().loadFilmlist.filmListLoadNotifier.addListenerLoadFilmlist(listener);
 
         VBox.setVgrow(tabPane, Priority.ALWAYS);
         getVBoxCont().getChildren().add(tabPane);
@@ -135,7 +135,7 @@ public class ConfigDialogController extends PDialogExtra {
         controllerFilm.close();
         controllerDownload.close();
 
-        LoadFilmFactory.getInstance().loadFilmlist.removeListenerLoadFilmlist(listener);
+        LoadFilmFactory.getInstance().loadFilmlist.filmListLoadNotifier.removeListenerLoadFilmlist(listener);
         Listener.notify(Listener.EVEMT_SETDATA_CHANGED, ConfigDialogController.class.getSimpleName());
         super.close();
     }
