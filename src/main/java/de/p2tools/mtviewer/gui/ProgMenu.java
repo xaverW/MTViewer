@@ -31,6 +31,7 @@ import de.p2tools.mtviewer.gui.tools.TipOfDayFactory;
 import de.p2tools.p2lib.guitools.POpen;
 import de.p2tools.p2lib.tools.shortcut.PShortcutWorker;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
 
 
 public class ProgMenu extends MenuButton {
@@ -42,6 +43,13 @@ public class ProgMenu extends MenuButton {
     private void makeMenue() {
         ProgData progData = ProgData.getInstance();
 
+        setOnMouseClicked(mouseEvent -> {
+            if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
+                ProgConfig.SYSTEM_DARK_THEME.setValue(!ProgConfig.SYSTEM_DARK_THEME.getValue());
+
+            }
+        });
+        
         setTooltip(new Tooltip("Filmmenü anzeigen"));
         setGraphic(ProgIconsMTViewer.FX_ICON_TOOLBAR_MENU.getImageView());
         getStyleClass().addAll("btnFunction", "btnFunc-1");
@@ -64,12 +72,16 @@ public class ProgMenu extends MenuButton {
         //Filmliste, Info, Einstellungen
         final MenuItem miLoad = new MenuItem("Eine neue Filmliste laden");
         miLoad.setOnAction(e -> LoadFilmFactory.getInstance().loadList(false));
+
+        final CheckMenuItem miDarkMode = new CheckMenuItem("Dark Mode");
+        miDarkMode.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_DARK_THEME);
+
         final MenuItem miShowInfo = new MenuItem("Infobereich unter der Tabelle ein-/ausblenden");
         miShowInfo.setOnAction(a -> progData.mtViewerController.setInfos());
         PShortcutWorker.addShortCut(miShowInfo, MTShortcut.SHORTCUT_SHOW_INFOS);
         final MenuItem miConfig = new MenuItem("Einstellungen");
         miConfig.setOnAction(e -> new ConfigDialogController(ProgData.getInstance()).showDialog());
-        getItems().addAll(mFilm, miLoad, miShowInfo, miConfig, new SeparatorMenuItem());
+        getItems().addAll(mFilm, miLoad, miDarkMode, miShowInfo, miConfig, new SeparatorMenuItem());
 
         //=========================
         //Hilfe
