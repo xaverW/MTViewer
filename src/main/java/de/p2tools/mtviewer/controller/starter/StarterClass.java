@@ -16,15 +16,12 @@
 
 package de.p2tools.mtviewer.controller.starter;
 
-import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.downloadtools.DirectHttpDownload;
 import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
-import de.p2tools.p2lib.P2LibConst;
-import de.p2tools.p2lib.guitools.pnotification.P2Notification;
 import de.p2tools.p2lib.mtdownload.SizeTools;
 import de.p2tools.p2lib.mtfilm.loadfilmlist.ListenerFilmlistLoadEvent;
 import de.p2tools.p2lib.mtfilm.loadfilmlist.ListenerLoadFilmlist;
@@ -170,20 +167,21 @@ public class StarterClass {
         list.add(PLog.LILNE_EMPTY);
         PLog.sysLog(list);
 
-        if (ProgConfig.DOWNLOAD_SHOW_NOTIFICATION.get() && !download.isStateStoped()) {
+        if (!download.isStateStoped()) {
             //war ein Abo und wurde nicht abgebrochen
-            addNotification(download);
+//            addNotification(download);
+            MTNotification.addNotification(download, download.isStateError());
         }
     }
 
-    public static void addNotification(DownloadData download) {
-        boolean error = download.isStateError();
-        String text = ("Film:   " + download.getTitle() + P2LibConst.LINE_SEPARATOR +
-                "Sender: " + download.getChannel() + P2LibConst.LINE_SEPARATOR +
-                "Größe:  " + SizeTools.humanReadableByteCount(download.getDownloadSize().getSize(), true) + P2LibConst.LINE_SEPARATOR +
-                (error ? "Download war fehlerhaft" : "Download war erfolgreich"));
-        P2Notification.addNotification("Download beendet", text, error);
-    }
+//    public static void addNotification(DownloadData download) {
+//        boolean error = download.isStateError();
+//        String text = ("Film:   " + download.getTitle() + P2LibConst.LINE_SEPARATOR +
+//                "Sender: " + download.getChannel() + P2LibConst.LINE_SEPARATOR +
+//                "Größe:  " + SizeTools.humanReadableByteCount(download.getDownloadSize().getSize(), true) + P2LibConst.LINE_SEPARATOR +
+//                (error ? "Download war fehlerhaft" : "Download war erfolgreich"));
+//        P2Notification.addNotification("Download beendet", text, error);
+//    }
 
     public static void finalizeDownload(DownloadData download) {
 

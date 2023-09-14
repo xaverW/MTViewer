@@ -1,9 +1,9 @@
 module mtviewer {
     opens de.p2tools.mtviewer;
     exports de.p2tools.mtviewer;
-    
-    opens de.p2tools.mtviewer.controller.data;
 
+    opens de.p2tools.mtviewer.controller.data;
+    opens de.p2tools.mtviewer.controller.data.download;
 
     requires de.p2tools.p2lib;
     requires javafx.controls;
@@ -17,5 +17,6 @@ module mtviewer {
     requires org.tukaani.xz;
 
     requires okhttp3;
+    requires org.apache.commons.lang3;
 }
 
