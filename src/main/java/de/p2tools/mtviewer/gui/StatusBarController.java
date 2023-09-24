@@ -20,8 +20,8 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.film.FilmTools;
 import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
 import de.p2tools.mtviewer.gui.tools.Listener;
-import de.p2tools.p2lib.mtfilm.loadfilmlist.ListenerFilmlistLoadEvent;
-import de.p2tools.p2lib.mtfilm.loadfilmlist.ListenerLoadFilmlist;
+import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadEvent;
+import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadListener;
 import de.p2tools.p2lib.tools.log.PLog;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -72,14 +72,14 @@ public class StatusBarController extends AnchorPane {
     private void make() {
         setInfoFilm();
         setTextForRightDisplay();
-        LoadFilmFactory.getInstance().loadFilmlist.filmListLoadNotifier.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
+        LoadFilmFactory.getInstance().loadFilmlist.p2LoadNotifier.addListenerLoadFilmlist(new P2LoadListener() {
             @Override
-            public void start(ListenerFilmlistLoadEvent event) {
+            public void start(P2LoadEvent event) {
                 stopTimer = true;
             }
 
             @Override
-            public void finished(ListenerFilmlistLoadEvent event) {
+            public void finished(P2LoadEvent event) {
                 stopTimer = false;
                 setStatusbarIndex();
             }

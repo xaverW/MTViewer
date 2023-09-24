@@ -23,8 +23,8 @@ import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.downloadtools.DirectHttpDownload;
 import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
 import de.p2tools.p2lib.mtdownload.SizeTools;
-import de.p2tools.p2lib.mtfilm.loadfilmlist.ListenerFilmlistLoadEvent;
-import de.p2tools.p2lib.mtfilm.loadfilmlist.ListenerLoadFilmlist;
+import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadEvent;
+import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadListener;
 import de.p2tools.p2lib.tools.date.DateFactory;
 import de.p2tools.p2lib.tools.date.PDate;
 import de.p2tools.p2lib.tools.log.PLog;
@@ -47,14 +47,14 @@ public class StarterClass {
         starterThread = new StarterThread();
         starterThread.start();
 
-        LoadFilmFactory.getInstance().loadFilmlist.filmListLoadNotifier.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
+        LoadFilmFactory.getInstance().loadFilmlist.p2LoadNotifier.addListenerLoadFilmlist(new P2LoadListener() {
             @Override
-            public void start(ListenerFilmlistLoadEvent event) {
+            public void start(P2LoadEvent event) {
                 searchFilms = true;
             }
 
             @Override
-            public void finished(ListenerFilmlistLoadEvent event) {
+            public void finished(P2LoadEvent event) {
                 searchFilms = false;
             }
         });

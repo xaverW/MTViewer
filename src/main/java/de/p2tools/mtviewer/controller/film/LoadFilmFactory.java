@@ -24,9 +24,9 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.config.ProgInfos;
 import de.p2tools.mtviewer.gui.tools.TipOfDayFactory;
 import de.p2tools.p2lib.mtfilm.film.FilmlistFactory;
-import de.p2tools.p2lib.mtfilm.loadfilmlist.ListenerFilmlistLoadEvent;
-import de.p2tools.p2lib.mtfilm.loadfilmlist.ListenerLoadFilmlist;
 import de.p2tools.p2lib.mtfilm.loadfilmlist.LoadFilmlist;
+import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadEvent;
+import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadListener;
 import de.p2tools.p2lib.mtfilm.tools.LoadFactoryConst;
 
 public class LoadFilmFactory {
@@ -36,11 +36,11 @@ public class LoadFilmFactory {
 
     private LoadFilmFactory() {
         loadFilmlist = new LoadFilmlist();
-        loadFilmlist.filmListLoadNotifier.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
+        loadFilmlist.p2LoadNotifier.addListenerLoadFilmlist(new P2LoadListener() {
             @Override
-            public void start(ListenerFilmlistLoadEvent event) {
+            public void start(P2LoadEvent event) {
                 ProgData.FILMLIST_IS_DOWNLOADING.setValue(true);
-                if (event.progress == ListenerLoadFilmlist.PROGRESS_INDETERMINATE) {
+                if (event.progress == P2LoadListener.PROGRESS_INDETERMINATE) {
                     // ist dann die gespeicherte Filmliste
                     ProgData.getInstance().maskerPane.setMaskerVisible(true, false, false);
                 } else {
@@ -53,20 +53,20 @@ public class LoadFilmFactory {
             }
 
             @Override
-            public void progress(ListenerFilmlistLoadEvent event) {
+            public void progress(P2LoadEvent event) {
                 ProgData.getInstance().maskerPane.setMaskerProgress(event.progress, event.text);
             }
 
             @Override
-            public void loaded(ListenerFilmlistLoadEvent event) {
+            public void loaded(P2LoadEvent event) {
                 // todo kommt da beim Laden 2x vorbei???
                 ProgData.getInstance().maskerPane.setMaskerVisible(true, false, false);
-                ProgData.getInstance().maskerPane.setMaskerProgress(ListenerLoadFilmlist.PROGRESS_INDETERMINATE, "Filmliste verarbeiten");
+                ProgData.getInstance().maskerPane.setMaskerProgress(P2LoadListener.PROGRESS_INDETERMINATE, "Filmliste verarbeiten");
                 ProgData.FILMLIST_IS_DOWNLOADING.setValue(false);
             }
 
             @Override
-            public void finished(ListenerFilmlistLoadEvent event) {
+            public void finished(P2LoadEvent event) {
                 if (ProgData.firstProgramStart) {
                     ProgSave.saveAll(); // damit nichts verloren geht
                 }
