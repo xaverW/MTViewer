@@ -22,7 +22,7 @@ https://www.p2tools.de
 
 ## Systemvoraussetzungen
 
-Unterstützt wird Windows und Linux. Das Programm benötigt eine aktuelle Java-VM ab Version: Java 11. Für Linux-Benutzer wird OpenJDK11 empfohlen. (FX-Runtime bringt das Programm bereits mit und muss nicht installiert werden).
+Unterstützt wird Windows und Linux. Das Programm benötigt eine aktuelle Java-VM ab Version: Java 17. Für Linux-Benutzer wird OpenJDK17 empfohlen. (FX-Runtime bringt das Programm bereits mit und muss nicht installiert werden).
 <br />
 
 
