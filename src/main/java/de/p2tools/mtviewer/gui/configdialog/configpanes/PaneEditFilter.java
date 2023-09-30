@@ -20,8 +20,8 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
-import de.p2tools.p2lib.guitools.PButton;
-import de.p2tools.p2lib.guitools.PColumnConstraints;
+import de.p2tools.p2lib.guitools.P2Button;
+import de.p2tools.p2lib.guitools.P2ColumnConstraints;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -75,7 +75,7 @@ public class PaneEditFilter {
         slider.setValue(ProgConfig.SYSTEM_FILTER_WAIT_TIME.getValue());
         setLabel(lblValue);
 
-        final Button btnHelp = PButton.helpButton(stage, "Filtereinstellungen",
+        final Button btnHelp = P2Button.helpButton(stage, "Filtereinstellungen",
                 HelpText.GUI_FILMS_EDIT_FILTER);
 
 
@@ -99,9 +99,9 @@ public class PaneEditFilter {
         GridPane.setHalignment(btnHelp, HPos.RIGHT);
 
         gridPane.getColumnConstraints().addAll(
-                PColumnConstraints.getCcPrefSize(),
-                PColumnConstraints.getCcPrefSize(),
-                PColumnConstraints.getCcComputedSizeAndHgrow());
+                P2ColumnConstraints.getCcPrefSize(),
+                P2ColumnConstraints.getCcPrefSize(),
+                P2ColumnConstraints.getCcComputedSizeAndHgrow());
         return gridPane;
     }
 

@@ -21,9 +21,9 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.dialogs.dialog.PDialogExtra;
-import de.p2tools.p2lib.guitools.PColumnConstraints;
-import de.p2tools.p2lib.guitools.PHyperlink;
-import de.p2tools.p2lib.guitools.ptoggleswitch.PToggleSwitch;
+import de.p2tools.p2lib.guitools.P2ColumnConstraints;
+import de.p2tools.p2lib.guitools.P2Hyperlink;
+import de.p2tools.p2lib.guitools.ptoggleswitch.P2ToggleSwitch;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 import de.p2tools.p2lib.mtfilm.film.FilmDataXml;
 import javafx.application.Platform;
@@ -53,12 +53,12 @@ public class FilmInfoDialogController extends PDialogExtra {
     private final ImageView ivHD = new ImageView();
     private final ImageView ivUT = new ImageView();
     private final ImageView ivNew = new ImageView();
-    private final PToggleSwitch tglUrl = new PToggleSwitch("URL's anzeigen");
+    private final P2ToggleSwitch tglUrl = new P2ToggleSwitch("URL's anzeigen");
 
-    private final PHyperlink pHyperlinkUrl = new PHyperlink("",
+    private final P2Hyperlink pHyperlinkUrl = new P2Hyperlink("",
             ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
 
-    private final PHyperlink pHyperlinkWebsite = new PHyperlink("",
+    private final P2Hyperlink pHyperlinkWebsite = new P2Hyperlink("",
             ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
 
     BooleanProperty urlProperty = ProgConfig.FILM_INFO_DIALOG_SHOW_URL;
@@ -169,8 +169,8 @@ public class FilmInfoDialogController extends PDialogExtra {
         gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
         gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
         gridPane.setPadding(new Insets(P2LibConst.DIST_EDGE));
-        gridPane.getColumnConstraints().addAll(PColumnConstraints.getCcPrefSize(),
-                PColumnConstraints.getCcComputedSizeAndHgrow());
+        gridPane.getColumnConstraints().addAll(P2ColumnConstraints.getCcPrefSize(),
+                P2ColumnConstraints.getCcComputedSizeAndHgrow());
 
         int row = 0;
         for (int i = 0; i < FilmDataXml.MAX_ELEM; ++i) {

@@ -21,8 +21,8 @@ import de.p2tools.mtviewer.controller.ProgQuit;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.p2lib.dialogs.dialog.PDialogExtra;
-import de.p2tools.p2lib.guitools.BigButton;
-import de.p2tools.p2lib.guitools.pmask.PMaskerPane;
+import de.p2tools.p2lib.guitools.P2BigButton;
+import de.p2tools.p2lib.guitools.pmask.P2MaskerPane;
 import javafx.concurrent.Task;
 import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
@@ -32,7 +32,7 @@ import javafx.scene.layout.*;
 public class QuitDialogController extends PDialogExtra {
 
     private final StackPane stackPane = new StackPane();
-    private final PMaskerPane maskerPane = new PMaskerPane();
+    private final P2MaskerPane maskerPane = new P2MaskerPane();
     private final WaitTask waitTask = new WaitTask();
     private final boolean startWithWaiting;
     private CheckBox cbxShutDown = new CheckBox("Rechner anschließend herunterfahren");
@@ -58,21 +58,21 @@ public class QuitDialogController extends PDialogExtra {
         headerLabel.setStyle("-fx-font-size: 1.5em;");
 
         //nicht beenden
-        BigButton cancelButton = new BigButton(ProgIconsMTViewer.ICON_BUTTON_QUIT.getImageView(),
+        P2BigButton cancelButton = new P2BigButton(ProgIconsMTViewer.ICON_BUTTON_QUIT.getImageView(),
                 "Nicht beenden", "");
         cancelButton.setOnAction(e -> {
             close();
         });
 
         //beenden
-        BigButton quitButton = new BigButton(ProgIconsMTViewer.ICON_BUTTON_QUIT.getImageView(),
+        P2BigButton quitButton = new P2BigButton(ProgIconsMTViewer.ICON_BUTTON_QUIT.getImageView(),
                 "Beenden", "Alle Downloads abbrechen und das Programm beenden.");
         quitButton.setOnAction(e -> {
             ProgQuit.quit();
         });
 
         //warten, dann beenden
-        BigButton waitButton = new BigButton(ProgIconsMTViewer.ICON_BUTTON_QUIT.getImageView(),
+        P2BigButton waitButton = new P2BigButton(ProgIconsMTViewer.ICON_BUTTON_QUIT.getImageView(),
                 "Warten", "Alle Downloads abwarten und dann das Programm beenden.");
         waitButton.setOnAction(e -> startWaiting());
         cbxShutDown.setSelected(false);

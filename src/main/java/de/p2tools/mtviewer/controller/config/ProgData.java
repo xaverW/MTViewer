@@ -30,7 +30,7 @@ import de.p2tools.mtviewer.controller.worker.Worker;
 import de.p2tools.mtviewer.gui.FilmGuiController;
 import de.p2tools.mtviewer.gui.dialog.QuitDialogController;
 import de.p2tools.mtviewer.gui.tools.Listener;
-import de.p2tools.p2lib.guitools.pmask.PMaskerPane;
+import de.p2tools.p2lib.guitools.pmask.P2MaskerPane;
 import de.p2tools.p2lib.mtfilm.film.Filmlist;
 import de.p2tools.p2lib.tools.duration.PDuration;
 import javafx.animation.Animation;
@@ -63,7 +63,7 @@ public class ProgData {
 
     // Gui
     public Stage primaryStage = null;
-    public PMaskerPane maskerPane = new PMaskerPane();
+    public P2MaskerPane maskerPane = new P2MaskerPane();
     public MTViewerController mtViewerController = null;
     public FilmGuiController filmGuiController = null; // Tab mit den Filmen
     public QuitDialogController quitDialogController = null;

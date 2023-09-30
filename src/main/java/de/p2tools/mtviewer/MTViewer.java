@@ -22,7 +22,7 @@ import de.p2tools.mtviewer.controller.config.*;
 import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.p2lib.P2LibInit;
 import de.p2tools.p2lib.ProgIconsP2Lib;
-import de.p2tools.p2lib.guitools.PGuiSize;
+import de.p2tools.p2lib.guitools.P2GuiSize;
 import de.p2tools.p2lib.tools.IoReadWriteStyle;
 import de.p2tools.p2lib.tools.duration.PDuration;
 import javafx.application.Application;
@@ -77,8 +77,8 @@ public class MTViewer extends Application {
             progData.mtViewerController = new MTViewerController();
 
             scene = new Scene(progData.mtViewerController,
-                    PGuiSize.getWidth(ProgConfig.SYSTEM_SIZE_GUI),
-                    PGuiSize.getHeight(ProgConfig.SYSTEM_SIZE_GUI));//Größe der scene!= Größe stage!!!
+                    P2GuiSize.getWidth(ProgConfig.SYSTEM_SIZE_GUI),
+                    P2GuiSize.getHeight(ProgConfig.SYSTEM_SIZE_GUI));//Größe der scene!= Größe stage!!!
             addThemeCss(); // und jetzt noch für die neue Scene
             ProgColorList.setColorTheme(); // Farben einrichten
 
@@ -102,12 +102,12 @@ public class MTViewer extends Application {
             });
 
             //Pos setzen
-            PGuiSize.setOnlyPos(ProgConfig.SYSTEM_SIZE_GUI, primaryStage);
+            P2GuiSize.setOnlyPos(ProgConfig.SYSTEM_SIZE_GUI, primaryStage);
 
-            scene.heightProperty().addListener((v, o, n) -> PGuiSize.getSizeScene(ProgConfig.SYSTEM_SIZE_GUI, primaryStage, scene));
-            scene.widthProperty().addListener((v, o, n) -> PGuiSize.getSizeScene(ProgConfig.SYSTEM_SIZE_GUI, primaryStage, scene));
-            primaryStage.xProperty().addListener((v, o, n) -> PGuiSize.getSizeScene(ProgConfig.SYSTEM_SIZE_GUI, primaryStage, scene));
-            primaryStage.yProperty().addListener((v, o, n) -> PGuiSize.getSizeScene(ProgConfig.SYSTEM_SIZE_GUI, primaryStage, scene));
+            scene.heightProperty().addListener((v, o, n) -> P2GuiSize.getSizeScene(ProgConfig.SYSTEM_SIZE_GUI, primaryStage, scene));
+            scene.widthProperty().addListener((v, o, n) -> P2GuiSize.getSizeScene(ProgConfig.SYSTEM_SIZE_GUI, primaryStage, scene));
+            primaryStage.xProperty().addListener((v, o, n) -> P2GuiSize.getSizeScene(ProgConfig.SYSTEM_SIZE_GUI, primaryStage, scene));
+            primaryStage.yProperty().addListener((v, o, n) -> P2GuiSize.getSizeScene(ProgConfig.SYSTEM_SIZE_GUI, primaryStage, scene));
             primaryStage.show();
         } catch (final Exception e) {
             e.printStackTrace();

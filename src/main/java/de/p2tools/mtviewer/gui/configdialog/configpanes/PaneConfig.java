@@ -21,9 +21,9 @@ import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
-import de.p2tools.p2lib.guitools.PButton;
-import de.p2tools.p2lib.guitools.PColumnConstraints;
-import de.p2tools.p2lib.guitools.ptoggleswitch.PToggleSwitch;
+import de.p2tools.p2lib.guitools.P2Button;
+import de.p2tools.p2lib.guitools.P2ColumnConstraints;
+import de.p2tools.p2lib.guitools.ptoggleswitch.P2ToggleSwitch;
 import de.p2tools.p2lib.tools.PStringUtils;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -40,7 +40,7 @@ public class PaneConfig {
 
     private final ProgData progData;
 
-    private final PToggleSwitch tglTipOfDay = new PToggleSwitch("Tip des Tages anzeigen");
+    private final P2ToggleSwitch tglTipOfDay = new P2ToggleSwitch("Tip des Tages anzeigen");
     private final Stage stage;
     private TextField txtUserAgent;
 
@@ -61,11 +61,11 @@ public class PaneConfig {
         gridPane.setPadding(new Insets(P2LibConst.DIST_EDGE));
 
         tglTipOfDay.selectedProperty().bindBidirectional(ProgConfig.TIP_OF_DAY_SHOW);
-        final Button btnHelpTipOfDay = PButton.helpButton(stage, "Tip des Tages anzeigen",
+        final Button btnHelpTipOfDay = P2Button.helpButton(stage, "Tip des Tages anzeigen",
                 HelpText.TIP_OF_DAY);
         GridPane.setHalignment(btnHelpTipOfDay, HPos.RIGHT);
 
-        final Button btnHelpUserAgent = PButton.helpButton(stage, "User Agent festlegen",
+        final Button btnHelpUserAgent = P2Button.helpButton(stage, "User Agent festlegen",
                 HelpText.USER_AGENT);
         GridPane.setHalignment(btnHelpUserAgent, HPos.RIGHT);
         txtUserAgent = new TextField() {
@@ -104,8 +104,8 @@ public class PaneConfig {
         gridPane.add(txtUserAgent, 1, row);
         gridPane.add(btnHelpUserAgent, 2, row);
 
-        gridPane.getColumnConstraints().addAll(PColumnConstraints.getCcPrefSize(),
-                PColumnConstraints.getCcComputedSizeAndHgrow(), PColumnConstraints.getCcPrefSize());
+        gridPane.getColumnConstraints().addAll(P2ColumnConstraints.getCcPrefSize(),
+                P2ColumnConstraints.getCcComputedSizeAndHgrow(), P2ColumnConstraints.getCcPrefSize());
 
         TitledPane tpConfig = new TitledPane("Allgemein", gridPane);
         result.add(tpConfig);

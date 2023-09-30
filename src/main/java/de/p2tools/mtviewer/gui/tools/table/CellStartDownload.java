@@ -24,7 +24,7 @@ import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.film.FilmTools;
-import de.p2tools.p2lib.guitools.POpen;
+import de.p2tools.p2lib.guitools.P2Open;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -121,7 +121,7 @@ public class CellStartDownload<S, T> extends TableCell<S, T> {
                     btnOpenDirectory.setGraphic(ProgIconsMTViewer.IMAGE_TABLE_DOWNLOAD_OPEN_DIR.getImageView());
                     btnOpenDirectory.setOnAction((ActionEvent event) -> {
                         DownloadData download = getTableView().getItems().get(getIndex());
-                        POpen.openDir(download.getDestPath(),
+                        P2Open.openDir(download.getDestPath(),
                                 ProgConfig.SYSTEM_PROG_OPEN_DIR, ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
                     });
                     hbox.getChildren().addAll(btnFilmStart, btnOpenDirectory);

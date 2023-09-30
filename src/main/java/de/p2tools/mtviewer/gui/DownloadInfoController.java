@@ -29,8 +29,8 @@ import de.p2tools.mtviewer.gui.tools.table.TableDownload;
 import de.p2tools.mtviewer.gui.tools.table.TableRowDownload;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.alert.PAlert;
-import de.p2tools.p2lib.guitools.POpen;
-import de.p2tools.p2lib.guitools.PTableFactory;
+import de.p2tools.p2lib.guitools.P2Open;
+import de.p2tools.p2lib.guitools.P2TableFactory;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 import de.p2tools.p2lib.tools.PSystemUtils;
 import javafx.beans.property.DoubleProperty;
@@ -144,7 +144,7 @@ public class DownloadInfoController extends AnchorPane {
         }
 
         String s = download.get().getDestPath();
-        POpen.openDir(s, ProgConfig.SYSTEM_PROG_OPEN_DIR, ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
+        P2Open.openDir(s, ProgConfig.SYSTEM_PROG_OPEN_DIR, ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
     }
 
     public void showFilmInfo() {
@@ -180,7 +180,7 @@ public class DownloadInfoController extends AnchorPane {
     }
 
     public void invertSelection() {
-        PTableFactory.invertSelection(tableView);
+        P2TableFactory.invertSelection(tableView);
     }
 
     public void cleanUp() {
@@ -294,12 +294,12 @@ public class DownloadInfoController extends AnchorPane {
             }
         });
         tableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent event) -> {
-            if (PTableFactory.SPACE.match(event)) {
-                PTableFactory.scrollVisibleRangeDown(tableView);
+            if (P2TableFactory.SPACE.match(event)) {
+                P2TableFactory.scrollVisibleRangeDown(tableView);
                 event.consume();
             }
-            if (PTableFactory.SPACE_SHIFT.match(event)) {
-                PTableFactory.scrollVisibleRangeUp(tableView);
+            if (P2TableFactory.SPACE_SHIFT.match(event)) {
+                P2TableFactory.scrollVisibleRangeUp(tableView);
                 event.consume();
             }
         });

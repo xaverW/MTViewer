@@ -26,8 +26,8 @@ import de.p2tools.mtviewer.controller.downloadtools.HttpDownloadFactory;
 import de.p2tools.p2lib.alert.PAlert;
 import de.p2tools.p2lib.dialogs.PDirFileChooser;
 import de.p2tools.p2lib.dialogs.dialog.PDialogExtra;
-import de.p2tools.p2lib.guitools.PColumnConstraints;
-import de.p2tools.p2lib.guitools.PHyperlink;
+import de.p2tools.p2lib.guitools.P2ColumnConstraints;
+import de.p2tools.p2lib.guitools.P2Hyperlink;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 import de.p2tools.p2lib.mtfilm.film.FilmFactory;
 import de.p2tools.p2lib.mtfilm.tools.FileNameUtils;
@@ -60,8 +60,8 @@ public class DownloadAddDialogController extends PDialogExtra {
     private final RadioButton rbSmall = new RadioButton("Klein");
     private final Label lblFree = new Label("4M noch frei");
     private final boolean onlyChange;
-    private PHyperlink pHyperlinkUrlFilm =
-            new PHyperlink("", ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
+    private P2Hyperlink pHyperlinkUrlFilm =
+            new P2Hyperlink("", ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
     private boolean ok = false;
     private FilmData filmData;
     private DownloadData downloadData;
@@ -194,8 +194,8 @@ public class DownloadAddDialogController extends PDialogExtra {
         gridPane.add(chkSubtitle, 1, ++row);
         gridPane.add(chkInfo, 1, ++row);
 
-        gridPane.getColumnConstraints().addAll(PColumnConstraints.getCcPrefSize(),
-                PColumnConstraints.getCcComputedSizeAndHgrow());
+        gridPane.getColumnConstraints().addAll(P2ColumnConstraints.getCcPrefSize(),
+                P2ColumnConstraints.getCcComputedSizeAndHgrow());
         getVBoxCont().setSpacing(20);
         getVBoxCont().getChildren().addAll(gridPane);
 

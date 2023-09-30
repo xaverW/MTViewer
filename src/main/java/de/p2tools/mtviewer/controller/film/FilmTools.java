@@ -25,7 +25,7 @@ import de.p2tools.mtviewer.gui.dialog.DownloadAddDialogController;
 import de.p2tools.mtviewer.gui.dialog.FilmPlayDialogController;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.alert.PAlert;
-import de.p2tools.p2lib.guitools.POpen;
+import de.p2tools.p2lib.guitools.P2Open;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 
 import java.text.NumberFormat;
@@ -56,7 +56,7 @@ public class FilmTools {
         String[] arrProgCallArray = null;
         arrProgCallArray = strProgCallArray.split(TRENNER_PROG_ARRAY);
 
-        POpen.playStoredFilm(arrProgCallArray, ProgConfig.SYSTEM_PROG_PLAY,
+        P2Open.playStoredFilm(arrProgCallArray, ProgConfig.SYSTEM_PROG_PLAY,
                 url, ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
     }
 
@@ -66,7 +66,7 @@ public class FilmTools {
         String[] arrProgCallArray = null;
         arrProgCallArray = strProgCallArray.split(TRENNER_PROG_ARRAY);
 
-        POpen.playStoredFilm(arrProgCallArray, ProgConfig.SYSTEM_PROG_PLAY,
+        P2Open.playStoredFilm(arrProgCallArray, ProgConfig.SYSTEM_PROG_PLAY,
                 pathFile, ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
     }
 

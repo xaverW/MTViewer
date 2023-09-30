@@ -19,9 +19,9 @@ package de.p2tools.mtviewer.gui.startdialog;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.p2lib.P2LibConst;
-import de.p2tools.p2lib.guitools.PButton;
-import de.p2tools.p2lib.guitools.PColumnConstraints;
-import de.p2tools.p2lib.guitools.ptoggleswitch.PToggleSwitch;
+import de.p2tools.p2lib.guitools.P2Button;
+import de.p2tools.p2lib.guitools.P2ColumnConstraints;
+import de.p2tools.p2lib.guitools.ptoggleswitch.P2ToggleSwitch;
 import javafx.beans.property.BooleanProperty;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -31,7 +31,7 @@ import javafx.stage.Stage;
 
 public class UpdatePane {
     private final Stage stage;
-    private final PToggleSwitch tglSearch = new PToggleSwitch("einmal am Tag nach einer neuen Programmversion suchen");
+    private final P2ToggleSwitch tglSearch = new P2ToggleSwitch("einmal am Tag nach einer neuen Programmversion suchen");
     BooleanProperty updateProp = ProgConfig.SYSTEM_UPDATE_SEARCH_ACT;
 
     public UpdatePane(Stage stage) {
@@ -52,14 +52,14 @@ public class UpdatePane {
         tglSearch.selectedProperty().bindBidirectional(updateProp);
 
 
-        final Button btnHelp = PButton.helpButton(stage, "Programmupdate suchen",
+        final Button btnHelp = P2Button.helpButton(stage, "Programmupdate suchen",
                 "Beim Programmstart wird geprüft, ob es eine neue Version des Programms gibt. Wenn es " +
                         "eine neue Version gibt, wird das mit einer Nachricht mitgeteilt. Es wird nicht " +
                         "automatisch das Programm verändert.");
 
         gridPane.add(tglSearch, 0, 0);
         gridPane.add(btnHelp, 1, 0);
-        gridPane.getColumnConstraints().addAll(PColumnConstraints.getCcComputedSizeAndHgrow());
+        gridPane.getColumnConstraints().addAll(P2ColumnConstraints.getCcComputedSizeAndHgrow());
 
         TitledPane tpConfig = new TitledPane("Programmupdate", gridPane);
         return tpConfig;

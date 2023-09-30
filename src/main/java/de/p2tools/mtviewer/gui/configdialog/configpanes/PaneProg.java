@@ -22,8 +22,8 @@ import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.dialogs.PDirFileChooser;
-import de.p2tools.p2lib.guitools.PButton;
-import de.p2tools.p2lib.guitools.PColumnConstraints;
+import de.p2tools.p2lib.guitools.P2Button;
+import de.p2tools.p2lib.guitools.P2ColumnConstraints;
 import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -59,7 +59,7 @@ public class PaneProg {
         gridPane.setPadding(new Insets(P2LibConst.DIST_EDGE));
 
         addWebbrowser(gridPane);
-        gridPane.getColumnConstraints().addAll(PColumnConstraints.getCcComputedSizeAndHgrow());
+        gridPane.getColumnConstraints().addAll(P2ColumnConstraints.getCcComputedSizeAndHgrow());
 
         TitledPane tpConfig = new TitledPane("Programme", gridPane);
         result.add(tpConfig);
@@ -77,7 +77,7 @@ public class PaneProg {
         btnFile.setGraphic(ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
         btnFile.setTooltip(new Tooltip("Einen Webbrowser zum Öffnen von URLs auswählen"));
 
-        final Button btnHelp = PButton.helpButton(stage, "Webbrowser", HelpText.WEBBROWSER);
+        final Button btnHelp = P2Button.helpButton(stage, "Webbrowser", HelpText.WEBBROWSER);
 
         VBox vBox = new VBox(2);
         vBox.setPadding(new Insets(0));

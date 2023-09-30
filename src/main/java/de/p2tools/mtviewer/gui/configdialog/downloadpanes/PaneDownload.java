@@ -21,9 +21,9 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.downloadtools.DownloadState;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
-import de.p2tools.p2lib.guitools.PButton;
-import de.p2tools.p2lib.guitools.PColumnConstraints;
-import de.p2tools.p2lib.guitools.ptoggleswitch.PToggleSwitch;
+import de.p2tools.p2lib.guitools.P2Button;
+import de.p2tools.p2lib.guitools.P2ColumnConstraints;
+import de.p2tools.p2lib.guitools.ptoggleswitch.P2ToggleSwitch;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -37,13 +37,13 @@ import java.util.Collection;
 public class PaneDownload {
 
     final GridPane gridPane = new GridPane();
-    private final PToggleSwitch tglFinished = new PToggleSwitch("Benachrichtigung wenn abgeschlossen");
+    private final P2ToggleSwitch tglFinished = new P2ToggleSwitch("Benachrichtigung wenn abgeschlossen");
     private final ToggleGroup group = new ToggleGroup();
     private final RadioButton rbAsk = new RadioButton("Vorher fragen");
     private final RadioButton rbContinue = new RadioButton("Immer weiterführen");
     private final RadioButton rbRestart = new RadioButton("Immer neu starten");
 
-    private final PToggleSwitch tglSSL = new PToggleSwitch("SSL-Download-URLs: Bei Problemen SSL abschalten");
+    private final P2ToggleSwitch tglSSL = new P2ToggleSwitch("SSL-Download-URLs: Bei Problemen SSL abschalten");
     private final ProgData progData;
     private final Stage stage;
 
@@ -71,14 +71,14 @@ public class PaneDownload {
         gridPane.setPadding(new Insets(P2LibConst.DIST_EDGE));
 
         tglFinished.selectedProperty().bindBidirectional(ProgConfig.DOWNLOAD_SHOW_NOTIFICATION);
-        final Button btnHelpFinished = PButton.helpButton(stage, "Download",
+        final Button btnHelpFinished = P2Button.helpButton(stage, "Download",
                 HelpText.DOWNLOAD_FINISHED);
 
-        final Button btnHelpContinue = PButton.helpButton(stage, "Download",
+        final Button btnHelpContinue = P2Button.helpButton(stage, "Download",
                 HelpText.DOWNLOAD_CONTINUE);
 
         tglSSL.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_SSL_ALWAYS_TRUE);
-        final Button btnHelpSSL = PButton.helpButton(stage, "Download",
+        final Button btnHelpSSL = P2Button.helpButton(stage, "Download",
                 HelpText.DOWNLOAD_SSL_ALWAYS_TRUE);
 
         GridPane.setHalignment(btnHelpFinished, HPos.RIGHT);
@@ -102,8 +102,8 @@ public class PaneDownload {
         gridPane.add(tglSSL, 0, ++row);
         gridPane.add(btnHelpSSL, 1, row);
 
-        gridPane.getColumnConstraints().addAll(PColumnConstraints.getCcComputedSizeAndHgrow(),
-                PColumnConstraints.getCcPrefSize());
+        gridPane.getColumnConstraints().addAll(P2ColumnConstraints.getCcComputedSizeAndHgrow(),
+                P2ColumnConstraints.getCcPrefSize());
     }
 
     private void initRadio() {

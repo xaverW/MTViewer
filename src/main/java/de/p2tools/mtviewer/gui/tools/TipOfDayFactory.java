@@ -20,9 +20,9 @@ package de.p2tools.mtviewer.gui.tools;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.p2lib.P2LibConst;
-import de.p2tools.p2lib.guitools.ptipofday.PTipOfDay;
-import de.p2tools.p2lib.guitools.ptipofday.PTipOfDayDialog;
-import de.p2tools.p2lib.guitools.ptipofday.PTipOfDayFactory;
+import de.p2tools.p2lib.guitools.ptipofday.P2TipOfDay;
+import de.p2tools.p2lib.guitools.ptipofday.P2TipOfDayDialog;
+import de.p2tools.p2lib.guitools.ptipofday.P2TipOfDayFactory;
 import de.p2tools.p2lib.tools.date.DateFactory;
 import de.p2tools.p2lib.tools.log.PLog;
 
@@ -47,21 +47,21 @@ public class TipOfDayFactory {
 
         if (showAlways ||
                 !ProgConfig.TIP_OF_DAY_DATE.get().equals(DateFactory.F_FORMAT_yyyy_MM_dd.format(new Date())) &&
-                        PTipOfDayFactory.containsToolTipNotShown(ProgConfig.TIP_OF_DAY_WAS_SHOWN.get(), listSize)) {
+                        P2TipOfDayFactory.containsToolTipNotShown(ProgConfig.TIP_OF_DAY_WAS_SHOWN.get(), listSize)) {
 
             //nur wenn "immer" / heute noch nicht und nicht angezeigte ToolTips enthalten sind
             ProgConfig.TIP_OF_DAY_DATE.setValue(DateFactory.F_FORMAT_yyyy_MM_dd.format(new Date()));
 
-            final List<PTipOfDay> pTipOfDayArrayList = new ArrayList<>();
+            final List<P2TipOfDay> pTipOfDayArrayList = new ArrayList<>();
             addTips(pTipOfDayArrayList);
-            new PTipOfDayDialog(progData.primaryStage, pTipOfDayArrayList,
+            new P2TipOfDayDialog(progData.primaryStage, pTipOfDayArrayList,
                     ProgConfig.TIP_OF_DAY_WAS_SHOWN, ProgConfig.TIP_OF_DAY_SHOW, 500);
         } else {
             PLog.sysLog("TipOfDay: Heute schon gemacht oder keine neuen Tips");
         }
     }
 
-    private static void addTips(List<PTipOfDay> pToolTipList) {
+    private static void addTips(List<P2TipOfDay> pToolTipList) {
         // private final int listSize = 1
         String text = START;
         text += "Der Infobereich unter der Filmliste\n" +
@@ -69,7 +69,7 @@ public class TipOfDayFactory {
                 "oder über das Menü\n" +
                 "ein- und ausgeblendet werden.";
         String image = "/de/p2tools/mtviewer/res/tooltips/Info.png";
-        PTipOfDay pToolTip = new PTipOfDay(text, image);
+        P2TipOfDay pToolTip = new P2TipOfDay(text, image);
         pToolTipList.add(pToolTip);
 
         text = START;
@@ -77,7 +77,7 @@ public class TipOfDayFactory {
                 "zurückgeholt werden. Der Filter kann\n" +
                 "hier auch gelöscht werden.";
         image = "/de/p2tools/mtviewer/res/tooltips/ClearFilter.png";
-        pToolTip = new PTipOfDay(text, image);
+        pToolTip = new P2TipOfDay(text, image);
         pToolTipList.add(pToolTip);
 
         text = START;
@@ -86,7 +86,7 @@ public class TipOfDayFactory {
                 "können spezielle Einstellungen\n" +
                 "zum Filtern vorgenommen werden.";
         image = "/de/p2tools/mtviewer/res/tooltips/Filter.png";
-        pToolTip = new PTipOfDay(text, image);
+        pToolTip = new P2TipOfDay(text, image);
         pToolTipList.add(pToolTip);
 
         text = START;
@@ -96,10 +96,10 @@ public class TipOfDayFactory {
                 "(Pfad, Zieldateiname, ..)\n" +
                 "vorgenommen werden.";
         image = "/de/p2tools/mtviewer/res/tooltips/DownloadPath.png";
-        pToolTip = new PTipOfDay(text, image);
+        pToolTip = new P2TipOfDay(text, image);
         pToolTipList.add(pToolTip);
 
-        pToolTipList.add(PTipOfDay.getTipWebsite(ProgConfig.SYSTEM_PROG_OPEN_URL));
+        pToolTipList.add(P2TipOfDay.getTipWebsite(ProgConfig.SYSTEM_PROG_OPEN_URL));
 
         text = START;
         text += "In den Programmeinstellungen\n" +
@@ -108,7 +108,7 @@ public class TipOfDayFactory {
                 "Schriftgröße im Programm,\n" +
                 "eingestellt werden.";
         image = "/de/p2tools/mtviewer/res/tooltips/Keysize.png";
-        pToolTip = new PTipOfDay(text, image);
+        pToolTip = new P2TipOfDay(text, image);
         pToolTipList.add(pToolTip);
 
         text = START;
@@ -120,7 +120,7 @@ public class TipOfDayFactory {
                 "reagiert das Programm dann\n" +
                 "schneller.";
         image = "/de/p2tools/mtviewer/res/tooltips/LoadFilmlist.png";
-        pToolTip = new PTipOfDay(text, image);
+        pToolTip = new P2TipOfDay(text, image);
         pToolTipList.add(pToolTip);
 
         text = START;
@@ -130,7 +130,7 @@ public class TipOfDayFactory {
                 "zum Abspielen der Filme\n" +
                 "geändert werden.";
         image = "/de/p2tools/mtviewer/res/tooltips/Videoplayer.png";
-        pToolTip = new PTipOfDay(text, image);
+        pToolTip = new P2TipOfDay(text, image);
         pToolTipList.add(pToolTip);
 
         text = START;
@@ -143,7 +143,7 @@ public class TipOfDayFactory {
                 "Programm startet dann wieder\n" +
                 "wie beim ersten Mal.";
         image = "/de/p2tools/mtviewer/res/tooltips/Reset.png";
-        pToolTip = new PTipOfDay(text, image);
+        pToolTip = new P2TipOfDay(text, image);
         pToolTipList.add(pToolTip);
     }
 }

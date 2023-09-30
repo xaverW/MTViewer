@@ -28,7 +28,7 @@ import de.p2tools.mtviewer.gui.configdialog.ConfigDialogController;
 import de.p2tools.mtviewer.gui.dialog.AboutDialogController;
 import de.p2tools.mtviewer.gui.dialog.ResetDialogController;
 import de.p2tools.mtviewer.gui.tools.TipOfDayFactory;
-import de.p2tools.p2lib.guitools.POpen;
+import de.p2tools.p2lib.guitools.P2Open;
 import de.p2tools.p2lib.tools.shortcut.PShortcutWorker;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
@@ -49,7 +49,7 @@ public class ProgMenu extends MenuButton {
 
             }
         });
-        
+
         setTooltip(new Tooltip("Filmmenü anzeigen"));
         setGraphic(ProgIconsMTViewer.FX_ICON_TOOLBAR_MENU.getImageView());
         getStyleClass().addAll("btnFunction", "btnFunc-1");
@@ -87,7 +87,7 @@ public class ProgMenu extends MenuButton {
         //Hilfe
         final MenuItem miUrlHelp = new MenuItem("Anleitung im Web");
         miUrlHelp.setOnAction(event -> {
-            POpen.openURL(ProgConst.URL_WEBSITE_HELP,
+            P2Open.openURL(ProgConst.URL_WEBSITE_HELP,
                     ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
         });
         final MenuItem miReset = new MenuItem("Alle Programmeinstellungen zurücksetzen");

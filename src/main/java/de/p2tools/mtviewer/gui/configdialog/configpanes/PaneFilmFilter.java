@@ -22,8 +22,8 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
-import de.p2tools.p2lib.guitools.PButton;
-import de.p2tools.p2lib.guitools.PColumnConstraints;
+import de.p2tools.p2lib.guitools.P2Button;
+import de.p2tools.p2lib.guitools.P2ColumnConstraints;
 import de.p2tools.p2lib.mtfilm.loadfilmlist.LoadFactory;
 import de.p2tools.p2lib.mtfilm.tools.LoadFactoryConst;
 import javafx.geometry.Insets;
@@ -66,9 +66,9 @@ public class PaneFilmFilter {
 
     public TitledPane make(Collection<TitledPane> result) {
 
-        final Button btnHelpDays = PButton.helpButton(stage, "Filmliste beim Laden filtern",
+        final Button btnHelpDays = P2Button.helpButton(stage, "Filmliste beim Laden filtern",
                 HelpText.LOAD_ONLY_FILMS);
-        final Button btnHelpSender = PButton.helpButton(stage, "Filmliste beim Laden filtern",
+        final Button btnHelpSender = P2Button.helpButton(stage, "Filmliste beim Laden filtern",
                 HelpText.LOAD_FILMLIST_SENDER);
 
         initSlider();
@@ -119,10 +119,10 @@ public class PaneFilmFilter {
         gridPane.add(slDuration, 1, row);
         gridPane.add(lblDuration, 2, row);
 
-        gridPane.getColumnConstraints().addAll(PColumnConstraints.getCcPrefSize(),
-                PColumnConstraints.getCcPrefSize(),
-                PColumnConstraints.getCcComputedSizeAndHgrow(),
-                PColumnConstraints.getCcPrefSize());
+        gridPane.getColumnConstraints().addAll(P2ColumnConstraints.getCcPrefSize(),
+                P2ColumnConstraints.getCcPrefSize(),
+                P2ColumnConstraints.getCcComputedSizeAndHgrow(),
+                P2ColumnConstraints.getCcPrefSize());
         vBox.getChildren().add(gridPane);
 
         HBox hBox = new HBox(P2LibConst.DIST_BUTTON);

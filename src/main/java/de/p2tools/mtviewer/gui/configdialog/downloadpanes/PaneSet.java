@@ -25,8 +25,8 @@ import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.dialogs.PDirFileChooser;
-import de.p2tools.p2lib.guitools.PButton;
-import de.p2tools.p2lib.guitools.PColumnConstraints;
+import de.p2tools.p2lib.guitools.P2Button;
+import de.p2tools.p2lib.guitools.P2ColumnConstraints;
 import de.p2tools.p2lib.tools.PSystemUtils;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
@@ -99,13 +99,13 @@ public class PaneSet {
         btnProgramReset.setTooltip(new Tooltip("Die Init-Parameter wieder herstellen"));
         btnProgramReset.setOnAction(event -> txtProg.setText(ProgConfig.SYSTEM_PROG_SAVE_INIT));
 
-        final Button btnHelpDestName = PButton.helpButton(stage, "Zieldateiname",
+        final Button btnHelpDestName = P2Button.helpButton(stage, "Zieldateiname",
                 HelpText.PSET_FILE_NAME);
 
-        final Button btnHelpProgram = PButton.helpButton(stage, "Programm",
+        final Button btnHelpProgram = P2Button.helpButton(stage, "Programm",
                 HelpText.PSET_FILE_HELP_PROGRAM);
 
-        final Button btnHelpParameter = PButton.helpButton(stage, "Parameter",
+        final Button btnHelpParameter = P2Button.helpButton(stage, "Parameter",
                 HelpText.PSET_FILE_HELP_PARAMETER);
 
         int row = 0;
@@ -140,9 +140,9 @@ public class PaneSet {
 
         gridPane.add(new Label(), 1, ++row);
 
-        gridPane.getColumnConstraints().addAll(PColumnConstraints.getCcPrefSize(),
-                PColumnConstraints.getCcComputedSizeAndHgrow(),
-                PColumnConstraints.getCcPrefSize());
+        gridPane.getColumnConstraints().addAll(P2ColumnConstraints.getCcPrefSize(),
+                P2ColumnConstraints.getCcComputedSizeAndHgrow(),
+                P2ColumnConstraints.getCcPrefSize());
 
         makeCut(vBoxAll);
         bindProgData();
@@ -155,7 +155,7 @@ public class PaneSet {
         Label lblTxtField = new Label("Länge\neinzelne Felder:");
         Label lblSizeField = new Label();
 
-        final Button btnHelpDestSize = PButton.helpButton(stage, "Länge des Zieldateinamens",
+        final Button btnHelpDestSize = P2Button.helpButton(stage, "Länge des Zieldateinamens",
                 HelpText.PSET_DEST_FILE_SIZE);
 
         slCut.setMin(0);
@@ -203,9 +203,9 @@ public class PaneSet {
         gridPane.add(slCutField, 1, row);
         gridPane.add(lblSizeField, 2, row);
 
-        gridPane.getColumnConstraints().addAll(PColumnConstraints.getCcPrefSize(),
-                PColumnConstraints.getCcComputedSizeAndHgrow(),
-                PColumnConstraints.getCcPrefSize(), PColumnConstraints.getCcPrefSize());
+        gridPane.getColumnConstraints().addAll(P2ColumnConstraints.getCcPrefSize(),
+                P2ColumnConstraints.getCcComputedSizeAndHgrow(),
+                P2ColumnConstraints.getCcPrefSize(), P2ColumnConstraints.getCcPrefSize());
     }
 
     private void setValueSlider(Slider sl, Label lb, String pre) {

@@ -24,9 +24,9 @@ import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.dialogs.PDirFileChooser;
-import de.p2tools.p2lib.guitools.PButton;
-import de.p2tools.p2lib.guitools.PColumnConstraints;
-import de.p2tools.p2lib.guitools.PHyperlink;
+import de.p2tools.p2lib.guitools.P2Button;
+import de.p2tools.p2lib.guitools.P2ColumnConstraints;
+import de.p2tools.p2lib.guitools.P2Hyperlink;
 import de.p2tools.p2lib.mtdownload.GetProgramStandardPath;
 import de.p2tools.p2lib.tools.PSystemUtils;
 import de.p2tools.p2lib.tools.ProgramToolsFactory;
@@ -62,7 +62,7 @@ public class PathPane {
         gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
         gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
         gridPane.setPadding(new Insets(P2LibConst.DIST_EDGE));
-        gridPane.getColumnConstraints().addAll(PColumnConstraints.getCcComputedSizeAndHgrow());
+        gridPane.getColumnConstraints().addAll(P2ColumnConstraints.getCcComputedSizeAndHgrow());
 
         gridPane.add(new Label(), 2, row);
         gridPane.add(new Label(), 2, row);
@@ -115,7 +115,7 @@ public class PathPane {
 
     private void addVlc() {
         Text text;
-        PHyperlink hyperlink;
+        P2Hyperlink hyperlink;
         TextField txtPlayer = new TextField();
         final Button btnFind = new Button("suchen");
 
@@ -124,7 +124,7 @@ public class PathPane {
             ProgConfig.SYSTEM_PROG_PLAY.setValue("");
             txtPlayer.setText(GetProgramStandardPath.getTemplatePathVlc());
         });
-        hyperlink = new PHyperlink(stage,
+        hyperlink = new P2Hyperlink(stage,
                 ProgConst.ADRESSE_WEBSITE_VLC,
                 ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
 
@@ -153,7 +153,7 @@ public class PathPane {
         hBox.setAlignment(Pos.CENTER_LEFT);
         hBox.getChildren().addAll(new Label("Website"), hyperlink);
 
-        final Button btnHelp = PButton.helpButton(stage,
+        final Button btnHelp = P2Button.helpButton(stage,
                 "Videoplayer", HelpText.PROG_PATH_VLC);
         GridPane.setHalignment(btnHelp, HPos.RIGHT);
 
@@ -176,7 +176,7 @@ public class PathPane {
         }
 
         Text text;
-        PHyperlink hyperlink;
+        P2Hyperlink hyperlink;
         TextField txtSave = new TextField();
         final Button btnFind = new Button("suchen");
 
@@ -185,7 +185,7 @@ public class PathPane {
             ProgConfig.SYSTEM_PROG_SAVE.setValue("");
             txtSave.setText(GetProgramStandardPath.getTemplatePathFFmpeg());
         });
-        hyperlink = new PHyperlink(stage,
+        hyperlink = new P2Hyperlink(stage,
                 ProgConst.ADRESSE_WEBSITE_ffmpeg,
                 ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
 
@@ -214,7 +214,7 @@ public class PathPane {
         hBox.setAlignment(Pos.CENTER_LEFT);
         hBox.getChildren().addAll(new Label("Website"), hyperlink);
 
-        final Button btnHelp = PButton.helpButton(stage,
+        final Button btnHelp = P2Button.helpButton(stage,
                 "Download Hilfsprogramm", HelpText.PROG_PATH_FFMPEG);
         GridPane.setHalignment(btnHelp, HPos.RIGHT);
 

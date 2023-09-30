@@ -21,10 +21,10 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
+import de.p2tools.p2lib.guitools.P2Button;
+import de.p2tools.p2lib.guitools.P2ButtonClearFilterFactory;
 import de.p2tools.p2lib.guitools.P2GuiTools;
 import de.p2tools.p2lib.guitools.P2MenuButton;
-import de.p2tools.p2lib.guitools.PButton;
-import de.p2tools.p2lib.guitools.PButtonClearFilterFactory;
 import de.p2tools.p2lib.guitools.prange.P2RangeBox;
 import de.p2tools.p2lib.mtfilter.FilterCheck;
 import de.p2tools.p2lib.mtfilter.FilterCheckRegEx;
@@ -54,7 +54,7 @@ public class FilmFilterController extends VBox {
     private final P2RangeBox slDur = new P2RangeBox("Filmlänge:", true, FilterCheck.FILTER_ALL_OR_MIN,
             FilterCheck.FILTER_DURATION_MAX_MINUTE);
 
-    private final Button btnClearFilter = PButtonClearFilterFactory.getPButtonClearSmall();
+    private final Button btnClearFilter = P2ButtonClearFilterFactory.getPButtonClearSmall();
     private final Button btnGoBack = new Button("");
     private final Button btnGoForward = new Button("");
     private final ArrayList<MenuItemClass> menuItemsList = new ArrayList<>();
@@ -349,7 +349,7 @@ public class FilmFilterController extends VBox {
         GridPane.setHgrow(vBox, Priority.ALWAYS);
         gridPaneLine1.add(vBox, 3, 0);
 
-        final Button btnHelpFilter = PButton.helpButton(progData.primaryStage, "Infos über die Filter",
+        final Button btnHelpFilter = P2Button.helpButton(progData.primaryStage, "Infos über die Filter",
                 HelpText.FILTER_INFO);
 
         HBox hBoxLine1 = new HBox();

@@ -15,7 +15,8 @@
  */
 package de.p2tools.mtviewer;
 
-import de.p2tools.p2lib.guitools.LinuxJavaFx;
+
+import de.p2tools.p2lib.guitools.P2LinuxJavaFx;
 import de.p2tools.p2lib.tools.net.Proxy;
 import javafx.application.Platform;
 import org.apache.commons.io.FileUtils;
@@ -44,7 +45,7 @@ public class Main {
     }
 
     private void start(String... args) {
-        if (LinuxJavaFx.hasJavaFx()) {
+        if (P2LinuxJavaFx.hasJavaFx()) {
 
             Proxy.proxyAuthentication();
             new AppParameter().processArgs(args);

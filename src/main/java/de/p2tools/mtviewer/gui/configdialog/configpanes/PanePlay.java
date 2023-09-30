@@ -23,8 +23,8 @@ import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.dialogs.PDirFileChooser;
-import de.p2tools.p2lib.guitools.PButton;
-import de.p2tools.p2lib.guitools.PColumnConstraints;
+import de.p2tools.p2lib.guitools.P2Button;
+import de.p2tools.p2lib.guitools.P2ColumnConstraints;
 import de.p2tools.p2lib.mtdownload.GetProgramStandardPath;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 import javafx.beans.property.StringProperty;
@@ -58,9 +58,9 @@ public class PanePlay {
         gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
         gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
         gridPane.setPadding(new Insets(P2LibConst.DIST_EDGE));
-        gridPane.getColumnConstraints().addAll(PColumnConstraints.getCcPrefSize(),
-                PColumnConstraints.getCcComputedSizeAndHgrow(), PColumnConstraints.getCcPrefSize(),
-                PColumnConstraints.getCcPrefSize());
+        gridPane.getColumnConstraints().addAll(P2ColumnConstraints.getCcPrefSize(),
+                P2ColumnConstraints.getCcComputedSizeAndHgrow(), P2ColumnConstraints.getCcPrefSize(),
+                P2ColumnConstraints.getCcPrefSize());
 
         int row = addVideoPlayer(gridPane, 0);
         makeResolution(gridPane, row);
@@ -102,8 +102,8 @@ public class PanePlay {
         btnParameterReset.setTooltip(new Tooltip("Die Init-Parameter wieder herstellen"));
         btnParameterReset.setOnAction(event -> txtParameter.setText(ProgConfig.SYSTEM_PROG_PLAY_PARAMETER_INIT));
 
-        final Button btnHelpProgram = PButton.helpButton(stage, "Videoplayer", HelpText.VIDEOPLAYER);
-        final Button btnHelpParameter = PButton.helpButton(stage, "Videoplayer", HelpText.PLAY_FILE_HELP_PARAMETER);
+        final Button btnHelpProgram = P2Button.helpButton(stage, "Videoplayer", HelpText.VIDEOPLAYER);
+        final Button btnHelpParameter = P2Button.helpButton(stage, "Videoplayer", HelpText.PLAY_FILE_HELP_PARAMETER);
 
         gridPane.add(new Label("Videoplayer zum Abspielen der Filme"), 0, row, 2, 1);
 
@@ -152,7 +152,7 @@ public class PanePlay {
         rbHeight.setPadding(new Insets(0, 0, 0, 15));
         rbLow.setPadding(new Insets(0, 0, 0, 15));
 
-        final Button btnHelpRes = PButton.helpButton(stage, "Auflösung",
+        final Button btnHelpRes = P2Button.helpButton(stage, "Auflösung",
                 HelpText.USE_RESOLUTION);
 
         gridPane.add(new Label(""), 0, ++row);

@@ -20,9 +20,9 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
-import de.p2tools.p2lib.guitools.PButton;
-import de.p2tools.p2lib.guitools.PColumnConstraints;
-import de.p2tools.p2lib.guitools.ptoggleswitch.PToggleSwitch;
+import de.p2tools.p2lib.guitools.P2Button;
+import de.p2tools.p2lib.guitools.P2ColumnConstraints;
+import de.p2tools.p2lib.guitools.ptoggleswitch.P2ToggleSwitch;
 import javafx.beans.property.BooleanProperty;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -37,8 +37,8 @@ import java.util.Collection;
 
 public class PaneFilmLoad {
 
-    private final PToggleSwitch tglLoad = new PToggleSwitch("Filmliste beim Programmstart laden");
-    private final PToggleSwitch tglRemoveDiacritic = new PToggleSwitch("Diakritische Zeichen ändern");
+    private final P2ToggleSwitch tglLoad = new P2ToggleSwitch("Filmliste beim Programmstart laden");
+    private final P2ToggleSwitch tglRemoveDiacritic = new P2ToggleSwitch("Diakritische Zeichen ändern");
     private final BooleanProperty diacriticChanged;
     private final Stage stage;
 
@@ -59,14 +59,14 @@ public class PaneFilmLoad {
         gridPane.setPadding(new Insets(P2LibConst.DIST_EDGE));
 
         tglLoad.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_LOAD_FILMS_ON_START);
-        final Button btnHelpLoad = PButton.helpButton(stage, "Filmliste laden",
+        final Button btnHelpLoad = P2Button.helpButton(stage, "Filmliste laden",
                 HelpText.LOAD_FILMLIST_PROGRAMSTART);
 
         //Diacritic
         tglRemoveDiacritic.setMaxWidth(Double.MAX_VALUE);
         tglRemoveDiacritic.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_REMOVE_DIACRITICS);
         tglRemoveDiacritic.selectedProperty().addListener((u, o, n) -> diacriticChanged.setValue(true));
-        final Button btnHelpDia = PButton.helpButton(stage, "Diakritische Zeichen",
+        final Button btnHelpDia = P2Button.helpButton(stage, "Diakritische Zeichen",
                 HelpText.DIAKRITISCHE_ZEICHEN);
 
         Button btnLoad = new Button("_Filmliste mit dieser Einstellung neu laden");
@@ -86,8 +86,8 @@ public class PaneFilmLoad {
         gridPane.add(btnLoad, 0, ++row, 2, 1);
         GridPane.setHalignment(btnLoad, HPos.RIGHT);
 
-        gridPane.getColumnConstraints().addAll(PColumnConstraints.getCcComputedSizeAndHgrow(),
-                PColumnConstraints.getCcPrefSize()
+        gridPane.getColumnConstraints().addAll(P2ColumnConstraints.getCcComputedSizeAndHgrow(),
+                P2ColumnConstraints.getCcPrefSize()
         );
 
         TitledPane tpConfig = new TitledPane("Filmliste laden", gridPane);

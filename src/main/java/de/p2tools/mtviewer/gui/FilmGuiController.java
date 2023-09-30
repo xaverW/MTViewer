@@ -24,8 +24,8 @@ import de.p2tools.mtviewer.gui.tools.Listener;
 import de.p2tools.mtviewer.gui.tools.table.Table;
 import de.p2tools.mtviewer.gui.tools.table.TableFilm;
 import de.p2tools.p2lib.alert.PAlert;
-import de.p2tools.p2lib.guitools.PTableFactory;
-import de.p2tools.p2lib.guitools.pclosepane.PClosePaneH;
+import de.p2tools.p2lib.guitools.P2TableFactory;
+import de.p2tools.p2lib.guitools.pclosepane.P2ClosePaneH;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 import de.p2tools.p2lib.tools.log.PLog;
 import javafx.application.Platform;
@@ -46,7 +46,7 @@ public class FilmGuiController extends AnchorPane {
 
     private final SplitPane splitPane = new SplitPane();
     private final ScrollPane scrollPaneTableFilm = new ScrollPane();
-    private final PClosePaneH pClosePaneHInfo;
+    private final P2ClosePaneH pClosePaneHInfo;
     private final TabPane tabPaneInfo;
     private final TableFilm tableView;
     private final ProgData progData;
@@ -63,7 +63,7 @@ public class FilmGuiController extends AnchorPane {
     public FilmGuiController() {
         progData = ProgData.getInstance();
         sortedList = progData.filmlist.getSortedList();
-        pClosePaneHInfo = new PClosePaneH(ProgConfig.FILM_GUI_DIVIDER_ON, true);
+        pClosePaneHInfo = new P2ClosePaneH(ProgConfig.FILM_GUI_DIVIDER_ON, true);
         tabPaneInfo = new TabPane();
         tableView = new TableFilm(Table.TABLE_ENUM.FILM, progData);
 
@@ -124,7 +124,7 @@ public class FilmGuiController extends AnchorPane {
     }
 
     public void refreshTable() {
-        PTableFactory.refreshTable(tableView);
+        P2TableFactory.refreshTable(tableView);
     }
 
     public ArrayList<FilmData> getSelList() {
@@ -157,7 +157,7 @@ public class FilmGuiController extends AnchorPane {
                 FilmGuiController.class.getSimpleName()) {
             @Override
             public void pingFx() {
-                PTableFactory.refreshTable(tableView);
+                P2TableFactory.refreshTable(tableView);
             }
         });
         Listener.addListener(new Listener(Listener.EVENT_BLACKLIST_CHANGED, this.getClass().getSimpleName()) {
@@ -213,12 +213,12 @@ public class FilmGuiController extends AnchorPane {
         });
 
         tableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent event) -> {
-            if (PTableFactory.SPACE.match(event)) {
-                PTableFactory.scrollVisibleRangeDown(tableView);
+            if (P2TableFactory.SPACE.match(event)) {
+                P2TableFactory.scrollVisibleRangeDown(tableView);
                 event.consume();
             }
-            if (PTableFactory.SPACE_SHIFT.match(event)) {
-                PTableFactory.scrollVisibleRangeUp(tableView);
+            if (P2TableFactory.SPACE_SHIFT.match(event)) {
+                P2TableFactory.scrollVisibleRangeUp(tableView);
                 event.consume();
             }
 

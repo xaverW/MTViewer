@@ -20,8 +20,8 @@ import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.gui.dialog.FilmInfoDialogController;
-import de.p2tools.p2lib.guitools.PTableFactory;
-import de.p2tools.p2lib.guitools.ptable.CellCheckBox;
+import de.p2tools.p2lib.guitools.P2TableFactory;
+import de.p2tools.p2lib.guitools.ptable.P2CellCheckBox;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 import de.p2tools.p2lib.mtfilm.film.FilmSize;
 import de.p2tools.p2lib.tools.date.PDate;
@@ -57,10 +57,10 @@ public class TableFilm extends PTable<FilmData> {
         setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
 
         // bei Farbänderung der Schriftfarbe klappt es damit besser: Table.refresh_table(table)
-        ProgConfig.SYSTEM_THEME_CHANGED.addListener((u, o, n) -> PTableFactory.refreshTable(this));
-        ProgColorList.FILM_LIVESTREAM.colorProperty().addListener((a, b, c) -> PTableFactory.refreshTable(this));
-        ProgColorList.FILM_GEOBLOCK.colorProperty().addListener((a, b, c) -> PTableFactory.refreshTable(this));
-        ProgColorList.FILM_NEW.colorProperty().addListener((a, b, c) -> PTableFactory.refreshTable(this));
+        ProgConfig.SYSTEM_THEME_CHANGED.addListener((u, o, n) -> P2TableFactory.refreshTable(this));
+        ProgColorList.FILM_LIVESTREAM.colorProperty().addListener((a, b, c) -> P2TableFactory.refreshTable(this));
+        ProgColorList.FILM_GEOBLOCK.colorProperty().addListener((a, b, c) -> P2TableFactory.refreshTable(this));
+        ProgColorList.FILM_NEW.colorProperty().addListener((a, b, c) -> P2TableFactory.refreshTable(this));
 
         final TableColumn<FilmData, Integer> nrColumn = new TableColumn<>("Nr");
         nrColumn.setCellValueFactory(new PropertyValueFactory<>("no"));
@@ -101,12 +101,12 @@ public class TableFilm extends PTable<FilmData> {
 
         final TableColumn<FilmData, Boolean> hdColumn = new TableColumn<>("HD");
         hdColumn.setCellValueFactory(new PropertyValueFactory<>("hd"));
-        hdColumn.setCellFactory(new CellCheckBox().cellFactory);
+        hdColumn.setCellFactory(new P2CellCheckBox().cellFactory);
         hdColumn.getStyleClass().add("alignCenter");
 
         final TableColumn<FilmData, Boolean> utColumn = new TableColumn<>("UT");
         utColumn.setCellValueFactory(new PropertyValueFactory<>("ut"));
-        utColumn.setCellFactory(new CellCheckBox().cellFactory);
+        utColumn.setCellFactory(new P2CellCheckBox().cellFactory);
         utColumn.getStyleClass().add("alignCenter");
 
         final TableColumn<FilmData, String> geoColumn = new TableColumn<>("Geo");
