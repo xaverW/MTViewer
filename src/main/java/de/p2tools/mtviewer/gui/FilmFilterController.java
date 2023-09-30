@@ -22,6 +22,7 @@ import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.guitools.P2GuiTools;
+import de.p2tools.p2lib.guitools.P2MenuButton;
 import de.p2tools.p2lib.guitools.PButton;
 import de.p2tools.p2lib.guitools.PButtonClearFilterFactory;
 import de.p2tools.p2lib.guitools.prange.P2RangeBox;
@@ -29,7 +30,6 @@ import de.p2tools.p2lib.mtfilter.FilterCheck;
 import de.p2tools.p2lib.mtfilter.FilterCheckRegEx;
 import de.p2tools.p2lib.tools.duration.PDuration;
 import javafx.beans.property.StringProperty;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -40,14 +40,12 @@ import javafx.scene.layout.*;
 import javafx.util.StringConverter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class FilmFilterController extends VBox {
 
     public static final int FILTER_SPACING_TEXTFILTER = 10;
 
-    private final MenuButton mbChannel = new MenuButton("");
+    private final P2MenuButton mbChannel;
     private final ComboBox<String> cboTheme = new ComboBox<>();
     private final ComboBox<String> cboTitle = new ComboBox<>();
     private final ComboBox<String> cboSomewhere = new ComboBox<>();
@@ -64,6 +62,8 @@ public class FilmFilterController extends VBox {
 
     public FilmFilterController() {
         this.progData = ProgData.getInstance();
+        this.mbChannel = new P2MenuButton(progData.actFilmFilterWorker.getActFilterSettings().channelProperty(),
+                progData.worker.getAllChannelList());
 
         setPadding(new Insets(10, 15, 5, 15));
         setSpacing(FILTER_SPACING_TEXTFILTER);
@@ -72,7 +72,7 @@ public class FilmFilterController extends VBox {
         initButton();
         initDaysFilter();
         initDurFilter();
-        initSenderFilter();
+//        initSenderFilter();
         initStringFilter();
         addFilter();
     }
@@ -143,104 +143,104 @@ public class FilmFilterController extends VBox {
 // todo       slDur.setValuePrefix("");
     }
 
-    private void initSenderFilter() {
-        mbChannel.setMaxWidth(Double.MAX_VALUE);
-        initChannelMenu();
-        progData.actFilmFilterWorker.getActFilterSettings().channelProperty().addListener((observable, oldValue, newValue) -> {
-            initChannelMenu();
-        });
-        progData.worker.getAllChannelList().addListener((ListChangeListener<String>) c -> initChannelMenu());
-        mbChannel.textProperty().bindBidirectional(progData.actFilmFilterWorker.getActFilterSettings().channelProperty());
-    }
+//    private void initSenderFilter() {
+//        mbChannel.setMaxWidth(Double.MAX_VALUE);
+//        initChannelMenu();
+//        progData.actFilmFilterWorker.getActFilterSettings().channelProperty().addListener((observable, oldValue, newValue) -> {
+//            initChannelMenu();
+//        });
+//        progData.worker.getAllChannelList().addListener((ListChangeListener<String>) c -> initChannelMenu());
+//        mbChannel.textProperty().bindBidirectional(progData.actFilmFilterWorker.getActFilterSettings().channelProperty());
+//    }
 
-    private void initChannelMenu() {
-        mbChannel.getItems().clear();
-        menuItemsList.clear();
+//    private void initChannelMenu() {
+//        mbChannel.getItems().clear();
+//        menuItemsList.clear();
+//
+//        List<String> channelFilterList = new ArrayList<>();
+//        String channelFilter = progData.actFilmFilterWorker.getActFilterSettings().channelProperty().get();
+//        if (channelFilter != null) {
+//            if (channelFilter.contains(",")) {
+//                channelFilterList.addAll(Arrays.asList(channelFilter.replace(" ", "").toLowerCase().split(",")));
+//            } else {
+//                channelFilterList.add(channelFilter.toLowerCase());
+//            }
+//            channelFilterList.stream().forEach(s -> s = s.trim());
+//        }
+//
+//        CheckBox miCheckAll = new CheckBox();
+//        miCheckAll.setVisible(false);
+//
+//        Button btnAll = new Button("Auswahl löschen");
+//        btnAll.setMaxWidth(Double.MAX_VALUE);
+//        btnAll.setOnAction(e -> {
+//            clearMenuText();
+//            mbChannel.hide();
+//        });
+//
+//        HBox hBoxAll = new HBox(P2LibConst.DIST_BUTTON);
+//        hBoxAll.setAlignment(Pos.CENTER_LEFT);
+//        hBoxAll.getChildren().addAll(miCheckAll, btnAll);
+//
+//        CustomMenuItem cmiAll = new CustomMenuItem(hBoxAll);
+//        mbChannel.getItems().add(cmiAll);
+//
+//        for (String s : progData.worker.getAllChannelList()) {
+//            if (s.isEmpty()) {
+//                continue;
+//            }
+//
+//            CheckBox miCheck = new CheckBox();
+//            if (channelFilterList.contains(s.toLowerCase())) {
+//                miCheck.setSelected(true);
+//            }
+//            miCheck.setOnAction(a -> setMenuText());
+//
+//            MenuItemClass menuItemClass = new MenuItemClass(s, miCheck);
+//            menuItemsList.add(menuItemClass);
+//
+//            Button btnChannel = new Button(s);
+//            btnChannel.setMaxWidth(Double.MAX_VALUE);
+//            btnChannel.setOnAction(e -> {
+//                setCheckBoxAndMenuText(menuItemClass);
+//                mbChannel.hide();
+//            });
+//
+//            HBox hBox = new HBox(10);
+//            hBox.prefWidthProperty().bind(hBoxAll.widthProperty());
+//            hBox.setAlignment(Pos.CENTER_LEFT);
+//            hBox.getChildren().addAll(miCheck, btnChannel);
+//            HBox.setHgrow(btnChannel, Priority.ALWAYS);
+//
+//            CustomMenuItem cmi = new CustomMenuItem(hBox);
+//            mbChannel.getItems().add(cmi);
+//        }
+//    }
 
-        List<String> channelFilterList = new ArrayList<>();
-        String channelFilter = progData.actFilmFilterWorker.getActFilterSettings().channelProperty().get();
-        if (channelFilter != null) {
-            if (channelFilter.contains(",")) {
-                channelFilterList.addAll(Arrays.asList(channelFilter.replace(" ", "").toLowerCase().split(",")));
-            } else {
-                channelFilterList.add(channelFilter.toLowerCase());
-            }
-            channelFilterList.stream().forEach(s -> s = s.trim());
-        }
+//    private void setCheckBoxAndMenuText(MenuItemClass cmi) {
+//        for (MenuItemClass cm : menuItemsList) {
+//            cm.getCheckBox().setSelected(false);
+//        }
+//        cmi.getCheckBox().setSelected(true);
+//        setMenuText();
+//    }
+//
+//    private void clearMenuText() {
+//        for (MenuItemClass cmi : menuItemsList) {
+//            cmi.getCheckBox().setSelected(false);
+//        }
+//        mbChannel.setText("");
+//    }
 
-        CheckBox miCheckAll = new CheckBox();
-        miCheckAll.setVisible(false);
-
-        Button btnAll = new Button("Auswahl löschen");
-        btnAll.setMaxWidth(Double.MAX_VALUE);
-        btnAll.setOnAction(e -> {
-            clearMenuText();
-            mbChannel.hide();
-        });
-
-        HBox hBoxAll = new HBox(P2LibConst.DIST_BUTTON);
-        hBoxAll.setAlignment(Pos.CENTER_LEFT);
-        hBoxAll.getChildren().addAll(miCheckAll, btnAll);
-
-        CustomMenuItem cmiAll = new CustomMenuItem(hBoxAll);
-        mbChannel.getItems().add(cmiAll);
-
-        for (String s : progData.worker.getAllChannelList()) {
-            if (s.isEmpty()) {
-                continue;
-            }
-
-            CheckBox miCheck = new CheckBox();
-            if (channelFilterList.contains(s.toLowerCase())) {
-                miCheck.setSelected(true);
-            }
-            miCheck.setOnAction(a -> setMenuText());
-
-            MenuItemClass menuItemClass = new MenuItemClass(s, miCheck);
-            menuItemsList.add(menuItemClass);
-
-            Button btnChannel = new Button(s);
-            btnChannel.setMaxWidth(Double.MAX_VALUE);
-            btnChannel.setOnAction(e -> {
-                setCheckBoxAndMenuText(menuItemClass);
-                mbChannel.hide();
-            });
-
-            HBox hBox = new HBox(10);
-            hBox.prefWidthProperty().bind(hBoxAll.widthProperty());
-            hBox.setAlignment(Pos.CENTER_LEFT);
-            hBox.getChildren().addAll(miCheck, btnChannel);
-            HBox.setHgrow(btnChannel, Priority.ALWAYS);
-
-            CustomMenuItem cmi = new CustomMenuItem(hBox);
-            mbChannel.getItems().add(cmi);
-        }
-    }
-
-    private void setCheckBoxAndMenuText(MenuItemClass cmi) {
-        for (MenuItemClass cm : menuItemsList) {
-            cm.getCheckBox().setSelected(false);
-        }
-        cmi.getCheckBox().setSelected(true);
-        setMenuText();
-    }
-
-    private void clearMenuText() {
-        for (MenuItemClass cmi : menuItemsList) {
-            cmi.getCheckBox().setSelected(false);
-        }
-        mbChannel.setText("");
-    }
-
-    private void setMenuText() {
-        String text = "";
-        for (MenuItemClass cmi : menuItemsList) {
-            if (cmi.getCheckBox().isSelected()) {
-                text = text + (text.isEmpty() ? "" : ", ") + cmi.getText();
-            }
-        }
-        mbChannel.setText(text);
-    }
+//    private void setMenuText() {
+//        String text = "";
+//        for (MenuItemClass cmi : menuItemsList) {
+//            if (cmi.getCheckBox().isSelected()) {
+//                text = text + (text.isEmpty() ? "" : ", ") + cmi.getText();
+//            }
+//        }
+//        mbChannel.setText(text);
+//    }
 
     private void initStringFilter() {
         //Theme
@@ -307,15 +307,6 @@ public class FilmFilterController extends VBox {
         getChildren().addAll(vBox);
         return vBox;
     }
-
-//    private VBox addDuration() {
-//        VBox vBox;
-//        vBox = new VBox(2);
-//        HBox h = new HBox(new Label("Filmlänge:"), P2GuiTools.getHBoxGrower());
-//        vBox.getChildren().addAll(h, slDur);
-//        getChildren().addAll(vBox);
-//        return vBox;
-//    }
 
     private void setLabelSlider() {
         final String txtAll = "alles";
