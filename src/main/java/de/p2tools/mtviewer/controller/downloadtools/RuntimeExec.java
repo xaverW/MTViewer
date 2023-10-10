@@ -208,7 +208,7 @@ public class RuntimeExec {
                     if (!s.isEmpty()) {
                         try {
                             final long aktSize = Integer.parseInt(s.replace("kB", ""));
-                            mVFilmSize.setActFileSize(aktSize * 1_000);
+                            mVFilmSize.setActuallySize(aktSize * 1_000);
                             final long akt = download.getStart().getStartTime().diffInSeconds();
                             if (oldSecs < akt - 5) {
                                 download.getStart().setBandwidth((aktSize - oldSize) * 1_000 / (akt - oldSecs));

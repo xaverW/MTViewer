@@ -155,7 +155,7 @@ public final class DownloadData extends DownloadDataProps {
         }
 
         final DownloadSize downSize = getDownloadSize();
-        downSize.reset();
+        downSize.clearSize();
         setRemaining("");
         setBandwidth("");
         getStart().setBandwidth(0);
@@ -173,18 +173,18 @@ public final class DownloadData extends DownloadDataProps {
 
     public void setSizeDownloadFromWeb(String size) {
         if (!size.isEmpty()) {
-            getDownloadSize().setSize(size);
+            getDownloadSize().setTargetSize(size);
         } else if (film != null) {
-            getDownloadSize().setSize(FilmFactory.getSizeFromWeb(film, getUrl()));
+            getDownloadSize().setTargetSize(FilmFactory.getSizeFromWeb(film, getUrl()));
         }
     }
 
     public void setSizeDownloadFromFilm() {
         if (film != null) {
             if (film.arr[FilmData.FILM_URL].equals(getUrl())) {
-                getDownloadSize().setSize(film.arr[FilmData.FILM_SIZE]);
+                getDownloadSize().setTargetSize(film.arr[FilmData.FILM_SIZE]);
             } else {
-                getDownloadSize().setSize("");
+                getDownloadSize().setTargetSize("");
             }
         }
     }
@@ -284,7 +284,7 @@ public final class DownloadData extends DownloadDataProps {
             properties[i].setValue(download.properties[i].getValue());
         }
         film = download.film;
-        getDownloadSize().setSize(download.getDownloadSize().getSize());// die Auflösung des Films kann sich ändern
+        getDownloadSize().setTargetSize(download.getDownloadSize().getTargetSize());// die Auflösung des Films kann sich ändern
         setStart(download.getStart());
     }
 }

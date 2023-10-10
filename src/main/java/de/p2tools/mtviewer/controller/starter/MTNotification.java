@@ -33,7 +33,7 @@ public class MTNotification {
     public static void addNotification(DownloadData download, boolean error) {
         String text = ("Film:   " + download.getTitle() + P2LibConst.LINE_SEPARATOR +
                 "Sender: " + download.getChannel() + P2LibConst.LINE_SEPARATOR +
-                "Größe:  " + SizeTools.humanReadableByteCount(download.getDownloadSize().getSize(), true) + P2LibConst.LINE_SEPARATOR +
+                "Größe:  " + SizeTools.humanReadableByteCount(download.getDownloadSize().getTargetSize(), true) + P2LibConst.LINE_SEPARATOR +
                 (error ? "Download war fehlerhaft" : "Download war erfolgreich"));
 
         Button btnFilmStart = new Button();

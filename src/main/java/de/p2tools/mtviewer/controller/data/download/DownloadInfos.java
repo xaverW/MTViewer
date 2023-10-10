@@ -193,23 +193,23 @@ public class DownloadInfos {
             if (download.isStateInit()) {
                 // noch nicht gestartet
                 ++numberNotStartedDownloads;
-                byteNotStartedDownloads += (download.getDownloadSize().getSize() > 0 ? download.getDownloadSize().getSize() : 0);
+                byteNotStartedDownloads += (download.getDownloadSize().getTargetSize() > 0 ? download.getDownloadSize().getTargetSize() : 0);
 
             } else if (download.isStateStartedWaiting()) {
                 // gestartet und warten auf den Download
                 ++numberWaitingDownloads;
-                byteWaitingDownloads += (download.getDownloadSize().getSize() > 0 ? download.getDownloadSize().getSize() : 0);
+                byteWaitingDownloads += (download.getDownloadSize().getTargetSize() > 0 ? download.getDownloadSize().getTargetSize() : 0);
 
             } else if (download.isStateStartedRun()) {
                 // die Downloads laufen gerade
                 ++numberLoadingDownloads;
-                byteLoadingDownloads += (download.getDownloadSize().getSize() > 0 ? download.getDownloadSize().getSize() : 0);
+                byteLoadingDownloads += (download.getDownloadSize().getTargetSize() > 0 ? download.getDownloadSize().getTargetSize() : 0);
 
                 bandwidth += download.getStart().getBandwidth(); // bytes per second
                 if (bandwidth < 0) {
                     bandwidth = 0;
                 }
-                byteLoadingDownloadsAlreadyLoaded += (download.getDownloadSize().getActFileSize() > 0 ? download.getDownloadSize().getActFileSize() : 0);
+                byteLoadingDownloadsAlreadyLoaded += (download.getDownloadSize().getActuallySize() > 0 ? download.getDownloadSize().getActuallySize() : 0);
                 if (download.getStart().getTimeLeftSeconds() > timeLeftLoadingDownloads) {
                     // der längste gibt die aktuelle Restzeit vor
                     timeLeftLoadingDownloads = download.getStart().getTimeLeftSeconds();

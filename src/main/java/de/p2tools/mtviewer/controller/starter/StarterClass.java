@@ -197,7 +197,7 @@ public class StarterClass {
             //dann ist er gelaufen
             start.setTimeLeftSeconds(0);
             download.setProgress(DownloadConstants.PROGRESS_FINISHED);
-            download.getDownloadSize().setActFileSize(-1);
+            download.getDownloadSize().setActuallySize(-1);
 
             if (start.getInputStream() != null) {
                 download.setBandwidth("Ø " + SizeTools.humanReadableByteCount(start.getInputStream().getSumBandwidth(), true));
@@ -230,12 +230,12 @@ public class StarterClass {
             if (destFile.exists()) {
                 final long length = destFile.length();
                 if (length > 0)
-                    if (download.getDownloadSize().getSize() > 0) {
+                    if (download.getDownloadSize().getTargetSize() > 0) {
                         //nur wenn der Download schon eine Größe hatte, nicht bei m3u8!
-                        download.getDownloadSize().setSize(length);
+                        download.getDownloadSize().setTargetSize(length);
                     } else {
                         //bei m3u8 nur die aktSize setzen!
-                        download.getDownloadSize().setActFileSize(length);
+                        download.getDownloadSize().setActuallySize(length);
                     }
             }
         } catch (
