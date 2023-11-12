@@ -18,7 +18,7 @@
 package de.p2tools.mtviewer.controller.data;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
-import de.p2tools.p2lib.tools.shortcut.PShortcut;
+import de.p2tools.p2lib.tools.shortcut.P2ShortcutKey;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -27,32 +27,32 @@ import java.util.HashSet;
 public class MTShortcut {
 
     // Menü
-    public static final PShortcut SHORTCUT_QUIT_PROGRAM =
-            new PShortcut(ProgConfig.SHORTCUT_QUIT_PROGRAM, ProgConfig.SHORTCUT_QUIT_PROGRAM_INIT,
+    public static final P2ShortcutKey SHORTCUT_QUIT_PROGRAM =
+            new P2ShortcutKey(ProgConfig.SHORTCUT_QUIT_PROGRAM, ProgConfig.SHORTCUT_QUIT_PROGRAM_INIT,
                     "Programm beenden",
                     "Das Programm wird beendet. Wenn noch ein Download läuft, wird in einem Dialog abgefragt, was getan werden soll.");
 
     // Tabelle Filme
-    public static final PShortcut SHORTCUT_SHOW_INFOS =
-            new PShortcut(ProgConfig.SHORTCUT_SHOW_INFOS, ProgConfig.SHORTCUT_SHOW_INFOS_INIT,
+    public static final P2ShortcutKey SHORTCUT_SHOW_INFOS =
+            new P2ShortcutKey(ProgConfig.SHORTCUT_SHOW_INFOS, ProgConfig.SHORTCUT_SHOW_INFOS_INIT,
                     "Infos anzeigen",
                     "Unter der Tabelle \"Filme\" die Infos anzeigen.");
 
-    public static final PShortcut SHORTCUT_INFO_FILM =
-            new PShortcut(ProgConfig.SHORTCUT_INFO_FILM, ProgConfig.SHORTCUT_INFO_FILM_INIT,
+    public static final P2ShortcutKey SHORTCUT_INFO_FILM =
+            new P2ShortcutKey(ProgConfig.SHORTCUT_INFO_FILM, ProgConfig.SHORTCUT_INFO_FILM_INIT,
                     "Filminformation anzeigen",
                     "In der Tabelle \"Filme\" die Infos des markierten Films anzeigen.");
 
-    public static final PShortcut SHORTCUT_PLAY_FILM =
-            new PShortcut(ProgConfig.SHORTCUT_PLAY_FILM, ProgConfig.SHORTCUT_PLAY_FILM_INIT,
+    public static final P2ShortcutKey SHORTCUT_PLAY_FILM =
+            new P2ShortcutKey(ProgConfig.SHORTCUT_PLAY_FILM, ProgConfig.SHORTCUT_PLAY_FILM_INIT,
                     "Film abspielen",
                     "Der markierte Film in der Tabelle \"Filme\" wird abgespielt.");
-    public static final PShortcut SHORTCUT_SAVE_FILM =
-            new PShortcut(ProgConfig.SHORTCUT_SAVE_FILM, ProgConfig.SHORTCUT_SAVE_FILM_INIT,
+    public static final P2ShortcutKey SHORTCUT_SAVE_FILM =
+            new P2ShortcutKey(ProgConfig.SHORTCUT_SAVE_FILM, ProgConfig.SHORTCUT_SAVE_FILM_INIT,
                     "Film speichern",
                     "Der markierte Film in der Tabelle \"Filme\" wird gespeichert.");
 
-    private static ObservableList<PShortcut> shortcutList = FXCollections.observableArrayList();
+    private static ObservableList<P2ShortcutKey> shortcutList = FXCollections.observableArrayList();
 
     public MTShortcut() {
         shortcutList.add(SHORTCUT_QUIT_PROGRAM);
@@ -62,13 +62,13 @@ public class MTShortcut {
         shortcutList.add(SHORTCUT_PLAY_FILM);
     }
 
-    public static synchronized ObservableList<PShortcut> getShortcutList() {
+    public static synchronized ObservableList<P2ShortcutKey> getShortcutList() {
         return shortcutList;
     }
 
     public static synchronized boolean checkDoubleShortcutList() {
         HashSet<String> hashSet = new HashSet<>();
-        for (PShortcut ps : shortcutList) {
+        for (P2ShortcutKey ps : shortcutList) {
             if (!hashSet.add(ps.getActShortcut())) {
                 return true;
             }

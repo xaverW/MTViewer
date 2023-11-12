@@ -24,7 +24,7 @@ import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.alert.PAlert;
 import de.p2tools.p2lib.guitools.P2Button;
 import de.p2tools.p2lib.tools.log.PLog;
-import de.p2tools.p2lib.tools.shortcut.PShortcut;
+import de.p2tools.p2lib.tools.shortcut.P2ShortcutKey;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -44,13 +44,13 @@ public class PaneShortcut {
     private final Stage stage;
     private final ProgData progData;
     private final TextArea txtLongDescription = new TextArea();
-    private final TableView<PShortcut> tableView = new TableView<>();
+    private final TableView<P2ShortcutKey> tableView = new TableView<>();
     private boolean released = true; // damits beim ersten Mal schon passt
     private String newShortcutValue = "";
-    private Callback<TableColumn<PShortcut, String>, TableCell<PShortcut, String>> cellFactoryChange
-            = (final TableColumn<PShortcut, String> param) -> {
+    private Callback<TableColumn<P2ShortcutKey, String>, TableCell<P2ShortcutKey, String>> cellFactoryChange
+            = (final TableColumn<P2ShortcutKey, String> param) -> {
 
-        final TableCell<PShortcut, String> cell = new TableCell<>() {
+        final TableCell<P2ShortcutKey, String> cell = new TableCell<>() {
 
             @Override
             public void updateItem(String item, boolean empty) {
@@ -61,7 +61,7 @@ public class PaneShortcut {
                     return;
                 }
 
-                PShortcut pShortcut = getTableView().getItems().get(getIndex());
+                P2ShortcutKey pShortcut = getTableView().getItems().get(getIndex());
                 newShortcutValue = pShortcut.getActShortcut();
 
                 final Button btnChange = new Button("Ändern");
@@ -121,10 +121,10 @@ public class PaneShortcut {
 
         return cell;
     };
-    private Callback<TableColumn<PShortcut, String>, TableCell<PShortcut, String>> cellFactoryReset
-            = (final TableColumn<PShortcut, String> param) -> {
+    private Callback<TableColumn<P2ShortcutKey, String>, TableCell<P2ShortcutKey, String>> cellFactoryReset
+            = (final TableColumn<P2ShortcutKey, String> param) -> {
 
-        final TableCell<PShortcut, String> cell = new TableCell<PShortcut, String>() {
+        final TableCell<P2ShortcutKey, String> cell = new TableCell<P2ShortcutKey, String>() {
 
             @Override
             public void updateItem(String item, boolean empty) {
@@ -135,7 +135,7 @@ public class PaneShortcut {
                     setText(null);
                     return;
                 }
-                PShortcut pShortcut = getTableView().getItems().get(getIndex());
+                P2ShortcutKey pShortcut = getTableView().getItems().get(getIndex());
 
                 final Button btnReset = new Button("Zurücksetzen");
                 btnReset.setTooltip(new Tooltip("Ein Klick setzt wieder das Original Tastenkürzel"));
@@ -191,24 +191,24 @@ public class PaneShortcut {
     public void close() {
     }
 
-    private void initTable(TableView<PShortcut> tableView) {
-        final TableColumn<PShortcut, String> descriptionColumn = new TableColumn<>("Beschreibung");
+    private void initTable(TableView<P2ShortcutKey> tableView) {
+        final TableColumn<P2ShortcutKey, String> descriptionColumn = new TableColumn<>("Beschreibung");
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
         descriptionColumn.getStyleClass().add("alignCenterLeft");
 
-        final TableColumn<PShortcut, String> actShortcutColumn = new TableColumn<>("Tastenkürzel");
+        final TableColumn<P2ShortcutKey, String> actShortcutColumn = new TableColumn<>("Tastenkürzel");
         actShortcutColumn.setCellValueFactory(new PropertyValueFactory<>("actShortcut"));
         actShortcutColumn.getStyleClass().add("alignCenter");
 
-        final TableColumn<PShortcut, String> changeColumn = new TableColumn<>("");
+        final TableColumn<P2ShortcutKey, String> changeColumn = new TableColumn<>("");
         changeColumn.getStyleClass().add("alignCenter");
         changeColumn.setCellFactory(cellFactoryChange);
 
-        final TableColumn<PShortcut, String> resetColumn = new TableColumn<>("");
+        final TableColumn<P2ShortcutKey, String> resetColumn = new TableColumn<>("");
         resetColumn.getStyleClass().add("alignCenter");
         resetColumn.setCellFactory(cellFactoryReset);
 
-        final TableColumn<PShortcut, String> orgShortcutColumn = new TableColumn<>("Original");
+        final TableColumn<P2ShortcutKey, String> orgShortcutColumn = new TableColumn<>("Original");
         orgShortcutColumn.setCellValueFactory(new PropertyValueFactory<>("orgShortcut"));
         orgShortcutColumn.getStyleClass().add("alignCenter");
 
@@ -229,7 +229,7 @@ public class PaneShortcut {
     }
 
     private void setActReplaceData() {
-        PShortcut pShortcutAct = tableView.getSelectionModel().getSelectedItem();
+        P2ShortcutKey pShortcutAct = tableView.getSelectionModel().getSelectedItem();
         txtLongDescription.setDisable(pShortcutAct == null);
         if (pShortcutAct != null) {
             txtLongDescription.setText(pShortcutAct.getLongDescription());
