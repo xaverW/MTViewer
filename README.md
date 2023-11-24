@@ -49,7 +49,7 @@ Weitere Infos zum Programm (Start und Benutzung) sind im Download-Paket enthalte
 
 zum Download:  
 [github.com/xaverW/MTViewer/releases](https://github.com/xaverW/MTViewer/releases)  
-[https://www.p2tools.de/mtviewer/download/](https://www.p2tools.de/mtviewer/download/)
+[https://www.p2tools.de/download/](https://www.p2tools.de/download/)
 <br />
 
 
