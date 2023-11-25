@@ -41,9 +41,9 @@ public class ProgConst {
 
     // Website MTViewer
     public static final String URL_WEBSITE = "https://www.p2tools.de";
-    public static final String URL_WEBSITE_MTVIEWER = "https://www.p2tools.de/mtviewer/";
-    public static final String URL_WEBSITE_DOWNLOAD = "https://www.p2tools.de/mtviewer/download.html";
-    public static final String URL_WEBSITE_HELP = "https://www.p2tools.de/mtviewer/manual/";
+    public static final String URL_WEBSITE_MTVIEWER = "https://github.com/xaverW/MTViewer";
+    public static final String URL_WEBSITE_DOWNLOAD = "https://github.com/xaverW/MTViewer/releases";
+    public static final String URL_WEBSITE_HELP = "https://github.com/xaverW/MTViewer";
 
     // ProgrammUrls
     public static final String ADRESSE_WEBSITE_VLC = "https://www.videolan.org";

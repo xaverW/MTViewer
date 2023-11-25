@@ -46,6 +46,8 @@ Der VLC-Player und ffmpeg müssen installiert sein.
 
 zum Download:  
 [github.com/xaverW/MTViewer/releases](https://github.com/xaverW/MTViewer/releases)  
+
+und hier können auch BETA-Versionen und Dailys geladen werden:  
 [https://www.p2tools.de/download/](https://www.p2tools.de/download/)
 <br />
 
