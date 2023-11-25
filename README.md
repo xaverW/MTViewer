@@ -16,7 +16,6 @@ Das Programm nutzt den Ordner ".p2Mtviewer" unter Linux oder den versteckten Ord
 java -jar MTViewer.jar ORDNER 
 ```
 
-https://www.p2tools.de
 <br />
 
 
@@ -63,7 +62,7 @@ gestartet werden.
 ## Infos
 
 Weitere Infos zum Programm (Start und Benutzung) sind im Download-Paket enthalten oder können hier gefunden werden:
-[help.md](help.md)  
+[HELP.md](HELP.md)  
 
 
 ## Website
