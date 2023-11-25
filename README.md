@@ -45,11 +45,6 @@ Der VLC-Player muss installiert sein.
 Linux:  
 Der VLC-Player und ffmpeg müssen installiert sein.  
 
-Weitere Infos zum Programm (Start und Benutzung) sind im Download-Paket enthalten oder können hier gefunden werden:
-[instructions/install.md](instructions/install.md)  
-
-
-
 zum Download:  
 [github.com/xaverW/MTViewer/releases](https://github.com/xaverW/MTViewer/releases)  
 [https://www.p2tools.de/download/](https://www.p2tools.de/download/)
@@ -63,6 +58,12 @@ Linux: “MTViewer__Linux.sh” oder
 Windows: “MTViewer__Windows.exe”  
 gestartet werden.
 <br />
+
+
+## Infos
+
+Weitere Infos zum Programm (Start und Benutzung) sind im Download-Paket enthalten oder können hier gefunden werden:
+[help.md](help.md)  
 
 
 ## Website
