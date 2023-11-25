@@ -15,9 +15,6 @@
 [instructions/settings.md](instructions/settings.md)  
 
 
-## Was ist neu
-[instructions/version.md](instructions/version.md)  
-
 
 ## Website
 [www.p2tools.de]( https://www.p2tools.de)
