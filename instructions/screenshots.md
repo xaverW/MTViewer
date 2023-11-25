@@ -1,6 +1,8 @@
 
 **Programmoberfläche**
 <br />
+<br />
+
 ![Programmoberfläche](gui.png)
 
 <br />
@@ -8,5 +10,7 @@
 
 **Dark Theme**
 <br />
+<br />
+
 ![Dark Theme](darktheme.png)
 
