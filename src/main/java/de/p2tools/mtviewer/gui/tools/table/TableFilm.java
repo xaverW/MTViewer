@@ -24,7 +24,7 @@ import de.p2tools.p2lib.guitools.P2TableFactory;
 import de.p2tools.p2lib.guitools.ptable.P2CellCheckBox;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 import de.p2tools.p2lib.mtfilm.film.FilmSize;
-import de.p2tools.p2lib.tools.date.PDate;
+import de.p2tools.p2lib.tools.date.P2Date;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -82,7 +82,7 @@ public class TableFilm extends PTable<FilmData> {
         startColumn.setCellFactory(new CellStartFilm<>().cellFactory);
         startColumn.getStyleClass().add("alignCenter");
 
-        final TableColumn<FilmData, PDate> datumColumn = new TableColumn<>("Datum");
+        final TableColumn<FilmData, P2Date> datumColumn = new TableColumn<>("Datum");
         datumColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         datumColumn.getStyleClass().add("alignCenter");
 

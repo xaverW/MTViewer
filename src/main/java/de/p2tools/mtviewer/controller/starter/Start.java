@@ -20,7 +20,7 @@ import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.p2lib.mtdownload.MLInputStream;
 import de.p2tools.p2lib.mtdownload.SizeTools;
-import de.p2tools.p2lib.tools.date.PDate;
+import de.p2tools.p2lib.tools.date.P2Date;
 
 public class Start {
 
@@ -33,7 +33,7 @@ public class Start {
     private long timeLeftSeconds = -1; // restliche Laufzeit [s] des Downloads
 
     private Process process = null; //Prozess des Download
-    private PDate startTime = null;
+    private P2Date startTime = null;
     private MLInputStream inputStream = null;
 
     private DownloadData download; //Referenz auf den Download dazu
@@ -65,7 +65,7 @@ public class Start {
     }
 
     public void startDownload() {
-        setStartTime(new PDate());
+        setStartTime(new P2Date());
     }
 
     public boolean isStartViewing() {
@@ -76,11 +76,11 @@ public class Start {
         this.startViewing = startViewing;
     }
 
-    public PDate getStartTime() {
+    public P2Date getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(PDate startTime) {
+    public void setStartTime(P2Date startTime) {
         this.startTime = startTime;
     }
 

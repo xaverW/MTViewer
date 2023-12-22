@@ -69,7 +69,7 @@ public class PaneUpdate {
 
     public TitledPane make(Collection<TitledPane> result) {
         final VBox vBox = new VBox(P2LibConst.DIST_BUTTON);
-        vBox.setPadding(new Insets(P2LibConst.DIST_EDGE));
+        vBox.setPadding(new Insets(P2LibConst.PADDING));
 
         final GridPane gridPane = new GridPane();
         gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);

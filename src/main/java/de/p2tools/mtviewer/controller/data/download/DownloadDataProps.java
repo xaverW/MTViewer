@@ -20,8 +20,8 @@ import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.p2lib.configfile.config.*;
 import de.p2tools.p2lib.configfile.pdata.PDataSample;
 import de.p2tools.p2lib.mtdownload.DownloadSize;
-import de.p2tools.p2lib.tools.date.PLDateFactory;
-import de.p2tools.p2lib.tools.date.PLDateProperty;
+import de.p2tools.p2lib.tools.date.P2LDateFactory;
+import de.p2tools.p2lib.tools.date.P2LDateProperty;
 import de.p2tools.p2lib.tools.file.PFileUtils;
 import javafx.application.Platform;
 import javafx.beans.property.*;
@@ -44,7 +44,7 @@ public class DownloadDataProps extends PDataSample<DownloadData> {
     private final StringProperty remaining = new SimpleStringProperty("");
     private final StringProperty bandwidth = new SimpleStringProperty("");
     private final DownloadSize downloadSize = new DownloadSize();
-    private final PLDateProperty filmDate = new PLDateProperty(LocalDate.MIN.MIN);//zum Sortieren in der Tabelle
+    private final P2LDateProperty filmDate = new P2LDateProperty(LocalDate.MIN.MIN);//zum Sortieren in der Tabelle
     private final StringProperty filmTime = new SimpleStringProperty("");
     private final IntegerProperty durationMinute = new SimpleIntegerProperty(0);
     private final BooleanProperty hd = new SimpleBooleanProperty(false);
@@ -126,11 +126,11 @@ public class DownloadDataProps extends PDataSample<DownloadData> {
     }
 
     public void setFilmDate(String date) {
-        LocalDate d = PLDateFactory.fromString(date);
+        LocalDate d = P2LDateFactory.fromString(date);
         this.filmDate.setValue(d);
     }
 
-    public PLDateProperty filmDateProperty() {
+    public P2LDateProperty filmDateProperty() {
         return filmDate;
     }
 

@@ -26,7 +26,7 @@ import de.p2tools.p2lib.mtfilm.film.FilmData;
 import de.p2tools.p2lib.mtfilm.film.FilmDataXml;
 import de.p2tools.p2lib.mtfilm.film.FilmFactory;
 import de.p2tools.p2lib.tools.PSystemUtils;
-import de.p2tools.p2lib.tools.date.PLDateFactory;
+import de.p2tools.p2lib.tools.date.P2LDateFactory;
 import de.p2tools.p2lib.tools.file.PFileUtils;
 import de.p2tools.p2lib.tools.net.PUrlTools;
 import javafx.application.Platform;
@@ -240,7 +240,7 @@ public final class DownloadData extends DownloadDataProps {
             path = PSystemUtils.getStandardDownloadPath();
         }
         if (name.isEmpty()) {
-            name = PLDateFactory.toStringR(LocalDate.now()) + '_' + getTheme() + '-' + getTitle() + ".mp4";
+            name = P2LDateFactory.toStringR(LocalDate.now()) + '_' + getTheme() + '-' + getTitle() + ".mp4";
         }
         final String[] pathName = {path, name};
         PFileUtils.checkLengthPath(pathName);

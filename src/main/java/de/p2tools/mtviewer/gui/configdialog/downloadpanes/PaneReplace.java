@@ -75,7 +75,7 @@ public class PaneReplace {
 
     private void make() {
         vBox.setFillWidth(true);
-        vBox.setPadding(new Insets(P2LibConst.DIST_EDGE));
+        vBox.setPadding(new Insets(P2LibConst.PADDING));
         vBox.setSpacing(10);
 
         makeAscii(vBox);
@@ -226,7 +226,7 @@ public class PaneReplace {
         gridPane.getStyleClass().add("extra-pane");
         gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
         gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
-        gridPane.setPadding(new Insets(P2LibConst.DIST_EDGE));
+        gridPane.setPadding(new Insets(P2LibConst.PADDING));
 
         gridPane.add(new Label("Von: "), 0, 0);
         gridPane.add(txtFrom, 1, 0);

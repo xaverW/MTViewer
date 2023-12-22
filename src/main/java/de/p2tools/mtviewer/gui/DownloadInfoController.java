@@ -196,7 +196,7 @@ public class DownloadInfoController extends AnchorPane {
 
     private void make() {
         hBoxAll.setSpacing(P2LibConst.DIST_BUTTON);
-        hBoxAll.setPadding(new Insets(P2LibConst.DIST_EDGE));
+        hBoxAll.setPadding(new Insets(P2LibConst.PADDING));
 
         scrollPane.setFitToHeight(true);
         scrollPane.setFitToWidth(true);

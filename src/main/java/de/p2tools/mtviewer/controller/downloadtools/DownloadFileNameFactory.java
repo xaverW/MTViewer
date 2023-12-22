@@ -25,7 +25,7 @@ import de.p2tools.p2lib.mtfilm.film.FilmData;
 import de.p2tools.p2lib.mtfilm.film.FilmDataXml;
 import de.p2tools.p2lib.mtfilm.tools.FileNameUtils;
 import de.p2tools.p2lib.tools.PSystemUtils;
-import de.p2tools.p2lib.tools.date.DateFactory;
+import de.p2tools.p2lib.tools.date.P2DateConst;
 import de.p2tools.p2lib.tools.file.PFileUtils;
 import de.p2tools.p2lib.tools.log.PLog;
 import de.p2tools.p2lib.tools.net.PUrlTools;
@@ -179,15 +179,15 @@ public class DownloadFileNameFactory {
     }
 
     private static String getToday__yyyy_o_MM_o_dd() {
-        return DateFactory.F_FORMAT_dd_MM_yyyy.format(new Date());
+        return P2DateConst.F_FORMAT_dd_MM_yyyy.format(new Date());
     }
 
     private static String getNow_HHMMSS() {
-        return DateFactory.F_FORMAT_HHmm_ss.format(new Date());
+        return P2DateConst.F_FORMAT_HHmm_ss.format(new Date());
     }
 
     private static String getNow_HH_MM_SS() {
-        return DateFactory.F_FORMAT_HH__mm__ss.format(new Date());
+        return P2DateConst.F_FORMAT_HH__mm__ss.format(new Date());
     }
 
     private static String getHMS(String s, String zeit) {
@@ -249,7 +249,7 @@ public class DownloadFileNameFactory {
     }
 
     private static String getToday_yyyyMMdd() {
-        return DateFactory.F_FORMAT_yyyyMMdd.format(new Date());
+        return P2DateConst.F_FORMAT_yyyyMMdd.format(new Date());
     }
 
     private static String cleanDate(String date) {

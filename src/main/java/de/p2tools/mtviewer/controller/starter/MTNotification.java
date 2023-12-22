@@ -55,7 +55,7 @@ public class MTNotification {
         });
 
         HBox hBoxBottom = new HBox();
-        hBoxBottom.setSpacing(P2LibConst.DIST_HBOX);
+        hBoxBottom.setSpacing(P2LibConst.PADDING_HBOX);
         hBoxBottom.setAlignment(Pos.CENTER_RIGHT);
         hBoxBottom.getChildren().addAll(btnFilmStart, btnOpenDirectory);
         add(text, error, hBoxBottom);

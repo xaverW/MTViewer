@@ -25,8 +25,8 @@ import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
 import de.p2tools.p2lib.mtdownload.SizeTools;
 import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadEvent;
 import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadListener;
-import de.p2tools.p2lib.tools.date.DateFactory;
-import de.p2tools.p2lib.tools.date.PDate;
+import de.p2tools.p2lib.tools.date.P2Date;
+import de.p2tools.p2lib.tools.date.P2DateConst;
 import de.p2tools.p2lib.tools.log.PLog;
 
 import java.io.File;
@@ -120,7 +120,7 @@ public class StarterClass {
         }
         list.add("Ziel: " + download.getDestPathFile());
         list.add("URL: " + download.getUrl());
-        list.add("Startzeit: " + DateFactory.F_FORMAT_HH__mm__ss.format(download.getStart().getStartTime()));
+        list.add("Startzeit: " + P2DateConst.F_FORMAT_HH__mm__ss.format(download.getStart().getStartTime()));
         list.add(DownloadConstants.TYPE_DOWNLOAD);
         list.add(PLog.LILNE_EMPTY);
         PLog.sysLog(list.toArray(new String[list.size()]));
@@ -143,8 +143,8 @@ public class StarterClass {
             list.add("Ziel: " + download.getDestPathFile());
         }
 
-        list.add("Startzeit: " + DateFactory.F_FORMAT_HH__mm__ss.format(start.getStartTime()));
-        list.add("Endzeit: " + DateFactory.F_FORMAT_HH__mm__ss.format(new PDate().getTime()));
+        list.add("Startzeit: " + P2DateConst.F_FORMAT_HH__mm__ss.format(start.getStartTime()));
+        list.add("Endzeit: " + P2DateConst.F_FORMAT_HH__mm__ss.format(new P2Date().getTime()));
 
         if (start.getRestartCounter() > 0) {
             list.add("Restarts: " + start.getRestartCounter());

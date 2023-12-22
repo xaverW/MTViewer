@@ -66,7 +66,7 @@ public class PaneSet {
 
     private void make() {
         vBoxAll.setFillWidth(true);
-        vBoxAll.setPadding(new Insets(P2LibConst.DIST_EDGE));
+        vBoxAll.setPadding(new Insets(P2LibConst.PADDING));
         vBoxAll.setSpacing(25);
 
         final Button btnFileDest = new Button();

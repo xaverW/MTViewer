@@ -17,7 +17,7 @@
 
 package de.p2tools.mtviewer.gui.tools.table;
 
-import de.p2tools.p2lib.tools.date.PLDateFactory;
+import de.p2tools.p2lib.tools.date.P2LDateFactory;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
@@ -42,7 +42,7 @@ public class CellLocalDate<S, T> extends TableCell<S, T> {
                 }
 
                 setGraphic(null);
-                setText(PLDateFactory.toString(item));
+                setText(P2LDateFactory.toString(item));
             }
         };
         return cell;
