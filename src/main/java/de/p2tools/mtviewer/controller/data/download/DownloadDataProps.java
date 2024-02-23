@@ -22,7 +22,7 @@ import de.p2tools.p2lib.configfile.pdata.PDataSample;
 import de.p2tools.p2lib.mtdownload.DownloadSize;
 import de.p2tools.p2lib.tools.date.P2LDateFactory;
 import de.p2tools.p2lib.tools.date.P2LDateProperty;
-import de.p2tools.p2lib.tools.file.PFileUtils;
+import de.p2tools.p2lib.tools.file.P2FileUtils;
 import javafx.application.Platform;
 import javafx.beans.property.*;
 
@@ -390,7 +390,7 @@ public class DownloadDataProps extends PDataSample<DownloadData> {
     }
 
     public String getDestPathFile() {
-        return PFileUtils.addsPath(destPath.getValueSafe(), destFileName.getValueSafe());
+        return P2FileUtils.addsPath(destPath.getValueSafe(), destFileName.getValueSafe());
     }
 
 //    public StringProperty destPathFileProperty() {

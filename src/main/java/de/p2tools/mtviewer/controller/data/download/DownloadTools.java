@@ -21,7 +21,7 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.p2lib.mtdownload.SizeTools;
 import de.p2tools.p2lib.mtfilm.tools.FileNameUtils;
 import de.p2tools.p2lib.tools.PSystemUtils;
-import de.p2tools.p2lib.tools.file.PFileUtils;
+import de.p2tools.p2lib.tools.file.P2FileUtils;
 import de.p2tools.p2lib.tools.log.PLog;
 import javafx.scene.control.Label;
 import org.apache.commons.io.FilenameUtils;
@@ -41,7 +41,7 @@ public class DownloadTools {
         }
         try {
             String noSize = "";
-            long usableSpace = PFileUtils.getFreeDiskSpace(path);
+            long usableSpace = P2FileUtils.getFreeDiskSpace(path);
             String sizeFree = "";
             if (usableSpace == 0) {
                 lblSizeFree.setText("");
