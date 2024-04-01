@@ -20,7 +20,7 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
-import de.p2tools.p2lib.dialogs.dialog.PDialogExtra;
+import de.p2tools.p2lib.dialogs.dialog.P2DialogExtra;
 import de.p2tools.p2lib.guitools.P2ColumnConstraints;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -37,7 +37,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
-public class DownloadErrorDialogController extends PDialogExtra {
+public class DownloadErrorDialogController extends P2DialogExtra {
 
     private final HBox hBoxTitle;
     private final VBox vBoxCont;

@@ -24,7 +24,7 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
-import de.p2tools.p2lib.dialogs.PDirFileChooser;
+import de.p2tools.p2lib.dialogs.P2DirFileChooser;
 import de.p2tools.p2lib.guitools.P2Button;
 import de.p2tools.p2lib.guitools.P2ColumnConstraints;
 import de.p2tools.p2lib.tools.PSystemUtils;
@@ -72,12 +72,12 @@ public class PaneSet {
         final Button btnFileDest = new Button();
         btnFileDest.setGraphic(ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
         btnFileDest.setTooltip(new Tooltip("Einen Ordner zum Speichern der Filme auswählen"));
-        btnFileDest.setOnAction(event -> PDirFileChooser.DirChooser(ProgData.getInstance().primaryStage, txtDestPath));
+        btnFileDest.setOnAction(event -> P2DirFileChooser.DirChooser(ProgData.getInstance().primaryStage, txtDestPath));
 
         final Button btnFileProgram = new Button();
         btnFileProgram.setGraphic(ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
         btnFileProgram.setTooltip(new Tooltip("Das Programm für den Download von Streams auswählen"));
-        btnFileProgram.setOnAction(event -> PDirFileChooser.FileChooserOpenFile(ProgData.getInstance().primaryStage, txtProg));
+        btnFileProgram.setOnAction(event -> P2DirFileChooser.FileChooserOpenFile(ProgData.getInstance().primaryStage, txtProg));
 
         final Button btnDestPathReset = new Button();
         btnDestPathReset.setGraphic(ProgIconsMTViewer.ICON_BUTTON_RESET.getImageView());

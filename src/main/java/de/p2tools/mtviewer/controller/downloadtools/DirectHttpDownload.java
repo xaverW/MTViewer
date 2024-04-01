@@ -26,7 +26,7 @@ import de.p2tools.mtviewer.gui.dialog.DownloadErrorDialogController;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.alert.PAlert;
 import de.p2tools.p2lib.mtdownload.DownloadFactory;
-import de.p2tools.p2lib.tools.log.PLog;
+import de.p2tools.p2lib.tools.log.P2Log;
 import javafx.application.Platform;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
@@ -119,7 +119,7 @@ public class DirectHttpDownload extends Thread {
                         text.add("Timeout, Download Restarts: " + restartCount);
                         text.add("Ziel: " + download.getDestPathFile());
                         text.add("URL: " + download.getUrl());
-                        PLog.sysLog(text.toArray(new String[text.size()]));
+                        P2Log.sysLog(text.toArray(new String[text.size()]));
                     }
                     restartCount++;
                     restart = true;
@@ -127,7 +127,7 @@ public class DirectHttpDownload extends Thread {
                 } else {
                     // dann weiß der Geier!
                     exMessage = ex.getMessage();
-                    PLog.errorLog(316598941, ex, "Fehler");
+                    P2Log.errorLog(316598941, ex, "Fehler");
                     if (download.getStart().getRestartCounter() == 0) {
                         // nur beim ersten Mal melden -> nervt sonst
                         Platform.runLater(() -> new DownloadErrorDialogController(download, exMessage));
@@ -156,7 +156,7 @@ public class DirectHttpDownload extends Thread {
         text.add("https, Download Restarts: " + restartCount);
         text.add("Ziel: " + download.getDestPathFile());
         text.add("URL: " + download.getUrl());
-        PLog.sysLog(text.toArray(new String[text.size()]));
+        P2Log.sysLog(text.toArray(new String[text.size()]));
 
         AtomicBoolean dialog = new AtomicBoolean(true);
         AtomicBoolean ret = new AtomicBoolean(false);
@@ -210,7 +210,7 @@ public class DirectHttpDownload extends Thread {
                 // ==================================
                 // dann wars das
                 responseCode = "Responsecode: " + conn.getResponseCode() + P2LibConst.LINE_SEPARATOR + conn.getResponseMessage();
-                PLog.errorLog(915236798, "HTTP-Fehler: " + conn.getResponseCode() + ' ' + conn.getResponseMessage());
+                P2Log.errorLog(915236798, "HTTP-Fehler: " + conn.getResponseCode() + ' ' + conn.getResponseMessage());
                 if (download.getStart().getRestartCounter() == 0) {
                     // nur beim ersten Mal melden -> nervt sonst
                     Platform.runLater(() -> new DownloadErrorDialogController(download, responseCode));
@@ -285,7 +285,7 @@ public class DirectHttpDownload extends Thread {
                             file = new File(download.getDestPathFile());
                         } catch (final Exception ex) {
                             // kann nicht gelöscht werden, evtl. klappt ja das Überschreiben
-                            PLog.errorLog(915263654, ex,
+                            P2Log.errorLog(915263654, ex,
                                     "file exists: " + download.getDestPathFile());
                         }
                     } else {

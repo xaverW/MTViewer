@@ -19,7 +19,7 @@ package de.p2tools.mtviewer.controller.data.download;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.p2lib.tools.log.PLog;
+import de.p2tools.p2lib.tools.log.P2Log;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -216,7 +216,7 @@ public class DownloadListStarts {
             }
             return true;
         } catch (Exception ex) {
-            PLog.errorLog(794519083, ex);
+            P2Log.errorLog(794519083, ex);
         }
         return false;
     }

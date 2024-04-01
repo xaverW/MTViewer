@@ -19,7 +19,7 @@ package de.p2tools.mtviewer.controller.downloadtools;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
-import de.p2tools.p2lib.tools.log.PLog;
+import de.p2tools.p2lib.tools.log.P2Log;
 
 public class DownloadProgParameterFactory {
     private DownloadProgParameterFactory() {
@@ -33,7 +33,7 @@ public class DownloadProgParameterFactory {
             progArray = getPlayParameterArray();
             progArray = replaceExec(url, progArray);
         } catch (final Exception ex) {
-            PLog.errorLog(987512098, ex);
+            P2Log.errorLog(987512098, ex);
         }
         return progArray;
     }
@@ -48,7 +48,7 @@ public class DownloadProgParameterFactory {
             commandCall = program + " " + progParameter;
             commandCall = replaceExec(downloadData, commandCall);
         } catch (final Exception ex) {
-            PLog.errorLog(825600145, ex);
+            P2Log.errorLog(825600145, ex);
         }
         return commandCall;
     }
@@ -60,7 +60,7 @@ public class DownloadProgParameterFactory {
             progArray = getProgParameterArray();
             progArray = replaceExec(downloadData, progArray);
         } catch (final Exception ex) {
-            PLog.errorLog(987512098, ex);
+            P2Log.errorLog(987512098, ex);
         }
         return progArray;
     }

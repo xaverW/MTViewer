@@ -18,7 +18,7 @@ package de.p2tools.mtviewer.gui.tools.table;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.p2lib.configfile.pdata.PDataSample;
-import de.p2tools.p2lib.tools.log.PLog;
+import de.p2tools.p2lib.tools.log.P2Log;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
@@ -90,7 +90,7 @@ public class Table {
                 }
             }
         } catch (final Exception ex) {
-            PLog.errorLog(642103218, ex.getMessage());
+            P2Log.errorLog(642103218, ex.getMessage());
             resetTable(table);
         }
     }

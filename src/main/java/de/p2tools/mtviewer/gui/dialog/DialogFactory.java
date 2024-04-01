@@ -22,7 +22,7 @@ import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.data.download.DownloadTools;
 import de.p2tools.p2lib.mtdownload.SizeTools;
 import de.p2tools.p2lib.tools.PStringUtils;
-import de.p2tools.p2lib.tools.log.PLog;
+import de.p2tools.p2lib.tools.log.P2Log;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -180,7 +180,7 @@ public class DialogFactory {
 
             }
         } catch (Exception ex) {
-            PLog.errorLog(978451203, ex);
+            P2Log.errorLog(978451203, ex);
             ret = stdPath;
         }
         return ret;

@@ -20,7 +20,7 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.gui.dialog.DownloadErrorDialogController;
-import de.p2tools.p2lib.tools.log.PLog;
+import de.p2tools.p2lib.tools.log.P2Log;
 import javafx.application.Platform;
 
 import java.io.File;
@@ -66,7 +66,7 @@ public class ExternalProgramDownload {
 
         } catch (final Exception ex) {
             exMessage = ex.getLocalizedMessage();
-            PLog.errorLog(395623710, ex);
+            P2Log.errorLog(395623710, ex);
             if (download.getStart().getRestartCounter() == 0) {
                 // nur beim ersten Mal melden -> nervt sonst
                 Platform.runLater(() -> new DownloadErrorDialogController(download, exMessage));

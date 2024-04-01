@@ -24,8 +24,8 @@ import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.downloadtools.HttpDownloadFactory;
 import de.p2tools.p2lib.alert.PAlert;
-import de.p2tools.p2lib.dialogs.PDirFileChooser;
-import de.p2tools.p2lib.dialogs.dialog.PDialogExtra;
+import de.p2tools.p2lib.dialogs.P2DirFileChooser;
+import de.p2tools.p2lib.dialogs.dialog.P2DialogExtra;
 import de.p2tools.p2lib.guitools.P2ColumnConstraints;
 import de.p2tools.p2lib.guitools.P2Hyperlink;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
@@ -39,7 +39,7 @@ import javafx.scene.layout.*;
 
 import java.io.File;
 
-public class DownloadAddDialogController extends PDialogExtra {
+public class DownloadAddDialogController extends P2DialogExtra {
 
     final String[] storedPath = ProgConfig.DOWNLOAD_DIALOG_PATH_SAVING.get().split("<>");
     private final ProgData progData;
@@ -231,7 +231,7 @@ public class DownloadAddDialogController extends PDialogExtra {
         btnDest.setGraphic(ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
         btnDest.setText("");
         btnDest.setTooltip(new Tooltip("Einen Pfad zum Speichern auswählen."));
-        btnDest.setOnAction(event -> PDirFileChooser.DirChooser(ProgData.getInstance().primaryStage, cboPath));
+        btnDest.setOnAction(event -> P2DirFileChooser.DirChooser(ProgData.getInstance().primaryStage, cboPath));
 
         btnPropose.setGraphic(ProgIconsMTViewer.ICON_BUTTON_PROPOSE.getImageView());
         btnPropose.setText("");

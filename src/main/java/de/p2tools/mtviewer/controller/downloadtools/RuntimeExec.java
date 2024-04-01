@@ -20,7 +20,7 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.p2lib.mtdownload.DownloadSize;
-import de.p2tools.p2lib.tools.log.PLog;
+import de.p2tools.p2lib.tools.log.P2Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -78,27 +78,27 @@ public class RuntimeExec {
         try {
             if (arrProgCallArray != null) {
                 if (log) {
-                    PLog.sysLog("=====================");
-                    PLog.sysLog("Starte Array: ");
-                    PLog.sysLog(" -> " + strProgCallArray);
-                    PLog.sysLog("=====================");
+                    P2Log.sysLog("=====================");
+                    P2Log.sysLog("Starte Array: ");
+                    P2Log.sysLog(" -> " + strProgCallArray);
+                    P2Log.sysLog("=====================");
                 }
                 process = Runtime.getRuntime().exec(arrProgCallArray);
 
             } else {
                 if (log) {
-                    PLog.sysLog("=====================");
-                    PLog.sysLog("Starte nicht als Array:");
-                    PLog.sysLog(" -> " + strProgCall);
-                    PLog.sysLog("=====================");
+                    P2Log.sysLog("=====================");
+                    P2Log.sysLog("Starte nicht als Array:");
+                    P2Log.sysLog(" -> " + strProgCall);
+                    P2Log.sysLog("=====================");
                 }
                 process = Runtime.getRuntime().exec(strProgCall);
             }
 
             if (strProgCall.contains("flvstreamer")) {
-                PLog.sysLog("=====================");
-                PLog.sysLog("flvstreamer");
-                PLog.sysLog("=====================");
+                P2Log.sysLog("=====================");
+                P2Log.sysLog("flvstreamer");
+                P2Log.sysLog("=====================");
                 flvstreamer = true;
             }
 
@@ -109,7 +109,7 @@ public class RuntimeExec {
             clearOut.setName("exec-out");
             clearOut.start();
         } catch (final Exception ex) {
-            PLog.errorLog(450028932, ex, "Fehler beim Starten");
+            P2Log.errorLog(450028932, ex, "Fehler beim Starten");
         }
         return process;
     }
@@ -175,7 +175,7 @@ public class RuntimeExec {
                     notifyDouble(d);
                 } catch (final Exception ex) {
                     if (ProgData.debug) {
-                        PLog.errorLog(954120125, input);
+                        P2Log.errorLog(954120125, input);
                     }
                 }
                 return;
@@ -240,7 +240,7 @@ public class RuntimeExec {
                 }
             } catch (final Exception ex) {
                 if (ProgData.debug) {
-                    PLog.errorLog(912036780, input);
+                    P2Log.errorLog(912036780, input);
                 }
             }
         }

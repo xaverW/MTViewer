@@ -18,7 +18,7 @@ package de.p2tools.mtviewer.controller;
 
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.p2lib.tools.PShutDown;
-import de.p2tools.p2lib.tools.log.LogMessage;
+import de.p2tools.p2lib.tools.log.P2LogMessage;
 import javafx.application.Platform;
 
 public class ProgQuit {
@@ -59,7 +59,7 @@ public class ProgQuit {
         stopAllDownloads();
         writeTabSettings();
         ProgSave.saveAll();
-        LogMessage.endMsg();
+        P2LogMessage.endMsg();
     }
 
     private static void exitProg() {

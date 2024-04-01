@@ -22,7 +22,7 @@ import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.alert.PAlert;
 import de.p2tools.p2lib.mtdownload.MTInfoFile;
 import de.p2tools.p2lib.mtdownload.MTSubtitle;
-import de.p2tools.p2lib.tools.log.PLog;
+import de.p2tools.p2lib.tools.log.P2Log;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -87,7 +87,7 @@ public class DownloadDataFactory {
         } catch (Exception ex) {
             PAlert.showErrorAlert("Film löschen", "Konnte die Datei nicht löschen!", "Fehler beim löschen von:" + P2LibConst.LINE_SEPARATORx2 +
                     download.getDestPathFile());
-            PLog.errorLog(915236547, "Fehler beim löschen: " + download.getDestPathFile());
+            P2Log.errorLog(915236547, "Fehler beim löschen: " + download.getDestPathFile());
         }
     }
 

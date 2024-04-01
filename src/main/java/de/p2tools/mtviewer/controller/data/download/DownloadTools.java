@@ -22,7 +22,7 @@ import de.p2tools.p2lib.mtdownload.SizeTools;
 import de.p2tools.p2lib.mtfilm.tools.FileNameUtils;
 import de.p2tools.p2lib.tools.PSystemUtils;
 import de.p2tools.p2lib.tools.file.P2FileUtils;
-import de.p2tools.p2lib.tools.log.PLog;
+import de.p2tools.p2lib.tools.log.P2Log;
 import javafx.scene.control.Label;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.SystemUtils;
@@ -163,7 +163,7 @@ public class DownloadTools {
                 alreadyDone.add(download);
             });
         } catch (final Exception ex) {
-            PLog.errorLog(303021458, ex);
+            P2Log.errorLog(303021458, ex);
         }
     }
 

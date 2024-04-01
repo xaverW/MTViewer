@@ -22,7 +22,7 @@ import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
 import de.p2tools.mtviewer.gui.FilmGuiPack;
 import de.p2tools.mtviewer.gui.StatusBarController;
-import de.p2tools.p2lib.tools.log.PLog;
+import de.p2tools.p2lib.tools.log.P2Log;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -56,7 +56,7 @@ public class MTViewerController extends StackPane {
             this.getChildren().addAll(vBox, progData.maskerPane);
             initMaskerPane();
         } catch (Exception ex) {
-            PLog.errorLog(597841023, ex);
+            P2Log.errorLog(597841023, ex);
         }
     }
 

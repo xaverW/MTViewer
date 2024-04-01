@@ -20,7 +20,6 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.gui.tools.table.TableDownload;
-import de.p2tools.p2lib.mtdownload.MLBandwidthTokenBucket;
 import de.p2tools.p2lib.tools.PSystemUtils;
 import javafx.beans.property.IntegerProperty;
 import javafx.scene.control.*;
@@ -176,7 +175,7 @@ public class DownloadTableContextMenu {
                 "oder unbegrenzt wenn \"aus\""));
 
         sliderBandwidth.setMin(50);
-        sliderBandwidth.setMax(MLBandwidthTokenBucket.BANDWIDTH_MAX_KBYTE);
+//        sliderBandwidth.setMax(MLBandwidthTokenBucket.BANDWIDTH_MAX_KBYTE);
         sliderBandwidth.setShowTickLabels(true);
         sliderBandwidth.setMinorTickCount(9);
         sliderBandwidth.setMajorTickUnit(250);
@@ -186,9 +185,9 @@ public class DownloadTableContextMenu {
         sliderBandwidth.setLabelFormatter(new StringConverter<>() {
             @Override
             public String toString(Double x) {
-                if (x == MLBandwidthTokenBucket.BANDWIDTH_MAX_KBYTE) {
-                    return "alles";
-                }
+//                if (x == MLBandwidthTokenBucket.BANDWIDTH_MAX_KBYTE) {
+//                    return "alles";
+//                }
 
                 return x.intValue() + "";
             }
@@ -212,11 +211,11 @@ public class DownloadTableContextMenu {
         int bandwidthKByte;
         String ret;
         bandwidthKByte = ProgConfig.DOWNLOAD_MAX_BANDWIDTH_KBYTE.getValue();
-        if (bandwidthKByte == MLBandwidthTokenBucket.BANDWIDTH_MAX_KBYTE) {
-            ret = "alles";
-        } else {
-            ret = bandwidthKByte + " kB/s";
-        }
-        lblBandwidth.setText(ret);
+//        if (bandwidthKByte == MLBandwidthTokenBucket.BANDWIDTH_MAX_KBYTE) {
+//            ret = "alles";
+//        } else {
+//            ret = bandwidthKByte + " kB/s";
+//        }
+//        lblBandwidth.setText(ret);
     }
 }

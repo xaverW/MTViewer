@@ -22,7 +22,7 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.update.SearchProgramUpdate;
 import de.p2tools.p2lib.tools.date.P2DateConst;
 import de.p2tools.p2lib.tools.duration.PDuration;
-import de.p2tools.p2lib.tools.log.PLog;
+import de.p2tools.p2lib.tools.log.P2Log;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -50,7 +50,7 @@ public class UpdateCheckFactory {
             if (updateCheckTodayDone()) {
                 list.add("  heute schon gemacht");
             }
-            PLog.sysLog(list);
+            P2Log.sysLog(list);
         }
     }
 

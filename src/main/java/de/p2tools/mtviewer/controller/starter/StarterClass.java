@@ -27,7 +27,7 @@ import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadEvent;
 import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadListener;
 import de.p2tools.p2lib.tools.date.P2Date;
 import de.p2tools.p2lib.tools.date.P2DateConst;
-import de.p2tools.p2lib.tools.log.PLog;
+import de.p2tools.p2lib.tools.log.P2Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -68,15 +68,15 @@ public class StarterClass {
 
         if (progress > DownloadConstants.PROGRESS_NOT_STARTED && progress < DownloadConstants.PROGRESS_NEARLY_FINISHED) {
             // *progress* Prozent werden berechnet und es wurde vor 99,5% abgebrochen
-            PLog.errorLog(696510258, "Download fehlgeschlagen: 99,5% wurden nicht erreicht: " + progress + "%, " + download.getDestPathFile());
+            P2Log.errorLog(696510258, "Download fehlgeschlagen: 99,5% wurden nicht erreicht: " + progress + "%, " + download.getDestPathFile());
             return false;
         }
 
         final File file = new File(download.getDestPathFile());
         if (!file.exists()) {
-            PLog.errorLog(550236231, "Download fehlgeschlagen: Datei existiert nicht: " + download.getDestPathFile());
+            P2Log.errorLog(550236231, "Download fehlgeschlagen: Datei existiert nicht: " + download.getDestPathFile());
         } else if (file.length() < ProgConst.MIN_DATEI_GROESSE_FILM) {
-            PLog.errorLog(795632500, "Download fehlgeschlagen: Datei zu klein: " + download.getDestPathFile());
+            P2Log.errorLog(795632500, "Download fehlgeschlagen: Datei zu klein: " + download.getDestPathFile());
         } else {
             ret = true;
         }
@@ -94,25 +94,25 @@ public class StarterClass {
                 // zum Wiederstarten/Aufräumen die leer/zu kleine Datei löschen, alles auf Anfang
                 if (file.length() == 0) {
                     // zum Wiederstarten/Aufräumen die leer/zu kleine Datei löschen, alles auf Anfang
-                    PLog.sysLog(new String[]{"Restart/Aufräumen: leere Datei löschen", file.getAbsolutePath()});
+                    P2Log.sysLog(new String[]{"Restart/Aufräumen: leere Datei löschen", file.getAbsolutePath()});
                     if (!file.delete()) {
                         throw new Exception();
                     }
                 } else if (file.length() < ProgConst.MIN_DATEI_GROESSE_FILM) {
-                    PLog.sysLog(new String[]{"Restart/Aufräumen: Zu kleine Datei löschen", file.getAbsolutePath()});
+                    P2Log.sysLog(new String[]{"Restart/Aufräumen: Zu kleine Datei löschen", file.getAbsolutePath()});
                     if (!file.delete()) {
                         throw new Exception();
                     }
                 }
             }
         } catch (final Exception ex) {
-            PLog.errorLog(795632500, "Fehler beim löschen" + file.getAbsolutePath());
+            P2Log.errorLog(795632500, "Fehler beim löschen" + file.getAbsolutePath());
         }
     }
 
     public static void startMsg(DownloadData download) {
         final ArrayList<String> list = new ArrayList<>();
-        list.add(PLog.LILNE3);
+        list.add(P2Log.LILNE3);
         if (download.getStart().getRestartCounter() > 0) {
             list.add("Download starten - Restart (Summe Starts: " + download.getStart().getRestartCounter() + ')');
         } else {
@@ -122,14 +122,14 @@ public class StarterClass {
         list.add("URL: " + download.getUrl());
         list.add("Startzeit: " + P2DateConst.F_FORMAT_HH__mm__ss.format(download.getStart().getStartTime()));
         list.add(DownloadConstants.TYPE_DOWNLOAD);
-        list.add(PLog.LILNE_EMPTY);
-        PLog.sysLog(list.toArray(new String[list.size()]));
+        list.add(P2Log.LILNE_EMPTY);
+        P2Log.sysLog(list.toArray(new String[list.size()]));
     }
 
     private static void finishedMsg(final DownloadData download) {
         final Start start = download.getStart();
         final ArrayList<String> list = new ArrayList<>();
-        list.add(PLog.LILNE3);
+        list.add(P2Log.LILNE3);
         if (download.isStateStoped()) {
             list.add("Download wurde abgebrochen");
 
@@ -164,8 +164,8 @@ public class StarterClass {
         }
         list.add("URL: " + download.getUrl());
         list.add(DownloadConstants.TYPE_DOWNLOAD);
-        list.add(PLog.LILNE_EMPTY);
-        PLog.sysLog(list);
+        list.add(P2Log.LILNE_EMPTY);
+        P2Log.sysLog(list);
 
         if (!download.isStateStoped()) {
             //war ein Abo und wurde nicht abgebrochen
@@ -240,7 +240,7 @@ public class StarterClass {
             }
         } catch (
                 final Exception ex) {
-            PLog.errorLog(461204780,
+            P2Log.errorLog(461204780,
                     "Fehler beim Ermitteln der Dateigröße: " + download.getDestPathFile());
         }
     }
@@ -254,7 +254,7 @@ public class StarterClass {
         text.add("Fehlerhaften Download neu starten - Restart (Summe Starts: " + download.getStart().getRestartCounter() + ')');
         text.add("Ziel: " + download.getDestPathFile());
         text.add("URL: " + download.getUrl());
-        PLog.sysLog(text.toArray(new String[text.size()]));
+        P2Log.sysLog(text.toArray(new String[text.size()]));
     }
 
     // ********************************************
@@ -303,7 +303,7 @@ public class StarterClass {
 
                     sleep(3 * 1000);
                 } catch (final Exception ex) {
-                    PLog.errorLog(613822015, ex);
+                    P2Log.errorLog(613822015, ex);
                 }
             }
         }

@@ -16,7 +16,7 @@
 
 package de.p2tools.mtviewer.gui.tools;
 
-import de.p2tools.p2lib.tools.log.PLog;
+import de.p2tools.p2lib.tools.log.P2Log;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class Listener implements EventListener {
     }
 
     public static synchronized void addListener(Listener listener) {
-        PLog.debugLog("Anz. Listener: " + listeners.size());
+        P2Log.debugLog("Anz. Listener: " + listeners.size());
         listeners.add(listener);
     }
 
@@ -83,7 +83,7 @@ public class Listener implements EventListener {
             ping();
             Platform.runLater(() -> pingFx());
         } catch (final Exception ex) {
-            PLog.errorLog(698989743, ex);
+            P2Log.errorLog(698989743, ex);
         }
     }
 }

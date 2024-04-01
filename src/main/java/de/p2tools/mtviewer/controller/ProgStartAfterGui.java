@@ -26,8 +26,8 @@ import de.p2tools.p2lib.guitools.P2WindowIcon;
 import de.p2tools.p2lib.tools.ProgramToolsFactory;
 import de.p2tools.p2lib.tools.date.P2DateConst;
 import de.p2tools.p2lib.tools.duration.PDuration;
-import de.p2tools.p2lib.tools.log.LogMessage;
-import de.p2tools.p2lib.tools.log.PLog;
+import de.p2tools.p2lib.tools.log.P2Log;
+import de.p2tools.p2lib.tools.log.P2LogMessage;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -72,8 +72,8 @@ public class ProgStartAfterGui {
         list.add("Programmpfad: " + ProgInfos.getPathJar());
         list.add("Verzeichnis Einstellungen: " + ProgInfos.getSettingsDirectory_String());
 
-        LogMessage.startMsg(ProgConst.PROGRAM_NAME, list);
-        PLog.sysLog(list);
+        P2LogMessage.startMsg(ProgConst.PROGRAM_NAME, list);
+        P2Log.sysLog(list);
         ProgConfig.logAllConfigs();
     }
 
@@ -95,7 +95,7 @@ public class ProgStartAfterGui {
             if (updateCheckTodayDone()) {
                 list.add("  heute schon gemacht");
             }
-            PLog.sysLog(list);
+            P2Log.sysLog(list);
         }
     }
 

@@ -23,8 +23,8 @@ import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.data.download.DownloadTools;
 import de.p2tools.mtviewer.controller.downloadtools.DownloadState;
-import de.p2tools.p2lib.dialogs.PDirFileChooser;
-import de.p2tools.p2lib.dialogs.dialog.PDialogExtra;
+import de.p2tools.p2lib.dialogs.P2DirFileChooser;
+import de.p2tools.p2lib.dialogs.dialog.P2DialogExtra;
 import de.p2tools.p2lib.guitools.P2ColumnConstraints;
 import de.p2tools.p2lib.mtfilm.tools.FileNameUtils;
 import de.p2tools.p2lib.tools.ProgramToolsFactory;
@@ -39,7 +39,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
-public class DownloadContinueDialogController extends PDialogExtra {
+public class DownloadContinueDialogController extends P2DialogExtra {
 
     private final ProgData progData;
     private final DownloadData download;
@@ -260,6 +260,6 @@ public class DownloadContinueDialogController extends PDialogExtra {
     }
 
     private void getDestination() {
-        PDirFileChooser.DirChooser(ProgData.getInstance().primaryStage, cbPath);
+        P2DirFileChooser.DirChooser(ProgData.getInstance().primaryStage, cbPath);
     }
 }
