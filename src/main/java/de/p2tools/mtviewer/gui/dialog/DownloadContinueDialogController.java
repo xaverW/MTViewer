@@ -21,7 +21,7 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
-import de.p2tools.mtviewer.controller.data.download.DownloadTools;
+import de.p2tools.mtviewer.controller.data.download.DownloadFactory;
 import de.p2tools.mtviewer.controller.downloadtools.DownloadState;
 import de.p2tools.p2lib.dialogs.P2DirFileChooser;
 import de.p2tools.p2lib.dialogs.dialog.P2DialogExtra;
@@ -201,9 +201,9 @@ public class DownloadContinueDialogController extends P2DialogExtra {
                 btnContinueDownload.setDisable(!download.getDestPath().equals(newValue));
             }
 
-            DownloadTools.calculateAndCheckDiskSpace(download, cbPath.getSelectionModel().getSelectedItem(), lblSizeFree);
+            DownloadFactory.calculateAndCheckDiskSpace(download, cbPath.getSelectionModel().getSelectedItem(), lblSizeFree);
         });
-        DownloadTools.calculateAndCheckDiskSpace(download, cbPath.getSelectionModel().getSelectedItem(), lblSizeFree);
+        DownloadFactory.calculateAndCheckDiskSpace(download, cbPath.getSelectionModel().getSelectedItem(), lblSizeFree);
 
         txtFileName.setText(download.getDestFileName());
         txtFileName.textProperty().addListener((observable, oldValue, newValue) -> {

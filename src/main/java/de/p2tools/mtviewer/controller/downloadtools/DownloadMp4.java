@@ -47,7 +47,7 @@ public class DownloadMp4 {
 
         downloadData.getStart().setInputStream(new MLInputStream(conn.getInputStream(),
                 bandwidthCalculationTimer,
-                ProgConfig.DOWNLOAD_MAX_BANDWIDTH_KBYTE,
+                ProgConfig.DOWNLOAD_MAX_BANDWIDTH_BYTE,
                 ProgData.FILMLIST_IS_DOWNLOADING));
 
         FileOutputStream fos = new FileOutputStream(file, (downloaded.get() != 0));

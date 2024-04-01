@@ -18,19 +18,82 @@ package de.p2tools.mtviewer.controller.data.download;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
+import de.p2tools.p2lib.mtdownload.MLBandwidthTokenBucket;
 import de.p2tools.p2lib.mtdownload.SizeTools;
 import de.p2tools.p2lib.mtfilm.tools.FileNameUtils;
 import de.p2tools.p2lib.tools.PSystemUtils;
 import de.p2tools.p2lib.tools.file.P2FileUtils;
 import de.p2tools.p2lib.tools.log.P2Log;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
+import javafx.util.StringConverter;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.SystemUtils;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DownloadTools {
+public class DownloadFactory {
+    private static final DecimalFormat f1 = new DecimalFormat("##");
+    private static final DecimalFormat f2 = new DecimalFormat("##.0");
+
+    private DownloadFactory() {
+    }
+
+    public static void initBandwidth(Slider slider, Label lbl) {
+        slider.setMin(MLBandwidthTokenBucket.BANDWIDTH_RUN_FREE);
+        slider.setMax(MLBandwidthTokenBucket.BANDWIDTH_MAX_BYTE);
+        slider.setShowTickLabels(true);
+        slider.setMinorTickCount(19);
+        slider.setMajorTickUnit(2_000_000);
+        slider.setBlockIncrement(100_000);
+        slider.setSnapToTicks(true);
+
+        slider.setLabelFormatter(new StringConverter<>() {
+            @Override
+            public String toString(Double x) {
+                if (x == MLBandwidthTokenBucket.BANDWIDTH_RUN_FREE) {
+                    return "alles";
+                }
+                return f1.format(x / 1_000_000);
+            }
+
+            @Override
+            public Double fromString(String string) {
+                return null;
+            }
+        });
+
+        slider.valueProperty().bindBidirectional(ProgConfig.DOWNLOAD_MAX_BANDWIDTH_BYTE);
+        lbl.setText(getTextBandwidth());
+
+        slider.valueProperty().addListener((obs, oldValue, newValue) -> {
+            ProgData.FILMLIST_IS_DOWNLOADING.setValue(false); // vorsichtshalber
+            lbl.setText(getTextBandwidth());
+        });
+    }
+
+    private static String getTextBandwidth() {
+        double bandwidthByte;
+        String ret;
+        bandwidthByte = ProgConfig.DOWNLOAD_MAX_BANDWIDTH_BYTE.getValue();
+        if (bandwidthByte == MLBandwidthTokenBucket.BANDWIDTH_RUN_FREE) {
+            ret = "alles";
+
+        } else {
+            if (bandwidthByte < 1_000_000) {
+                // kByte
+                ret = f1.format(bandwidthByte / 1_000) + " kB/s";
+            } else if (bandwidthByte == 10_000_000) {
+                // 10 MByte
+                ret = f1.format(bandwidthByte / 1_000_000.0) + " MB/s";
+            } else {
+                ret = f2.format(bandwidthByte / 1_000_000) + " MB/s";
+            }
+        }
+        return ret;
+    }
 
     /**
      * Calculate free disk space on volume and check if the movies can be safely downloaded.

@@ -19,7 +19,7 @@ package de.p2tools.mtviewer.gui.dialog;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
-import de.p2tools.mtviewer.controller.data.download.DownloadTools;
+import de.p2tools.mtviewer.controller.data.download.DownloadFactory;
 import de.p2tools.p2lib.mtdownload.SizeTools;
 import de.p2tools.p2lib.tools.PStringUtils;
 import de.p2tools.p2lib.tools.log.P2Log;
@@ -148,7 +148,7 @@ public class DialogFactory {
     public static String getNextName(String stdPath, String actDownPath, String theme) {
         String ret = actDownPath;
 
-        theme = DownloadTools.replaceEmptyFileName(theme,
+        theme = DownloadFactory.replaceEmptyFileName(theme,
                 ProgConfig.SYSTEM_USE_REPLACETABLE.getValue(),
                 ProgConfig.SYSTEM_ONLY_ASCII.getValue());
 
