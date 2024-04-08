@@ -19,14 +19,14 @@ package de.p2tools.mtviewer.gui.configdialog;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.gui.configdialog.configpanes.*;
-import de.p2tools.p2lib.dialogs.accordion.PAccordionPane;
+import de.p2tools.p2lib.dialogs.accordion.P2AccordionPane;
 import javafx.scene.control.TitledPane;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class ControllerConfig extends PAccordionPane {
+public class ControllerConfig extends P2AccordionPane {
 
     private final ProgData progData;
     private final Stage stage;

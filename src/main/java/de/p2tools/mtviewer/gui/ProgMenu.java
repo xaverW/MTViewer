@@ -29,7 +29,7 @@ import de.p2tools.mtviewer.gui.dialog.AboutDialogController;
 import de.p2tools.mtviewer.gui.dialog.ResetDialogController;
 import de.p2tools.mtviewer.gui.tools.TipOfDayFactory;
 import de.p2tools.p2lib.guitools.P2Open;
-import de.p2tools.p2lib.tools.shortcut.PShortcutWorker;
+import de.p2tools.p2lib.tools.shortcut.P2ShortcutWorker;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 
@@ -59,13 +59,13 @@ public class ProgMenu extends MenuButton {
         final Menu mFilm = new Menu("Filme");
         final MenuItem miPlay = new MenuItem("Film abspielen");
         miPlay.setOnAction(a -> progData.filmGuiController.playFilm());
-        PShortcutWorker.addShortCut(miPlay, MTShortcut.SHORTCUT_PLAY_FILM);
+        P2ShortcutWorker.addShortCut(miPlay, MTShortcut.SHORTCUT_PLAY_FILM);
         final MenuItem miSave = new MenuItem("Film speichern");
         miSave.setOnAction(a -> progData.filmGuiController.saveFilm());
-        PShortcutWorker.addShortCut(miSave, MTShortcut.SHORTCUT_SAVE_FILM);
+        P2ShortcutWorker.addShortCut(miSave, MTShortcut.SHORTCUT_SAVE_FILM);
         final MenuItem miFilmInfo = new MenuItem("Filminformation anzeigen");
         miFilmInfo.setOnAction(a -> progData.filmGuiController.showFilmInfo());
-        PShortcutWorker.addShortCut(miFilmInfo, MTShortcut.SHORTCUT_INFO_FILM);
+        P2ShortcutWorker.addShortCut(miFilmInfo, MTShortcut.SHORTCUT_INFO_FILM);
         mFilm.getItems().addAll(miPlay, miSave, miFilmInfo);
 
         //=========================
@@ -78,7 +78,7 @@ public class ProgMenu extends MenuButton {
 
         final MenuItem miShowInfo = new MenuItem("Infobereich unter der Tabelle ein-/ausblenden");
         miShowInfo.setOnAction(a -> progData.mtViewerController.setInfos());
-        PShortcutWorker.addShortCut(miShowInfo, MTShortcut.SHORTCUT_SHOW_INFOS);
+        P2ShortcutWorker.addShortCut(miShowInfo, MTShortcut.SHORTCUT_SHOW_INFOS);
         final MenuItem miConfig = new MenuItem("Einstellungen");
         miConfig.setOnAction(e -> new ConfigDialogController(ProgData.getInstance()).showDialog());
         getItems().addAll(mFilm, miLoad, miDarkMode, miShowInfo, miConfig, new SeparatorMenuItem());
@@ -107,7 +107,7 @@ public class ProgMenu extends MenuButton {
         //Quitt
         final MenuItem miQuit = new MenuItem("Beenden");
         miQuit.setOnAction(e -> ProgQuit.quit(false));
-        PShortcutWorker.addShortCut(miQuit, MTShortcut.SHORTCUT_QUIT_PROGRAM);
+        P2ShortcutWorker.addShortCut(miQuit, MTShortcut.SHORTCUT_QUIT_PROGRAM);
 
         getItems().addAll(miQuit);
     }

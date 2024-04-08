@@ -20,7 +20,7 @@ import de.p2tools.mtviewer.controller.config.*;
 import de.p2tools.mtviewer.gui.startdialog.StartDialogController;
 import de.p2tools.p2lib.configfile.ConfigFile;
 import de.p2tools.p2lib.configfile.ConfigReadFile;
-import de.p2tools.p2lib.tools.duration.PDuration;
+import de.p2tools.p2lib.tools.duration.P2Duration;
 import de.p2tools.p2lib.tools.log.P2Log;
 import de.p2tools.p2lib.tools.log.P2LogMessage;
 import de.p2tools.p2lib.tools.log.P2Logger;
@@ -37,7 +37,7 @@ public class ProgStartBeforeGui {
 
     public static void workBeforeGui() {
         if (!loadAll()) {
-            PDuration.onlyPing("Erster Start");
+            P2Duration.onlyPing("Erster Start");
             ProgData.firstProgramStart = true;
 
             UpdateConfig.setUpdateDone(); //dann ists ja kein Programmupdate

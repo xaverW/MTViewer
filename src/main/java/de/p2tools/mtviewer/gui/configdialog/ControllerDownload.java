@@ -21,14 +21,14 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.gui.configdialog.downloadpanes.PaneDownload;
 import de.p2tools.mtviewer.gui.configdialog.downloadpanes.PaneReplace;
 import de.p2tools.mtviewer.gui.configdialog.downloadpanes.PaneSet;
-import de.p2tools.p2lib.dialogs.accordion.PAccordionPane;
+import de.p2tools.p2lib.dialogs.accordion.P2AccordionPane;
 import javafx.scene.control.TitledPane;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class ControllerDownload extends PAccordionPane {
+public class ControllerDownload extends P2AccordionPane {
     private final ProgData progData;
     private final Stage stage;
     private PaneDownload paneDownload;

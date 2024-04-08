@@ -83,11 +83,11 @@ public class ProgIconsMTViewer {
         public boolean searchUrl(String p, Class<?>... clazzAr) {
             URL url;
             url = MTViewerController.class.getResource(p);
-            if (set(url, p, "P2InfoController.class.getResource")) return true;
+            if (set(url, p, "MTViewerController.class.getResource")) return true;
             url = ProgConst.class.getResource(p);
             if (set(url, p, "ProgConst.class.getResource")) return true;
             url = ProgIconsMTViewer.class.getResource(p);
-            if (set(url, p, "ProgIconsInfo.class.getResource")) return true;
+            if (set(url, p, "ProgIconsMTViewer.class.getResource")) return true;
             url = this.getClass().getResource(p);
             if (set(url, p, "this.getClass().getResource")) return true;
 

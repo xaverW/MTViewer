@@ -23,9 +23,9 @@ import de.p2tools.mtviewer.controller.config.ProgInfos;
 import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
 import de.p2tools.mtviewer.controller.update.SearchProgramUpdate;
 import de.p2tools.p2lib.guitools.P2WindowIcon;
-import de.p2tools.p2lib.tools.ProgramToolsFactory;
+import de.p2tools.p2lib.tools.P2ToolsFactory;
 import de.p2tools.p2lib.tools.date.P2DateConst;
-import de.p2tools.p2lib.tools.duration.PDuration;
+import de.p2tools.p2lib.tools.duration.P2Duration;
 import de.p2tools.p2lib.tools.log.P2Log;
 import de.p2tools.p2lib.tools.log.P2LogMessage;
 
@@ -79,7 +79,7 @@ public class ProgStartAfterGui {
 
     private static void checkProgUpdate() {
         // Prüfen obs ein Programmupdate gibt
-        PDuration.onlyPing("checkProgUpdate");
+        P2Duration.onlyPing("checkProgUpdate");
         if (ProgConfig.SYSTEM_UPDATE_SEARCH_ACT.getValue() &&
                 !updateCheckTodayDone()) {
             // nach Updates suchen
@@ -110,9 +110,9 @@ public class ProgStartAfterGui {
 
     private static void setTitle() {
         if (ProgData.debug) {
-            ProgData.getInstance().primaryStage.setTitle(ProgConst.PROGRAM_NAME + " " + ProgramToolsFactory.getProgVersion() + " / DEBUG");
+            ProgData.getInstance().primaryStage.setTitle(ProgConst.PROGRAM_NAME + " " + P2ToolsFactory.getProgVersion() + " / DEBUG");
         } else {
-            ProgData.getInstance().primaryStage.setTitle(ProgConst.PROGRAM_NAME + " " + ProgramToolsFactory.getProgVersion());
+            ProgData.getInstance().primaryStage.setTitle(ProgConst.PROGRAM_NAME + " " + P2ToolsFactory.getProgVersion());
         }
     }
 }

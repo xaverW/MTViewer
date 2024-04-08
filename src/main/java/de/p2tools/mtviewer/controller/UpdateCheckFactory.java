@@ -21,7 +21,7 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.update.SearchProgramUpdate;
 import de.p2tools.p2lib.tools.date.P2DateConst;
-import de.p2tools.p2lib.tools.duration.PDuration;
+import de.p2tools.p2lib.tools.duration.P2Duration;
 import de.p2tools.p2lib.tools.log.P2Log;
 
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class UpdateCheckFactory {
 
     public static void checkProgUpdate() {
         // Prüfen obs ein Programmupdate gibt
-        PDuration.onlyPing("checkProgUpdate");
+        P2Duration.onlyPing("checkProgUpdate");
         if (ProgConfig.SYSTEM_UPDATE_SEARCH_ACT.getValue() &&
                 !updateCheckTodayDone()) {
             // nach Updates suchen

@@ -16,13 +16,13 @@
 
 package de.p2tools.mtviewer.controller.data;
 
-import de.p2tools.p2lib.configfile.pdata.PDataList;
+import de.p2tools.p2lib.configfile.pdata.P2DataList;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 
 import java.io.File;
 
-public final class ReplaceList extends SimpleListProperty<ReplaceData> implements PDataList<ReplaceData> {
+public final class ReplaceList extends SimpleListProperty<ReplaceData> implements P2DataList<ReplaceData> {
 
     public static final String TAG = "ReplaceList";
 

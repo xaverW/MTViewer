@@ -24,7 +24,7 @@ import de.p2tools.mtviewer.controller.downloadtools.DownloadProgParameterFactory
 import de.p2tools.mtviewer.gui.dialog.DownloadAddDialogController;
 import de.p2tools.mtviewer.gui.dialog.FilmPlayDialogController;
 import de.p2tools.p2lib.P2LibConst;
-import de.p2tools.p2lib.alert.PAlert;
+import de.p2tools.p2lib.alert.P2Alert;
 import de.p2tools.p2lib.guitools.P2Open;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 
@@ -100,7 +100,7 @@ public class FilmTools {
         DownloadData download = progData.downloadList.getDownloadUrlFilm(film.arr[FilmData.FILM_URL]);
         if (download != null) {
             // dann ist der Film schon in der Downloadliste
-            PAlert.BUTTON answer = PAlert.showAlert_yes_no("Anlegen?", "Nochmal anlegen?",
+            P2Alert.BUTTON answer = P2Alert.showAlert_yes_no("Anlegen?", "Nochmal anlegen?",
                     "Download für den Film existiert bereits:" + P2LibConst.LINE_SEPARATORx2 +
                             film.getTitle() + P2LibConst.LINE_SEPARATORx2 +
                             "Nochmal anlegen?");

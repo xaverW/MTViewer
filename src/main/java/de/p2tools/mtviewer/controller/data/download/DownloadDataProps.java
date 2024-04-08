@@ -18,7 +18,7 @@ package de.p2tools.mtviewer.controller.data.download;
 
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.p2lib.configfile.config.*;
-import de.p2tools.p2lib.configfile.pdata.PDataSample;
+import de.p2tools.p2lib.configfile.pdata.P2DataSample;
 import de.p2tools.p2lib.mtdownload.DownloadSize;
 import de.p2tools.p2lib.tools.date.P2LDateFactory;
 import de.p2tools.p2lib.tools.date.P2LDateProperty;
@@ -29,7 +29,7 @@ import javafx.beans.property.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class DownloadDataProps extends PDataSample<DownloadData> {
+public class DownloadDataProps extends P2DataSample<DownloadData> {
 
     public static final String TAG = "DownloadData";
     private final IntegerProperty no = new SimpleIntegerProperty(ProgConst.NUMBER_NOT_EXISTS);

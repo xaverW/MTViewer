@@ -18,9 +18,9 @@ package de.p2tools.mtviewer.controller.data.download;
 
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.p2lib.configfile.pdata.PDataList;
+import de.p2tools.p2lib.configfile.pdata.P2DataList;
 import de.p2tools.p2lib.mtfilm.film.Filmlist;
-import de.p2tools.p2lib.tools.duration.PDuration;
+import de.p2tools.p2lib.tools.duration.P2Duration;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -29,7 +29,7 @@ import javafx.collections.ObservableList;
 
 import java.util.*;
 
-public class DownloadList extends SimpleListProperty<DownloadData> implements PDataList<DownloadData> {
+public class DownloadList extends SimpleListProperty<DownloadData> implements P2DataList<DownloadData> {
 
     public static final String TAG = "DownloadList";
     private final ProgData progData;
@@ -134,7 +134,7 @@ public class DownloadList extends SimpleListProperty<DownloadData> implements PD
     public synchronized void addFilmInList(Filmlist filmlist) {
         // bei einmal Downloads nach einem Programmstart/Neuladen der Filmliste
         // den Film wieder eintragen
-        PDuration.counterStart("DownloadList.addFilmInList");
+        P2Duration.counterStart("DownloadList.addFilmInList");
 
         int counter = 50; //todo das dauert sonst viel zu lang
         for (DownloadData d : this) {
@@ -146,7 +146,7 @@ public class DownloadList extends SimpleListProperty<DownloadData> implements PD
             d.setSizeDownloadFromFilm();
         }
 
-        PDuration.counterStop("DownloadList.addFilmInList");
+        P2Duration.counterStop("DownloadList.addFilmInList");
     }
 
     public synchronized void preferDownloads(ArrayList<DownloadData> prefDownList) {

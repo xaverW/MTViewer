@@ -20,7 +20,7 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.gui.configdialog.configpanes.PaneFilmFilter;
 import de.p2tools.mtviewer.gui.configdialog.configpanes.PaneFilmLoad;
-import de.p2tools.p2lib.dialogs.accordion.PAccordionPane;
+import de.p2tools.p2lib.dialogs.accordion.P2AccordionPane;
 import javafx.beans.property.BooleanProperty;
 import javafx.scene.control.TitledPane;
 import javafx.stage.Stage;
@@ -28,7 +28,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class ControllerFilm extends PAccordionPane {
+public class ControllerFilm extends P2AccordionPane {
 
     private final ProgData progData;
     private final Stage stage;

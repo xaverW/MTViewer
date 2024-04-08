@@ -23,7 +23,7 @@ import de.p2tools.mtviewer.gui.dialog.FilmInfoDialogController;
 import de.p2tools.mtviewer.gui.tools.Listener;
 import de.p2tools.mtviewer.gui.tools.table.Table;
 import de.p2tools.mtviewer.gui.tools.table.TableFilm;
-import de.p2tools.p2lib.alert.PAlert;
+import de.p2tools.p2lib.alert.P2Alert;
 import de.p2tools.p2lib.guitools.P2TableFactory;
 import de.p2tools.p2lib.guitools.pclosepane.P2ClosePaneH;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
@@ -131,7 +131,7 @@ public class FilmGuiController extends AnchorPane {
         final ArrayList<FilmData> ret = new ArrayList<>();
         ret.addAll(tableView.getSelectionModel().getSelectedItems());
         if (ret.isEmpty()) {
-            PAlert.showInfoNoSelection();
+            P2Alert.showInfoNoSelection();
         }
         return ret;
     }
@@ -146,7 +146,7 @@ public class FilmGuiController extends AnchorPane {
             return Optional.of(tableView.getSelectionModel().getSelectedItem());
         } else {
             if (show) {
-                PAlert.showInfoNoSelection();
+                P2Alert.showInfoNoSelection();
             }
             return Optional.empty();
         }

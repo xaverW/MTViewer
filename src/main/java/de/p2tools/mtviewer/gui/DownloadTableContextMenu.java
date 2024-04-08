@@ -20,7 +20,7 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.data.download.DownloadFactory;
 import de.p2tools.mtviewer.gui.tools.table.TableDownload;
-import de.p2tools.p2lib.tools.PSystemUtils;
+import de.p2tools.p2lib.tools.P2SystemUtils;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -128,11 +128,11 @@ public class DownloadTableContextMenu {
 
         final MenuItem miCopyName = new MenuItem("Titel in die Zwischenablage kopieren");
         miCopyName.setOnAction(a -> {
-            PSystemUtils.copyToClipboard(download.getTitle());
+            P2SystemUtils.copyToClipboard(download.getTitle());
         });
         final MenuItem miCopyTheme = new MenuItem("Thema in die Zwischenablage kopieren");
         miCopyTheme.setOnAction(a -> {
-            PSystemUtils.copyToClipboard(download.getTheme());
+            P2SystemUtils.copyToClipboard(download.getTheme());
         });
 
         miFilmInfo.setDisable(download == null);

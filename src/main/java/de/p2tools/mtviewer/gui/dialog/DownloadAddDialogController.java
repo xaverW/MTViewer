@@ -23,7 +23,7 @@ import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.downloadtools.HttpDownloadFactory;
-import de.p2tools.p2lib.alert.PAlert;
+import de.p2tools.p2lib.alert.P2Alert;
 import de.p2tools.p2lib.dialogs.P2DirFileChooser;
 import de.p2tools.p2lib.dialogs.dialog.P2DialogExtra;
 import de.p2tools.p2lib.guitools.P2ColumnConstraints;
@@ -31,7 +31,7 @@ import de.p2tools.p2lib.guitools.P2Hyperlink;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 import de.p2tools.p2lib.mtfilm.film.FilmFactory;
 import de.p2tools.p2lib.mtfilm.tools.FileNameUtils;
-import de.p2tools.p2lib.tools.PSystemUtils;
+import de.p2tools.p2lib.tools.P2SystemUtils;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -429,11 +429,11 @@ public class DownloadAddDialogController extends P2DialogExtra {
     private boolean check() {
         ok = false;
         if (downloadData == null) {
-            PAlert.showErrorAlert("Fehlerhafter Download!", "Fehlerhafter Download!",
+            P2Alert.showErrorAlert("Fehlerhafter Download!", "Fehlerhafter Download!",
                     "Download konnte nicht erstellt werden.");
 
         } else if (path.isEmpty() || downloadData.getDestFileName().isEmpty()) {
-            PAlert.showErrorAlert("Fehlerhafter Pfad/Name!", "Fehlerhafter Pfad/Name!",
+            P2Alert.showErrorAlert("Fehlerhafter Pfad/Name!", "Fehlerhafter Pfad/Name!",
                     "Pfad oder Name ist leer.");
 
         } else {
@@ -443,7 +443,7 @@ public class DownloadAddDialogController extends P2DialogExtra {
             if (HttpDownloadFactory.checkPathWritable(path)) {
                 ok = true;
             } else {
-                PAlert.showErrorAlert("Fehlerhafter Pfad/Name!", "Fehlerhafter Pfad/Name!",
+                P2Alert.showErrorAlert("Fehlerhafter Pfad/Name!", "Fehlerhafter Pfad/Name!",
                         "Pfad ist nicht beschreibbar.");
             }
         }
@@ -492,7 +492,7 @@ public class DownloadAddDialogController extends P2DialogExtra {
         String stdPath, actPath;
         actPath = cboPath.getSelectionModel().getSelectedItem();
 
-        stdPath = PSystemUtils.getStandardDownloadPath();
+        stdPath = P2SystemUtils.getStandardDownloadPath();
         actPath = DialogFactory.getNextName(stdPath, actPath, downloadData.getTheme());
         if (!cboPath.getItems().contains(actPath)) {
             cboPath.getItems().add(actPath);

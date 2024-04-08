@@ -21,10 +21,10 @@ import de.p2tools.mtviewer.controller.ProgStartBeforeGui;
 import de.p2tools.mtviewer.controller.config.*;
 import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.p2lib.P2LibInit;
-import de.p2tools.p2lib.ProgIconsP2Lib;
+import de.p2tools.p2lib.P2ProgIcons;
 import de.p2tools.p2lib.guitools.P2GuiSize;
 import de.p2tools.p2lib.tools.IoReadWriteStyle;
-import de.p2tools.p2lib.tools.duration.PDuration;
+import de.p2tools.p2lib.tools.duration.P2Duration;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -49,7 +49,7 @@ public class MTViewer extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
-        PDuration.counterStart(LOG_TEXT_PROGRAMSTART);
+        P2Duration.counterStart(LOG_TEXT_PROGRAMSTART);
         progData = ProgData.getInstance();
         progData.primaryStage = primaryStage;
 
@@ -58,13 +58,13 @@ public class MTViewer extends Application {
         initRootLayout();
         ProgStartAfterGui.doWorkAfterGui();
 
-        PDuration.onlyPing("Gui steht!");
-        PDuration.counterStop(LOG_TEXT_PROGRAMSTART);
+        P2Duration.onlyPing("Gui steht!");
+        P2Duration.counterStop(LOG_TEXT_PROGRAMSTART);
     }
 
     private void initP2lib() {
         ProgIconsMTViewer.initIcons();
-        ProgIconsP2Lib.initIcons();
+        P2ProgIcons.initIcons();
         P2LibInit.initLib(primaryStage, ProgConst.PROGRAM_NAME,
                 "", ProgConfig.SYSTEM_DARK_THEME,
                 ProgData.debug, ProgData.duration);

@@ -21,7 +21,7 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.data.download.DownloadFactory;
 import de.p2tools.p2lib.mtdownload.SizeTools;
-import de.p2tools.p2lib.tools.PStringUtils;
+import de.p2tools.p2lib.tools.P2StringUtils;
 import de.p2tools.p2lib.tools.log.P2Log;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.ComboBox;
@@ -65,7 +65,7 @@ public class DialogFactory {
             }
         }
 
-        String savePath = PStringUtils.appendList(path2, "<>", true, true);
+        String savePath = P2StringUtils.appendList(path2, "<>", true, true);
         stringProperty.setValue(savePath);
     }
 

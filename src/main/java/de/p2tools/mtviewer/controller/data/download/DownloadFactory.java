@@ -21,7 +21,7 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.p2lib.mtdownload.MLBandwidthTokenBucket;
 import de.p2tools.p2lib.mtdownload.SizeTools;
 import de.p2tools.p2lib.mtfilm.tools.FileNameUtils;
-import de.p2tools.p2lib.tools.PSystemUtils;
+import de.p2tools.p2lib.tools.P2SystemUtils;
 import de.p2tools.p2lib.tools.file.P2FileUtils;
 import de.p2tools.p2lib.tools.log.P2Log;
 import javafx.scene.control.Label;
@@ -137,7 +137,7 @@ public class DownloadFactory {
 
     public static String getDownloadPath() {
         return ProgConfig.START_DIALOG_DOWNLOAD_PATH.get().isEmpty() ?
-                PSystemUtils.getStandardDownloadPath() : ProgConfig.START_DIALOG_DOWNLOAD_PATH.get();
+                P2SystemUtils.getStandardDownloadPath() : ProgConfig.START_DIALOG_DOWNLOAD_PATH.get();
     }
 
     /**

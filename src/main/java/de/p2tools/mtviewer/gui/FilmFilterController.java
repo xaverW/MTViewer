@@ -28,7 +28,7 @@ import de.p2tools.p2lib.guitools.P2MenuButton;
 import de.p2tools.p2lib.guitools.prange.P2RangeBox;
 import de.p2tools.p2lib.mtfilter.FilterCheck;
 import de.p2tools.p2lib.mtfilter.FilterCheckRegEx;
-import de.p2tools.p2lib.tools.duration.PDuration;
+import de.p2tools.p2lib.tools.duration.P2Duration;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -89,7 +89,7 @@ public class FilmFilterController extends VBox {
         btnGoForward.setTooltip(new Tooltip("letzte Filtereinstellung wieder herstellen"));
 
         btnClearFilter.setOnAction(a -> {
-            PDuration.onlyPing("Filter löschen");
+            P2Duration.onlyPing("Filter löschen");
             progData.actFilmFilterWorker.clearFilter();
         });
     }

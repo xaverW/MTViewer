@@ -23,7 +23,7 @@ import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
 import de.p2tools.mtviewer.controller.data.ReplaceData;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
-import de.p2tools.p2lib.alert.PAlert;
+import de.p2tools.p2lib.alert.P2Alert;
 import de.p2tools.p2lib.guitools.P2Button;
 import de.p2tools.p2lib.guitools.P2ColumnConstraints;
 import de.p2tools.p2lib.guitools.P2GuiTools;
@@ -136,7 +136,7 @@ public class PaneReplace {
             final ObservableList<ReplaceData> sels = tableView.getSelectionModel().getSelectedItems();
 
             if (sels == null || sels.isEmpty()) {
-                PAlert.showInfoNoSelection();
+                P2Alert.showInfoNoSelection();
             } else {
                 ProgData.getInstance().replaceList.removeAll(sels);
                 tableView.getSelectionModel().clearSelection();
@@ -161,7 +161,7 @@ public class PaneReplace {
         btnUp.setOnAction(event -> {
             final int sel = tableView.getSelectionModel().getSelectedIndex();
             if (sel < 0) {
-                PAlert.showInfoNoSelection();
+                P2Alert.showInfoNoSelection();
             } else {
                 int res = ProgData.getInstance().replaceList.up(sel, true);
                 tableView.getSelectionModel().select(res);
@@ -174,7 +174,7 @@ public class PaneReplace {
         btnDown.setOnAction(event -> {
             final int sel = tableView.getSelectionModel().getSelectedIndex();
             if (sel < 0) {
-                PAlert.showInfoNoSelection();
+                P2Alert.showInfoNoSelection();
             } else {
                 int res = ProgData.getInstance().replaceList.up(sel, false);
                 tableView.getSelectionModel().select(res);
@@ -187,7 +187,7 @@ public class PaneReplace {
         btnTop.setOnAction(event -> {
             final int sel = tableView.getSelectionModel().getSelectedIndex();
             if (sel < 0) {
-                PAlert.showInfoNoSelection();
+                P2Alert.showInfoNoSelection();
             } else {
                 int res = ProgData.getInstance().replaceList.top(sel, true);
                 tableView.getSelectionModel().select(res);
@@ -200,7 +200,7 @@ public class PaneReplace {
         btnBottom.setOnAction(event -> {
             final int sel = tableView.getSelectionModel().getSelectedIndex();
             if (sel < 0) {
-                PAlert.showInfoNoSelection();
+                P2Alert.showInfoNoSelection();
             } else {
                 int res = ProgData.getInstance().replaceList.top(sel, false);
                 tableView.getSelectionModel().select(res);

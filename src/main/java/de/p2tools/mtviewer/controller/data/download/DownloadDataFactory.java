@@ -19,7 +19,7 @@ package de.p2tools.mtviewer.controller.data.download;
 
 import de.p2tools.mtviewer.gui.dialog.DeleteFilmFileDialogController;
 import de.p2tools.p2lib.P2LibConst;
-import de.p2tools.p2lib.alert.PAlert;
+import de.p2tools.p2lib.alert.P2Alert;
 import de.p2tools.p2lib.mtdownload.MTInfoFile;
 import de.p2tools.p2lib.mtdownload.MTSubtitle;
 import de.p2tools.p2lib.tools.log.P2Log;
@@ -43,7 +43,7 @@ public class DownloadDataFactory {
         }
 
         if (download.isStateStartedRun()) {
-            PAlert.showErrorAlert("Film löschen", "Download läuft noch", "Download erst stoppen!");
+            P2Alert.showErrorAlert("Film löschen", "Download läuft noch", "Download erst stoppen!");
         }
 
 
@@ -51,7 +51,7 @@ public class DownloadDataFactory {
             // Film
             File filmFile = new File(download.getDestPathFile());
             if (!filmFile.exists()) {
-                PAlert.showErrorAlert("Film löschen", "", "Die Datei existiert nicht!");
+                P2Alert.showErrorAlert("Film löschen", "", "Die Datei existiert nicht!");
                 return;
             }
 
@@ -85,7 +85,7 @@ public class DownloadDataFactory {
 
 
         } catch (Exception ex) {
-            PAlert.showErrorAlert("Film löschen", "Konnte die Datei nicht löschen!", "Fehler beim löschen von:" + P2LibConst.LINE_SEPARATORx2 +
+            P2Alert.showErrorAlert("Film löschen", "Konnte die Datei nicht löschen!", "Fehler beim löschen von:" + P2LibConst.LINE_SEPARATORx2 +
                     download.getDestPathFile());
             P2Log.errorLog(915236547, "Fehler beim löschen: " + download.getDestPathFile());
         }

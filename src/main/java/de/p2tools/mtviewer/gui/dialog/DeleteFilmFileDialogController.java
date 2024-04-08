@@ -18,7 +18,7 @@ package de.p2tools.mtviewer.gui.dialog;
 
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.p2lib.P2LibConst;
-import de.p2tools.p2lib.alert.PAlert;
+import de.p2tools.p2lib.alert.P2Alert;
 import de.p2tools.p2lib.dialogs.dialog.P2DialogExtra;
 import de.p2tools.p2lib.guitools.P2ColumnConstraints;
 import de.p2tools.p2lib.tools.log.P2Log;
@@ -185,7 +185,7 @@ public class DeleteFilmFileDialogController extends P2DialogExtra {
 
         } catch (Exception ex) {
             ret = false;
-            PAlert.showErrorAlert("Datei löschen",
+            P2Alert.showErrorAlert("Datei löschen",
                     "Konnte die Datei nicht löschen!",
                     "Fehler beim löschen von:" + P2LibConst.LINE_SEPARATORx2 + delFile);
             P2Log.errorLog(302020149, "Fehler beim löschen: " + delFile);

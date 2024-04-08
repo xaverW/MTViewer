@@ -28,11 +28,11 @@ import de.p2tools.mtviewer.gui.tools.table.Table;
 import de.p2tools.mtviewer.gui.tools.table.TableDownload;
 import de.p2tools.mtviewer.gui.tools.table.TableRowDownload;
 import de.p2tools.p2lib.P2LibConst;
-import de.p2tools.p2lib.alert.PAlert;
+import de.p2tools.p2lib.alert.P2Alert;
 import de.p2tools.p2lib.guitools.P2Open;
 import de.p2tools.p2lib.guitools.P2TableFactory;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
-import de.p2tools.p2lib.tools.PSystemUtils;
+import de.p2tools.p2lib.tools.P2SystemUtils;
 import javafx.beans.property.DoubleProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.transformation.SortedList;
@@ -176,7 +176,7 @@ public class DownloadInfoController extends AnchorPane {
         if (!download.isPresent()) {
             return;
         }
-        PSystemUtils.copyToClipboard(download.get().getUrl());
+        P2SystemUtils.copyToClipboard(download.get().getUrl());
     }
 
     public void invertSelection() {
@@ -237,7 +237,7 @@ public class DownloadInfoController extends AnchorPane {
         final ArrayList<DownloadData> ret = new ArrayList<>();
         ret.addAll(tableView.getSelectionModel().getSelectedItems());
         if (ret.isEmpty()) {
-            PAlert.showInfoNoSelection();
+            P2Alert.showInfoNoSelection();
         }
         return ret;
     }
@@ -319,7 +319,7 @@ public class DownloadInfoController extends AnchorPane {
             return Optional.of(tableView.getSelectionModel().getSelectedItem());
         } else {
             if (show) {
-                PAlert.showInfoNoSelection();
+                P2Alert.showInfoNoSelection();
             }
             return Optional.empty();
         }

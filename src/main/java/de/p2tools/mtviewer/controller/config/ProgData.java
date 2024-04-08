@@ -32,7 +32,7 @@ import de.p2tools.mtviewer.gui.dialog.QuitDialogController;
 import de.p2tools.mtviewer.gui.tools.Listener;
 import de.p2tools.p2lib.guitools.pmask.P2MaskerPane;
 import de.p2tools.p2lib.mtfilm.film.Filmlist;
-import de.p2tools.p2lib.tools.duration.PDuration;
+import de.p2tools.p2lib.tools.duration.P2Duration;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -118,7 +118,7 @@ public class ProgData {
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.setDelay(Duration.seconds(5));
         timeline.play();
-        PDuration.onlyPing("Timer gestartet");
+        P2Duration.onlyPing("Timer gestartet");
     }
 
     private void doTimerWorkOneSecond() {

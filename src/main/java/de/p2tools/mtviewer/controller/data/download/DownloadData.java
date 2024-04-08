@@ -20,12 +20,12 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.downloadtools.DownloadFileNameFactory;
 import de.p2tools.mtviewer.controller.starter.Start;
-import de.p2tools.p2lib.alert.PAlert;
+import de.p2tools.p2lib.alert.P2Alert;
 import de.p2tools.p2lib.mtdownload.DownloadSize;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 import de.p2tools.p2lib.mtfilm.film.FilmDataXml;
 import de.p2tools.p2lib.mtfilm.film.FilmFactory;
-import de.p2tools.p2lib.tools.PSystemUtils;
+import de.p2tools.p2lib.tools.P2SystemUtils;
 import de.p2tools.p2lib.tools.date.P2LDateFactory;
 import de.p2tools.p2lib.tools.file.P2FileUtils;
 import de.p2tools.p2lib.tools.net.PUrlTools;
@@ -237,7 +237,7 @@ public final class DownloadData extends DownloadDataProps {
         //=====================================================
         // zur Sicherheit
         if (path.isEmpty()) {
-            path = PSystemUtils.getStandardDownloadPath();
+            path = P2SystemUtils.getStandardDownloadPath();
         }
         if (name.isEmpty()) {
             name = P2LDateFactory.toStringR(LocalDate.now()) + '_' + getTheme() + '-' + getTitle() + ".mp4";
@@ -246,7 +246,7 @@ public final class DownloadData extends DownloadDataProps {
         P2FileUtils.checkLengthPath(pathName);
         if (!pathName[0].equals(path) || !pathName[1].equals(name)) {
             Platform.runLater(() ->
-                    new PAlert().showInfoAlert("Pfad zu lang!", "Pfad zu lang!",
+                    new P2Alert().showInfoAlert("Pfad zu lang!", "Pfad zu lang!",
                             "Dateiname war zu lang und wurde gekürzt!")
             );
             path = pathName[0];

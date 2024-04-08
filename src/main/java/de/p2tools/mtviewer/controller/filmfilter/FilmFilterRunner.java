@@ -19,7 +19,7 @@ package de.p2tools.mtviewer.controller.filmfilter;
 
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.gui.tools.Listener;
-import de.p2tools.p2lib.tools.duration.PDuration;
+import de.p2tools.p2lib.tools.duration.P2Duration;
 import de.p2tools.p2lib.tools.log.P2Log;
 import javafx.application.Platform;
 
@@ -75,10 +75,10 @@ public class FilmFilterRunner {
                     P2Log.debugLog("         === Filter: " + count++ + " ===");
                     P2Log.debugLog("========================================");
 
-                    PDuration.counterStart("FilmFilterRunner.filterList");
+                    P2Duration.counterStart("FilmFilterRunner.filterList");
                     progData.filmlist.filteredListSetPred(
                             PredicateFactory.getPredicate(progData.actFilmFilterWorker.getActFilterSettings()));
-                    PDuration.counterStop("FilmFilterRunner.filterList");
+                    P2Duration.counterStop("FilmFilterRunner.filterList");
 
                     search.set(false);
                     if (research.get()) {
