@@ -94,7 +94,7 @@ public class LoadFilmFactory {
 
     public void loadList(boolean alwaysLoadNew) {
         initLoadFactoryConst();
-        loadFilmlist.loadNewFilmlistFromWeb(alwaysLoadNew, ProgInfos.getFilmListFile());
+        loadFilmlist.loadNewFilmlistFromWeb(alwaysLoadNew/*, ProgInfos.getFilmListFile()*/);
     }
 
     public void initLoadFactoryConst() {
