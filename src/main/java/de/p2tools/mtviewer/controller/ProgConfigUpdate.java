@@ -15,17 +15,23 @@
  */
 
 
-package de.p2tools.mtviewer.controller.config;
+package de.p2tools.mtviewer.controller;
 
+
+import de.p2tools.mtviewer.controller.config.ProgConfig;
+import de.p2tools.mtviewer.controller.config.ProgData;
+import de.p2tools.mtviewer.controller.config.ProgInfos;
 import de.p2tools.p2lib.mtfilter.FilterCheck;
 
-public class UpdateConfig {
-
-    private UpdateConfig() {
+public class ProgConfigUpdate {
+    // hier werden geänderte Programmeinstellungen/Funktionen angepasst,
+    // muss immer nur einmal laufen!!
+    private ProgConfigUpdate() {
     }
 
     public static void setUpdateDone() {
         ProgConfig.SYSTEM_AFTER_UPDATE_FILTER.setValue(true);
+        ProgConfig.SYSTEM_CHANGE_LOG_DIR.setValue(true); // für Version 17
     }
 
     public static void update() {
@@ -37,6 +43,17 @@ public class UpdateConfig {
                 ProgData.getInstance().actFilmFilterWorker.getActFilterSettings().setTimeRange(FilterCheck.FILTER_ALL_OR_MIN);
             }
         }
+
+        if (!ProgConfig.SYSTEM_CHANGE_LOG_DIR.getValue()) {
+            // dann sind noch alte LogDir Einstellungen gespeichert
+            final String logDir = ProgConfig.SYSTEM_LOG_DIR.getValueSafe();
+            final String standardDir = ProgInfos.getStandardLogDirectory_String();
+            if (logDir.equals(standardDir)) {
+                // wenn eh der StandardPfad drin steht, dann löschen
+                ProgConfig.SYSTEM_LOG_DIR.setValue("");
+            }
+        }
+
         setUpdateDone();
     }
 }

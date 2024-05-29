@@ -21,7 +21,7 @@ import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
+import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.dialogs.P2DirFileChooser;
@@ -70,32 +70,32 @@ public class PaneSet {
         vBoxAll.setSpacing(25);
 
         final Button btnFileDest = new Button();
-        btnFileDest.setGraphic(ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
+        btnFileDest.setGraphic(ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
         btnFileDest.setTooltip(new Tooltip("Einen Ordner zum Speichern der Filme auswählen"));
         btnFileDest.setOnAction(event -> P2DirFileChooser.DirChooser(ProgData.getInstance().primaryStage, txtDestPath));
 
         final Button btnFileProgram = new Button();
-        btnFileProgram.setGraphic(ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
+        btnFileProgram.setGraphic(ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
         btnFileProgram.setTooltip(new Tooltip("Das Programm für den Download von Streams auswählen"));
         btnFileProgram.setOnAction(event -> P2DirFileChooser.FileChooserOpenFile(ProgData.getInstance().primaryStage, txtProg));
 
         final Button btnDestPathReset = new Button();
-        btnDestPathReset.setGraphic(ProgIconsMTViewer.ICON_BUTTON_RESET.getImageView());
+        btnDestPathReset.setGraphic(ProgIcons.ICON_BUTTON_RESET.getImageView());
         btnDestPathReset.setTooltip(new Tooltip("Die Init-Parameter wieder herstellen"));
         btnDestPathReset.setOnAction(event -> txtDestPath.setText(ProgConfig.DOWNLOAD_FILE_PATH_INIT));
 
         final Button btnDestReset = new Button();
-        btnDestReset.setGraphic(ProgIconsMTViewer.ICON_BUTTON_RESET.getImageView());
+        btnDestReset.setGraphic(ProgIcons.ICON_BUTTON_RESET.getImageView());
         btnDestReset.setTooltip(new Tooltip("Die Init-Parameter wieder herstellen"));
         btnDestReset.setOnAction(event -> txtDestName.setText(ProgConfig.DOWNLOAD_FILE_NAME_INIT));
 
         final Button btnParameterReset = new Button();
-        btnParameterReset.setGraphic(ProgIconsMTViewer.ICON_BUTTON_RESET.getImageView());
+        btnParameterReset.setGraphic(ProgIcons.ICON_BUTTON_RESET.getImageView());
         btnParameterReset.setTooltip(new Tooltip("Die Init-Parameter wieder herstellen"));
         btnParameterReset.setOnAction(event -> txtParameter.setText(ProgConfig.SYSTEM_PROG_SAVE_PARAMETER_INIT));
 
         final Button btnProgramReset = new Button();
-        btnProgramReset.setGraphic(ProgIconsMTViewer.ICON_BUTTON_RESET.getImageView());
+        btnProgramReset.setGraphic(ProgIcons.ICON_BUTTON_RESET.getImageView());
         btnProgramReset.setTooltip(new Tooltip("Die Init-Parameter wieder herstellen"));
         btnProgramReset.setOnAction(event -> txtProg.setText(ProgConfig.SYSTEM_PROG_SAVE_INIT));
 

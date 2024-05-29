@@ -17,7 +17,7 @@
 package de.p2tools.mtviewer.controller.starter;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
-import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
+import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.guitools.P2Open;
@@ -39,19 +39,19 @@ public class MTNotification {
         Button btnFilmStart = new Button();
         btnFilmStart.getStyleClass().addAll("btnFunction", "btnFuncTable");
         btnFilmStart.setTooltip(new Tooltip("Gespeicherten Film abspielen"));
-        btnFilmStart.setGraphic(ProgIconsMTViewer.IMAGE_TABLE_FILM_PLAY.getImageView());
+        btnFilmStart.setGraphic(ProgIcons.IMAGE_TABLE_FILM_PLAY.getImageView());
         btnFilmStart.setOnAction((ActionEvent event) -> {
             P2Open.playStoredFilm(download.getDestPathFile(),
-                    ProgConfig.SYSTEM_PROG_PLAY, ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
+                    ProgConfig.SYSTEM_PROG_PLAY, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
         });
 
         Button btnOpenDirectory = new Button();
         btnOpenDirectory.getStyleClass().addAll("btnFunction", "btnFuncTable");
         btnOpenDirectory.setTooltip(new Tooltip("Ordner mit gespeichertem Film öffnen"));
-        btnOpenDirectory.setGraphic(ProgIconsMTViewer.IMAGE_TABLE_DOWNLOAD_OPEN_DIR.getImageView());
+        btnOpenDirectory.setGraphic(ProgIcons.IMAGE_TABLE_DOWNLOAD_OPEN_DIR.getImageView());
         btnOpenDirectory.setOnAction((ActionEvent event) -> {
             P2Open.openDir(download.getDestPath(),
-                    ProgConfig.SYSTEM_PROG_OPEN_DIR, ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
+                    ProgConfig.SYSTEM_PROG_OPEN_DIR, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
         });
 
         HBox hBoxBottom = new HBox();

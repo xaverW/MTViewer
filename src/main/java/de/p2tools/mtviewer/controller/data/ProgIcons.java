@@ -26,7 +26,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProgIconsMTViewer {
+public class ProgIcons {
     public static String ICON_PATH = "res/program/";
     public static String ICON_PATH_LONG = "de/p2tools/mtviewer/res/program/";
 
@@ -66,7 +66,7 @@ public class ProgIconsMTViewer {
 
     public static void initIcons() {
         iconList.forEach(p -> {
-            String url = p.genUrl(P2IconMTViewer.class, MTViewerController.class, ProgConst.class, ProgIconsMTViewer.class, P2LibConst.class);
+            String url = p.genUrl(P2IconMTViewer.class, MTViewerController.class, ProgConst.class, ProgIcons.class, P2LibConst.class);
             if (url.isEmpty()) {
                 // dann wurde keine gefunden
                 System.out.println("ProgIconsInfo: keine URL, icon: " + p.getPathFileNameDark() + " - " + p.getFileName());
@@ -86,7 +86,7 @@ public class ProgIconsMTViewer {
             if (set(url, p, "MTViewerController.class.getResource")) return true;
             url = ProgConst.class.getResource(p);
             if (set(url, p, "ProgConst.class.getResource")) return true;
-            url = ProgIconsMTViewer.class.getResource(p);
+            url = ProgIcons.class.getResource(p);
             if (set(url, p, "ProgIconsMTViewer.class.getResource")) return true;
             url = this.getClass().getResource(p);
             if (set(url, p, "this.getClass().getResource")) return true;

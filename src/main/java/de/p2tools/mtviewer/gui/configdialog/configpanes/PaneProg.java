@@ -18,7 +18,7 @@ package de.p2tools.mtviewer.gui.configdialog.configpanes;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
+import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.dialogs.P2DirFileChooser;
@@ -74,7 +74,7 @@ public class PaneProg {
         btnFile.setOnAction(event -> {
             P2DirFileChooser.FileChooserOpenFile(ProgData.getInstance().primaryStage, txtFileManagerWeb);
         });
-        btnFile.setGraphic(ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
+        btnFile.setGraphic(ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
         btnFile.setTooltip(new Tooltip("Einen Webbrowser zum Öffnen von URLs auswählen"));
 
         final Button btnHelp = P2Button.helpButton(stage, "Webbrowser", HelpText.WEBBROWSER);

@@ -18,7 +18,7 @@ package de.p2tools.mtviewer.gui.dialog;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
+import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.dialogs.dialog.P2DialogExtra;
 import de.p2tools.p2lib.guitools.P2ColumnConstraints;
@@ -56,10 +56,10 @@ public class FilmInfoDialogController extends P2DialogExtra {
     private final P2ToggleSwitch tglUrl = new P2ToggleSwitch("URL's anzeigen");
 
     private final P2Hyperlink pHyperlinkUrl = new P2Hyperlink("",
-            ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
+            ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
 
     private final P2Hyperlink pHyperlinkWebsite = new P2Hyperlink("",
-            ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
+            ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
 
     BooleanProperty urlProperty = ProgConfig.FILM_INFO_DIALOG_SHOW_URL;
 
@@ -125,21 +125,21 @@ public class FilmInfoDialogController extends P2DialogExtra {
                             break;
                         case FilmDataXml.FILM_HD:
                             if (film.isHd()) {
-                                ivHD.setImage(ProgIconsMTViewer.ICON_DIALOG_ON.getImage());
+                                ivHD.setImage(ProgIcons.ICON_DIALOG_ON.getImage());
                             } else {
                                 ivHD.setImage(null);
                             }
                             break;
                         case FilmDataXml.FILM_UT:
                             if (film.isUt()) {
-                                ivUT.setImage(ProgIconsMTViewer.ICON_DIALOG_ON.getImage());
+                                ivUT.setImage(ProgIcons.ICON_DIALOG_ON.getImage());
                             } else {
                                 ivUT.setImage(null);
                             }
                             break;
                         case FilmDataXml.FILM_NEW:
                             if (film.isNewFilm()) {
-                                ivNew.setImage(ProgIconsMTViewer.ICON_DIALOG_ON.getImage());
+                                ivNew.setImage(ProgIcons.ICON_DIALOG_ON.getImage());
                             } else {
                                 ivNew.setImage(null);
                             }

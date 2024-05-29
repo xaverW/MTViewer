@@ -16,13 +16,15 @@
 
 package de.p2tools.mtviewer.controller;
 
-import de.p2tools.mtviewer.controller.config.*;
+import de.p2tools.mtviewer.controller.config.ProgColorList;
+import de.p2tools.mtviewer.controller.config.ProgConfig;
+import de.p2tools.mtviewer.controller.config.ProgData;
+import de.p2tools.mtviewer.controller.config.ProgInfos;
 import de.p2tools.mtviewer.gui.startdialog.StartDialogController;
 import de.p2tools.p2lib.configfile.ConfigFile;
 import de.p2tools.p2lib.configfile.ConfigReadFile;
 import de.p2tools.p2lib.tools.duration.P2Duration;
 import de.p2tools.p2lib.tools.log.P2Log;
-import de.p2tools.p2lib.tools.log.P2LogMessage;
 import de.p2tools.p2lib.tools.log.P2Logger;
 import javafx.application.Platform;
 
@@ -37,15 +39,16 @@ public class ProgStartBeforeGui {
 
     public static void workBeforeGui() {
         if (!loadAll()) {
+            // dann ist der erste Start
             P2Duration.onlyPing("Erster Start");
             ProgData.firstProgramStart = true;
 
-            UpdateConfig.setUpdateDone(); //dann ists ja kein Programmupdate
-            ProgData.getInstance().replaceList.init(); //einmal ein Muster anlegen, für Linux ist es bereits aktiv!
+            ProgConfigUpdate.setUpdateDone(); // dann ist's ja kein Programmupdate
+            ProgData.getInstance().replaceList.init(); // einmal ein Muster anlegen, für Linux ist es bereits aktiv!
 
             StartDialogController startDialogController = new StartDialogController();
             if (!startDialogController.isOk()) {
-                // dann jetzt beenden -> Tschüss
+                // dann jetzt beenden -> Tschüs
                 Platform.exit();
                 System.exit(0);
             }
@@ -54,31 +57,58 @@ public class ProgStartBeforeGui {
 
     /**
      * Config beim  Programmstart laden
-     *
-     * @return
      */
     private static boolean loadAll() {
+        ArrayList<String> logList = new ArrayList<>();
+        boolean ret = load(logList);
+
         if (ProgConfig.SYSTEM_LOG_ON.getValue()) {
+            // dann für den evtl. geänderten LogPfad
             P2Logger.setFileHandler(ProgInfos.getLogDirectory_String());
         }
+        P2Log.sysLog(logList);
 
-        if (!load()) {
+        if (!ret) {
             P2Log.sysLog("Weder Konfig noch Backup konnte geladen werden!");
             // teils geladene Reste entfernen
             clearTheConfigs();
-            return false;
         }
-        return true;
+
+        return ret;
     }
 
-    public static void shortStartMsg() {
-        ArrayList<String> list = new ArrayList<>();
-        list.add("Verzeichnisse:");
-        list.add("Programmpfad: " + ProgInfos.getPathJar());
-        list.add("Verzeichnis Einstellungen: " + ProgInfos.getSettingsDirectory_String());
+    private static boolean load(ArrayList<String> logList) {
+        final Path xmlFilePath = ProgInfos.getSettingsFile();
+        P2Duration.onlyPing("ProgStartFactory.loadProgConfigData");
+        try {
+            if (!Files.exists(xmlFilePath)) {
+                //dann gibts das Konfig-File gar nicht
+                logList.add("Konfig existiert nicht!");
+                return false;
+            }
 
-        P2LogMessage.startMsg(ProgConst.PROGRAM_NAME, list);
-        P2Log.sysLog(list);
+            logList.add("Programmstart und ProgConfig laden von: " + xmlFilePath);
+            ConfigFile configFile = new ConfigFile(xmlFilePath.toString(), true) {
+                @Override
+                public void clearConfigFile() {
+                    clearTheConfigs();
+                }
+            };
+            ProgConfig.addConfigData(configFile);
+            if (ConfigReadFile.readConfig(configFile)) {
+                initAfterLoad();
+                logList.add("Konfig wurde geladen!");
+                return true;
+
+            } else {
+                // dann hat das Laden nicht geklappt
+                logList.add("Konfig konnte nicht geladen werden!");
+                return false;
+            }
+        } catch (final Exception ex) {
+            logList.add(ex.getLocalizedMessage());
+        }
+        return false;
     }
 
     private static void clearTheConfigs() {
@@ -86,37 +116,95 @@ public class ProgStartBeforeGui {
         progData.replaceList.clear();
     }
 
-    private static boolean load() {
-        final Path xmlFilePath = new ProgInfos().getSettingsFile();
-        try {
-            if (!Files.exists(xmlFilePath)) {
-                //dann gibts das Konfig-File gar nicht
-                P2Log.sysLog("Konfig existiert nicht!");
-                return false;
-            }
-
-            P2Log.sysLog("Programmstart und ProgConfig laden von: " + xmlFilePath);
-            ConfigFile configFile = new ConfigFile(xmlFilePath.toString(), true) {
-                @Override
-                public void clearConfigFile() {
-                    clearTheConfigs();
-                }
-            };
-
-            ProgConfig.addConfigData(configFile);
-            if (ConfigReadFile.readConfig(configFile)) {
-                UpdateConfig.update();
-                P2Log.sysLog("Konfig wurde geladen!");
-                return true;
-
-            } else {
-                // dann hat das Laden nicht geklappt
-                P2Log.sysLog("Konfig konnte nicht geladen werden!");
-                return false;
-            }
-        } catch (final Exception ex) {
-            P2Log.errorLog(915470101, ex);
-        }
-        return false;
+    private static void initAfterLoad() {
+        ProgConfigUpdate.update(); // falls es ein Programmupdate gab, Configs anpassen
+        ProgColorList.setColorTheme(); // Farben einrichten
     }
 }
+
+
+//    public static void workBeforeGui() {
+//        if (!loadAll()) {
+//            P2Duration.onlyPing("Erster Start");
+//            ProgData.firstProgramStart = true;
+//
+//            UpdateConfig.setUpdateDone(); //dann ists ja kein Programmupdate
+//            ProgData.getInstance().replaceList.init(); //einmal ein Muster anlegen, für Linux ist es bereits aktiv!
+//
+//            StartDialogController startDialogController = new StartDialogController();
+//            if (!startDialogController.isOk()) {
+//                // dann jetzt beenden -> Tschüss
+//                Platform.exit();
+//                System.exit(0);
+//            }
+//        }
+//    }
+//
+//    /**
+//     * Config beim  Programmstart laden
+//     *
+//     * @return
+//     */
+//    private static boolean loadAll() {
+//        if (ProgConfig.SYSTEM_LOG_ON.getValue()) {
+//            P2Logger.setFileHandler(ProgInfos.getLogDirectory_String());
+//        }
+//
+//        if (!load()) {
+//            P2Log.sysLog("Weder Konfig noch Backup konnte geladen werden!");
+//            // teils geladene Reste entfernen
+//            clearTheConfigs();
+//            return false;
+//        }
+//        return true;
+//    }
+//
+//    public static void shortStartMsg() {
+//        ArrayList<String> list = new ArrayList<>();
+//        list.add("Verzeichnisse:");
+//        list.add("Programmpfad: " + ProgInfos.getPathJar());
+//        list.add("Verzeichnis Einstellungen: " + ProgInfos.getSettingsDirectory_String());
+//
+//        P2LogMessage.startMsg(ProgConst.PROGRAM_NAME, list);
+//        P2Log.sysLog(list);
+//    }
+//
+//    private static void clearTheConfigs() {
+//        ProgData progData = ProgData.getInstance();
+//        progData.replaceList.clear();
+//    }
+//
+//    private static boolean load() {
+//        final Path xmlFilePath = new ProgInfos().getSettingsFile();
+//        try {
+//            if (!Files.exists(xmlFilePath)) {
+//                //dann gibts das Konfig-File gar nicht
+//                P2Log.sysLog("Konfig existiert nicht!");
+//                return false;
+//            }
+//
+//            P2Log.sysLog("Programmstart und ProgConfig laden von: " + xmlFilePath);
+//            ConfigFile configFile = new ConfigFile(xmlFilePath.toString(), true) {
+//                @Override
+//                public void clearConfigFile() {
+//                    clearTheConfigs();
+//                }
+//            };
+//
+//            ProgConfig.addConfigData(configFile);
+//            if (ConfigReadFile.readConfig(configFile)) {
+//                UpdateConfig.update();
+//                P2Log.sysLog("Konfig wurde geladen!");
+//                return true;
+//
+//            } else {
+//                // dann hat das Laden nicht geklappt
+//                P2Log.sysLog("Konfig konnte nicht geladen werden!");
+//                return false;
+//            }
+//        } catch (final Exception ex) {
+//            P2Log.errorLog(915470101, ex);
+//        }
+//        return false;
+//    }
+//}

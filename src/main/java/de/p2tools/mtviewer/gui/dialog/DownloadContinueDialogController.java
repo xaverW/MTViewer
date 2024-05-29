@@ -19,7 +19,7 @@ package de.p2tools.mtviewer.gui.dialog;
 import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
+import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.data.download.DownloadFactory;
 import de.p2tools.mtviewer.controller.downloadtools.DownloadState;
@@ -156,7 +156,7 @@ public class DownloadContinueDialogController extends P2DialogExtra {
     }
 
     private void initButton() {
-        btnPath.setGraphic(ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
+        btnPath.setGraphic(ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
         btnPath.setTooltip(new Tooltip("Einen Pfad zum Speichern auswählen"));
         btnPath.setOnAction(event -> getDestination());
 

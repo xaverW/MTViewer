@@ -19,7 +19,7 @@ package de.p2tools.mtviewer.gui.configdialog.configpanes;
 import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
+import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.dialogs.P2DirFileChooser;
@@ -89,16 +89,16 @@ public class PanePlay {
         btnFile.setOnAction(event -> {
             P2DirFileChooser.FileChooserOpenFile(ProgData.getInstance().primaryStage, txtPlay);
         });
-        btnFile.setGraphic(ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
+        btnFile.setGraphic(ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
         btnFile.setTooltip(new Tooltip("Einen Videoplayer zum Abspielen der Filme auswählen"));
 
         final Button btnProgramReset = new Button();
-        btnProgramReset.setGraphic(ProgIconsMTViewer.ICON_BUTTON_RESET.getImageView());
+        btnProgramReset.setGraphic(ProgIcons.ICON_BUTTON_RESET.getImageView());
         btnProgramReset.setTooltip(new Tooltip("Die Init-Parameter wieder herstellen"));
         btnProgramReset.setOnAction(event -> txtPlay.setText(GetProgramStandardPath.getTemplatePathVlc()));
 
         final Button btnParameterReset = new Button();
-        btnParameterReset.setGraphic(ProgIconsMTViewer.ICON_BUTTON_RESET.getImageView());
+        btnParameterReset.setGraphic(ProgIcons.ICON_BUTTON_RESET.getImageView());
         btnParameterReset.setTooltip(new Tooltip("Die Init-Parameter wieder herstellen"));
         btnParameterReset.setOnAction(event -> txtParameter.setText(ProgConfig.SYSTEM_PROG_PLAY_PARAMETER_INIT));
 

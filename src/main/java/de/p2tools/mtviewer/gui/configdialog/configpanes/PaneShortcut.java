@@ -160,7 +160,7 @@ public class PaneShortcut {
         progData = ProgData.getInstance();
     }
 
-    public void makeShortcut(Collection<TitledPane> result) {
+    public void make(Collection<TitledPane> result) {
         final Button btnHelp = P2Button.helpButton(stage, "Tastenkürzel ändern",
                 HelpText.SHORTCUT);
 

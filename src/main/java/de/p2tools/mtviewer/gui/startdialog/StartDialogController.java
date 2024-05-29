@@ -17,7 +17,7 @@
 package de.p2tools.mtviewer.gui.startdialog;
 
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
+import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.gui.configdialog.configpanes.PaneFilmFilter;
 import de.p2tools.mtviewer.gui.configdialog.configpanes.PaneGeo;
 import de.p2tools.p2lib.dialogs.dialog.P2DialogExtra;
@@ -150,7 +150,7 @@ public class StartDialogController extends P2DialogExtra {
 
         //geoPane
         paneGeo = new PaneGeo(getStage());
-        tGeo = paneGeo.makeGeo();
+        tGeo = paneGeo.make();
         tGeo.setMaxHeight(Double.MAX_VALUE);
         tGeo.setCollapsible(false);
 
@@ -179,7 +179,7 @@ public class StartDialogController extends P2DialogExtra {
         btnCancel = new Button("_Abbrechen");
         btnCancel.setOnAction(a -> closeDialog(false));
 
-        btnNext = P2Button.getButton(ProgIconsMTViewer.ICON_BUTTON_NEXT.getImageView(), "nächste Seite");
+        btnNext = P2Button.getButton(ProgIcons.ICON_BUTTON_NEXT.getImageView(), "nächste Seite");
         btnNext.setOnAction(event -> {
             switch (aktState) {
                 case START_1:
@@ -202,7 +202,7 @@ public class StartDialogController extends P2DialogExtra {
             }
             selectActPane();
         });
-        btnPrev = P2Button.getButton(ProgIconsMTViewer.ICON_BUTTON_PREV.getImageView(), "vorherige Seite");
+        btnPrev = P2Button.getButton(ProgIcons.ICON_BUTTON_PREV.getImageView(), "vorherige Seite");
         btnPrev.setOnAction(event -> {
             switch (aktState) {
                 case START_1:

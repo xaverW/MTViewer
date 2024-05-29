@@ -18,7 +18,7 @@ package de.p2tools.mtviewer.controller.film;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
+import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.downloadtools.DownloadProgParameterFactory;
 import de.p2tools.mtviewer.gui.dialog.DownloadAddDialogController;
@@ -57,7 +57,7 @@ public class FilmTools {
         arrProgCallArray = strProgCallArray.split(TRENNER_PROG_ARRAY);
 
         P2Open.playStoredFilm(arrProgCallArray, ProgConfig.SYSTEM_PROG_PLAY,
-                url, ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
+                url, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
     }
 
     public static void playFilm(String pathFile) {
@@ -67,7 +67,7 @@ public class FilmTools {
         arrProgCallArray = strProgCallArray.split(TRENNER_PROG_ARRAY);
 
         P2Open.playStoredFilm(arrProgCallArray, ProgConfig.SYSTEM_PROG_PLAY,
-                pathFile, ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
+                pathFile, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
     }
 
     public static synchronized String getStatusInfosFilm() {

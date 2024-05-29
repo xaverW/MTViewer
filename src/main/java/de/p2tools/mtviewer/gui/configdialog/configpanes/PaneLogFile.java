@@ -19,7 +19,7 @@ package de.p2tools.mtviewer.gui.configdialog.configpanes;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.config.ProgInfos;
-import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
+import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.dialogs.P2DirFileChooser;
@@ -36,18 +36,17 @@ import javafx.stage.Stage;
 
 import java.util.Collection;
 
-public class PaneLog {
+public class PaneLogFile {
 
-    private final ProgData progData;
-
+    private final BooleanProperty logfileChanged = new SimpleBooleanProperty(false);
     private final P2ToggleSwitch tglEnableLog = new P2ToggleSwitch("Ein Logfile anlegen:");
-    private final Stage stage;
-    BooleanProperty logfileChanged = new SimpleBooleanProperty(false);
+    private final Label lblStandardLogDir = new Label("");
     private TextField txtLogFile;
 
-    public PaneLog(Stage stage) {
+    private final Stage stage;
+
+    public PaneLogFile(Stage stage) {
         this.stage = stage;
-        progData = ProgData.getInstance();
     }
 
     public void close() {
@@ -55,11 +54,14 @@ public class PaneLog {
         txtLogFile.textProperty().unbindBidirectional(ProgConfig.SYSTEM_LOG_DIR);
     }
 
-    public TitledPane make(Collection<TitledPane> result) {
+    public void make(Collection<TitledPane> result) {
         final GridPane gridPane = new GridPane();
         gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
         gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
         gridPane.setPadding(new Insets(P2LibConst.PADDING));
+
+        TitledPane tpConfig = new TitledPane("Logfile", gridPane);
+        result.add(tpConfig);
 
         tglEnableLog.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_LOG_ON);
         tglEnableLog.selectedProperty().addListener(((observable, oldValue, newValue) -> {
@@ -77,22 +79,19 @@ public class PaneLog {
 
         txtLogFile = new TextField();
         txtLogFile.textProperty().bindBidirectional(ProgConfig.SYSTEM_LOG_DIR);
-        if (txtLogFile.getText().isEmpty()) {
-            txtLogFile.setText(ProgInfos.getLogDirectory_String());
-        }
 
         final Button btnFile = new Button();
         btnFile.setTooltip(new Tooltip("Einen Ordner für das Logfile auswählen"));
         btnFile.setOnAction(event -> {
             P2DirFileChooser.DirChooser(ProgData.getInstance().primaryStage, txtLogFile);
         });
-        btnFile.setGraphic(ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
+        btnFile.setGraphic(ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
 
-        final Button btnReset = new Button();
-        btnReset.setGraphic(ProgIconsMTViewer.ICON_BUTTON_RESET.getImageView());
-        btnReset.setTooltip(new Tooltip("Standardpfad für das Logfile wieder herstellen"));
-        btnReset.setOnAction(event -> {
-            txtLogFile.setText(ProgInfos.getStandardLogDirectory_String());
+        final Button btnClear = new Button();
+        btnClear.setGraphic(ProgIcons.ICON_BUTTON_CLEAN.getImageView());
+        btnClear.setTooltip(new Tooltip("Pfad löschen"));
+        btnClear.setOnAction(event -> {
+            txtLogFile.setText("");
         });
 
         final Button btnChange = new Button("_Pfad zum Logfile jetzt schon ändern");
@@ -105,19 +104,25 @@ public class PaneLog {
             logfileChanged.setValue(false);
         });
 
-        Label lblPath = new Label("Ordner:");
+        Label lblPath = new Label("Eigener Pfad:");
+
+        lblStandardLogDir.visibleProperty().bind(tglEnableLog.selectedProperty());
+        txtLogFile.textProperty().addListener((u, o, n) -> setLabel());
+        setLabel();
 
         int row = 0;
         gridPane.add(tglEnableLog, 0, row, 3, 1);
         gridPane.add(btnHelp, 3, row);
+        gridPane.add(lblStandardLogDir, 0, ++row, 4, 1);
 
-        ++row;
+        gridPane.add(new Label(""), 0, ++row);
+
         gridPane.add(lblPath, 0, ++row);
         gridPane.add(txtLogFile, 1, row);
         gridPane.add(btnFile, 2, row);
-        gridPane.add(btnReset, 3, row);
+        gridPane.add(btnClear, 3, row);
 
-        gridPane.add(btnChange, 0, ++row, 2, 1);
+        gridPane.add(btnChange, 0, ++row, 4, 1);
         gridPane.getColumnConstraints().addAll(P2ColumnConstraints.getCcPrefSize(),
                 P2ColumnConstraints.getCcComputedSizeAndHgrow(),
                 P2ColumnConstraints.getCcPrefSize(),
@@ -126,13 +131,17 @@ public class PaneLog {
         lblPath.disableProperty().bind(tglEnableLog.selectedProperty().not());
         txtLogFile.disableProperty().bind(tglEnableLog.selectedProperty().not());
         btnFile.disableProperty().bind(tglEnableLog.selectedProperty().not());
-        btnReset.disableProperty().bind(tglEnableLog.selectedProperty().not());
+        btnClear.disableProperty().bind(tglEnableLog.selectedProperty().not());
         btnChange.disableProperty().bind(tglEnableLog.selectedProperty().not().or(logfileChanged.not()));
 
         txtLogFile.textProperty().addListener((observable, oldValue, newValue) -> logfileChanged.setValue(true));
+    }
 
-        TitledPane tpConfig = new TitledPane("Logfile", gridPane);
-        result.add(tpConfig);
-        return tpConfig;
+    private void setLabel() {
+        if (txtLogFile.getText().isEmpty()) {
+            lblStandardLogDir.setText("Standard-Pfad:  " + ProgInfos.getStandardLogDirectory_String());
+        } else {
+            lblStandardLogDir.setText("");
+        }
     }
 }

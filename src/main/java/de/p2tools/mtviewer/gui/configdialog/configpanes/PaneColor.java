@@ -154,7 +154,7 @@ public class PaneColor {
         this.stage = stage;
     }
 
-    public void makeColor(Collection<TitledPane> result) {
+    public void make(Collection<TitledPane> result) {
         tglDarkTheme.selectedProperty().bindBidirectional(propDarkTheme);
         final Button btnHelpTheme = P2Button.helpButton(stage, "Erscheinungsbild der Programmoberfläche",
                 HelpText.DARK_THEME);

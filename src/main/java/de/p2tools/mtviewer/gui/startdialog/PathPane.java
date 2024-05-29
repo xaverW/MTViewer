@@ -20,7 +20,7 @@ import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.ProgIconsMTViewer;
+import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.dialogs.P2DirFileChooser;
@@ -102,7 +102,7 @@ public class PathPane {
         btnFile.setOnAction(event -> {
             P2DirFileChooser.DirChooser(stage, txtDownloadPath);
         });
-        btnFile.setGraphic(ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
+        btnFile.setGraphic(ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
         btnFile.setTooltip(new Tooltip("Speicherordner auswählen"));
 
         gridPane.add(text, 0, row);
@@ -126,7 +126,7 @@ public class PathPane {
         });
         hyperlink = new P2Hyperlink(stage,
                 ProgConst.ADRESSE_WEBSITE_VLC,
-                ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
+                ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
 
         text.setStyle("-fx-font-weight: bold");
 
@@ -145,7 +145,7 @@ public class PathPane {
         btnFile.setOnAction(event -> {
             P2DirFileChooser.FileChooserOpenFile(stage, txtPlayer);
         });
-        btnFile.setGraphic(ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
+        btnFile.setGraphic(ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
         btnFile.setTooltip(new Tooltip("Programmdatei auswählen"));
 
         HBox hBox = new HBox();
@@ -187,7 +187,7 @@ public class PathPane {
         });
         hyperlink = new P2Hyperlink(stage,
                 ProgConst.ADRESSE_WEBSITE_ffmpeg,
-                ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
+                ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
 
         text.setStyle("-fx-font-weight: bold");
 
@@ -206,7 +206,7 @@ public class PathPane {
         btnFile.setOnAction(event -> {
             P2DirFileChooser.FileChooserOpenFile(stage, txtSave);
         });
-        btnFile.setGraphic(ProgIconsMTViewer.ICON_BUTTON_FILE_OPEN.getImageView());
+        btnFile.setGraphic(ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
         btnFile.setTooltip(new Tooltip("Programmdatei auswählen"));
 
         HBox hBox = new HBox();

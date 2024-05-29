@@ -50,11 +50,11 @@ public class PaneGeo {
         tglGeo.selectedProperty().unbindBidirectional(geoProperty);
     }
 
-    public TitledPane makeGeo() {
-        return makeGeo(null);
+    public TitledPane make() {
+        return make(null);
     }
 
-    public TitledPane makeGeo(Collection<TitledPane> result) {
+    public TitledPane make(Collection<TitledPane> result) {
         tglGeo.selectedProperty().bindBidirectional(geoProperty);
         final Button btnHelpGeo = P2Button.helpButton(stage, "Geogeblockte Filme", HelpText.CONFIG_GEO);
 
