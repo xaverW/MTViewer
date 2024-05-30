@@ -1,5 +1,10 @@
 # MTViewer
 
+**Version 4**
+* kleinere Änderungen am GUI und der Verarbeitung der Filme
+* … 
+
+
 **Version 3**
 
 * Die Java-Version wurde auf mind. Java 17 angehoben
@@ -11,6 +16,7 @@
 * Notifications überarbeitet: Film starten, Ordner öffnen
 * Neues Tastenkürzel: ctrl+v -> Die Filmliste zum Download kann vorgegeben werden
 * ...
+
 
 **Version 2**
 
@@ -24,17 +30,18 @@
 * In den Text-Filtern können jetzt auch Begriffe ausgeschlossen werden: "!:"
 * ...
 
+
 **Version 1**
 
 * Erste veröffentlichte Version
+
 
 **Release 0**
 
 * Erste veröffentlichte Beta-Version
 
-<br />
-<br />
 
+<br />
 **Links**
 
 [www.p2tools.de]( https://www.p2tools.de)
