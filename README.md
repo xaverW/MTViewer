@@ -16,9 +16,6 @@ Das Programm nutzt den Ordner ".p2Mtviewer" unter Linux oder den versteckten Ord
 java -jar MTViewer.jar ORDNER 
 ```
 
-<br />
-
-
 ## Systemvoraussetzungen
 
 Unterstützt wird Windows und Linux. Das Programm benötigt eine aktuelle Java-VM ab Version: Java 17. Für Linux-Benutzer wird OpenJDK17 empfohlen. (FX-Runtime bringt das Programm bereits mit und muss nicht installiert werden).
