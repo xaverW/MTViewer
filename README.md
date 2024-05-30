@@ -29,15 +29,15 @@ Unterstützt wird Windows und Linux. Das Programm benötigt eine aktuelle Java-V
 
 Das Programm wird in drei Paketen angeboten. Diese unterscheiden sich nur im “Zubehör”, das Programm selbst ist in allen Paketen identisch:
 
-MTViewer-XX.zip
+MTViewer-XX__DATUM.zip
 
 Das Programmpaket bringt nur das Programm und die benötigten Hilfsprogramme aber kein Java mit. Auf dem Rechner muss eine Java-Laufzeitumgebung ab Java11 installiert sein. Dieses Programmpaket kann auf allen Betriebssystemen verwendet werden. Es bringt Startdateien für Linux und Windows mit.
 
 
-MTViewer-XX__Linux+Java.zip  
-MTPlayer-XX__Windows+Java.zip
+MTViewer-XX__Linux+Java__DATUM.zip  
+MTPlayer-XX__Windows+Java__DATUM.zip
 
-Diese Programmpakete bringen die Java-Laufzeitumgebung mit und sind nur für das angegebene     Betriebssystem: Linux oder Windows. Es muss kein Java auf dem System installiert sein. (Die Java-Laufzeitumgebung liegt im Ordner “Java” und kommt von jdk.java.net).
+Diese Programmpakete bringen die Java-Laufzeitumgebung mit und sind nur für das angegebene Betriebssystem: Linux oder Windows. Es muss kein Java auf dem System installiert sein. (Die Java-Laufzeitumgebung liegt im Ordner “Java” und kommt von jdk.java.net).
 
 Windows:  
 Der VLC-Player muss installiert sein.  
@@ -48,7 +48,7 @@ zum Download:
 [github.com/xaverW/MTViewer/releases](https://github.com/xaverW/MTViewer/releases)  
 
 und hier können auch BETA-Versionen und Dailys geladen werden:  
-[https://www.p2tools.de/download/](https://www.p2tools.de/download/)
+[https://www.p2tools.de/mtviewer/download/](https://www.p2tools.de/mtviewer/download/)
 <br />
 
 
@@ -64,7 +64,7 @@ gestartet werden.
 ## Infos
 
 Weitere Infos zum Programm (Start und Benutzung) sind im Download-Paket enthalten oder können hier gefunden werden:
-[HELP.md](HELP.md)  
+[https://www.p2tools.de/mtviewer/](https://www.p2tools.de/mtviewer/)  
 
 
 ## Website
