@@ -6,21 +6,21 @@ Die Programme: git und gradle müssen installiert sein.
 In einem leeren Verzeichis muss zuerst der
 Quellcode geladen werden. Der liegt hier:
 
-https://github.com/xaverW/MTPlayer
+https://github.com/xaverW/MTViewer
 
 
 ==================================
 * Quellcode laden
 ==================================
 
-$ git clone https://github.com/xaverW/MTPlayer.git
+$ git clone https://github.com/xaverW/MTViewer.git
 
 
 ==================================
-* im Ordner MTPlayer gradle anlegen
+* im Ordner MTViewer gradle anlegen
 ==================================
 
-§ cd MTPlayer
+§ cd MTViewer
 $ gradle init
 
 
@@ -36,7 +36,7 @@ Select type of build to generate:
   4: Basic (build structure only)
 Enter selection (default: Application) [1..4] --> 4
 
-Project name (default: MTPlayer): --> default
+Project name (default: MTViewer): --> default
 
 Select build script DSL:
   1: Kotlin
@@ -58,14 +58,14 @@ $ cp ./build-infos/gitignore ./.gitignore
 
 
 ==================================
-* im MTPlayer-Verzeichis dann das
+* im MTViewer-Verzeichis dann das
   Programm bauen
 ==================================
 
 $ ./gradlew fatJar
 
 ==================================
-* im MTPlayer-Verzeichis kann dann
+* im MTViewer-Verzeichis kann dann
   das Programm auch mit gradle
   gestartet werden
 ==================================
@@ -80,7 +80,7 @@ $ ./gradlew run
 ==================================
 
 $ cd build/fatJar
-$ java -jar MTPlayer.jar
+$ java -jar MTViewer.jar
 
 
 
@@ -89,7 +89,7 @@ $ java -jar MTPlayer.jar
   mit dem aktuellem in GitHub abgeglichen
   und aktualisiert werden und das Programm
   neu gebaut werden.
-  (im Ordner MTPlayer)
+  (im Ordner MTViewer)
 ==================================
 
 $ git status
