@@ -17,7 +17,6 @@
 package de.p2tools.mtviewer.gui;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
-import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.guitools.P2ColumnConstraints;
 import de.p2tools.p2lib.guitools.P2Hyperlink;
@@ -134,7 +133,7 @@ public class FilmInfoController extends VBox {
 
         if (!film.arr[FilmDataXml.FILM_WEBSITE].isEmpty()) {
             P2Hyperlink hyperlink = new P2Hyperlink(film.arr[FilmDataXml.FILM_WEBSITE],
-                    ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
+                    ProgConfig.SYSTEM_PROG_OPEN_URL);
             hBoxUrl.getChildren().addAll(lblUrl, hyperlink);
         }
 

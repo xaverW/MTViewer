@@ -61,7 +61,7 @@ public class DownloadAddDialogController extends P2DialogExtra {
     private final Label lblFree = new Label("4M noch frei");
     private final boolean onlyChange;
     private P2Hyperlink pHyperlinkUrlFilm =
-            new P2Hyperlink("", ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
+            new P2Hyperlink("", ProgConfig.SYSTEM_PROG_OPEN_URL);
     private boolean ok = false;
     private FilmData filmData;
     private DownloadData downloadData;
