@@ -71,7 +71,7 @@ public class MTViewerController extends StackPane {
     }
 
     public void setInfos() {
-        ProgConfig.FILM_GUI_DIVIDER_ON.setValue(!ProgConfig.FILM_GUI_DIVIDER_ON.getValue());
+        ProgConfig.GUI_INFO_IS_SHOWING.setValue(!ProgConfig.GUI_INFO_IS_SHOWING.getValue());
     }
 
     public void setFocus() {

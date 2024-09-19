@@ -29,7 +29,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class FilmInfoController extends VBox {
+public class PaneFilmInfo extends VBox {
     private final SplitPane splitPane = new SplitPane();
     private final VBox vBoxLeft = new VBox();
 
@@ -48,9 +48,10 @@ public class FilmInfoController extends VBox {
     private FilmData film = null;
     private String oldDescription = "";
 
-    public FilmInfoController() {
+    public PaneFilmInfo() {
         setSpacing(10);
         setPadding(new Insets(10));
+        VBox.setVgrow(this, Priority.ALWAYS);
 
         StackPane stackPane = new StackPane();
         stackPane.getChildren().addAll(textArea, btnReset);

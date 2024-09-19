@@ -17,52 +17,49 @@
 
 package de.p2tools.mtviewer.gui.tools.table;
 
-import de.p2tools.mtviewer.controller.config.ProgColorList;
-import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
-import javafx.beans.property.BooleanProperty;
 import javafx.scene.control.TableRow;
 
 
-public class TableRowFilm<T> extends TableRow {
+public class TableRowFilm<T> extends TableRow<T> {
 
-    private final BooleanProperty geoMelden;
+//    private final BooleanProperty geoMelden;
 
     public TableRowFilm() {
-        geoMelden = ProgConfig.SYSTEM_MARK_GEO;
+//        geoMelden = ProgConfig.SYSTEM_MARK_GEO;
     }
 
     @Override
-    public void updateItem(Object f, boolean empty) {
+    public void updateItem(T f, boolean empty) {
         super.updateItem(f, empty);
 
         FilmData film = (FilmData) f;
         if (film == null || empty) {
             setStyle("");
-        } else {
-            if (film.isLive()) {
-                // livestream
-                for (int i = 0; i < getChildren().size(); i++) {
-                    getChildren().get(i).setStyle(ProgColorList.FILM_LIVESTREAM.getCssFontBold());
-                }
-
-            } else if (geoMelden.get() && film.isGeoBlocked()) {
-                // geogeblockt
-                for (int i = 0; i < getChildren().size(); i++) {
-                    getChildren().get(i).setStyle(ProgColorList.FILM_GEOBLOCK.getCssFontBold());
-                }
-
-            } else if (film.isNewFilm()) {
-                // neue Filme
-                for (int i = 0; i < getChildren().size(); i++) {
-                    getChildren().get(i).setStyle(ProgColorList.FILM_NEW.getCssFont());
-                }
-
-            } else {
-                for (int i = 0; i < getChildren().size(); i++) {
-                    getChildren().get(i).setStyle("");
-                }
-            }
+//        } else {
+//            if (film.isLive()) {
+//                // livestream
+//                for (int i = 0; i < getChildren().size(); i++) {
+//                    getChildren().get(i).setStyle(ProgColorList.FILM_LIVESTREAM.getCssFontBold());
+//                }
+//
+//            } else if (geoMelden.get() && film.isGeoBlocked()) {
+//                // geogeblockt
+//                for (int i = 0; i < getChildren().size(); i++) {
+//                    getChildren().get(i).setStyle(ProgColorList.FILM_GEOBLOCK.getCssFontBold());
+//                }
+//
+//            } else if (film.isNewFilm()) {
+//                // neue Filme
+//                for (int i = 0; i < getChildren().size(); i++) {
+//                    getChildren().get(i).setStyle(ProgColorList.FILM_NEW.getCssFont());
+//                }
+//
+//            } else {
+//                for (int i = 0; i < getChildren().size(); i++) {
+//                    getChildren().get(i).setStyle("");
+//                }
+//            }
         }
     }
 }

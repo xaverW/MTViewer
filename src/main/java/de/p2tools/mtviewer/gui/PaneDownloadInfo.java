@@ -52,7 +52,7 @@ import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class DownloadInfoController extends AnchorPane {
+public class PaneDownloadInfo extends AnchorPane {
 
     private final HBox hBoxAll = new HBox();
     private final VBox vBoxTable = new VBox();
@@ -63,8 +63,9 @@ public class DownloadInfoController extends AnchorPane {
 
     DoubleProperty doubleProperty; //sonst geht die Ref verloren
 
-    public DownloadInfoController() {
+    public PaneDownloadInfo() {
         progData = ProgData.getInstance();
+        VBox.setVgrow(this, Priority.ALWAYS);
         tableView = new TableDownload(Table.TABLE_ENUM.DOWNLOAD);
         this.doubleProperty = ProgConfig.DOWNLOAD_GUI_FILTER_DIVIDER;
         sortedDownloads = new SortedList<>(progData.downloadList);

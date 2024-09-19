@@ -19,9 +19,7 @@ package de.p2tools.mtviewer.gui.tools.table;
 import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.gui.dialog.FilmInfoDialogController;
 import de.p2tools.p2lib.guitools.P2TableFactory;
-import de.p2tools.p2lib.guitools.ptable.P2CellCheckBox;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 import de.p2tools.p2lib.mtfilm.film.FilmSize;
 import de.p2tools.p2lib.tools.date.P2Date;
@@ -29,14 +27,13 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseButton;
 
 public class TableFilm extends PTable<FilmData> {
 
     public TableFilm(Table.TABLE_ENUM table_enum, ProgData progData) {
         super(table_enum);
         this.table_enum = table_enum;
-        initFileRunnerColumn();
+        initColumn();
     }
 
     public Table.TABLE_ENUM getETable() {
@@ -44,11 +41,11 @@ public class TableFilm extends PTable<FilmData> {
     }
 
     public void resetTable() {
-        initFileRunnerColumn();
+        initColumn();
         Table.resetTable(this);
     }
 
-    private void initFileRunnerColumn() {
+    private void initColumn() {
         getColumns().clear();
 
         setTableMenuButtonVisible(true);
@@ -65,72 +62,71 @@ public class TableFilm extends PTable<FilmData> {
         final TableColumn<FilmData, Integer> nrColumn = new TableColumn<>("Nr");
         nrColumn.setCellValueFactory(new PropertyValueFactory<>("no"));
         nrColumn.getStyleClass().add("alignCenterRightPadding_10");
+        TableFilmFactory.columnFactoryInteger(nrColumn);
 
         final TableColumn<FilmData, String> senderColumn = new TableColumn<>("Sender");
         senderColumn.setCellValueFactory(new PropertyValueFactory<>("channel"));
         senderColumn.getStyleClass().add("alignCenter");
+        TableFilmFactory.columnFactoryString(senderColumn);
 
         final TableColumn<FilmData, String> themeColumn = new TableColumn<>("Thema");
         themeColumn.setCellValueFactory(new PropertyValueFactory<>("theme"));
         themeColumn.getStyleClass().add("alignCenterLeft");
+        TableFilmFactory.columnFactoryString(themeColumn);
 
         final TableColumn<FilmData, String> titleColumn = new TableColumn<>("Titel");
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         titleColumn.getStyleClass().add("alignCenterLeft");
+        TableFilmFactory.columnFactoryString(titleColumn);
 
         final TableColumn<FilmData, String> startColumn = new TableColumn<>("");
-        startColumn.setCellFactory(new CellStartFilm<>().cellFactory);
         startColumn.getStyleClass().add("alignCenter");
+        TableFilmFactory.columnFactoryButton(startColumn);
 
         final TableColumn<FilmData, P2Date> datumColumn = new TableColumn<>("Datum");
         datumColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         datumColumn.getStyleClass().add("alignCenter");
+        TableFilmFactory.columnFactoryP2Date(datumColumn);
 
         final TableColumn<FilmData, String> timeColumn = new TableColumn<>("Zeit");
         timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
         timeColumn.getStyleClass().add("alignCenter");
+        TableFilmFactory.columnFactoryString(timeColumn);
 
         final TableColumn<FilmData, Integer> durationColumn = new TableColumn<>("Dauer [min]");
-        durationColumn.setCellFactory(new CellDuration<FilmData, Integer>().cellFactory);
         durationColumn.setCellValueFactory(new PropertyValueFactory<>("durationMinute"));
         durationColumn.getStyleClass().add("alignCenterRightPadding_25");
+        TableFilmFactory.columnFactoryInteger(durationColumn);
 
         final TableColumn<FilmData, FilmSize> sizeColumn = new TableColumn<>("Größe [MB]");
         sizeColumn.setCellValueFactory(new PropertyValueFactory<>("filmSize"));
         sizeColumn.getStyleClass().add("alignCenterRightPadding_25");
+        TableFilmFactory.columnFactoryFilmSize(sizeColumn);
 
         final TableColumn<FilmData, Boolean> hdColumn = new TableColumn<>("HD");
         hdColumn.setCellValueFactory(new PropertyValueFactory<>("hd"));
-        hdColumn.setCellFactory(new P2CellCheckBox().cellFactory);
         hdColumn.getStyleClass().add("alignCenter");
+        TableFilmFactory.columnFactoryBoolean(hdColumn);
 
         final TableColumn<FilmData, Boolean> utColumn = new TableColumn<>("UT");
         utColumn.setCellValueFactory(new PropertyValueFactory<>("ut"));
-        utColumn.setCellFactory(new P2CellCheckBox().cellFactory);
         utColumn.getStyleClass().add("alignCenter");
+        TableFilmFactory.columnFactoryBoolean(utColumn);
 
         final TableColumn<FilmData, String> geoColumn = new TableColumn<>("Geo");
         geoColumn.setCellValueFactory(new PropertyValueFactory<>("geo"));
         geoColumn.getStyleClass().add("alignCenter");
+        TableFilmFactory.columnFactoryString(geoColumn);
 
         final TableColumn<FilmData, String> urlColumn = new TableColumn<>("URL");
         urlColumn.setCellValueFactory(new PropertyValueFactory<>("url"));
         urlColumn.getStyleClass().add("alignCenterLeft");
+        TableFilmFactory.columnFactoryString(urlColumn);
 
         nrColumn.setPrefWidth(50);
         senderColumn.setPrefWidth(80);
         themeColumn.setPrefWidth(180);
         titleColumn.setPrefWidth(230);
-
-        setRowFactory(tv -> {
-            TableRowFilm<FilmData> row = new TableRowFilm<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
-                    FilmInfoDialogController.getInstanceAndShow().showFilmInfo();
-                }
-            });
-            return row;
-        });
 
         getColumns().addAll(
                 nrColumn,

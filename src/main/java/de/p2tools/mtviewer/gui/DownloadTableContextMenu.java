@@ -28,14 +28,14 @@ import javafx.scene.layout.VBox;
 public class DownloadTableContextMenu {
 
     private final ProgData progData;
-    private final DownloadInfoController downloadInfoController;
+    private final PaneDownloadInfo paneDownloadInfo;
     private final TableDownload tableView;
     private final Slider sliderBandwidth = new Slider();
     private final Label lblBandwidth = new Label();
 
-    public DownloadTableContextMenu(final ProgData progData, final DownloadInfoController downloadInfoController, final TableDownload tableView) {
+    public DownloadTableContextMenu(final ProgData progData, final PaneDownloadInfo paneDownloadInfo, final TableDownload tableView) {
         this.progData = progData;
-        this.downloadInfoController = downloadInfoController;
+        this.paneDownloadInfo = paneDownloadInfo;
         this.tableView = tableView;
         initBandwidth();
     }
@@ -59,11 +59,11 @@ public class DownloadTableContextMenu {
 
         //dann die "echten" Menüpunkte
         final MenuItem miStart = new MenuItem("Download starten");
-        miStart.setOnAction(a -> downloadInfoController.startDownload(false));
+        miStart.setOnAction(a -> paneDownloadInfo.startDownload(false));
         final MenuItem miStop = new MenuItem("Download stoppen");
-        miStop.setOnAction(a -> downloadInfoController.stopDownload(false));
+        miStop.setOnAction(a -> paneDownloadInfo.stopDownload(false));
         final MenuItem miChange = new MenuItem("Download ändern");
-        miChange.setOnAction(a -> downloadInfoController.changeDownload());
+        miChange.setOnAction(a -> paneDownloadInfo.changeDownload());
 
         miStart.setDisable(download == null);
         miStop.setDisable(download == null);
@@ -72,11 +72,11 @@ public class DownloadTableContextMenu {
 
         // Submenü "Download"
         final MenuItem miPrefer = new MenuItem("Downloads vorziehen");
-        miPrefer.setOnAction(a -> downloadInfoController.preferDownload());
+        miPrefer.setOnAction(a -> paneDownloadInfo.preferDownload());
         final MenuItem miPutBack = new MenuItem("Downloads zurückstellen");
-        miPutBack.setOnAction(a -> downloadInfoController.moveDownloadBack());
+        miPutBack.setOnAction(a -> paneDownloadInfo.moveDownloadBack());
         final MenuItem miRemove = new MenuItem("Downloads aus Liste entfernen");
-        miRemove.setOnAction(a -> downloadInfoController.deleteDownloads());
+        miRemove.setOnAction(a -> paneDownloadInfo.deleteDownloads());
 
         final Menu submenuDownload = new Menu("Downloads");
         submenuDownload.setDisable(download == null);
@@ -87,12 +87,12 @@ public class DownloadTableContextMenu {
 
         // Submenü "alle Downloads"
         final MenuItem miStartAll = new MenuItem("Alle Downloads starten");
-        miStartAll.setOnAction(a -> downloadInfoController.startDownload(true /* alle */));
+        miStartAll.setOnAction(a -> paneDownloadInfo.startDownload(true /* alle */));
 
         final MenuItem miStopAll = new MenuItem("Alle Downloads stoppen");
-        miStopAll.setOnAction(a -> downloadInfoController.stopDownload(true /* alle */));
+        miStopAll.setOnAction(a -> paneDownloadInfo.stopDownload(true /* alle */));
         final MenuItem miStopWaiting = new MenuItem("Alle wartenden Downloads stoppen");
-        miStopWaiting.setOnAction(a -> downloadInfoController.stopWaitingDownloads());
+        miStopWaiting.setOnAction(a -> paneDownloadInfo.stopWaitingDownloads());
 
         miStartAll.setDisable(download == null);
         miStopAll.setDisable(download == null);
@@ -105,11 +105,11 @@ public class DownloadTableContextMenu {
 
         // Submenü "gespeicherte Filme"
         final MenuItem miPlayerDownload = new MenuItem("Gespeicherten Film (Datei) abspielen");
-        miPlayerDownload.setOnAction(a -> downloadInfoController.playFilm());
+        miPlayerDownload.setOnAction(a -> paneDownloadInfo.playFilm());
         final MenuItem miDeleteDownload = new MenuItem("Gespeicherten Film (Datei) löschen");
-        miDeleteDownload.setOnAction(a -> downloadInfoController.deleteFilmFile());
+        miDeleteDownload.setOnAction(a -> paneDownloadInfo.deleteFilmFile());
         final MenuItem miOpenDir = new MenuItem("Zielordner öffnen");
-        miOpenDir.setOnAction(e -> downloadInfoController.openDestinationDir());
+        miOpenDir.setOnAction(e -> paneDownloadInfo.openDestinationDir());
 
         final Menu submenuFilm = new Menu("Gespeicherten Film");
         submenuFilm.setDisable(download == null);
@@ -119,11 +119,11 @@ public class DownloadTableContextMenu {
 
 
         final MenuItem miFilmInfo = new MenuItem("Filminformation anzeigen");
-        miFilmInfo.setOnAction(a -> downloadInfoController.showFilmInfo());
+        miFilmInfo.setOnAction(a -> paneDownloadInfo.showFilmInfo());
         final MenuItem miPlayUrl = new MenuItem("Film (URL) abspielen");
-        miPlayUrl.setOnAction(a -> downloadInfoController.playUrl());
+        miPlayUrl.setOnAction(a -> paneDownloadInfo.playUrl());
         final MenuItem miCopyUrl = new MenuItem("Download (URL) kopieren");
-        miCopyUrl.setOnAction(a -> downloadInfoController.copyUrl());
+        miCopyUrl.setOnAction(a -> paneDownloadInfo.copyUrl());
 
 
         final MenuItem miCopyName = new MenuItem("Titel in die Zwischenablage kopieren");
@@ -148,7 +148,7 @@ public class DownloadTableContextMenu {
         final MenuItem miSelectAll = new MenuItem("Alles auswählen");
         miSelectAll.setOnAction(a -> tableView.getSelectionModel().selectAll());
         final MenuItem miSelection = new MenuItem("Auswahl umkehren");
-        miSelection.setOnAction(a -> downloadInfoController.invertSelection());
+        miSelection.setOnAction(a -> paneDownloadInfo.invertSelection());
         final MenuItem resetTable = new MenuItem("Tabelle zurücksetzen");
         resetTable.setOnAction(a -> tableView.resetTable());
 

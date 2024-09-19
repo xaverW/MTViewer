@@ -166,7 +166,6 @@ public class ProgConfig extends P2DataProgConfig {
 
     // Configs
     public static StringProperty SYSTEM_FILMLIST_DATE = addStrProp("system-filmlist-date", "");
-    //    public static IntegerProperty SYSTEM_FILMLIST_AGE = addIntProp("system-filmlist-age", P2LibConst.NUMBER_NULL);
     public static StringProperty SYSTEM_USERAGENT = addStrProp("system-useragent", ProgConst.USER_AGENT_DEFAULT); //Useragent für direkte Downloads
     public static BooleanProperty SYSTEM_USE_REPLACETABLE = addBoolProp("system-use-replacetable", SystemUtils.IS_OS_LINUX ? Boolean.TRUE : Boolean.FALSE);
     public static BooleanProperty SYSTEM_ONLY_ASCII = addBoolProp("system-only-ascii", Boolean.FALSE);
@@ -195,12 +194,9 @@ public class ProgConfig extends P2DataProgConfig {
     public static StringProperty SYSTEM_LOAD_NOT_SENDER = addStrProp("system-load-not-sender", "");
     public static IntegerProperty SYSTEM_LOAD_FILMLIST_MAX_DAYS = addIntProp("system-load-filmlist-max-days", 0); //es werden nur die x letzten Tage geladen
     public static IntegerProperty SYSTEM_LOAD_FILMLIST_MIN_DURATION = addIntProp("system-load-filmlist-min-duration", 0); //es werden nur Filme mit mind. x Minuten geladen
-    public static StringProperty SYSTEM_PATH_VLC = addStrProp("system-path-vlc", GetProgramStandardPath.getTemplatePathVlc());
 
     // Gui Film
     public static BooleanProperty FILM_GUI_FILTER_DIVIDER_ON = addBoolProp("film-gui-filter-divider-on", Boolean.TRUE);
-    public static DoubleProperty FILM_GUI_DIVIDER = addDoubleProp("film-gui-divider", ProgConst.GUI_FILME_DIVIDER_LOCATION);
-    public static BooleanProperty FILM_GUI_DIVIDER_ON = addBoolProp("film-gui-divider-on", Boolean.TRUE);
     public static StringProperty FILM_GUI_TABLE_WIDTH = addStrProp("film-gui-table-width");
     public static StringProperty FILM_GUI_TABLE_SORT = addStrProp("film-gui-table-sort");
     public static StringProperty FILM_GUI_TABLE_UP_DOWN = addStrProp("film-gui-table-up-down");
@@ -209,6 +205,14 @@ public class ProgConfig extends P2DataProgConfig {
     public static StringProperty FILM_RESOLUTION = addStrProp("film-resolution", FilmData.RESOLUTION_NORMAL);
     public static StringProperty FILM_PLAY_DIALOG_SIZE = addStrProp("film-play-dialog-size");
     public static DoubleProperty FILM_GUI_INFO_DIVIDER = addDoubleProp("film-gui-info-divider", 0.7);
+
+    // Infos
+    public static BooleanProperty GUI_INFO_IS_SHOWING = addBoolProp("gui-info-is-showing", Boolean.TRUE);
+    public static BooleanProperty PANE_FILM_INFO_IS_RIP = addBoolProp("pane-film-info-is-rip", Boolean.FALSE);
+    public static BooleanProperty PANE_DOWNLOAD_INFO_IS_RIP = addBoolProp("pane-download-info-is-rip", Boolean.FALSE);
+    public static StringProperty PANE_DIALOG_FILM_INFO_SIZE = addStrProp("pane-dialog-film-info-size", "400:400");
+    public static StringProperty PANE_DIALOG_DOWNLOAD_INFO_SIZE = addStrProp("pane-dialog-download-info-size", "400:400");
+    public static DoubleProperty GUI_INFO_DIVIDER = addDoubleProp("gui-info-divider", 0.7);
 
     // ConfigDialog
     public static StringProperty CONFIG_DIALOG_SIZE = addStrProp("config-dialog-size", "900:700");
