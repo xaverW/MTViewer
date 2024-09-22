@@ -26,9 +26,14 @@ import de.p2tools.mtviewer.gui.tools.table.TableFilm;
 import de.p2tools.mtviewer.gui.tools.table.TableRowFilm;
 import de.p2tools.p2lib.alert.P2Alert;
 import de.p2tools.p2lib.guitools.P2TableFactory;
+import de.p2tools.p2lib.guitools.pclosepane.P2ClosePaneFactory;
+import de.p2tools.p2lib.guitools.pclosepane.P2InfoController;
+import de.p2tools.p2lib.guitools.pclosepane.P2InfoDto;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 import de.p2tools.p2lib.tools.log.P2Log;
 import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.transformation.SortedList;
 import javafx.geometry.Orientation;
 import javafx.scene.control.ContextMenu;
@@ -48,13 +53,14 @@ public class FilmGuiController extends AnchorPane {
     private final ProgData progData;
     private final SortedList<FilmData> sortedList;
     private final KeyCombination STRG_A = new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_ANY);
-    private final InfoController infoController;
-    private FilmData lastShownFilmData = null;
-    private boolean bound = false;
+
+    private PaneFilmInfo paneFilmInfo;
+    private PaneDownloadInfo paneDownloadInfo;
+    private final P2InfoController infoControllerInfo;
+    private final BooleanProperty boundInfo = new SimpleBooleanProperty(false);
 
     public FilmGuiController() {
         progData = ProgData.getInstance();
-        infoController = new InfoController();
 
         sortedList = progData.filmlist.getSortedList();
         tableView = new TableFilm(Table.TABLE_ENUM.FILM, progData);
@@ -70,9 +76,27 @@ public class FilmGuiController extends AnchorPane {
         scrollPaneTableFilm.setFitToWidth(true);
         scrollPaneTableFilm.setContent(tableView);
 
-        ProgConfig.GUI_INFO_IS_SHOWING.addListener((observable, oldValue, newValue) -> setInfoPane());
-        ProgConfig.PANE_FILM_INFO_IS_RIP.addListener((observable, oldValue, newValue) -> setInfoPane());
-        ProgConfig.PANE_DOWNLOAD_INFO_IS_RIP.addListener((observable, oldValue, newValue) -> setInfoPane());
+        paneFilmInfo = new PaneFilmInfo();
+        paneDownloadInfo = new PaneDownloadInfo();
+
+        ArrayList<P2InfoDto> list = new ArrayList<>();
+        P2InfoDto infoDto = new P2InfoDto(paneFilmInfo,
+                ProgConfig.FILM__INFO_PANE_IS_RIP,
+                ProgConfig.FILM__INFO_DIALOG_SIZE, new SimpleBooleanProperty(true),
+                "Filme", "Filme", false);
+        list.add(infoDto);
+
+        infoDto = new P2InfoDto(paneDownloadInfo,
+                ProgConfig.DOWNLOAD__INFO_PANE_IS_RIP,
+                ProgConfig.DOWNLOAD__INFO_DIALOG_SIZE, new SimpleBooleanProperty(true),
+                "Downloads", "Downloads", false);
+        list.add(infoDto);
+
+        infoControllerInfo = new P2InfoController(list, ProgConfig.INFO__IS_SHOWING);
+
+        ProgConfig.INFO__IS_SHOWING.addListener((observable, oldValue, newValue) -> setInfoPane());
+        ProgConfig.FILM__INFO_PANE_IS_RIP.addListener((observable, oldValue, newValue) -> setInfoPane());
+        ProgConfig.DOWNLOAD__INFO_PANE_IS_RIP.addListener((observable, oldValue, newValue) -> setInfoPane());
 
         setInfoPane();
         initTable();
@@ -113,7 +137,7 @@ public class FilmGuiController extends AnchorPane {
 
     public void saveTable() {
         Table.saveTable(tableView, Table.TABLE_ENUM.FILM);
-        infoController.getPaneDownloadInfo().saveTable();
+        paneDownloadInfo.saveTable();
     }
 
     public void refreshTable() {
@@ -151,12 +175,6 @@ public class FilmGuiController extends AnchorPane {
             @Override
             public void pingFx() {
                 P2TableFactory.refreshTable(tableView);
-            }
-        });
-        Listener.addListener(new Listener(Listener.EVENT_BLACKLIST_CHANGED, this.getClass().getSimpleName()) {
-            @Override
-            public void pingFx() {
-                lastShownFilmData = null;
             }
         });
     }
@@ -245,38 +263,18 @@ public class FilmGuiController extends AnchorPane {
 
     private void setFilmInfos() {
         FilmData film = tableView.getSelectionModel().getSelectedItem();
-        infoController.getPaneFilmInfo().setFilm(film);
+        paneFilmInfo.setFilm(film);
         FilmInfoDialogController.getInstance().setFilm(film);
     }
 
     private void setFilmInfos(FilmData film) {
-        infoController.getPaneFilmInfo().setFilm(film);
+        paneFilmInfo.setFilm(film);
         FilmInfoDialogController.getInstance().setFilm(film);
     }
 
     private void setInfoPane() {
-        // hier wird das InfoPane ein- ausgeblendet
-        if (bound && splitPane.getItems().size() > 1) {
-            bound = false;
-            splitPane.getDividers().get(0).positionProperty().unbindBidirectional(ProgConfig.GUI_INFO_DIVIDER);
-        }
-
-        splitPane.getItems().clear();
-        if (!infoController.arePanesShowing()) {
-            // dann wird nix angezeigt
-            splitPane.getItems().add(scrollPaneTableFilm);
-            ProgConfig.GUI_INFO_IS_SHOWING.set(false);
-            return;
-        }
-
-        if (ProgConfig.GUI_INFO_IS_SHOWING.getValue()) {
-            bound = true;
-            splitPane.getItems().addAll(scrollPaneTableFilm, infoController);
-            SplitPane.setResizableWithParent(infoController, false);
-            splitPane.getDividers().get(0).positionProperty().bindBidirectional(ProgConfig.GUI_INFO_DIVIDER);
-
-        } else {
-            splitPane.getItems().add(scrollPaneTableFilm);
-        }
+        P2ClosePaneFactory.setSplit(boundInfo, splitPane,
+                infoControllerInfo, false, scrollPaneTableFilm,
+                ProgConfig.INFO__DIVIDER, ProgConfig.INFO__IS_SHOWING);
     }
 }

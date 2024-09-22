@@ -207,12 +207,13 @@ public class ProgConfig extends P2DataProgConfig {
     public static DoubleProperty FILM_GUI_INFO_DIVIDER = addDoubleProp("film-gui-info-divider", 0.7);
 
     // Infos
-    public static BooleanProperty GUI_INFO_IS_SHOWING = addBoolProp("gui-info-is-showing", Boolean.TRUE);
-    public static BooleanProperty PANE_FILM_INFO_IS_RIP = addBoolProp("pane-film-info-is-rip", Boolean.FALSE);
-    public static BooleanProperty PANE_DOWNLOAD_INFO_IS_RIP = addBoolProp("pane-download-info-is-rip", Boolean.FALSE);
-    public static StringProperty PANE_DIALOG_FILM_INFO_SIZE = addStrProp("pane-dialog-film-info-size", "400:400");
-    public static StringProperty PANE_DIALOG_DOWNLOAD_INFO_SIZE = addStrProp("pane-dialog-download-info-size", "400:400");
-    public static DoubleProperty GUI_INFO_DIVIDER = addDoubleProp("gui-info-divider", 0.7);
+    public static BooleanProperty INFO__IS_SHOWING = addBoolProp("info--is-showing", Boolean.TRUE);
+    public static DoubleProperty INFO__DIVIDER = addDoubleProp("info--divider", 0.7);
+
+    public static BooleanProperty FILM__INFO_PANE_IS_RIP = addBoolProp("film--info-pane-is-rip", Boolean.FALSE);
+    public static StringProperty FILM__INFO_DIALOG_SIZE = addStrProp("film--info-dialog-size", "400:400");
+    public static BooleanProperty DOWNLOAD__INFO_PANE_IS_RIP = addBoolProp("download--info-pane-is-rip", Boolean.FALSE);
+    public static StringProperty DOWNLOAD__INFO_DIALOG_SIZE = addStrProp("download--info-dialog-size", "400:400");
 
     // ConfigDialog
     public static StringProperty CONFIG_DIALOG_SIZE = addStrProp("config-dialog-size", "900:700");

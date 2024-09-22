@@ -71,7 +71,7 @@ public class MTViewerController extends StackPane {
     }
 
     public void setInfos() {
-        ProgConfig.GUI_INFO_IS_SHOWING.setValue(!ProgConfig.GUI_INFO_IS_SHOWING.getValue());
+        ProgConfig.INFO__IS_SHOWING.setValue(!ProgConfig.INFO__IS_SHOWING.getValue());
     }
 
     public void setFocus() {
