@@ -78,6 +78,8 @@ public class ProgMenu extends MenuButton {
 
         final MenuItem miShowInfo = new MenuItem("Infobereich unter der Tabelle ein-/ausblenden");
         miShowInfo.setOnAction(a -> progData.mtViewerController.setInfos());
+        miShowInfo.disableProperty().bind(ProgConfig.FILM__INFO_PANE_IS_RIP
+                .and(ProgConfig.DOWNLOAD__INFO_PANE_IS_RIP));
         P2ShortcutWorker.addShortCut(miShowInfo, MTShortcut.SHORTCUT_SHOW_INFOS);
         final MenuItem miConfig = new MenuItem("Einstellungen");
         miConfig.setOnAction(e -> new ConfigDialogController(ProgData.getInstance()).showDialog());
