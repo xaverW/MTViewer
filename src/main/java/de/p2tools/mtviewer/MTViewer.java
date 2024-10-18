@@ -18,12 +18,14 @@ package de.p2tools.mtviewer;
 import de.p2tools.mtviewer.controller.ProgQuit;
 import de.p2tools.mtviewer.controller.ProgStartAfterGui;
 import de.p2tools.mtviewer.controller.ProgStartBeforeGui;
-import de.p2tools.mtviewer.controller.config.*;
-import de.p2tools.mtviewer.controller.data.ProgIcons;
+import de.p2tools.mtviewer.controller.config.ProgColorList;
+import de.p2tools.mtviewer.controller.config.ProgConfig;
+import de.p2tools.mtviewer.controller.config.ProgConst;
+import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.p2lib.P2LibInit;
 import de.p2tools.p2lib.guitools.P2GuiSize;
-import de.p2tools.p2lib.tools.IoReadWriteStyle;
 import de.p2tools.p2lib.tools.duration.P2Duration;
+import de.p2tools.p2lib.tools.shortcut.P2ShortcutKey;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -52,8 +54,9 @@ public class MTViewer extends Application {
         progData = ProgData.getInstance();
         progData.primaryStage = primaryStage;
 
-        initP2lib();
         ProgStartBeforeGui.workBeforeGui();
+        initP2lib();
+
         initRootLayout();
         ProgStartAfterGui.doWorkAfterGui();
 
@@ -62,37 +65,19 @@ public class MTViewer extends Application {
     }
 
     private void initP2lib() {
-        ProgIcons.initIcons();
         P2LibInit.initLib(primaryStage, ProgConst.PROGRAM_NAME,
-                "",
-                ProgConfig.SYSTEM_DARK_THEME, null,
+                "", ProgConfig.SYSTEM_DARK_THEME, null, ProgConfig.SYSTEM_THEME_CHANGED,
+                ProgConst.CSS_FILE, ProgConst.CSS_FILE_DARK_THEME, ProgConfig.SYSTEM_FONT_SIZE,
                 ProgData.debug, ProgData.duration);
-        P2LibInit.addCssFile(ProgConst.CSS_FILE);
     }
 
     private void initRootLayout() {
         try {
-            addThemeCss(); // damit es für die 2 schon mal stimmt
             progData.mtViewerController = new MTViewerController();
 
             scene = new Scene(progData.mtViewerController,
                     P2GuiSize.getWidth(ProgConfig.SYSTEM_SIZE_GUI),
                     P2GuiSize.getHeight(ProgConfig.SYSTEM_SIZE_GUI));//Größe der scene!= Größe stage!!!
-            addThemeCss(); // und jetzt noch für die neue Scene
-            ProgColorList.setColorTheme(); // Farben einrichten
-
-            if (ProgConfig.SYSTEM_STYLE.getValue()) {
-                P2LibInit.setStyleFile(ProgInfos.getStyleFile().toString());
-                IoReadWriteStyle.readStyle(ProgInfos.getStyleFile(), scene);
-            }
-
-            ProgConfig.SYSTEM_DARK_THEME.addListener((u, o, n) -> {
-                addThemeCss();
-                //erst css ändern, dann
-                ProgColorList.setColorTheme();
-                ProgConfig.SYSTEM_THEME_CHANGED.setValue(!ProgConfig.SYSTEM_THEME_CHANGED.getValue());
-            });
-
             primaryStage.setScene(scene);
             primaryStage.setOnCloseRequest(e -> {
                 //beim Beenden
@@ -102,23 +87,19 @@ public class MTViewer extends Application {
 
             //Pos setzen
             P2GuiSize.setOnlyPos(ProgConfig.SYSTEM_SIZE_GUI, primaryStage);
-
             scene.heightProperty().addListener((v, o, n) -> P2GuiSize.getSizeScene(ProgConfig.SYSTEM_SIZE_GUI, primaryStage, scene));
             scene.widthProperty().addListener((v, o, n) -> P2GuiSize.getSizeScene(ProgConfig.SYSTEM_SIZE_GUI, primaryStage, scene));
             primaryStage.xProperty().addListener((v, o, n) -> P2GuiSize.getSizeScene(ProgConfig.SYSTEM_SIZE_GUI, primaryStage, scene));
             primaryStage.yProperty().addListener((v, o, n) -> P2GuiSize.getSizeScene(ProgConfig.SYSTEM_SIZE_GUI, primaryStage, scene));
+
+            P2LibInit.addP2CssToScene(scene); // und jetzt noch CSS einstellen
+            ProgConfig.SYSTEM_DARK_THEME.addListener((u, o, n) -> {
+                ProgColorList.setColorTheme();
+            });
+
             primaryStage.show();
         } catch (final Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private void addThemeCss() {
-        if (ProgConfig.SYSTEM_DARK_THEME.getValue()) {
-            P2LibInit.addCssFile(ProgConst.CSS_FILE_DARK_THEME);
-        } else {
-            P2LibInit.removeCssFile(ProgConst.CSS_FILE_DARK_THEME);
-        }
-        P2LibInit.addP2CssToScene(scene);
     }
 }

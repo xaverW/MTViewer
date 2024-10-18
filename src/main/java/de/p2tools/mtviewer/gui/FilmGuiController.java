@@ -83,13 +83,15 @@ public class FilmGuiController extends AnchorPane {
         P2InfoDto infoDto = new P2InfoDto(paneFilmInfo,
                 ProgConfig.FILM__INFO_PANE_IS_RIP,
                 ProgConfig.FILM__INFO_DIALOG_SIZE, new SimpleBooleanProperty(true),
-                "Filme", "Filme", false);
+                "Filme", "Filme", false,
+                progData.maskerPane.visibleProperty());
         list.add(infoDto);
 
         infoDto = new P2InfoDto(paneDownloadInfo,
                 ProgConfig.DOWNLOAD__INFO_PANE_IS_RIP,
                 ProgConfig.DOWNLOAD__INFO_DIALOG_SIZE, new SimpleBooleanProperty(true),
-                "Downloads", "Downloads", false);
+                "Downloads", "Downloads", false,
+                progData.maskerPane.visibleProperty());
         list.add(infoDto);
 
         infoControllerInfo = new P2InfoController(list, ProgConfig.INFO__IS_SHOWING);

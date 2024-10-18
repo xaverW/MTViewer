@@ -21,20 +21,14 @@ import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.config.ProgInfos;
 import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
-import de.p2tools.mtviewer.controller.update.SearchProgramUpdate;
 import de.p2tools.p2lib.guitools.P2WindowIcon;
 import de.p2tools.p2lib.tools.P2ToolsFactory;
-import de.p2tools.p2lib.tools.date.P2DateConst;
-import de.p2tools.p2lib.tools.duration.P2Duration;
 import de.p2tools.p2lib.tools.log.P2Log;
 import de.p2tools.p2lib.tools.log.P2LogMessage;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class ProgStartAfterGui {
-    private static boolean doneAtProgramstart = false;
 
     private ProgStartAfterGui() {
     }
@@ -48,20 +42,6 @@ public class ProgStartAfterGui {
         startMsg();
         setTitle();
         ProgData.getInstance().startTimer();
-//        LoadFilmFactory.getInstance().loadFilmlist.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
-//            @Override
-//            public void finished(ListenerFilmlistLoadEvent event) {
-//                int age = FilmlistFactory.getAge(ProgData.getInstance().filmlist.metaData);
-//                ProgConfig.SYSTEM_FILMLIST_AGE.setValue(ProgData.getInstance().filmlist.isEmpty() ? P2LibConst.NUMBER_NOT_STARTED : age);
-//
-//                if (!doneAtProgramstart) {
-//                    doneAtProgramstart = true;
-//                    checkProgUpdate();
-//                    new TipOfDay().showDialog(ProgData.getInstance(), false);
-//                }
-//            }
-//        });
-
         //die gespeicherte Filmliste laden
         LoadFilmFactory.getInstance().loadProgStart();
     }
@@ -76,37 +56,36 @@ public class ProgStartAfterGui {
         P2Log.sysLog(list);
         ProgConfig.logAllConfigs();
     }
+//    private static void checkProgUpdate() {
+//        // Prüfen obs ein Programmupdate gibt
+//        P2Duration.onlyPing("checkProgUpdate");
+//        if (ProgConfig.SYSTEM_UPDATE_SEARCH_ACT.getValue() &&
+//                !updateCheckTodayDone()) {
+//            // nach Updates suchen
+//            runUpdateCheck(false);
+//
+//        } else {
+//            // will der User nicht --oder-- wurde heute schon gemacht
+//            List list = new ArrayList(5);
+//            list.add("Kein Update-Check:");
+//            if (!ProgConfig.SYSTEM_UPDATE_SEARCH_ACT.getValue()) {
+//                list.add("  der User will nicht");
+//            }
+//            if (updateCheckTodayDone()) {
+//                list.add("  heute schon gemacht");
+//            }
+//            P2Log.sysLog(list);
+//        }
+//    }
 
-    private static void checkProgUpdate() {
-        // Prüfen obs ein Programmupdate gibt
-        P2Duration.onlyPing("checkProgUpdate");
-        if (ProgConfig.SYSTEM_UPDATE_SEARCH_ACT.getValue() &&
-                !updateCheckTodayDone()) {
-            // nach Updates suchen
-            runUpdateCheck(false);
-
-        } else {
-            // will der User nicht --oder-- wurde heute schon gemacht
-            List list = new ArrayList(5);
-            list.add("Kein Update-Check:");
-            if (!ProgConfig.SYSTEM_UPDATE_SEARCH_ACT.getValue()) {
-                list.add("  der User will nicht");
-            }
-            if (updateCheckTodayDone()) {
-                list.add("  heute schon gemacht");
-            }
-            P2Log.sysLog(list);
-        }
-    }
-
-    private static boolean updateCheckTodayDone() {
-        return ProgConfig.SYSTEM_UPDATE_DATE.get().equals(P2DateConst.F_FORMAT_yyyy_MM_dd.format(new Date()));
-    }
-
-    private static void runUpdateCheck(boolean showAlways) {
-        ProgConfig.SYSTEM_UPDATE_DATE.setValue(P2DateConst.F_FORMAT_yyyy_MM_dd.format(new Date()));
-        new SearchProgramUpdate(ProgData.getInstance()).searchNewProgramVersion(showAlways);
-    }
+//    private static boolean updateCheckTodayDone() {
+//        return ProgConfig.SYSTEM_UPDATE_DATE.get().equals(P2DateConst.F_FORMAT_yyyy_MM_dd.format(new Date()));
+//    }
+//
+//    private static void runUpdateCheck(boolean showAlways) {
+//        ProgConfig.SYSTEM_UPDATE_DATE.setValue(P2DateConst.F_FORMAT_yyyy_MM_dd.format(new Date()));
+//        new SearchProgramUpdate(ProgData.getInstance()).searchNewProgramVersion(showAlways);
+//    }
 
     private static void setTitle() {
         if (ProgData.debug) {
