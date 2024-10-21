@@ -26,9 +26,9 @@ import de.p2tools.mtviewer.gui.tools.table.TableFilm;
 import de.p2tools.mtviewer.gui.tools.table.TableRowFilm;
 import de.p2tools.p2lib.alert.P2Alert;
 import de.p2tools.p2lib.guitools.P2TableFactory;
+import de.p2tools.p2lib.guitools.pclosepane.P2ClosePaneController;
+import de.p2tools.p2lib.guitools.pclosepane.P2ClosePaneDto;
 import de.p2tools.p2lib.guitools.pclosepane.P2ClosePaneFactory;
-import de.p2tools.p2lib.guitools.pclosepane.P2InfoController;
-import de.p2tools.p2lib.guitools.pclosepane.P2InfoDto;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 import de.p2tools.p2lib.tools.log.P2Log;
 import javafx.application.Platform;
@@ -56,7 +56,7 @@ public class FilmGuiController extends AnchorPane {
 
     private PaneFilmInfo paneFilmInfo;
     private PaneDownloadInfo paneDownloadInfo;
-    private final P2InfoController infoControllerInfo;
+    private final P2ClosePaneController infoControllerInfo;
     private final BooleanProperty boundInfo = new SimpleBooleanProperty(false);
 
     public FilmGuiController() {
@@ -79,22 +79,22 @@ public class FilmGuiController extends AnchorPane {
         paneFilmInfo = new PaneFilmInfo();
         paneDownloadInfo = new PaneDownloadInfo();
 
-        ArrayList<P2InfoDto> list = new ArrayList<>();
-        P2InfoDto infoDto = new P2InfoDto(paneFilmInfo,
+        ArrayList<P2ClosePaneDto> list = new ArrayList<>();
+        P2ClosePaneDto infoDto = new P2ClosePaneDto(paneFilmInfo,
                 ProgConfig.FILM__INFO_PANE_IS_RIP,
                 ProgConfig.FILM__INFO_DIALOG_SIZE, new SimpleBooleanProperty(true),
                 "Filme", "Filme", false,
                 progData.maskerPane.visibleProperty());
         list.add(infoDto);
 
-        infoDto = new P2InfoDto(paneDownloadInfo,
+        infoDto = new P2ClosePaneDto(paneDownloadInfo,
                 ProgConfig.DOWNLOAD__INFO_PANE_IS_RIP,
                 ProgConfig.DOWNLOAD__INFO_DIALOG_SIZE, new SimpleBooleanProperty(true),
                 "Downloads", "Downloads", false,
                 progData.maskerPane.visibleProperty());
         list.add(infoDto);
 
-        infoControllerInfo = new P2InfoController(list, ProgConfig.INFO__IS_SHOWING);
+        infoControllerInfo = new P2ClosePaneController(list, ProgConfig.INFO__IS_SHOWING);
 
         ProgConfig.INFO__IS_SHOWING.addListener((observable, oldValue, newValue) -> setInfoPane());
         ProgConfig.FILM__INFO_PANE_IS_RIP.addListener((observable, oldValue, newValue) -> setInfoPane());
