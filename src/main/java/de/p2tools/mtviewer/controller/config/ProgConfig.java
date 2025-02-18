@@ -22,7 +22,8 @@ import de.p2tools.mtviewer.controller.filmfilter.ActFilmFilterWorker;
 import de.p2tools.mtviewer.controller.filmfilter.FilmFilter;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.configfile.ConfigFile;
-import de.p2tools.p2lib.data.P2DataProgConfig;
+import de.p2tools.p2lib.configfile.pdata.P2Data;
+import de.p2tools.p2lib.configfile.pdata.P2DataProgConfig;
 import de.p2tools.p2lib.mtdownload.GetProgramStandardPath;
 import de.p2tools.p2lib.mtdownload.MLBandwidthTokenBucket;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
@@ -94,8 +95,8 @@ public class ProgConfig extends P2DataProgConfig {
     // ===========================================
     // Configs der Programmversion, nur damit sie (zur Update-Suche) im Config-File stehen
     public static StringProperty SYSTEM_PROG_VERSION = addStrProp("system-prog-version", P2ToolsFactory.getProgVersion());
-    public static StringProperty SYSTEM_PROG_BUILD_NO = addStrProp("system-prog-build-no", P2ToolsFactory.getBuild());
-    public static StringProperty SYSTEM_PROG_BUILD_DATE = addStrProp("system-prog-build-date", P2ToolsFactory.getCompileDate());//z.B.: 27.07.2
+    public static StringProperty SYSTEM_PROG_BUILD_NO = addStrProp("system-prog-build-no", P2ToolsFactory.getBuildNo());
+    public static StringProperty SYSTEM_PROG_BUILD_DATE = addStrProp("system-prog-build-date", P2ToolsFactory.getBuildDateR());//z.B.: 27.07.2
 
     // Configs zum Aktualisieren beim Programmupdate
     public static BooleanProperty SYSTEM_AFTER_UPDATE_FILTER = addBoolProp("system-after-update-filter", Boolean.FALSE);
@@ -109,6 +110,8 @@ public class ProgConfig extends P2DataProgConfig {
     public static StringProperty SYSTEM_UPDATE_DATE = addStrProp("system-update-date"); // Datum der letzten Prüfung
 
     public static BooleanProperty SYSTEM_UPDATE_SEARCH_ACT = addBoolProp("system-update-search-act", Boolean.TRUE); //Infos und Programm
+    public static StringProperty SYSTEM_SEARCH_UPDATE_LAST_DATE = addStrProp("system-search-update-last-date"); // Datum der letzten Prüfung
+    public static BooleanProperty SYSTEM_SEARCH_UPDATE = addBoolProp("system-search-update" + P2Data.TAGGER + "system-update-search-act", Boolean.TRUE); // nach einem Update suchen
     public static BooleanProperty SYSTEM_UPDATE_SEARCH_BETA = addBoolProp("system-update-search-beta", Boolean.FALSE); //beta suchen
     public static BooleanProperty SYSTEM_UPDATE_SEARCH_DAILY = addBoolProp("system-update-search-daily", Boolean.FALSE); //daily suchen
 
@@ -267,8 +270,8 @@ public class ProgConfig extends P2DataProgConfig {
 
         // Configs der Programmversion, nur damit sie (zur Update-Suche) im Config-File stehen
         ProgConfig.SYSTEM_PROG_VERSION.set(P2ToolsFactory.getProgVersion());
-        ProgConfig.SYSTEM_PROG_BUILD_NO.set(P2ToolsFactory.getBuild());
-        ProgConfig.SYSTEM_PROG_BUILD_DATE.set(P2ToolsFactory.getCompileDate());
+        ProgConfig.SYSTEM_PROG_BUILD_NO.set(P2ToolsFactory.getBuildNo());
+        ProgConfig.SYSTEM_PROG_BUILD_DATE.set(P2ToolsFactory.getBuildDateR());
 
         configFile.addConfigs(ProgConfig.getInstance());//Progconfig
         configFile.addConfigs(ProgColorList.getInstance());//Color

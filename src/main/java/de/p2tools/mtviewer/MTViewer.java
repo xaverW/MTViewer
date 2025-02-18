@@ -25,7 +25,6 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.p2lib.P2LibInit;
 import de.p2tools.p2lib.guitools.P2GuiSize;
 import de.p2tools.p2lib.tools.duration.P2Duration;
-import de.p2tools.p2lib.tools.shortcut.P2ShortcutKey;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -68,6 +67,7 @@ public class MTViewer extends Application {
         P2LibInit.initLib(primaryStage, ProgConst.PROGRAM_NAME,
                 "", ProgConfig.SYSTEM_DARK_THEME, null, ProgConfig.SYSTEM_THEME_CHANGED,
                 ProgConst.CSS_FILE, ProgConst.CSS_FILE_DARK_THEME, ProgConfig.SYSTEM_FONT_SIZE,
+                "", "",
                 ProgData.debug, ProgData.duration);
     }
 
@@ -76,8 +76,8 @@ public class MTViewer extends Application {
             progData.mtViewerController = new MTViewerController();
 
             scene = new Scene(progData.mtViewerController,
-                    P2GuiSize.getWidth(ProgConfig.SYSTEM_SIZE_GUI),
-                    P2GuiSize.getHeight(ProgConfig.SYSTEM_SIZE_GUI));//Größe der scene!= Größe stage!!!
+                    P2GuiSize.getSceneSize(ProgConfig.SYSTEM_SIZE_GUI, true),
+                    P2GuiSize.getSceneSize(ProgConfig.SYSTEM_SIZE_GUI, false));
             primaryStage.setScene(scene);
             primaryStage.setOnCloseRequest(e -> {
                 //beim Beenden
@@ -86,11 +86,11 @@ public class MTViewer extends Application {
             });
 
             //Pos setzen
-            P2GuiSize.setOnlyPos(ProgConfig.SYSTEM_SIZE_GUI, primaryStage);
-            scene.heightProperty().addListener((v, o, n) -> P2GuiSize.getSizeScene(ProgConfig.SYSTEM_SIZE_GUI, primaryStage, scene));
-            scene.widthProperty().addListener((v, o, n) -> P2GuiSize.getSizeScene(ProgConfig.SYSTEM_SIZE_GUI, primaryStage, scene));
-            primaryStage.xProperty().addListener((v, o, n) -> P2GuiSize.getSizeScene(ProgConfig.SYSTEM_SIZE_GUI, primaryStage, scene));
-            primaryStage.yProperty().addListener((v, o, n) -> P2GuiSize.getSizeScene(ProgConfig.SYSTEM_SIZE_GUI, primaryStage, scene));
+            P2GuiSize.setPos(ProgConfig.SYSTEM_SIZE_GUI, primaryStage);
+            scene.heightProperty().addListener((v, o, n) -> P2GuiSize.getSize(ProgConfig.SYSTEM_SIZE_GUI, primaryStage));
+            scene.widthProperty().addListener((v, o, n) -> P2GuiSize.getSize(ProgConfig.SYSTEM_SIZE_GUI, primaryStage));
+            primaryStage.xProperty().addListener((v, o, n) -> P2GuiSize.getSize(ProgConfig.SYSTEM_SIZE_GUI, primaryStage));
+            primaryStage.yProperty().addListener((v, o, n) -> P2GuiSize.getSize(ProgConfig.SYSTEM_SIZE_GUI, primaryStage));
 
             P2LibInit.addP2CssToScene(scene); // und jetzt noch CSS einstellen
             ProgConfig.SYSTEM_DARK_THEME.addListener((u, o, n) -> {
