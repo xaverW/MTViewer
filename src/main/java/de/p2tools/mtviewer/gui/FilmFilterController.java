@@ -72,7 +72,6 @@ public class FilmFilterController extends VBox {
         initButton();
         initDaysFilter();
         initDurFilter();
-//        initSenderFilter();
         initStringFilter();
         addFilter();
     }
@@ -142,105 +141,6 @@ public class FilmFilterController extends VBox {
         slDur.maxValueProperty().bindBidirectional(progData.actFilmFilterWorker.getActFilterSettings().maxDurProperty());
 // todo       slDur.setValuePrefix("");
     }
-
-//    private void initSenderFilter() {
-//        mbChannel.setMaxWidth(Double.MAX_VALUE);
-//        initChannelMenu();
-//        progData.actFilmFilterWorker.getActFilterSettings().channelProperty().addListener((observable, oldValue, newValue) -> {
-//            initChannelMenu();
-//        });
-//        progData.worker.getAllChannelList().addListener((ListChangeListener<String>) c -> initChannelMenu());
-//        mbChannel.textProperty().bindBidirectional(progData.actFilmFilterWorker.getActFilterSettings().channelProperty());
-//    }
-
-//    private void initChannelMenu() {
-//        mbChannel.getItems().clear();
-//        menuItemsList.clear();
-//
-//        List<String> channelFilterList = new ArrayList<>();
-//        String channelFilter = progData.actFilmFilterWorker.getActFilterSettings().channelProperty().get();
-//        if (channelFilter != null) {
-//            if (channelFilter.contains(",")) {
-//                channelFilterList.addAll(Arrays.asList(channelFilter.replace(" ", "").toLowerCase().split(",")));
-//            } else {
-//                channelFilterList.add(channelFilter.toLowerCase());
-//            }
-//            channelFilterList.stream().forEach(s -> s = s.trim());
-//        }
-//
-//        CheckBox miCheckAll = new CheckBox();
-//        miCheckAll.setVisible(false);
-//
-//        Button btnAll = new Button("Auswahl löschen");
-//        btnAll.setMaxWidth(Double.MAX_VALUE);
-//        btnAll.setOnAction(e -> {
-//            clearMenuText();
-//            mbChannel.hide();
-//        });
-//
-//        HBox hBoxAll = new HBox(P2LibConst.DIST_BUTTON);
-//        hBoxAll.setAlignment(Pos.CENTER_LEFT);
-//        hBoxAll.getChildren().addAll(miCheckAll, btnAll);
-//
-//        CustomMenuItem cmiAll = new CustomMenuItem(hBoxAll);
-//        mbChannel.getItems().add(cmiAll);
-//
-//        for (String s : progData.worker.getAllChannelList()) {
-//            if (s.isEmpty()) {
-//                continue;
-//            }
-//
-//            CheckBox miCheck = new CheckBox();
-//            if (channelFilterList.contains(s.toLowerCase())) {
-//                miCheck.setSelected(true);
-//            }
-//            miCheck.setOnAction(a -> setMenuText());
-//
-//            MenuItemClass menuItemClass = new MenuItemClass(s, miCheck);
-//            menuItemsList.add(menuItemClass);
-//
-//            Button btnChannel = new Button(s);
-//            btnChannel.setMaxWidth(Double.MAX_VALUE);
-//            btnChannel.setOnAction(e -> {
-//                setCheckBoxAndMenuText(menuItemClass);
-//                mbChannel.hide();
-//            });
-//
-//            HBox hBox = new HBox(10);
-//            hBox.prefWidthProperty().bind(hBoxAll.widthProperty());
-//            hBox.setAlignment(Pos.CENTER_LEFT);
-//            hBox.getChildren().addAll(miCheck, btnChannel);
-//            HBox.setHgrow(btnChannel, Priority.ALWAYS);
-//
-//            CustomMenuItem cmi = new CustomMenuItem(hBox);
-//            mbChannel.getItems().add(cmi);
-//        }
-//    }
-
-//    private void setCheckBoxAndMenuText(MenuItemClass cmi) {
-//        for (MenuItemClass cm : menuItemsList) {
-//            cm.getCheckBox().setSelected(false);
-//        }
-//        cmi.getCheckBox().setSelected(true);
-//        setMenuText();
-//    }
-//
-//    private void clearMenuText() {
-//        for (MenuItemClass cmi : menuItemsList) {
-//            cmi.getCheckBox().setSelected(false);
-//        }
-//        mbChannel.setText("");
-//    }
-
-//    private void setMenuText() {
-//        String text = "";
-//        for (MenuItemClass cmi : menuItemsList) {
-//            if (cmi.getCheckBox().isSelected()) {
-//                text = text + (text.isEmpty() ? "" : ", ") + cmi.getText();
-//            }
-//        }
-//        mbChannel.setText(text);
-//    }
 
     private void initStringFilter() {
         //Theme

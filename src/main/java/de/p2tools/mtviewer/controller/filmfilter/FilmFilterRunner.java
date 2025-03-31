@@ -40,13 +40,6 @@ public class FilmFilterRunner {
         this.progData = progData;
 
         progData.actFilmFilterWorker.filterChangeProperty().addListener((observable, oldValue, newValue) -> filter()); // Filmfilter (User) haben sich geändert
-//        LoadFilmFactory.getInstance().loadFilmlist.addListenerLoadFilmlist(new ListenerLoadFilmlist() {
-//            @Override
-//            public void finished(ListenerFilmlistLoadEvent event) {
-//                filterList();
-//            }
-//        });
-
         Listener.addListener(new Listener(Listener.EVENT_BLACKLIST_CHANGED, FilmFilterRunner.class.getSimpleName()) {
             @Override
             public void pingFx() {

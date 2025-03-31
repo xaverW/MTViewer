@@ -248,7 +248,6 @@ public class DirectHttpDownload extends Thread {
         if (file.exists()) {
 
             DownloadState.ContinueDownload result;
-            boolean isNewName = false;
 
             if (ProgConfig.DOWNLOAD_CONTINUE.getValue() == DownloadState.DOWNLOAD_RESTART__CONTINUE) {
                 //weiterführen
@@ -278,23 +277,14 @@ public class DirectHttpDownload extends Thread {
                     break;
 
                 case RESTART_DOWNLOAD:
-                    if (!isNewName) {
-                        // dann mit gleichem Namen und Datei vorher löschen
-                        try {
-                            Files.deleteIfExists(file.toPath());
-                            file = new File(download.getDestPathFile());
-                        } catch (final Exception ex) {
-                            // kann nicht gelöscht werden, evtl. klappt ja das Überschreiben
-                            P2Log.errorLog(915263654, ex,
-                                    "file exists: " + download.getDestPathFile());
-                        }
-                    } else {
-                        // dann mit neuem Namen
-                        try {
-                            Files.createDirectories(Paths.get(download.getDestPath()));
-                        } catch (final IOException ignored) {
-                        }
+                    // dann mit gleichem Namen und Datei vorher löschen
+                    try {
+                        Files.deleteIfExists(file.toPath());
                         file = new File(download.getDestPathFile());
+                    } catch (final Exception ex) {
+                        // kann nicht gelöscht werden, evtl. klappt ja das Überschreiben
+                        P2Log.errorLog(915263654, ex,
+                                "file exists: " + download.getDestPathFile());
                     }
                     break;
             }

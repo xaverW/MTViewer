@@ -46,7 +46,6 @@ public class DownloadListStartStop {
         delDownloads(list);
     }
 
-
     /**
      * eine Liste Downloads aus der "Dwonloadliste"  stoppen und dann entfernen
      *

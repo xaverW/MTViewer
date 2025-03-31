@@ -22,8 +22,8 @@ import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.p2lib.tools.log.P2Log;
 
 public class DownloadProgParameterFactory {
-    private DownloadProgParameterFactory() {
 
+    private DownloadProgParameterFactory() {
     }
 
     public static String getProgParameterArray(String url) {

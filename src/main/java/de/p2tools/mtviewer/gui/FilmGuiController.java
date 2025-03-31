@@ -181,29 +181,6 @@ public class FilmGuiController extends AnchorPane {
         });
     }
 
-//    private void selectFilm() {
-//        Platform.runLater(() -> {
-//            if ((tableView.getItems().size() == 0)) {
-//                return;
-//            }
-//            if (lastShownFilmData != null) {
-//                tableView.getSelectionModel().clearSelection();
-//                tableView.getSelectionModel().select(lastShownFilmData);
-//                tableView.scrollTo(lastShownFilmData);
-//
-//            } else {
-//                FilmData selFilm = tableView.getSelectionModel().getSelectedItem();
-//                if (selFilm != null) {
-//                    tableView.scrollTo(selFilm);
-//                } else {
-//                    tableView.getSelectionModel().clearSelection();
-//                    tableView.getSelectionModel().select(0);
-//                    tableView.scrollTo(0);
-//                }
-//            }
-//        });
-//    }
-
     private void initTable() {
         Table.setTable(tableView);
         tableView.setItems(sortedList);

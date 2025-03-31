@@ -107,7 +107,7 @@ public class ProgMenu extends MenuButton {
         //=========================
         //Quitt
         final MenuItem miQuit = new MenuItem("Beenden");
-        miQuit.setOnAction(e -> ProgQuit.quit(false));
+        miQuit.setOnAction(e -> ProgQuit.quit());
         P2ShortcutWorker.addShortCut(miQuit, MTShortcut.SHORTCUT_QUIT_PROGRAM);
 
         getItems().addAll(miQuit);

@@ -23,10 +23,8 @@ import javafx.scene.control.TableRow;
 
 public class TableRowFilm<T> extends TableRow<T> {
 
-//    private final BooleanProperty geoMelden;
 
     public TableRowFilm() {
-//        geoMelden = ProgConfig.SYSTEM_MARK_GEO;
     }
 
     @Override
@@ -36,30 +34,6 @@ public class TableRowFilm<T> extends TableRow<T> {
         FilmData film = (FilmData) f;
         if (film == null || empty) {
             setStyle("");
-//        } else {
-//            if (film.isLive()) {
-//                // livestream
-//                for (int i = 0; i < getChildren().size(); i++) {
-//                    getChildren().get(i).setStyle(ProgColorList.FILM_LIVESTREAM.getCssFontBold());
-//                }
-//
-//            } else if (geoMelden.get() && film.isGeoBlocked()) {
-//                // geogeblockt
-//                for (int i = 0; i < getChildren().size(); i++) {
-//                    getChildren().get(i).setStyle(ProgColorList.FILM_GEOBLOCK.getCssFontBold());
-//                }
-//
-//            } else if (film.isNewFilm()) {
-//                // neue Filme
-//                for (int i = 0; i < getChildren().size(); i++) {
-//                    getChildren().get(i).setStyle(ProgColorList.FILM_NEW.getCssFont());
-//                }
-//
-//            } else {
-//                for (int i = 0; i < getChildren().size(); i++) {
-//                    getChildren().get(i).setStyle("");
-//                }
-//            }
         }
     }
 }

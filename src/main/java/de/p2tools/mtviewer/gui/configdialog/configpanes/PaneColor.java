@@ -27,7 +27,6 @@ import de.p2tools.p2lib.guitools.P2ColumnConstraints;
 import de.p2tools.p2lib.guitools.P2TableFactory;
 import de.p2tools.p2lib.guitools.ptoggleswitch.P2ToggleSwitch;
 import de.p2tools.p2lib.tools.P2ColorFactory;
-import javafx.beans.property.BooleanProperty;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -44,7 +43,6 @@ import java.util.Collection;
 public class PaneColor {
     private final Stage stage;
     private final P2ToggleSwitch tglDarkTheme = new P2ToggleSwitch("Dunkles Erscheinungsbild der Programmoberfläche");
-    BooleanProperty propDarkTheme = ProgConfig.SYSTEM_DARK_THEME;
     private Callback<TableColumn<P2ColorData, String>, TableCell<P2ColorData, String>> cellFactoryChange
             = (final TableColumn<P2ColorData, String> param) -> {
 
@@ -155,7 +153,7 @@ public class PaneColor {
     }
 
     public void make(Collection<TitledPane> result) {
-        tglDarkTheme.selectedProperty().bindBidirectional(propDarkTheme);
+        tglDarkTheme.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_DARK_THEME);
         final Button btnHelpTheme = P2Button.helpButton(stage, "Erscheinungsbild der Programmoberfläche",
                 HelpText.DARK_THEME);
 
@@ -203,7 +201,7 @@ public class PaneColor {
     }
 
     public void close() {
-//        tglDarkTheme.selectedProperty().unbindBidirectional(propDarkTheme);
+        tglDarkTheme.selectedProperty().unbindBidirectional(ProgConfig.SYSTEM_DARK_THEME);
     }
 
     private void initTableColor(TableView<P2ColorData> tableView) {

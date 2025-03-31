@@ -35,7 +35,6 @@ public class MTViewer extends Application {
     protected ProgData progData;
     Scene scene = null;
     private Stage primaryStage;
-    private boolean firstProgramStart = false; // ist der allererste Programmstart: Programminit wird gemacht
 
     public static void main(String[] args) {
         launch(args);
@@ -82,7 +81,7 @@ public class MTViewer extends Application {
             primaryStage.setOnCloseRequest(e -> {
                 //beim Beenden
                 e.consume();
-                ProgQuit.quit(false);
+                ProgQuit.quit();
             });
 
             //Pos setzen

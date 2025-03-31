@@ -24,7 +24,6 @@ import de.p2tools.p2lib.alert.P2Alert;
 import de.p2tools.p2lib.mtdownload.DownloadSize;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 import de.p2tools.p2lib.mtfilm.film.FilmDataXml;
-import de.p2tools.p2lib.mtfilm.film.FilmFactory;
 import de.p2tools.p2lib.tools.P2InfoFactory;
 import de.p2tools.p2lib.tools.date.P2LDateFactory;
 import de.p2tools.p2lib.tools.file.P2FileUtils;
@@ -132,19 +131,6 @@ public final class DownloadData extends DownloadDataProps {
         setState(DownloadConstants.STATE_INIT);
     }
 
-//    public void restartDownload() {
-//        // stoppen und alles zurücksetzen
-//        final DownloadSize downSize = getDownloadSize();
-//        downSize.reset();
-//        setRemaining("");
-//        setBandwidth("");
-//        getStart().setBandwidth(0);
-//        setNo(DownloadConstants.DOWNLOAD_NUMBER_NOT_STARTED);
-//
-//        setState(DownloadConstants.STATE_INIT);
-//        setProgress(DownloadConstants.PROGRESS_NOT_STARTED);
-//    }
-
     public void stopDownload() {
         if (isStateError()) {
             // damit fehlerhafte nicht wieder starten
@@ -164,19 +150,6 @@ public final class DownloadData extends DownloadDataProps {
 
     public String getFileNameWithoutSuffix() {
         return PUrlTools.getFileNameWithoutSuffix(getDestPathFile());
-    }
-
-
-    public String getFileNameSuffix() {
-        return P2FileUtils.getFileNameSuffix(getDestPathFile());
-    }
-
-    public void setSizeDownloadFromWeb(String size) {
-        if (!size.isEmpty()) {
-            getDownloadSize().setTargetSize(size);
-        } else if (film != null) {
-            getDownloadSize().setTargetSize(FilmFactory.getSizeFromWeb(film, getUrl()));
-        }
     }
 
     public void setSizeDownloadFromFilm() {

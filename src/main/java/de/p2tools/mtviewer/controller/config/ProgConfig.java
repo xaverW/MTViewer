@@ -38,8 +38,6 @@ import java.util.Arrays;
 
 public class ProgConfig extends P2DataProgConfig {
 
-    //    public static final String SYSTEM = "system";
-//    private static final ArrayList<Config> arrayList = new ArrayList<>();
     // Programm-Configs, änderbar nur im Konfig-File
     // ============================================
     // 250 Sekunden, wie bei Firefox

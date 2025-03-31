@@ -20,7 +20,6 @@ package de.p2tools.mtviewer.controller.config;
 
 import de.p2tools.p2lib.colordata.P2ColorData;
 import de.p2tools.p2lib.colordata.P2ColorList;
-import de.p2tools.p2lib.tools.log.P2Log;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.paint.Color;
@@ -38,11 +37,7 @@ public class ProgColorList extends P2ColorList {
     public static final P2ColorData FILM_GEOBLOCK = addNewKey("COLOR_FILM_GEOBLOCK_BACKGROUND",
             Color.rgb(255, 168, 0), Color.rgb(236, 153, 0), "Tabelle Filme, geogeblockt");
 
-    //    // Filter wenn RegEx
-//    public static final PColorData FILTER_REGEX = new PColorData("COLOR_FILTER_REGEX",
-//            Color.rgb(225, 255, 225), Color.rgb(128, 179, 213));
-//    public static final PColorData FILTER_REGEX_ERROR = new PColorData("COLOR_FILTER_REGEX_ERROR",
-//            Color.rgb(255, 230, 230), Color.rgb(170, 0, 0));
+    // Filter wenn RegEx
     public static final P2ColorData ERROR = new P2ColorData("COLOR_ERROR", Color.rgb(255, 233, 233), Color.rgb(163, 82, 82));
     // DialogDownload
     public static final P2ColorData DOWNLOAD_NAME_ERROR = new P2ColorData("COLOR_DOWNLOAD_NAME_ERROR",
@@ -96,24 +91,5 @@ public class ProgColorList extends P2ColorList {
 
     public synchronized static P2ColorList getInstance() {
         return P2ColorList.getInst();
-    }
-
-
-    public static void setColorData(String key, String value) {
-        try {
-            ObservableList<P2ColorData> list = getInstance();
-            list.stream().forEach(pColorData -> {
-                if (pColorData.getKey().equals(key)) {
-                    Color c = Color.web(value);
-                    if (value.endsWith("_DARK")) {
-                        pColorData.setColorDark(c);
-                    } else {
-                        pColorData.setColorLight(c);
-                    }
-                }
-            });
-        } catch (Exception ex) {
-            P2Log.errorLog(956410210, "setColorData");
-        }
     }
 }

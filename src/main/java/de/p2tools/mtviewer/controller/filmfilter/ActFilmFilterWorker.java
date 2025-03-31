@@ -229,11 +229,6 @@ public final class ActFilmFilterWorker {
         }
 
         //Textfilter
-//        if (!sf.isThemeExact() && checkText(sfB.themeProperty(), sf.themeProperty(), sfB, sf, theme)) {
-//            setFalse();
-//            theme = true;
-//            return;
-//        }
         if (checkText(sfB.themeProperty(), sf.themeProperty(), sfB, sf, themeTitle)) {
             setFalse();
             themeTitle = true;

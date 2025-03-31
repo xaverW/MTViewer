@@ -43,18 +43,6 @@ public class ProgQuit {
         exitProg();
     }
 
-    /**
-     * Quit the MTViewer application and show QuitDialog
-     *
-     * @param startWithWaiting starts the dialog with the masker pane
-     */
-    public static void quit(boolean startWithWaiting) {
-        final ProgData progData = ProgData.getInstance();
-        //dann Programm beenden
-        saveConfig();
-        exitProg();
-    }
-
     private static void saveConfig() {
         stopAllDownloads();
         writeTabSettings();

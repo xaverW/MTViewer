@@ -46,17 +46,6 @@ public class StarterClass {
         starterThread = new StarterThread();
         starterThread.start();
 
-//        LoadFilmFactory.getInstance().loadFilmlist.p2LoadNotifier.addListenerLoadFilmlist(new P2LoadListener() {
-//            @Override
-//            public void start(P2LoadEvent event) {
-//                searchFilms = true;
-//            }
-//
-//            @Override
-//            public void finished(P2LoadEvent event) {
-//                searchFilms = false;
-//            }
-//        });
         progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_FILMLIST_LOAD_START) {
             @Override
             public void pingGui() {
@@ -180,19 +169,9 @@ public class StarterClass {
 
         if (!download.isStateStoped()) {
             //war ein Abo und wurde nicht abgebrochen
-//            addNotification(download);
             MTNotification.addNotification(download, download.isStateError());
         }
     }
-
-//    public static void addNotification(DownloadData download) {
-//        boolean error = download.isStateError();
-//        String text = ("Film:   " + download.getTitle() + P2LibConst.LINE_SEPARATOR +
-//                "Sender: " + download.getChannel() + P2LibConst.LINE_SEPARATOR +
-//                "Größe:  " + SizeTools.humanReadableByteCount(download.getDownloadSize().getSize(), true) + P2LibConst.LINE_SEPARATOR +
-//                (error ? "Download war fehlerhaft" : "Download war erfolgreich"));
-//        P2Notification.addNotification("Download beendet", text, error);
-//    }
 
     public static void finalizeDownload(DownloadData download) {
 

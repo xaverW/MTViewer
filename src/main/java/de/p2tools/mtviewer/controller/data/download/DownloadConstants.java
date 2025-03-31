@@ -42,11 +42,6 @@ public class DownloadConstants {
 
     public static final String TYPE_DOWNLOAD = "direkter Download";
 
-    public static final String STATE_COMBO_NOT_STARTED = "noch nicht gestartet";
-    public static final String STATE_COMBO_WAITING = "gestartet und wartet noch";
-    public static final String STATE_COMBO_STARTED = "gestartet (läuft oder wartet)";
-    public static final String STATE_COMBO_LOADING = "läuft";
-
     private static final DecimalFormat df = new DecimalFormat("###,##0.0");
 
     public static String getTextProgress(int status, double progress) {

@@ -26,13 +26,6 @@ import de.p2tools.p2lib.p2event.P2Listener;
 public class CheckForNewFilmlist extends SearchFilmlistUpdate {
 
     public CheckForNewFilmlist(ProgData progData) {
-//        LoadFilmFactory.getInstance().loadFilmlist.p2LoadNotifier.addListenerLoadFilmlist(new P2LoadListener() {
-//            @Override
-//            public void finished(P2LoadEvent event) {
-//                //dann wird wieder gesucht
-//                setFoundNewList(false);
-//            }
-//        });
         progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_FILMLIST_LOAD_FINISHED) {
             @Override
             public void pingGui() {
@@ -47,8 +40,4 @@ public class CheckForNewFilmlist extends SearchFilmlistUpdate {
             }
         });
     }
-
-//    public boolean check() {
-//        return super.check(ProgData.getInstance().filmlist.getFilmlistId());
-//    }
 }

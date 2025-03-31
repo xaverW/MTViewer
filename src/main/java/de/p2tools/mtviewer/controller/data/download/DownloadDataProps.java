@@ -393,10 +393,6 @@ public class DownloadDataProps extends P2DataSample<DownloadData> {
         return P2FileUtils.addsPath(destPath.getValueSafe(), destFileName.getValueSafe());
     }
 
-//    public StringProperty destPathFileProperty() {
-//        return destPathFile;
-//    }
-
     public boolean isPlacedBack() {
         return placedBack.get();
     }

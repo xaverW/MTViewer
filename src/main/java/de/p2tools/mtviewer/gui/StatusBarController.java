@@ -72,18 +72,6 @@ public class StatusBarController extends AnchorPane {
     private void make() {
         setInfoFilm();
         setTextForRightDisplay();
-//        LoadFilmFactory.getInstance().loadFilmlist.p2LoadNotifier.addListenerLoadFilmlist(new P2LoadListener() {
-//            @Override
-//            public void start(P2LoadEvent event) {
-//                stopTimer = true;
-//            }
-//
-//            @Override
-//            public void finished(P2LoadEvent event) {
-//                stopTimer = false;
-//                setStatusbarIndex();
-//            }
-//        });
         progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_FILMLIST_LOAD_START) {
             @Override
             public void pingGui(P2Event event) {

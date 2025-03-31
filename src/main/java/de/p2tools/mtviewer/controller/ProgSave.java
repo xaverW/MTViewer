@@ -35,9 +35,6 @@ import java.nio.file.StandardCopyOption;
 import java.util.Date;
 
 public class ProgSave {
-    private static boolean alreadyMadeBackup = false;
-    private static boolean open = true;
-
     private ProgSave() {
     }
 
@@ -84,15 +81,7 @@ public class ProgSave {
                                 + ProgInfos.getSettingsDirectory_String()
                                 + P2LibConst.LINE_SEPARATORx2
                                 + "von Hand löschen und das Programm wieder starten.");
-                open = false;
             } catch (Exception ignore) {
-                open = false;
-            }
-            while (open) {
-                try {
-                    ProgSave.class.wait(100);
-                } catch (final Exception ignored) {
-                }
             }
         }
     }
