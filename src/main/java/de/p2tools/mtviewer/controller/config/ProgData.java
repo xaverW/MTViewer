@@ -22,6 +22,7 @@ import de.p2tools.mtviewer.controller.data.MTShortcut;
 import de.p2tools.mtviewer.controller.data.ReplaceList;
 import de.p2tools.mtviewer.controller.data.download.DownloadInfos;
 import de.p2tools.mtviewer.controller.data.download.DownloadList;
+import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
 import de.p2tools.mtviewer.controller.filmfilter.ActFilmFilterWorker;
 import de.p2tools.mtviewer.controller.filmfilter.FilmFilterRunner;
 import de.p2tools.mtviewer.controller.starter.StarterClass;
@@ -29,17 +30,12 @@ import de.p2tools.mtviewer.controller.worker.CheckForNewFilmlist;
 import de.p2tools.mtviewer.controller.worker.Worker;
 import de.p2tools.mtviewer.gui.FilmGuiController;
 import de.p2tools.mtviewer.gui.dialog.QuitDialogController;
-import de.p2tools.mtviewer.gui.tools.Listener;
 import de.p2tools.p2lib.guitools.pmask.P2MaskerPane;
 import de.p2tools.p2lib.mtfilm.film.Filmlist;
-import de.p2tools.p2lib.tools.duration.P2Duration;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import de.p2tools.p2lib.p2event.P2EventHandler;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class ProgData {
     private static ProgData instance;
@@ -50,6 +46,8 @@ public class ProgData {
     public static boolean reset = false; // Programm auf Starteinstellungen zurücksetzen
     public static boolean firstProgramStart = false; // ist der allererste Programmstart: Init wird gemacht
     public static BooleanProperty FILMLIST_IS_DOWNLOADING = new SimpleBooleanProperty(Boolean.FALSE); // dann wird eine Filmliste geladen
+
+    public P2EventHandler pEventHandler;
 
     // Infos
     public static String configDir = ""; // Verzeichnis zum Speichern der Programmeinstellungen
@@ -72,24 +70,26 @@ public class ProgData {
     public CheckForNewFilmlist checkForNewFilmlist;
 
     // Programmdaten
+    public LoadFilmFactory loadFilmFactory;
     public Filmlist filmlist; // ist die komplette Filmliste
     public DownloadInfos downloadInfos;
     public ReplaceList replaceList;
     boolean oneSecond = false;
 
     private ProgData() {
+        pEventHandler = new P2EventHandler(false);
         mtShortcut = new MTShortcut();
         replaceList = new ReplaceList();
 
         actFilmFilterWorker = new ActFilmFilterWorker(this);
         filmlist = new Filmlist();
         downloadList = new DownloadList(this);
+        loadFilmFactory = new LoadFilmFactory(this);
         starterClass = new StarterClass(this);
         downloadInfos = new DownloadInfos(this);
         filmFilterRunner = new FilmFilterRunner(this);
         worker = new Worker(this);
-        checkForNewFilmlist = new CheckForNewFilmlist();
-
+        checkForNewFilmlist = new CheckForNewFilmlist(this);
     }
 
     public synchronized static final ProgData getInstance(String dir) {
@@ -101,31 +101,5 @@ public class ProgData {
 
     public synchronized static final ProgData getInstance() {
         return instance == null ? instance = new ProgData() : instance;
-    }
-
-    public void startTimer() {
-        // extra starten, damit er im Einrichtungsdialog nicht dazwischen funkt
-        Timeline timeline = new Timeline(new KeyFrame(
-                Duration.millis(500), ae -> {
-
-            oneSecond = !oneSecond;
-            if (oneSecond) {
-                doTimerWorkOneSecond();
-            }
-            doTimerWorkHalfSecond();
-
-        }));
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.setDelay(Duration.seconds(5));
-        timeline.play();
-        P2Duration.onlyPing("Timer gestartet");
-    }
-
-    private void doTimerWorkOneSecond() {
-        Listener.notify(Listener.EVENT_TIMER, ProgData.class.getName());
-    }
-
-    private void doTimerWorkHalfSecond() {
-        Listener.notify(Listener.EVENT_TIMER_HALF_SECOND, ProgData.class.getName());
     }
 }

@@ -16,15 +16,14 @@
 
 package de.p2tools.mtviewer.controller.starter;
 
+import de.p2tools.mtviewer.controller.config.PEvents;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.downloadtools.DirectHttpDownload;
-import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
 import de.p2tools.p2lib.mtdownload.SizeTools;
-import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadEvent;
-import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadListener;
+import de.p2tools.p2lib.p2event.P2Listener;
 import de.p2tools.p2lib.tools.date.P2Date;
 import de.p2tools.p2lib.tools.date.P2DateConst;
 import de.p2tools.p2lib.tools.log.P2Log;
@@ -47,14 +46,26 @@ public class StarterClass {
         starterThread = new StarterThread();
         starterThread.start();
 
-        LoadFilmFactory.getInstance().loadFilmlist.p2LoadNotifier.addListenerLoadFilmlist(new P2LoadListener() {
+//        LoadFilmFactory.getInstance().loadFilmlist.p2LoadNotifier.addListenerLoadFilmlist(new P2LoadListener() {
+//            @Override
+//            public void start(P2LoadEvent event) {
+//                searchFilms = true;
+//            }
+//
+//            @Override
+//            public void finished(P2LoadEvent event) {
+//                searchFilms = false;
+//            }
+//        });
+        progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_FILMLIST_LOAD_START) {
             @Override
-            public void start(P2LoadEvent event) {
+            public void pingGui() {
                 searchFilms = true;
             }
-
+        });
+        progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_FILMLIST_LOAD_FINISHED) {
             @Override
-            public void finished(P2LoadEvent event) {
+            public void pingGui() {
                 searchFilms = false;
             }
         });

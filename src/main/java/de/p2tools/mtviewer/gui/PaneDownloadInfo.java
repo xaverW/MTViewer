@@ -32,7 +32,7 @@ import de.p2tools.p2lib.alert.P2Alert;
 import de.p2tools.p2lib.guitools.P2Open;
 import de.p2tools.p2lib.guitools.P2TableFactory;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
-import de.p2tools.p2lib.tools.P2SystemUtils;
+import de.p2tools.p2lib.tools.P2ToolsFactory;
 import javafx.beans.property.DoubleProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.transformation.SortedList;
@@ -177,7 +177,7 @@ public class PaneDownloadInfo extends AnchorPane {
         if (!download.isPresent()) {
             return;
         }
-        P2SystemUtils.copyToClipboard(download.get().getUrl());
+        P2ToolsFactory.copyToClipboard(download.get().getUrl());
     }
 
     public void invertSelection() {

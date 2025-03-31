@@ -19,54 +19,114 @@ package de.p2tools.mtviewer.controller.film;
 
 import de.p2tools.mtviewer.controller.ProgSave;
 import de.p2tools.mtviewer.controller.UpdateCheckFactory;
+import de.p2tools.mtviewer.controller.config.PEvents;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.config.ProgInfos;
 import de.p2tools.mtviewer.gui.tools.TipOfDayFactory;
 import de.p2tools.p2lib.mtfilm.film.FilmlistFactory;
 import de.p2tools.p2lib.mtfilm.loadfilmlist.LoadFilmlist;
-import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadEvent;
-import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadListener;
 import de.p2tools.p2lib.mtfilm.tools.LoadFactoryConst;
+import de.p2tools.p2lib.p2event.P2Event;
+import de.p2tools.p2lib.p2event.P2Listener;
 
 public class LoadFilmFactory {
+    public static final double PROGRESS_MIN = 0.0;
+    public static final double PROGRESS_MAX = 1.0;
+    public static final double PROGRESS_INDETERMINATE = -1.0;
+
     private static LoadFilmFactory instance;
     public LoadFilmlist loadFilmlist; //erledigt das Update der Filmliste
     private static boolean doneAtProgramStart = false;
+    private final ProgData progData;
 
-    private LoadFilmFactory() {
-        loadFilmlist = new LoadFilmlist();
-        loadFilmlist.p2LoadNotifier.addListenerLoadFilmlist(new P2LoadListener() {
+    public LoadFilmFactory(ProgData progData) {
+        this.progData = progData;
+        loadFilmlist = new LoadFilmlist(progData.pEventHandler);
+//        loadFilmlist.p2LoadNotifier.addListenerLoadFilmlist(new P2LoadListener() {
+//            @Override
+//            public void start(P2LoadEvent event) {
+//                ProgData.FILMLIST_IS_DOWNLOADING.setValue(true);
+//                if (event.progress == P2LoadListener.PROGRESS_INDETERMINATE) {
+//                    // ist dann die gespeicherte Filmliste
+//                    ProgData.getInstance().maskerPane.setMaskerVisible(true, false, false);
+//                } else {
+//                    ProgData.getInstance().maskerPane.setMaskerVisible();
+//                }
+//                ProgData.getInstance().maskerPane.setMaskerProgress(event.progress, event.text);
+//
+//                // the channel combo will be reseted, therefore save the filter
+//                ProgData.getInstance().worker.saveFilter();
+//            }
+//
+//            @Override
+//            public void progress(P2LoadEvent event) {
+//                ProgData.getInstance().maskerPane.setMaskerProgress(event.progress, event.text);
+//            }
+//
+//            @Override
+//            public void loaded(P2LoadEvent event) {
+//                // todo kommt da beim Laden 2x vorbei???
+//                ProgData.getInstance().maskerPane.setMaskerVisible(true, false, false);
+//                ProgData.getInstance().maskerPane.setMaskerProgress(P2LoadListener.PROGRESS_INDETERMINATE, "Filmliste verarbeiten");
+//                ProgData.FILMLIST_IS_DOWNLOADING.setValue(false);
+//            }
+//
+//            @Override
+//            public void finished(P2LoadEvent event) {
+//                if (ProgData.firstProgramStart) {
+//                    ProgSave.saveAll(); // damit nichts verloren geht
+//                }
+//                // activate the saved filter
+//                ProgData.getInstance().worker.resetFilter();
+//                ProgData.getInstance().filmFilterRunner.filter();
+//                ProgData.getInstance().maskerPane.switchOffMasker();
+//
+//                String filmDate = FilmlistFactory.getAgeAsStringDate(ProgData.getInstance().filmlist.metaData);
+//                ProgConfig.SYSTEM_FILMLIST_DATE.setValue(ProgData.getInstance().filmlist.isEmpty() ? "" : filmDate);
+//
+//                if (!doneAtProgramStart) {
+//                    doneAtProgramStart = true;
+//                    UpdateCheckFactory.checkProgUpdate();
+//                    TipOfDayFactory.showDialog(ProgData.getInstance(), false);
+//                }
+//            }
+//        });
+
+        progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_FILMLIST_LOAD_START) {
             @Override
-            public void start(P2LoadEvent event) {
+            public void pingGui(P2Event event) {
                 ProgData.FILMLIST_IS_DOWNLOADING.setValue(true);
-                if (event.progress == P2LoadListener.PROGRESS_INDETERMINATE) {
+                if (event.getAct() == PROGRESS_INDETERMINATE) {
                     // ist dann die gespeicherte Filmliste
                     ProgData.getInstance().maskerPane.setMaskerVisible(true, false, false);
                 } else {
                     ProgData.getInstance().maskerPane.setMaskerVisible();
                 }
-                ProgData.getInstance().maskerPane.setMaskerProgress(event.progress, event.text);
+                ProgData.getInstance().maskerPane.setMaskerProgress(event.getAct(), event.getText());
 
                 // the channel combo will be reseted, therefore save the filter
                 ProgData.getInstance().worker.saveFilter();
             }
-
+        });
+        progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_FILMLIST_LOAD_PROGRESS) {
             @Override
-            public void progress(P2LoadEvent event) {
-                ProgData.getInstance().maskerPane.setMaskerProgress(event.progress, event.text);
+            public void pingGui(P2Event event) {
+                ProgData.getInstance().maskerPane.setMaskerProgress(event.getAct(), event.getText());
             }
-
+        });
+        progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_FILMLIST_LOAD_LOADED) {
             @Override
-            public void loaded(P2LoadEvent event) {
+            public void pingGui() {
                 // todo kommt da beim Laden 2x vorbei???
                 ProgData.getInstance().maskerPane.setMaskerVisible(true, false, false);
-                ProgData.getInstance().maskerPane.setMaskerProgress(P2LoadListener.PROGRESS_INDETERMINATE, "Filmliste verarbeiten");
+                ProgData.getInstance().maskerPane.setMaskerProgress(PROGRESS_INDETERMINATE, "Filmliste verarbeiten");
                 ProgData.FILMLIST_IS_DOWNLOADING.setValue(false);
             }
-
+        });
+        progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_FILMLIST_LOAD_FINISHED) {
             @Override
-            public void finished(P2LoadEvent event) {
+            public void pingGui() {
                 if (ProgData.firstProgramStart) {
                     ProgSave.saveAll(); // damit nichts verloren geht
                 }
@@ -116,9 +176,5 @@ public class LoadFilmFactory {
         LoadFactoryConst.loadFilmlist = loadFilmlist;
         LoadFactoryConst.primaryStage = ProgData.getInstance().primaryStage;
         LoadFactoryConst.filmListUrl = ProgData.filmListUrl;
-    }
-
-    public synchronized static final LoadFilmFactory getInstance() {
-        return instance == null ? instance = new LoadFilmFactory() : instance;
     }
 }

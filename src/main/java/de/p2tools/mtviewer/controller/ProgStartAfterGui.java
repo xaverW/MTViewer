@@ -20,8 +20,7 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.config.ProgInfos;
-import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
-import de.p2tools.p2lib.tools.P2ToolsFactory;
+import de.p2tools.p2lib.tools.P2InfoFactory;
 import de.p2tools.p2lib.tools.log.P2Log;
 import de.p2tools.p2lib.tools.log.P2LogMessage;
 
@@ -39,9 +38,9 @@ public class ProgStartAfterGui {
     public static void doWorkAfterGui() {
         startMsg();
         setTitle();
-        ProgData.getInstance().startTimer();
+        ProgData.getInstance().pEventHandler.startTimer();
         //die gespeicherte Filmliste laden
-        LoadFilmFactory.getInstance().loadProgStart();
+        ProgData.getInstance().loadFilmFactory.loadProgStart();
     }
 
     public static void startMsg() {
@@ -57,9 +56,9 @@ public class ProgStartAfterGui {
 
     private static void setTitle() {
         if (ProgData.debug) {
-            ProgData.getInstance().primaryStage.setTitle(ProgConst.PROGRAM_NAME + " " + P2ToolsFactory.getProgVersion() + " / DEBUG");
+            ProgData.getInstance().primaryStage.setTitle(ProgConst.PROGRAM_NAME + " " + P2InfoFactory.getProgVersion() + " / DEBUG");
         } else {
-            ProgData.getInstance().primaryStage.setTitle(ProgConst.PROGRAM_NAME + " " + P2ToolsFactory.getProgVersion());
+            ProgData.getInstance().primaryStage.setTitle(ProgConst.PROGRAM_NAME + " " + P2InfoFactory.getProgVersion());
         }
     }
 }

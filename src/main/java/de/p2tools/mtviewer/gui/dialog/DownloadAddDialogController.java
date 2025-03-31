@@ -31,7 +31,7 @@ import de.p2tools.p2lib.guitools.P2Hyperlink;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 import de.p2tools.p2lib.mtfilm.film.FilmFactory;
 import de.p2tools.p2lib.mtfilm.tools.FileNameUtils;
-import de.p2tools.p2lib.tools.P2SystemUtils;
+import de.p2tools.p2lib.tools.P2InfoFactory;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -492,7 +492,7 @@ public class DownloadAddDialogController extends P2DialogExtra {
         String stdPath, actPath;
         actPath = cboPath.getSelectionModel().getSelectedItem();
 
-        stdPath = P2SystemUtils.getStandardDownloadPath();
+        stdPath = P2InfoFactory.getStandardDownloadPath();
         actPath = DialogFactory.getNextName(stdPath, actPath, downloadData.getTheme());
         if (!cboPath.getItems().contains(actPath)) {
             cboPath.getItems().add(actPath);

@@ -28,8 +28,7 @@ import de.p2tools.p2lib.guitools.P2Button;
 import de.p2tools.p2lib.guitools.P2ColumnConstraints;
 import de.p2tools.p2lib.guitools.P2Hyperlink;
 import de.p2tools.p2lib.mtdownload.GetProgramStandardPath;
-import de.p2tools.p2lib.tools.P2SystemUtils;
-import de.p2tools.p2lib.tools.P2ToolsFactory;
+import de.p2tools.p2lib.tools.P2InfoFactory;
 import javafx.beans.property.StringProperty;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -83,7 +82,7 @@ public class PathPane {
         text = new Text("Pfad für Downloads auswählen");
         btnFind.setOnAction(event -> {
             ProgConfig.DOWNLOAD_FILE_PATH.setValue("");
-            txtDownloadPath.setText(P2SystemUtils.getStandardDownloadPath());
+            txtDownloadPath.setText(P2InfoFactory.getStandardDownloadPath());
         });
 
         text.setStyle("-fx-font-weight: bold");
@@ -95,7 +94,7 @@ public class PathPane {
             ProgConfig.DOWNLOAD_FILE_PATH.setValue("/tmp/Download");
         }
         if (txtDownloadPath.getText().isEmpty()) {
-            txtDownloadPath.setText(P2SystemUtils.getStandardDownloadPath());
+            txtDownloadPath.setText(P2InfoFactory.getStandardDownloadPath());
         }
 
         final Button btnFile = new Button();
@@ -168,9 +167,9 @@ public class PathPane {
     }
 
     private void addFFmpeg() {
-        P2ToolsFactory.OperatingSystemType op = P2ToolsFactory.getOs();
-        if (op.equals(P2ToolsFactory.OperatingSystemType.WIN32) ||
-                op.equals(P2ToolsFactory.OperatingSystemType.WIN64)) {
+        P2InfoFactory.OperatingSystemType op = P2InfoFactory.getOs();
+        if (op.equals(P2InfoFactory.OperatingSystemType.WIN32) ||
+                op.equals(P2InfoFactory.OperatingSystemType.WIN64)) {
             //da wirds mitgeliefert und passt
             return;
         }

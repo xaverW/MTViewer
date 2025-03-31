@@ -17,19 +17,25 @@
 
 package de.p2tools.mtviewer.controller.worker;
 
+import de.p2tools.mtviewer.controller.config.PEvents;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
 import de.p2tools.mtviewer.gui.tools.Listener;
-import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadEvent;
-import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadListener;
 import de.p2tools.p2lib.mtfilm.tools.SearchFilmlistUpdate;
+import de.p2tools.p2lib.p2event.P2Listener;
 
 public class CheckForNewFilmlist extends SearchFilmlistUpdate {
 
-    public CheckForNewFilmlist() {
-        LoadFilmFactory.getInstance().loadFilmlist.p2LoadNotifier.addListenerLoadFilmlist(new P2LoadListener() {
+    public CheckForNewFilmlist(ProgData progData) {
+//        LoadFilmFactory.getInstance().loadFilmlist.p2LoadNotifier.addListenerLoadFilmlist(new P2LoadListener() {
+//            @Override
+//            public void finished(P2LoadEvent event) {
+//                //dann wird wieder gesucht
+//                setFoundNewList(false);
+//            }
+//        });
+        progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_FILMLIST_LOAD_FINISHED) {
             @Override
-            public void finished(P2LoadEvent event) {
+            public void pingGui() {
                 //dann wird wieder gesucht
                 setFoundNewList(false);
             }
@@ -42,7 +48,7 @@ public class CheckForNewFilmlist extends SearchFilmlistUpdate {
         });
     }
 
-    public boolean check() {
-        return super.check(ProgData.getInstance().filmlist.getFilmlistId());
-    }
+//    public boolean check() {
+//        return super.check(ProgData.getInstance().filmlist.getFilmlistId());
+//    }
 }

@@ -21,7 +21,7 @@ import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.p2lib.checkforactinfos.FoundAll;
 import de.p2tools.p2lib.checkforactinfos.FoundSearchDataDTO;
-import de.p2tools.p2lib.tools.P2ToolsFactory;
+import de.p2tools.p2lib.tools.P2InfoFactory;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 
@@ -73,10 +73,11 @@ public class SearchProgramUpdate {
                 ProgConst.URL_WEBSITE_DOWNLOAD,
                 ProgConst.PROGRAM_NAME,
 
-                P2ToolsFactory.getProgVersion(),
-                P2ToolsFactory.getBuildNo(),
-                P2ToolsFactory.getBuildDateR(),
+                P2InfoFactory.getProgVersion(),
+                P2InfoFactory.getBuildNo(),
+                P2InfoFactory.getBuildDateR(),
 
+                new String[]{}, // bsSearch zur Anzeige der Downloads
                 ProgConfig.SYSTEM_DOWNLOAD_DIR_NEW_VERSION,
                 showAllways,
                 false

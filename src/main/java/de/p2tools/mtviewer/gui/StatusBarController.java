@@ -16,12 +16,12 @@
 
 package de.p2tools.mtviewer.gui;
 
+import de.p2tools.mtviewer.controller.config.PEvents;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.film.FilmTools;
-import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
 import de.p2tools.mtviewer.gui.tools.Listener;
-import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadEvent;
-import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadListener;
+import de.p2tools.p2lib.p2event.P2Event;
+import de.p2tools.p2lib.p2event.P2Listener;
 import de.p2tools.p2lib.tools.log.P2Log;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -72,14 +72,27 @@ public class StatusBarController extends AnchorPane {
     private void make() {
         setInfoFilm();
         setTextForRightDisplay();
-        LoadFilmFactory.getInstance().loadFilmlist.p2LoadNotifier.addListenerLoadFilmlist(new P2LoadListener() {
+//        LoadFilmFactory.getInstance().loadFilmlist.p2LoadNotifier.addListenerLoadFilmlist(new P2LoadListener() {
+//            @Override
+//            public void start(P2LoadEvent event) {
+//                stopTimer = true;
+//            }
+//
+//            @Override
+//            public void finished(P2LoadEvent event) {
+//                stopTimer = false;
+//                setStatusbarIndex();
+//            }
+//        });
+        progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_FILMLIST_LOAD_START) {
             @Override
-            public void start(P2LoadEvent event) {
+            public void pingGui(P2Event event) {
                 stopTimer = true;
             }
-
+        });
+        progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_FILMLIST_LOAD_FINISHED) {
             @Override
-            public void finished(P2LoadEvent event) {
+            public void pingGui(P2Event event) {
                 stopTimer = false;
                 setStatusbarIndex();
             }

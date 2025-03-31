@@ -19,7 +19,6 @@ package de.p2tools.mtviewer;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
-import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
 import de.p2tools.mtviewer.gui.FilmGuiPack;
 import de.p2tools.mtviewer.gui.StatusBarController;
 import de.p2tools.p2lib.tools.log.P2Log;
@@ -67,7 +66,7 @@ public class MTViewerController extends StackPane {
         Button btnStop = progData.maskerPane.getButton();
         progData.maskerPane.setButtonText("");
         btnStop.setGraphic(ProgIcons.ICON_BUTTON_STOP.getImageView());
-        btnStop.setOnAction(a -> LoadFilmFactory.getInstance().loadFilmlist.setStop(true));
+        btnStop.setOnAction(a -> progData.loadFilmFactory.loadFilmlist.setStop(true));
     }
 
     public void setInfos() {

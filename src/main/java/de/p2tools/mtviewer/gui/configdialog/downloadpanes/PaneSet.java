@@ -27,7 +27,7 @@ import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.dialogs.P2DirFileChooser;
 import de.p2tools.p2lib.guitools.P2Button;
 import de.p2tools.p2lib.guitools.P2ColumnConstraints;
-import de.p2tools.p2lib.tools.P2SystemUtils;
+import de.p2tools.p2lib.tools.P2InfoFactory;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.control.*;
@@ -217,7 +217,7 @@ public class PaneSet {
         unBindProgData();
         txtDestPath.textProperty().bindBidirectional(ProgConfig.DOWNLOAD_FILE_PATH);
         if (txtDestPath.getText().isEmpty()) {
-            txtDestPath.setText(P2SystemUtils.getStandardDownloadPath());
+            txtDestPath.setText(P2InfoFactory.getStandardDownloadPath());
         }
         txtDestName.textProperty().bindBidirectional(ProgConfig.DOWNLOAD_FILE_NAME);
         if (txtDestName.getText().isEmpty()) {
