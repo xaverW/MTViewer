@@ -16,11 +16,11 @@
 
 package de.p2tools.mtviewer.gui;
 
+import de.p2tools.mtviewer.controller.config.PEvents;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.film.FilmTools;
 import de.p2tools.mtviewer.gui.dialog.FilmInfoDialogController;
-import de.p2tools.mtviewer.gui.tools.Listener;
 import de.p2tools.mtviewer.gui.tools.table.Table;
 import de.p2tools.mtviewer.gui.tools.table.TableFilm;
 import de.p2tools.mtviewer.gui.tools.table.TableRowFilm;
@@ -30,6 +30,7 @@ import de.p2tools.p2lib.guitools.pclosepane.P2ClosePaneController;
 import de.p2tools.p2lib.guitools.pclosepane.P2ClosePaneDto;
 import de.p2tools.p2lib.guitools.pclosepane.P2ClosePaneFactory;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
+import de.p2tools.p2lib.p2event.P2Listener;
 import de.p2tools.p2lib.tools.log.P2Log;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
@@ -172,10 +173,9 @@ public class FilmGuiController extends AnchorPane {
     }
 
     private void initListener() {
-        Listener.addListener(new Listener(new int[]{Listener.EVENT_GUI_HISTORY_CHANGED},
-                FilmGuiController.class.getSimpleName()) {
+        progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_GUI_HISTORY_CHANGED) {
             @Override
-            public void pingFx() {
+            public void pingGui() {
                 P2TableFactory.refreshTable(tableView);
             }
         });

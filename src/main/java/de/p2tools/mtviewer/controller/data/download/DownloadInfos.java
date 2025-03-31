@@ -17,10 +17,11 @@
 
 package de.p2tools.mtviewer.controller.data.download;
 
+import de.p2tools.mtviewer.controller.config.PEvents;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.gui.tools.Listener;
 import de.p2tools.p2lib.mtdownload.SizeTools;
+import de.p2tools.p2lib.p2event.P2Listener;
 import de.p2tools.p2lib.tools.log.P2Log;
 
 import java.text.DecimalFormat;
@@ -51,7 +52,7 @@ public class DownloadInfos {
 
     public DownloadInfos(ProgData progData) {
         this.progData = progData;
-        Listener.addListener(new Listener(Listener.EVENT_TIMER, DownloadInfos.class.getSimpleName()) {
+        progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_TIMER_SECOND) {
             @Override
             public void ping() {
                 clean();

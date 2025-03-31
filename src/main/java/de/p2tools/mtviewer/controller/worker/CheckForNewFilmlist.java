@@ -19,7 +19,6 @@ package de.p2tools.mtviewer.controller.worker;
 
 import de.p2tools.mtviewer.controller.config.PEvents;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.gui.tools.Listener;
 import de.p2tools.p2lib.mtfilm.tools.SearchFilmlistUpdate;
 import de.p2tools.p2lib.p2event.P2Listener;
 
@@ -33,9 +32,9 @@ public class CheckForNewFilmlist extends SearchFilmlistUpdate {
                 setFoundNewList(false);
             }
         });
-        Listener.addListener(new Listener(Listener.EVENT_TIMER, CheckForNewFilmlist.class.getSimpleName()) {
+        progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_TIMER_SECOND) {
             @Override
-            public void pingFx() {
+            public void pingGui() {
                 hasNewFilmlist(ProgData.getInstance().filmlist.getFilmlistId());
             }
         });

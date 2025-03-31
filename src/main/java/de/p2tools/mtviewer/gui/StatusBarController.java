@@ -19,7 +19,6 @@ package de.p2tools.mtviewer.gui;
 import de.p2tools.mtviewer.controller.config.PEvents;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.film.FilmTools;
-import de.p2tools.mtviewer.gui.tools.Listener;
 import de.p2tools.p2lib.p2event.P2Event;
 import de.p2tools.p2lib.p2event.P2Listener;
 import de.p2tools.p2lib.tools.log.P2Log;
@@ -85,9 +84,9 @@ public class StatusBarController extends AnchorPane {
                 setStatusbarIndex();
             }
         });
-        Listener.addListener(new Listener(Listener.EVENT_TIMER, StatusBarController.class.getSimpleName()) {
+        progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_TIMER_SECOND) {
             @Override
-            public void pingFx() {
+            public void pingGui() {
                 try {
                     if (!stopTimer) {
                         setStatusbarIndex();

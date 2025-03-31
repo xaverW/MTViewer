@@ -22,4 +22,9 @@ import de.p2tools.p2lib.p2event.P2Events;
 public class PEvents extends P2Events {
     // Prog zählt vorwärts
     private static int count = 0;
+
+    public static final int EVENT_BLACKLIST_CHANGED = count++;
+    public static final int EVENT_DIACRITIC_CHANGED = count++;
+    public static final int EVENT_GUI_HISTORY_CHANGED = count++;
+    public static final int EVENT_SETDATA_CHANGED = count++;
 }

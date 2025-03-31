@@ -16,9 +16,9 @@
 
 package de.p2tools.mtviewer.gui.configdialog;
 
+import de.p2tools.mtviewer.controller.config.PEvents;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.gui.tools.Listener;
 import de.p2tools.p2lib.dialogs.dialog.P2DialogExtra;
 import de.p2tools.p2lib.mtfilm.film.FilmFactory;
 import de.p2tools.p2lib.tools.log.P2Log;
@@ -82,7 +82,7 @@ public class ConfigDialogController extends P2DialogExtra {
                 ProgData.getInstance().maskerPane.setMaskerText("Diakritika entfernen");
                 ProgData.getInstance().maskerPane.setMaskerVisible();
                 FilmFactory.flattenDiacritic(progData.filmlist);
-                Listener.notify(Listener.EVENT_DIACRITIC_CHANGED, ConfigDialogController.class.getSimpleName());
+                progData.pEventHandler.notifyListener(PEvents.EVENT_DIACRITIC_CHANGED);
                 ProgData.getInstance().maskerPane.switchOffMasker();
             }).start();
         }
@@ -92,7 +92,7 @@ public class ConfigDialogController extends P2DialogExtra {
         controllerFilm.close();
         controllerDownload.close();
 
-        Listener.notify(Listener.EVEMT_SETDATA_CHANGED, ConfigDialogController.class.getSimpleName());
+        progData.pEventHandler.notifyListener(PEvents.EVENT_SETDATA_CHANGED);
         super.close();
     }
 
