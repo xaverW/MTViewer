@@ -84,6 +84,6 @@ public class ProgQuit {
     private static void writeTabSettings() {
         // Tabelleneinstellungen merken
         final ProgData progData = ProgData.getInstance();
-        progData.filmGuiController.saveTable();
+        progData.filmGuiPack.saveTable();
     }
 }

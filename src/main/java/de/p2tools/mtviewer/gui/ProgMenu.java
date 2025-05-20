@@ -57,13 +57,13 @@ public class ProgMenu extends MenuButton {
         //Filme
         final Menu mFilm = new Menu("Filme");
         final MenuItem miPlay = new MenuItem("Film abspielen");
-        miPlay.setOnAction(a -> progData.filmGuiController.playFilm());
+        miPlay.setOnAction(a -> progData.filmGuiPack.getFilmGuiController().playFilm());
         P2ShortcutWorker.addShortCut(miPlay, MTShortcut.SHORTCUT_PLAY_FILM);
         final MenuItem miSave = new MenuItem("Film speichern");
-        miSave.setOnAction(a -> progData.filmGuiController.saveFilm());
+        miSave.setOnAction(a -> progData.filmGuiPack.getFilmGuiController().saveFilm());
         P2ShortcutWorker.addShortCut(miSave, MTShortcut.SHORTCUT_SAVE_FILM);
         final MenuItem miFilmInfo = new MenuItem("Filminformation anzeigen");
-        miFilmInfo.setOnAction(a -> progData.filmGuiController.showFilmInfo());
+        miFilmInfo.setOnAction(a -> progData.filmGuiPack.getFilmGuiController().showFilmInfo());
         P2ShortcutWorker.addShortCut(miFilmInfo, MTShortcut.SHORTCUT_INFO_FILM);
         mFilm.getItems().addAll(miPlay, miSave, miFilmInfo);
 
@@ -75,14 +75,20 @@ public class ProgMenu extends MenuButton {
         final CheckMenuItem miDarkMode = new CheckMenuItem("Dark Mode");
         miDarkMode.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_DARK_THEME);
 
-        final MenuItem miShowInfo = new MenuItem("Infobereich unter der Tabelle ein-/ausblenden");
-        miShowInfo.setOnAction(a -> progData.mtViewerController.setInfos());
-        miShowInfo.disableProperty().bind(ProgConfig.FILM__INFO_PANE_IS_RIP
-                .and(ProgConfig.DOWNLOAD__INFO_PANE_IS_RIP));
+        final CheckMenuItem miShowInfo = new CheckMenuItem("Infobereich anzeigen");
+        miShowInfo.selectedProperty().bindBidirectional(ProgConfig.INFO__IS_SHOWING);
+        miShowInfo.disableProperty().bind(ProgConfig.INFO__PANE_INFO_IS_RIP
+                .and(ProgConfig.INFO__PANE_DOWNLOAD_IS_RIP));
         P2ShortcutWorker.addShortCut(miShowInfo, MTShortcut.SHORTCUT_SHOW_INFOS);
+
+        final CheckMenuItem miShowFilter = new CheckMenuItem("Filter anzeigen");
+        miShowFilter.selectedProperty().bindBidirectional(ProgConfig.FILTER__IS_SHOWING);
+        miShowFilter.disableProperty().bind(ProgConfig.FILTER__PANE_FILTER_IS_RIP);
+        P2ShortcutWorker.addShortCut(miShowFilter, MTShortcut.SHORTCUT_SHOW_FILTER);
+
         final MenuItem miConfig = new MenuItem("Einstellungen");
         miConfig.setOnAction(e -> new ConfigDialogController(ProgData.getInstance()).showDialog());
-        getItems().addAll(mFilm, miLoad, miDarkMode, miShowInfo, miConfig, new SeparatorMenuItem());
+        getItems().addAll(mFilm, miLoad, miDarkMode, miShowInfo, miShowFilter, miConfig, new SeparatorMenuItem());
 
         //=========================
         //Hilfe

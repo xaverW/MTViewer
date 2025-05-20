@@ -28,7 +28,7 @@ import de.p2tools.mtviewer.controller.filmfilter.FilmFilterRunner;
 import de.p2tools.mtviewer.controller.starter.StarterClass;
 import de.p2tools.mtviewer.controller.worker.CheckForNewFilmlist;
 import de.p2tools.mtviewer.controller.worker.Worker;
-import de.p2tools.mtviewer.gui.FilmGuiController;
+import de.p2tools.mtviewer.gui.FilmGuiPack;
 import de.p2tools.mtviewer.gui.dialog.QuitDialogController;
 import de.p2tools.p2lib.guitools.pmask.P2MaskerPane;
 import de.p2tools.p2lib.mtfilm.film.Filmlist;
@@ -63,7 +63,7 @@ public class ProgData {
     public Stage primaryStage = null;
     public P2MaskerPane maskerPane = new P2MaskerPane();
     public MTViewerController mtViewerController = null;
-    public FilmGuiController filmGuiController = null; // Tab mit den Filmen
+    public FilmGuiPack filmGuiPack = null; // Tab mit den Filmen
     public QuitDialogController quitDialogController = null;
     // Worker
     public Worker worker; // Liste aller Sender, Themen, ...

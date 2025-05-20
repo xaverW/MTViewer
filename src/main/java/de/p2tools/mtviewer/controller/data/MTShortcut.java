@@ -38,6 +38,11 @@ public class MTShortcut {
                     "Infos anzeigen",
                     "Unter der Tabelle \"Filme\" die Infos anzeigen.");
 
+    public static final P2ShortcutKey SHORTCUT_SHOW_FILTER =
+            new P2ShortcutKey(ProgConfig.SHORTCUT_SHOW_FILTER, ProgConfig.SHORTCUT_SHOW_FILTER_INIT,
+                    "Filter anzeigen",
+                    "Neben der Tabelle \"Filme\" die Filter anzeigen.");
+
     public static final P2ShortcutKey SHORTCUT_INFO_FILM =
             new P2ShortcutKey(ProgConfig.SHORTCUT_INFO_FILM, ProgConfig.SHORTCUT_INFO_FILM_INIT,
                     "Filminformation anzeigen",

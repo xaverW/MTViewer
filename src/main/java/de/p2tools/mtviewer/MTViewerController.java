@@ -16,10 +16,10 @@
 
 package de.p2tools.mtviewer;
 
-import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.gui.FilmGuiPack;
+import de.p2tools.mtviewer.gui.FilmGuiTop;
 import de.p2tools.mtviewer.gui.StatusBarController;
 import de.p2tools.p2lib.tools.log.P2Log;
 import javafx.geometry.Insets;
@@ -32,24 +32,24 @@ import javafx.scene.layout.VBox;
 public class MTViewerController extends StackPane {
 
     private final ProgData progData;
-    FilmGuiPack filmGuiPack = new FilmGuiPack();
+    private final FilmGuiPack filmGuiPack;
 
     public MTViewerController() {
         progData = ProgData.getInstance();
+        filmGuiPack = new FilmGuiPack();
         init();
     }
 
     private void init() {
         try {
             // Center
-            VBox vBoxFilm = filmGuiPack.pack();
             StatusBarController statusBarController;
             statusBarController = new StatusBarController(progData);
 
             // Gui zusammenbauen
             VBox vBox = new VBox();
-            vBox.getChildren().addAll(vBoxFilm, statusBarController);
-            VBox.setVgrow(vBoxFilm, Priority.ALWAYS);
+            vBox.getChildren().addAll(new FilmGuiTop(), filmGuiPack, statusBarController);
+            VBox.setVgrow(filmGuiPack, Priority.ALWAYS);
 
             this.setPadding(new Insets(0));
             this.getChildren().addAll(vBox, progData.maskerPane);
@@ -69,11 +69,7 @@ public class MTViewerController extends StackPane {
         btnStop.setOnAction(a -> progData.loadFilmFactory.loadFilmlist.setStop(true));
     }
 
-    public void setInfos() {
-        ProgConfig.INFO__IS_SHOWING.setValue(!ProgConfig.INFO__IS_SHOWING.getValue());
-    }
-
     public void setFocus() {
-        progData.filmGuiController.isShown();
+        progData.filmGuiPack.getFilmGuiController().isShown();
     }
 }

@@ -18,42 +18,130 @@ package de.p2tools.mtviewer.gui;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
+import de.p2tools.p2lib.guitools.pclosepane.P2ClosePaneController;
+import de.p2tools.p2lib.guitools.pclosepane.P2ClosePaneDto;
+import de.p2tools.p2lib.guitools.pclosepane.P2ClosePaneFactory;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.geometry.Orientation;
+import javafx.scene.control.SplitPane;
+import javafx.scene.layout.HBox;
 
-public class FilmGuiPack {
+import java.util.ArrayList;
 
-    final FilmFilterController filterController;
-    final FilmGuiController filmGuiController;
-    ProgData progData;
-    private VBox vBox = new VBox();
+public class FilmGuiPack extends HBox {
+
+    private final SplitPane splitPaneFilter = new SplitPane();
+    private final SplitPane splitPaneInfo = new SplitPane();
+
+    private final FilmGuiController filmGuiController;
+    private final PaneFilmFilter paneFilmFilter;
+    private final PaneFilmInfo paneFilmInfo;
+    private final PaneDownloadInfo paneDownloadInfo;
+
+    private final P2ClosePaneController CloseControllerFilter;
+    private final P2ClosePaneController closeControllerInfo;
+    private final BooleanProperty boundFilter = new SimpleBooleanProperty(false);
+    private final BooleanProperty boundInfo = new SimpleBooleanProperty(false);
+
+    private final ProgData progData;
 
     public FilmGuiPack() {
         progData = ProgData.getInstance();
-        filterController = new FilmFilterController();
-        filmGuiController = new FilmGuiController();
-        progData.filmGuiController = filmGuiController;
+
+        this.paneFilmFilter = new PaneFilmFilter();
+        this.filmGuiController = new FilmGuiController();
+        this.paneFilmInfo = new PaneFilmInfo();
+        this.paneDownloadInfo = new PaneDownloadInfo();
+
+
+        P2ClosePaneDto infoDto = new P2ClosePaneDto(paneFilmFilter,
+                ProgConfig.FILTER__PANE_FILTER_IS_RIP,
+                ProgConfig.FILTER__PANE_FILTER_DIALOG_SIZE, new SimpleBooleanProperty(true),
+                "Filter", "Filter", true,
+                progData.maskerPane.getVisibleProperty());
+        CloseControllerFilter = new P2ClosePaneController(infoDto, ProgConfig.FILTER__IS_SHOWING);
+
+        ArrayList<P2ClosePaneDto> list = new ArrayList<>();
+        infoDto = new P2ClosePaneDto(paneFilmInfo,
+                ProgConfig.INFO__PANE_INFO_IS_RIP,
+                ProgConfig.INFO__PANE_INFO_DIALOG_SIZE, new SimpleBooleanProperty(true),
+                "Beschreibung", "Beschreibung", false,
+                progData.maskerPane.getVisibleProperty());
+        list.add(infoDto);
+
+        infoDto = new P2ClosePaneDto(paneDownloadInfo,
+                ProgConfig.INFO__PANE_DOWNLOAD_IS_RIP,
+                ProgConfig.INFO__PANE_DOWNLOAD_DIALOG_SIZE, new SimpleBooleanProperty(true),
+                "Download", "Download", false,
+                progData.maskerPane.getVisibleProperty());
+        list.add(infoDto);
+        closeControllerInfo = new P2ClosePaneController(list, ProgConfig.INFO__IS_SHOWING);
+
+        ProgConfig.FILTER__IS_SHOWING.addListener((observable, oldValue, newValue) -> setSplitFilter());
+        ProgConfig.FILTER__PANE_FILTER_IS_RIP.addListener((observable, oldValue, newValue) -> setSplitFilter());
+
+        ProgConfig.INFO__IS_SHOWING.addListener((observable, oldValue, newValue) -> setSplitInfo());
+        ProgConfig.INFO__PANE_INFO_IS_RIP.addListener((observable, oldValue, newValue) -> setSplitInfo());
+        ProgConfig.INFO__PANE_DOWNLOAD_IS_RIP.addListener((observable, oldValue, newValue) -> setSplitInfo());
+
+        progData.filmGuiPack = this;
+        pack();
     }
 
-    public VBox pack() {
-        ProgConfig.FILM_GUI_FILTER_DIVIDER_ON.setValue(true);
-        ProgConfig.FILM_GUI_FILTER_DIVIDER_ON.addListener((observable, oldValue, newValue) -> setFilterPane());
-
-        vBox.getChildren().addAll(filterController, filmGuiController);
-        VBox.setVgrow(filmGuiController, Priority.ALWAYS);
-        return vBox;
+    public void saveTable() {
+        filmGuiController.saveTable();
+        paneDownloadInfo.saveTable();
     }
 
-    private void setFilterPane() {
-        if (ProgConfig.FILM_GUI_FILTER_DIVIDER_ON.getValue()) {
-            vBox.getChildren().clear();
-            vBox.getChildren().addAll(filterController, filmGuiController);
-            VBox.setVgrow(filmGuiController, Priority.ALWAYS);
+    public FilmGuiController getFilmGuiController() {
+        return filmGuiController;
+    }
 
-        } else {
-            vBox.getChildren().clear();
-            vBox.getChildren().addAll(filmGuiController);
-            VBox.setVgrow(filmGuiController, Priority.ALWAYS);
-        }
+    public PaneFilmFilter getFilmFilterController() {
+        return paneFilmFilter;
+    }
+
+    public PaneFilmInfo getPaneFilmInfo() {
+        return paneFilmInfo;
+    }
+
+    public PaneDownloadInfo getPaneDownloadInfo() {
+        return paneDownloadInfo;
+    }
+
+    public void setInfos() {
+        ProgConfig.INFO__IS_SHOWING.setValue(!ProgConfig.INFO__IS_SHOWING.getValue());
+    }
+
+    public void setFilter() {
+        ProgConfig.FILTER__IS_SHOWING.setValue(!ProgConfig.FILTER__IS_SHOWING.getValue());
+    }
+
+    private void pack() {
+        //Filter
+        SplitPane.setResizableWithParent(CloseControllerFilter, false);
+        ProgConfig.FILTER__IS_SHOWING.addListener((observable, oldValue, newValue) -> setSplitFilter());
+        setSplitFilter();
+
+        //Info
+        splitPaneInfo.setOrientation(Orientation.VERTICAL);
+        SplitPane.setResizableWithParent(filmGuiController, false);
+        ProgConfig.INFO__IS_SHOWING.addListener((observable, oldValue, newValue) -> setSplitInfo());
+        setSplitInfo();
+
+        getChildren().addAll(splitPaneFilter);
+    }
+
+    private void setSplitFilter() {
+        P2ClosePaneFactory.setSplit(boundFilter, splitPaneFilter,
+                CloseControllerFilter, true, splitPaneInfo,
+                ProgConfig.FILTER__DIVIDER, ProgConfig.FILTER__IS_SHOWING);
+    }
+
+    private void setSplitInfo() {
+        P2ClosePaneFactory.setSplit(boundInfo, splitPaneInfo,
+                closeControllerInfo, false, filmGuiController,
+                ProgConfig.INFO__DIVIDER, ProgConfig.INFO__IS_SHOWING);
     }
 }

@@ -30,8 +30,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 public class PaneFilmInfo extends VBox {
-    private final SplitPane splitPane = new SplitPane();
-    private final VBox vBoxLeft = new VBox();
 
     private final TextArea textArea = new TextArea();
     private final Button btnReset = new Button("@");
@@ -75,6 +73,7 @@ public class PaneFilmInfo extends VBox {
         VBox v = new VBox();
         v.setSpacing(0);
         v.getChildren().addAll(lblTheme, lblTitle);
+        VBox vBoxLeft = new VBox();
         vBoxLeft.setSpacing(2);
         vBoxLeft.setPadding(new Insets(P2LibConst.PADDING));
         vBoxLeft.getChildren().addAll(v, stackPane, hBoxUrl);
@@ -96,8 +95,9 @@ public class PaneFilmInfo extends VBox {
         gridPane.add(new Label("Größe: "), 0, ++row);
         gridPane.add(lblSize, 1, row);
 
+        SplitPane splitPane = new SplitPane();
         splitPane.getItems().addAll(vBoxLeft, gridPane);
-        splitPane.getDividers().get(0).positionProperty().bindBidirectional(ProgConfig.FILM_GUI_INFO_DIVIDER);
+        splitPane.getDividers().get(0).positionProperty().bindBidirectional(ProgConfig.INFO__DIVIDER);
         SplitPane.setResizableWithParent(gridPane, false);
 
         setSpacing(0);

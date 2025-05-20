@@ -112,7 +112,7 @@ public class StatusBarController extends AnchorPane {
 
     private void setInfoFilm() {
         lblLeftFilm.setText(FilmTools.getStatusInfosFilm());
-        final int selCount = progData.filmGuiController.getSelCount();
+        final int selCount = progData.filmGuiPack.getFilmGuiController().getSelCount();
         lblSelFilm.setText(selCount > 0 ? selCount + "" : " ");
     }
 

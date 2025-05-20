@@ -89,6 +89,8 @@ public class ProgConfig extends P2DataProgConfig {
 
             + "*" + "\t" + "Downloadprogress im Terminal (-auto) anzeigen: "
             + SYSTEM_PARAMETER_DOWNLOAD_PROGRESS.getValue() + P2LibConst.LINE_SEPARATOR;
+
+
     // ===========================================
     // Configs der Programmversion, nur damit sie (zur Update-Suche) im Config-File stehen
     public static StringProperty SYSTEM_PROG_VERSION = addStrProp("system-prog-version", P2InfoFactory.getProgVersion());
@@ -111,11 +113,6 @@ public class ProgConfig extends P2DataProgConfig {
     public static BooleanProperty SYSTEM_SEARCH_UPDATE = addBoolProp("system-search-update" + P2Data.TAGGER + "system-update-search-act", Boolean.TRUE); // nach einem Update suchen
     public static BooleanProperty SYSTEM_UPDATE_SEARCH_BETA = addBoolProp("system-update-search-beta", Boolean.FALSE); //beta suchen
     public static BooleanProperty SYSTEM_UPDATE_SEARCH_DAILY = addBoolProp("system-update-search-daily", Boolean.FALSE); //daily suchen
-
-    public static StringProperty SYSTEM_UPDATE_LAST_INFO = addStrProp("system-update-last-info");
-    public static StringProperty SYSTEM_UPDATE_LAST_ACT = addStrProp("system-update-last-act");
-    public static StringProperty SYSTEM_UPDATE_LAST_BETA = addStrProp("system-update-last-beta");
-    public static StringProperty SYSTEM_UPDATE_LAST_DAILY = addStrProp("system-update-last-daily");
 
     // ConfigDialog, Dialog nach Start immer gleich öffnen
     public static IntegerProperty SYSTEM_CONFIG_DIALOG_TAB = new SimpleIntegerProperty(0);
@@ -171,7 +168,6 @@ public class ProgConfig extends P2DataProgConfig {
     public static BooleanProperty SYSTEM_ONLY_ASCII = addBoolProp("system-only-ascii", Boolean.FALSE);
     public static BooleanProperty SYSTEM_MARK_GEO = addBoolProp("system-mark-geo", Boolean.TRUE);
     public static StringProperty SYSTEM_GEO_HOME_PLACE = addStrProp("system-geo-home-place", FilmData.GEO_DE);
-    public static BooleanProperty SYSTEM_STYLE = addBoolProp("system-style", Boolean.FALSE);
     public static IntegerProperty SYSTEM_FONT_SIZE = addIntProp("system-style-size", 14);
     public static BooleanProperty SYSTEM_FONT_SIZE_CHANGE = addBoolProp("system-font-size-change", Boolean.FALSE); // für die Schriftgröße
     public static StringProperty SYSTEM_LOG_DIR = addStrProp("system-log-dir", "");
@@ -196,8 +192,22 @@ public class ProgConfig extends P2DataProgConfig {
     public static IntegerProperty SYSTEM_LOAD_FILMLIST_MAX_DAYS = addIntProp("system-load-filmlist-max-days", 0); //es werden nur die x letzten Tage geladen
     public static IntegerProperty SYSTEM_LOAD_FILMLIST_MIN_DURATION = addIntProp("system-load-filmlist-min-duration", 0); //es werden nur Filme mit mind. x Minuten geladen
 
+    // INFO
+    public static BooleanProperty INFO__IS_SHOWING = addBoolProp("info--is-showing", Boolean.TRUE);
+    public static DoubleProperty INFO__DIVIDER = addDoubleProp("info--divider", 0.7);
+    public static StringProperty INFO__PANE_INFO_DIALOG_SIZE = addStrProp("info--pane-info-dialog-size", "400:400");
+    public static BooleanProperty INFO__PANE_INFO_IS_RIP = addBoolProp("info--pane-info-is-rip", Boolean.FALSE);
+
+    public static StringProperty INFO__PANE_DOWNLOAD_DIALOG_SIZE = addStrProp("info--pane-download-dialog-size", "400:400");
+    public static BooleanProperty INFO__PANE_DOWNLOAD_IS_RIP = addBoolProp("info--pane-download-is-rip", Boolean.FALSE);
+
+    // FILTER
+    public static BooleanProperty FILTER__IS_SHOWING = addBoolProp("filter--is-showing", Boolean.TRUE);
+    public static DoubleProperty FILTER__DIVIDER = addDoubleProp("filter--divider", 0.3);
+    public static StringProperty FILTER__PANE_FILTER_DIALOG_SIZE = addStrProp("filter--pane-filter-dialog-size", "400:600");
+    public static BooleanProperty FILTER__PANE_FILTER_IS_RIP = addBoolProp("filter--pane-filter-is-rip", Boolean.FALSE);
+
     // Gui Film
-    public static BooleanProperty FILM_GUI_FILTER_DIVIDER_ON = addBoolProp("film-gui-filter-divider-on", Boolean.TRUE);
     public static StringProperty FILM_GUI_TABLE_WIDTH = addStrProp("film-gui-table-width");
     public static StringProperty FILM_GUI_TABLE_SORT = addStrProp("film-gui-table-sort");
     public static StringProperty FILM_GUI_TABLE_UP_DOWN = addStrProp("film-gui-table-up-down");
@@ -205,16 +215,6 @@ public class ProgConfig extends P2DataProgConfig {
     public static StringProperty FILM_GUI_TABLE_ORDER = addStrProp("film-gui-table-order");
     public static StringProperty FILM_RESOLUTION = addStrProp("film-resolution", FilmData.RESOLUTION_NORMAL);
     public static StringProperty FILM_PLAY_DIALOG_SIZE = addStrProp("film-play-dialog-size");
-    public static DoubleProperty FILM_GUI_INFO_DIVIDER = addDoubleProp("film-gui-info-divider", 0.7);
-
-    // Infos
-    public static BooleanProperty INFO__IS_SHOWING = addBoolProp("info--is-showing", Boolean.TRUE);
-    public static DoubleProperty INFO__DIVIDER = addDoubleProp("info--divider", 0.7);
-
-    public static BooleanProperty FILM__INFO_PANE_IS_RIP = addBoolProp("film--info-pane-is-rip", Boolean.FALSE);
-    public static StringProperty FILM__INFO_DIALOG_SIZE = addStrProp("film--info-dialog-size", "400:400");
-    public static BooleanProperty DOWNLOAD__INFO_PANE_IS_RIP = addBoolProp("download--info-pane-is-rip", Boolean.FALSE);
-    public static StringProperty DOWNLOAD__INFO_DIALOG_SIZE = addStrProp("download--info-dialog-size", "400:400");
 
     // ConfigDialog
     public static StringProperty CONFIG_DIALOG_SIZE = addStrProp("config-dialog-size", "900:700");
@@ -223,7 +223,7 @@ public class ProgConfig extends P2DataProgConfig {
     // StartDialog
     public static StringProperty START_DIALOG_DOWNLOAD_PATH = addStrProp("start-dialog-download-path", P2InfoFactory.getStandardDownloadPath());
 
-    //     FilmInfoDialog
+    // FilmInfoDialog
     public static BooleanProperty FILM_INFO_DIALOG_SHOW_URL = addBoolProp("film-info-dialog-show-url", Boolean.FALSE);
 
     // Shorcuts Hauptmenü
@@ -233,6 +233,9 @@ public class ProgConfig extends P2DataProgConfig {
     // Shortcuts Filmmenü
     public static String SHORTCUT_SHOW_INFOS_INIT = "Alt+I";
     public static StringProperty SHORTCUT_SHOW_INFOS = addStrProp("SHORTCUT_SHOW_INFO", SHORTCUT_SHOW_INFOS_INIT);
+
+    public static String SHORTCUT_SHOW_FILTER_INIT = "Alt+F";
+    public static StringProperty SHORTCUT_SHOW_FILTER = addStrProp("SHORTCUT_SHOW_FILTER", SHORTCUT_SHOW_FILTER_INIT);
 
     public static String SHORTCUT_INFO_FILM_INIT = "Ctrl+I";
     public static StringProperty SHORTCUT_INFO_FILM = addStrProp("SHORTCUT_INFO_FILM", SHORTCUT_INFO_FILM_INIT);
