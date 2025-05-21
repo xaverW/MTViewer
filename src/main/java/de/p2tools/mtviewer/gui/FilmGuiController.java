@@ -44,13 +44,13 @@ public class FilmGuiController extends VBox {
     private final ScrollPane scrollPane = new ScrollPane();
     private final TableFilm tableView;
     private final ProgData progData;
-    private final SortedList<FilmData> sortedList;
+    private final SortedList sortedList;
     private final KeyCombination STRG_A = new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_ANY);
 
     public FilmGuiController() {
         progData = ProgData.getInstance();
 
-        sortedList = progData.filmlist.getSortedList();
+        sortedList = progData.filmlistUsed.getSortedList();
         tableView = new TableFilm(Table.TABLE_ENUM.FILM, progData);
 
         scrollPane.setContent(tableView);

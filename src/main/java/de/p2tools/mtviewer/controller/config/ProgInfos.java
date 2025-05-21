@@ -17,10 +17,13 @@
 package de.p2tools.mtviewer.controller.config;
 
 import de.p2tools.mtviewer.Main;
+import de.p2tools.p2lib.atdata.AudioFactory;
 import de.p2tools.p2lib.configfile.SettingsDirectory;
 import de.p2tools.p2lib.tools.P2Exception;
+import de.p2tools.p2lib.tools.log.P2Log;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -59,6 +62,27 @@ public class ProgInfos {
         return s;
     }
 
+    /**
+     * Liefert den Pfad zur Audioliste
+     *
+     * @return Den Pfad als String
+     */
+    public static String getAudioListFile() {
+        return getSettingsDirectory_String() + File.separator + AudioFactory.AUDIO_LIST_FILE_JSON;
+    }
+
+    public static Path getAndMakeAudioListFile() {
+        Path urlPath = null;
+        try {
+            urlPath = Paths.get(getAudioListFile());
+            if (Files.notExists(urlPath)) {
+                urlPath = Files.createFile(urlPath);
+            }
+        } catch (final IOException ex) {
+            P2Log.errorLog(914579541, ex);
+        }
+        return urlPath;
+    }
 
     /**
      * Liefert den Pfad zur Filmliste

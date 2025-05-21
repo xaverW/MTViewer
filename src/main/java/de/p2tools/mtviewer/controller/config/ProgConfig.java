@@ -107,6 +107,7 @@ public class ProgConfig extends P2DataProgConfig {
 
     // Configs zur Programmupdatesuche
     public static StringProperty SYSTEM_UPDATE_DATE = addStrProp("system-update-date"); // Datum der letzten Prüfung
+    public static StringProperty SYSTEM_AUDIOLIST_DATE_TIME = addStrProp("system-audiolist-date", ""); // DateTimeFormatter DT_FORMATTER_dd_MM_yyyy___HH__mm
 
     public static BooleanProperty SYSTEM_UPDATE_SEARCH_ACT = addBoolProp("system-update-search-act", Boolean.TRUE); //Infos und Programm
     public static StringProperty SYSTEM_SEARCH_UPDATE_LAST_DATE = addStrProp("system-search-update-last-date"); // Datum der letzten Prüfung
@@ -181,6 +182,8 @@ public class ProgConfig extends P2DataProgConfig {
     public static IntegerProperty SYSTEM_FILTER_WAIT_TIME = addIntProp("system-filter-wait-time", 100);
     public static BooleanProperty SYSTEM_FILTER_RETURN = addBoolProp("system-filter-return", Boolean.FALSE);
     public static StringProperty SYSTEM_DOWNLOAD_DIR_NEW_VERSION = addStrProp("system-download-dir-new-version", "");
+    public static IntegerProperty SYSTEM_AUDIOLIST_COUNT_DOUBLE = addIntProp("system-audiolist-count-double", 0); // Anzahl der doppelten Filme
+    public static IntegerProperty SYSTEM_SHOW_LIST = addIntProp("system-show-list", ProgConst.SHOW_LIST_MEDIATHEK); // Welche Liste Filme/Audios angezeigt wird
 
     // Fenstereinstellungen
     public static StringProperty SYSTEM_SIZE_GUI = addStrProp("system-size-gui", "1000:800");
@@ -215,6 +218,7 @@ public class ProgConfig extends P2DataProgConfig {
     public static StringProperty FILM_GUI_TABLE_ORDER = addStrProp("film-gui-table-order");
     public static StringProperty FILM_RESOLUTION = addStrProp("film-resolution", FilmData.RESOLUTION_NORMAL);
     public static StringProperty FILM_PLAY_DIALOG_SIZE = addStrProp("film-play-dialog-size");
+    public static DoubleProperty PANE_FILM_INFO__DIVIDER = addDoubleProp("pane-film-info--divider", 0.7);
 
     // ConfigDialog
     public static StringProperty CONFIG_DIALOG_SIZE = addStrProp("config-dialog-size", "900:700");

@@ -72,7 +72,7 @@ public class FilmTools {
 
     public static synchronized String getStatusInfosFilm() {
         String textLinks;
-        final int sumFilmlist = ProgData.getInstance().filmlist.size();
+        final int sumFilmlist = ProgData.getInstance().filmlistUsed.size();
         final int sumFilmShown = ProgData.getInstance().filmGuiPack.getFilmGuiController().getFilmCount();
 
         String sumFilmlistStr = numberFormat.format(sumFilmShown);

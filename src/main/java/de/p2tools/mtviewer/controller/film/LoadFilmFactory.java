@@ -19,10 +19,7 @@ package de.p2tools.mtviewer.controller.film;
 
 import de.p2tools.mtviewer.controller.ProgSave;
 import de.p2tools.mtviewer.controller.UpdateCheckFactory;
-import de.p2tools.mtviewer.controller.config.PEvents;
-import de.p2tools.mtviewer.controller.config.ProgConfig;
-import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.config.ProgInfos;
+import de.p2tools.mtviewer.controller.config.*;
 import de.p2tools.mtviewer.gui.tools.TipOfDayFactory;
 import de.p2tools.p2lib.mtfilm.film.FilmlistFactory;
 import de.p2tools.p2lib.mtfilm.loadfilmlist.LoadFilmlist;
@@ -93,8 +90,18 @@ public class LoadFilmFactory {
                     UpdateCheckFactory.checkProgUpdate();
                     TipOfDayFactory.showDialog(ProgData.getInstance(), false);
                 }
+
+                setList();
             }
         });
+    }
+
+    public void setList() {
+        if (ProgConfig.SYSTEM_SHOW_LIST.get() == ProgConst.SHOW_LIST_MEDIATHEK) {
+            ProgData.getInstance().filmlistUsed.setAll(ProgData.getInstance().filmlist);
+        } else {
+            ProgData.getInstance().filmlistUsed.setAll(ProgData.getInstance().audioList);
+        }
     }
 
     public void loadProgStart() {

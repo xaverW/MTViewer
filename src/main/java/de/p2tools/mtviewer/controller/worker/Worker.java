@@ -38,7 +38,7 @@ public class Worker {
     }
 
     public void resetFilter() {
-        allChannelList.setAll(Arrays.asList(progData.filmlist.sender));//alle Sender laden
+        allChannelList.setAll(Arrays.asList(progData.filmlistUsed.sender));//alle Sender laden
         sfTemp.copyTo(progData.actFilmFilterWorker.getActFilterSettings());
     }
 

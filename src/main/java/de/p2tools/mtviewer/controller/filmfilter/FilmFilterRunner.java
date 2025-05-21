@@ -70,7 +70,7 @@ public class FilmFilterRunner {
                     P2Log.debugLog("========================================");
 
                     P2Duration.counterStart("FilmFilterRunner.filterList");
-                    progData.filmlist.filteredListSetPred(
+                    progData.filmlistUsed.filteredListSetPred(
                             PredicateFactory.getPredicate(progData.actFilmFilterWorker.getActFilterSettings()));
                     P2Duration.counterStop("FilmFilterRunner.filterList");
 

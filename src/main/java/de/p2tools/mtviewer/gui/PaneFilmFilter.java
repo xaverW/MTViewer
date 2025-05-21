@@ -17,6 +17,7 @@
 package de.p2tools.mtviewer.gui;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
+import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.gui.tools.HelpText;
@@ -26,6 +27,7 @@ import de.p2tools.p2lib.guitools.P2ButtonClearFilterFactory;
 import de.p2tools.p2lib.guitools.P2GuiTools;
 import de.p2tools.p2lib.guitools.P2MenuButton;
 import de.p2tools.p2lib.guitools.prange.P2RangeBox;
+import de.p2tools.p2lib.guitools.ptoggleswitch.P2ToggleSwitch;
 import de.p2tools.p2lib.mtfilter.FilterCheck;
 import de.p2tools.p2lib.mtfilter.FilterCheckRegEx;
 import de.p2tools.p2lib.tools.duration.P2Duration;
@@ -46,6 +48,7 @@ import java.util.ArrayList;
 
 public class PaneFilmFilter extends VBox {
 
+    private final P2ToggleSwitch tglMediathek = new P2ToggleSwitch("Media/Audiothek");
     private final P2MenuButton mbChannel;
     private final ComboBox<String> cboTheme = new ComboBox<>();
     private final ComboBox<String> cboTitle = new ComboBox<>();
@@ -91,6 +94,14 @@ public class PaneFilmFilter extends VBox {
         btnClearFilter.setOnAction(a -> {
             P2Duration.onlyPing("Filter löschen");
             progData.actFilmFilterWorker.clearFilter();
+        });
+        tglMediathek.selectedProperty().addListener((u, o, n) -> {
+            if (tglMediathek.isSelected()) {
+                ProgConfig.SYSTEM_SHOW_LIST.set(ProgConst.SHOW_LIST_MEDIATHEK);
+            } else {
+                ProgConfig.SYSTEM_SHOW_LIST.set(ProgConst.SHOW_LIST_AUDIOTHEK);
+            }
+            progData.loadFilmFactory.setList();
         });
     }
 
@@ -232,10 +243,13 @@ public class PaneFilmFilter extends VBox {
 
         int row = 0;
 
+        gridPane.add(tglMediathek, 0, row);
+
+        ++row;
         VBox vBox;
         vBox = addTxt("Sender", mbChannel);
         GridPane.setHgrow(vBox, Priority.ALWAYS);
-        gridPane.add(vBox, 0, row);
+        gridPane.add(vBox, 0, ++row);
 
         vBox = addTxt("Thema", cboTheme);
         GridPane.setHgrow(vBox, Priority.ALWAYS);
@@ -263,15 +277,13 @@ public class PaneFilmFilter extends VBox {
         // checkbox
         gridPane.add(new Label(""), 0, ++row);
 
-        CheckBox chkOnlyNew = new CheckBox();
+        P2ToggleSwitch chkOnlyNew = new P2ToggleSwitch("Nur neue Filme:");
         chkOnlyNew.selectedProperty().bindBidirectional(progData.actFilmFilterWorker.getActFilterSettings().onlyNewProperty());
-        HBox hBoxNew = new HBox(P2LibConst.DIST_BUTTON, new Label("Nur neue Filme:"), chkOnlyNew);
-        hBoxNew.setAlignment(Pos.CENTER_RIGHT);
-        gridPane.add(hBoxNew, 0, ++row);
+        gridPane.add(chkOnlyNew, 0, ++row);
 
-        CheckBox chkLive = new CheckBox();
+        P2ToggleSwitch chkLive = new P2ToggleSwitch("Nur Live-Streams:");
         chkLive.setSelected(progData.actFilmFilterWorker.getActFilterSettings().onlyLiveProperty().get());
-        chkLive.setOnAction(a -> {
+        chkLive.selectedProperty().addListener((u, o, n) -> {
             if (chkLive.isSelected()) {
                 progData.actFilmFilterWorker.getActFilterSettings().clearFilter();
                 progData.actFilmFilterWorker.getActFilterSettings().setOnlyLive(true);
@@ -282,9 +294,7 @@ public class PaneFilmFilter extends VBox {
         progData.actFilmFilterWorker.getActFilterSettings().onlyLiveProperty().addListener((u, o, n) -> {
             chkLive.setSelected(n);
         });
-        HBox hBoxLive = new HBox(P2LibConst.DIST_BUTTON, new Label("Nur Live-Streams:"), chkLive);
-        hBoxLive.setAlignment(Pos.CENTER_RIGHT);
-        gridPane.add(hBoxLive, 0, ++row);
+        gridPane.add(chkLive, 0, ++row);
 
         // ==================
         // clear

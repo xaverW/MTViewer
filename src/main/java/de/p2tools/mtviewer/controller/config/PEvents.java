@@ -27,4 +27,9 @@ public class PEvents extends P2Events {
     public static final int EVENT_DIACRITIC_CHANGED = count++;
     public static final int EVENT_GUI_HISTORY_CHANGED = count++;
     public static final int EVENT_SETDATA_CHANGED = count++;
+
+    public static final int LOAD_RADIO_LIST_START = ++count;
+    public static final int LOAD_RADIO_LIST_PROGRESS = ++count;
+    public static final int LOAD_RADIO_LIST_LOADED = ++count;
+    public static final int LOAD_RADIO_LIST_FINISHED = ++count;
 }

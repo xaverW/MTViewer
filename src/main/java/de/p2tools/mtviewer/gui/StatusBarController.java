@@ -119,10 +119,10 @@ public class StatusBarController extends AnchorPane {
     private void setTextForRightDisplay() {
         // Text rechts: alter/neuladenIn anzeigen
         String strText = "Filmliste erstellt: ";
-        strText += progData.filmlist.genDate();
+        strText += progData.filmlistUsed.genDate();
         strText += " Uhr  ";
 
-        final int second = progData.filmlist.getAge();
+        final int second = progData.filmlistUsed.getAge();
         if (second != 0) {
             strText += "||  Alter: ";
             final int minute = second / 60;

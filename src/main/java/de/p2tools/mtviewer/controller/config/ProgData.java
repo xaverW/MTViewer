@@ -31,6 +31,7 @@ import de.p2tools.mtviewer.controller.worker.Worker;
 import de.p2tools.mtviewer.gui.FilmGuiPack;
 import de.p2tools.mtviewer.gui.dialog.QuitDialogController;
 import de.p2tools.p2lib.guitools.pmask.P2MaskerPane;
+import de.p2tools.p2lib.mtfilm.film.FilmData;
 import de.p2tools.p2lib.mtfilm.film.Filmlist;
 import de.p2tools.p2lib.p2event.P2EventHandler;
 import javafx.beans.property.BooleanProperty;
@@ -46,6 +47,7 @@ public class ProgData {
     public static boolean reset = false; // Programm auf Starteinstellungen zurücksetzen
     public static boolean firstProgramStart = false; // ist der allererste Programmstart: Init wird gemacht
     public static BooleanProperty FILMLIST_IS_DOWNLOADING = new SimpleBooleanProperty(Boolean.FALSE); // dann wird eine Filmliste geladen
+    public static BooleanProperty AUDIOLIST_IS_DOWNLOADING = new SimpleBooleanProperty(Boolean.FALSE); // dann wird eine Audioliste geladen
 
     public P2EventHandler pEventHandler;
 
@@ -71,10 +73,13 @@ public class ProgData {
 
     // Programmdaten
     public LoadFilmFactory loadFilmFactory;
-    public Filmlist filmlist; // ist die komplette Filmliste
+
+    public Filmlist<FilmData> filmlist; // ist die komplette Filmliste
+    public Filmlist<FilmData> audioList; // ist die komplette Audioliste
+    public Filmlist<FilmData> filmlistUsed; // ist die verwendete Filmliste
+
     public DownloadInfos downloadInfos;
     public ReplaceList replaceList;
-    boolean oneSecond = false;
 
     private ProgData() {
         pEventHandler = new P2EventHandler(false);
@@ -82,7 +87,11 @@ public class ProgData {
         replaceList = new ReplaceList();
 
         actFilmFilterWorker = new ActFilmFilterWorker(this);
-        filmlist = new Filmlist();
+
+        filmlist = new Filmlist<>();
+        audioList = new Filmlist<>();
+        filmlistUsed = new Filmlist<>();
+
         downloadList = new DownloadList(this);
         loadFilmFactory = new LoadFilmFactory(this);
         starterClass = new StarterClass(this);

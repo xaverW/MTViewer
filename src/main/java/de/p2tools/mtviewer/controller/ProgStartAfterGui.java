@@ -16,6 +16,7 @@
 
 package de.p2tools.mtviewer.controller;
 
+import de.p2tools.mtviewer.controller.audio.LoadAudioFactory;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
@@ -41,6 +42,7 @@ public class ProgStartAfterGui {
         ProgData.getInstance().pEventHandler.startTimer();
         //die gespeicherte Filmliste laden
         ProgData.getInstance().loadFilmFactory.loadProgStart();
+        LoadAudioFactory.getInstance().loadProgStart();
     }
 
     public static void startMsg() {
