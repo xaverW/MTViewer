@@ -18,11 +18,11 @@
 package de.p2tools.mtviewer.controller.config;
 
 import de.p2tools.mtviewer.MTViewerController;
+import de.p2tools.mtviewer.controller.LoadFactory;
 import de.p2tools.mtviewer.controller.data.MTShortcut;
 import de.p2tools.mtviewer.controller.data.ReplaceList;
 import de.p2tools.mtviewer.controller.data.download.DownloadInfos;
 import de.p2tools.mtviewer.controller.data.download.DownloadList;
-import de.p2tools.mtviewer.controller.film.LoadFilmFactory;
 import de.p2tools.mtviewer.controller.filmfilter.ActFilmFilterWorker;
 import de.p2tools.mtviewer.controller.filmfilter.FilmFilterRunner;
 import de.p2tools.mtviewer.controller.starter.StarterClass;
@@ -72,7 +72,7 @@ public class ProgData {
     public CheckForNewFilmlist checkForNewFilmlist;
 
     // Programmdaten
-    public LoadFilmFactory loadFilmFactory;
+    public LoadFactory loadFactory;
 
     public Filmlist<FilmData> filmlist; // ist die komplette Filmliste
     public Filmlist<FilmData> audioList; // ist die komplette Audioliste
@@ -93,7 +93,7 @@ public class ProgData {
         filmlistUsed = new Filmlist<>();
 
         downloadList = new DownloadList(this);
-        loadFilmFactory = new LoadFilmFactory(this);
+        loadFactory = new LoadFactory(this);
         starterClass = new StarterClass(this);
         downloadInfos = new DownloadInfos(this);
         filmFilterRunner = new FilmFilterRunner(this);

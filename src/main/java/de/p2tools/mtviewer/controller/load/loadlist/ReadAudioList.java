@@ -14,16 +14,18 @@
  * not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.p2tools.mtviewer.controller.audio;
+package de.p2tools.mtviewer.controller.load.loadlist;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
+import de.p2tools.mtviewer.controller.load.LoadAudioFactoryDto;
 import de.p2tools.p2lib.atdata.AudioFactory;
 import de.p2tools.p2lib.atdata.AudioListFactory;
 import de.p2tools.p2lib.mtdownload.MLHttpClient;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 import de.p2tools.p2lib.mtfilm.film.Filmlist;
+import de.p2tools.p2lib.mtfilm.film.FilmlistXml;
 import de.p2tools.p2lib.mtfilm.readwritefilmlist.ReadFilmlist;
 import de.p2tools.p2lib.mtfilm.readwritefilmlist.WriteFilmlistJson;
 import de.p2tools.p2lib.mtfilm.tools.InputStreamProgressMonitor;
@@ -36,20 +38,17 @@ import de.p2tools.p2lib.tools.log.P2Log;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import org.apache.commons.lang3.time.FastDateFormat;
 import org.tukaani.xz.XZInputStream;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.zip.ZipInputStream;
 
 public class ReadAudioList {
@@ -147,22 +146,22 @@ public class ReadAudioList {
         ProgConfig.SYSTEM_AUDIOLIST_DATE_TIME.setValue(dateStr);
     }
 
-    private void processFromFile(String source, Filmlist<FilmData> filmlist) {
-        try (InputStream in = selectDecompressor(source, new FileInputStream(source));
-             JsonParser jp = new JsonFactory().createParser(in)) {
-            new de.p2tools.mtviewer.controller.audio.ReadAudioListJson().readFilmData(jp, filmlist);
-
-        } catch (final FileNotFoundException ex) {
-            logList.add("Audioliste existiert nicht: " + source + "\n" + ex.getLocalizedMessage());
-            P2Log.errorLog(894512369, "Audioliste existiert nicht: " + source);
-            filmlist.clear();
-
-        } catch (final Exception ex) {
-            logList.add("Audioliste: " + source + "\n" + ex.getLocalizedMessage());
-            P2Log.errorLog(945123641, ex, "Audioliste: " + source);
-            filmlist.clear();
-        }
-    }
+//    private void processFromFile(String source, Filmlist<FilmData> filmlist) {
+//        try (InputStream in = selectDecompressor(source, new FileInputStream(source));
+//             JsonParser jp = new JsonFactory().createParser(in)) {
+//            new ReadAudioListJson().readFilmData(jp, filmlist);
+//
+//        } catch (final FileNotFoundException ex) {
+//            logList.add("Audioliste existiert nicht: " + source + "\n" + ex.getLocalizedMessage());
+//            P2Log.errorLog(894512369, "Audioliste existiert nicht: " + source);
+//            filmlist.clear();
+//
+//        } catch (final Exception ex) {
+//            logList.add("Audioliste: " + source + "\n" + ex.getLocalizedMessage());
+//            P2Log.errorLog(945123641, ex, "Audioliste: " + source);
+//            filmlist.clear();
+//        }
+//    }
 
     private static InputStream selectDecompressor(String source, InputStream in) throws Exception {
         if (source.endsWith(LoadFactoryConst.FORMAT_XZ)) {
@@ -207,6 +206,42 @@ public class ReadAudioList {
         } catch (final Exception ex) {
             P2Log.errorLog(820147395, ex, "FilmListe: " + source);
             audioList.clear();
+        }
+
+        // meta korrigieren
+        changeMeta(audioList.metaData);
+    }
+
+    private static void changeMeta(String[] metaData) {
+        // audiothek: "AudioList" : [ "22.05.2025 06:59:17", "22.05.2025 08:59:17" ]
+        // audiolist: metaData = new String[]{"GMT", "LocalDate"}; // AudioDataXml.AUDIO_LIST_META_MAX_ELEM
+
+        // mediathek: "Filmliste" : [ "22.05.2025, 10:32", "22.05.2025, 08:32", "3", "MSearch [Vers.: 3.1.255]", "a34202f7a2c9077f7b654e878c11a784" ],
+        // FILMLIST_DATE_NR = 0;
+        // FILMLIST_DATE_GMT_NR = 1;
+
+        final String DATE_TIME_FORMAT_MEDIATHEK = "dd.MM.yyyy, HH:mm";
+        final String DATE_TIME_FORMAT_AUDIOTHEK = "dd.MM.yyyy HH:mm:ss";
+        try {
+            final SimpleDateFormat sdf_audiothek = new SimpleDateFormat(DATE_TIME_FORMAT_AUDIOTHEK);
+
+            String date = metaData[1];
+            String dateGmt = metaData[0];
+            Date filmDate = sdf_audiothek.parse(date);
+            Date filmDateGmt = sdf_audiothek.parse(dateGmt);
+
+            metaData[FilmlistXml.FILMLIST_DATE_GMT_NR] = FastDateFormat.getInstance(DATE_TIME_FORMAT_MEDIATHEK).format(filmDateGmt);
+            metaData[FilmlistXml.FILMLIST_DATE_NR] = FastDateFormat.getInstance(DATE_TIME_FORMAT_MEDIATHEK).format(filmDate);
+        } catch (Exception ex) {
+            P2Log.errorLog(965874548, ex, "GenDateTime: Audiolist");
+
+            SimpleDateFormat sdf_mediathek = new SimpleDateFormat(DATE_TIME_FORMAT_MEDIATHEK);
+            SimpleDateFormat sdfUtf_mediathek = new SimpleDateFormat(DATE_TIME_FORMAT_MEDIATHEK);
+            sdfUtf_mediathek.setTimeZone(new SimpleTimeZone(SimpleTimeZone.UTC_TIME, "UTC"));
+            String d = sdf_mediathek.format(new Date());
+            String dUtf = sdfUtf_mediathek.format(new Date());
+            metaData[FilmlistXml.FILMLIST_DATE_NR] = d;
+            metaData[FilmlistXml.FILMLIST_DATE_GMT_NR] = dUtf;
         }
     }
 

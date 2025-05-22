@@ -19,6 +19,7 @@ package de.p2tools.mtviewer.gui.configdialog.configpanes;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
+import de.p2tools.mtviewer.controller.load.LoadFilmFactory;
 import de.p2tools.mtviewer.gui.tools.HelpText;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.guitools.P2Button;
@@ -143,7 +144,7 @@ public class PaneFilmFilter {
             Button btnLoad = new Button("_Filmliste mit diesen Einstellungen neu laden");
             btnLoad.setTooltip(new Tooltip("Eine komplette neue Filmliste laden.\n" +
                     "Geänderte Einstellungen für das Laden der Filmliste werden so sofort übernommen"));
-            btnLoad.setOnAction(event -> progData.loadFilmFactory.loadList(true));
+            btnLoad.setOnAction(event -> LoadFilmFactory.loadList(true));
 
             hBox = new HBox();
             hBox.setAlignment(Pos.CENTER_RIGHT);

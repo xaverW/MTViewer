@@ -16,6 +16,7 @@
 
 package de.p2tools.mtviewer.controller.worker;
 
+import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.filmfilter.FilmFilter;
 import javafx.collections.FXCollections;
@@ -31,6 +32,8 @@ public class Worker {
 
     public Worker(ProgData progData) {
         this.progData = progData;
+        ProgConfig.SYSTEM_SHOW_MEDIATHEK.addListener((u, o, n) -> progData.loadFactory.setList());
+        ProgConfig.SYSTEM_SHOW_AUDIOTHEK.addListener((u, o, n) -> progData.loadFactory.setList());
     }
 
     public void saveFilter() {

@@ -22,6 +22,7 @@ import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.MTShortcut;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
+import de.p2tools.mtviewer.controller.load.LoadFilmFactory;
 import de.p2tools.mtviewer.controller.update.SearchProgramUpdate;
 import de.p2tools.mtviewer.gui.configdialog.ConfigDialogController;
 import de.p2tools.mtviewer.gui.dialog.AboutDialogController;
@@ -70,7 +71,7 @@ public class ProgMenu extends MenuButton {
         //=========================
         //Filmliste, Info, Einstellungen
         final MenuItem miLoad = new MenuItem("Eine neue Filmliste laden");
-        miLoad.setOnAction(e -> progData.loadFilmFactory.loadList(false));
+        miLoad.setOnAction(e -> LoadFilmFactory.loadList(false));
 
         final CheckMenuItem miDarkMode = new CheckMenuItem("Dark Mode");
         miDarkMode.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_DARK_THEME);

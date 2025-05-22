@@ -17,8 +17,8 @@
 
 package de.p2tools.mtviewer.gui.tools.table;
 
+import de.p2tools.mtviewer.controller.FilmTools;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
-import de.p2tools.mtviewer.controller.film.FilmTools;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;

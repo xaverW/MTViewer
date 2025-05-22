@@ -17,7 +17,6 @@
 package de.p2tools.mtviewer.gui;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
-import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.gui.tools.HelpText;
@@ -48,7 +47,9 @@ import java.util.ArrayList;
 
 public class PaneFilmFilter extends VBox {
 
-    private final P2ToggleSwitch tglMediathek = new P2ToggleSwitch("Media/Audiothek");
+    private final P2ToggleSwitch tglMediathek = new P2ToggleSwitch("Mediathek");
+    private final P2ToggleSwitch tglAudiothek = new P2ToggleSwitch("Audiothek");
+
     private final P2MenuButton mbChannel;
     private final ComboBox<String> cboTheme = new ComboBox<>();
     private final ComboBox<String> cboTitle = new ComboBox<>();
@@ -95,14 +96,9 @@ public class PaneFilmFilter extends VBox {
             P2Duration.onlyPing("Filter löschen");
             progData.actFilmFilterWorker.clearFilter();
         });
-        tglMediathek.selectedProperty().addListener((u, o, n) -> {
-            if (tglMediathek.isSelected()) {
-                ProgConfig.SYSTEM_SHOW_LIST.set(ProgConst.SHOW_LIST_MEDIATHEK);
-            } else {
-                ProgConfig.SYSTEM_SHOW_LIST.set(ProgConst.SHOW_LIST_AUDIOTHEK);
-            }
-            progData.loadFilmFactory.setList();
-        });
+
+        tglMediathek.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_SHOW_MEDIATHEK);
+        tglAudiothek.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_SHOW_AUDIOTHEK);
     }
 
     private void initDaysFilter() {
@@ -240,10 +236,10 @@ public class PaneFilmFilter extends VBox {
         final GridPane gridPane = new GridPane();
         gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
         gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
-
         int row = 0;
 
         gridPane.add(tglMediathek, 0, row);
+        gridPane.add(tglAudiothek, 0, ++row);
 
         ++row;
         VBox vBox;

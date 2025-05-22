@@ -16,9 +16,9 @@
 
 package de.p2tools.mtviewer.gui;
 
+import de.p2tools.mtviewer.controller.FilmTools;
 import de.p2tools.mtviewer.controller.config.PEvents;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.film.FilmTools;
 import de.p2tools.p2lib.p2event.P2Event;
 import de.p2tools.p2lib.p2event.P2Listener;
 import de.p2tools.p2lib.tools.log.P2Log;
@@ -96,13 +96,13 @@ public class StatusBarController extends AnchorPane {
                 }
             }
         });
-        progData.checkForNewFilmlist.foundNewListProperty().addListener((u, o, n) -> {
-            if (progData.checkForNewFilmlist.isFoundNewList()) {
-                lblRightFilm.setStyle("-fx-underline: true;");
-            } else {
-                lblRightFilm.setStyle("-fx-underline: false;");
-            }
-        });
+//        progData.checkForNewFilmlist.foundNewListProperty().addListener((u, o, n) -> {
+//            if (progData.checkForNewFilmlist.isFoundNewList()) {
+//                lblRightFilm.setStyle("-fx-underline: true;");
+//            } else {
+//                lblRightFilm.setStyle("-fx-underline: false;");
+//            }
+//        });
     }
 
     public void setStatusbarIndex() {
@@ -117,29 +117,16 @@ public class StatusBarController extends AnchorPane {
     }
 
     private void setTextForRightDisplay() {
-        // Text rechts: alter/neuladenIn anzeigen
-        String strText = "Filmliste erstellt: ";
-        strText += progData.filmlistUsed.genDate();
-        strText += " Uhr  ";
+        // Mediathek
+        String strText = "Mediathek: ";
+        strText += progData.filmlist.genDate();
+        strText += " Uhr";
 
-        final int second = progData.filmlistUsed.getAge();
-        if (second != 0) {
-            strText += "||  Alter: ";
-            final int minute = second / 60;
-            String strSecond = String.valueOf(second % 60);
-            String strMinute = String.valueOf(minute % 60);
-            String strHour = String.valueOf(minute / 60);
-            if (strSecond.length() < 2) {
-                strSecond = '0' + strSecond;
-            }
-            if (strMinute.length() < 2) {
-                strMinute = '0' + strMinute;
-            }
-            if (strHour.length() < 2) {
-                strHour = '0' + strHour;
-            }
-            strText += strHour + ':' + strMinute + ':' + strSecond + ' ';
-        }
+        // Audiothek
+        strText += "  /  Audiothek: ";
+        strText += progData.audioList.genDate();
+        strText += " Uhr";
+
         // Infopanel setzen
         lblRightFilm.setText(strText);
     }

@@ -1,6 +1,7 @@
 package de.p2tools.mtviewer.gui;
 
 import de.p2tools.mtviewer.controller.config.ProgData;
+import de.p2tools.mtviewer.controller.load.LoadFilmFactory;
 import de.p2tools.p2lib.guitools.P2GuiTools;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -25,11 +26,11 @@ public class FilmGuiTop extends HBox {
                 "Mit der rechten Maustaste wird immer die komplette Filmliste geladen."));
 
         btnFilmlist.setOnAction(e -> {
-            progData.loadFilmFactory.loadList(false);
+            LoadFilmFactory.loadList(false);
         });
         btnFilmlist.setOnMouseClicked(mouseEvent -> {
             if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
-                progData.loadFilmFactory.loadList(true);
+                LoadFilmFactory.loadList(true);
             }
         });
     }

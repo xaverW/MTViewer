@@ -16,11 +16,12 @@
 
 package de.p2tools.mtviewer.controller;
 
-import de.p2tools.mtviewer.controller.audio.LoadAudioFactory;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.config.ProgInfos;
+import de.p2tools.mtviewer.controller.load.LoadAudioFactory;
+import de.p2tools.mtviewer.controller.load.LoadFilmFactory;
 import de.p2tools.p2lib.tools.P2InfoFactory;
 import de.p2tools.p2lib.tools.log.P2Log;
 import de.p2tools.p2lib.tools.log.P2LogMessage;
@@ -41,8 +42,8 @@ public class ProgStartAfterGui {
         setTitle();
         ProgData.getInstance().pEventHandler.startTimer();
         //die gespeicherte Filmliste laden
-        ProgData.getInstance().loadFilmFactory.loadProgStart();
-        LoadAudioFactory.getInstance().loadProgStart();
+        LoadFilmFactory.loadProgStart();
+        LoadAudioFactory.loadProgStart();
     }
 
     public static void startMsg() {

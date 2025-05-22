@@ -183,7 +183,8 @@ public class ProgConfig extends P2DataProgConfig {
     public static BooleanProperty SYSTEM_FILTER_RETURN = addBoolProp("system-filter-return", Boolean.FALSE);
     public static StringProperty SYSTEM_DOWNLOAD_DIR_NEW_VERSION = addStrProp("system-download-dir-new-version", "");
     public static IntegerProperty SYSTEM_AUDIOLIST_COUNT_DOUBLE = addIntProp("system-audiolist-count-double", 0); // Anzahl der doppelten Filme
-    public static IntegerProperty SYSTEM_SHOW_LIST = addIntProp("system-show-list", ProgConst.SHOW_LIST_MEDIATHEK); // Welche Liste Filme/Audios angezeigt wird
+    public static BooleanProperty SYSTEM_SHOW_MEDIATHEK = addBoolProp("system-show-mediathek", Boolean.TRUE);
+    public static BooleanProperty SYSTEM_SHOW_AUDIOTHEK = addBoolProp("system-show-auiothek", Boolean.FALSE);
 
     // Fenstereinstellungen
     public static StringProperty SYSTEM_SIZE_GUI = addStrProp("system-size-gui", "1000:800");

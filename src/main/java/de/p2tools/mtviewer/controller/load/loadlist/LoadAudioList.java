@@ -14,11 +14,13 @@
  * not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.p2tools.mtviewer.controller.audio;
+package de.p2tools.mtviewer.controller.load.loadlist;
 
 import de.p2tools.mtviewer.controller.config.PEvents;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.config.ProgInfos;
+import de.p2tools.mtviewer.controller.load.LoadAudioFactory;
+import de.p2tools.mtviewer.controller.load.LoadAudioFactoryDto;
 import de.p2tools.p2lib.p2event.P2Event;
 import de.p2tools.p2lib.tools.date.P2LDateFactory;
 import de.p2tools.p2lib.tools.duration.P2Duration;
@@ -34,7 +36,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class LoadAudioList {
 
     private static final AtomicBoolean stop = new AtomicBoolean(false); // damit kann das Laden gestoppt werden kann
-    private final BooleanProperty propLoadAudiolist = new SimpleBooleanProperty(false);
+    private static final BooleanProperty propLoadAudiolist = new SimpleBooleanProperty(false);
 
     public LoadAudioList() {
     }
@@ -59,14 +61,14 @@ public class LoadAudioList {
     }
 
     public void setPropLoadAudiolist(boolean propLoadAudiolist) {
-        this.propLoadAudiolist.set(propLoadAudiolist);
+        LoadAudioList.propLoadAudiolist.set(propLoadAudiolist);
     }
 
     public void loadNewListFromWeb() {
         // aus dem Menü oder Button in den Einstellungen
         setPropLoadAudiolist(true);
         ProgData.getInstance().pEventHandler.notifyListener(
-                new P2Event(PEvents.LOAD_RADIO_LIST_START, "Audioliste aus dem Web laden", LoadAudioFactory.PROGRESS_INDETERMINATE));
+                new P2Event(PEvents.LOAD_AUDIO_LIST_START, "Audioliste aus dem Web laden", LoadAudioFactory.PROGRESS_INDETERMINATE));
 
         new Thread(() -> {
             final List<String> logList = new ArrayList<>();
@@ -101,7 +103,7 @@ public class LoadAudioList {
         // nur einmal direkt nach dem Programmstart
         setPropLoadAudiolist(true);
         ProgData.getInstance().pEventHandler.notifyListener(
-                new P2Event(PEvents.LOAD_RADIO_LIST_START, "Programmstart, Liste laden", LoadAudioFactory.PROGRESS_INDETERMINATE));
+                new P2Event(PEvents.LOAD_AUDIO_LIST_START, "Programmstart, Liste laden", LoadAudioFactory.PROGRESS_INDETERMINATE));
 
         new Thread(() -> {
             final List<String> logList = new ArrayList<>();
@@ -165,7 +167,7 @@ public class LoadAudioList {
                 if (audioListTooOld || LoadAudioFactoryDto.audioListNew.isEmpty()) {
                     //dann war sie zu alt oder ist leer
                     ProgData.getInstance().pEventHandler.notifyListener(
-                            new P2Event(PEvents.LOAD_RADIO_LIST_PROGRESS, "Audioliste ist zu alt, eine neue laden", LoadAudioFactory.PROGRESS_INDETERMINATE));
+                            new P2Event(PEvents.LOAD_AUDIO_LIST_PROGRESS, "Audioliste ist zu alt, eine neue laden", LoadAudioFactory.PROGRESS_INDETERMINATE));
 
                     logList.add("## Programmstart: Neue Liste aus dem Web laden");
                     new ReadAudioList().readDb(false, ProgInfos.getAndMakeAudioListFile());
@@ -183,7 +185,7 @@ public class LoadAudioList {
         }
 
         ProgData.getInstance().pEventHandler.notifyListener(
-                new P2Event(PEvents.LOAD_RADIO_LIST_LOADED, "Audios verarbeiten", LoadAudioFactory.PROGRESS_INDETERMINATE));
+                new P2Event(PEvents.LOAD_AUDIO_LIST_LOADED, "Audios verarbeiten", LoadAudioFactory.PROGRESS_INDETERMINATE));
     }
 
     // #######################################
@@ -197,11 +199,11 @@ public class LoadAudioList {
         logList.add("##");
 
         ProgData.getInstance().pEventHandler.notifyListener(
-                new P2Event(PEvents.LOAD_RADIO_LIST_LOADED, "Audios markieren, Themen suchen", LoadAudioFactory.PROGRESS_INDETERMINATE));
+                new P2Event(PEvents.LOAD_AUDIO_LIST_LOADED, "Audios markieren, Themen suchen", LoadAudioFactory.PROGRESS_INDETERMINATE));
 //        LoadAudioFactoryDto.audioListNew.loadSenderAndGenre();
 
         ProgData.getInstance().pEventHandler.notifyListener(
-                new P2Event(PEvents.LOAD_RADIO_LIST_LOADED, "Audios in Downloads eingetragen", LoadAudioFactory.PROGRESS_INDETERMINATE));
+                new P2Event(PEvents.LOAD_AUDIO_LIST_LOADED, "Audios in Downloads eingetragen", LoadAudioFactory.PROGRESS_INDETERMINATE));
         logList.add("## Audios in Downloads eingetragen");
 
         //die List wieder füllen
@@ -212,7 +214,7 @@ public class LoadAudioList {
             LoadAudioFactoryDto.audioListAkt.metaData = LoadAudioFactoryDto.audioListNew.metaData;
             LoadAudioFactoryDto.audioListAkt.setAll(LoadAudioFactoryDto.audioListNew);
             LoadAudioFactoryDto.audioListNew.clear();
-            ProgData.getInstance().pEventHandler.notifyListener(new P2Event(PEvents.LOAD_RADIO_LIST_FINISHED));
+            ProgData.getInstance().pEventHandler.notifyListener(new P2Event(PEvents.LOAD_AUDIO_LIST_FINISHED));
         });
     }
 }
