@@ -17,7 +17,9 @@
 package de.p2tools.mtviewer.gui.tools.table;
 
 import de.p2tools.mtviewer.controller.config.ProgColorList;
+import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
+import de.p2tools.p2lib.guitools.P2TableFactory;
 import de.p2tools.p2lib.guitools.ptable.P2CellCheckBox;
 import de.p2tools.p2lib.mtdownload.DownloadSize;
 import de.p2tools.p2lib.tools.GermanStringIntSorter;
@@ -61,6 +63,8 @@ public class TableDownload extends PTable<DownloadData> {
         ProgColorList.DOWNLOAD_RUN.colorProperty().addListener((a, b, c) -> refresh());
         ProgColorList.DOWNLOAD_FINISHED.colorProperty().addListener((a, b, c) -> refresh());
         ProgColorList.DOWNLOAD_ERROR.colorProperty().addListener((a, b, c) -> refresh());
+        ProgConfig.SYSTEM_SMALL_ROW_TABLE_DOWNLOAD.addListener((observableValue, s, t1) -> P2TableFactory.refreshTable(this));
+        ProgConfig.DOWNLOAD_GUI_SHOW_TABLE_TOOL_TIP.addListener((observableValue, s, t1) -> P2TableFactory.refreshTable(this));
 
         final TableColumn<DownloadData, Integer> nrColumn = new TableColumn<>("Nr");
         nrColumn.setCellValueFactory(new PropertyValueFactory<>("no"));

@@ -182,6 +182,13 @@ public class TableFilmFactory {
                 hbox.getChildren().addAll(btnPlay, btnSave);
                 setGraphic(hbox);
 
+                if (ProgConfig.SYSTEM_SMALL_ROW_TABLE_FILM.get()) {
+                    btnPlay.setMaxHeight(18);
+                    btnPlay.setMinHeight(18);
+                    btnSave.setMaxHeight(18);
+                    btnSave.setMinHeight(18);
+                }
+                
                 FilmData film = getTableView().getItems().get(getIndex());
                 set(film, this);
             }

@@ -81,6 +81,14 @@ public class CellStartDownload<S, T> extends TableCell<S, T> {
                         DownloadData download = getTableView().getItems().get(getIndex());
                         ProgData.getInstance().downloadList.delDownloads(download);
                     });
+
+                    if (ProgConfig.SYSTEM_SMALL_ROW_TABLE_DOWNLOAD.get()) {
+                        btnDownStart.setMaxHeight(18);
+                        btnDownStart.setMinHeight(18);
+                        btnDownDel.setMaxHeight(18);
+                        btnDownDel.setMinHeight(18);
+                    }
+
                     hbox.getChildren().addAll(btnDownStart, btnDownDel);
                     setGraphic(hbox);
 
@@ -102,6 +110,14 @@ public class CellStartDownload<S, T> extends TableCell<S, T> {
                         DownloadData download = getTableView().getItems().get(getIndex());
                         ProgData.getInstance().downloadList.delDownloads(download);
                     });
+
+                    if (ProgConfig.SYSTEM_SMALL_ROW_TABLE_DOWNLOAD.get()) {
+                        btnDownStop.setMaxHeight(18);
+                        btnDownStop.setMinHeight(18);
+                        btnDownDel.setMaxHeight(18);
+                        btnDownDel.setMinHeight(18);
+                    }
+
                     hbox.getChildren().addAll(btnDownStop, btnDownDel);
                     setGraphic(hbox);
 
@@ -124,6 +140,14 @@ public class CellStartDownload<S, T> extends TableCell<S, T> {
                         P2Open.openDir(download.getDestPath(),
                                 ProgConfig.SYSTEM_PROG_OPEN_DIR, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
                     });
+
+                    if (ProgConfig.SYSTEM_SMALL_ROW_TABLE_DOWNLOAD.get()) {
+                        btnFilmStart.setMaxHeight(18);
+                        btnFilmStart.setMinHeight(18);
+                        btnOpenDirectory.setMaxHeight(18);
+                        btnOpenDirectory.setMinHeight(18);
+                    }
+
                     hbox.getChildren().addAll(btnFilmStart, btnOpenDirectory);
                     setGraphic(hbox);
 
@@ -147,6 +171,14 @@ public class CellStartDownload<S, T> extends TableCell<S, T> {
                         DownloadData download = getTableView().getItems().get(getIndex());
                         ProgData.getInstance().downloadList.delDownloads(download);
                     });
+
+                    if (ProgConfig.SYSTEM_SMALL_ROW_TABLE_DOWNLOAD.get()) {
+                        btnDownStart.setMaxHeight(18);
+                        btnDownStart.setMinHeight(18);
+                        btnDownDel.setMaxHeight(18);
+                        btnDownDel.setMinHeight(18);
+                    }
+
                     hbox.getChildren().addAll(btnDownStart, btnDownDel);
                     setGraphic(hbox);
 

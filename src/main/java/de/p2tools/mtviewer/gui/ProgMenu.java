@@ -22,7 +22,6 @@ import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.MTShortcut;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
-import de.p2tools.mtviewer.controller.load.LoadFilmFactory;
 import de.p2tools.mtviewer.controller.update.SearchProgramUpdate;
 import de.p2tools.mtviewer.gui.configdialog.ConfigDialogController;
 import de.p2tools.mtviewer.gui.dialog.AboutDialogController;
@@ -69,10 +68,7 @@ public class ProgMenu extends MenuButton {
         mFilm.getItems().addAll(miPlay, miSave, miFilmInfo);
 
         //=========================
-        //Filmliste, Info, Einstellungen
-        final MenuItem miLoad = new MenuItem("Eine neue Filmliste laden");
-        miLoad.setOnAction(e -> LoadFilmFactory.loadList(false));
-
+        // Info, Einstellungen
         final CheckMenuItem miDarkMode = new CheckMenuItem("Dark Mode");
         miDarkMode.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_DARK_THEME);
 
@@ -89,7 +85,7 @@ public class ProgMenu extends MenuButton {
 
         final MenuItem miConfig = new MenuItem("Einstellungen");
         miConfig.setOnAction(e -> new ConfigDialogController(ProgData.getInstance()).showDialog());
-        getItems().addAll(mFilm, miLoad, miDarkMode, miShowInfo, miShowFilter, miConfig, new SeparatorMenuItem());
+        getItems().addAll(mFilm, miDarkMode, miShowInfo, miShowFilter, miConfig, new SeparatorMenuItem());
 
         //=========================
         //Hilfe

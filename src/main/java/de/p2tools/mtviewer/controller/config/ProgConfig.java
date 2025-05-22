@@ -121,6 +121,8 @@ public class ProgConfig extends P2DataProgConfig {
     public static IntegerProperty SYSTEM_CONFIG_DIALOG_FILM = new SimpleIntegerProperty(-1);
     public static IntegerProperty SYSTEM_CONFIG_DIALOG_DOWNLOAD = new SimpleIntegerProperty(-1);
     public static IntegerProperty SYSTEM_CONFIG_DIALOG_PLAY = new SimpleIntegerProperty(-1);
+    public static BooleanProperty SYSTEM_SMALL_ROW_TABLE_FILM = addBoolProp("system-small-row-table-film", Boolean.FALSE);
+    public static BooleanProperty SYSTEM_SMALL_ROW_TABLE_DOWNLOAD = addBoolProp("system-small-row-table-download", Boolean.FALSE);
 
     //Download
     public static StringProperty DOWNLOAD_DIALOG_PATH_SAVING = addStrProp("download-dialog-path-saving"); // gesammelten Downloadpfade im Downloaddialog
@@ -220,6 +222,8 @@ public class ProgConfig extends P2DataProgConfig {
     public static StringProperty FILM_RESOLUTION = addStrProp("film-resolution", FilmData.RESOLUTION_NORMAL);
     public static StringProperty FILM_PLAY_DIALOG_SIZE = addStrProp("film-play-dialog-size");
     public static DoubleProperty PANE_FILM_INFO__DIVIDER = addDoubleProp("pane-film-info--divider", 0.7);
+    public static BooleanProperty FILM_GUI_SHOW_TABLE_TOOL_TIP = addBoolProp("film-gui-show-table-tool-tip", Boolean.TRUE);
+    public static BooleanProperty DOWNLOAD_GUI_SHOW_TABLE_TOOL_TIP = addBoolProp("download-gui-show-table-tool-tip", Boolean.TRUE);
 
     // ConfigDialog
     public static StringProperty CONFIG_DIALOG_SIZE = addStrProp("config-dialog-size", "900:700");

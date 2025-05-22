@@ -16,6 +16,7 @@
 
 package de.p2tools.mtviewer.gui;
 
+import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.data.download.DownloadFactory;
@@ -149,14 +150,19 @@ public class DownloadTableContextMenu {
         miSelectAll.setOnAction(a -> tableView.getSelectionModel().selectAll());
         final MenuItem miSelection = new MenuItem("Auswahl umkehren");
         miSelection.setOnAction(a -> paneDownloadInfo.invertSelection());
-        final MenuItem resetTable = new MenuItem("Tabelle zurücksetzen");
-        resetTable.setOnAction(a -> tableView.resetTable());
-
         miSelectAll.setDisable(download == null);
         miSelection.setDisable(download == null);
+        contextMenu.getItems().add(new SeparatorMenuItem());
+        contextMenu.getItems().addAll(miSelectAll, miSelection);
 
         contextMenu.getItems().add(new SeparatorMenuItem());
-        contextMenu.getItems().addAll(miSelectAll, miSelection, resetTable);
+        CheckMenuItem smallTableRow = new CheckMenuItem("Nur kleine Button anzeigen");
+        smallTableRow.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_SMALL_ROW_TABLE_DOWNLOAD);
+        CheckMenuItem toolTipTable = new CheckMenuItem("Infos beim Überfahren einer Zeile anzeigen");
+        toolTipTable.selectedProperty().bindBidirectional(ProgConfig.DOWNLOAD_GUI_SHOW_TABLE_TOOL_TIP);
+        MenuItem resetTable = new MenuItem("Tabelle zurücksetzen");
+        resetTable.setOnAction(a -> tableView.resetTable());
+        contextMenu.getItems().addAll(smallTableRow, toolTipTable, resetTable);
     }
 
     private void initBandwidth() {

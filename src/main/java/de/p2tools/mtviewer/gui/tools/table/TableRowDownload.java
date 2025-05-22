@@ -42,6 +42,16 @@ public class TableRowDownload<T> extends TableRow {
             setStyle("");
 
         } else {
+            if (ProgConfig.DOWNLOAD_GUI_SHOW_TABLE_TOOL_TIP.getValue()) {
+                if (download.isStateError()) {
+                    setTooltip(new Tooltip(download.getTheme() +
+                            "\n" + download.getTitle() +
+                            "\n" + download.getErrorMessage()));
+                } else {
+                    setTooltip(new Tooltip(download.getTheme() + "\n" + download.getTitle()));
+                }
+            }
+
             if (geoMelden.get() && download.isGeoBlocked()) {
                 // geogeblockt
                 for (int i = 0; i < getChildren().size(); i++) {

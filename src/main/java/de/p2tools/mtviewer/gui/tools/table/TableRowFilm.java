@@ -17,8 +17,10 @@
 
 package de.p2tools.mtviewer.gui.tools.table;
 
+import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 import javafx.scene.control.TableRow;
+import javafx.scene.control.Tooltip;
 
 
 public class TableRowFilm<T> extends TableRow<T> {
@@ -34,6 +36,10 @@ public class TableRowFilm<T> extends TableRow<T> {
         FilmData film = (FilmData) f;
         if (film == null || empty) {
             setStyle("");
+        } else {
+            if (ProgConfig.FILM_GUI_SHOW_TABLE_TOOL_TIP.getValue()) {
+                setTooltip(new Tooltip(film.getTheme() + "\n" + film.getTitle()));
+            }
         }
     }
 }
