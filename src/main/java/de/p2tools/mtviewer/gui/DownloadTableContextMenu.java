@@ -19,26 +19,20 @@ package de.p2tools.mtviewer.gui;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
-import de.p2tools.mtviewer.controller.data.download.DownloadFactory;
 import de.p2tools.mtviewer.gui.tools.table.TableDownload;
 import de.p2tools.p2lib.tools.P2ToolsFactory;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 public class DownloadTableContextMenu {
 
     private final ProgData progData;
     private final PaneDownloadInfo paneDownloadInfo;
     private final TableDownload tableView;
-    private final Slider sliderBandwidth = new Slider();
-    private final Label lblBandwidth = new Label();
 
     public DownloadTableContextMenu(final ProgData progData, final PaneDownloadInfo paneDownloadInfo, final TableDownload tableView) {
         this.progData = progData;
         this.paneDownloadInfo = paneDownloadInfo;
         this.tableView = tableView;
-        initBandwidth();
     }
 
     public ContextMenu getContextMenu(final DownloadData download) {
@@ -48,17 +42,6 @@ public class DownloadTableContextMenu {
     }
 
     private void getMenu(final ContextMenu contextMenu, final DownloadData download) {
-        //erst mal die Einstellung der Bandbreite
-        HBox hBox = new HBox(10);
-        hBox.getChildren().addAll(sliderBandwidth, lblBandwidth);
-        VBox vBox = new VBox(10);
-        vBox.getChildren().addAll(new Label("max. Bandbreite:"), hBox);
-        CustomMenuItem customMenuItem = new CustomMenuItem(vBox);
-        customMenuItem.setHideOnClick(false);
-
-        contextMenu.getItems().addAll(customMenuItem, new SeparatorMenuItem());
-
-        //dann die "echten" Menüpunkte
         final MenuItem miStart = new MenuItem("Download starten");
         miStart.setOnAction(a -> paneDownloadInfo.startDownload(false));
         final MenuItem miStop = new MenuItem("Download stoppen");
@@ -163,16 +146,5 @@ public class DownloadTableContextMenu {
         MenuItem resetTable = new MenuItem("Tabelle zurücksetzen");
         resetTable.setOnAction(a -> tableView.resetTable());
         contextMenu.getItems().addAll(smallTableRow, toolTipTable, resetTable);
-    }
-
-    private void initBandwidth() {
-        Label lblText = new Label("Max. Bandbreite: ");
-        lblText.setMinWidth(0);
-        lblText.setTooltip(new Tooltip("Maximale Bandbreite die ein einzelner Download beanspruchen darf \n" +
-                "oder unbegrenzt wenn \"aus\""));
-        sliderBandwidth.setTooltip(new Tooltip("Maximale Bandbreite die ein einzelner Download beanspruchen darf \n" +
-                "oder unbegrenzt wenn \"aus\""));
-
-        DownloadFactory.initBandwidth(sliderBandwidth, lblBandwidth);
     }
 }
