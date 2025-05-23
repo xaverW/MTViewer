@@ -41,6 +41,12 @@ public final class FilmFilter extends FilmFilterProps {
         setName(name);
     }
 
+    public FilmFilter(String name, String tag) {
+        initFilter();
+        setName(name);
+        setTag(tag);
+    }
+
     public boolean isReportChange() {
         return reportChange;
     }

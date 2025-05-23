@@ -76,13 +76,16 @@ public class LoadFactory {
         progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_FILMLIST_LOAD_FINISHED) {
             @Override
             public void pingGui() {
+                ProgData.loadFilm = false;
                 if (ProgData.firstProgramStart) {
                     ProgSave.saveAll(); // damit nichts verloren geht
                 }
                 // activate the saved filter
                 progData.worker.resetFilter();
                 progData.filmFilterRunner.filter();
-                progData.maskerPane.switchOffMasker();
+                if (!ProgData.loadAudio) {
+                    progData.maskerPane.switchOffMasker();
+                }
 
                 String filmDate = FilmlistFactory.getAgeAsStringDate(ProgData.getInstance().filmlist.metaData);
                 ProgConfig.SYSTEM_FILMLIST_DATE.setValue(ProgData.getInstance().filmlist.isEmpty() ? "" : filmDate);
@@ -132,18 +135,14 @@ public class LoadFactory {
         progData.pEventHandler.addListener(new P2Listener(PEvents.LOAD_AUDIO_LIST_FINISHED) {
             @Override
             public void pingGui(P2Event event) {
+                ProgData.loadAudio = false;
                 if (ProgData.firstProgramStart) {
                     ProgSave.saveAll(); // damit nichts verloren geht
                 }
-                progData.maskerPane.setMaskerText("Blacklist filtern");
-//                BlacklistFilterFactory.markBlack(false);
-//                AudioToolsFactory.markShownAndBookmarks();
-
-                // activate the saved filter
                 progData.worker.resetFilter();
-//                ProgData.getInstance().audioFilterRunner.filter();
-//                ProgData.getInstance().downloadList.addAudioInList(ProgData.getInstance().audioList);
-                progData.maskerPane.switchOffMasker();
+                if (!ProgData.loadFilm) {
+                    progData.maskerPane.switchOffMasker();
+                }
             }
         });
     }

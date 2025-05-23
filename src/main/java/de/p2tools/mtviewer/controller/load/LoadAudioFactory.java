@@ -38,6 +38,7 @@ public class LoadAudioFactory {
     }
 
     public static void loadProgStart() {
+        ProgData.loadAudio = true;
         // neu einmal direkt nach dem Programmstart
         LoadAudioList loadAudioList = new LoadAudioList();
         initLoadFactoryConst(loadAudioList);
@@ -45,6 +46,7 @@ public class LoadAudioFactory {
     }
 
     public static void loadListButton() {
+        ProgData.loadAudio = true;
         // aus dem Menü oder Button in den Einstellungen
         LoadAudioList loadAudioList = new LoadAudioList();
         initLoadFactoryConst(loadAudioList);

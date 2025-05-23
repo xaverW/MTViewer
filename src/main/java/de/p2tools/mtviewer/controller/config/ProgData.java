@@ -49,6 +49,9 @@ public class ProgData {
     public static BooleanProperty FILMLIST_IS_DOWNLOADING = new SimpleBooleanProperty(Boolean.FALSE); // dann wird eine Filmliste geladen
     public static BooleanProperty AUDIOLIST_IS_DOWNLOADING = new SimpleBooleanProperty(Boolean.FALSE); // dann wird eine Audioliste geladen
 
+    public static boolean loadFilm = false;
+    public static boolean loadAudio = false;
+
     public P2EventHandler pEventHandler;
 
     // Infos

@@ -22,7 +22,9 @@ import de.p2tools.mtviewer.controller.filmfilter.FilmFilter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Worker {
 
@@ -41,7 +43,15 @@ public class Worker {
     }
 
     public void resetFilter() {
-        allChannelList.setAll(Arrays.asList(progData.filmlistUsed.sender));//alle Sender laden
+        ArrayList<String> sender = new ArrayList<>(Arrays.asList(progData.filmlist.sender));
+        List<String> audio = Arrays.asList(progData.audioList.sender);
+        audio.forEach(a -> {
+            if (!sender.contains(a)) {
+                sender.add(a);
+            }
+        });
+
+        allChannelList.setAll(sender);
         sfTemp.copyTo(progData.actFilmFilterWorker.getActFilterSettings());
     }
 

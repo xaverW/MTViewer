@@ -28,7 +28,7 @@ import java.util.ArrayList;
 
 public class FilmFilterProps extends P2DataSample<FilmFilter> implements Comparable<FilmFilter> {
 
-    public static String TAG = "SelectedFilter";
+    public String TAG = "SelectedFilter";
 
     private final StringProperty name = new SimpleStringProperty();
     private final StringProperty channel = new SimpleStringProperty();
@@ -106,6 +106,10 @@ public class FilmFilterProps extends P2DataSample<FilmFilter> implements Compara
         for (int i = 0; i < sfIntegerPropArr.length; ++i) {
             sf.sfIntegerPropArr[i].setValue(this.sfIntegerPropArr[i].getValue());
         }
+    }
+
+    public void setTag(String string) {
+        TAG = string;
     }
 
     @Override

@@ -1,1 +1,4 @@
 /*  style sheet for the dark-theme */
+.root {
+    -fx-animated: #193258;
+}

@@ -30,20 +30,25 @@ import de.p2tools.p2lib.guitools.ptoggleswitch.P2ToggleSwitch;
 import de.p2tools.p2lib.mtfilter.FilterCheck;
 import de.p2tools.p2lib.mtfilter.FilterCheckRegEx;
 import de.p2tools.p2lib.tools.duration.P2Duration;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import javafx.util.StringConverter;
-
-import java.util.ArrayList;
 
 public class PaneFilmFilter extends VBox {
 
@@ -62,7 +67,15 @@ public class PaneFilmFilter extends VBox {
     private final Button btnClearFilter = P2ButtonClearFilterFactory.getPButtonClearSmall();
     private final Button btnGoBack = new Button("");
     private final Button btnGoForward = new Button("");
-    private final ArrayList<MenuItemClass> menuItemsList = new ArrayList<>();
+
+    private final Button btnFilter1 = new Button("");
+    private final Button btnFilter2 = new Button("");
+    private final Button btnFilter3 = new Button("");
+    private final Button btnFilter4 = new Button("");
+    private final Button btnAddFilter1 = new Button("");
+    private final Button btnAddFilter2 = new Button("");
+    private final Button btnAddFilter3 = new Button("");
+    private final Button btnAddFilter4 = new Button("");
     private final ProgData progData;
 
     public PaneFilmFilter() {
@@ -99,6 +112,90 @@ public class PaneFilmFilter extends VBox {
 
         tglMediathek.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_SHOW_MEDIATHEK);
         tglAudiothek.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_SHOW_AUDIOTHEK);
+
+        btnFilter1.setGraphic(ProgIcons.ICON_BUTTON_UP.getImageView());
+        btnFilter1.getStyleClass().add("buttonVerySmall");
+        btnFilter1.setTooltip(new Tooltip("Gespeicherten Filter setzen"));
+        btnFilter1.setOnAction(a -> {
+            progData.actFilmFilterWorker.setStoredFilter(1);
+        });
+        btnFilter2.setGraphic(ProgIcons.ICON_BUTTON_UP.getImageView());
+        btnFilter2.getStyleClass().add("buttonVerySmall");
+        btnFilter2.setTooltip(new Tooltip("Gespeicherten Filter setzen"));
+        btnFilter2.setOnAction(a -> {
+            progData.actFilmFilterWorker.setStoredFilter(2);
+        });
+        btnFilter3.setGraphic(ProgIcons.ICON_BUTTON_UP.getImageView());
+        btnFilter3.getStyleClass().add("buttonVerySmall");
+        btnFilter3.setTooltip(new Tooltip("Gespeicherten Filter setzen"));
+        btnFilter3.setOnAction(a -> {
+            progData.actFilmFilterWorker.setStoredFilter(3);
+        });
+        btnFilter4.setGraphic(ProgIcons.ICON_BUTTON_UP.getImageView());
+        btnFilter4.getStyleClass().add("buttonVerySmall");
+        btnFilter4.setTooltip(new Tooltip("Gespeicherten Filter setzen"));
+        btnFilter4.setOnAction(a -> {
+            progData.actFilmFilterWorker.setStoredFilter(4);
+        });
+
+        PauseTransition transition = new PauseTransition(Duration.seconds(1.0));
+        transition.setOnFinished(event -> {
+            btnAddFilter1.getStyleClass().removeAll("animated-button");
+            btnAddFilter2.getStyleClass().removeAll("animated-button");
+            btnAddFilter3.getStyleClass().removeAll("animated-button");
+            btnAddFilter4.getStyleClass().removeAll("animated-button");
+        });
+
+        btnAddFilter1.setGraphic(ProgIcons.ICON_BUTTON_DOWN.getImageView());
+        btnAddFilter1.getStyleClass().add("buttonVerySmall");
+        btnAddFilter1.setTooltip(new Tooltip("Aktuellen Filter speichern"));
+        btnAddFilter1.setOnAction(a -> {
+            btnAddFilter1.getStyleClass().add("animated-button");
+            transition.playFromStart();
+            setEffect(btnAddFilter1);
+            progData.actFilmFilterWorker.storeFilter(1);
+        });
+        btnAddFilter2.setGraphic(ProgIcons.ICON_BUTTON_DOWN.getImageView());
+        btnAddFilter2.getStyleClass().add("buttonVerySmall");
+        btnAddFilter2.setTooltip(new Tooltip("Aktuellen Filter speichern"));
+        btnAddFilter2.setOnAction(a -> {
+            btnAddFilter2.getStyleClass().add("animated-button");
+            transition.playFromStart();
+            setEffect(btnAddFilter2);
+            progData.actFilmFilterWorker.storeFilter(2);
+        });
+        btnAddFilter3.setGraphic(ProgIcons.ICON_BUTTON_DOWN.getImageView());
+        btnAddFilter3.getStyleClass().add("buttonVerySmall");
+        btnAddFilter3.setTooltip(new Tooltip("Aktuellen Filter speichern"));
+        btnAddFilter3.setOnAction(a -> {
+            btnAddFilter3.getStyleClass().add("animated-button");
+            transition.playFromStart();
+            setEffect(btnAddFilter3);
+            progData.actFilmFilterWorker.storeFilter(3);
+        });
+        btnAddFilter4.setGraphic(ProgIcons.ICON_BUTTON_DOWN.getImageView());
+        btnAddFilter4.getStyleClass().add("buttonVerySmall");
+        btnAddFilter4.setTooltip(new Tooltip("Aktuellen Filter speichern"));
+        btnAddFilter4.setOnAction(a -> {
+            btnAddFilter4.getStyleClass().add("animated-button");
+            transition.playFromStart();
+            setEffect(btnAddFilter4);
+            progData.actFilmFilterWorker.storeFilter(4);
+        });
+
+
+    }
+
+    private void setEffect(Node target) {
+        DropShadow shadow = new DropShadow();
+        shadow.setColor(Color.DARKBLUE);
+        shadow.setSpread(0.1);
+        Timeline shadowAnimation = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(shadow.radiusProperty(), 0d)),
+                new KeyFrame(Duration.seconds(0.15), new KeyValue(shadow.radiusProperty(), 20d)));
+        target.setEffect(shadow);
+        shadowAnimation.setOnFinished(evt -> target.setEffect(null));
+        shadowAnimation.play();
     }
 
     private void initDaysFilter() {
@@ -233,49 +330,25 @@ public class PaneFilmFilter extends VBox {
         final Button btnHelpFilter = P2Button.helpButton(progData.primaryStage, "Infos über die Filter",
                 HelpText.FILTER_INFO);
 
-        final GridPane gridPane = new GridPane();
-        gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
-        gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
-        int row = 0;
+        final VBox vBox = new VBox();
+        vBox.setSpacing(10);
 
-        gridPane.add(tglMediathek, 0, row);
-        gridPane.add(tglAudiothek, 0, ++row);
+        vBox.getChildren().add(tglMediathek);
+        vBox.getChildren().add(tglAudiothek);
 
-        ++row;
-        VBox vBox;
-        vBox = addTxt("Sender", mbChannel);
-        GridPane.setHgrow(vBox, Priority.ALWAYS);
-        gridPane.add(vBox, 0, ++row);
-
-        vBox = addTxt("Thema", cboTheme);
-        GridPane.setHgrow(vBox, Priority.ALWAYS);
-        gridPane.add(vBox, 0, ++row);
-
-        vBox = addTxt("Titel", cboTitle);
-        GridPane.setHgrow(vBox, Priority.ALWAYS);
-        gridPane.add(vBox, 0, ++row);
-
-        vBox = addTxt("Irgendwo", cboSomewhere);
-        GridPane.setHgrow(vBox, Priority.ALWAYS);
-        gridPane.add(vBox, 0, ++row);
+        addTxt("Sender", mbChannel, vBox);
+        addTxt("Thema", cboTheme, vBox);
+        addTxt("Titel", cboTitle, vBox);
+        addTxt("Irgendwo", cboSomewhere, vBox);
 
         // Slider
-        gridPane.add(new Label(""), 0, ++row);
-
-        vBox = addSlider();
-        gridPane.add(vBox, 0, ++row);
-        GridPane.setHgrow(vBox, Priority.ALWAYS);
-
-        vBox = slDur;
-        gridPane.add(vBox, 0, ++row);
-        GridPane.setHgrow(vBox, Priority.ALWAYS);
+        vBox.getChildren().add(addSlider());
+        vBox.getChildren().add(slDur);
 
         // checkbox
-        gridPane.add(new Label(""), 0, ++row);
-
         P2ToggleSwitch chkOnlyNew = new P2ToggleSwitch("Nur neue Filme:");
         chkOnlyNew.selectedProperty().bindBidirectional(progData.actFilmFilterWorker.getActFilterSettings().onlyNewProperty());
-        gridPane.add(chkOnlyNew, 0, ++row);
+        vBox.getChildren().add(chkOnlyNew);
 
         P2ToggleSwitch chkLive = new P2ToggleSwitch("Nur Live-Streams:");
         chkLive.setSelected(progData.actFilmFilterWorker.getActFilterSettings().onlyLiveProperty().get());
@@ -290,7 +363,34 @@ public class PaneFilmFilter extends VBox {
         progData.actFilmFilterWorker.getActFilterSettings().onlyLiveProperty().addListener((u, o, n) -> {
             chkLive.setSelected(n);
         });
-        gridPane.add(chkLive, 0, ++row);
+        vBox.getChildren().add(chkLive);
+
+        // ==================
+        // Speicher
+        VBox vBoxSaved = new VBox();
+        HBox hBoxSet = new HBox();
+        hBoxSet.getChildren().addAll(btnFilter1, btnFilter2, btnFilter3, btnFilter4);
+        btnFilter1.setMaxWidth(Double.MAX_VALUE);
+        btnFilter2.setMaxWidth(Double.MAX_VALUE);
+        btnFilter3.setMaxWidth(Double.MAX_VALUE);
+        btnFilter4.setMaxWidth(Double.MAX_VALUE);
+        HBox.setHgrow(btnFilter1, Priority.ALWAYS);
+        HBox.setHgrow(btnFilter2, Priority.ALWAYS);
+        HBox.setHgrow(btnFilter3, Priority.ALWAYS);
+        HBox.setHgrow(btnFilter4, Priority.ALWAYS);
+
+        HBox hBoxStore = new HBox();
+        hBoxStore.getChildren().addAll(btnAddFilter1, btnAddFilter2, btnAddFilter3, btnAddFilter4);
+        btnAddFilter1.setMaxWidth(Double.MAX_VALUE);
+        btnAddFilter2.setMaxWidth(Double.MAX_VALUE);
+        btnAddFilter3.setMaxWidth(Double.MAX_VALUE);
+        btnAddFilter4.setMaxWidth(Double.MAX_VALUE);
+        HBox.setHgrow(btnAddFilter1, Priority.ALWAYS);
+        HBox.setHgrow(btnAddFilter2, Priority.ALWAYS);
+        HBox.setHgrow(btnAddFilter3, Priority.ALWAYS);
+        HBox.setHgrow(btnAddFilter4, Priority.ALWAYS);
+
+        vBoxSaved.getChildren().addAll(hBoxSet, hBoxStore);
 
         // ==================
         // clear
@@ -302,33 +402,14 @@ public class PaneFilmFilter extends VBox {
 
 
         // ===============
-        getChildren().addAll(gridPane, P2GuiTools.getVBoxGrower(), hBoxClear);
+        getChildren().addAll(vBox, P2GuiTools.getHDistance(20), vBoxSaved, P2GuiTools.getVBoxGrower(), hBoxClear);
         VBox.setVgrow(this, Priority.ALWAYS);
     }
 
-    private VBox addTxt(String txt, Control control) {
+    private void addTxt(String txt, Node control, VBox vBoxComplete) {
         VBox vBox = new VBox(2);
-        vBox.setMaxWidth(Double.MAX_VALUE);
         Label label = new Label(txt);
         vBox.getChildren().addAll(label, control);
-        return vBox;
-    }
-
-    private static class MenuItemClass {
-        private final String text;
-        private final CheckBox checkBox;
-
-        MenuItemClass(String text, CheckBox checkbox) {
-            this.text = text;
-            this.checkBox = checkbox;
-        }
-
-        public String getText() {
-            return text;
-        }
-
-        public CheckBox getCheckBox() {
-            return checkBox;
-        }
+        vBoxComplete.getChildren().add(vBox);
     }
 }

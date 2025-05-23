@@ -1,4 +1,5 @@
 .root {
+    -fx-animated: #6f83aa;
 }
 
 /* ist der Label mit der Anzahl markierter Tabellenzeilen in der Taskbar*/
@@ -16,3 +17,16 @@
 .update-grid-cell {
     -fx-background-color: white ;
 }
+
+.animated-button {
+    -fx-background-color: -fx-animated;
+}
+.animated-button:focused{
+    -fx-background-color: -fx-animated;
+}
+.animated-button:hover{
+    -fx-background-color: -fx-animated;
+}
+.animated-button:focused:hover{
+    -fx-background-color: -fx-animated;
+c}

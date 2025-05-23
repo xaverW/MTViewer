@@ -68,6 +68,11 @@ public final class ActFilmFilterWorker {
     private FilmFilter actFilterSettings = new FilmFilter(SELECTED_FILTER_NAME); // ist der "aktuelle" Filter im Programm
     private FilmFilter oldActFilterSettings = new FilmFilter(SELECTED_FILTER_NAME); // ist der "aktuelle" Filter im Programm
 
+    private FilmFilter storedFilter1 = new FilmFilter("storedFilter1", "storedFilter1"); // sind die gespeicherten Filter
+    private FilmFilter storedFilter2 = new FilmFilter("storedFilter2", "storedFilter2"); // sind die gespeicherten Filter
+    private FilmFilter storedFilter3 = new FilmFilter("storedFilter3", "storedFilter3"); // sind die gespeicherten Filter
+    private FilmFilter storedFilter4 = new FilmFilter("storedFilter4", "storedFilter4"); // sind die gespeicherten Filter
+
     private boolean theme = false, themeTitle = false, title = false, somewhere = false;
 
     public ActFilmFilterWorker(ProgData progData) {
@@ -117,6 +122,57 @@ public final class ActFilmFilterWorker {
     public FilmFilter getActFilterSettings() {
         return actFilterSettings;
     }
+
+    public FilmFilter getStoredFilter1() {
+        return storedFilter1;
+    }
+
+    public FilmFilter getStoredFilter2() {
+        return storedFilter2;
+    }
+
+    public FilmFilter getStoredFilter3() {
+        return storedFilter3;
+    }
+
+    public FilmFilter getStoredFilter4() {
+        return storedFilter4;
+    }
+
+    public synchronized void setStoredFilter(int i) {
+        switch (i) {
+            case 1:
+                setActFilterSettings(storedFilter1);
+                break;
+            case 2:
+                setActFilterSettings(storedFilter2);
+                break;
+            case 3:
+                setActFilterSettings(storedFilter3);
+                break;
+            case 4:
+                setActFilterSettings(storedFilter4);
+                break;
+        }
+    }
+
+    public synchronized void storeFilter(int i) {
+        switch (i) {
+            case 1:
+                actFilterSettings.copyTo(storedFilter1);
+                break;
+            case 2:
+                actFilterSettings.copyTo(storedFilter2);
+                break;
+            case 3:
+                actFilterSettings.copyTo(storedFilter3);
+                break;
+            case 4:
+                actFilterSettings.copyTo(storedFilter4);
+                break;
+        }
+    }
+
 
     /**
      * setzt die aktuellen Filtereinstellungen aus einem Filter (gespeicherten Filter)

@@ -28,12 +28,14 @@ public class LoadFilmFactory {
     }
 
     public static void loadProgStart() {
+        ProgData.loadFilm = true;
         LoadFilmlist loadFilmlist = new LoadFilmlist(ProgData.getInstance().pEventHandler);
         initLoadFactoryConst(loadFilmlist);
         loadFilmlist.loadFilmlistProgStart();
     }
 
     public static void loadList(boolean alwaysLoadNew) {
+        ProgData.loadFilm = true;
         LoadFilmlist loadFilmlist = new LoadFilmlist(ProgData.getInstance().pEventHandler);
         initLoadFactoryConst(loadFilmlist);
         loadFilmlist.loadNewFilmlistFromWeb(alwaysLoadNew);

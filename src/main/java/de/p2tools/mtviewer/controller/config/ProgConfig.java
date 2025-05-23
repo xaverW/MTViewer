@@ -122,7 +122,7 @@ public class ProgConfig extends P2DataProgConfig {
     public static IntegerProperty SYSTEM_CONFIG_DIALOG_DOWNLOAD = new SimpleIntegerProperty(-1);
     public static IntegerProperty SYSTEM_CONFIG_DIALOG_PLAY = new SimpleIntegerProperty(-1);
     public static BooleanProperty SYSTEM_SMALL_ROW_TABLE_FILM = addBoolProp("system-small-row-table-film", Boolean.FALSE);
-    public static BooleanProperty SYSTEM_SMALL_ROW_TABLE_DOWNLOAD = addBoolProp("system-small-row-table-download", Boolean.FALSE);
+    public static BooleanProperty SYSTEM_SMALL_ROW_TABLE_DOWNLOAD = addBoolProp("system-small-row-table-download", Boolean.TRUE);
 
     //Download
     public static StringProperty DOWNLOAD_DIALOG_PATH_SAVING = addStrProp("download-dialog-path-saving"); // gesammelten Downloadpfade im Downloaddialog
@@ -171,7 +171,7 @@ public class ProgConfig extends P2DataProgConfig {
     public static BooleanProperty SYSTEM_ONLY_ASCII = addBoolProp("system-only-ascii", Boolean.FALSE);
     public static BooleanProperty SYSTEM_MARK_GEO = addBoolProp("system-mark-geo", Boolean.TRUE);
     public static StringProperty SYSTEM_GEO_HOME_PLACE = addStrProp("system-geo-home-place", FilmData.GEO_DE);
-    public static IntegerProperty SYSTEM_FONT_SIZE = addIntProp("system-style-size", 14);
+    public static IntegerProperty SYSTEM_FONT_SIZE = addIntProp("system-style-size", 0);
     public static BooleanProperty SYSTEM_FONT_SIZE_CHANGE = addBoolProp("system-font-size-change", Boolean.FALSE); // für die Schriftgröße
     public static StringProperty SYSTEM_LOG_DIR = addStrProp("system-log-dir", "");
     public static BooleanProperty SYSTEM_LOG_ON = addBoolProp("system-log-on", Boolean.TRUE);
@@ -288,6 +288,11 @@ public class ProgConfig extends P2DataProgConfig {
         final FilmFilter akt_sf = progData.actFilmFilterWorker.getActFilterSettings();//akt-Filter
         akt_sf.setName(ActFilmFilterWorker.SELECTED_FILTER_NAME);// nur zur Info im Config-File
         configFile.addConfigs(akt_sf);
+
+        configFile.addConfigs(progData.actFilmFilterWorker.getStoredFilter1());
+        configFile.addConfigs(progData.actFilmFilterWorker.getStoredFilter2());
+        configFile.addConfigs(progData.actFilmFilterWorker.getStoredFilter3());
+        configFile.addConfigs(progData.actFilmFilterWorker.getStoredFilter4());
 
         configFile.addConfigs(progData.replaceList);
         configFile.addConfigs(progData.downloadList);
