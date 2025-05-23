@@ -61,6 +61,11 @@ public class TableFilm extends PTable<FilmData> {
         ProgConfig.SYSTEM_SMALL_ROW_TABLE_FILM.addListener((observableValue, s, t1) -> refresh());
         ProgConfig.FILM_GUI_SHOW_TABLE_TOOL_TIP.addListener((observableValue, s, t1) -> refresh());
 
+        final TableColumn<FilmData, Boolean> markColumn = new TableColumn<>("Film");
+        markColumn.setCellValueFactory(new PropertyValueFactory<>("mark"));
+        markColumn.getStyleClass().add("alignCenter");
+        TableFilmFactory.columnFactoryBoolean(markColumn);
+
         final TableColumn<FilmData, Integer> nrColumn = new TableColumn<>("Nr");
         nrColumn.setCellValueFactory(new PropertyValueFactory<>("no"));
         nrColumn.getStyleClass().add("alignCenterRightPadding_10");
@@ -131,7 +136,7 @@ public class TableFilm extends PTable<FilmData> {
         titleColumn.setPrefWidth(230);
 
         getColumns().addAll(
-                nrColumn,
+                markColumn, nrColumn,
                 senderColumn, themeColumn, titleColumn,
                 startColumn,
                 datumColumn, timeColumn, durationColumn, sizeColumn,

@@ -38,6 +38,7 @@ public class PaneFilmInfo extends VBox {
     private final HBox hBoxUrl = new HBox(10);
     private final Label lblUrl = new Label("zur Website: ");
 
+    private final Label lblMediathek = new Label();
     private final Label lblDate = new Label();
     private final Label lblTime = new Label();
     private final Label lblDuration = new Label();
@@ -86,7 +87,8 @@ public class PaneFilmInfo extends VBox {
         gridPane.getColumnConstraints().addAll(P2ColumnConstraints.getCcPrefSize(), P2ColumnConstraints.getCcComputedSizeAndHgrow());
 
         int row = 0;
-        gridPane.add(new Label("Datum: "), 0, row);
+        gridPane.add(lblMediathek, 0, row);
+        gridPane.add(new Label("Datum: "), 0, ++row);
         gridPane.add(lblDate, 1, row);
         gridPane.add(new Label("Zeit: "), 0, ++row);
         gridPane.add(lblTime, 1, row);
@@ -111,6 +113,7 @@ public class PaneFilmInfo extends VBox {
 
         if (film == null) {
             this.film = null;
+            lblMediathek.setText("");
             lblTheme.setText("");
             lblTitle.setText("");
             textArea.clear();
@@ -126,6 +129,7 @@ public class PaneFilmInfo extends VBox {
 
         this.film = film;
 
+        lblMediathek.setText(film.isMark() ? "Mediathek" : "Audiothek");
         lblTheme.setText(film.arr[FilmDataXml.FILM_CHANNEL] + "  -  " + film.arr[FilmDataXml.FILM_THEME]);
         lblTitle.setText(film.arr[FilmDataXml.FILM_TITLE]);
         textArea.setText(film.getDescription());

@@ -95,6 +95,8 @@ public class LoadFactory {
                     UpdateCheckFactory.checkProgUpdate();
                     TipOfDayFactory.showDialog(ProgData.getInstance(), false);
                 }
+                // MARK markiert: Mediathek
+                progData.filmlist.forEach(f -> f.setMark(true));
 
                 setList();
             }
@@ -143,6 +145,8 @@ public class LoadFactory {
                 if (!ProgData.loadFilm) {
                     progData.maskerPane.switchOffMasker();
                 }
+                // MARK markiert: Mediathek
+                progData.audioList.forEach(f -> f.setMark(false));
             }
         });
     }

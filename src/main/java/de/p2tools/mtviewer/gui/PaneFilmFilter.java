@@ -146,7 +146,7 @@ public class PaneFilmFilter extends VBox {
             btnAddFilter4.getStyleClass().removeAll("animated-button");
         });
 
-        btnAddFilter1.setGraphic(ProgIcons.ICON_BUTTON_DOWN.getImageView());
+        btnAddFilter1.setGraphic(ProgIcons.ICON_BUTTON_REC.getImageView());
         btnAddFilter1.getStyleClass().add("buttonVerySmall");
         btnAddFilter1.setTooltip(new Tooltip("Aktuellen Filter speichern"));
         btnAddFilter1.setOnAction(a -> {
@@ -155,7 +155,7 @@ public class PaneFilmFilter extends VBox {
             setEffect(btnAddFilter1);
             progData.actFilmFilterWorker.storeFilter(1);
         });
-        btnAddFilter2.setGraphic(ProgIcons.ICON_BUTTON_DOWN.getImageView());
+        btnAddFilter2.setGraphic(ProgIcons.ICON_BUTTON_REC.getImageView());
         btnAddFilter2.getStyleClass().add("buttonVerySmall");
         btnAddFilter2.setTooltip(new Tooltip("Aktuellen Filter speichern"));
         btnAddFilter2.setOnAction(a -> {
@@ -164,7 +164,7 @@ public class PaneFilmFilter extends VBox {
             setEffect(btnAddFilter2);
             progData.actFilmFilterWorker.storeFilter(2);
         });
-        btnAddFilter3.setGraphic(ProgIcons.ICON_BUTTON_DOWN.getImageView());
+        btnAddFilter3.setGraphic(ProgIcons.ICON_BUTTON_REC.getImageView());
         btnAddFilter3.getStyleClass().add("buttonVerySmall");
         btnAddFilter3.setTooltip(new Tooltip("Aktuellen Filter speichern"));
         btnAddFilter3.setOnAction(a -> {
@@ -173,7 +173,7 @@ public class PaneFilmFilter extends VBox {
             setEffect(btnAddFilter3);
             progData.actFilmFilterWorker.storeFilter(3);
         });
-        btnAddFilter4.setGraphic(ProgIcons.ICON_BUTTON_DOWN.getImageView());
+        btnAddFilter4.setGraphic(ProgIcons.ICON_BUTTON_REC.getImageView());
         btnAddFilter4.getStyleClass().add("buttonVerySmall");
         btnAddFilter4.setTooltip(new Tooltip("Aktuellen Filter speichern"));
         btnAddFilter4.setOnAction(a -> {
@@ -182,8 +182,6 @@ public class PaneFilmFilter extends VBox {
             setEffect(btnAddFilter4);
             progData.actFilmFilterWorker.storeFilter(4);
         });
-
-
     }
 
     private void setEffect(Node target) {
@@ -390,7 +388,9 @@ public class PaneFilmFilter extends VBox {
         HBox.setHgrow(btnAddFilter3, Priority.ALWAYS);
         HBox.setHgrow(btnAddFilter4, Priority.ALWAYS);
 
-        vBoxSaved.getChildren().addAll(hBoxSet, hBoxStore);
+        Label lbl = new Label("Filter einstellen / sichern:");
+        lbl.setPadding(new Insets(0, 0, 2, 0));
+        vBoxSaved.getChildren().addAll(lbl, hBoxSet, hBoxStore);
 
         // ==================
         // clear
@@ -402,7 +402,7 @@ public class PaneFilmFilter extends VBox {
 
 
         // ===============
-        getChildren().addAll(vBox, P2GuiTools.getHDistance(20), vBoxSaved, P2GuiTools.getVBoxGrower(), hBoxClear);
+        getChildren().addAll(vBox, P2GuiTools.getVBoxGrower(), vBoxSaved, hBoxClear);
         VBox.setVgrow(this, Priority.ALWAYS);
     }
 

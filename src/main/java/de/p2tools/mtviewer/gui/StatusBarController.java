@@ -31,7 +31,6 @@ import javafx.scene.layout.Priority;
 
 public class StatusBarController extends AnchorPane {
 
-    private final Label lblSelFilm = new Label();
     private final Label lblLeftFilm = new Label();
     private final Label lblRightFilm = new Label();
 
@@ -42,7 +41,7 @@ public class StatusBarController extends AnchorPane {
     public StatusBarController(ProgData progData) {
         this.progData = progData;
 
-        filmPane = getHbox(lblSelFilm, lblLeftFilm, lblRightFilm);
+        filmPane = getHbox(lblLeftFilm, lblRightFilm);
         getChildren().addAll(filmPane);
         AnchorPane.setLeftAnchor(filmPane, 0.0);
         AnchorPane.setBottomAnchor(filmPane, 0.0);
@@ -51,19 +50,16 @@ public class StatusBarController extends AnchorPane {
         make();
     }
 
-    private HBox getHbox(Label lblSel, Label lblLeft, Label lblRight) {
+    private HBox getHbox(Label lblLeft, Label lblRight) {
         HBox hBox = new HBox();
         hBox.setPadding(new Insets(2, 5, 2, 5));
         hBox.setSpacing(10);
         hBox.setAlignment(Pos.CENTER_RIGHT);
 
-        lblSel.setPadding(new Insets(0, 10, 0, 0));
-        lblSel.getStyleClass().add("lblSelectedLines");
-
         lblLeft.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(lblLeft, Priority.ALWAYS);
 
-        hBox.getChildren().addAll(lblSel, lblLeft, lblRight);
+        hBox.getChildren().addAll(lblLeft, lblRight);
         hBox.setStyle("-fx-background-color: -fx-background;");
         return hBox;
     }
@@ -96,13 +92,6 @@ public class StatusBarController extends AnchorPane {
                 }
             }
         });
-//        progData.checkForNewFilmlist.foundNewListProperty().addListener((u, o, n) -> {
-//            if (progData.checkForNewFilmlist.isFoundNewList()) {
-//                lblRightFilm.setStyle("-fx-underline: true;");
-//            } else {
-//                lblRightFilm.setStyle("-fx-underline: false;");
-//            }
-//        });
     }
 
     public void setStatusbarIndex() {
@@ -112,8 +101,6 @@ public class StatusBarController extends AnchorPane {
 
     private void setInfoFilm() {
         lblLeftFilm.setText(FilmTools.getStatusInfosFilm());
-        final int selCount = progData.filmGuiPack.getFilmGuiController().getSelCount();
-        lblSelFilm.setText(selCount > 0 ? selCount + "" : " ");
     }
 
     private void setTextForRightDisplay() {
