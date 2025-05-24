@@ -29,6 +29,7 @@ public class ProgConst {
     public static final String CONFIG_FILE_COPY = "mtv.xml_copy_";
     public static final String CONFIG_DIRECTORY = "p2Mtviewer"; // im Homeverzeichnis
     public static final String XML_START = "Mediathek";
+    public static final String FILE_HISTORY = "history.txt";
 
     public static final String LOG_DIR = "Log";
     public static final String CSS_FILE = "de/p2tools/mtviewer/mtfx.css";
@@ -74,4 +75,6 @@ public class ProgConst {
 
     //Startnummer/Filmnummer/... wenn nicht vorhanden
     public static final int NUMBER_NOT_EXISTS = Integer.MAX_VALUE;
+
+    public static final String THEME_LIVE = "Livestream";
 }

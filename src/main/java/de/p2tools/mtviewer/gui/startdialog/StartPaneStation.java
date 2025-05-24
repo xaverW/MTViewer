@@ -16,12 +16,22 @@
 
 package de.p2tools.mtviewer.gui.startdialog;
 
-import de.p2tools.mtviewer.gui.configdialog.configpanes.PaneStation;
+import de.p2tools.mtviewer.gui.configdialog.configpanes.PStation;
+import javafx.scene.control.TitledPane;
 import javafx.stage.Stage;
 
-public class StartPaneStation extends PaneStation {
+public class StartPaneStation {
+    private final PStation pStation;
 
     public StartPaneStation(Stage stage) {
-        super(stage);
+        pStation = new PStation(stage);
+    }
+
+    public void close() {
+        pStation.close();
+    }
+
+    public TitledPane make() {
+        return new TitledPane("Sender die nicht interessieren, abschalten", pStation);
     }
 }

@@ -16,11 +16,23 @@
 
 package de.p2tools.mtviewer.gui.startdialog;
 
-import de.p2tools.mtviewer.gui.configdialog.configpanes.PaneFilm;
+import de.p2tools.mtviewer.gui.configdialog.configpanes.PFilm;
+import javafx.scene.control.TitledPane;
 import javafx.stage.Stage;
 
-public class StartPaneFilm extends PaneFilm {
+public class StartPaneFilm {
+
+    private final PFilm pFilm;
+
     public StartPaneFilm(Stage stage) {
-        super(stage);
+        pFilm = new PFilm(stage);
+    }
+
+    public void close() {
+        pFilm.close();
+    }
+
+    public TitledPane make() {
+        return new TitledPane("Filmliste bereits beim Laden filtern", pFilm);
     }
 }

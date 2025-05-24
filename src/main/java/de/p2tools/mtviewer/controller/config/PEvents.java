@@ -28,6 +28,7 @@ public class PEvents extends P2Events {
     public static final int EVENT_GUI_HISTORY_CHANGED = count++;
     public static final int EVENT_SETDATA_CHANGED = count++;
     public static final int EVENT_REFRESH_TABLE = ++count;
+    public static final int EVENT_HISTORY_CHANGED = count++;
 
     public static final int LOAD_AUDIO_LIST_START = ++count;
     public static final int LOAD_AUDIO_LIST_PROGRESS = ++count;

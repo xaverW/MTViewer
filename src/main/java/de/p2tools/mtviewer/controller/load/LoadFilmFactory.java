@@ -20,6 +20,7 @@ package de.p2tools.mtviewer.controller.load;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.config.ProgInfos;
+import de.p2tools.mtviewer.controller.data.film.FilmListMtc;
 import de.p2tools.p2lib.mtfilm.loadfilmlist.LoadFilmlist;
 import de.p2tools.p2lib.mtfilm.tools.LoadFactoryConst;
 
@@ -29,14 +30,14 @@ public class LoadFilmFactory {
 
     public static void loadProgStart() {
         ProgData.loadFilm = true;
-        LoadFilmlist loadFilmlist = new LoadFilmlist(ProgData.getInstance().pEventHandler);
+        LoadFilmlist loadFilmlist = new LoadFilmlist(ProgData.getInstance().pEventHandler, new FilmListMtc(), new FilmListMtc());
         initLoadFactoryConst(loadFilmlist);
         loadFilmlist.loadFilmlistProgStart();
     }
 
     public static void loadList(boolean alwaysLoadNew) {
         ProgData.loadFilm = true;
-        LoadFilmlist loadFilmlist = new LoadFilmlist(ProgData.getInstance().pEventHandler);
+        LoadFilmlist loadFilmlist = new LoadFilmlist(ProgData.getInstance().pEventHandler, new FilmListMtc(), new FilmListMtc());
         initLoadFactoryConst(loadFilmlist);
         loadFilmlist.loadNewFilmlistFromWeb(alwaysLoadNew);
     }

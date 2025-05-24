@@ -191,6 +191,7 @@ public final class DownloadData extends DownloadDataProps {
         setTitle(film.arr[FilmDataXml.FILM_TITLE]);
         setFilmUrl(film.arr[FilmDataXml.FILM_URL]);
         setUrlSubtitle(film.getUrlSubtitle());
+        setHistoryUrl(film.getUrlHistory());
 
         setFilmDate(film.arr[FilmDataXml.FILM_DATE]);
         setFilmTime(film.arr[FilmDataXml.FILM_TIME]);

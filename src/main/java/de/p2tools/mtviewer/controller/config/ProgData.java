@@ -23,6 +23,8 @@ import de.p2tools.mtviewer.controller.data.MTShortcut;
 import de.p2tools.mtviewer.controller.data.ReplaceList;
 import de.p2tools.mtviewer.controller.data.download.DownloadInfos;
 import de.p2tools.mtviewer.controller.data.download.DownloadList;
+import de.p2tools.mtviewer.controller.data.film.FilmListMtc;
+import de.p2tools.mtviewer.controller.data.history.HistoryList;
 import de.p2tools.mtviewer.controller.filmfilter.ActFilmFilterWorker;
 import de.p2tools.mtviewer.controller.filmfilter.FilmFilterRunner;
 import de.p2tools.mtviewer.controller.starter.StarterClass;
@@ -77,9 +79,10 @@ public class ProgData {
     // Programmdaten
     public LoadFactory loadFactory;
 
-    public Filmlist<FilmData> filmlist; // ist die komplette Filmliste
+    public FilmListMtc filmlist; // ist die komplette Filmliste
     public Filmlist<FilmData> audioList; // ist die komplette Audioliste
     public Filmlist<FilmData> filmlistUsed; // ist die verwendete Filmliste
+    public HistoryList historyList; // alle angesehenen Filme
 
     public DownloadInfos downloadInfos;
     public ReplaceList replaceList;
@@ -91,11 +94,13 @@ public class ProgData {
 
         actFilmFilterWorker = new ActFilmFilterWorker(this);
 
-        filmlist = new Filmlist<>();
+        filmlist = new FilmListMtc();
         audioList = new Filmlist<>();
         filmlistUsed = new Filmlist<>();
 
         downloadList = new DownloadList(this);
+        historyList = new HistoryList(ProgConst.FILE_HISTORY, HistoryList.HISTORY_LIST.HISTORY);
+
         loadFactory = new LoadFactory(this);
         starterClass = new StarterClass(this);
         downloadInfos = new DownloadInfos(this);

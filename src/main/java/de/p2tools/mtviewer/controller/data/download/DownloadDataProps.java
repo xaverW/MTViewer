@@ -52,16 +52,18 @@ public class DownloadDataProps extends P2DataSample<DownloadData> {
     private final BooleanProperty geoBlocked = new SimpleBooleanProperty(false);
     private final StringProperty filmUrl = new SimpleStringProperty(""); //in normaler Auflösung
     private final StringProperty url = new SimpleStringProperty(""); //in der gewählte Auflösung
+    private final StringProperty historyUrl = new SimpleStringProperty("");
     private final StringProperty urlSubtitle = new SimpleStringProperty("");
     private final StringProperty destFileName = new SimpleStringProperty("");
     private final StringProperty destPath = new SimpleStringProperty("");
     private final BooleanProperty placedBack = new SimpleBooleanProperty(false);
     private final BooleanProperty infoFile = new SimpleBooleanProperty(false);
     private final BooleanProperty subtitle = new SimpleBooleanProperty(false);
+
     public final Property[] properties = {no, filmNr, channel, theme, title,
             state, progress, remaining, bandwidth, downloadSize,
             filmDate, filmTime, durationMinute,
-            hd, ut, geoBlocked, filmUrl, url, urlSubtitle,
+            hd, ut, geoBlocked, filmUrl, url, urlSubtitle, historyUrl,
             destFileName, destPath, /*destPathFile,*/
             placedBack, infoFile, subtitle};
 
@@ -99,6 +101,7 @@ public class DownloadDataProps extends P2DataSample<DownloadData> {
         list.add(new Config_stringProp("filmUrl", DownloadFieldNames.DOWNLOAD_FILM_URL, filmUrl));
         list.add(new Config_stringProp("url", DownloadFieldNames.DOWNLOAD_URL, url));
         list.add(new Config_stringProp("urlSubtitle", DownloadFieldNames.DOWNLOAD_URL_SUBTITLE, urlSubtitle));
+        list.add(new Config_stringProp("historyUrl", historyUrl));
         list.add(new Config_stringProp("destFileName", DownloadFieldNames.DOWNLOAD_DEST_FILE_NAME, destFileName));
         list.add(new Config_stringProp("destPath", DownloadFieldNames.DOWNLOAD_DEST_PATH, destPath));
         list.add(new Config_boolProp("placedBack", DownloadFieldNames.DOWNLOAD_PLACED_BACK, placedBack));
@@ -363,6 +366,18 @@ public class DownloadDataProps extends P2DataSample<DownloadData> {
 
     public StringProperty urlSubtitleProperty() {
         return urlSubtitle;
+    }
+
+    public String getHistoryUrl() {
+        return historyUrl.get();
+    }
+
+    public StringProperty historyUrlProperty() {
+        return historyUrl;
+    }
+
+    public void setHistoryUrl(String historyUrl) {
+        this.historyUrl.set(historyUrl);
     }
 
     public String getDestFileName() {

@@ -20,9 +20,9 @@ package de.p2tools.mtviewer.controller;
 import de.p2tools.mtviewer.controller.config.PEvents;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
+import de.p2tools.mtviewer.controller.data.film.FilmToolsFactory;
 import de.p2tools.mtviewer.gui.tools.TipOfDayFactory;
 import de.p2tools.p2lib.mtfilm.film.FilmlistFactory;
-import de.p2tools.p2lib.mtfilm.loadfilmlist.LoadFilmlist;
 import de.p2tools.p2lib.p2event.P2Event;
 import de.p2tools.p2lib.p2event.P2Listener;
 
@@ -32,7 +32,7 @@ public class LoadFactory {
     public static final double PROGRESS_INDETERMINATE = -1.0;
 
     private static LoadFactory instance;
-    public LoadFilmlist loadFilmlist; //erledigt das Update der Filmliste
+    //    public LoadFilmlist loadFilmlist; //erledigt das Update der Filmliste
     private static boolean doneAtProgramStart = false;
     private final ProgData progData;
 
@@ -41,7 +41,7 @@ public class LoadFactory {
 
         // =================
         // Mediathek
-        loadFilmlist = new LoadFilmlist(progData.pEventHandler);
+//        loadFilmlist = new LoadFilmlist(progData.pEventHandler, new FilmListMtc(), new FilmListMtc());
         progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_FILMLIST_LOAD_START) {
             @Override
             public void pingGui(P2Event event) {
@@ -76,6 +76,8 @@ public class LoadFactory {
         progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_FILMLIST_LOAD_FINISHED) {
             @Override
             public void pingGui() {
+                FilmToolsFactory.markFilms(ProgData.getInstance().filmlist);
+
                 ProgData.loadFilm = false;
                 if (ProgData.firstProgramStart) {
                     ProgSave.saveAll(); // damit nichts verloren geht
