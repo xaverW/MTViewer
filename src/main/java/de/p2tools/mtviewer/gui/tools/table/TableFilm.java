@@ -136,11 +136,6 @@ public class TableFilm extends PTable<FilmData> {
         geoColumn.getStyleClass().add("alignCenter");
         TableFilmFactory.columnFactoryString(geoColumn);
 
-        final TableColumn<FilmData, String> urlColumn = new TableColumn<>("URL");
-        urlColumn.setCellValueFactory(new PropertyValueFactory<>("url"));
-        urlColumn.getStyleClass().add("alignCenterLeft");
-        TableFilmFactory.columnFactoryString(urlColumn);
-
         nrColumn.setPrefWidth(50);
         senderColumn.setPrefWidth(80);
         themeColumn.setPrefWidth(180);
@@ -152,7 +147,6 @@ public class TableFilm extends PTable<FilmData> {
                 startColumn,
                 datumColumn, timeColumn, durationColumn, sizeColumn,
                 hdColumn, utColumn,
-                geoColumn,
-                urlColumn);
+                geoColumn);
     }
 }

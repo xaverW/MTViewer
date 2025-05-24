@@ -19,15 +19,12 @@ package de.p2tools.mtviewer.gui.dialog;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
-import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.dialogs.dialog.P2DialogExtra;
 import de.p2tools.p2lib.guitools.P2ColumnConstraints;
 import de.p2tools.p2lib.guitools.P2Hyperlink;
-import de.p2tools.p2lib.guitools.ptoggleswitch.P2ToggleSwitch;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 import de.p2tools.p2lib.mtfilm.film.FilmDataXml;
 import javafx.application.Platform;
-import javafx.beans.property.BooleanProperty;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -35,7 +32,7 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -45,7 +42,6 @@ public class FilmInfoDialogController extends P2DialogExtra {
 
     private final Text[] textTitle = new Text[FilmDataXml.MAX_ELEM];
     private final Label[] lblCont = new Label[FilmDataXml.MAX_ELEM];
-    private final Text textMediathek = new Text();
     private final TextArea textArea = new TextArea();
 
     private final GridPane gridPane = new GridPane();
@@ -54,41 +50,22 @@ public class FilmInfoDialogController extends P2DialogExtra {
     private final ImageView ivHD = new ImageView();
     private final ImageView ivUT = new ImageView();
     private final ImageView ivNew = new ImageView();
-    private final P2ToggleSwitch tglUrl = new P2ToggleSwitch("URL's anzeigen");
 
-    private final P2Hyperlink pHyperlinkUrl = new P2Hyperlink("",
+    private final P2Hyperlink p2HyperlinkUrlSmall = new P2Hyperlink("",
+            ProgConfig.SYSTEM_PROG_OPEN_URL);
+    private final P2Hyperlink p2HyperlinkUrlHeight = new P2Hyperlink("",
+            ProgConfig.SYSTEM_PROG_OPEN_URL);
+    private final P2Hyperlink p2HyperlinkUrlHd = new P2Hyperlink("",
             ProgConfig.SYSTEM_PROG_OPEN_URL);
 
-    private final P2Hyperlink pHyperlinkWebsite = new P2Hyperlink("",
+    private final P2Hyperlink p2HyperlinkWebsite = new P2Hyperlink("",
             ProgConfig.SYSTEM_PROG_OPEN_URL);
-
-    BooleanProperty urlProperty = ProgConfig.FILM_INFO_DIALOG_SHOW_URL;
 
     private FilmInfoDialogController() {
         super(ProgData.getInstance().primaryStage, ProgConfig.SYSTEM_SIZE_DIALOG_FILMINFO,
-                "Filminfos", false, false, DECO.BORDER_SMALL);
+                "Filminfos", false, false, DECO.BORDER_SMALL, true);
 
         init(false);
-    }
-
-    public synchronized static final FilmInfoDialogController getInstance() {
-        if (instance == null) {
-            instance = new FilmInfoDialogController();
-        }
-        return instance;
-    }
-
-    public synchronized static final FilmInfoDialogController getInstanceAndShow() {
-        if (instance == null) {
-            instance = new FilmInfoDialogController();
-        }
-
-        if (!instance.isShowing()) {
-            instance.showDialog();
-        }
-        instance.getStage().toFront();
-
-        return instance;
     }
 
     public void showFilmInfo() {
@@ -98,14 +75,6 @@ public class FilmInfoDialogController extends P2DialogExtra {
     public void setFilm(FilmData film) {
         Platform.runLater(() -> {
             //braucht es aktuell (noch) nicht: Platform ....
-            if (film == null) {
-                textMediathek.setText("");
-            } else if (film.isMark()) {
-                textMediathek.setText("Mediathek");
-            } else {
-                textMediathek.setText("Audiothek");
-            }
-
             for (int i = 0; i < FilmDataXml.MAX_ELEM; ++i) {
                 if (film == null) {
                     lblCont[i].setText("");
@@ -113,8 +82,10 @@ public class FilmInfoDialogController extends P2DialogExtra {
                     ivHD.setImage(null);
                     ivUT.setImage(null);
                     ivNew.setImage(null);
-                    pHyperlinkUrl.setUrl("");
-                    pHyperlinkWebsite.setUrl("");
+                    p2HyperlinkUrlSmall.setUrl("");
+                    p2HyperlinkUrlHeight.setUrl("");
+                    p2HyperlinkUrlHd.setUrl("");
+                    p2HyperlinkWebsite.setUrl("");
                 } else {
                     switch (i) {
                         case FilmDataXml.FILM_NR:
@@ -124,10 +95,13 @@ public class FilmInfoDialogController extends P2DialogExtra {
                             lblCont[i].setText(film.getDurationMinute() + "");
                             break;
                         case FilmDataXml.FILM_URL:
-                            pHyperlinkUrl.setUrl(film.arr[FilmDataXml.FILM_URL]);
+
+                            p2HyperlinkUrlSmall.setUrl(film.isSmall() ? film.getUrlForResolution(FilmData.RESOLUTION_SMALL) : "");
+                            p2HyperlinkUrlHeight.setUrl(film.arr[FilmDataXml.FILM_URL]);
+                            p2HyperlinkUrlHd.setUrl(film.isHd() ? film.getUrlForResolution(FilmData.RESOLUTION_HD) : "");
                             break;
                         case FilmDataXml.FILM_WEBSITE:
-                            pHyperlinkWebsite.setUrl(film.arr[FilmDataXml.FILM_WEBSITE]);
+                            p2HyperlinkWebsite.setUrl(film.arr[FilmDataXml.FILM_WEBSITE]);
                             break;
                         case FilmDataXml.FILM_DESCRIPTION:
                             textArea.setText(film.arr[i]);
@@ -163,34 +137,38 @@ public class FilmInfoDialogController extends P2DialogExtra {
     }
 
     @Override
+    public void updateCss() {
+        super.updateCss();
+        for (int i = 0; i < FilmDataXml.MAX_ELEM; ++i) {
+            if (textTitle[i] == null) {
+                return;
+            }
+            textTitle[i].getStyleClass().add("downloadGuiMediaText");
+        }
+    }
+
+    @Override
     public void make() {
-        ProgConfig.SYSTEM_THEME_CHANGED.addListener((u, o, n) -> updateCss());
+        this.getMaskerPane().visibleProperty().bind(ProgData.getInstance().maskerPane.visibleProperty());
+
+        TitledPane tpUrl;
         addOkButton(btnOk);
-
-        getHboxLeft().getChildren().add(tglUrl);
-        tglUrl.setTooltip(new Tooltip("URL anzeigen"));
-        tglUrl.selectedProperty().bindBidirectional(urlProperty);
-        tglUrl.selectedProperty().addListener((observable, oldValue, newValue) -> setUrl());
-
         btnOk.setOnAction(a -> close());
         getVBoxCont().getChildren().add(gridPane);
 
-        gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
-        gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
-        gridPane.setPadding(new Insets(P2LibConst.PADDING));
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+        gridPane.setPadding(new Insets(5));
         gridPane.getColumnConstraints().addAll(P2ColumnConstraints.getCcPrefSize(),
                 P2ColumnConstraints.getCcComputedSizeAndHgrow());
 
         int row = 0;
-
-        textMediathek.setFont(Font.font(null, FontWeight.BOLD, -1));
-        gridPane.add(textMediathek, 0, row++);
-
         for (int i = 0; i < FilmDataXml.MAX_ELEM; ++i) {
             textTitle[i] = new Text(FilmDataXml.COLUMN_NAMES[i] + ":");
             textTitle[i].setFont(Font.font(null, FontWeight.BOLD, -1));
+            textTitle[i].getStyleClass().add("downloadGuiMediaText");
             lblCont[i] = new Label("");
-            lblCont[i].setWrapText(true);
+//            lblCont[i].setWrapText(true);
 
             switch (i) {
                 case FilmDataXml.FILM_DATE_LONG:
@@ -216,20 +194,67 @@ public class FilmInfoDialogController extends P2DialogExtra {
                     gridPane.add(ivNew, 1, row++);
                     break;
                 case FilmDataXml.FILM_URL:
+                    p2HyperlinkUrlSmall.setWrapText(true);
+                    p2HyperlinkUrlHeight.setWrapText(true);
+                    p2HyperlinkUrlHd.setWrapText(true);
+
+                    tpUrl = new TitledPane("", new HBox());
+                    tpUrl.expandedProperty().bindBidirectional(ProgConfig.FILM_INFO_DIALOG_SHOW_URL);
+                    final var gUrl = new GridPane();
+                    gUrl.setHgap(10);
+                    gUrl.setVgap(0);
+//                    gUrl.setGridLinesVisible(true);
+                    gUrl.setPadding(new Insets(0));
+                    gUrl.getColumnConstraints().addAll(P2ColumnConstraints.getCcPrefSize(),
+                            P2ColumnConstraints.getCcComputedSizeAndHgrow());
+
+                    gUrl.add(new Label("Niedrig:"), 0, 0);
+                    gUrl.add(p2HyperlinkUrlSmall, 1, 0);
+                    gUrl.add(new Label("Hoch:"), 0, 1);
+                    gUrl.add(p2HyperlinkUrlHeight, 1, 1);
+                    gUrl.add(new Label("HD:"), 0, 2);
+                    gUrl.add(p2HyperlinkUrlHd, 1, 2);
+                    tpUrl.setContent(gUrl);
+
                     gridPane.add(textTitle[i], 0, row);
-                    gridPane.add(pHyperlinkUrl, 1, row++);
+                    gridPane.add(tpUrl, 1, row++, 2, 1);
                     break;
                 case FilmDataXml.FILM_WEBSITE:
+                    p2HyperlinkWebsite.setWrapText(true);
+                    tpUrl = new TitledPane("", new HBox());
+                    tpUrl.expandedProperty().bindBidirectional(ProgConfig.FILM_INFO_DIALOG_SHOW_WEBSITE_URL);
+                    final var gWeb = new GridPane();
+                    gWeb.add(textTitle[i], 0, 0);
+                    gWeb.add(p2HyperlinkWebsite, 1, 1, 3, 1);
+                    tpUrl.setContent(gWeb);
+
                     gridPane.add(textTitle[i], 0, row);
-                    gridPane.add(pHyperlinkWebsite, 1, row++);
+                    gridPane.add(tpUrl, 1, row++, 2, 1);
+                    break;
+                case FilmDataXml.FILM_GEO:
+                    int r = row++ - 1;
+                    gridPane.add(textTitle[i], 0, r);
+                    gridPane.add(lblCont[i], 1, r);
+                    final int iii = i;
+                    lblCont[i].setOnContextMenuRequested(event ->
+                            getMenu(lblCont[iii], event));
                     break;
                 case FilmDataXml.FILM_DESCRIPTION:
                     textArea.setMaxHeight(Double.MAX_VALUE);
                     textArea.setPrefRowCount(6);
                     textArea.setWrapText(true);
                     textArea.setEditable(false);
-                    gridPane.add(textTitle[i], 0, row);
-                    gridPane.add(textArea, 1, row++);
+
+                    tpUrl = new TitledPane("", new HBox());
+                    tpUrl.expandedProperty().bindBidirectional(ProgConfig.FILM_INFO_DIALOG_SHOW_DESCRIPTION);
+                    final var gDescription = new GridPane();
+                    gDescription.add(textTitle[i], 0, 0);
+                    gDescription.add(textArea, 1, 1, 3, 1);
+                    tpUrl.setContent(gDescription);
+
+                    int rr = row++ + 1;
+                    gridPane.add(textTitle[i], 0, rr);
+                    gridPane.add(tpUrl, 1, rr);
                     break;
                 default:
                     gridPane.add(textTitle[i], 0, row);
@@ -239,32 +264,11 @@ public class FilmInfoDialogController extends P2DialogExtra {
                             getMenu(lblCont[ii], event));
             }
         }
-        setUrl();
-    }
-
-    private void setUrl() {
-        textTitle[FilmDataXml.FILM_URL].setVisible(urlProperty.get());
-        textTitle[FilmDataXml.FILM_URL].setManaged(urlProperty.get());
-
-        pHyperlinkUrl.setVisible(urlProperty.get());
-        pHyperlinkUrl.setManaged(urlProperty.get());
-        pHyperlinkUrl.setWrapText(true);
-        pHyperlinkUrl.setMinHeight(Region.USE_PREF_SIZE);
-        pHyperlinkUrl.setPadding(new Insets(5));
-
-        textTitle[FilmDataXml.FILM_WEBSITE].setVisible(urlProperty.get());
-        textTitle[FilmDataXml.FILM_WEBSITE].setManaged(urlProperty.get());
-
-        pHyperlinkWebsite.setVisible(urlProperty.get());
-        pHyperlinkWebsite.setManaged(urlProperty.get());
-        pHyperlinkWebsite.setWrapText(true);
-        pHyperlinkWebsite.setMinHeight(Region.USE_PREF_SIZE);
-        pHyperlinkWebsite.setPadding(new Insets(5));
     }
 
     private void getMenu(Label lbl, ContextMenuEvent event) {
         final ContextMenu contextMenu = new ContextMenu();
-        MenuItem menuItem = new MenuItem("kopieren");
+        MenuItem menuItem = new MenuItem("Kopieren");
         menuItem.setOnAction(a -> {
             final Clipboard clipboard = Clipboard.getSystemClipboard();
             final ClipboardContent content = new ClipboardContent();
@@ -273,5 +277,25 @@ public class FilmInfoDialogController extends P2DialogExtra {
         });
         contextMenu.getItems().addAll(menuItem);
         contextMenu.show(lbl, event.getScreenX(), event.getScreenY());
+    }
+
+    public synchronized static FilmInfoDialogController getInstance() {
+        if (instance == null) {
+            instance = new FilmInfoDialogController();
+        }
+        return instance;
+    }
+
+    public synchronized static FilmInfoDialogController getInstanceAndShow() {
+        if (instance == null) {
+            instance = new FilmInfoDialogController();
+        }
+
+        if (!instance.isShowing()) {
+            instance.showDialog();
+        }
+        instance.getStage().toFront();
+
+        return instance;
     }
 }

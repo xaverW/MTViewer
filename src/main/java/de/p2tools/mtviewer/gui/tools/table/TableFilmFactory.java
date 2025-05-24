@@ -188,14 +188,14 @@ public class TableFilmFactory {
                     btnSave.setMaxHeight(18);
                     btnSave.setMinHeight(18);
                 }
-                
+
                 FilmData film = getTableView().getItems().get(getIndex());
                 set(film, this);
             }
         });
     }
 
-    public static void set(FilmData film, TableCell tableCell) {
+    private static void set(FilmData film, TableCell tableCell) {
         if (film.isLive()) {
             // livestream
             tableCell.setStyle(ProgColorList.FILM_LIVESTREAM.getCssFontBold());

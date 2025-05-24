@@ -23,7 +23,6 @@ import de.p2tools.p2lib.guitools.P2Button;
 import de.p2tools.p2lib.guitools.P2ColumnConstraints;
 import de.p2tools.p2lib.guitools.ptoggleswitch.P2ToggleSwitch;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
-import javafx.beans.property.BooleanProperty;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -40,14 +39,13 @@ public class PaneGeo {
 
     private final P2ToggleSwitch tglGeo = new P2ToggleSwitch("Geblockte Sendungen gelb markieren:");
     private final Stage stage;
-    BooleanProperty geoProperty = ProgConfig.SYSTEM_MARK_GEO;
 
     public PaneGeo(Stage stage) {
         this.stage = stage;
     }
 
     public void close() {
-        tglGeo.selectedProperty().unbindBidirectional(geoProperty);
+        tglGeo.selectedProperty().unbindBidirectional(ProgConfig.SYSTEM_MARK_GEO);
     }
 
     public TitledPane make() {
@@ -55,7 +53,7 @@ public class PaneGeo {
     }
 
     public TitledPane make(Collection<TitledPane> result) {
-        tglGeo.selectedProperty().bindBidirectional(geoProperty);
+        tglGeo.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_MARK_GEO);
         final Button btnHelpGeo = P2Button.helpButton(stage, "Geogeblockte Filme", HelpText.CONFIG_GEO);
 
         ToggleGroup tg = new ToggleGroup();

@@ -221,6 +221,8 @@ public class ProgConfig extends P2DataProgConfig {
 
     // FilmInfoDialog
     public static BooleanProperty FILM_INFO_DIALOG_SHOW_URL = addBoolProp("film-info-dialog-show-url", Boolean.FALSE);
+    public static BooleanProperty FILM_INFO_DIALOG_SHOW_WEBSITE_URL = addBoolProp("film-info-dialog-show-website-url", Boolean.FALSE);
+    public static BooleanProperty FILM_INFO_DIALOG_SHOW_DESCRIPTION = addBoolProp("film-info-dialog-show-description", Boolean.TRUE);
 
     //Download
     public static StringProperty DOWNLOAD_DIALOG_PATH_SAVING = addStrProp("download-dialog-path-saving"); // gesammelten Downloadpfade im Downloaddialog
