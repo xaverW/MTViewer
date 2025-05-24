@@ -171,6 +171,9 @@ public class ProgConfig extends P2DataProgConfig {
     public static IntegerProperty SYSTEM_AUDIOLIST_COUNT_DOUBLE = addIntProp("system-audiolist-count-double", 0); // Anzahl der doppelten Filme
     public static BooleanProperty SYSTEM_SHOW_MEDIATHEK = addBoolProp("system-show-mediathek", Boolean.TRUE);
     public static BooleanProperty SYSTEM_SHOW_AUDIOTHEK = addBoolProp("system-show-auiothek", Boolean.FALSE);
+    public static BooleanProperty SYSTEM_FILMLIST_REMOVE_DOUBLE = addBoolProp("system-filmlist-remove-double", Boolean.FALSE);
+//    public static StringProperty SYSTEM_PATH_FFMPEG = addStrProp("system-path-ffmpeg", GetProgramStandardPath.getTemplatePathFFmpeg());
+//    public static StringProperty SYSTEM_PATH_VLC = addStrProp("system-path-vlc", GetProgramStandardPath.getTemplatePathVlc());
 
     // Einstellungen Filmliste
     public static BooleanProperty SYSTEM_LOAD_FILMS_ON_START = addBoolProp("system-load-films-on-start", Boolean.TRUE);

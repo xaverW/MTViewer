@@ -103,14 +103,14 @@ public class StartPane {
     }
 
     private javafx.scene.image.Image getHelpScreen1() {
-        final String path = "/de/p2tools/mtviewer/res/mtviewer-startpage-1.png";
+        final String path = "/de/p2tools/mtviewer/res/startdialog/mtviewer-startpage-1.png";
         return new javafx.scene.image.Image(path, 600,
                 600,
                 true, true);
     }
 
     private javafx.scene.image.Image getHelpScreen2() {
-        final String path = "/de/p2tools/mtviewer/res/mtviewer-startpage-2.png";
+        final String path = "/de/p2tools/mtviewer/res/startdialog/mtviewer-startpage-2.png";
         return new javafx.scene.image.Image(path, 600,
                 600,
                 true, true);

@@ -19,6 +19,60 @@ package de.p2tools.mtviewer.gui.tools;
 import de.p2tools.p2lib.P2LibConst;
 
 public class HelpText {
+    public static final String LOAD_FILMLIST_ONLY_MARK_DOUBLE =
+            "In der Filmliste sind ~150.000 Filme doppelt enthalten (z.B. bei ARD und BR)." +
+                    "\n\n" +
+                    "Doppelte können bereits beim Laden der Filmliste ausgefiltert werden. Da die Filmliste " +
+                    "inzwischen sehr lang ist, wäre das eine " +
+                    "sehr gute Entscheidung. In den Einstellungen kann das auch wieder geändert werden." +
+//                    "\n\n" +
+//                    "Sie können die doppelten Filme aber auch im Programm mit einem Filter " +
+//                    "oder mit der Blacklist ausblenden." +
+                    "\n";
+
+    public static final String LOAD_ONLY_FILMS_STARTDIALOG =
+            "\"Nur Filme der letzten Tage laden\"" +
+                    "\n" +
+                    "Die Filmliste enthält dann nur Filme aus diesem Zeitraum. " +
+                    "Filme ohne Datum sind immer enthalten.\n" +
+                    "\n" +
+                    "\"Nur Filme mit Mindestlänge laden\"" +
+                    "\n" +
+                    "Die Filmliste enthält dann nur Filme von " +
+                    "mindestens dieser Dauer. Filme ohne Längenangabe sind immer enthalten.\n" +
+                    "\n" +
+                    "Bei 'alles laden' sind alle Filme enthalten." +
+                    "\n" +
+                    "\n" +
+                    "Das Filtern der Filmliste kann bei älteren Rechnern mit wenig Speicher " +
+                    "hilfreich sein: Bei 'maximal 250 Tage' oder 'mindestens 5 Minuten' ist die " +
+                    "Filmliste nur etwa halb so groß (~300.000 Filme)." +
+                    "\n";
+
+    public static final String PROG_PATHS =
+            "Hier können Standardprogramme zum Ansehen und Aufzeichnen der Filme eingetragen werden.\n" +
+                    "\n" +
+                    "Es müssen mindestens diese Programme installiert sein:\n" +
+                    "VLC -- zum Ansehen der Filme\n" +
+                    "ffmpeg -- zum Aufzeichnen von Playlisten (URL endet mit 'm3u8')\n" +
+                    "\n" +
+                    "Wenn die Pfade nicht automatisch erkannt wurden kann man sie auch per Hand auswählen.\n" +
+                    "\n" +
+                    "Installation unter Linux:\n" +
+                    "Am einfachsten über die Paketverwaltung.\n" +
+                    "\n" +
+                    "Installation unter Windows:\n" +
+                    "MTPlayer enthält bereits ffmpeg, es kann aber auch separat installiert werden.\n" +
+                    "VLC muss aus dem Internet geladen werden.\n" +
+                    "\n" +
+                    "Downloadquellen:\n" +
+                    "http://www.videolan.org\n" +
+                    "http://ffmpeg.org" +
+                    "\n";
+
+    public static final String LOAD_FILMLIST_SENDER_STARTDIALOG =
+            "Filme der markierten Sender werden beim Laden der Filmliste ausgeschlossen.\n" +
+                    "\n";
 
     public static final String FILTER_INFO =
             "Die Menüs, Textfelder und Schieberegler erlauben ein detailliertes " +

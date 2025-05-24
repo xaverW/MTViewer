@@ -18,11 +18,8 @@ package de.p2tools.mtviewer.gui.startdialog;
 
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
-import de.p2tools.mtviewer.gui.configdialog.configpanes.PaneFilmFilter;
-import de.p2tools.mtviewer.gui.configdialog.configpanes.PaneGeo;
 import de.p2tools.p2lib.dialogs.dialog.P2DialogExtra;
 import de.p2tools.p2lib.guitools.P2Button;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
@@ -38,35 +35,51 @@ public class StartDialogController extends P2DialogExtra {
 
     private static final String STR_START_1 = "Infos";
     private static final String STR_START_2 = "Infos";
+    private static final String STR_COLOR_MODE = "Farbe";
     private static final String STR_UPDATE = "Update";
     private static final String STR_GEO = "Geo";
     private static final String STR_FILM = "Filme";
+    private static final String STR_STATION = "Sender";
+    private static final String STR_DOWN = "Ziel";
     private static final String STR_PATH = "Pfade";
+
     private final ProgData progData;
     private boolean ok = false;
+
     private TilePane tilePane = new TilePane();
     private StackPane stackpane;
     private Button btnOk, btnCancel;
     private Button btnPrev, btnNext;
-    private Button btnStart1 = new Button(STR_START_1), btnStart2 = new Button(STR_START_2),
-            btnUpdate = new Button(STR_UPDATE), btnGeo = new Button(STR_GEO),
-            btnFilm = new Button(STR_FILM),
-            btnPath = new Button(STR_PATH);
-    private State aktState = State.START_1;
 
+    private Button btnStart1 = new Button(STR_START_1), btnStart2 = new Button(STR_START_2),
+            btnColorMode = new Button(STR_COLOR_MODE),
+            btnUpdate = new Button(STR_UPDATE),
+            btnGeo = new Button(STR_GEO),
+            btnFilm = new Button(STR_FILM),
+            btnStation = new Button(STR_STATION),
+            btnDown = new Button(STR_DOWN),
+            btnPath = new Button(STR_PATH);
+
+    private State aktState = State.START_1;
     private TitledPane tStart1;
     private TitledPane tStart2;
+    private TitledPane tColorMode;
     private TitledPane tUpdate;
     private TitledPane tGeo;
     private TitledPane tFilm;
+    private TitledPane tStation;
+    private TitledPane tDown;
     private TitledPane tPath;
 
     private StartPane startPane1;
     private StartPane startPane2;
-    private UpdatePane updatePane;
-    private PaneGeo paneGeo;
-    private PaneFilmFilter loadFilmsPane;
-    private PathPane pathPane;
+    private StartPaneColorMode startPaneColorMode;
+    private StartPaneUpdate startPaneUpdate;
+    private StartPaneGeo startPaneGeo;
+    private StartPaneFilm startPaneFilm;
+    private StartPaneStation startPaneStation;
+    private StartPaneDownloadPath startPaneDownloadPath;
+    private StartPanePath startPanePath;
 
     public StartDialogController() {
         super(null, null, "Starteinstellungen", true, false);
@@ -88,10 +101,13 @@ public class StartDialogController extends P2DialogExtra {
         this.ok = ok;
         startPane1.close();
         startPane2.close();
-        updatePane.close();
-        paneGeo.close();
-        loadFilmsPane.close();
-        pathPane.close();
+        startPaneColorMode.close();
+        startPaneUpdate.close();
+        startPaneGeo.close();
+        startPaneFilm.close();
+        startPaneStation.close();
+        startPaneDownloadPath.close();
+        startPanePath.close();
         super.close();
     }
 
@@ -100,18 +116,29 @@ public class StartDialogController extends P2DialogExtra {
     }
 
     private void initTopButton() {
-        getVBoxCont().getChildren().add(tilePane);
-        tilePane.getChildren().addAll(btnStart1, btnStart2, btnUpdate, btnGeo, btnFilm, btnPath);
-        tilePane.setAlignment(Pos.CENTER);
-        tilePane.setPadding(new Insets(10, 10, 20, 10));
-        tilePane.setHgap(10);
-        tilePane.setVgap(10);
+        final TilePane tilePane1 = new TilePane();
+        tilePane1.setAlignment(Pos.CENTER);
+        tilePane1.setHgap(10);
+        tilePane1.setVgap(10);
+        getVBoxCont().getChildren().add(tilePane1);
+
+        final TilePane tilePane2 = new TilePane();
+        tilePane2.setAlignment(Pos.CENTER);
+        tilePane2.setHgap(10);
+        tilePane2.setVgap(10);
+        getVBoxCont().getChildren().add(tilePane2);
+
+        tilePane1.getChildren().addAll(btnStart1, btnStart2);
+        tilePane2.getChildren().addAll(btnColorMode, btnUpdate, btnGeo, btnFilm, btnStation, btnDown, btnPath);
 
         initTopButton(btnStart1, State.START_1);
         initTopButton(btnStart2, State.START_2);
+        initTopButton(btnColorMode, State.COLOR_MODE);
         initTopButton(btnUpdate, State.UPDATE);
         initTopButton(btnGeo, State.GEO);
         initTopButton(btnFilm, State.FILM);
+        initTopButton(btnStation, State.STATION);
+        initTopButton(btnDown, State.DOWN);
         initTopButton(btnPath, State.PATH);
     }
 
@@ -142,31 +169,49 @@ public class StartDialogController extends P2DialogExtra {
         tStart2.setMaxHeight(Double.MAX_VALUE);
         tStart2.setCollapsible(false);
 
+        //colorModePane
+        startPaneColorMode = new StartPaneColorMode(this.getStage());
+        tColorMode = startPaneColorMode.make();
+        tColorMode.setMaxHeight(Double.MAX_VALUE);
+        tColorMode.setCollapsible(false);
+
         //updatePane
-        updatePane = new UpdatePane(getStage());
-        tUpdate = updatePane.makeStart();
+        startPaneUpdate = new StartPaneUpdate(this);
+        tUpdate = startPaneUpdate.makeStart();
         tUpdate.setMaxHeight(Double.MAX_VALUE);
         tUpdate.setCollapsible(false);
 
         //geoPane
-        paneGeo = new PaneGeo(getStage());
-        tGeo = paneGeo.make();
+        startPaneGeo = new StartPaneGeo(getStage());
+        tGeo = startPaneGeo.make();
         tGeo.setMaxHeight(Double.MAX_VALUE);
         tGeo.setCollapsible(false);
 
         //filmPane
-        loadFilmsPane = new PaneFilmFilter(getStage());
-        tFilm = loadFilmsPane.make();
+        startPaneFilm = new StartPaneFilm(getStage());
+        tFilm = startPaneFilm.make();
         tFilm.setMaxHeight(Double.MAX_VALUE);
         tFilm.setCollapsible(false);
 
+        // stationPane
+        startPaneStation = new StartPaneStation(getStage());
+        tStation = startPaneStation.make();
+        tStation.setMaxHeight(Double.MAX_VALUE);
+        tStation.setCollapsible(false);
+
+        // downloadPane
+        startPaneDownloadPath = new StartPaneDownloadPath(getStage());
+        tDown = startPaneDownloadPath.make();
+        tDown.setMaxHeight(Double.MAX_VALUE);
+        tDown.setCollapsible(false);
+
         //pathPane
-        pathPane = new PathPane(getStage());
-        tPath = pathPane.makePath();
+        startPanePath = new StartPanePath(getStage());
+        tPath = startPanePath.makePath();
         tPath.setMaxHeight(Double.MAX_VALUE);
         tPath.setCollapsible(false);
 
-        stackpane.getChildren().addAll(tStart1, tStart2, tUpdate, tGeo, tFilm, tPath);
+        stackpane.getChildren().addAll(tStart1, tStart2, tColorMode, tUpdate, tGeo, tFilm, tStation, tDown, tPath);
     }
 
     private void initButton() {
@@ -186,6 +231,9 @@ public class StartDialogController extends P2DialogExtra {
                     aktState = State.START_2;
                     break;
                 case START_2:
+                    aktState = State.COLOR_MODE;
+                    break;
+                case COLOR_MODE:
                     aktState = State.UPDATE;
                     break;
                 case UPDATE:
@@ -195,6 +243,12 @@ public class StartDialogController extends P2DialogExtra {
                     aktState = State.FILM;
                     break;
                 case FILM:
+                    aktState = State.STATION;
+                    break;
+                case STATION:
+                    aktState = State.DOWN;
+                    break;
+                case DOWN:
                     aktState = State.PATH;
                     break;
                 case PATH:
@@ -210,8 +264,11 @@ public class StartDialogController extends P2DialogExtra {
                 case START_2:
                     aktState = State.START_1;
                     break;
-                case UPDATE:
+                case COLOR_MODE:
                     aktState = State.START_2;
+                    break;
+                case UPDATE:
+                    aktState = State.COLOR_MODE;
                     break;
                 case GEO:
                     aktState = State.UPDATE;
@@ -219,8 +276,14 @@ public class StartDialogController extends P2DialogExtra {
                 case FILM:
                     aktState = State.GEO;
                     break;
-                case PATH:
+                case STATION:
                     aktState = State.FILM;
+                    break;
+                case DOWN:
+                    aktState = State.STATION;
+                    break;
+                case PATH:
+                    aktState = State.DOWN;
                     break;
             }
             selectActPane();
@@ -248,6 +311,12 @@ public class StartDialogController extends P2DialogExtra {
                 tStart2.toFront();
                 setButtonStyle(btnStart2);
                 break;
+            case COLOR_MODE:
+                btnPrev.setDisable(false);
+                btnNext.setDisable(false);
+                tColorMode.toFront();
+                setButtonStyle(btnColorMode);
+                break;
             case UPDATE:
                 btnPrev.setDisable(false);
                 btnNext.setDisable(false);
@@ -266,6 +335,18 @@ public class StartDialogController extends P2DialogExtra {
                 tFilm.toFront();
                 setButtonStyle(btnFilm);
                 break;
+            case STATION:
+                btnPrev.setDisable(false);
+                btnNext.setDisable(false);
+                tStation.toFront();
+                setButtonStyle(btnStation);
+                break;
+            case DOWN:
+                btnPrev.setDisable(false);
+                btnNext.setDisable(false);
+                tDown.toFront();
+                setButtonStyle(btnDown);
+                break;
             case PATH:
                 btnPrev.setDisable(false);
                 btnNext.setDisable(true);
@@ -281,9 +362,12 @@ public class StartDialogController extends P2DialogExtra {
     private void setButtonStyle(Button btnSel) {
         btnStart1.getStyleClass().setAll("btnFunction", "btnFuncStartDialog");
         btnStart2.getStyleClass().setAll("btnFunction", "btnFuncStartDialog");
+        btnColorMode.getStyleClass().setAll("btnFunction", "btnFuncStartDialog");
         btnUpdate.getStyleClass().setAll("btnFunction", "btnFuncStartDialog");
         btnGeo.getStyleClass().setAll("btnFunction", "btnFuncStartDialog");
         btnFilm.getStyleClass().setAll("btnFunction", "btnFuncStartDialog");
+        btnStation.getStyleClass().setAll("btnFunction", "btnFuncStartDialog");
+        btnDown.getStyleClass().setAll("btnFunction", "btnFuncStartDialog");
         btnPath.getStyleClass().setAll("btnFunction", "btnFuncStartDialog");
         btnSel.getStyleClass().setAll("btnFunction", "btnFuncStartDialogSel");
     }
@@ -291,12 +375,17 @@ public class StartDialogController extends P2DialogExtra {
     private void initTooltip() {
         btnStart1.setTooltip(new Tooltip("Infos über das Programm"));
         btnStart2.setTooltip(new Tooltip("Infos über das Programm"));
+        btnColorMode.setTooltip(new Tooltip("Wie soll die Programmoberfläche aussehen?"));
         btnUpdate.setTooltip(new Tooltip("Soll das Programm nach Updates suchen?"));
         btnGeo.setTooltip(new Tooltip("Einstellung des eigenen Standorts\n" +
                 "und der Markierung geblockter Filme"));
         btnFilm.setTooltip(new Tooltip("Damit kann man die Größe der\n" +
                 "Filmliste reduzieren und damit die Geschwindigkeit\n" +
                 "des Programms auf langsamen Rechnern verbessern"));
+        btnStation.setTooltip(new Tooltip("Damit kann man die Größe der\n" +
+                "Filmliste reduzieren und damit die Geschwindigkeit\n" +
+                "des Programms auf langsamen Rechnern verbessern"));
+        btnDown.setTooltip(new Tooltip("Auswahl des Verzeichnis zum Speichern der Filme"));
         btnPath.setTooltip(new Tooltip("Angabe von Programmen zum Ansehen\n" +
                 "und Speichern der Filme"));
 
@@ -307,5 +396,5 @@ public class StartDialogController extends P2DialogExtra {
         btnPrev.setTooltip(new Tooltip("Vorherige Einstellmöglichkeit"));
     }
 
-    private enum State {START_1, START_2, UPDATE, GEO, FILM, PATH}
+    private enum State {START_1, START_2, COLOR_MODE, UPDATE, GEO, FILM, STATION, DOWN, PATH}
 }

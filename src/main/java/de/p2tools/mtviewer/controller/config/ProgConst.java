@@ -47,7 +47,7 @@ public class ProgConst {
 
     // ProgrammUrls
     public static final String ADRESSE_WEBSITE_VLC = "https://www.videolan.org";
-    public static final String ADRESSE_WEBSITE_ffmpeg = "https://ffmpeg.org/";
+    public static final String ADRESSE_WEBSITE_FFMPEG = "https://ffmpeg.org";
 
     public static final String FILE_PROG_ICON = "/de/p2tools/mtviewer/res/P2.png";
 

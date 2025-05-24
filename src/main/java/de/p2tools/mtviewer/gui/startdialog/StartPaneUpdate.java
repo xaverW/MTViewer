@@ -1,5 +1,5 @@
 /*
- * MTViewer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
+ * MTPlayer Copyright (C) 2017 W. Xaver W.Xaver[at]googlemail.com
  * https://www.p2tools.de
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -19,40 +19,56 @@ package de.p2tools.mtviewer.gui.startdialog;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.p2lib.P2LibConst;
+import de.p2tools.p2lib.dialogs.dialog.P2Dialog;
 import de.p2tools.p2lib.guitools.P2Button;
 import de.p2tools.p2lib.guitools.P2ColumnConstraints;
+import de.p2tools.p2lib.guitools.P2GuiTools;
 import de.p2tools.p2lib.guitools.ptoggleswitch.P2ToggleSwitch;
-import javafx.beans.property.BooleanProperty;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 
-public class UpdatePane {
-    private final Stage stage;
+public class StartPaneUpdate {
+    private final P2Dialog pDialog;
     private final P2ToggleSwitch tglSearch = new P2ToggleSwitch("einmal am Tag nach einer neuen Programmversion suchen");
-    BooleanProperty updateProp = ProgConfig.SYSTEM_UPDATE_SEARCH_ACT;
 
-    public UpdatePane(Stage stage) {
-        this.stage = stage;
+    public StartPaneUpdate(P2Dialog pDialog) {
+        this.pDialog = pDialog;
     }
 
     public void close() {
-        tglSearch.selectedProperty().unbindBidirectional(updateProp);
+        tglSearch.selectedProperty().unbindBidirectional(ProgConfig.SYSTEM_SEARCH_UPDATE);
     }
 
     public TitledPane makeStart() {
+        VBox vBox = new VBox(10);
+
+        HBox hBox = new HBox();
+        hBox.getStyleClass().add("extra-pane");
+        hBox.setPadding(new Insets(P2LibConst.PADDING));
+        hBox.setMaxWidth(Double.MAX_VALUE);
+        hBox.setMinHeight(Region.USE_PREF_SIZE);
+        Label lbl = new Label("Das Programm kann einmal täglich nach einem Update suchen. " +
+                "Gibt es eins, wird darüber informiert und es kann geladen werden. " +
+                "Es wird nichts automatisch geändert.");
+        lbl.setWrapText(true);
+        lbl.setPrefWidth(500);
+        hBox.getChildren().add(lbl);
+        vBox.getChildren().addAll(P2GuiTools.getVDistance(5), hBox, P2GuiTools.getVDistance(20));
+
         final GridPane gridPane = new GridPane();
         gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
         gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
-        gridPane.setPadding(new Insets(P2LibConst.PADDING));
 
         //einmal am Tag Update suchen
-        tglSearch.selectedProperty().bindBidirectional(updateProp);
+        tglSearch.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_SEARCH_UPDATE);
 
-
-        final Button btnHelp = P2Button.helpButton(stage, "Programmupdate suchen",
+        final Button btnHelp = P2Button.helpButton(pDialog.getStage(), "Programmupdate suchen",
                 "Beim Programmstart wird geprüft, ob es eine neue Version des Programms gibt. Wenn es " +
                         "eine neue Version gibt, wird das mit einer Nachricht mitgeteilt. Es wird nicht " +
                         "automatisch das Programm verändert.");
@@ -60,8 +76,8 @@ public class UpdatePane {
         gridPane.add(tglSearch, 0, 0);
         gridPane.add(btnHelp, 1, 0);
         gridPane.getColumnConstraints().addAll(P2ColumnConstraints.getCcComputedSizeAndHgrow());
+        vBox.getChildren().add(gridPane);
 
-        TitledPane tpConfig = new TitledPane("Programmupdate", gridPane);
-        return tpConfig;
+        return new TitledPane("Programmupdate", vBox);
     }
 }
