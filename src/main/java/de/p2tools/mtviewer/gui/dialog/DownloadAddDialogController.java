@@ -233,7 +233,7 @@ public class DownloadAddDialogController extends P2DialogExtra {
         btnDest.setTooltip(new Tooltip("Einen Pfad zum Speichern auswählen."));
         btnDest.setOnAction(event -> P2DirFileChooser.DirChooser(ProgData.getInstance().primaryStage, cboPath));
 
-        btnPropose.setGraphic(ProgIcons.ICON_BUTTON_PROPOSE.getImageView());
+        btnPropose.setGraphic(ProgIcons.ICON_BUTTON_RESET.getImageView());
         btnPropose.setText("");
         btnPropose.setTooltip(new Tooltip("Einen Pfad zum Speichern vorschlagen lassen."));
         btnPropose.setOnAction(event -> proposeDestination());

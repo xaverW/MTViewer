@@ -54,7 +54,8 @@ public class ProgStartAfterGui {
 
         P2LogMessage.startMsg(ProgConst.PROGRAM_NAME, list);
         P2Log.sysLog(list);
-        ProgConfig.logAllConfigs();
+        ProgConfig.getInstance().writeConfigs();
+        ;
     }
 
     private static void setTitle() {

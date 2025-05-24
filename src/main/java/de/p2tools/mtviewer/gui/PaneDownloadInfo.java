@@ -215,7 +215,7 @@ public class PaneDownloadInfo extends AnchorPane {
 
         hBoxAll.getChildren().addAll(vBoxTable, vBoxButton);
 
-        btnClearFilter.setGraphic(ProgIcons.ICON_BUTTON_CLEAN.getImageView());
+        btnClearFilter.setGraphic(ProgIcons.ICON_BUTTON_RESET.getImageView());
         btnClearFilter.setTooltip(new Tooltip("Tabelle aufräumen"));
         btnClearFilter.getStyleClass().add("buttonSmall");
         btnClearFilter.setOnAction(a -> cleanUp());

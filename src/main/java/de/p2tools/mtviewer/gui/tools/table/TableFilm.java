@@ -16,12 +16,14 @@
 
 package de.p2tools.mtviewer.gui.tools.table;
 
+import de.p2tools.mtviewer.controller.config.PEvents;
 import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.p2lib.guitools.P2TableFactory;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 import de.p2tools.p2lib.mtfilm.film.FilmSize;
+import de.p2tools.p2lib.p2event.P2Listener;
 import de.p2tools.p2lib.tools.date.P2Date;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -45,6 +47,10 @@ public class TableFilm extends PTable<FilmData> {
         Table.resetTable(this);
     }
 
+    private void refreshTable() {
+        P2TableFactory.refreshTable(this);
+    }
+
     private void initColumn() {
         getColumns().clear();
 
@@ -60,7 +66,12 @@ public class TableFilm extends PTable<FilmData> {
         ProgColorList.FILM_NEW.colorProperty().addListener((a, b, c) -> P2TableFactory.refreshTable(this));
         ProgConfig.SYSTEM_SMALL_ROW_TABLE_FILM.addListener((observableValue, s, t1) -> refresh());
         ProgConfig.FILM_GUI_SHOW_TABLE_TOOL_TIP.addListener((observableValue, s, t1) -> refresh());
-
+        ProgData.getInstance().pEventHandler.addListener(new P2Listener(PEvents.EVENT_REFRESH_TABLE) {
+            @Override
+            public void pingGui() {
+                refreshTable();
+            }
+        });
         final TableColumn<FilmData, Boolean> markColumn = new TableColumn<>("Film");
         markColumn.setCellValueFactory(new PropertyValueFactory<>("mark"));
         markColumn.getStyleClass().add("alignCenter");
