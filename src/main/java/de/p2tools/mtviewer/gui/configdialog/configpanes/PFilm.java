@@ -24,6 +24,7 @@ import de.p2tools.p2lib.guitools.P2Button;
 import de.p2tools.p2lib.guitools.P2ColumnConstraints;
 import de.p2tools.p2lib.guitools.P2GuiTools;
 import de.p2tools.p2lib.guitools.ptoggleswitch.P2ToggleSwitch;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -40,6 +41,7 @@ public class PFilm extends VBox {
     private final Slider slDuration = new Slider();
     private final Label lblDays = new Label("");
     private final Label lblDuration = new Label("");
+    private String strDouble = "";
     private final Stage stage;
 
     public PFilm(Stage stage) {
@@ -79,21 +81,27 @@ public class PFilm extends VBox {
         final Button btnHelpDays = P2Button.helpButton(stage, "Filmliste beim Laden filtern",
                 HelpText.LOAD_ONLY_FILMS_STARTDIALOG);
 
+        ProgConfig.SYSTEM_FILMLIST_COUNT_DOUBLE.addListener((u, o, n) -> {
+            Platform.runLater(this::setLblDouble);
+        });
+        setLblDouble();
+
+        final P2ToggleSwitch tglRemove = new P2ToggleSwitch("Doppelte Filme beim Laden der Filmliste ausschließen");
+        ProgConfig.SYSTEM_FILMLIST_REMOVE_DOUBLE.setValue(Boolean.TRUE); // beim ersten Start wird angelegt
+        tglRemove.setSelected(ProgConfig.SYSTEM_FILMLIST_REMOVE_DOUBLE.getValue());
+        tglRemove.selectedProperty().addListener((u, o, n) -> ProgConfig.SYSTEM_FILMLIST_REMOVE_DOUBLE.setValue(tglRemove.isSelected()));
+
         final GridPane gridPane = new GridPane();
         gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
         gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
 
         int row = 0;
-        final P2ToggleSwitch tglRemove = new P2ToggleSwitch("Doppelte Filme beim Laden der Filmliste ausschließen");
-        ProgConfig.SYSTEM_FILMLIST_REMOVE_DOUBLE.setValue(Boolean.TRUE); // beim ersten Start wird angelegt
-        tglRemove.setSelected(ProgConfig.SYSTEM_FILMLIST_REMOVE_DOUBLE.getValue());
-        tglRemove.selectedProperty().addListener((u, o, n) -> ProgConfig.SYSTEM_FILMLIST_REMOVE_DOUBLE.setValue(tglRemove.isSelected()));
         gridPane.add(tglRemove, 0, row, 3, 1);
         gridPane.add(btnHelpDouble, 3, row);
-        gridPane.add(new Label(), 0, ++row);
-        ++row;
+        gridPane.add(new Label("     ( Anzahl Doppelte: " + strDouble + " )"), 0, ++row, 3, 1);
 
-        gridPane.add(new Label("Nur Filme der letzten Tage laden:"), 0, row, 2, 1);
+        gridPane.add(new Label(), 0, ++row);
+        gridPane.add(new Label("Nur Filme der letzten Tage laden:"), 0, ++row, 2, 1);
         gridPane.add(new Label("Filme laden:"), 0, ++row);
         gridPane.add(slDays, 1, row);
         gridPane.add(lblDays, 2, row);
@@ -111,6 +119,10 @@ public class PFilm extends VBox {
                 P2ColumnConstraints.getCcPrefSize());
 
         getChildren().add(gridPane);
+    }
+
+    private void setLblDouble() {
+        strDouble = ProgConfig.SYSTEM_FILMLIST_COUNT_DOUBLE.getValue() + "";
     }
 
     private void initSlider() {

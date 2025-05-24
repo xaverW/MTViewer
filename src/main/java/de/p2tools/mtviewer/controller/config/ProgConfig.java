@@ -172,7 +172,6 @@ public class ProgConfig extends P2DataProgConfig {
     public static BooleanProperty SYSTEM_SHOW_MEDIATHEK = addBoolProp("system-show-mediathek", Boolean.TRUE);
     public static BooleanProperty SYSTEM_SHOW_AUDIOTHEK = addBoolProp("system-show-auiothek", Boolean.FALSE);
     public static BooleanProperty SYSTEM_FILMLIST_REMOVE_DOUBLE = addBoolProp("system-filmlist-remove-double", Boolean.FALSE);
-    public static StringProperty SYSTEM_MARK_DOUBLE_CHANNEL_LIST = addStrProp("system-mark-double-channel-list", "ARD,ZDF");
     public static IntegerProperty SYSTEM_FILMLIST_COUNT_DOUBLE = addIntProp("system-filmlist-count-double", 0); // Anzahl der doppelten Filme
     public static BooleanProperty SYSTEM_FILMLIST_DOUBLE_WITH_THEME_TITLE = addBoolProp("system-filmlist-double-with-theme-title", Boolean.FALSE);
 
