@@ -41,7 +41,7 @@ public class PFilm extends VBox {
     private final Slider slDuration = new Slider();
     private final Label lblDays = new Label("");
     private final Label lblDuration = new Label("");
-    private String strDouble = "";
+    private final Label lblDouble = new Label();
     private final Stage stage;
 
     public PFilm(Stage stage) {
@@ -98,7 +98,7 @@ public class PFilm extends VBox {
         int row = 0;
         gridPane.add(tglRemove, 0, row, 3, 1);
         gridPane.add(btnHelpDouble, 3, row);
-        gridPane.add(new Label("     ( Anzahl Doppelte: " + strDouble + " )"), 0, ++row, 3, 1);
+        gridPane.add(lblDouble, 0, ++row, 3, 1);
 
         gridPane.add(new Label(), 0, ++row);
         gridPane.add(new Label("Nur Filme der letzten Tage laden:"), 0, ++row, 2, 1);
@@ -122,7 +122,9 @@ public class PFilm extends VBox {
     }
 
     private void setLblDouble() {
-        strDouble = ProgConfig.SYSTEM_FILMLIST_COUNT_DOUBLE.getValue() + "";
+        lblDouble.setText("     ( Anzahl Doppelte: " + ProgConfig.SYSTEM_FILMLIST_COUNT_DOUBLE.getValue() + " )");
+        lblDouble.setVisible(ProgConfig.SYSTEM_FILMLIST_COUNT_DOUBLE.getValue() != 0);
+        lblDouble.setManaged(ProgConfig.SYSTEM_FILMLIST_COUNT_DOUBLE.getValue() != 0);
     }
 
     private void initSlider() {

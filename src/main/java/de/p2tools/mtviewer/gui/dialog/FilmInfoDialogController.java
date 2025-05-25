@@ -231,14 +231,6 @@ public class FilmInfoDialogController extends P2DialogExtra {
                     gridPane.add(textTitle[i], 0, row);
                     gridPane.add(tpUrl, 1, row++, 2, 1);
                     break;
-                case FilmDataXml.FILM_GEO:
-                    int r = row++ - 1;
-                    gridPane.add(textTitle[i], 0, r);
-                    gridPane.add(lblCont[i], 1, r);
-                    final int iii = i;
-                    lblCont[i].setOnContextMenuRequested(event ->
-                            getMenu(lblCont[iii], event));
-                    break;
                 case FilmDataXml.FILM_DESCRIPTION:
                     textArea.setMaxHeight(Double.MAX_VALUE);
                     textArea.setPrefRowCount(6);
@@ -252,9 +244,9 @@ public class FilmInfoDialogController extends P2DialogExtra {
                     gDescription.add(textArea, 1, 1, 3, 1);
                     tpUrl.setContent(gDescription);
 
-                    int rr = row++ + 1;
-                    gridPane.add(textTitle[i], 0, rr);
-                    gridPane.add(tpUrl, 1, rr);
+                    gridPane.add(textTitle[i], 0, row);
+                    gridPane.add(tpUrl, 1, row++);
+
                     break;
                 default:
                     gridPane.add(textTitle[i], 0, row);
