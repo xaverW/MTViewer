@@ -63,8 +63,6 @@ public class FilmTableContextMenu {
         MenuItem miFilmInfo = new MenuItem("Filminformation anzeigen");
         miFilmInfo.setOnAction(a -> filmGuiController.showFilmInfo());
         miFilmInfo.setDisable(film == null);
-
-        contextMenu.getItems().add(new SeparatorMenuItem());
         contextMenu.getItems().addAll(miFilmInfo);
 
         contextMenu.getItems().add(new SeparatorMenuItem());
@@ -105,33 +103,34 @@ public class FilmTableContextMenu {
             progData.actFilmFilterWorker.getActFilterSettings().setTitle(film.getTitle());
         });
 
-        submenuFilter.getItems().addAll(miFilterChannel, miFilterTheme, miFilterTitle, miFilterChannelTheme, miFilterChannelThemeTitle);
+        submenuFilter.getItems().addAll(miFilterChannel, miFilterTheme, miFilterTitle,
+                miFilterChannelTheme, miFilterChannelThemeTitle);
         return submenuFilter;
     }
 
     public static Menu copyInfos(FilmData film) {
         final Menu subMenuURL = new Menu("Film-Infos kopieren");
-        subMenuURL.setDisable(film == null);
+
+        if (film == null) {
+            subMenuURL.setDisable(true);
+            return subMenuURL;
+        }
 
         final MenuItem miCopyTheme = new MenuItem("Thema");
-        miCopyTheme.setDisable(film == null);
         miCopyTheme.setOnAction(a -> P2ToolsFactory.copyToClipboard(film.getTheme()));
 
         final MenuItem miCopyName = new MenuItem("Titel");
-        miCopyName.setDisable(film == null);
         miCopyName.setOnAction(a -> P2ToolsFactory.copyToClipboard(film.getTitle()));
 
         final MenuItem miCopyWeb = new MenuItem("Website-URL");
-        miCopyWeb.setDisable(film == null);
         miCopyWeb.setOnAction(a -> P2ToolsFactory.copyToClipboard(film.getWebsite()));
 
         subMenuURL.getItems().addAll(miCopyTheme, miCopyName, miCopyWeb);
 
-
-        final String uNormal = film == null ? "" : film.getUrlForResolution(FilmData.RESOLUTION_NORMAL);
-        String uHd = film == null ? "" : film.getUrlForResolution(FilmData.RESOLUTION_HD);
-        String uLow = film == null ? "" : film.getUrlForResolution(FilmData.RESOLUTION_SMALL);
-        String uSub = film == null ? "" : film.getUrlSubtitle();
+        final String uNormal = film.getUrlForResolution(FilmData.RESOLUTION_NORMAL);
+        String uHd = film.getUrlForResolution(FilmData.RESOLUTION_HD);
+        String uLow = film.getUrlForResolution(FilmData.RESOLUTION_SMALL);
+        String uSub = film.getUrlSubtitle();
 
         if (uHd.equals(uNormal)) {
             uHd = ""; // dann gibts keine
@@ -172,13 +171,10 @@ public class FilmTableContextMenu {
 
         } else {
             item = new MenuItem("Film-URL");
-            item.setDisable(film == null);
             item.setOnAction(a -> P2ToolsFactory.copyToClipboard(film.getUrlForResolution(FilmData.RESOLUTION_NORMAL)));
             subMenuURL.getItems().add(item);
         }
 
         return subMenuURL;
     }
-
-
 }
