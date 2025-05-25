@@ -14,7 +14,7 @@
  * not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.p2tools.mtviewer.gui.tools.table;
+package de.p2tools.mtviewer.gui.help.table;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.p2lib.configfile.pdata.P2DataSample;

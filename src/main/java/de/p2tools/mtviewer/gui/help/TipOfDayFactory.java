@@ -15,7 +15,7 @@
  */
 
 
-package de.p2tools.mtviewer.gui.tools;
+package de.p2tools.mtviewer.gui.help;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
@@ -67,14 +67,19 @@ public class TipOfDayFactory {
         text += "Der Infobereich unter der Filmliste\n" +
                 "kann mit dem Tastenkürzel \"alt+i\"\n" +
                 "oder über das Menü\n" +
-                "ein- und ausgeblendet werden.";
+                "ein- und ausgeblendet werden.\n\n" +
+                "Der Filter kann mit \"alt+f\" oder\n" +
+                "über das Menü ein- und ausgeblendet\n" +
+                "werden.";
         String image = "/de/p2tools/mtviewer/res/tooltips/Info.png";
         P2TipOfDay pToolTip = new P2TipOfDay(text, image);
         pToolTipList.add(pToolTip);
 
         text = START;
-        text += "Hier können vorherige Filtereinstellung\n" +
-                "zurückgeholt werden. Der Filter kann\n" +
+        text += "Hier können vorherige\n" +
+                "Filtereinstellung gespeichert\n" +
+                "und zurückgeholt werden.\n" +
+                "Der aktuelle Filter kann\n" +
                 "hier auch gelöscht werden.";
         image = "/de/p2tools/mtviewer/res/tooltips/ClearFilter.png";
         pToolTip = new P2TipOfDay(text, image);

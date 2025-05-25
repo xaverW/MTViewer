@@ -46,8 +46,8 @@ public class StartPane {
         iv.setImage(im);
 
         hBox.getChildren().addAll(iv);
-        Label text = new Label("1) Das sind Filter, die das Suchen" + P2LibConst.LINE_SEPARATOR +
-                "in der Filmliste ermöglichen." +
+        Label text = new Label("1) Hier kann eine neue Filmliste\n" +
+                "geladen werden." +
 
                 P2LibConst.LINE_SEPARATORx2 +
                 "2) Das ist das Programm-Menü" + P2LibConst.LINE_SEPARATOR +
@@ -55,17 +55,21 @@ public class StartPane {
                 "das Programm." +
 
                 P2LibConst.LINE_SEPARATORx2 +
-                "3) Hier können alte Filereinstellungen" + P2LibConst.LINE_SEPARATOR +
-                "wiederhergestellt und der" + P2LibConst.LINE_SEPARATOR +
-                "Filter gelöscht werden." +
+                "3) Das ist die Auswahl der\n" +
+                "Anzeige: Mediathek, Audiothek." +
 
                 P2LibConst.LINE_SEPARATORx2 +
-                "4) Ein Film oder ein Download kann" + P2LibConst.LINE_SEPARATOR +
-                "hier gestartet werden." +
+                "4) Die Liste kann damit\n" +
+                "gefiltert werden." +
 
                 P2LibConst.LINE_SEPARATORx2 +
-                "5) Infos zum markierten Film" + P2LibConst.LINE_SEPARATOR +
-                "werden hier angezeigt.");
+                "5) Eingestellte Filter kann man\n" +
+                "damit speichern oder wieder\n" +
+                "herstellen." +
+
+                P2LibConst.LINE_SEPARATORx2 +
+                "6) Infos zum Ausgewählten\n" +
+                "Film werden hier angezeigt.");
 
         hBox.getChildren().add(text);
 
@@ -90,11 +94,15 @@ public class StartPane {
                 "ein- und ausgeblendet werden." +
 
                 P2LibConst.LINE_SEPARATORx2 +
-                "2) Hier werden die" + P2LibConst.LINE_SEPARATOR +
+                "2) Filme kann man damit\n" +
+                "ansehen oder speichern." +
+
+                P2LibConst.LINE_SEPARATORx2 +
+                "3) Hier werden die" + P2LibConst.LINE_SEPARATOR +
                 "Downloads angezeigt." +
 
                 P2LibConst.LINE_SEPARATORx2 +
-                "3) Das ist die Liste aller" + P2LibConst.LINE_SEPARATOR +
+                "4) Das ist die Liste aller" + P2LibConst.LINE_SEPARATOR +
                 "angelegter Downloads.");
 
         hBox.getChildren().add(text);

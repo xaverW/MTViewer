@@ -1,4 +1,4 @@
-package de.p2tools.mtviewer.gui.tools.table;
+package de.p2tools.mtviewer.gui.help.table;
 
 import de.p2tools.mtviewer.controller.FilmTools;
 import de.p2tools.mtviewer.controller.config.ProgColorList;

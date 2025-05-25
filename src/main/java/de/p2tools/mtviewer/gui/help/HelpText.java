@@ -14,7 +14,7 @@
  * not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.p2tools.mtviewer.gui.tools;
+package de.p2tools.mtviewer.gui.help;
 
 import de.p2tools.p2lib.P2LibConst;
 
