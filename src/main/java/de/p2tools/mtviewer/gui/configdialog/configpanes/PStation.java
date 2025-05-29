@@ -28,6 +28,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.TilePane;
@@ -85,8 +86,12 @@ public class PStation extends VBox {
         tilePaneSender.setVgap(5);
         ArrayList<String> aListChannel = LoadFactory.getSenderListNotToLoad();
         ArrayList<CheckBox> aListCb = new ArrayList<>();
-        for (String s : LoadFactoryConst.SENDER) {
+        for (int i = 0; i < LoadFactoryConst.SENDER.length; ++i) {
+            String s = LoadFactoryConst.SENDER[i];
+            String s_ = LoadFactoryConst.SENDER_[i];
+
             final CheckBox cb = new CheckBox(s);
+            cb.setTooltip(new Tooltip(s_));
             aListCb.add(cb);
             cb.setSelected(aListChannel.contains(s));
             cb.setOnAction(a -> {

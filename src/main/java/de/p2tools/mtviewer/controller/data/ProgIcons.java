@@ -41,7 +41,7 @@ public class ProgIcons {
     public static P2Image ICON_BUTTON_REMOVE = new P2Image(ICON_PATH_LONG, "button-remove.png", 16, 16);
     public static P2Image ICON_BUTTON_RESET = new P2Image(ICON_PATH_LONG, "button-reset.png", 16, 16);
     public static P2Image ICON_BUTTON_START_ALL = new P2Image(ICON_PATH_LONG, "button-start-all.png", 16, 16);
-    public static P2Image ICON_BUTTON_STOP = new P2Image(ICON_PATH_LONG, "button-worker-stop.png", 16, 16);
+    public static P2Image ICON_BUTTON_CLEAR = new P2Image(ICON_PATH_LONG, "button-clear.png", 16, 16);
     public static P2Image ICON_BUTTON_STOP_ALL = new P2Image(ICON_PATH_LONG, "button-stop-all.png", 16, 16);
     public static P2Image ICON_BUTTON_UP = new P2Image(ICON_PATH_LONG, "button-up.png", 16, 16);
 
