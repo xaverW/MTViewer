@@ -22,6 +22,7 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.gui.help.TipOfDayFactory;
 import de.p2tools.p2lib.mtfilm.film.FilmlistFactory;
+import de.p2tools.p2lib.mtfilm.loadfilmlist.LoadFilmlist;
 import de.p2tools.p2lib.p2event.P2Event;
 import de.p2tools.p2lib.p2event.P2Listener;
 
@@ -45,12 +46,13 @@ public class LoadFactory {
             @Override
             public void pingGui(P2Event event) {
                 ProgData.FILMLIST_IS_DOWNLOADING.setValue(true);
-                if (event.getAct() == PROGRESS_INDETERMINATE) {
+                if (event.getAct() == LoadFilmlist.PROGRESS_INDETERMINATE) {
                     // ist dann die gespeicherte Filmliste
-                    progData.maskerPane.setMaskerVisible(true, false, false);
+                    progData.maskerPane.setMaskerVisible(true, true, false);
                 } else {
-                    progData.maskerPane.setMaskerVisible();
+                    progData.maskerPane.setMaskerVisible(true, true, true);
                 }
+
                 progData.maskerPane.setMaskerProgress(event.getAct(), event.getText());
 
                 // the channel combo will be reseted, therefore save the filter

@@ -80,7 +80,7 @@ public class ConfigDialogController extends P2DialogExtra {
             //zum Einfügen der Diakritika muss eine neue Filmliste geladen werden
             new Thread(() -> {
                 ProgData.getInstance().maskerPane.setMaskerText("Diakritika entfernen");
-                ProgData.getInstance().maskerPane.setMaskerVisible();
+                ProgData.getInstance().maskerPane.setMaskerVisible(true, true, false);
                 FilmFactory.flattenDiacritic(progData.filmlist);
                 progData.pEventHandler.notifyListener(PEvents.EVENT_DIACRITIC_CHANGED);
                 ProgData.getInstance().maskerPane.switchOffMasker();

@@ -63,8 +63,8 @@ public class FilmFilterRunner {
         // ist etwas "umständlich", scheint aber am flüssigsten zu laufen
         if (!search.getAndSet(true)) {
             research.set(false);
-            try {
-                Platform.runLater(() -> {
+            Platform.runLater(() -> {
+                try {
                     P2Log.debugLog("========================================");
                     P2Log.debugLog("         === Filter: " + count++ + " ===");
                     P2Log.debugLog("========================================");
@@ -78,10 +78,10 @@ public class FilmFilterRunner {
                     if (research.get()) {
                         filterList();
                     }
-                });
-            } catch (Exception ex) {
-                ex.printStackTrace(); //todo???
-            }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            });
         } else {
             research.set(true);
         }

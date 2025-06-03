@@ -25,21 +25,29 @@ import de.p2tools.p2lib.mtfilm.loadfilmlist.LoadFilmlist;
 import de.p2tools.p2lib.mtfilm.tools.LoadFactoryConst;
 
 public class LoadFilmFactory {
+    private static LoadFilmlist loadFilmlist = null;
+
     private LoadFilmFactory() {
     }
 
     public static void loadProgStart() {
         ProgData.loadFilm = true;
-        LoadFilmlist loadFilmlist = new LoadFilmlist(ProgData.getInstance().pEventHandler, new FilmListMtc(), new FilmListMtc());
+        loadFilmlist = new LoadFilmlist(ProgData.getInstance().pEventHandler, new FilmListMtc(), new FilmListMtc());
         initLoadFactoryConst(loadFilmlist);
         loadFilmlist.loadFilmlistProgStart();
     }
 
     public static void loadList(boolean alwaysLoadNew) {
         ProgData.loadFilm = true;
-        LoadFilmlist loadFilmlist = new LoadFilmlist(ProgData.getInstance().pEventHandler, new FilmListMtc(), new FilmListMtc());
+        loadFilmlist = new LoadFilmlist(ProgData.getInstance().pEventHandler, new FilmListMtc(), new FilmListMtc());
         initLoadFactoryConst(loadFilmlist);
         loadFilmlist.loadNewFilmlistFromWeb(alwaysLoadNew);
+    }
+
+    public static void setLoadStop() {
+        if (loadFilmlist != null) {
+            loadFilmlist.setStop(true);
+        }
     }
 
     private static void initLoadFactoryConst(LoadFilmlist loadFilmlist) {
