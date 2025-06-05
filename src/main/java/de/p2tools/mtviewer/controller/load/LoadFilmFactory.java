@@ -21,25 +21,27 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.config.ProgInfos;
 import de.p2tools.mtviewer.controller.data.film.FilmListMtc;
-import de.p2tools.p2lib.mtfilm.loadfilmlist.LoadFilmlist;
+import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadFilmlist;
 import de.p2tools.p2lib.mtfilm.tools.LoadFactoryConst;
 
 public class LoadFilmFactory {
-    private static LoadFilmlist loadFilmlist = null;
+    private static P2LoadFilmlist loadFilmlist = null;
 
     private LoadFilmFactory() {
     }
 
     public static void loadProgStart() {
-        ProgData.loadFilm = true;
-        loadFilmlist = new LoadFilmlist(ProgData.getInstance().pEventHandler, new FilmListMtc(), new FilmListMtc());
+        // Programmstart
+        ProgData.FILMLIST_IS_DOWNLOADING.set(true);
+        loadFilmlist = new P2LoadFilmlist(ProgData.getInstance().pEventHandler, new FilmListMtc(), new FilmListMtc());
         initLoadFactoryConst(loadFilmlist);
         loadFilmlist.loadFilmlistProgStart();
     }
 
-    public static void loadList(boolean alwaysLoadNew) {
-        ProgData.loadFilm = true;
-        loadFilmlist = new LoadFilmlist(ProgData.getInstance().pEventHandler, new FilmListMtc(), new FilmListMtc());
+    public static void loadListButton(boolean alwaysLoadNew) {
+        // Button
+        ProgData.FILMLIST_IS_DOWNLOADING.set(true);
+        loadFilmlist = new P2LoadFilmlist(ProgData.getInstance().pEventHandler, new FilmListMtc(), new FilmListMtc());
         initLoadFactoryConst(loadFilmlist);
         loadFilmlist.loadNewFilmlistFromWeb(alwaysLoadNew);
     }
@@ -50,7 +52,7 @@ public class LoadFilmFactory {
         }
     }
 
-    private static void initLoadFactoryConst(LoadFilmlist loadFilmlist) {
+    private static void initLoadFactoryConst(P2LoadFilmlist p2LoadFilmlist) {
         LoadFactoryConst.debug = ProgData.debug;
 
         LoadFactoryConst.GEO_HOME_PLACE = ProgConfig.SYSTEM_GEO_HOME_PLACE.getValue();
@@ -66,7 +68,7 @@ public class LoadFilmFactory {
         LoadFactoryConst.userAgent = ProgConfig.SYSTEM_USERAGENT.getValue();
         LoadFactoryConst.filmlist = ProgData.getInstance().filmlist;
 
-        LoadFactoryConst.loadFilmlist = loadFilmlist;
+        LoadFactoryConst.p2LoadFilmlist = p2LoadFilmlist;
         LoadFactoryConst.primaryStage = ProgData.getInstance().primaryStage;
         LoadFactoryConst.filmListUrl = ProgData.filmListUrl;
     }

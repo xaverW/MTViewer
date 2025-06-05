@@ -26,11 +26,11 @@ public class FilmGuiTop extends HBox {
                 "Mit der rechten Maustaste wird immer die komplette Filmliste geladen."));
 
         btnFilmlist.setOnAction(e -> {
-            LoadFilmFactory.loadList(false);
+            LoadFilmFactory.loadListButton(false);
         });
         btnFilmlist.setOnMouseClicked(mouseEvent -> {
             if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
-                LoadFilmFactory.loadList(true);
+                LoadFilmFactory.loadListButton(true);
             }
         });
     }

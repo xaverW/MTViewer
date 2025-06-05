@@ -45,7 +45,7 @@ public class PaneFilmLoad {
         Button btnLoad = new Button("_Filmliste mit diesen Einstellungen neu laden");
         btnLoad.setTooltip(new Tooltip("Eine komplette neue Filmliste laden.\n" +
                 "Geänderte Einstellungen für das Laden der Filmliste werden so sofort übernommen"));
-        btnLoad.setOnAction(event -> LoadFilmFactory.loadList(true));
+        btnLoad.setOnAction(event -> LoadFilmFactory.loadListButton(true));
         HBox hBox = new HBox(P2LibConst.SPACING_HBOX);
         hBox.getChildren().add(btnLoad);
         hBox.setAlignment(Pos.CENTER_RIGHT);

@@ -18,7 +18,6 @@
 package de.p2tools.mtviewer.controller.config;
 
 import de.p2tools.mtviewer.MTViewerController;
-import de.p2tools.mtviewer.controller.LoadFactory;
 import de.p2tools.mtviewer.controller.data.MTShortcut;
 import de.p2tools.mtviewer.controller.data.ReplaceList;
 import de.p2tools.mtviewer.controller.data.download.DownloadInfos;
@@ -50,9 +49,6 @@ public class ProgData {
     public static BooleanProperty FILMLIST_IS_DOWNLOADING = new SimpleBooleanProperty(Boolean.FALSE); // dann wird eine Filmliste geladen
     public static BooleanProperty AUDIOLIST_IS_DOWNLOADING = new SimpleBooleanProperty(Boolean.FALSE); // dann wird eine Audioliste geladen
 
-    public static boolean loadFilm = false;
-    public static boolean loadAudio = false;
-
     public P2EventHandler pEventHandler;
 
     // Infos
@@ -75,9 +71,6 @@ public class ProgData {
     public Worker worker; // Liste aller Sender, Themen, ...
     public CheckForNewFilmlist checkForNewFilmlist;
 
-    // Programmdaten
-    public LoadFactory loadFactory;
-
     public FilmListMtc filmlist; // ist die komplette Filmliste
     public Filmlist<FilmData> audioList; // ist die komplette Audioliste
     public Filmlist<FilmData> filmlistUsed; // ist die verwendete Filmliste
@@ -98,7 +91,6 @@ public class ProgData {
 
         downloadList = new DownloadList(this);
 
-        loadFactory = new LoadFactory(this);
         starterClass = new StarterClass(this);
         downloadInfos = new DownloadInfos(this);
         filmFilterRunner = new FilmFilterRunner(this);

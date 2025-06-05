@@ -24,6 +24,7 @@ import de.p2tools.mtviewer.controller.starter.StarterClass;
 import de.p2tools.p2lib.mtdownload.MLBandwidthTokenBucket;
 import de.p2tools.p2lib.mtdownload.MLInputStream;
 import javafx.beans.property.LongProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 import java.io.File;
@@ -35,8 +36,7 @@ public class DownloadMp4 {
     private ProgData progData;
     private DownloadData downloadData;
 
-    public DownloadMp4(ProgData progData,
-                       DownloadData downloadData) {
+    public DownloadMp4(ProgData progData, DownloadData downloadData) {
         this.progData = progData;
         this.downloadData = downloadData;
     }
@@ -44,11 +44,12 @@ public class DownloadMp4 {
     public void download(HttpURLConnection conn, Timer bandwidthCalculationTimer,
                          File file, LongProperty downloaded) throws Exception {
 
-
+        SimpleBooleanProperty sb = new SimpleBooleanProperty();
+        sb.bind(ProgData.FILMLIST_IS_DOWNLOADING.or(ProgData.AUDIOLIST_IS_DOWNLOADING));
         downloadData.getStart().setInputStream(new MLInputStream(conn.getInputStream(),
                 bandwidthCalculationTimer,
                 new SimpleIntegerProperty(MLBandwidthTokenBucket.BANDWIDTH_RUN_FREE),
-                ProgData.FILMLIST_IS_DOWNLOADING));
+                sb));
 
         FileOutputStream fos = new FileOutputStream(file, (downloaded.get() != 0));
         downloadData.getDownloadSize().addActFileSize(downloaded.get());

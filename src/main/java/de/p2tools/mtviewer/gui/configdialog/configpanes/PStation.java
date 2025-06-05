@@ -21,7 +21,7 @@ import de.p2tools.mtviewer.gui.help.HelpText;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.guitools.P2Button;
 import de.p2tools.p2lib.guitools.P2GuiTools;
-import de.p2tools.p2lib.mtfilm.loadfilmlist.LoadFactory;
+import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadFactory;
 import de.p2tools.p2lib.mtfilm.tools.LoadFactoryConst;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -84,7 +84,7 @@ public class PStation extends VBox {
         final TilePane tilePaneSender = new TilePane();
         tilePaneSender.setHgap(5);
         tilePaneSender.setVgap(5);
-        ArrayList<String> aListChannel = LoadFactory.getSenderListNotToLoad();
+        ArrayList<String> aListChannel = P2LoadFactory.getSenderListNotToLoad();
         ArrayList<CheckBox> aListCb = new ArrayList<>();
         for (int i = 0; i < LoadFactoryConst.SENDER.length; ++i) {
             String s = LoadFactoryConst.SENDER[i];
@@ -97,7 +97,7 @@ public class PStation extends VBox {
             cb.setOnAction(a -> {
                 makePropSender(aListCb);
                 // und noch prüfen, dass nicht alle ausgeschaltet sind
-                LoadFactory.checkAllSenderSelectedNotToLoad(stage);
+                P2LoadFactory.checkAllSenderSelectedNotToLoad(stage);
             });
 
             tilePaneSender.getChildren().add(cb);

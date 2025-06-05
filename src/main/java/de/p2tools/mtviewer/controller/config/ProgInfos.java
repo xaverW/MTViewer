@@ -17,7 +17,7 @@
 package de.p2tools.mtviewer.controller.config;
 
 import de.p2tools.mtviewer.Main;
-import de.p2tools.p2lib.atdata.AudioFactory;
+import de.p2tools.p2lib.atdata.P2AudioFactory;
 import de.p2tools.p2lib.configfile.SettingsDirectory;
 import de.p2tools.p2lib.tools.P2Exception;
 import de.p2tools.p2lib.tools.log.P2Log;
@@ -68,7 +68,7 @@ public class ProgInfos {
      * @return Den Pfad als String
      */
     public static String getAudioListFile() {
-        return getSettingsDirectory_String() + File.separator + AudioFactory.AUDIO_LIST_FILE_JSON;
+        return getSettingsDirectory_String() + File.separator + P2AudioFactory.AUDIO_LIST_FILE_JSON;
     }
 
     public static Path getAndMakeAudioListFile() {

@@ -14,14 +14,14 @@
  * not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.p2tools.mtviewer.controller.load.loadlist;
+package de.p2tools.mtviewer.controller.load.loadaudiolist;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.load.LoadAudioFactoryDto;
-import de.p2tools.p2lib.atdata.AudioFactory;
-import de.p2tools.p2lib.atdata.AudioListFactory;
+import de.p2tools.p2lib.atdata.P2AudioFactory;
+import de.p2tools.p2lib.atdata.P2AudioListFactory;
 import de.p2tools.p2lib.mtdownload.MLHttpClient;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 import de.p2tools.p2lib.mtfilm.film.Filmlist;
@@ -102,8 +102,8 @@ public class ReadAudioList {
                 LoadAudioFactoryDto.audioListNew.clear();
 
                 //dann aus dem Web mit der URL laden
-                logList.add("## Audioliste aus URL laden: " + de.p2tools.p2lib.atdata.AudioFactory.AUDIOLIST_URL);
-                processFromWeb(new URL(AudioFactory.AUDIOLIST_URL), LoadAudioFactoryDto.audioListNew);
+                logList.add("## Audioliste aus URL laden: " + de.p2tools.p2lib.atdata.P2AudioFactory.AUDIOLIST_URL);
+                processFromWeb(new URL(P2AudioFactory.AUDIOLIST_URL), LoadAudioFactoryDto.audioListNew);
 
                 if (LoadAudioFactoryDto.audioListNew.isEmpty()) {
                     // dann hats nicht geklappt
@@ -141,7 +141,7 @@ public class ReadAudioList {
 
     private void setDate() {
         // Datum setzen
-        LocalDateTime date = AudioListFactory.getDate(LoadAudioFactoryDto.audioListNew.metaData);
+        LocalDateTime date = P2AudioListFactory.getDate(LoadAudioFactoryDto.audioListNew.metaData);
         String dateStr = P2LDateTimeFactory.toString(date, P2DateConst.DT_FORMATTER_dd_MM_yyyy___HH__mm);
         ProgConfig.SYSTEM_AUDIOLIST_DATE_TIME.setValue(dateStr);
     }

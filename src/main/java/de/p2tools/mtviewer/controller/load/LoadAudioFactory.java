@@ -20,7 +20,7 @@ package de.p2tools.mtviewer.controller.load;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.config.ProgInfos;
-import de.p2tools.mtviewer.controller.load.loadlist.LoadAudioList;
+import de.p2tools.mtviewer.controller.load.loadaudiolist.LoadAudioList;
 import de.p2tools.p2lib.mtfilm.film.Filmlist;
 import de.p2tools.p2lib.tools.date.P2DateConst;
 import de.p2tools.p2lib.tools.date.P2LDateTimeFactory;
@@ -38,16 +38,16 @@ public class LoadAudioFactory {
     }
 
     public static void loadProgStart() {
-        ProgData.loadAudio = true;
         // neu einmal direkt nach dem Programmstart
+        ProgData.AUDIOLIST_IS_DOWNLOADING.set(true);
         LoadAudioList loadAudioList = new LoadAudioList();
         initLoadFactoryConst(loadAudioList);
         loadAudioList.loadAtProgStart();
     }
 
     public static void loadListButton() {
-        ProgData.loadAudio = true;
         // aus dem Menü oder Button in den Einstellungen
+        ProgData.AUDIOLIST_IS_DOWNLOADING.set(true);
         LoadAudioList loadAudioList = new LoadAudioList();
         initLoadFactoryConst(loadAudioList);
         loadAudioList.loadNewListFromWeb();
