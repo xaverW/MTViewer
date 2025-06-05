@@ -49,34 +49,6 @@ public class LoadAudioList {
     public synchronized void setMax(int max) {
     }
 
-    public void loadNewListFromWeb() {
-        // aus dem Menü oder Button in den Einstellungen
-        ProgData.getInstance().pEventHandler.notifyListener(
-                new P2Event(PEvents.LOAD_AUDIO_LIST_START, "Audioliste aus dem Web laden", LoadAudioFactory.PROGRESS_INDETERMINATE));
-
-        new Thread(() -> {
-            final List<String> logList = new ArrayList<>();
-            P2Duration.counterStart("loadNewListFromWeb");
-            //damit wird eine neue Liste (Web) geladen UND auch gleich im Config-Ordner gespeichert
-            logList.add("");
-            logList.add("## " + P2Log.LILNE1);
-            logList.add("## Audioliste aus dem Web laden - start");
-            logList.add("## Alte Liste erstellt  am: " + LoadAudioFactoryDto.audioListDate);
-            logList.add("##            Anzahl Beiträge: " + LoadAudioFactoryDto.audioListAkt.size());
-            logList.add("##");
-
-            new ReadAudioList().readDb(false, ProgInfos.getAndMakeAudioListFile());
-            afterLoading(logList);
-
-            logList.add("## Audioliste aus dem Web laden - ende");
-            logList.add("## " + P2Log.LILNE1);
-            logList.add("");
-            P2Log.sysLog(logList);
-
-            P2Duration.counterStop("loadNewListFromWeb");
-        }).start();
-    }
-
     /**
      * Audioliste beim Programmstart laden
      */
@@ -105,62 +77,91 @@ public class LoadAudioList {
         }).start();
     }
 
+    public void loadNewListFromWeb() {
+        // aus dem Menü oder Button in den Einstellungen
+        ProgData.getInstance().pEventHandler.notifyListener(
+                new P2Event(PEvents.LOAD_AUDIO_LIST_START, "Audioliste aus dem Web laden", LoadAudioFactory.PROGRESS_INDETERMINATE));
+
+        new Thread(() -> {
+            final List<String> logList = new ArrayList<>();
+            P2Duration.counterStart("loadNewListFromWeb");
+            //damit wird eine neue Liste (Web) geladen UND auch gleich im Config-Ordner gespeichert
+            logList.add("");
+            logList.add("## " + P2Log.LILNE1);
+            logList.add("## Audioliste aus dem Web laden - start");
+            logList.add("## Alte Liste erstellt  am: " + LoadAudioFactoryDto.audioListDate);
+            logList.add("##            Anzahl Beiträge: " + LoadAudioFactoryDto.audioListAkt.size());
+            logList.add("##");
+
+            new ReadAudioList().readWebList(ProgInfos.getAndMakeAudioListFile());
+            afterLoading(logList);
+
+            logList.add("## Audioliste aus dem Web laden - ende");
+            logList.add("## " + P2Log.LILNE1);
+            logList.add("");
+            P2Log.sysLog(logList);
+
+            P2Duration.counterStop("loadNewListFromWeb");
+        }).start();
+    }
+
     /**
      * Audioliste beim Programmstart laden
      */
     private void loadAtProgStart(List<String> logList) {
-        // einer der ZWEI Einstiegspunkte zum Laden: ProgStart / sofort Web
-        // hier wird die gespeicherte Audioliste geladen und wenn zu alt, wird eine neue aus
-        // dem Web geladen
-        boolean audioListTooOld = false;
+        // ProgStart, hier wird die gespeicherte Audioliste geladen und
+        // wenn zu alt, wird eine neue aus dem Web geladen
         if (LoadAudioFactoryDto.firstProgramStart) {
             // gespeicherte Audioliste laden, macht beim ersten Programmstart keinen Sinn
             logList.add("## Erster Programmstart -> Liste aus dem Web laden");
-            new ReadAudioList().readDb(false, ProgInfos.getAndMakeAudioListFile());
+            new ReadAudioList().readWebList(ProgInfos.getAndMakeAudioListFile());
             P2Duration.onlyPing("Erster Programmstart: Neu Audioliste aus dem Web geladen");
+            return;
+        }
 
-        } else {
-            // dann ist ein normaler Start mit vorhandener Audioliste, muss auf jeden Fall geladen werden > Hash
-            logList.add("## Beim Programmstart soll keine neue Liste geladen werden");
-            logList.add("## Programmstart: Gespeicherte Liste aus laden");
-            new ReadAudioList().readDb(true, ProgInfos.getAndMakeAudioListFile());
-            logList.add("## Programmstart: Gespeicherte Liste geladen");
+        boolean loadFromWeb = false;
+        // dann ist ein normaler Start mit vorhandener Audioliste, muss auf jeden Fall geladen werden > Hash
+        logList.add("## Beim Programmstart soll keine neue Liste geladen werden");
+        logList.add("## Programmstart: Gespeicherte Liste laden");
 
-            if (LoadAudioFactoryDto.loadNewAudioListOnProgramStart) {
-                //dann wird eine neue Liste aus dem Web beim Programmstart geladen, wenn nötig
-                if (LoadAudioFactory.isNotFromToday(LoadAudioFactoryDto.audioListDate.getValueSafe())) {
-                    //gespeicherte Liste zu alt
-                    logList.add("## Gespeicherte Audioliste ist zu alt: " + LoadAudioFactoryDto.audioListDate.getValueSafe());
-                    audioListTooOld = true;
+        new ReadAudioList().readLocalList(ProgInfos.getAndMakeAudioListFile()); // Liste in new laden
+        logList.add("## Programmstart: Gespeicherte Liste geladen");
 
-                } else {
-                    logList.add("## Gespeicherte Audioliste ist nicht zu alt: " + LoadAudioFactoryDto.audioListDate.getValueSafe());
-                }
+        if (LoadAudioFactoryDto.loadNewAudioListOnProgramStart) {
+            //dann soll eine neue Liste beim Programmstart geladen, wenn nötig
+            if (LoadAudioFactory.isNotFromToday(LoadAudioFactoryDto.audioListDate.getValueSafe())) {
+                //gespeicherte Liste zu alt
+                logList.add("## Gespeicherte Audioliste ist zu alt: " + LoadAudioFactoryDto.audioListDate.getValueSafe());
+                loadFromWeb = true;
 
-                if (LoadAudioFactoryDto.audioListNew.isEmpty()) {
-                    //dann ist sie leer
-                    logList.add("## Gespeicherte Audioliste ist leer, neue Audioliste aus dem Web laden");
-                    logList.add("## " + P2Log.LILNE3);
-                }
-
-                if (audioListTooOld || LoadAudioFactoryDto.audioListNew.isEmpty()) {
-                    //dann war sie zu alt oder ist leer
-                    ProgData.getInstance().pEventHandler.notifyListener(
-                            new P2Event(PEvents.LOAD_AUDIO_LIST_PROGRESS, "Audioliste ist zu alt, eine neue laden", LoadAudioFactory.PROGRESS_INDETERMINATE));
-
-                    logList.add("## Programmstart: Neue Liste aus dem Web laden");
-                    new ReadAudioList().readDb(false, ProgInfos.getAndMakeAudioListFile());
-                    P2Duration.onlyPing("Programmstart: Neu Audioliste aus dem Web geladen");
-                }
+            } else {
+                logList.add("## Gespeicherte Audioliste ist nicht zu alt: " + LoadAudioFactoryDto.audioListDate.getValueSafe());
             }
 
             if (LoadAudioFactoryDto.audioListNew.isEmpty()) {
-                // dann hat das alles nicht geklappt??
-                logList.add("## Das Laden der Liste hat nicht geklappt");
-                logList.add("## Noch ein Versuch: Gespeicherte Liste aus laden");
-                new ReadAudioList().readDb(true, ProgInfos.getAndMakeAudioListFile());
-                logList.add("## Gespeicherte Liste geladen");
+                //dann ist die geladene locale Liste leer (wird ja in new geladen)
+                loadFromWeb = true;
+                logList.add("## Gespeicherte Audioliste ist leer, neue Audioliste aus dem Web laden");
+                logList.add("## " + P2Log.LILNE3);
             }
+
+            if (loadFromWeb) {
+                //dann war sie zu alt oder ist leer
+                ProgData.getInstance().pEventHandler.notifyListener(
+                        new P2Event(PEvents.LOAD_AUDIO_LIST_PROGRESS, "Audioliste ist zu alt, eine neue laden", LoadAudioFactory.PROGRESS_INDETERMINATE));
+
+                logList.add("## Programmstart: Neue Liste aus dem Web laden");
+                new ReadAudioList().readWebList(ProgInfos.getAndMakeAudioListFile());
+                P2Duration.onlyPing("Programmstart: Neu Audioliste aus dem Web geladen");
+            }
+        }
+
+        if (LoadAudioFactoryDto.audioListNew.isEmpty()) {
+            // dann hat das alles nicht geklappt??
+            logList.add("## Das Laden der Liste hat nicht geklappt");
+            logList.add("## Noch ein Versuch: Gespeicherte Liste laden");
+            new ReadAudioList().readLocalList(ProgInfos.getAndMakeAudioListFile());
+            logList.add("## Gespeicherte Liste geladen");
         }
 
         ProgData.getInstance().pEventHandler.notifyListener(
@@ -179,17 +180,11 @@ public class LoadAudioList {
 
         ProgData.getInstance().pEventHandler.notifyListener(
                 new P2Event(PEvents.LOAD_AUDIO_LIST_LOADED, "Audios markieren, Themen suchen", LoadAudioFactory.PROGRESS_INDETERMINATE));
-//        LoadAudioFactoryDto.audioListNew.loadSenderAndGenre();
-
-        ProgData.getInstance().pEventHandler.notifyListener(
-                new P2Event(PEvents.LOAD_AUDIO_LIST_LOADED, "Audios in Downloads eingetragen", LoadAudioFactory.PROGRESS_INDETERMINATE));
-        logList.add("## Audios in Downloads eingetragen");
 
         //die List wieder füllen
         logList.add("## ==> und jetzt die Audioliste wieder füllen :)");
         Platform.runLater(() -> {
             LoadAudioFactoryDto.audioListAkt.sender = LoadAudioFactoryDto.audioListNew.sender;
-//            LoadAudioFactoryDto.audioListAkt.genre = LoadAudioFactoryDto.audioListNew.genre;
             LoadAudioFactoryDto.audioListAkt.metaData = LoadAudioFactoryDto.audioListNew.metaData;
             LoadAudioFactoryDto.audioListAkt.setAll(LoadAudioFactoryDto.audioListNew);
             LoadAudioFactoryDto.audioListNew.clear();

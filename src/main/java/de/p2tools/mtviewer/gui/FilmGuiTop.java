@@ -1,6 +1,7 @@
 package de.p2tools.mtviewer.gui;
 
 import de.p2tools.mtviewer.controller.config.ProgData;
+import de.p2tools.mtviewer.controller.load.LoadAudioFactory;
 import de.p2tools.mtviewer.controller.load.LoadFilmFactory;
 import de.p2tools.p2lib.guitools.P2GuiTools;
 import javafx.geometry.Insets;
@@ -31,6 +32,7 @@ public class FilmGuiTop extends HBox {
         btnFilmlist.setOnMouseClicked(mouseEvent -> {
             if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
                 LoadFilmFactory.loadListButton(true);
+                LoadAudioFactory.loadListButton();
             }
         });
     }

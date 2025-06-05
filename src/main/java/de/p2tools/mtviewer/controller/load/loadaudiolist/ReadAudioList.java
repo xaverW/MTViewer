@@ -25,9 +25,10 @@ import de.p2tools.p2lib.atdata.P2AudioListFactory;
 import de.p2tools.p2lib.mtdownload.MLHttpClient;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 import de.p2tools.p2lib.mtfilm.film.Filmlist;
+import de.p2tools.p2lib.mtfilm.film.FilmlistFactory;
 import de.p2tools.p2lib.mtfilm.film.FilmlistXml;
-import de.p2tools.p2lib.mtfilm.readwritefilmlist.ReadFilmlist;
-import de.p2tools.p2lib.mtfilm.readwritefilmlist.WriteFilmlistJson;
+import de.p2tools.p2lib.mtfilm.readwritefilmlist.P2ReadFilmlist;
+import de.p2tools.p2lib.mtfilm.readwritefilmlist.P2WriteFilmlistJson;
 import de.p2tools.p2lib.mtfilm.tools.InputStreamProgressMonitor;
 import de.p2tools.p2lib.mtfilm.tools.LoadFactoryConst;
 import de.p2tools.p2lib.mtfilm.tools.ProgressMonitorInputStream;
@@ -59,74 +60,77 @@ public class ReadAudioList {
     public ReadAudioList() {
     }
 
-    public boolean readDb(boolean localList, Path path) {
+    public boolean readLocalList(Path path) {
+        // beim Programmstart wird die gespeicherte Liste geladen
         boolean ret;
         P2Duration.counterStart("readDb");
 
         try {
-            if (localList) {
-                if (!Files.exists(path) || path.toFile().length() == 0) {
-                    return false;
-                }
+            if (!Files.exists(path) || path.toFile().length() == 0) {
+                return false;
+            }
 
-                logList.add("##");
-                logList.add("## Jetzige Liste erstellt am: " + LoadAudioFactoryDto.audioListNew.genDate());
-                logList.add("##   Anzahl Filme: " + LoadAudioFactoryDto.audioListNew.size());
-                logList.add("##   Anzahl Neue:  " + LoadAudioFactoryDto.audioListNew.countNewFilms());
-                logList.add("##");
-                logList.add("## " + P2Log.LILNE2);
-                logList.add("##");
+            LoadAudioFactoryDto.audioListAkt.clear();
+            LoadAudioFactoryDto.audioListNew.clear();
+            logList.add("Audioliste lesen");
+            logList.add("   --> Lesen von: " + path);
+            new P2ReadFilmlist().readFilmlistWebOrLocal(logList, LoadAudioFactoryDto.audioListNew, path.toString());
+            setDateFromLocal();
 
-                LoadAudioFactoryDto.audioListAkt.clear();
-                LoadAudioFactoryDto.audioListNew.clear();
-                logList.add("Audioliste lesen");
-                logList.add("   --> Lesen von: " + path);
-                new ReadFilmlist().readFilmlistWebOrLocal(logList, LoadAudioFactoryDto.audioListNew, path.toString());
-                setDate();
+            logList.add("## Filme markieren");
+            final int count = LoadAudioFactoryDto.audioListNew.markFilms();
 
-                logList.add("## Filme markieren");
-                final int count = LoadAudioFactoryDto.audioListNew.markFilms();
+            logList.add("## Anzahl doppelte Filme: " + count);
+            LoadAudioFactoryDto.audioListNew.loadSender();
 
-                logList.add("## Anzahl doppelte Filme: " + count);
-                LoadAudioFactoryDto.audioListNew.loadSender();
+            logList.add("##   Audioliste gelesen, OK");
+            logList.add("##   Anzahl gelesen: " + LoadAudioFactoryDto.audioListNew.size());
+            ret = true;
 
-                logList.add("##   Audioliste gelesen, OK");
-                logList.add("##   Anzahl gelesen: " + LoadAudioFactoryDto.audioListNew.size());
-                ret = true;
+        } catch (final Exception ex) {
+            logList.add("##   Audioliste lesen hat nicht geklappt");
+            P2Log.errorLog(645891204, ex);
+            ret = false;
+        }
+        return ret;
+    }
+
+    public boolean readWebList(Path path) {
+        boolean ret;
+        P2Duration.counterStart("readWebList");
+
+        try {
+            // Hash füllen
+            fillHash(logList, LoadAudioFactoryDto.audioListAkt);
+            fillHash(logList, LoadAudioFactoryDto.audioListNew);
+            LoadAudioFactoryDto.audioListAkt.clear();
+            LoadAudioFactoryDto.audioListNew.clear();
+
+            //dann aus dem Web mit der URL laden
+            logList.add("## Audioliste aus URL laden: " + de.p2tools.p2lib.atdata.P2AudioFactory.AUDIOLIST_URL);
+            processFromWeb(new URL(P2AudioFactory.AUDIOLIST_URL), LoadAudioFactoryDto.audioListNew);
+
+            if (LoadAudioFactoryDto.audioListNew.isEmpty()) {
+                // dann hats nicht geklappt
+                ret = false;
 
             } else {
-                // Hash füllen
-                fillHash(logList, LoadAudioFactoryDto.audioListAkt);
-                fillHash(logList, LoadAudioFactoryDto.audioListNew);
-                LoadAudioFactoryDto.audioListAkt.clear();
-                LoadAudioFactoryDto.audioListNew.clear();
+                setDateFromWeb();
+                // unerwünschte löschen
+                removeUnwanted(logList, LoadAudioFactoryDto.audioListNew);
+                // neue Filme markieren
+                markNewFilms(logList, LoadAudioFactoryDto.audioListNew);
+                markDoubleAudios(logList, LoadAudioFactoryDto.audioListNew); // todo löschen??
 
-                //dann aus dem Web mit der URL laden
-                logList.add("## Audioliste aus URL laden: " + de.p2tools.p2lib.atdata.P2AudioFactory.AUDIOLIST_URL);
-                processFromWeb(new URL(P2AudioFactory.AUDIOLIST_URL), LoadAudioFactoryDto.audioListNew);
+                // und dann auch speichern
+                logList.add("##");
+                logList.add("## Audioliste schreiben (" + LoadAudioFactoryDto.audioListNew.size() + " Audios) :");
+                logList.add("##    --> Start Schreiben nach: " + path);
+                new P2WriteFilmlistJson().write(path.toString(), LoadAudioFactoryDto.audioListNew);
+                logList.add("##    --> geschrieben!");
+                logList.add("##");
 
-                if (LoadAudioFactoryDto.audioListNew.isEmpty()) {
-                    // dann hats nicht geklappt
-                    ret = false;
-
-                } else {
-                    setDate();
-                    // unerwünschte löschen
-                    removeUnwanted(logList, LoadAudioFactoryDto.audioListNew);
-                    // neue Filme markieren
-                    markNewFilms(logList, LoadAudioFactoryDto.audioListNew);
-                    markDoubleAudios(logList, LoadAudioFactoryDto.audioListNew);
-
-                    // und dann auch speichern
-                    logList.add("##");
-                    logList.add("## Audioliste schreiben (" + LoadAudioFactoryDto.audioListNew.size() + " Audios) :");
-                    logList.add("##    --> Start Schreiben nach: " + path);
-                    new WriteFilmlistJson().write(path.toString(), LoadAudioFactoryDto.audioListNew);
-                    logList.add("##    --> geschrieben!");
-                    logList.add("##");
-
-                    ret = true;
-                }
+                ret = true;
             }
         } catch (final Exception ex) {
             logList.add("##   Audioliste lesen hat nicht geklappt");
@@ -135,33 +139,22 @@ public class ReadAudioList {
         }
 
         P2Log.sysLog(logList);
-        P2Duration.counterStop("readDb");
+        P2Duration.counterStop("readWebList");
         return ret;
     }
 
-    private void setDate() {
-        // Datum setzen
-        LocalDateTime date = P2AudioListFactory.getDate(LoadAudioFactoryDto.audioListNew.metaData);
-        String dateStr = P2LDateTimeFactory.toString(date, P2DateConst.DT_FORMATTER_dd_MM_yyyy___HH__mm);
-        ProgConfig.SYSTEM_AUDIOLIST_DATE_TIME.setValue(dateStr);
+    private void setDateFromLocal() {
+        // Datum setzen, Format stimmt da ja schon!
+        String date = FilmlistFactory.genDate(LoadAudioFactoryDto.audioListNew.metaData);
+        LoadAudioFactoryDto.audioListDate.set(date);
     }
 
-//    private void processFromFile(String source, Filmlist<FilmData> filmlist) {
-//        try (InputStream in = selectDecompressor(source, new FileInputStream(source));
-//             JsonParser jp = new JsonFactory().createParser(in)) {
-//            new ReadAudioListJson().readFilmData(jp, filmlist);
-//
-//        } catch (final FileNotFoundException ex) {
-//            logList.add("Audioliste existiert nicht: " + source + "\n" + ex.getLocalizedMessage());
-//            P2Log.errorLog(894512369, "Audioliste existiert nicht: " + source);
-//            filmlist.clear();
-//
-//        } catch (final Exception ex) {
-//            logList.add("Audioliste: " + source + "\n" + ex.getLocalizedMessage());
-//            P2Log.errorLog(945123641, ex, "Audioliste: " + source);
-//            filmlist.clear();
-//        }
-//    }
+    private void setDateFromWeb() {
+        // Datum setzen
+        LocalDateTime date = P2AudioListFactory.getDate(LoadAudioFactoryDto.audioListNew.metaData);
+        String dateStr = P2LDateTimeFactory.toString(date, P2DateConst.DT_FORMATTER__FILMLIST);
+        LoadAudioFactoryDto.audioListDate.set(dateStr);
+    }
 
     private static InputStream selectDecompressor(String source, InputStream in) throws Exception {
         if (source.endsWith(LoadFactoryConst.FORMAT_XZ)) {
@@ -187,7 +180,6 @@ public class ReadAudioList {
                 final int iProgress = (int) (bytesRead * 100/* zum Runden */ / size);
                 if (iProgress != oldProgress) {
                     oldProgress = iProgress;
-//                    notifyProgress(1.0 * iProgress / 100);
                 }
             }
         };

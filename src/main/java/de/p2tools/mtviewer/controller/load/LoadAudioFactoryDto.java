@@ -40,7 +40,7 @@ public class LoadAudioFactoryDto {
     public static Filmlist<FilmData> audioListNew;
 
     public static String userAgent = "";
-    public static LoadAudioList loadFilmlist;
+    public static LoadAudioList loadAudiolist;
     public static HashSet<String> hashSet = new HashSet<>();
     public static Stage primaryStage = null;
 }

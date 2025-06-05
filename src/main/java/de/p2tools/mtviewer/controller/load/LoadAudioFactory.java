@@ -47,6 +47,7 @@ public class LoadAudioFactory {
 
     public static void loadListButton() {
         // aus dem Menü oder Button in den Einstellungen
+        // immer neu aus dem Web laden
         ProgData.AUDIOLIST_IS_DOWNLOADING.set(true);
         LoadAudioList loadAudioList = new LoadAudioList();
         initLoadFactoryConst(loadAudioList);
@@ -54,9 +55,10 @@ public class LoadAudioFactory {
     }
 
     public static boolean isNotFromToday(String strDate) {
-        LocalDateTime listDate = P2LDateTimeFactory.fromString(strDate, P2DateConst.DT_FORMATTER_dd_MM_yyyy___HH__mm);
-        LocalDate act = listDate.toLocalDate(); //2015-11-??
-        LocalDate today = LocalDate.now(); //2015-11-23
+        // in den Einstellungen gespeichertes Datum prüfen
+        LocalDateTime listDate = P2LDateTimeFactory.fromString(strDate, P2DateConst.DT_FORMATTER__FILMLIST); // "dd.MM.yyyy, HH:mm"
+        LocalDate act = listDate.toLocalDate();
+        LocalDate today = LocalDate.now();
         return !act.equals(today);
     }
 
@@ -75,7 +77,7 @@ public class LoadAudioFactory {
         LoadAudioFactoryDto.audioListAkt = ProgData.getInstance().audioList;
         LoadAudioFactoryDto.audioListNew = new Filmlist<>();
 
-        LoadAudioFactoryDto.loadFilmlist = loadAudioList;
+        LoadAudioFactoryDto.loadAudiolist = loadAudioList;
         LoadAudioFactoryDto.primaryStage = ProgData.getInstance().primaryStage;
     }
 }
