@@ -34,6 +34,9 @@ public class FilmGuiTop extends HBox {
                 LoadFilmFactory.loadListButton(true);
                 LoadAudioFactory.loadListButton();
             }
+            if (mouseEvent.getButton().equals(MouseButton.MIDDLE)) {
+                LoadAudioFactory.loadListButton();
+            }
         });
     }
 }

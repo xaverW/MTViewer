@@ -54,10 +54,11 @@ import java.util.zip.ZipInputStream;
 
 public class ReadAudioList {
 
-    private List<String> logList = new ArrayList<>();
+    private final List<String> logList;
     private static int countDouble = 0;
 
-    public ReadAudioList() {
+    public ReadAudioList(List<String> logList) {
+        this.logList = logList;
     }
 
     public boolean readLocalList(Path path) {
@@ -72,8 +73,8 @@ public class ReadAudioList {
 
             LoadAudioFactoryDto.audioListAkt.clear();
             LoadAudioFactoryDto.audioListNew.clear();
-            logList.add("Audioliste lesen");
-            logList.add("   --> Lesen von: " + path);
+            logList.add("## " + "Audioliste lesen");
+            logList.add("## " + "   --> Lesen von: " + path);
             new P2ReadFilmlist().readFilmlistWebOrLocal(logList, LoadAudioFactoryDto.audioListNew, path.toString());
             setDateFromLocal();
 
@@ -138,7 +139,6 @@ public class ReadAudioList {
             ret = false;
         }
 
-        P2Log.sysLog(logList);
         P2Duration.counterStop("readWebList");
         return ret;
     }
@@ -260,10 +260,12 @@ public class ReadAudioList {
             LocalDate minDate = LocalDate.now().minusDays(LoadAudioFactoryDto.SYSTEM_LOAD_FILMLIST_MAX_DAYS);
             while (it.hasNext()) {
                 FilmData audioData = it.next();
-                if (LoadAudioFactoryDto.SYSTEM_LOAD_FILMLIST_MAX_DAYS > 0 &&
-                        audioData.getDate().getLocalDate().isBefore(minDate)) {
-                    it.remove();
-                    continue;
+                if (LoadAudioFactoryDto.SYSTEM_LOAD_FILMLIST_MAX_DAYS > 0) {
+                    LocalDate ld = audioData.getDate().getLocalDate(); // gibt ein paar Sendungen mit Datum 01.01.1970!!
+                    if (ld != null && ld.isBefore(minDate)) {
+                        it.remove();
+                        continue;
+                    }
                 }
                 if (LoadAudioFactoryDto.SYSTEM_LOAD_FILMLIST_MIN_DURATION > 0 &&
                         audioData.getDurationMinute() != 0 &&
@@ -293,7 +295,7 @@ public class ReadAudioList {
         // doppelte Filme (URL)
         // viele Filme sind bei mehreren Sendern vorhanden
 
-        logList.add("## neue Audios markieren");
+        logList.add("## doppelte Audios markieren");
         final HashSet<String> urlHashSet = new HashSet<>(audioList.size(), 0.75F);
         P2Duration.counterStart("markAudios");
         try {
