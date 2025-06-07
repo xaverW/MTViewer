@@ -21,6 +21,7 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.config.ProgInfos;
 import de.p2tools.mtviewer.controller.load.LoadAudioFactory;
 import de.p2tools.mtviewer.controller.load.LoadAudioFactoryDto;
+import de.p2tools.p2lib.mtfilm.film.FilmData;
 import de.p2tools.p2lib.p2event.P2Event;
 import de.p2tools.p2lib.tools.date.P2LDateFactory;
 import de.p2tools.p2lib.tools.duration.P2Duration;
@@ -96,11 +97,11 @@ public class LoadAudioList {
             logList.add("## " + P2Log.LILNE1);
             logList.add("## Audioliste laden");
             logList.add("## Audioliste aus dem Web laden - start");
-            logList.add("## Alte Liste erstellt  am: " + LoadAudioFactoryDto.audioListDate);
+            logList.add("## Alte Liste erstellt  am: " + LoadAudioFactoryDto.audioListDate.getValueSafe());
             logList.add("##            Anzahl Beiträge: " + LoadAudioFactoryDto.audioListAkt.size());
             logList.add("##");
 
-            new ReadAudioList(logList).readWebList(ProgInfos.getAndMakeAudioListFile());
+            new ReadWebAudioList(logList).readWebList(ProgInfos.getAndMakeAudioListFile());
             afterLoading(logList);
 
             logList.add("## Audioliste aus dem Web laden - ende");
@@ -125,7 +126,7 @@ public class LoadAudioList {
             // gespeicherte Audioliste laden, macht beim ersten Programmstart keinen Sinn
             logList.add("## Erster Programmstart -> Liste aus dem Web laden");
 
-            new ReadAudioList(logList).readWebList(ProgInfos.getAndMakeAudioListFile());
+            new ReadWebAudioList(logList).readWebList(ProgInfos.getAndMakeAudioListFile());
             P2Duration.onlyPing("Erster Programmstart: Neu Audioliste aus dem Web geladen");
             return;
         }
@@ -134,7 +135,7 @@ public class LoadAudioList {
         // dann ist ein normaler Start mit vorhandener Audioliste, muss auf jeden Fall geladen werden > Hash
         logList.add("## Programmstart: Gespeicherte Liste laden");
 
-        new ReadAudioList(logList).readLocalList(ProgInfos.getAndMakeAudioListFile()); // Liste in new laden
+        new ReadLocalAudioList(logList).readLocalList(ProgInfos.getAndMakeAudioListFile()); // Liste in new laden
         logList.add("## Programmstart: Gespeicherte Liste geladen");
 
         if (LoadAudioFactoryDto.loadNewAudioListOnProgramStart) {
@@ -161,7 +162,7 @@ public class LoadAudioList {
                         new P2Event(PEvents.LOAD_AUDIO_LIST_PROGRESS, "Audioliste ist zu alt, eine neue laden", LoadAudioFactory.PROGRESS_INDETERMINATE));
 
                 logList.add("## Programmstart: Neue Liste aus dem Web laden");
-                new ReadAudioList(logList).readWebList(ProgInfos.getAndMakeAudioListFile());
+                new ReadWebAudioList(logList).readWebList(ProgInfos.getAndMakeAudioListFile());
                 P2Duration.onlyPing("Programmstart: Neu Audioliste aus dem Web geladen");
             }
         } else {
@@ -172,7 +173,7 @@ public class LoadAudioList {
             // dann hat das alles nicht geklappt??
             logList.add("## Das Laden der Liste hat nicht geklappt");
             logList.add("## Noch ein Versuch: Gespeicherte Liste laden");
-            new ReadAudioList(logList).readLocalList(ProgInfos.getAndMakeAudioListFile());
+            new ReadLocalAudioList(logList).readLocalList(ProgInfos.getAndMakeAudioListFile());
             logList.add("## Gespeicherte Liste geladen");
         }
 
@@ -183,6 +184,10 @@ public class LoadAudioList {
     // #######################################
     // #######################################
     private void afterLoading(List<String> logList) {
+        P2Duration.counterStart("afterLoading");
+        LoadAudioFactoryDto.audioListNew.forEach(FilmData::init); // damit wird auch das Datum! gesetzt
+        P2Duration.counterStop("afterLoading");
+
         logList.add("##");
         logList.add("## Jetzige Liste erstellt am: " + P2LDateFactory.getNowString());
         logList.add("##   Anzahl Audios: " + LoadAudioFactoryDto.audioListNew.size());

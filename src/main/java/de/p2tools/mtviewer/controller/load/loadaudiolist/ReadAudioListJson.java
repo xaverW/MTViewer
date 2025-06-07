@@ -69,7 +69,6 @@ public class ReadAudioListJson {
                 final FilmData audioData = filmList.getNewElement();
                 try {
                     addValue(audioData, jp);
-                    audioData.init(); // damit wird auch das Datum! gesetzt
                     filmList.add(audioData);
                 } catch (Exception ex) {
                     System.out.println(ex);

@@ -19,8 +19,10 @@ package de.p2tools.mtviewer.gui.configdialog;
 import de.p2tools.mtviewer.controller.config.PEvents;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
+import de.p2tools.mtviewer.controller.config.ProgInfos;
 import de.p2tools.p2lib.dialogs.dialog.P2DialogExtra;
 import de.p2tools.p2lib.mtfilm.film.FilmFactory;
+import de.p2tools.p2lib.mtfilm.readwritefilmlist.P2WriteFilmlistJson;
 import de.p2tools.p2lib.tools.log.P2Log;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
@@ -81,7 +83,13 @@ public class ConfigDialogController extends P2DialogExtra {
             new Thread(() -> {
                 ProgData.getInstance().maskerPane.setMaskerText("Diakritika entfernen");
                 ProgData.getInstance().maskerPane.setMaskerVisible(true, true, false);
+
+                // ändern und Liste speichern
                 FilmFactory.flattenDiacritic(progData.filmlist);
+                FilmFactory.flattenDiacritic(progData.audioList);
+                new P2WriteFilmlistJson().write(ProgInfos.getFilmListFile(), progData.filmlist);
+                new P2WriteFilmlistJson().write(ProgInfos.getAndMakeAudioListFile().toString(), progData.audioList);
+
                 progData.pEventHandler.notifyListener(PEvents.EVENT_DIACRITIC_CHANGED);
                 ProgData.getInstance().maskerPane.switchOffMasker();
             }).start();
