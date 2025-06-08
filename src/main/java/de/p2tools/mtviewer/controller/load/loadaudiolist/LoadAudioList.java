@@ -53,13 +53,12 @@ public class LoadAudioList {
     /**
      * Audioliste beim Programmstart laden
      */
-    public void loadAtProgStart() {
+    public void loadAudioListAtProgStart() {
         // nur einmal direkt nach dem Programmstart
-        ProgData.getInstance().pEventHandler.notifyListener(
-                new P2Event(PEvents.LOAD_AUDIO_LIST_START, "Programmstart, Liste laden", LoadAudioFactory.PROGRESS_INDETERMINATE));
-
         new Thread(() -> {
-            P2Duration.counterStart("loadAudioListProgStart");
+            P2Duration.counterStart("loadAudioListAtProgStart");
+            ProgData.getInstance().pEventHandler.notifyListener(
+                    new P2Event(PEvents.LOAD_AUDIO_LIST_START, "Programmstart, Liste laden", LoadAudioFactory.PROGRESS_INDETERMINATE));
             final List<String> logList = new ArrayList<>();
 
             logList.add("## " + P2Log.LILNE1);
@@ -68,7 +67,7 @@ public class LoadAudioList {
             logList.add("## Audioliste beim **Programmstart** laden - start");
             logList.add("## ");
 
-            loadAtProgStart(logList);
+            loadAudioListAtProgStart(logList);
             afterLoading(logList);
 
             logList.add("## Audioliste beim Programmstart laden - ende");
@@ -79,19 +78,18 @@ public class LoadAudioList {
             P2Log.emptyLine();
             P2Log.sysLog(logList);
             P2Log.emptyLine();
-            P2Duration.counterStop("loadAudioListProgStart");
+            P2Duration.counterStop("loadAudioListAtProgStart");
         }).start();
     }
 
-    public void loadNewListFromWeb() {
+    public void loadNewAudioListFromWeb() {
         // aus dem Menü oder Button in den Einstellungen
-        ProgData.getInstance().pEventHandler.notifyListener(
-                new P2Event(PEvents.LOAD_AUDIO_LIST_START, "Audioliste aus dem Web laden", LoadAudioFactory.PROGRESS_INDETERMINATE));
-
         new Thread(() -> {
-            final List<String> logList = new ArrayList<>();
-            P2Duration.counterStart("loadNewListFromWeb");
             //damit wird eine neue Liste (Web) geladen UND auch gleich im Config-Ordner gespeichert
+            P2Duration.counterStart("loadNewAudioListFromWeb");
+            ProgData.getInstance().pEventHandler.notifyListener(
+                    new P2Event(PEvents.LOAD_AUDIO_LIST_START, "Audioliste aus dem Web laden", LoadAudioFactory.PROGRESS_INDETERMINATE));
+            final List<String> logList = new ArrayList<>();
 
             logList.add("## " + P2Log.LILNE1);
             logList.add("## " + P2Log.LILNE1);
@@ -113,14 +111,14 @@ public class LoadAudioList {
             P2Log.sysLog(logList);
             P2Log.emptyLine();
 
-            P2Duration.counterStop("loadNewListFromWeb");
+            P2Duration.counterStop("loadNewAudioListFromWeb");
         }).start();
     }
 
     /**
      * Audioliste beim Programmstart laden
      */
-    private void loadAtProgStart(List<String> logList) {
+    private void loadAudioListAtProgStart(List<String> logList) {
         // ProgStart, hier wird die gespeicherte Audioliste geladen und
         // wenn zu alt, wird eine neue aus dem Web geladen
 

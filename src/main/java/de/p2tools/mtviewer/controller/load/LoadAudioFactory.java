@@ -42,7 +42,7 @@ public class LoadAudioFactory {
         ProgData.AUDIOLIST_IS_DOWNLOADING.set(true);
         LoadAudioList loadAudioList = new LoadAudioList();
         initLoadFactoryConst(loadAudioList);
-        loadAudioList.loadAtProgStart();
+        loadAudioList.loadAudioListAtProgStart();
     }
 
     public static void loadAudioListButton() {
@@ -51,7 +51,7 @@ public class LoadAudioFactory {
         ProgData.AUDIOLIST_IS_DOWNLOADING.set(true);
         LoadAudioList loadAudioList = new LoadAudioList();
         initLoadFactoryConst(loadAudioList);
-        loadAudioList.loadNewListFromWeb();
+        loadAudioList.loadNewAudioListFromWeb();
     }
 
     public static boolean isNotFromToday(String strDate) {

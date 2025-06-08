@@ -19,7 +19,6 @@ package de.p2tools.mtviewer.controller.load.loadaudiolist;
 import de.p2tools.mtviewer.controller.load.LoadAudioFactoryDto;
 import de.p2tools.p2lib.mtfilm.film.FilmlistFactory;
 import de.p2tools.p2lib.mtfilm.readwritefilmlist.P2ReadFilmlist;
-import de.p2tools.p2lib.tools.duration.P2Duration;
 import de.p2tools.p2lib.tools.log.P2Log;
 
 import java.nio.file.Files;
@@ -38,7 +37,6 @@ public class ReadLocalAudioList {
     public boolean readLocalList(Path path) {
         // beim Programmstart wird die gespeicherte Liste geladen
         boolean ret;
-        P2Duration.counterStart("readDb");
 
         try {
             if (!Files.exists(path) || path.toFile().length() == 0) {
