@@ -84,10 +84,12 @@ public class PFilm extends VBox {
         ProgConfig.SYSTEM_FILMLIST_COUNT_DOUBLE.addListener((u, o, n) -> {
             Platform.runLater(this::setLblDouble);
         });
+        ProgConfig.SYSTEM_AUDIOLIST_COUNT_DOUBLE.addListener((u, o, n) -> {
+            Platform.runLater(this::setLblDouble);
+        });
         setLblDouble();
 
-        final P2ToggleSwitch tglRemove = new P2ToggleSwitch("Doppelte Filme beim Laden der Filmliste ausschließen");
-        ProgConfig.SYSTEM_FILMLIST_REMOVE_DOUBLE.setValue(Boolean.TRUE); // beim ersten Start wird angelegt
+        final P2ToggleSwitch tglRemove = new P2ToggleSwitch("Doppelte Filme/Audios beim Laden ausschließen");
         tglRemove.setSelected(ProgConfig.SYSTEM_FILMLIST_REMOVE_DOUBLE.getValue());
         tglRemove.selectedProperty().addListener((u, o, n) -> ProgConfig.SYSTEM_FILMLIST_REMOVE_DOUBLE.setValue(tglRemove.isSelected()));
 
@@ -101,14 +103,14 @@ public class PFilm extends VBox {
         gridPane.add(lblDouble, 0, ++row, 3, 1);
 
         gridPane.add(new Label(), 0, ++row);
-        gridPane.add(new Label("Nur Filme der letzten Tage laden:"), 0, ++row, 2, 1);
+        gridPane.add(new Label("Nur Filme/Audios der letzten Tage laden:"), 0, ++row, 2, 1);
         gridPane.add(new Label("Filme laden:"), 0, ++row);
         gridPane.add(slDays, 1, row);
         gridPane.add(lblDays, 2, row);
         gridPane.add(btnHelpDays, 3, row, 1, 2);
 
         gridPane.add(new Label(), 0, ++row);
-        gridPane.add(new Label("Nur Filme mit Mindestlänge laden:"), 0, ++row, 2, 1);
+        gridPane.add(new Label("Nur Filme/Audios mit Mindestlänge laden:"), 0, ++row, 2, 1);
         gridPane.add(new Label("Filme laden:"), 0, ++row);
         gridPane.add(slDuration, 1, row);
         gridPane.add(lblDuration, 2, row);
@@ -122,9 +124,12 @@ public class PFilm extends VBox {
     }
 
     private void setLblDouble() {
-        lblDouble.setText("     ( Anzahl Doppelte: " + ProgConfig.SYSTEM_FILMLIST_COUNT_DOUBLE.getValue() + " )");
-        lblDouble.setVisible(ProgConfig.SYSTEM_FILMLIST_COUNT_DOUBLE.getValue() != 0);
-        lblDouble.setManaged(ProgConfig.SYSTEM_FILMLIST_COUNT_DOUBLE.getValue() != 0);
+        lblDouble.setText("     ( Doppelte Film: " + ProgConfig.SYSTEM_FILMLIST_COUNT_DOUBLE.get() +
+                "  -  doppelte Audios: " + ProgConfig.SYSTEM_AUDIOLIST_COUNT_DOUBLE.get() + " )");
+        lblDouble.setVisible(ProgConfig.SYSTEM_FILMLIST_COUNT_DOUBLE.get() != 0 ||
+                ProgConfig.SYSTEM_AUDIOLIST_COUNT_DOUBLE.get() != 0);
+        lblDouble.setManaged(ProgConfig.SYSTEM_FILMLIST_COUNT_DOUBLE.getValue() != 0 ||
+                ProgConfig.SYSTEM_AUDIOLIST_COUNT_DOUBLE.get() != 0);
     }
 
     private void initSlider() {

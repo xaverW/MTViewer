@@ -17,22 +17,29 @@ package de.p2tools.mtviewer.controller.load.loadaudiolist;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
+import de.p2tools.mtviewer.controller.load.LoadAudioFactoryDto;
 import de.p2tools.p2lib.atdata.AudioDataXml;
 import de.p2tools.p2lib.atdata.AudioList;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 import de.p2tools.p2lib.mtfilm.film.FilmDataXml;
 import de.p2tools.p2lib.mtfilm.film.Filmlist;
+import de.p2tools.p2lib.tools.log.P2Log;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
-public class ReadAudioListJson {
+public class ReadWebAudioToFilmListJson {
 
     private String channel = "", genre = "", theme = "";
 
-    public ReadAudioListJson() {
+    public ReadWebAudioToFilmListJson() {
     }
 
-    public void readFilmData(JsonParser jp, Filmlist<FilmData> filmList) throws IOException {
+    public void readAudioData(JsonParser jp, Filmlist<FilmData> filmList) throws IOException {
+
+        final long loadFilmsMaxMilliSeconds = getDaysLoadingFilms();
+        final int loadFilmsMinDuration = LoadAudioFactoryDto.SYSTEM_LOAD_MIN_DURATION;
+
         JsonToken jsonToken;
         if (jp.nextToken() != JsonToken.START_OBJECT) {
             throw new IllegalStateException("Expected data to start with an Object");
@@ -69,6 +76,20 @@ public class ReadAudioListJson {
                 final FilmData audioData = filmList.getNewElement();
                 try {
                     addValue(audioData, jp);
+
+                    // aus dem Web muss das immer gemacht werden
+                    audioData.init(); // damit wird auch das Datum! gesetzt
+
+                    //und jetzt wird gefiltert, wenn aus dem Web
+                    if (loadFilmsMaxMilliSeconds > 0 && !checkDays(audioData, loadFilmsMaxMilliSeconds)) {
+                        //wenn er zu alt ist, nicht laden
+                        continue;
+                    }
+                    if (loadFilmsMinDuration > 0 && !checkDuration(audioData, loadFilmsMinDuration)) {
+                        //wenn er zu kurz ist, nicht laden
+                        continue;
+                    }
+
                     filmList.add(audioData);
                 } catch (Exception ex) {
                     System.out.println(ex);
@@ -88,12 +109,12 @@ public class ReadAudioListJson {
                     }
                     filmData.arr[FilmDataXml.FILM_CHANNEL] = channel;
                     break;
-                case AudioDataXml.JSON_AUDIO_GENRE:
-                    if (!str.isEmpty()) {
-                        genre = str.intern();
-                    }
+//                case AudioDataXml.JSON_AUDIO_GENRE:
+//                    if (!str.isEmpty()) {
+//                        genre = str.intern();
+//                    }
 //                    filmData.arr[FilmDataXml.AUDIO_GENRE] = genre;
-                    break;
+//                    break;
                 case AudioDataXml.JSON_AUDIO_THEME:
                     if (!str.isEmpty()) {
                         theme = str.intern();
@@ -129,13 +150,52 @@ public class ReadAudioListJson {
                 case AudioDataXml.JSON_AUDIO_NEW:
                     filmData.arr[FilmDataXml.FILM_NEW] = str;
                     break;
-                case AudioDataXml.JSON_AUDIO_PODCAST:
+//                case AudioDataXml.JSON_AUDIO_PODCAST:
 //                    filmData.arr[FilmDataXml.AUDIO_PODCAST] = str;
-                    break;
-                case AudioDataXml.JSON_AUDIO_DOUBLE:
+//                    break;
+//                case AudioDataXml.JSON_AUDIO_DOUBLE:
 //                    filmData.arr[FilmDataXml.AUDIO_DOUBLE] = str;
-                    break;
+//                    break;
             }
+        }
+    }
+
+    private boolean checkDays(FilmData film, long loadFilmsLastMilliSeconds) {
+        // true, wenn der Film angezeigt werden kann!
+        try {
+            if (film.filmDate.getTime() != 0) {
+                if (film.filmDate.getTime() < loadFilmsLastMilliSeconds) {
+                    //dann ist er zu alt
+                    return false;
+                }
+            }
+        } catch (final Exception ex) {
+            P2Log.errorLog(495623014, ex);
+        }
+        return true;
+    }
+
+    private boolean checkDuration(FilmData film, int loadFilmsMinDuration) {
+        //true, wenn der Film angezeigt werden kann!
+        try {
+            if (film.getDurationMinute() != 0) {
+                if (film.getDurationMinute() < loadFilmsMinDuration) {
+                    //dann ist er zu kurz
+                    return false;
+                }
+            }
+        } catch (final Exception ex) {
+            P2Log.errorLog(495623014, ex);
+        }
+        return true;
+    }
+
+    private long getDaysLoadingFilms() {
+        final long days = LoadAudioFactoryDto.SYSTEM_LOAD_MAX_DAYS;
+        if (days > 0) {
+            return System.currentTimeMillis() - TimeUnit.MILLISECONDS.convert(days, TimeUnit.DAYS);
+        } else {
+            return 0;
         }
     }
 }

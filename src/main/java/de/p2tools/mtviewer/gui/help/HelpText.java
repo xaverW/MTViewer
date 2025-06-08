@@ -332,13 +332,12 @@ public class HelpText {
                     "\n";
 
     public static final String LOAD_FILMLIST_PROGRAMSTART =
-            "Die Filmliste wird beim Programmstart automatisch geladen, " +
-                    "wenn sie älter als 3 Stunden ist. Sie kann auch über den " +
-                    "Menüpunkt \"Eine neue Filmliste laden\" im Programmmenü aktualisiert werden.\n" +
-                    "\n" +
+            "Die Filmliste/Audioliste wird beim Programmstart automatisch geladen. " +
+                    "Die Filmliste, wenn sie älter als 3 Stunden ist. " +
                     "Zum Update werden dann nur noch Differenzlisten geladen " +
-                    "(diese enthalten nur neu hinzugekommene Filme)." +
-                    "\n";
+                    "(diese enthält nur neu hinzugekommene Filme)." +
+                    "\n" +
+                    "Die Audioliste wird neu geladen, wenn sie vom Vortag ist.";
 
     public static final String DIAKRITISCHE_ZEICHEN =
             "\"Diakritische Zeichen ändern\" meint, dass bestimmte Zeichen in den " +

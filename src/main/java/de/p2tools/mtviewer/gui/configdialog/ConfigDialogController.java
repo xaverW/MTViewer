@@ -119,7 +119,7 @@ public class ConfigDialogController extends P2DialogExtra {
             tabPane.getTabs().add(tab);
 
             controllerFilm = new ControllerFilm(getStage(), diacriticChanged);
-            tab = new Tab("Filmliste laden");
+            tab = new Tab("Filmliste/Audioliste laden");
             tab.setClosable(false);
             tab.setContent(controllerFilm);
             tabPane.getTabs().add(tab);

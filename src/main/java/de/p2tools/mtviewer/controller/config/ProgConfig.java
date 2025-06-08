@@ -154,8 +154,10 @@ public class ProgConfig extends P2DataProgConfig {
     public static BooleanProperty SYSTEM_ONLY_ASCII = addBoolProp("system-only-ascii", Boolean.FALSE);
     public static BooleanProperty SYSTEM_MARK_GEO = addBoolProp("system-mark-geo", Boolean.TRUE);
     public static StringProperty SYSTEM_GEO_HOME_PLACE = addStrProp("system-geo-home-place", FilmData.GEO_DE);
+
     public static IntegerProperty SYSTEM_FONT_SIZE = addIntProp("system-style-size", 0);
     public static BooleanProperty SYSTEM_FONT_SIZE_CHANGE = addBoolProp("system-font-size-change", Boolean.FALSE); // für die Schriftgröße
+
     public static StringProperty SYSTEM_LOG_DIR = addStrProp("system-log-dir", "");
     public static BooleanProperty SYSTEM_LOG_ON = addBoolProp("system-log-on", Boolean.TRUE);
     public static BooleanProperty SYSTEM_DARK_THEME = addBoolProp("system-dark-theme", Boolean.FALSE);
@@ -168,11 +170,11 @@ public class ProgConfig extends P2DataProgConfig {
     public static IntegerProperty SYSTEM_FILTER_WAIT_TIME = addIntProp("system-filter-wait-time", 100);
     public static BooleanProperty SYSTEM_FILTER_RETURN = addBoolProp("system-filter-return", Boolean.FALSE);
     public static StringProperty SYSTEM_DOWNLOAD_DIR_NEW_VERSION = addStrProp("system-download-dir-new-version", "");
-    public static IntegerProperty SYSTEM_AUDIOLIST_COUNT_DOUBLE = addIntProp("system-audiolist-count-double", 0); // Anzahl der doppelten Filme
     public static BooleanProperty SYSTEM_SHOW_MEDIATHEK = addBoolProp("system-show-mediathek", Boolean.TRUE);
     public static BooleanProperty SYSTEM_SHOW_AUDIOTHEK = addBoolProp("system-show-auiothek", Boolean.FALSE);
-    public static BooleanProperty SYSTEM_FILMLIST_REMOVE_DOUBLE = addBoolProp("system-filmlist-remove-double", Boolean.FALSE);
+    public static BooleanProperty SYSTEM_FILMLIST_REMOVE_DOUBLE = addBoolProp("system-filmlist-remove-double", Boolean.TRUE);
     public static IntegerProperty SYSTEM_FILMLIST_COUNT_DOUBLE = addIntProp("system-filmlist-count-double", 0); // Anzahl der doppelten Filme
+    public static IntegerProperty SYSTEM_AUDIOLIST_COUNT_DOUBLE = addIntProp("system-audiolist-count-double", 0); // Anzahl der doppelten Filme
     public static BooleanProperty SYSTEM_FILMLIST_DOUBLE_WITH_THEME_TITLE = addBoolProp("system-filmlist-double-with-theme-title", Boolean.FALSE);
 
     // Einstellungen Filmliste

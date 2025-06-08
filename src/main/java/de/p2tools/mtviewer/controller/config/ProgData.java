@@ -45,6 +45,7 @@ public class ProgData {
     public static boolean debug = false; // Debugmodus
     public static boolean duration = false; // Duration ausgeben
     public static boolean reset = false; // Programm auf Starteinstellungen zurücksetzen
+    public static boolean raspberry = false; // läuft auf einem Raspberry
     public static boolean firstProgramStart = false; // ist der allererste Programmstart: Init wird gemacht
     public static BooleanProperty FILMLIST_IS_DOWNLOADING = new SimpleBooleanProperty(Boolean.FALSE); // dann wird eine Filmliste geladen
     public static BooleanProperty AUDIOLIST_IS_DOWNLOADING = new SimpleBooleanProperty(Boolean.FALSE); // dann wird eine Audioliste geladen

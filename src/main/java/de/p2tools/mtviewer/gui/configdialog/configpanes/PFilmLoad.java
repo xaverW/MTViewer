@@ -32,7 +32,7 @@ import javafx.stage.Stage;
 
 public class PFilmLoad extends VBox {
 
-    private final P2ToggleSwitch tglLoad = new P2ToggleSwitch("Filmliste beim Programmstart laden");
+    private final P2ToggleSwitch tglLoad = new P2ToggleSwitch("Filmliste/Audioliste beim Programmstart laden");
     private final P2ToggleSwitch tglRemoveDiacritic = new P2ToggleSwitch("Diakritische Zeichen ändern");
     private final BooleanProperty diacriticChanged;
     private final Stage stage;
@@ -58,7 +58,7 @@ public class PFilmLoad extends VBox {
         gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
 
         tglLoad.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_LOAD_FILMS_ON_START);
-        final Button btnHelpLoad = P2Button.helpButton(stage, "Filmliste laden",
+        final Button btnHelpLoad = P2Button.helpButton(stage, "Filmliste/Audioliste laden",
                 HelpText.LOAD_FILMLIST_PROGRAMSTART);
 
         //Diacritic

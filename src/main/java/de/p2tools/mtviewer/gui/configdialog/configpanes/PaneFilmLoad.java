@@ -16,15 +16,20 @@
 
 package de.p2tools.mtviewer.gui.configdialog.configpanes;
 
+import de.p2tools.mtviewer.controller.load.LoadAudioFactory;
 import de.p2tools.mtviewer.controller.load.LoadFilmFactory;
 import de.p2tools.p2lib.P2LibConst;
+import de.p2tools.p2lib.guitools.P2ColumnConstraints;
 import de.p2tools.p2lib.guitools.P2GuiTools;
 import javafx.beans.property.BooleanProperty;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.Tooltip;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 
 import java.util.Collection;
@@ -42,16 +47,34 @@ public class PaneFilmLoad {
     }
 
     public TitledPane make(Collection<TitledPane> result) {
-        Button btnLoad = new Button("_Filmliste mit diesen Einstellungen neu laden");
-        btnLoad.setTooltip(new Tooltip("Eine komplette neue Filmliste laden.\n" +
-                "Geänderte Einstellungen für das Laden der Filmliste werden so sofort übernommen"));
-        btnLoad.setOnAction(event -> LoadFilmFactory.loadListButton(true));
-        HBox hBox = new HBox(P2LibConst.SPACING_HBOX);
-        hBox.getChildren().add(btnLoad);
+        Button btnLoadFilm = new Button("_Filmliste mit diesen Einstellungen neu laden");
+        btnLoadFilm.setTooltip(new Tooltip("Eine komplette neue Filmliste laden.\n" +
+                "Geänderte Einstellungen für das Laden der Liste werden so sofort übernommen"));
+        btnLoadFilm.setOnAction(event -> LoadFilmFactory.loadFilmListButton(true));
+
+        Button btnLoadAudio = new Button("_Audioliste mit diesen Einstellungen neu laden");
+        btnLoadAudio.setTooltip(new Tooltip("Eine komplette neue Audioliste laden.\n" +
+                "Geänderte Einstellungen für das Laden der Liste werden so sofort übernommen"));
+        btnLoadAudio.setOnAction(event -> LoadAudioFactory.loadAudioListButton());
+
+        final GridPane gridPane = new GridPane();
+        gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
+        gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
+        gridPane.setPadding(new Insets(P2LibConst.PADDING));
+        gridPane.getColumnConstraints().addAll(P2ColumnConstraints.getCcPrefSize());
+
+        gridPane.add(btnLoadFilm, 0, 0);
+        gridPane.add(btnLoadAudio, 0, 1);
+
+        btnLoadFilm.setMaxWidth(Double.MAX_VALUE);
+        GridPane.setVgrow(btnLoadFilm, Priority.ALWAYS);
+        HBox hBox = new HBox();
+        hBox.getChildren().add(gridPane);
         hBox.setAlignment(Pos.CENTER_RIGHT);
+
         pFilmLoad.getChildren().addAll(P2GuiTools.getVBoxGrower(), hBox);
 
-        TitledPane tpConfig = new TitledPane("Filmliste laden", pFilmLoad);
+        TitledPane tpConfig = new TitledPane("Filmliste/Audioliste laden", pFilmLoad);
         result.add(tpConfig);
         return tpConfig;
     }

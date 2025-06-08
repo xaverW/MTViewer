@@ -25,30 +25,30 @@ import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadFilmlist;
 import de.p2tools.p2lib.mtfilm.tools.LoadFactoryConst;
 
 public class LoadFilmFactory {
-    private static P2LoadFilmlist loadFilmlist = null;
+    private static P2LoadFilmlist p2LoadFilmlist = null;
 
     private LoadFilmFactory() {
     }
 
-    public static void loadProgStart() {
+    public static void loadFilmListProgStart() {
         // Programmstart
         ProgData.FILMLIST_IS_DOWNLOADING.set(true);
-        loadFilmlist = new P2LoadFilmlist(ProgData.getInstance().pEventHandler, new FilmListMtc(), new FilmListMtc());
-        initLoadFactoryConst(loadFilmlist);
-        loadFilmlist.loadFilmlistProgStart();
+        p2LoadFilmlist = new P2LoadFilmlist(ProgData.getInstance().pEventHandler, new FilmListMtc(), new FilmListMtc());
+        initLoadFactoryConst(p2LoadFilmlist);
+        p2LoadFilmlist.loadFilmlistProgStart();
     }
 
-    public static void loadListButton(boolean alwaysLoadNew) {
+    public static void loadFilmListButton(boolean alwaysLoadNew) {
         // Button
         ProgData.FILMLIST_IS_DOWNLOADING.set(true);
-        loadFilmlist = new P2LoadFilmlist(ProgData.getInstance().pEventHandler, new FilmListMtc(), new FilmListMtc());
-        initLoadFactoryConst(loadFilmlist);
-        loadFilmlist.loadNewFilmlistFromWeb(alwaysLoadNew);
+        p2LoadFilmlist = new P2LoadFilmlist(ProgData.getInstance().pEventHandler, new FilmListMtc(), new FilmListMtc());
+        initLoadFactoryConst(p2LoadFilmlist);
+        p2LoadFilmlist.loadNewFilmlistFromWeb(alwaysLoadNew);
     }
 
     public static void setLoadStop() {
-        if (loadFilmlist != null) {
-            loadFilmlist.setStop(true);
+        if (p2LoadFilmlist != null) {
+            p2LoadFilmlist.setStop(true);
         }
     }
 

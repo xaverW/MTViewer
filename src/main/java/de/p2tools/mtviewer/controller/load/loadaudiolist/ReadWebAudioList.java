@@ -23,10 +23,7 @@ import de.p2tools.mtviewer.controller.load.LoadAudioFactoryDto;
 import de.p2tools.p2lib.atdata.P2AudioFactory;
 import de.p2tools.p2lib.atdata.P2AudioListFactory;
 import de.p2tools.p2lib.mtdownload.MLHttpClient;
-import de.p2tools.p2lib.mtfilm.film.FilmData;
-import de.p2tools.p2lib.mtfilm.film.FilmFactory;
-import de.p2tools.p2lib.mtfilm.film.Filmlist;
-import de.p2tools.p2lib.mtfilm.film.FilmlistXml;
+import de.p2tools.p2lib.mtfilm.film.*;
 import de.p2tools.p2lib.mtfilm.readwritefilmlist.P2WriteFilmlistJson;
 import de.p2tools.p2lib.mtfilm.tools.InputStreamProgressMonitor;
 import de.p2tools.p2lib.mtfilm.tools.LoadFactoryConst;
@@ -45,9 +42,11 @@ import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Path;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.SimpleTimeZone;
 import java.util.zip.ZipInputStream;
 
 public class ReadWebAudioList {
@@ -65,8 +64,9 @@ public class ReadWebAudioList {
 
         try {
             // Hash füllen
-            fillHash(logList, LoadAudioFactoryDto.audioListAkt);
-            fillHash(logList, LoadAudioFactoryDto.audioListNew);
+            LoadAudioFactoryDto.hashSet.addAll(LoadAudioFactoryDto.audioListAkt.stream().map(FilmData::getUrlHistory).toList());
+            LoadAudioFactoryDto.hashSet.addAll(LoadAudioFactoryDto.audioListNew.stream().map(FilmData::getUrlHistory).toList());
+
             LoadAudioFactoryDto.audioListAkt.clear();
             LoadAudioFactoryDto.audioListNew.clear();
 
@@ -81,9 +81,8 @@ public class ReadWebAudioList {
             } else {
                 setDateFromWeb();
                 flattenDiacritic(logList, LoadAudioFactoryDto.audioListNew);
-                removeUnwanted(logList, LoadAudioFactoryDto.audioListNew);
                 markNewFilms(logList, LoadAudioFactoryDto.audioListNew);
-                markDoubleAudios(logList, LoadAudioFactoryDto.audioListNew); // todo löschen??
+                markDoubleAudios(logList, LoadAudioFactoryDto.audioListNew);
 
                 // und dann auch speichern
                 logList.add("##");
@@ -147,7 +146,7 @@ public class ReadWebAudioList {
                 try (InputStream input = new ProgressMonitorInputStream(body.byteStream(), body.contentLength(), monitor)) {
                     try (InputStream is = selectDecompressor(source.toString(), input);
                          JsonParser jp = new JsonFactory().createParser(is)) {
-                        new ReadAudioListJson().readFilmData(jp, audioList);
+                        new ReadWebAudioToFilmListJson().readAudioData(jp, audioList);
                     }
                 }
             }
@@ -193,53 +192,12 @@ public class ReadWebAudioList {
         }
     }
 
-    private void fillHash(List<String> logList, Filmlist<FilmData> audioList) {
-        //alle historyURLs in den hash schreiben
-//        logList.add("## " + P2Log.LILNE3);
-//        logList.add("## Hash füllen, Größe vorher: " + LoadAudioFactoryDto.hashSet.size());
-
-        LoadAudioFactoryDto.hashSet.addAll(audioList.stream().map(FilmData::getUrlHistory).toList());
-//        logList.add("##                   nachher: " + LoadAudioFactoryDto.hashSet.size());
-//        logList.add("## " + P2Log.LILNE3);
-    }
-
     private void flattenDiacritic(List<String> logList, Filmlist<FilmData> audioList) {
         logList.add("## Diakritika setzen/ändern, Diakritika suchen");
         if (LoadFactoryConst.removeDiacritic) {
             FilmFactory.flattenDiacritic(audioList);
         } else {
             logList.add("## Diakritika: nicht gewollt");
-        }
-    }
-
-    private void removeUnwanted(List<String> logList, Filmlist<FilmData> audioList) {
-        if (LoadAudioFactoryDto.SYSTEM_LOAD_FILMLIST_MAX_DAYS == 0 &&
-                LoadAudioFactoryDto.SYSTEM_LOAD_FILMLIST_MIN_DURATION == 0) {
-            // dann alles
-            return;
-        }
-
-        try {
-            logList.add("## unerwünschte löschen");
-            Iterator<FilmData> it = audioList.iterator();
-            LocalDate minDate = LocalDate.now().minusDays(LoadAudioFactoryDto.SYSTEM_LOAD_FILMLIST_MAX_DAYS);
-            while (it.hasNext()) {
-                FilmData audioData = it.next();
-                if (LoadAudioFactoryDto.SYSTEM_LOAD_FILMLIST_MAX_DAYS > 0) {
-                    LocalDate ld = audioData.getDate().getLocalDate(); // gibt ein paar Sendungen mit Datum 01.01.1970!!
-                    if (ld != null && ld.isBefore(minDate)) {
-                        it.remove();
-                        continue;
-                    }
-                }
-                if (LoadAudioFactoryDto.SYSTEM_LOAD_FILMLIST_MIN_DURATION > 0 &&
-                        audioData.getDurationMinute() != 0 &&
-                        audioData.getDurationMinute() < LoadAudioFactoryDto.SYSTEM_LOAD_FILMLIST_MIN_DURATION) {
-                    it.remove();
-                }
-            }
-        } catch (Exception ex) {
-            System.out.println(ex.getLocalizedMessage());
         }
     }
 
@@ -258,26 +216,28 @@ public class ReadWebAudioList {
     public void markDoubleAudios(List<String> logList, Filmlist<FilmData> audioList) {
         // läuft direkt nach dem Laden der Filmliste!
         // doppelte Filme (URL)
-        // viele Filme sind bei mehreren Sendern vorhanden
-
+        P2Duration.counterStart("markDoubleAudios");
         logList.add("## doppelte Audios markieren");
         final HashSet<String> urlHashSet = new HashSet<>(audioList.size(), 0.75F);
-        P2Duration.counterStart("markAudios");
-        try {
-            countDouble = 0;
-            audioList.forEach((FilmData f) -> {
-                if (!urlHashSet.add(f.getUrl())) {
-                    ++countDouble;
-                    f.setDoubleUrl(true);
-                }
-            });
-        } catch (Exception ex) {
-            P2Log.errorLog(951024789, ex);
+        countDouble = 0;
+        audioList.forEach((FilmData f) -> {
+            if (!urlHashSet.add(f.getUrl())) {
+                ++countDouble;
+                f.setDoubleUrl(true);
+            }
+        });
+        urlHashSet.clear();
+
+        logList.add("## Anzahl doppelte: " + countDouble);
+        if (ProgConfig.SYSTEM_FILMLIST_REMOVE_DOUBLE.getValue()) {
+            // dann auch entfernen
+            logList.add("## und entfernen");
+            logList.add("## Anzahl: " + audioList.size());
+            audioList.removeIf(FilmDataProps::isDoubleUrl);
+            logList.add("## Anzahl jetzt: " + audioList.size());
         }
 
-        urlHashSet.clear();
-        P2Duration.counterStop("markAudios");
-
         ProgConfig.SYSTEM_AUDIOLIST_COUNT_DOUBLE.setValue(countDouble);
+        P2Duration.counterStop("markDoubleAudios");
     }
 }

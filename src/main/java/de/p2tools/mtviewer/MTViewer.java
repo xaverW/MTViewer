@@ -20,7 +20,6 @@ import de.p2tools.mtviewer.controller.ProgStartAfterGui;
 import de.p2tools.mtviewer.controller.ProgStartBeforeGui;
 import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
-import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.p2lib.P2LibInit;
 import de.p2tools.p2lib.guitools.P2GuiSize;
@@ -53,21 +52,12 @@ public class MTViewer extends Application {
         progData.primaryStage = primaryStage;
 
         ProgStartBeforeGui.workBeforeGui();
-        initP2lib();
 
         initRootLayout();
         ProgStartAfterGui.doWorkAfterGui();
 
         P2Duration.onlyPing("Gui steht!");
         P2Duration.counterStop(LOG_TEXT_PROGRAMSTART);
-    }
-
-    private void initP2lib() {
-        P2LibInit.initLib(primaryStage, ProgConst.PROGRAM_NAME, "",
-                ProgConfig.SYSTEM_DARK_THEME, ProgConfig.SYSTEM_BLACK_WHITE_ICON, ProgConfig.SYSTEM_THEME_CHANGED,
-                ProgConst.CSS_FILE, ProgConst.CSS_FILE_DARK_THEME, ProgConfig.SYSTEM_FONT_SIZE,
-                "", "",
-                ProgData.debug, ProgData.duration);
     }
 
     private void initRootLayout() {

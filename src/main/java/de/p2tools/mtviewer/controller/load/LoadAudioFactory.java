@@ -37,7 +37,7 @@ public class LoadAudioFactory {
     private LoadAudioFactory() {
     }
 
-    public static void loadProgStart() {
+    public static void loadAudioListProgStart() {
         // neu einmal direkt nach dem Programmstart
         ProgData.AUDIOLIST_IS_DOWNLOADING.set(true);
         LoadAudioList loadAudioList = new LoadAudioList();
@@ -45,7 +45,7 @@ public class LoadAudioFactory {
         loadAudioList.loadAtProgStart();
     }
 
-    public static void loadListButton() {
+    public static void loadAudioListButton() {
         // aus dem Menü oder Button in den Einstellungen
         // immer neu aus dem Web laden
         ProgData.AUDIOLIST_IS_DOWNLOADING.set(true);
@@ -69,8 +69,8 @@ public class LoadAudioFactory {
         LoadAudioFactoryDto.firstProgramStart = ProgData.firstProgramStart;
         LoadAudioFactoryDto.localFilmListFile = ProgInfos.getAudioListFile();
         LoadAudioFactoryDto.loadNewAudioListOnProgramStart = ProgConfig.SYSTEM_LOAD_FILMS_ON_START.getValue();
-        LoadAudioFactoryDto.SYSTEM_LOAD_FILMLIST_MAX_DAYS = ProgConfig.SYSTEM_LOAD_FILMLIST_MAX_DAYS.getValue();
-        LoadAudioFactoryDto.SYSTEM_LOAD_FILMLIST_MIN_DURATION = ProgConfig.SYSTEM_LOAD_FILMLIST_MIN_DURATION.getValue();
+        LoadAudioFactoryDto.SYSTEM_LOAD_MAX_DAYS = ProgConfig.SYSTEM_LOAD_FILMLIST_MAX_DAYS.getValue();
+        LoadAudioFactoryDto.SYSTEM_LOAD_MIN_DURATION = ProgConfig.SYSTEM_LOAD_FILMLIST_MIN_DURATION.getValue();
         LoadAudioFactoryDto.removeDiacritic = ProgConfig.SYSTEM_REMOVE_DIACRITICS.getValue();
         LoadAudioFactoryDto.userAgent = ProgConfig.SYSTEM_USERAGENT.getValue();
 
