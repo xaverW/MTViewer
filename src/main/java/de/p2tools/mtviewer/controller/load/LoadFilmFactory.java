@@ -17,12 +17,9 @@
 
 package de.p2tools.mtviewer.controller.load;
 
-import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.config.ProgInfos;
-import de.p2tools.mtviewer.controller.data.film.FilmListMtc;
+import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadConst;
 import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadFilmlist;
-import de.p2tools.p2lib.mtfilm.tools.LoadFactoryConst;
 
 public class LoadFilmFactory {
     private static P2LoadFilmlist p2LoadFilmlist = null;
@@ -33,43 +30,22 @@ public class LoadFilmFactory {
     public static void loadFilmListProgStart() {
         // Programmstart
         ProgData.FILMLIST_IS_DOWNLOADING.set(true);
-        p2LoadFilmlist = new P2LoadFilmlist(ProgData.getInstance().pEventHandler, new FilmListMtc(), new FilmListMtc());
-        initLoadFactoryConst(p2LoadFilmlist);
+        p2LoadFilmlist = new P2LoadFilmlist(ProgData.getInstance().pEventHandler);
+        LoadFactory.initLoadFactoryConst();
         p2LoadFilmlist.loadFilmlistProgStart();
     }
 
     public static void loadFilmListButton(boolean alwaysLoadNew) {
         // Button
         ProgData.FILMLIST_IS_DOWNLOADING.set(true);
-        p2LoadFilmlist = new P2LoadFilmlist(ProgData.getInstance().pEventHandler, new FilmListMtc(), new FilmListMtc());
-        initLoadFactoryConst(p2LoadFilmlist);
+        p2LoadFilmlist = new P2LoadFilmlist(ProgData.getInstance().pEventHandler);
+        LoadFactory.initLoadFactoryConst();
         p2LoadFilmlist.loadNewFilmlistFromWeb(alwaysLoadNew);
     }
 
     public static void setLoadStop() {
         if (p2LoadFilmlist != null) {
-            p2LoadFilmlist.setStop(true);
+            P2LoadConst.stop.set(true);
         }
-    }
-
-    private static void initLoadFactoryConst(P2LoadFilmlist p2LoadFilmlist) {
-        LoadFactoryConst.debug = ProgData.debug;
-
-        LoadFactoryConst.GEO_HOME_PLACE = ProgConfig.SYSTEM_GEO_HOME_PLACE.getValue();
-        LoadFactoryConst.SYSTEM_LOAD_NOT_SENDER = ProgConfig.SYSTEM_LOAD_NOT_SENDER.getValue();
-
-        LoadFactoryConst.dateStoredFilmlist = ProgConfig.SYSTEM_FILMLIST_DATE.getValue();
-        LoadFactoryConst.firstProgramStart = ProgData.firstProgramStart;
-        LoadFactoryConst.localFilmListFile = ProgInfos.getFilmListFile();
-        LoadFactoryConst.loadNewFilmlistOnProgramStart = ProgConfig.SYSTEM_LOAD_FILMS_ON_START.getValue();
-        LoadFactoryConst.SYSTEM_LOAD_FILMLIST_MAX_DAYS = ProgConfig.SYSTEM_LOAD_FILMLIST_MAX_DAYS.getValue();
-        LoadFactoryConst.SYSTEM_LOAD_FILMLIST_MIN_DURATION = ProgConfig.SYSTEM_LOAD_FILMLIST_MIN_DURATION.getValue();
-        LoadFactoryConst.removeDiacritic = ProgConfig.SYSTEM_REMOVE_DIACRITICS.getValue();
-        LoadFactoryConst.userAgent = ProgConfig.SYSTEM_USERAGENT.getValue();
-        LoadFactoryConst.filmlist = ProgData.getInstance().filmlist;
-
-        LoadFactoryConst.p2LoadFilmlist = p2LoadFilmlist;
-        LoadFactoryConst.primaryStage = ProgData.getInstance().primaryStage;
-        LoadFactoryConst.filmListUrl = ProgData.filmListUrl;
     }
 }

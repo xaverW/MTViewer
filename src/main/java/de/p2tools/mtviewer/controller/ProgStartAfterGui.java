@@ -41,6 +41,7 @@ public class ProgStartAfterGui {
         startMsg();
         setTitle();
         ProgData.getInstance().pEventHandler.startTimer();
+
         //die gespeicherte Filmliste laden
         LoadFilmFactory.loadFilmListProgStart();
         LoadAudioFactory.loadAudioListProgStart();

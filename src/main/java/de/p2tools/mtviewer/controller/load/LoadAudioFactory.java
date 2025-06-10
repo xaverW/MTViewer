@@ -17,22 +17,10 @@
 
 package de.p2tools.mtviewer.controller.load;
 
-import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.config.ProgInfos;
-import de.p2tools.mtviewer.controller.load.loadaudiolist.LoadAudioList;
-import de.p2tools.p2lib.mtfilm.film.Filmlist;
-import de.p2tools.p2lib.tools.date.P2DateConst;
-import de.p2tools.p2lib.tools.date.P2LDateTimeFactory;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import de.p2tools.p2lib.audio.loadaudiolist.P2LoadAudioList;
 
 public class LoadAudioFactory {
-
-    public static final double PROGRESS_MIN = 0.0;
-    public static final double PROGRESS_MAX = 1.0;
-    public static final double PROGRESS_INDETERMINATE = -1.0;
 
     private LoadAudioFactory() {
     }
@@ -40,44 +28,19 @@ public class LoadAudioFactory {
     public static void loadAudioListProgStart() {
         // neu einmal direkt nach dem Programmstart
         ProgData.AUDIOLIST_IS_DOWNLOADING.set(true);
-        LoadAudioList loadAudioList = new LoadAudioList();
-        initLoadFactoryConst(loadAudioList);
-        loadAudioList.loadAudioListAtProgStart();
+        P2LoadAudioList p2LoadAudioList = new P2LoadAudioList(ProgData.getInstance().pEventHandler);
+        LoadFactory.initLoadFactoryConst();
+        p2LoadAudioList.loadAudioListAtProgStart();
     }
 
     public static void loadAudioListButton() {
         // aus dem Menü oder Button in den Einstellungen
         // immer neu aus dem Web laden
         ProgData.AUDIOLIST_IS_DOWNLOADING.set(true);
-        LoadAudioList loadAudioList = new LoadAudioList();
-        initLoadFactoryConst(loadAudioList);
-        loadAudioList.loadNewAudioListFromWeb();
+        P2LoadAudioList p2LoadAudioList = new P2LoadAudioList(ProgData.getInstance().pEventHandler);
+        LoadFactory.initLoadFactoryConst();
+        p2LoadAudioList.loadNewAudioListFromWeb();
     }
 
-    public static boolean isNotFromToday(String strDate) {
-        // in den Einstellungen gespeichertes Datum prüfen
-        LocalDateTime listDate = P2LDateTimeFactory.fromString(strDate, P2DateConst.DT_FORMATTER__FILMLIST); // "dd.MM.yyyy, HH:mm"
-        LocalDate act = listDate.toLocalDate();
-        LocalDate today = LocalDate.now();
-        return !act.equals(today);
-    }
 
-    private static void initLoadFactoryConst(LoadAudioList loadAudioList) {
-        LoadAudioFactoryDto.debug = ProgData.debug;
-
-        LoadAudioFactoryDto.audioListDate = ProgConfig.SYSTEM_AUDIOLIST_DATE_TIME;
-        LoadAudioFactoryDto.firstProgramStart = ProgData.firstProgramStart;
-        LoadAudioFactoryDto.localFilmListFile = ProgInfos.getAudioListFile();
-        LoadAudioFactoryDto.loadNewAudioListOnProgramStart = ProgConfig.SYSTEM_LOAD_FILMS_ON_START.getValue();
-        LoadAudioFactoryDto.SYSTEM_LOAD_MAX_DAYS = ProgConfig.SYSTEM_LOAD_FILMLIST_MAX_DAYS.getValue();
-        LoadAudioFactoryDto.SYSTEM_LOAD_MIN_DURATION = ProgConfig.SYSTEM_LOAD_FILMLIST_MIN_DURATION.getValue();
-        LoadAudioFactoryDto.removeDiacritic = ProgConfig.SYSTEM_REMOVE_DIACRITICS.getValue();
-        LoadAudioFactoryDto.userAgent = ProgConfig.SYSTEM_USERAGENT.getValue();
-
-        LoadAudioFactoryDto.audioListAkt = ProgData.getInstance().audioList;
-        LoadAudioFactoryDto.audioListNew = new Filmlist<>();
-
-        LoadAudioFactoryDto.loadAudiolist = loadAudioList;
-        LoadAudioFactoryDto.primaryStage = ProgData.getInstance().primaryStage;
-    }
 }

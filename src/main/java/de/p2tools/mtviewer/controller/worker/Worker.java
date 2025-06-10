@@ -28,6 +28,7 @@ import de.p2tools.p2lib.mtfilm.film.Filmlist;
 import de.p2tools.p2lib.mtfilm.film.FilmlistFactory;
 import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadFilmlist;
 import de.p2tools.p2lib.p2event.P2Event;
+import de.p2tools.p2lib.p2event.P2Events;
 import de.p2tools.p2lib.p2event.P2Listener;
 import de.p2tools.p2lib.tools.duration.P2Duration;
 import javafx.collections.FXCollections;
@@ -130,7 +131,7 @@ public class Worker {
     private void addAudiothek() {
         // ===========
         // Audiothek
-        progData.pEventHandler.addListener(new P2Listener(PEvents.LOAD_AUDIO_LIST_START) {
+        progData.pEventHandler.addListener(new P2Listener(P2Events.LOAD_AUDIO_LIST_START) {
             @Override
             public void pingGui(P2Event event) {
                 progData.filmlistUsed.clear(); // muss dann ja auf jeden Fall gebaut werden
