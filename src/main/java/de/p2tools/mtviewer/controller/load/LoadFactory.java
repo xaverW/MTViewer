@@ -3,7 +3,7 @@ package de.p2tools.mtviewer.controller.load;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.config.ProgInfos;
-import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadConst;
+import de.p2tools.p2lib.mediathek.filmlistload.P2LoadConst;
 
 public class LoadFactory {
     private LoadFactory() {

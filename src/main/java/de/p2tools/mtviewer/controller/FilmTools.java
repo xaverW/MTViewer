@@ -26,7 +26,7 @@ import de.p2tools.mtviewer.gui.dialog.FilmPlayDialogController;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.alert.P2Alert;
 import de.p2tools.p2lib.guitools.P2Open;
-import de.p2tools.p2lib.mtfilm.film.FilmData;
+import de.p2tools.p2lib.mediathek.filmdata.FilmData;
 
 import java.text.NumberFormat;
 import java.util.Locale;

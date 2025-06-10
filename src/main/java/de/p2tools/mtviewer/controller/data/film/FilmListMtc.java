@@ -1,7 +1,8 @@
 package de.p2tools.mtviewer.controller.data.film;
 
-import de.p2tools.p2lib.mtfilm.film.FilmData;
-import de.p2tools.p2lib.mtfilm.film.Filmlist;
+
+import de.p2tools.p2lib.mediathek.filmdata.FilmData;
+import de.p2tools.p2lib.mediathek.filmdata.Filmlist;
 
 import java.util.List;
 

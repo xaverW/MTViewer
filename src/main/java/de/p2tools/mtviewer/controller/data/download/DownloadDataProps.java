@@ -19,7 +19,7 @@ package de.p2tools.mtviewer.controller.data.download;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.p2lib.configfile.config.*;
 import de.p2tools.p2lib.configfile.pdata.P2DataSample;
-import de.p2tools.p2lib.mtdownload.DownloadSize;
+import de.p2tools.p2lib.mediathek.download.DownloadSize;
 import de.p2tools.p2lib.tools.date.P2LDateFactory;
 import de.p2tools.p2lib.tools.date.P2LDateProperty;
 import de.p2tools.p2lib.tools.file.P2FileUtils;

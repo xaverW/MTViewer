@@ -22,7 +22,7 @@ import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.guitools.P2Open;
 import de.p2tools.p2lib.guitools.pnotification.P2Notification;
-import de.p2tools.p2lib.mtdownload.SizeTools;
+import de.p2tools.p2lib.mediathek.download.SizeTools;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

@@ -19,7 +19,7 @@ package de.p2tools.mtviewer.controller.downloadtools;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
-import de.p2tools.p2lib.mtdownload.DownloadSize;
+import de.p2tools.p2lib.mediathek.download.DownloadSize;
 import de.p2tools.p2lib.tools.log.P2Log;
 
 import java.io.BufferedReader;

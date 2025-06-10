@@ -18,7 +18,7 @@ package de.p2tools.mtviewer.controller.config;
 
 import de.p2tools.mtviewer.Main;
 import de.p2tools.p2lib.configfile.SettingsDirectory;
-import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadConst;
+import de.p2tools.p2lib.mediathek.filmlistload.P2LoadConst;
 import de.p2tools.p2lib.tools.P2Exception;
 import de.p2tools.p2lib.tools.log.P2Log;
 

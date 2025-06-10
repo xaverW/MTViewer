@@ -25,7 +25,7 @@ import de.p2tools.mtviewer.gui.help.table.TableFilm;
 import de.p2tools.mtviewer.gui.help.table.TableRowFilm;
 import de.p2tools.p2lib.alert.P2Alert;
 import de.p2tools.p2lib.guitools.P2TableFactory;
-import de.p2tools.p2lib.mtfilm.film.FilmData;
+import de.p2tools.p2lib.mediathek.filmdata.FilmData;
 import de.p2tools.p2lib.p2event.P2Listener;
 import de.p2tools.p2lib.tools.log.P2Log;
 import javafx.application.Platform;

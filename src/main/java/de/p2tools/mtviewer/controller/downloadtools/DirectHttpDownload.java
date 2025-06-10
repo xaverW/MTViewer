@@ -25,7 +25,7 @@ import de.p2tools.mtviewer.gui.dialog.DownloadContinueDialogController;
 import de.p2tools.mtviewer.gui.dialog.DownloadErrorDialogController;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.alert.P2Alert;
-import de.p2tools.p2lib.mtdownload.DownloadFactory;
+import de.p2tools.p2lib.mediathek.download.DownloadFactory;
 import de.p2tools.p2lib.tools.log.P2Log;
 import javafx.application.Platform;
 import javafx.beans.property.LongProperty;

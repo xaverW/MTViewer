@@ -17,10 +17,11 @@
 
 package de.p2tools.mtviewer.controller.filmfilter;
 
-import de.p2tools.p2lib.mtfilm.film.FilmData;
-import de.p2tools.p2lib.mtfilter.FilmFilterCheck;
-import de.p2tools.p2lib.mtfilter.Filter;
-import de.p2tools.p2lib.mtfilter.FilterCheck;
+
+import de.p2tools.p2lib.mediathek.filmdata.FilmData;
+import de.p2tools.p2lib.mediathek.filter.FilmFilterCheck;
+import de.p2tools.p2lib.mediathek.filter.Filter;
+import de.p2tools.p2lib.mediathek.filter.FilterCheck;
 
 import java.util.function.Predicate;
 

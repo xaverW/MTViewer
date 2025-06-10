@@ -18,8 +18,8 @@ package de.p2tools.mtviewer.controller.starter;
 
 import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
-import de.p2tools.p2lib.mtdownload.MLInputStream;
-import de.p2tools.p2lib.mtdownload.SizeTools;
+import de.p2tools.p2lib.mediathek.download.MLInputStream;
+import de.p2tools.p2lib.mediathek.download.SizeTools;
 import de.p2tools.p2lib.tools.date.P2Date;
 
 public class Start {

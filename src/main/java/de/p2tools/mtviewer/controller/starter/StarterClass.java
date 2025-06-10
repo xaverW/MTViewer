@@ -22,7 +22,7 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.downloadtools.DirectHttpDownload;
-import de.p2tools.p2lib.mtdownload.SizeTools;
+import de.p2tools.p2lib.mediathek.download.SizeTools;
 import de.p2tools.p2lib.p2event.P2Listener;
 import de.p2tools.p2lib.tools.date.P2Date;
 import de.p2tools.p2lib.tools.date.P2DateConst;

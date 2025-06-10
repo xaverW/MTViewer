@@ -23,7 +23,7 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.p2lib.guitools.P2TableFactory;
 import de.p2tools.p2lib.guitools.ptable.P2CellCheckBox;
-import de.p2tools.p2lib.mtdownload.DownloadSize;
+import de.p2tools.p2lib.mediathek.download.DownloadSize;
 import de.p2tools.p2lib.p2event.P2Listener;
 import de.p2tools.p2lib.tools.GermanStringIntSorter;
 import javafx.scene.control.SelectionMode;

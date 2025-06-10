@@ -18,8 +18,8 @@ package de.p2tools.mtviewer.controller.data.download;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.p2lib.mtdownload.SizeTools;
-import de.p2tools.p2lib.mtfilm.tools.FileNameUtils;
+import de.p2tools.p2lib.mediathek.download.SizeTools;
+import de.p2tools.p2lib.mediathek.tools.FileNameUtils;
 import de.p2tools.p2lib.tools.P2InfoFactory;
 import de.p2tools.p2lib.tools.file.P2FileUtils;
 import de.p2tools.p2lib.tools.log.P2Log;

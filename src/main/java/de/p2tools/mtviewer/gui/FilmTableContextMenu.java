@@ -19,7 +19,7 @@ package de.p2tools.mtviewer.gui;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.gui.help.table.TableFilm;
-import de.p2tools.p2lib.mtfilm.film.FilmData;
+import de.p2tools.p2lib.mediathek.filmdata.FilmData;
 import de.p2tools.p2lib.tools.P2ToolsFactory;
 import javafx.scene.control.*;
 

@@ -31,7 +31,7 @@ import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.alert.P2Alert;
 import de.p2tools.p2lib.guitools.P2Open;
 import de.p2tools.p2lib.guitools.P2TableFactory;
-import de.p2tools.p2lib.mtfilm.film.FilmData;
+import de.p2tools.p2lib.mediathek.filmdata.FilmData;
 import de.p2tools.p2lib.tools.P2ToolsFactory;
 import javafx.beans.property.DoubleProperty;
 import javafx.collections.ListChangeListener;

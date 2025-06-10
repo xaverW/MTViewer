@@ -23,7 +23,7 @@ import de.p2tools.p2lib.guitools.P2Button;
 import de.p2tools.p2lib.guitools.P2ColumnConstraints;
 import de.p2tools.p2lib.guitools.P2GuiTools;
 import de.p2tools.p2lib.guitools.ptoggleswitch.P2ToggleSwitch;
-import de.p2tools.p2lib.mtfilm.film.FilmData;
+import de.p2tools.p2lib.mediathek.filmdata.FilmData;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;

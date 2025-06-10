@@ -17,7 +17,7 @@
 package de.p2tools.mtviewer.controller.filmfilter;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
-import de.p2tools.p2lib.mtfilter.FilterCheck;
+import de.p2tools.p2lib.mediathek.filter.FilterCheck;
 import de.p2tools.p2lib.tools.log.P2Log;
 import javafx.animation.PauseTransition;
 import javafx.beans.property.BooleanProperty;

@@ -21,7 +21,7 @@ package de.p2tools.mtviewer.controller;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.config.ProgInfos;
-import de.p2tools.p2lib.mtfilter.FilterCheck;
+import de.p2tools.p2lib.mediathek.filter.FilterCheck;
 
 public class ProgConfigUpdate {
     // hier werden geänderte Programmeinstellungen/Funktionen angepasst,

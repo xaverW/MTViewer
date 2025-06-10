@@ -18,8 +18,8 @@
 package de.p2tools.mtviewer.controller.load;
 
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.p2lib.audio.loadaudiolist.P2LoadAudioList;
-import de.p2tools.p2lib.mtfilm.film.Filmlist;
+import de.p2tools.p2lib.mediathek.audiolistload.P2LoadAudioList;
+import de.p2tools.p2lib.mediathek.filmdata.Filmlist;
 
 public class LoadAudioFactory {
 

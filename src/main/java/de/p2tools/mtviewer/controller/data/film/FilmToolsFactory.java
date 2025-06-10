@@ -17,9 +17,9 @@
 package de.p2tools.mtviewer.controller.data.film;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
-import de.p2tools.p2lib.mtfilm.film.FilmData;
-import de.p2tools.p2lib.mtfilm.film.FilmDataProps;
-import de.p2tools.p2lib.mtfilm.film.FilmDataXml;
+import de.p2tools.p2lib.mediathek.filmdata.FilmData;
+import de.p2tools.p2lib.mediathek.filmdata.FilmDataProps;
+import de.p2tools.p2lib.mediathek.filmdata.FilmDataXml;
 import de.p2tools.p2lib.tools.duration.P2Duration;
 import javafx.beans.property.ListProperty;
 
