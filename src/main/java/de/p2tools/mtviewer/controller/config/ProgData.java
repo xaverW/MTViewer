@@ -74,7 +74,7 @@ public class ProgData {
 
     public FilmListMtc filmlist; // ist die komplette Filmliste
     public Filmlist<FilmData> audioList; // ist die komplette Audioliste
-    public Filmlist<FilmData> filmlistUsed; // ist die verwendete Filmliste
+    public FilmListMtc filmlistUsed; // ist die verwendete Filmliste
 
     public DownloadInfos downloadInfos;
     public ReplaceList replaceList;
@@ -88,7 +88,7 @@ public class ProgData {
 
         filmlist = new FilmListMtc();
         audioList = new Filmlist<>();
-        filmlistUsed = new Filmlist<>();
+        filmlistUsed = new FilmListMtc();
 
         downloadList = new DownloadList(this);
 

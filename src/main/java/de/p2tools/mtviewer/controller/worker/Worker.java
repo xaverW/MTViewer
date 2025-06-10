@@ -25,7 +25,7 @@ import de.p2tools.mtviewer.controller.filmfilter.FilmFilter;
 import de.p2tools.mtviewer.gui.help.TipOfDayFactory;
 import de.p2tools.p2lib.mtfilm.film.FilmData;
 import de.p2tools.p2lib.mtfilm.film.Filmlist;
-import de.p2tools.p2lib.mtfilm.film.FilmlistFactory;
+import de.p2tools.p2lib.mtfilm.film.P2FilmlistFactory;
 import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadFilmlist;
 import de.p2tools.p2lib.p2event.P2Event;
 import de.p2tools.p2lib.p2event.P2Events;
@@ -107,7 +107,7 @@ public class Worker {
                 progData.worker.resetFilter();
                 progData.filmFilterRunner.filter();
 
-                String filmDate = FilmlistFactory.getAgeAsStringDate(ProgData.getInstance().filmlist.metaData);
+                String filmDate = P2FilmlistFactory.getAgeAsStringDate(ProgData.getInstance().filmlist.metaData);
                 ProgConfig.SYSTEM_FILMLIST_DATE.setValue(ProgData.getInstance().filmlist.isEmpty() ? "" : filmDate);
 
                 if (!doneAtProgramStart) {
@@ -115,8 +115,6 @@ public class Worker {
                     UpdateCheckFactory.checkProgUpdate();
                     TipOfDayFactory.showDialog(ProgData.getInstance(), false);
                 }
-                // MARK markiert: Mediathek
-                progData.filmlist.forEach(f -> f.setMark(true));
 
                 ProgData.FILMLIST_IS_DOWNLOADING.set(false);
                 if (!ProgData.AUDIOLIST_IS_DOWNLOADING.get()) {
@@ -168,8 +166,6 @@ public class Worker {
                     ProgSave.saveAll(); // damit nichts verloren geht
                 }
                 progData.worker.resetFilter();
-                // MARK markiert: Mediathek
-                progData.audioList.forEach(f -> f.setMark(false));
 
                 ProgData.AUDIOLIST_IS_DOWNLOADING.set(false);
                 if (!ProgData.FILMLIST_IS_DOWNLOADING.get()) {

@@ -18,6 +18,9 @@
 package de.p2tools.mtviewer.controller.load;
 
 import de.p2tools.mtviewer.controller.config.ProgData;
+import de.p2tools.mtviewer.controller.data.film.FilmListMtc;
+import de.p2tools.p2lib.mtfilm.film.FilmData;
+import de.p2tools.p2lib.mtfilm.film.Filmlist;
 import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadConst;
 import de.p2tools.p2lib.mtfilm.loadfilmlist.P2LoadFilmlist;
 
@@ -30,7 +33,9 @@ public class LoadFilmFactory {
     public static void loadFilmListProgStart() {
         // Programmstart
         ProgData.FILMLIST_IS_DOWNLOADING.set(true);
-        p2LoadFilmlist = new P2LoadFilmlist(ProgData.getInstance().pEventHandler);
+        Filmlist<FilmData> filmlistNew = new FilmListMtc();
+        Filmlist<FilmData> filmlistDiff = new FilmListMtc();
+        p2LoadFilmlist = new P2LoadFilmlist(ProgData.getInstance().pEventHandler, filmlistNew, filmlistDiff);
         LoadFactory.initLoadFactoryConst();
         p2LoadFilmlist.loadFilmlistProgStart();
     }
@@ -38,7 +43,9 @@ public class LoadFilmFactory {
     public static void loadFilmListButton(boolean alwaysLoadNew) {
         // Button
         ProgData.FILMLIST_IS_DOWNLOADING.set(true);
-        p2LoadFilmlist = new P2LoadFilmlist(ProgData.getInstance().pEventHandler);
+        Filmlist<FilmData> filmlistNew = new FilmListMtc();
+        Filmlist<FilmData> filmlistDiff = new FilmListMtc();
+        p2LoadFilmlist = new P2LoadFilmlist(ProgData.getInstance().pEventHandler, filmlistNew, filmlistDiff);
         LoadFactory.initLoadFactoryConst();
         p2LoadFilmlist.loadNewFilmlistFromWeb(alwaysLoadNew);
     }

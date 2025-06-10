@@ -25,6 +25,7 @@ import javafx.beans.property.ListProperty;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 public class FilmToolsFactory {
     private static int countDouble = 0;
@@ -32,7 +33,7 @@ public class FilmToolsFactory {
     private FilmToolsFactory() {
     }
 
-    public static int markFilms(ListProperty<? extends FilmData> filmList) {
+    public static int markFilms(List<String> logList, ListProperty<? extends FilmData> filmList) {
         // läuft direkt nach dem Laden der Filmliste!
         // doppelte Filme (URL), Geo, InFuture markieren
         // viele Filme sind bei mehreren Sendern vorhanden
@@ -43,8 +44,10 @@ public class FilmToolsFactory {
 
         P2Duration.counterStart("markFilms");
         filmList.forEach((FilmData f) -> {
-            mark(f);
+            f.setGeoBlocked();
+            f.setInFuture();
         });
+
         for (String sender : senderArr) {
             addSender(filmList, urlHashSet, senderArr, sender);
         }
@@ -52,19 +55,19 @@ public class FilmToolsFactory {
         addSender(filmList, urlHashSet, senderArr, "");
         urlHashSet.clear();
 
+
+        logList.add("## Anzahl doppelte: " + countDouble);
         if (ProgConfig.SYSTEM_FILMLIST_REMOVE_DOUBLE.getValue()) {
             // dann auch gleich noch entfernen
+            logList.add("## und entfernen");
+            logList.add("## Anzahl: " + filmList.size());
             filmList.removeIf(FilmDataProps::isDoubleUrl);
+            logList.add("## Anzahl jetzt: " + filmList.size());
         }
         ProgConfig.SYSTEM_FILMLIST_COUNT_DOUBLE.setValue(countDouble);
 
         P2Duration.counterStop("markFilms");
         return countDouble;
-    }
-
-    private static void mark(FilmData filmData) {
-        filmData.setGeoBlocked();
-        filmData.setInFuture();
     }
 
     private static String getHashFromFilm(FilmData filmData) {

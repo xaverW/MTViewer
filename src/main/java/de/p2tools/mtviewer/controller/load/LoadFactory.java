@@ -27,6 +27,8 @@ public class LoadFactory {
 
         P2LoadConst.localAudioListFile = ProgInfos.getAudioListFile();
         P2LoadConst.localFilmListFile = ProgInfos.getFilmListFile();
+        P2LoadConst.SYSTEM_AUDIOLIST_COUNT_DOUBLE = ProgConfig.SYSTEM_AUDIOLIST_COUNT_DOUBLE;
+        P2LoadConst.SYSTEM_FILMLIST_REMOVE_DOUBLE = ProgConfig.SYSTEM_FILMLIST_REMOVE_DOUBLE.get();
 
         P2LoadConst.filmlistLocal = ProgData.getInstance().filmlist;
         P2LoadConst.audioListLocal = ProgData.getInstance().audioList;

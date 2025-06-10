@@ -19,6 +19,7 @@ package de.p2tools.mtviewer.controller.load;
 
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.p2lib.audio.loadaudiolist.P2LoadAudioList;
+import de.p2tools.p2lib.mtfilm.film.Filmlist;
 
 public class LoadAudioFactory {
 
@@ -28,7 +29,7 @@ public class LoadAudioFactory {
     public static void loadAudioListProgStart() {
         // neu einmal direkt nach dem Programmstart
         ProgData.AUDIOLIST_IS_DOWNLOADING.set(true);
-        P2LoadAudioList p2LoadAudioList = new P2LoadAudioList(ProgData.getInstance().pEventHandler);
+        P2LoadAudioList p2LoadAudioList = new P2LoadAudioList(ProgData.getInstance().pEventHandler, new Filmlist<>());
         LoadFactory.initLoadFactoryConst();
         p2LoadAudioList.loadAudioListAtProgStart();
     }
@@ -37,7 +38,7 @@ public class LoadAudioFactory {
         // aus dem Menü oder Button in den Einstellungen
         // immer neu aus dem Web laden
         ProgData.AUDIOLIST_IS_DOWNLOADING.set(true);
-        P2LoadAudioList p2LoadAudioList = new P2LoadAudioList(ProgData.getInstance().pEventHandler);
+        P2LoadAudioList p2LoadAudioList = new P2LoadAudioList(ProgData.getInstance().pEventHandler, new Filmlist<>());
         LoadFactory.initLoadFactoryConst();
         p2LoadAudioList.loadNewAudioListFromWeb();
     }
