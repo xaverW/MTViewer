@@ -103,10 +103,6 @@ public class Worker {
                 if (ProgData.firstProgramStart) {
                     ProgSave.saveAll(); // damit nichts verloren geht
                 }
-                // activate the saved filter
-                progData.worker.resetFilter();
-                progData.filmFilterRunner.filter();
-
                 String filmDate = P2FilmlistFactory.getAgeAsStringDate(ProgData.getInstance().filmlist.metaData);
                 ProgConfig.SYSTEM_FILMLIST_DATE.setValue(ProgData.getInstance().filmlist.isEmpty() ? "" : filmDate);
 
@@ -115,12 +111,19 @@ public class Worker {
                     UpdateCheckFactory.checkProgUpdate();
                     TipOfDayFactory.showDialog(ProgData.getInstance(), false);
                 }
+                // MARK markiert dass es die Filmliste ist!
+                progData.filmlist.forEach(f -> f.setMark(true));
 
                 ProgData.FILMLIST_IS_DOWNLOADING.set(false);
                 if (!ProgData.AUDIOLIST_IS_DOWNLOADING.get()) {
-                    progData.maskerPane.switchOffMasker();
                     setNo();
                     setList();
+
+                    // activate the saved filter
+                    progData.worker.resetFilter();
+                    progData.filmFilterRunner.filter();
+
+                    progData.maskerPane.switchOffMasker();
                 }
             }
         });
@@ -165,13 +168,19 @@ public class Worker {
                 if (ProgData.firstProgramStart) {
                     ProgSave.saveAll(); // damit nichts verloren geht
                 }
-                progData.worker.resetFilter();
+                // MARK markiert dass es die Filmliste ist!
+                progData.audioList.forEach(f -> f.setMark(false));
 
                 ProgData.AUDIOLIST_IS_DOWNLOADING.set(false);
                 if (!ProgData.FILMLIST_IS_DOWNLOADING.get()) {
-                    progData.maskerPane.switchOffMasker();
                     setNo();
                     setList();
+
+                    // activate the saved filter
+                    progData.worker.resetFilter();
+                    progData.filmFilterRunner.filter();
+
+                    progData.maskerPane.switchOffMasker();
                 }
             }
         });
