@@ -30,6 +30,9 @@ public class FilmFilterProps extends P2DataSample<FilmFilter> implements Compara
 
     public String TAG = "SelectedFilter";
 
+    private final BooleanProperty listFilm = new SimpleBooleanProperty(false);
+    private final BooleanProperty listAudio = new SimpleBooleanProperty(false);
+
     private final StringProperty name = new SimpleStringProperty();
     private final StringProperty channel = new SimpleStringProperty();
     private final StringProperty theme = new SimpleStringProperty();
@@ -43,7 +46,7 @@ public class FilmFilterProps extends P2DataSample<FilmFilter> implements Compara
     private final BooleanProperty onlyNew = new SimpleBooleanProperty(false);
     private final BooleanProperty onlyLive = new SimpleBooleanProperty(false);
 
-    public BooleanProperty[] sfBooleanPropArr = {onlyNew, onlyLive};
+    public BooleanProperty[] sfBooleanPropArr = {listFilm, listAudio, onlyNew, onlyLive};
 
     public StringProperty[] sfStringPropArr = {name, channel, theme, title, somewhere};
     public IntegerProperty[] sfIntegerPropArr = {timeRange, minDur, maxDur};
@@ -51,6 +54,9 @@ public class FilmFilterProps extends P2DataSample<FilmFilter> implements Compara
     @Override
     public Config[] getConfigsArr() {
         ArrayList<Config> list = new ArrayList<>();
+        list.add(new Config_boolProp("listFilm", listFilm));
+        list.add(new Config_boolProp("listAudio", listAudio));
+
         list.add(new Config_stringProp("name", name));
         list.add(new Config_stringProp("channel", channel));
         list.add(new Config_stringProp("theme", theme));
@@ -117,6 +123,29 @@ public class FilmFilterProps extends P2DataSample<FilmFilter> implements Compara
         return TAG;
     }
 
+    public boolean isListFilm() {
+        return listFilm.get();
+    }
+
+    public void setListFilm(boolean listFilm) {
+        this.listFilm.set(listFilm);
+    }
+
+    public BooleanProperty listFilmProperty() {
+        return listFilm;
+    }
+
+    public boolean isListAudio() {
+        return listAudio.get();
+    }
+
+    public void setListAudio(boolean listAudio) {
+        this.listAudio.set(listAudio);
+    }
+
+    public BooleanProperty listAudioProperty() {
+        return listAudio;
+    }
 
     public String getName() {
         return name.get();

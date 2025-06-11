@@ -111,7 +111,11 @@ public class PaneFilmFilter extends VBox {
         });
 
         tglMediathek.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_SHOW_MEDIATHEK);
+        tglMediathek.selectedProperty().addListener((u, o, n) ->
+                progData.actFilmFilterWorker.getActFilterSettings().setListFilm(tglMediathek.isSelected()));
         tglAudiothek.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_SHOW_AUDIOTHEK);
+        tglAudiothek.selectedProperty().addListener((u, o, n) ->
+                progData.actFilmFilterWorker.getActFilterSettings().setListAudio(tglAudiothek.isSelected()));
 
         btnFilter1.setGraphic(ProgIcons.ICON_BUTTON_UP.getImageView());
         btnFilter1.getStyleClass().add("buttonVerySmall");

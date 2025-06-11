@@ -74,6 +74,9 @@ public final class FilmFilter extends FilmFilterProps {
         });
 
         clearFilter();
+        listFilmProperty().addListener(l -> setFilterChange());
+        listAudioProperty().addListener(l -> setFilterChange());
+        
         nameProperty().addListener(l -> setFilterChange());
         channelProperty().addListener(l -> setFilterChange());
         themeProperty().addListener(l -> setTxtFilterChange());

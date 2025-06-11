@@ -65,13 +65,13 @@ public final class ActFilmFilterWorker {
     private final ObservableList<String> lastTitleFilter = FXCollections.observableArrayList("");
     private final ObservableList<String> lastSomewhereFilter = FXCollections.observableArrayList("");
     private final ChangeListener<Boolean> filterChangeListener;
-    private FilmFilter actFilterSettings = new FilmFilter(SELECTED_FILTER_NAME); // ist der "aktuelle" Filter im Programm
-    private FilmFilter oldActFilterSettings = new FilmFilter(SELECTED_FILTER_NAME); // ist der "aktuelle" Filter im Programm
+    private final FilmFilter actFilterSettings = new FilmFilter(SELECTED_FILTER_NAME); // ist der "aktuelle" Filter im Programm
+    private final FilmFilter oldActFilterSettings = new FilmFilter(SELECTED_FILTER_NAME); // ist der "aktuelle" Filter im Programm
 
-    private FilmFilter storedFilter1 = new FilmFilter("storedFilter1", "storedFilter1"); // sind die gespeicherten Filter
-    private FilmFilter storedFilter2 = new FilmFilter("storedFilter2", "storedFilter2"); // sind die gespeicherten Filter
-    private FilmFilter storedFilter3 = new FilmFilter("storedFilter3", "storedFilter3"); // sind die gespeicherten Filter
-    private FilmFilter storedFilter4 = new FilmFilter("storedFilter4", "storedFilter4"); // sind die gespeicherten Filter
+    private final FilmFilter storedFilter1 = new FilmFilter("storedFilter1", "storedFilter1"); // sind die gespeicherten Filter
+    private final FilmFilter storedFilter2 = new FilmFilter("storedFilter2", "storedFilter2"); // sind die gespeicherten Filter
+    private final FilmFilter storedFilter3 = new FilmFilter("storedFilter3", "storedFilter3"); // sind die gespeicherten Filter
+    private final FilmFilter storedFilter4 = new FilmFilter("storedFilter4", "storedFilter4"); // sind die gespeicherten Filter
 
     private boolean theme = false, themeTitle = false, title = false, somewhere = false;
 
@@ -183,6 +183,7 @@ public final class ActFilmFilterWorker {
         if (sf == null) {
             return;
         }
+
         actFilterSettings.filterChangeProperty().removeListener(filterChangeListener);
         sf.copyTo(actFilterSettings);
         postFilterChange();

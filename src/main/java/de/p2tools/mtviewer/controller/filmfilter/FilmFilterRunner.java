@@ -18,6 +18,7 @@
 package de.p2tools.mtviewer.controller.filmfilter;
 
 import de.p2tools.mtviewer.controller.config.PEvents;
+import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.p2lib.p2event.P2Listener;
 import de.p2tools.p2lib.tools.duration.P2Duration;
@@ -56,7 +57,7 @@ public class FilmFilterRunner {
     }
 
     public void filter() {
-        Platform.runLater(() -> filterList());
+        Platform.runLater(this::filterList);
     }
 
     private void filterList() {
@@ -70,8 +71,12 @@ public class FilmFilterRunner {
                     P2Log.debugLog("========================================");
 
                     P2Duration.counterStart("FilmFilterRunner.filterList");
+
+                    ProgConfig.SYSTEM_SHOW_MEDIATHEK.set(progData.actFilmFilterWorker.getActFilterSettings().isListFilm());
+                    ProgConfig.SYSTEM_SHOW_AUDIOTHEK.set(progData.actFilmFilterWorker.getActFilterSettings().isListAudio());
                     progData.filmlistUsed.filteredListSetPred(
                             PredicateFactory.getPredicate(progData.actFilmFilterWorker.getActFilterSettings()));
+
                     P2Duration.counterStop("FilmFilterRunner.filterList");
 
                     search.set(false);
