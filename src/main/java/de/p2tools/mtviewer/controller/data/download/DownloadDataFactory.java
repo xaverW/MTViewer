@@ -20,8 +20,8 @@ package de.p2tools.mtviewer.controller.data.download;
 import de.p2tools.mtviewer.gui.dialog.DeleteFilmFileDialogController;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.alert.P2Alert;
-import de.p2tools.p2lib.mediathek.download.MTInfoFile;
-import de.p2tools.p2lib.mediathek.download.MTSubtitle;
+import de.p2tools.p2lib.mediathek.download.P2InfoFile;
+import de.p2tools.p2lib.mediathek.download.P2Subtitle;
 import de.p2tools.p2lib.tools.log.P2Log;
 
 import java.io.File;
@@ -58,7 +58,7 @@ public class DownloadDataFactory {
             // Infofile
             File infoFile = null;
             if (download.isInfoFile()) {
-                Path infoPath = MTInfoFile.getInfoFilePath(download.getFileNameWithoutSuffix());
+                Path infoPath = P2InfoFile.getInfoFilePath(download.getFileNameWithoutSuffix());
                 if (infoPath != null) {
                     infoFile = infoPath.toFile();
                 }
@@ -67,14 +67,14 @@ public class DownloadDataFactory {
             // Unteritel
             File subtitleFile = null;
             if (download.isSubtitle()) {
-                Path subtitlePath = MTSubtitle.getSubtitlePath(download.getUrlSubtitle(), download.getFileNameWithoutSuffix());
+                Path subtitlePath = P2Subtitle.getSubtitlePath(download.getUrlSubtitle(), download.getFileNameWithoutSuffix());
                 if (subtitlePath != null) {
                     subtitleFile = subtitlePath.toFile();
                 }
             }
             File subtitleFileSrt = null;
             if (download.isSubtitle()) {
-                Path subtitlePathSrt = MTSubtitle.getSrtPath(download.getFileNameWithoutSuffix());
+                Path subtitlePathSrt = P2Subtitle.getSrtPath(download.getFileNameWithoutSuffix());
                 if (subtitlePathSrt != null) {
                     subtitleFileSrt = subtitlePathSrt.toFile();
                 }

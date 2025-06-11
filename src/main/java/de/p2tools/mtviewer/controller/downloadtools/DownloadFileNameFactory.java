@@ -23,7 +23,7 @@ import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.data.download.DownloadFactory;
 import de.p2tools.p2lib.mediathek.filmdata.FilmData;
 import de.p2tools.p2lib.mediathek.filmdata.FilmDataXml;
-import de.p2tools.p2lib.mediathek.tools.FileNameUtils;
+import de.p2tools.p2lib.mediathek.tools.P2FileNameUtils;
 import de.p2tools.p2lib.tools.P2InfoFactory;
 import de.p2tools.p2lib.tools.date.P2DateConst;
 import de.p2tools.p2lib.tools.file.P2FileUtils;
@@ -317,9 +317,9 @@ public class DownloadFileNameFactory {
 
         // und wenn gewünscht: "NUR Ascii-Zeichen"
         if (onlyAscii) {
-            ret = FileNameUtils.convertToASCIIEncoding(ret, isPath);
+            ret = P2FileNameUtils.convertToASCIIEncoding(ret, isPath);
         } else {
-            ret = FileNameUtils.convertToNativeEncoding(ret, isPath);
+            ret = P2FileNameUtils.convertToNativeEncoding(ret, isPath);
         }
 
         if (isWindowsPath) {

@@ -22,7 +22,7 @@ import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.guitools.P2Open;
 import de.p2tools.p2lib.guitools.pnotification.P2Notification;
-import de.p2tools.p2lib.mediathek.download.SizeTools;
+import de.p2tools.p2lib.mediathek.tools.P2SizeTools;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -33,7 +33,7 @@ public class MTNotification {
     public static void addNotification(DownloadData download, boolean error) {
         String text = ("Film:   " + download.getTitle() + P2LibConst.LINE_SEPARATOR +
                 "Sender: " + download.getChannel() + P2LibConst.LINE_SEPARATOR +
-                "Größe:  " + SizeTools.humanReadableByteCount(download.getDownloadSize().getTargetSize(), true) + P2LibConst.LINE_SEPARATOR +
+                "Größe:  " + P2SizeTools.humanReadableByteCount(download.getDownloadSize().getTargetSize(), true) + P2LibConst.LINE_SEPARATOR +
                 (error ? "Download war fehlerhaft" : "Download war erfolgreich"));
 
         Button btnFilmStart = new Button();

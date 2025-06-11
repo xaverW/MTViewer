@@ -21,8 +21,8 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.starter.StarterClass;
-import de.p2tools.p2lib.mediathek.download.MLBandwidthTokenBucket;
-import de.p2tools.p2lib.mediathek.download.MLInputStream;
+import de.p2tools.p2lib.mediathek.download.MtBandwidthTokenBucket;
+import de.p2tools.p2lib.mediathek.download.MtInputStream;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -46,14 +46,14 @@ public class DownloadMp4 {
 
         SimpleBooleanProperty sb = new SimpleBooleanProperty();
         sb.bind(ProgData.FILMLIST_IS_DOWNLOADING.or(ProgData.AUDIOLIST_IS_DOWNLOADING));
-        downloadData.getStart().setInputStream(new MLInputStream(conn.getInputStream(),
+        downloadData.getStart().setInputStream(new MtInputStream(conn.getInputStream(),
                 bandwidthCalculationTimer,
-                new SimpleIntegerProperty(MLBandwidthTokenBucket.BANDWIDTH_RUN_FREE),
+                new SimpleIntegerProperty(MtBandwidthTokenBucket.BANDWIDTH_RUN_FREE),
                 sb));
 
         FileOutputStream fos = new FileOutputStream(file, (downloaded.get() != 0));
         downloadData.getDownloadSize().addActFileSize(downloaded.get());
-        final byte[] buffer = new byte[MLBandwidthTokenBucket.DEFAULT_BUFFER_SIZE];
+        final byte[] buffer = new byte[MtBandwidthTokenBucket.DEFAULT_BUFFER_SIZE];
         double percent, ppercent = DownloadConstants.PROGRESS_WAITING, startPercent = DownloadConstants.PROGRESS_NOT_STARTED;
         int len;
         long aktBandwidth = 0, aktSize = 0;

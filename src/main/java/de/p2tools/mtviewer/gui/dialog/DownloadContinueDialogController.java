@@ -26,7 +26,7 @@ import de.p2tools.mtviewer.controller.downloadtools.DownloadState;
 import de.p2tools.p2lib.dialogs.P2DirFileChooser;
 import de.p2tools.p2lib.dialogs.dialog.P2DialogExtra;
 import de.p2tools.p2lib.guitools.P2ColumnConstraints;
-import de.p2tools.p2lib.mediathek.tools.FileNameUtils;
+import de.p2tools.p2lib.mediathek.tools.P2FileNameUtils;
 import de.p2tools.p2lib.tools.P2InfoFactory;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -212,7 +212,7 @@ public class DownloadContinueDialogController extends P2DialogExtra {
                 btnContinueDownload.setDisable(!download.getDestFileName().equals(newValue));
             }
 
-            if (!txtFileName.getText().equals(FileNameUtils.checkFileName(txtFileName.getText(), false /* pfad */))) {
+            if (!txtFileName.getText().equals(P2FileNameUtils.checkFileName(txtFileName.getText(), false /* pfad */))) {
                 txtFileName.setStyle(ProgColorList.DOWNLOAD_NAME_ERROR.getCssBackground());
             } else {
                 txtFileName.setStyle("");

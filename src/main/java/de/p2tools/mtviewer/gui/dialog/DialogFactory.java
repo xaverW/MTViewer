@@ -20,7 +20,7 @@ package de.p2tools.mtviewer.gui.dialog;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.data.download.DownloadFactory;
-import de.p2tools.p2lib.mediathek.download.SizeTools;
+import de.p2tools.p2lib.mediathek.tools.P2SizeTools;
 import de.p2tools.p2lib.tools.P2StringUtils;
 import de.p2tools.p2lib.tools.log.P2Log;
 import javafx.beans.property.StringProperty;
@@ -83,7 +83,7 @@ public class DialogFactory {
 
             long usableSpace = getFreeDiskSpace(path);
             if (usableSpace > 0) {
-                sizeFree = SizeTools.humanReadableByteCount(usableSpace, true);
+                sizeFree = P2SizeTools.humanReadableByteCount(usableSpace, true);
             }
 
             // jetzt noch prüfen, obs auf die Platte passt

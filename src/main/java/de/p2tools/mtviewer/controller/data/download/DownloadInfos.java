@@ -20,7 +20,7 @@ package de.p2tools.mtviewer.controller.data.download;
 import de.p2tools.mtviewer.controller.config.PEvents;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.p2lib.mediathek.download.SizeTools;
+import de.p2tools.p2lib.mediathek.tools.P2SizeTools;
 import de.p2tools.p2lib.p2event.P2Listener;
 import de.p2tools.p2lib.tools.log.P2Log;
 
@@ -288,7 +288,7 @@ public class DownloadInfos {
             for (int i = 0; i < (10 - a); ++i) {
                 text += "-";
             }
-            text += " ]  " + SizeTools.getSize(byteLoadingDownloadsAlreadyLoaded) + " von " + SizeTools.getSize(byteLoadingDownloads) + " MByte /";
+            text += " ]  " + P2SizeTools.getSize(byteLoadingDownloadsAlreadyLoaded) + " von " + P2SizeTools.getSize(byteLoadingDownloads) + " MByte /";
             text += " Downloads: " + numberLoadingDownloads + " /";
             text += " Bandbreite: " + roundBandwidth();
             P2Log.progress(text);

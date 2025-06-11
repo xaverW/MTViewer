@@ -18,8 +18,8 @@ package de.p2tools.mtviewer.controller.starter;
 
 import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
-import de.p2tools.p2lib.mediathek.download.MLInputStream;
-import de.p2tools.p2lib.mediathek.download.SizeTools;
+import de.p2tools.p2lib.mediathek.download.MtInputStream;
+import de.p2tools.p2lib.mediathek.tools.P2SizeTools;
 import de.p2tools.p2lib.tools.date.P2Date;
 
 public class Start {
@@ -34,7 +34,7 @@ public class Start {
 
     private Process process = null; //Prozess des Download
     private P2Date startTime = null;
-    private MLInputStream inputStream = null;
+    private MtInputStream inputStream = null;
 
     private DownloadData download; //Referenz auf den Download dazu
 
@@ -48,7 +48,7 @@ public class Start {
 
     public void setBandwidth(long bandwidth) {
         this.bandwidth = bandwidth;
-        download.setBandwidth(SizeTools.humanReadableByteCount(bandwidth, true));
+        download.setBandwidth(P2SizeTools.humanReadableByteCount(bandwidth, true));
     }
 
     public long getTimeLeftSeconds() {
@@ -84,11 +84,11 @@ public class Start {
         this.startTime = startTime;
     }
 
-    public MLInputStream getInputStream() {
+    public MtInputStream getInputStream() {
         return inputStream;
     }
 
-    public void setInputStream(MLInputStream inputStream) {
+    public void setInputStream(MtInputStream inputStream) {
         this.inputStream = inputStream;
     }
 

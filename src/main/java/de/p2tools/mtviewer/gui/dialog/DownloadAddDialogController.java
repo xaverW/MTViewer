@@ -30,7 +30,7 @@ import de.p2tools.p2lib.guitools.P2ColumnConstraints;
 import de.p2tools.p2lib.guitools.P2Hyperlink;
 import de.p2tools.p2lib.mediathek.film.FilmFactory;
 import de.p2tools.p2lib.mediathek.filmdata.FilmData;
-import de.p2tools.p2lib.mediathek.tools.FileNameUtils;
+import de.p2tools.p2lib.mediathek.tools.P2FileNameUtils;
 import de.p2tools.p2lib.tools.P2InfoFactory;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -270,7 +270,7 @@ public class DownloadAddDialogController extends P2DialogExtra {
 
         txtName.setText(downloadData.getDestFileName());
         txtName.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!txtName.getText().equals(FileNameUtils.checkFileName(txtName.getText(), false /* pfad */))) {
+            if (!txtName.getText().equals(P2FileNameUtils.checkFileName(txtName.getText(), false /* pfad */))) {
                 txtName.setStyle(ProgColorList.DOWNLOAD_NAME_ERROR.getCssBackground());
             } else {
                 txtName.setStyle("");

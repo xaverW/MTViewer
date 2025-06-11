@@ -18,8 +18,8 @@ package de.p2tools.mtviewer.controller.data.download;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.p2lib.mediathek.download.SizeTools;
-import de.p2tools.p2lib.mediathek.tools.FileNameUtils;
+import de.p2tools.p2lib.mediathek.tools.P2FileNameUtils;
+import de.p2tools.p2lib.mediathek.tools.P2SizeTools;
 import de.p2tools.p2lib.tools.P2InfoFactory;
 import de.p2tools.p2lib.tools.file.P2FileUtils;
 import de.p2tools.p2lib.tools.log.P2Log;
@@ -52,7 +52,7 @@ public class DownloadFactory {
             if (usableSpace == 0) {
                 lblSizeFree.setText("");
             } else {
-                sizeFree = SizeTools.humanReadableByteCount(usableSpace, true);
+                sizeFree = P2SizeTools.humanReadableByteCount(usableSpace, true);
             }
 
             // jetzt noch prüfen, obs auf die Platte passt
@@ -100,9 +100,9 @@ public class DownloadFactory {
 
         // und wenn gewünscht: "NUR Ascii-Zeichen"
         if (onlyAscii) {
-            ret = FileNameUtils.convertToASCIIEncoding(ret, false);
+            ret = P2FileNameUtils.convertToASCIIEncoding(ret, false);
         } else {
-            ret = FileNameUtils.convertToNativeEncoding(ret, false);
+            ret = P2FileNameUtils.convertToNativeEncoding(ret, false);
         }
 
         return ret;
@@ -133,9 +133,9 @@ public class DownloadFactory {
 
         // und wenn gewünscht: "NUR Ascii-Zeichen"
         if (onlyAscii) {
-            ret = FileNameUtils.convertToASCIIEncoding(ret, isPath);
+            ret = P2FileNameUtils.convertToASCIIEncoding(ret, isPath);
         } else {
-            ret = FileNameUtils.convertToNativeEncoding(ret, isPath);
+            ret = P2FileNameUtils.convertToNativeEncoding(ret, isPath);
         }
 
         if (isWindowsPath) {

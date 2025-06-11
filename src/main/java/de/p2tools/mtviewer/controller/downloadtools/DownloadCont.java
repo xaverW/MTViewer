@@ -21,8 +21,8 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.config.ProgInfos;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.data.download.DownloadDataFactory;
-import de.p2tools.p2lib.mediathek.download.MTInfoFile;
-import de.p2tools.p2lib.mediathek.download.MTSubtitle;
+import de.p2tools.p2lib.mediathek.download.P2InfoFile;
+import de.p2tools.p2lib.mediathek.download.P2Subtitle;
 import de.p2tools.p2lib.tools.P2InfoFactory;
 import de.p2tools.p2lib.tools.date.P2DateConst;
 import javafx.beans.property.LongProperty;
@@ -54,14 +54,14 @@ public class DownloadCont {
         if (download.isInfoFile()) {
             //Infofile laden
             if (download.getFilm() == null) {
-                MTInfoFile.writeInfoFile(download.getDestPath(), download.getDestPathFile(), download.getFileNameWithoutSuffix(),
+                P2InfoFile.writeInfoFile(download.getDestPath(), download.getDestPathFile(), download.getFileNameWithoutSuffix(),
                         download.getUrl(), download.getDownloadSize().toString(),
                         download.getChannel(), download.getTheme(), download.getTitle(),
                         download.getFilmDate().toString(), download.getFilmTime(), download.getDurationMinute() + "",
                         "", "");
 
             } else {
-                MTInfoFile.writeInfoFile(download.getDestPath(), download.getDestPathFile(), download.getFileNameWithoutSuffix(),
+                P2InfoFile.writeInfoFile(download.getDestPath(), download.getDestPathFile(), download.getFileNameWithoutSuffix(),
                         download.getUrl(), download.getDownloadSize().toString(),
                         download.getFilm().getChannel(), download.getFilm().getTheme(), download.getFilm().getTitle(),
                         download.getFilm().getDate().toString(), download.getFilm().getTime(), download.getFilm().getDuration(),
@@ -71,7 +71,7 @@ public class DownloadCont {
 
         if (download.isSubtitle()) {
             //Untertitel laden
-            new MTSubtitle().writeSubtitle(download.getUrlSubtitle(), download.getFileNameWithoutSuffix(), download.getDestPath(),
+            new P2Subtitle().writeSubtitle(download.getUrlSubtitle(), download.getFileNameWithoutSuffix(), download.getDestPath(),
                     ProgInfos.getUserAgent());
         }
 
