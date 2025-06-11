@@ -72,11 +72,8 @@ public class Worker {
 
                 if (event.getAct() == P2LoadFilmlist.PROGRESS_INDETERMINATE) {
                     // ist dann die gespeicherte Filmliste
-                    progData.maskerPane.setMaskerVisible(true, true, false);
-                } else {
-                    progData.maskerPane.setMaskerVisible(true, true, true);
+                    progData.maskerPane.setMaskerVisible();
                 }
-
                 progData.maskerPane.setMaskerProgress(event.getAct(), event.getText());
 
                 // the channel combo will be reseted, therefore save the filter
@@ -92,8 +89,7 @@ public class Worker {
         progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_FILMLIST_LOAD_LOADED) {
             @Override
             public void pingGui() {
-                // todo kommt da beim Laden 2x vorbei???
-                progData.maskerPane.setMaskerVisible(true, false, false);
+//                progData.maskerPane.setMaskerVisible(true, true, true);
                 progData.maskerPane.setMaskerProgress(PROGRESS_INDETERMINATE, "Filmliste verarbeiten");
             }
         });
@@ -139,8 +135,6 @@ public class Worker {
 
                 if (event.getAct() == PROGRESS_INDETERMINATE) {
                     // ist dann die gespeicherte Audioliste
-                    progData.maskerPane.setMaskerVisible(true, false, false);
-                } else {
                     progData.maskerPane.setMaskerVisible();
                 }
                 progData.maskerPane.setMaskerProgress(event.getAct(), event.getText());
@@ -157,8 +151,8 @@ public class Worker {
         });
         progData.pEventHandler.addListener(new P2Listener(PEvents.LOAD_AUDIO_LIST_LOADED) {
             @Override
-            public void pingGui(P2Event event) { // todo kommt da beim Laden 2x vorbei???
-                progData.maskerPane.setMaskerVisible(true, false, false);
+            public void pingGui(P2Event event) {
+//                progData.maskerPane.setMaskerVisible(true, true, true);
                 progData.maskerPane.setMaskerProgress(PROGRESS_INDETERMINATE, "Audioliste verarbeiten");
             }
         });
