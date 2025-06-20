@@ -30,7 +30,7 @@ public class FilmFilterProps extends P2DataSample<FilmFilter> implements Compara
 
     public String TAG = "SelectedFilter";
 
-    private final BooleanProperty listFilm = new SimpleBooleanProperty(false);
+    private final BooleanProperty listFilm = new SimpleBooleanProperty(true); // wird beim ersten Start dann angezeigt
     private final BooleanProperty listAudio = new SimpleBooleanProperty(false);
 
     private final StringProperty name = new SimpleStringProperty();
