@@ -41,10 +41,10 @@ public class ProgConst {
     public static final int SYSTEM_FILTER_MAX_WAIT_TIME = 2_000; // 1.000 ms
 
     // Website MTViewer
-    public static final String URL_WEBSITE = "https://www.p2tools.de";
-    public static final String URL_WEBSITE_MTVIEWER = "https://github.com/xaverW/MTViewer";
-    public static final String URL_WEBSITE_DOWNLOAD = "https://github.com/xaverW/MTViewer/releases";
-    public static final String URL_WEBSITE_HELP = "https://github.com/xaverW/MTViewer";
+    public static final String URL_WEBSITE = "https://www.p2tools.de/";
+    public static final String URL_WEBSITE_DOWNLOAD = "https://www.p2tools.de/mtviewer/download/";
+    public static final String URL_WEBSITE_HELP = "https://www.p2tools.de/mtviewer/manual/";
+
 
     // ProgrammUrls
     public static final String ADRESSE_WEBSITE_VLC = "https://www.videolan.org";

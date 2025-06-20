@@ -69,7 +69,7 @@ public class SearchProgramUpdate {
                 ProgConfig.SYSTEM_UPDATE_SEARCH_BETA,
                 ProgConfig.SYSTEM_UPDATE_SEARCH_DAILY,
 
-                ProgConst.URL_WEBSITE_MTVIEWER,
+                ProgConst.URL_WEBSITE,
                 ProgConst.URL_WEBSITE_DOWNLOAD,
                 ProgConst.PROGRAM_NAME,
 

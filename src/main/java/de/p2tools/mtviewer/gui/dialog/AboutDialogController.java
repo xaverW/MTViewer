@@ -27,7 +27,7 @@ public class AboutDialogController extends AboutDialog {
     private final ProgData progData;
 
     public AboutDialogController(ProgData progData) {
-        super(progData.primaryStage, ProgConst.PROGRAM_NAME, ProgConst.URL_WEBSITE_MTVIEWER, ProgConst.URL_WEBSITE_HELP,
+        super(progData.primaryStage, ProgConst.PROGRAM_NAME, ProgConst.URL_WEBSITE, ProgConst.URL_WEBSITE_HELP,
                 ProgConfig.SYSTEM_PROG_OPEN_URL,
                 ProgConfig.SYSTEM_DARK_THEME.getValue(),
                 new String[]{"Filmliste:", "Einstellungen:"},

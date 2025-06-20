@@ -89,7 +89,7 @@ public class PaneUpdate {
         tglSearchBeta.selectedProperty().addListener((ob, ol, ne) -> checkBeta());
 
         btnNow.setOnAction(event -> new SearchProgramUpdate(progData, stage).searchNewProgramVersion(true));
-        P2Hyperlink hyperlink = new P2Hyperlink(ProgConst.URL_WEBSITE_MTVIEWER,
+        P2Hyperlink hyperlink = new P2Hyperlink(ProgConst.URL_WEBSITE,
                 ProgConfig.SYSTEM_PROG_OPEN_URL);
 
         int row = 0;
