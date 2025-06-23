@@ -1,10 +1,9 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 
 # MTViewer
+Das Programm MTViewer ist eine Art Suchmaschine für Filme der Mediatheken der Öffentlich-Rechtlichen Sender. Das Programm stellt eine Liste mit Links zu den Filmen zur Verfügung. Es ist möglich, diese URLs an externe Programme weiterzugeben. Mit diesen Programmen können dann diese Filme angesehen oder aufgezeichnet werden.
 
-Das Programm MTPViewer ist eine Art Suchmaschine für Filme der Mediatheken der Öffentlich-Rechtlichen Sender. Das Programm stellt eine Liste mit Links zu den Filmen zur Verfügung. Es ist möglich, diese URLs an externe Programme weiterzugeben. Mit diesen Programmen können dann diese Filme angesehen oder aufgezeichnet werden.
-
-Das Programm MTViewer ist eine Alternative zu meinem Programm MTPlayer. MTViewer konzentriert sich auf das Nötigste: Film ansehen und Film speichern. Es ist daher schnell und einfach zu bedienen.
+Das Programm MTViewer ist eine Alternative zu MTPlayer und damit wird ebenfalls die Filmliste des Projekts MediathekView.de durchsucht. Die Liste kann mit verschiedenen Filtern nach Beiträgen durchsucht werden. Mit einem Programm eigener Wahl können die Filme angesehen und aufgezeichnet werden. Es beschränkt sich aber auf das Nötigste (“nur mal schnell einen Film suchen”) und möchte so möglichst einfach und schnell zu bedienen sein. 
 <br />
 
 
@@ -53,8 +52,7 @@ und hier können auch BETA-Versionen und Dailys geladen werden:
 
 
 ## Installation
-
-MTViewer muss nicht installiert werden, das Entpacken der heruntergeladenen ZIP-Datei ist quasi die Installation. Die heruntergeladene ZIP-Datei entpacken und den entpackten Ordner “MTViewer...” ins Benutzerverzeichnis verschieben. Das Programm kann dann mit Doppelklick auf:  
+MTViewer-XX__Windows==SETUP__DATUM.exe wird durch einen Doppelklick darauf installiert. Die anderen Versionen müssen nicht installiert werden, das Entpacken der heruntergeladenen ZIP-Datei ist quasi die Installation. Die heruntergeladene ZIP-Datei entpacken und den entpackten Ordner “MTViewer...” ins Benutzerverzeichnis verschieben. Das Programm kann dann mit Doppelklick auf:  
 Linux: “MTViewer__Linux.sh” oder  
 Windows: “MTViewer__Windows.exe”  
 gestartet werden.
