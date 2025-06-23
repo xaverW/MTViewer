@@ -23,18 +23,21 @@ Unterstützt wird Windows und Linux. Das Programm benötigt eine aktuelle Java-V
 
 
 ## Download
+Das Programm wird in fünf Paketen angeboten. Diese unterscheiden sich nur im “Zubehör”, das Programm selbst ist in allen Paketen identisch: 
 
-Das Programm wird in drei Paketen angeboten. Diese unterscheiden sich nur im “Zubehör”, das Programm selbst ist in allen Paketen identisch:
+* **MTViewer-XX__Windows==SETUP__DATUM.exe**  
+Mit diesem Programmpaket kann das Programm auf Windows installiert werden: Doppelklick und alles wird eingerichtet, auch ein Startbutton auf dem Desktop. Es muss auch kein Java auf dem System installiert sein. (Die Java-Laufzeitumgebung ist enthalten).
 
-MTViewer-XX__DATUM.zip
+* **MTViewer-XX__DATUM.zip**  
+Das Programmpaket bringt nur das Programm und die benötigten Hilfsprogramme aber kein Java mit. Auf dem Rechner muss eine Java-Laufzeitumgebung ab Java17 installiert sein. Dieses Programmpaket kann auf allen Betriebssystemen verwendet werden. Es bringt Startdateien für Linux und Windows mit. Zip entpacken und Programm Starten.
 
-Das Programmpaket bringt nur das Programm und die benötigten Hilfsprogramme aber kein Java mit. Auf dem Rechner muss eine Java-Laufzeitumgebung ab Java11 installiert sein. Dieses Programmpaket kann auf allen Betriebssystemen verwendet werden. Es bringt Startdateien für Linux und Windows mit.
+* **MTViewer-XX__Linux+Java__DATUM.zip**  
+**MTViewer-XX__Win+Java__DATUM.zip**  
+Diese Programmpakete bringen die Java-Laufzeitumgebung mit und sind nur für das angegebene Betriebssystem: Linux oder Windows. Es muss kein Java auf dem System installiert sein. (Die Java-Laufzeitumgebung liegt im Ordner: "Java" und kommt von jdk.java.net). Zip entpacken und Programm starten.
 
+* **MTViewer-XX__Raspberry__DATUM.zip**  
+Das ist ein Programmpaket, das auf einem Raspberry verwendet werden kann. Es muss ein aktueller Raspberry mit einer 64Bit CPU mit AArch64 Architektur sein. Zip entpacken und Programm Starten.
 
-MTViewer-XX__Linux+Java__DATUM.zip  
-MTPlayer-XX__Windows+Java__DATUM.zip
-
-Diese Programmpakete bringen die Java-Laufzeitumgebung mit und sind nur für das angegebene Betriebssystem: Linux oder Windows. Es muss kein Java auf dem System installiert sein. (Die Java-Laufzeitumgebung liegt im Ordner “Java” und kommt von jdk.java.net).
 
 Windows:  
 Der VLC-Player muss installiert sein.  

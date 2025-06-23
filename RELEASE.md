@@ -1,5 +1,20 @@
 # MTViewer
 
+
+**Version 5**
+* Anpassungen für den Raspberry
+* Installationspaket für Windows
+* Fehler bei Verwendung eines eigenen Log-Verzeichnisses
+* Überarbeitung der Oberfläche
+* Filtereinstellungen können gespeichert und wieder hergestellt werden
+* Filter/Info können in externen Fenstern angezeigt werden
+* Die Programmoberfläche kann mit Schwarz/Weiß Icons angezeigt werden
+* Menüs wurden überarbeitet
+* Zur Mediathek kann jetzt auch die Audiothek angezeigt werden
+* Das Laden der Listen (Mediathek/Audiothek) wurde verbessert
+* ...
+
+
 **Version 4**
 * kleinere Änderungen am GUI und der Verarbeitung der Filme
 * … 
