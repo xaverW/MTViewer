@@ -178,6 +178,7 @@ public class FilmInfoDialogController extends P2DialogExtra {
                 case FilmDataXml.FILM_URL_HISTORY:
                 case FilmDataXml.FILM_URL_SMALL:
                 case FilmDataXml.FILM_URL_SUBTITLE:
+                case FilmDataXml.FILM_ABO_NAME:
                     // bis hier nicht anzeigen
                     break;
 
