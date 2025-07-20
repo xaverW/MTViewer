@@ -63,13 +63,13 @@ public class DownloadAddDialogController extends P2DialogExtra {
     private P2Hyperlink pHyperlinkUrlFilm =
             new P2Hyperlink("", ProgConfig.SYSTEM_PROG_OPEN_URL);
     private boolean ok = false;
-    private FilmData filmData;
+    private final FilmData filmData;
     private DownloadData downloadData;
     private String path = "";
     private String fileSize_HD = "";
     private String fileSize_high = "";
     private String fileSize_small = "";
-
+    private final String oldResolution;
 
     public DownloadAddDialogController(ProgData progData, DownloadData downloadData, FilmData filmData, boolean onlyChange) {
         super(progData.primaryStage, ProgConfig.DOWNLOAD_ADD_DIALOG_SIZE,
@@ -80,6 +80,8 @@ public class DownloadAddDialogController extends P2DialogExtra {
         this.filmData = filmData;
         this.downloadData = downloadData;
         this.onlyChange = onlyChange;
+        this.oldResolution = ProgConfig.DOWNLOAD_RESOLUTION.getValueSafe(); // wir nur bei Filmen angepasst
+
         if (this.downloadData == null) {
             this.downloadData = new DownloadData(filmData);
         }
@@ -474,19 +476,28 @@ public class DownloadAddDialogController extends P2DialogExtra {
         close();
     }
 
-    private String getFilmSize() {
-        switch (ProgConfig.DOWNLOAD_RESOLUTION.getValueSafe()) {
-            case FilmData.RESOLUTION_HD:
-                return fileSize_HD;
-
-            case FilmData.RESOLUTION_SMALL:
-                return fileSize_small;
-
-            case FilmData.RESOLUTION_NORMAL:
-            default:
-                return fileSize_high;
+    @Override
+    public void close() {
+        if (!filmData.isMark()) {
+            // wenn kein Film, soll es nicht geändert werden
+            ProgConfig.DOWNLOAD_RESOLUTION.set(oldResolution);
         }
+        super.close();
     }
+
+//    private String getFilmSize() {
+//        switch (ProgConfig.DOWNLOAD_RESOLUTION.getValueSafe()) {
+//            case FilmData.RESOLUTION_HD:
+//                return fileSize_HD;
+//
+//            case FilmData.RESOLUTION_SMALL:
+//                return fileSize_small;
+//
+//            case FilmData.RESOLUTION_NORMAL:
+//            default:
+//                return fileSize_high;
+//        }
+//    }
 
     private void proposeDestination() {
         String stdPath, actPath;
