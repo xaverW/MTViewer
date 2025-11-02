@@ -31,8 +31,6 @@ import de.p2tools.mtviewer.controller.worker.Worker;
 import de.p2tools.mtviewer.gui.FilmGuiPack;
 import de.p2tools.mtviewer.gui.dialog.QuitDialogController;
 import de.p2tools.p2lib.guitools.pmask.P2MaskerPane;
-import de.p2tools.p2lib.mediathek.filmdata.FilmData;
-import de.p2tools.p2lib.mediathek.filmdata.Filmlist;
 import de.p2tools.p2lib.p2event.P2EventHandler;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -73,7 +71,7 @@ public class ProgData {
     public CheckForNewFilmlist checkForNewFilmlist;
 
     public FilmListMtc filmlist; // ist die komplette Filmliste
-    public Filmlist<FilmData> audioList; // ist die komplette Audioliste
+    public FilmListMtc audioList; // ist die komplette Audioliste
     public FilmListMtc filmlistUsed; // ist die verwendete Filmliste
 
     public DownloadInfos downloadInfos;
@@ -87,7 +85,7 @@ public class ProgData {
         actFilmFilterWorker = new ActFilmFilterWorker(this);
 
         filmlist = new FilmListMtc();
-        audioList = new Filmlist<>();
+        audioList = new FilmListMtc();
         filmlistUsed = new FilmListMtc();
 
         downloadList = new DownloadList(this);

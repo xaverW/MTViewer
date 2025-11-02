@@ -47,7 +47,7 @@ public class FilmPlayDialogController extends P2DialogExtra {
 
     public FilmPlayDialogController(StringProperty conf, ProgData progData,
                                     FilmData filmData) {
-        super(progData.primaryStage, conf, "Film ansehen", true, false);
+        super(progData.primaryStage, conf, "Film ansehen", true, true, true);
 
         this.progData = progData;
         this.filmData = filmData;

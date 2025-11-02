@@ -7,6 +7,9 @@ import de.p2tools.p2lib.mediathek.filmdata.Filmlist;
 import java.util.List;
 
 public class FilmListMtc extends Filmlist<FilmData> {
+    public FilmListMtc() {
+        super(FilmData::new);
+    }
 
     @Override
     public synchronized int markFilms(List<String> logList) {

@@ -56,7 +56,7 @@ public class DownloadErrorDialogController extends P2DialogExtra {
 
     public DownloadErrorDialogController(DownloadData download, String message) {
         super(ProgData.getInstance().primaryStage, ProgConfig.DOWNLOAD_DIALOG_ERROR_SIZE,
-                "Fehler", true, false);
+                "Fehler", true, true, true);
 
         this.download = download;
         this.message = message;

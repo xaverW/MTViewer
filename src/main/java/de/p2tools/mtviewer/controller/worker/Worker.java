@@ -21,11 +21,11 @@ import de.p2tools.mtviewer.controller.UpdateCheckFactory;
 import de.p2tools.mtviewer.controller.config.PEvents;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
+import de.p2tools.mtviewer.controller.data.film.FilmListMtc;
 import de.p2tools.mtviewer.controller.filmfilter.FilmFilter;
 import de.p2tools.mtviewer.gui.help.TipOfDayFactory;
 import de.p2tools.p2lib.mediathek.film.P2FilmlistFactory;
 import de.p2tools.p2lib.mediathek.filmdata.FilmData;
-import de.p2tools.p2lib.mediathek.filmdata.Filmlist;
 import de.p2tools.p2lib.mediathek.filmlistload.P2LoadFilmlist;
 import de.p2tools.p2lib.p2event.P2Event;
 import de.p2tools.p2lib.p2event.P2Events;
@@ -128,7 +128,7 @@ public class Worker {
     private void addAudiothek() {
         // ===========
         // Audiothek
-        progData.pEventHandler.addListener(new P2Listener(P2Events.LOAD_AUDIO_LIST_START) {
+        progData.pEventHandler.addListener(new P2Listener(P2Events.EVENT_AUDIO_LIST_LOAD_START) {
             @Override
             public void pingGui(P2Event event) {
                 progData.filmlistUsed.clear(); // muss dann ja auf jeden Fall gebaut werden
@@ -143,20 +143,20 @@ public class Worker {
                 progData.worker.saveFilter();
             }
         });
-        progData.pEventHandler.addListener(new P2Listener(PEvents.LOAD_AUDIO_LIST_PROGRESS) {
+        progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_AUDIO_LIST_LOAD_PROGRESS) {
             @Override
             public void pingGui(P2Event event) {
                 progData.maskerPane.setMaskerProgress(event.getAct(), event.getText());
             }
         });
-        progData.pEventHandler.addListener(new P2Listener(PEvents.LOAD_AUDIO_LIST_LOADED) {
+        progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_AUDIO_LIST_LOAD_LOADED) {
             @Override
             public void pingGui(P2Event event) {
 //                progData.maskerPane.setMaskerVisible(true, true, true);
                 progData.maskerPane.setMaskerProgress(PROGRESS_INDETERMINATE, "Audioliste verarbeiten");
             }
         });
-        progData.pEventHandler.addListener(new P2Listener(PEvents.LOAD_AUDIO_LIST_FINISHED) {
+        progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_AUDIO_LIST_LOAD_FINISHED) {
             @Override
             public void pingGui(P2Event event) {
                 if (ProgData.firstProgramStart) {
@@ -197,7 +197,7 @@ public class Worker {
         if (ProgConfig.SYSTEM_SHOW_MEDIATHEK.get() && ProgConfig.SYSTEM_SHOW_AUDIOTHEK.get()) {
             // beide
             if (progData.filmlistUsed.size() != progData.filmlist.size() + progData.audioList.size()) {
-                Filmlist<FilmData> tmp = new Filmlist<>();
+                FilmListMtc tmp = new FilmListMtc();
                 tmp.addAll(progData.filmlist);
                 tmp.addAll(progData.audioList);
                 progData.filmlistUsed.addAll(tmp);

@@ -49,7 +49,7 @@ public class DeleteFilmFileDialogController extends P2DialogExtra {
     private GridPane gridPane = new GridPane();
 
     public DeleteFilmFileDialogController(String downloadPath, File filmFile, File infoFile, File subtitleFile, File subtitleFileSrt) {
-        super(ProgData.getInstance().primaryStage, null, "Datei löschen", true, false);
+        super(ProgData.getInstance().primaryStage, null, "Datei löschen", true, false, false);
 
         this.downloadPath = downloadPath;
         this.filmFile = filmFile;

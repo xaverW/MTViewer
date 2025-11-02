@@ -263,11 +263,11 @@ public class PaneFilmFilter extends VBox {
                 progData.actFilmFilterWorker.getActFilterSettings().somewhereProperty());
 
         FilterCheckRegEx fTT = new FilterCheckRegEx(cboTheme.getEditor());
-        cboTheme.getEditor().textProperty().addListener((observable, oldValue, newValue) -> fTT.checkPattern());
+//        cboTheme.getEditor().textProperty().addListener((observable, oldValue, newValue) -> fTT.checkPattern());
         FilterCheckRegEx fT = new FilterCheckRegEx(cboTitle.getEditor());
-        cboTitle.getEditor().textProperty().addListener((observable, oldValue, newValue) -> fT.checkPattern());
+//        cboTitle.getEditor().textProperty().addListener((observable, oldValue, newValue) -> fT.checkPattern());
         FilterCheckRegEx fS = new FilterCheckRegEx(cboSomewhere.getEditor());
-        cboSomewhere.getEditor().textProperty().addListener((observable, oldValue, newValue) -> fS.checkPattern());
+//        cboSomewhere.getEditor().textProperty().addListener((observable, oldValue, newValue) -> fS.checkPattern());
     }
 
     private void addTextFilter(ComboBox<String> cbo, ObservableList<String> items, StringProperty strProp) {

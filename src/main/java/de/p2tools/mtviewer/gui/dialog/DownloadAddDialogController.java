@@ -74,7 +74,7 @@ public class DownloadAddDialogController extends P2DialogExtra {
     public DownloadAddDialogController(ProgData progData, DownloadData downloadData, FilmData filmData, boolean onlyChange) {
         super(progData.primaryStage, ProgConfig.DOWNLOAD_ADD_DIALOG_SIZE,
                 onlyChange ? "Download ändern" : "Download anlegen",
-                true, false);
+                true, true, true);
 
         this.progData = progData;
         this.filmData = filmData;

@@ -38,7 +38,7 @@ public class QuitDialogController extends P2DialogExtra {
     private CheckBox cbxShutDown = new CheckBox("Rechner anschließend herunterfahren");
 
     public QuitDialogController(boolean startWithWaiting) {
-        super(ProgData.getInstance().primaryStage, null, "Programm beenden", true, false);
+        super(ProgData.getInstance().primaryStage, null, "Programm beenden", false, false, false);
         ProgData.getInstance().quitDialogController = this;
         this.startWithWaiting = startWithWaiting;
         init(true);

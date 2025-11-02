@@ -63,7 +63,7 @@ public class DownloadContinueDialogController extends P2DialogExtra {
 
     public DownloadContinueDialogController(StringProperty conf, ProgData progData,
                                             DownloadData download, boolean directDownload) {
-        super(progData.primaryStage, conf, "Download weiterführen", true, false);
+        super(progData.primaryStage, conf, "Download weiterführen", true, true, true);
 
         this.progData = progData;
         this.download = download;
