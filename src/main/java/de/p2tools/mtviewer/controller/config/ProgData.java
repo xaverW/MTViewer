@@ -30,10 +30,13 @@ import de.p2tools.mtviewer.controller.worker.CheckForNewFilmlist;
 import de.p2tools.mtviewer.controller.worker.Worker;
 import de.p2tools.mtviewer.gui.FilmGuiPack;
 import de.p2tools.mtviewer.gui.dialog.QuitDialogController;
+import de.p2tools.p2lib.css.P2CssFactory;
 import de.p2tools.p2lib.guitools.pmask.P2MaskerPane;
 import de.p2tools.p2lib.p2event.P2EventHandler;
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.stage.Stage;
 
 public class ProgData {
@@ -59,6 +62,7 @@ public class ProgData {
     public FilmFilterRunner filmFilterRunner;
     public DownloadList downloadList; // Filme die als "Download" geladen werden sollen
     public StarterClass starterClass; // Klasse zum Ausführen der Programme (für die Downloads): VLC, flvstreamer, ...
+    public ObjectProperty<P2CssFactory.CSS> cssProp = new SimpleObjectProperty<>(P2CssFactory.CSS.CSS_0);
 
     // Gui
     public Stage primaryStage = null;

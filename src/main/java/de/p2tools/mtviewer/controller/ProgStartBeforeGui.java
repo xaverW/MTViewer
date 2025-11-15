@@ -60,12 +60,15 @@ public class ProgStartBeforeGui {
 
     private static void initLib() {
         P2LibInit.initLib(ProgData.getInstance().primaryStage, ProgConst.PROGRAM_NAME, "",
+                ProgConfig.SYSTEM_THEME_CHANGED,
                 ProgConfig.SYSTEM_DARK_THEME,
                 ProgConfig.SYSTEM_BLACK_WHITE_ICON,
-                ProgConfig.SYSTEM_THEME_CHANGED,
-                null,
-                new String[]{ProgConst.CSS_FILE}, new String[]{ProgConst.CSS_FILE_DARK_THEME},
+
+                "de/p2tools/mtviewer/css/",
+                ProgData.getInstance().cssProp,
                 ProgConfig.SYSTEM_FONT_SIZE,
+
+                null,
                 "", "",
                 ProgData.debug, ProgData.duration);
     }

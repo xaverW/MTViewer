@@ -21,7 +21,7 @@ import de.p2tools.mtviewer.controller.ProgStartBeforeGui;
 import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.p2lib.P2LibInit;
+import de.p2tools.p2lib.css.P2CssFactory;
 import de.p2tools.p2lib.guitools.P2GuiSize;
 import de.p2tools.p2lib.tools.duration.P2Duration;
 import javafx.application.Application;
@@ -81,7 +81,7 @@ public class MTViewer extends Application {
             primaryStage.xProperty().addListener((v, o, n) -> P2GuiSize.getSize(ProgConfig.SYSTEM_SIZE_GUI, primaryStage));
             primaryStage.yProperty().addListener((v, o, n) -> P2GuiSize.getSize(ProgConfig.SYSTEM_SIZE_GUI, primaryStage));
 
-            P2LibInit.addP2CssToScene(scene); // und jetzt noch CSS einstellen
+            P2CssFactory.addP2CssToScene(scene); // und jetzt noch CSS einstellen
             ProgConfig.SYSTEM_DARK_THEME.addListener((u, o, n) -> {
                 ProgColorList.setColorTheme();
             });
