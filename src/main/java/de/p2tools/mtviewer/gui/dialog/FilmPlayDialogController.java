@@ -19,7 +19,7 @@ package de.p2tools.mtviewer.gui.dialog;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.p2lib.dialogs.dialog.P2DialogExtra;
-import de.p2tools.p2lib.guitools.P2ColumnConstraints;
+import de.p2tools.p2lib.guitools.grid.P2GridConstraints;
 import de.p2tools.p2lib.mediathek.filmdata.FilmData;
 import de.p2tools.p2lib.mediathek.filmdata.FilmDataXml;
 import javafx.beans.property.StringProperty;
@@ -109,8 +109,8 @@ public class FilmPlayDialogController extends P2DialogExtra {
         gridPane.add(new Label(), 0, ++row);
         gridPane.add(chkSave, 0, ++row, 2, 1);
 
-        gridPane.getColumnConstraints().addAll(P2ColumnConstraints.getCcPrefSize(),
-                P2ColumnConstraints.getCcComputedSizeAndHgrow());
+        gridPane.getColumnConstraints().addAll(P2GridConstraints.getCcPrefSize(),
+                P2GridConstraints.getCcComputedSizeAndHgrow());
 
         getVBoxCont().setPadding(new Insets(5));
         getVBoxCont().setSpacing(20);

@@ -24,7 +24,7 @@ import de.p2tools.mtviewer.gui.help.HelpText;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.dialogs.P2DirFileChooser;
 import de.p2tools.p2lib.guitools.P2Button;
-import de.p2tools.p2lib.guitools.P2ColumnConstraints;
+import de.p2tools.p2lib.guitools.grid.P2GridConstraints;
 import de.p2tools.p2lib.mediathek.download.GetProgramStandardPath;
 import de.p2tools.p2lib.mediathek.filmdata.FilmData;
 import javafx.beans.property.StringProperty;
@@ -58,9 +58,9 @@ public class PanePlay {
         gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
         gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
         gridPane.setPadding(new Insets(P2LibConst.PADDING));
-        gridPane.getColumnConstraints().addAll(P2ColumnConstraints.getCcPrefSize(),
-                P2ColumnConstraints.getCcComputedSizeAndHgrow(), P2ColumnConstraints.getCcPrefSize(),
-                P2ColumnConstraints.getCcPrefSize());
+        gridPane.getColumnConstraints().addAll(P2GridConstraints.getCcPrefSize(),
+                P2GridConstraints.getCcComputedSizeAndHgrow(), P2GridConstraints.getCcPrefSize(),
+                P2GridConstraints.getCcPrefSize());
 
         int row = addVideoPlayer(gridPane, 0);
         makeResolution(gridPane, row);

@@ -19,8 +19,8 @@ package de.p2tools.mtviewer.gui.configdialog.configpanes;
 import de.p2tools.mtviewer.controller.load.LoadAudioFactory;
 import de.p2tools.mtviewer.controller.load.LoadFilmFactory;
 import de.p2tools.p2lib.P2LibConst;
-import de.p2tools.p2lib.guitools.P2ColumnConstraints;
 import de.p2tools.p2lib.guitools.P2GuiTools;
+import de.p2tools.p2lib.guitools.grid.P2GridConstraints;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -58,11 +58,11 @@ public class PaneFilm {
         gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
         gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
         gridPane.setPadding(new Insets(P2LibConst.PADDING));
-        gridPane.getColumnConstraints().addAll(P2ColumnConstraints.getCcPrefSize());
+        gridPane.getColumnConstraints().addAll(P2GridConstraints.getCcPrefSize());
 
         gridPane.add(btnLoadFilm, 0, 0);
         gridPane.add(btnLoadAudio, 0, 1);
-        
+
         btnLoadFilm.setMaxWidth(Double.MAX_VALUE);
         GridPane.setVgrow(btnLoadFilm, Priority.ALWAYS);
         HBox hBox = new HBox();

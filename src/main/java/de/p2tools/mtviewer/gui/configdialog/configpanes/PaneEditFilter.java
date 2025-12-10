@@ -21,7 +21,7 @@ import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.gui.help.HelpText;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.guitools.P2Button;
-import de.p2tools.p2lib.guitools.P2ColumnConstraints;
+import de.p2tools.p2lib.guitools.grid.P2GridConstraints;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -99,9 +99,9 @@ public class PaneEditFilter {
         GridPane.setHalignment(btnHelp, HPos.RIGHT);
 
         gridPane.getColumnConstraints().addAll(
-                P2ColumnConstraints.getCcPrefSize(),
-                P2ColumnConstraints.getCcPrefSize(),
-                P2ColumnConstraints.getCcComputedSizeAndHgrow());
+                P2GridConstraints.getCcPrefSize(),
+                P2GridConstraints.getCcPrefSize(),
+                P2GridConstraints.getCcComputedSizeAndHgrow());
         return gridPane;
     }
 

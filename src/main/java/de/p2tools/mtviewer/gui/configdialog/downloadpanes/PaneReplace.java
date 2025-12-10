@@ -25,8 +25,8 @@ import de.p2tools.mtviewer.gui.help.HelpText;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.alert.P2Alert;
 import de.p2tools.p2lib.guitools.P2Button;
-import de.p2tools.p2lib.guitools.P2ColumnConstraints;
 import de.p2tools.p2lib.guitools.P2GuiTools;
+import de.p2tools.p2lib.guitools.grid.P2GridConstraints;
 import de.p2tools.p2lib.guitools.ptoggleswitch.P2ToggleSwitch;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -103,8 +103,8 @@ public class PaneReplace {
         gridPane.add(tglReplace, 0, 1);
         gridPane.add(btnHelpReplace, 1, 1);
 
-        gridPane.getColumnConstraints().addAll(P2ColumnConstraints.getCcComputedSizeAndHgrow(),
-                P2ColumnConstraints.getCcPrefSize());
+        gridPane.getColumnConstraints().addAll(P2GridConstraints.getCcComputedSizeAndHgrow(),
+                P2GridConstraints.getCcPrefSize());
     }
 
     private void initTable(VBox vBox) {
@@ -233,7 +233,7 @@ public class PaneReplace {
         gridPane.add(new Label("Nach: "), 0, 1);
         gridPane.add(txtTo, 1, 1);
 
-        gridPane.getColumnConstraints().addAll(P2ColumnConstraints.getCcPrefSize(), P2ColumnConstraints.getCcComputedSizeAndHgrow());
+        gridPane.getColumnConstraints().addAll(P2GridConstraints.getCcPrefSize(), P2GridConstraints.getCcComputedSizeAndHgrow());
         vBox.getChildren().add(gridPane);
         gridPane.setDisable(true);
         gridPane.disableProperty().bind(

@@ -64,7 +64,8 @@ public class ProgStartBeforeGui {
                 ProgConfig.SYSTEM_DARK_THEME,
                 ProgConfig.SYSTEM_BLACK_WHITE_ICON,
 
-                "de/p2tools/mtviewer/css/",
+                new String[]{"de/p2tools/mtviewer/css/"},
+                new String[]{},
                 ProgData.getInstance().cssProp,
                 ProgConfig.SYSTEM_FONT_SIZE,
 

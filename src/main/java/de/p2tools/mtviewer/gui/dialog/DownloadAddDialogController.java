@@ -26,8 +26,8 @@ import de.p2tools.mtviewer.controller.downloadtools.HttpDownloadFactory;
 import de.p2tools.p2lib.alert.P2Alert;
 import de.p2tools.p2lib.dialogs.P2DirFileChooser;
 import de.p2tools.p2lib.dialogs.dialog.P2DialogExtra;
-import de.p2tools.p2lib.guitools.P2ColumnConstraints;
 import de.p2tools.p2lib.guitools.P2Hyperlink;
+import de.p2tools.p2lib.guitools.grid.P2GridConstraints;
 import de.p2tools.p2lib.mediathek.film.FilmFactory;
 import de.p2tools.p2lib.mediathek.filmdata.FilmData;
 import de.p2tools.p2lib.mediathek.tools.P2FileNameUtils;
@@ -196,8 +196,8 @@ public class DownloadAddDialogController extends P2DialogExtra {
         gridPane.add(chkSubtitle, 1, ++row);
         gridPane.add(chkInfo, 1, ++row);
 
-        gridPane.getColumnConstraints().addAll(P2ColumnConstraints.getCcPrefSize(),
-                P2ColumnConstraints.getCcComputedSizeAndHgrow());
+        gridPane.getColumnConstraints().addAll(P2GridConstraints.getCcPrefSize(),
+                P2GridConstraints.getCcComputedSizeAndHgrow());
         getVBoxCont().setSpacing(20);
         getVBoxCont().getChildren().addAll(gridPane);
 

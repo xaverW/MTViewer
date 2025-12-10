@@ -24,7 +24,7 @@ import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.guitools.P2Button;
 import de.p2tools.p2lib.guitools.P2ButtonClearFilterFactory;
 import de.p2tools.p2lib.guitools.P2GuiTools;
-import de.p2tools.p2lib.guitools.P2MenuButton;
+import de.p2tools.p2lib.guitools.pcbo.P2CboCheckBoxListString;
 import de.p2tools.p2lib.guitools.prange.P2RangeBox;
 import de.p2tools.p2lib.guitools.ptoggleswitch.P2ToggleSwitch;
 import de.p2tools.p2lib.mediathek.filter.FilterCheck;
@@ -55,7 +55,7 @@ public class PaneFilmFilter extends VBox {
     private final P2ToggleSwitch tglMediathek = new P2ToggleSwitch("Mediathek");
     private final P2ToggleSwitch tglAudiothek = new P2ToggleSwitch("Audiothek");
 
-    private final P2MenuButton mbChannel;
+    private final P2CboCheckBoxListString mbChannel;
     private final ComboBox<String> cboTheme = new ComboBox<>();
     private final ComboBox<String> cboTitle = new ComboBox<>();
     private final ComboBox<String> cboSomewhere = new ComboBox<>();
@@ -80,7 +80,7 @@ public class PaneFilmFilter extends VBox {
 
     public PaneFilmFilter() {
         this.progData = ProgData.getInstance();
-        this.mbChannel = new P2MenuButton(progData.actFilmFilterWorker.getActFilterSettings().channelProperty(),
+        this.mbChannel = new P2CboCheckBoxListString(progData.actFilmFilterWorker.getActFilterSettings().channelProperty(),
                 progData.worker.getAllChannelList());
 
         setPadding(new Insets(10));

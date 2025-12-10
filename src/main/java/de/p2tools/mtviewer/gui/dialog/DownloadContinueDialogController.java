@@ -25,7 +25,7 @@ import de.p2tools.mtviewer.controller.data.download.DownloadFactory;
 import de.p2tools.mtviewer.controller.downloadtools.DownloadState;
 import de.p2tools.p2lib.dialogs.P2DirFileChooser;
 import de.p2tools.p2lib.dialogs.dialog.P2DialogExtra;
-import de.p2tools.p2lib.guitools.P2ColumnConstraints;
+import de.p2tools.p2lib.guitools.grid.P2GridConstraints;
 import de.p2tools.p2lib.mediathek.tools.P2FileNameUtils;
 import de.p2tools.p2lib.tools.P2InfoFactory;
 import javafx.animation.KeyFrame;
@@ -139,8 +139,8 @@ public class DownloadContinueDialogController extends P2DialogExtra {
         GridPane.setHalignment(lblSizeFree, HPos.RIGHT);
         gridPane.add(lblSizeFree, 1, ++row, 2, 1);
 
-        gridPane.getColumnConstraints().addAll(P2ColumnConstraints.getCcPrefSize(),
-                P2ColumnConstraints.getCcComputedSizeAndHgrow());
+        gridPane.getColumnConstraints().addAll(P2GridConstraints.getCcPrefSize(),
+                P2GridConstraints.getCcComputedSizeAndHgrow());
 
         getVBoxCont().setPadding(new Insets(5));
         getVBoxCont().setSpacing(20);

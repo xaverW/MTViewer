@@ -30,7 +30,7 @@ import de.p2tools.mtviewer.gui.help.table.TableRowDownload;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.alert.P2Alert;
 import de.p2tools.p2lib.guitools.P2Open;
-import de.p2tools.p2lib.guitools.P2TableFactory;
+import de.p2tools.p2lib.guitools.ptable.P2TableFactory;
 import de.p2tools.p2lib.mediathek.filmdata.FilmData;
 import de.p2tools.p2lib.tools.P2ToolsFactory;
 import javafx.beans.property.DoubleProperty;
