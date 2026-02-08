@@ -77,4 +77,46 @@ public class ProgConst {
     public static final int NUMBER_NOT_EXISTS = Integer.MAX_VALUE;
 
     public static final String THEME_LIVE = "Livestream";
+
+    public static final String ICON_COLOR_DARK_1 = "#ffffff";
+    public static final String ICON_COLOR_DARK_2 = "#000080";
+    public static final String ICON_COLOR_LIGHT_1 = "#333333";
+    public static final String ICON_COLOR_LIGHT_2 = "#4d66cc";
+
+    public static final String GUI_COLOR_DARK_1 = "#cccccc";
+    public static final String GUI_COLOR_DARK_2 = "#000080";
+    public static final String GUI_COLOR_LIGHT_1 = "#666666";
+    public static final String GUI_COLOR_LIGHT_2 = "#4d66cc";
+
+    public static final String GUI_BACKGROUND_DARK_1 = "#333333";
+    public static final String GUI_BACKGROUND_DARK_2 = "#a1a1a1";
+    public static final String GUI_BACKGROUND_LIGHT_1 = "#cccccc";
+    public static final String GUI_BACKGROUND_LIGHT_2 = "#d8d8d8";
+
+    public static final String GUI_TITLE_BAR_DARK_1 = "#666666";
+    public static final String GUI_TITLE_BAR_DARK_2 = "#000080";
+    public static final String GUI_TITLE_BAR_LIGHT_1 = "#d8d8d8";
+    public static final String GUI_TITLE_BAR_LIGHT_2 = "#99b3ff";
+
+    public static final String GUI_TITLE_BAR_SEL_DARK_1 = "#333333";
+    public static final String GUI_TITLE_BAR_SEL_DARK_2 = "#414180";
+    public static final String GUI_TITLE_BAR_SEL_LIGHT_1 = "#999999";
+    public static final String GUI_TITLE_BAR_SEL_LIGHT_2 = "#4d66cc";
+
+    public static final boolean GUI_BACKGROUND_TRANSPARENT_DARK_1 = true;
+    public static final boolean GUI_BACKGROUND_TRANSPARENT_DARK_2 = false;
+    public static final boolean GUI_BACKGROUND_TRANSPARENT_LIGHT_1 = true;
+    public static final boolean GUI_BACKGROUND_TRANSPARENT_LIGHT_2 = false;
+
+    public static final boolean GUI_TITLE_BAR_TRANSPARENT_DARK_1 = true;
+    public static final boolean GUI_TITLE_BAR_TRANSPARENT_DARK_2 = false;
+    public static final boolean GUI_TITLE_BAR_TRANSPARENT_LIGHT_1 = true;
+    public static final boolean GUI_TITLE_BAR_TRANSPARENT_LIGHT_2 = false;
+
+    public static final boolean GUI_TITLE_BAR_SEL_TRANSPARENT_DARK_1 = false;
+    public static final boolean GUI_TITLE_BAR_SEL_TRANSPARENT_DARK_2 = false;
+    public static final boolean GUI_TITLE_BAR_SEL_TRANSPARENT_LIGHT_1 = false;
+    public static final boolean GUI_TITLE_BAR_SEL_TRANSPARENT_LIGHT_2 = false;
+
+    
 }

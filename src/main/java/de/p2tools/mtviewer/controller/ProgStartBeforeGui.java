@@ -62,10 +62,12 @@ public class ProgStartBeforeGui {
         P2LibInit.initLib(ProgData.getInstance().primaryStage, ProgConst.PROGRAM_NAME, "",
                 ProgConfig.SYSTEM_THEME_CHANGED,
                 ProgConfig.SYSTEM_DARK_THEME,
-                ProgConfig.SYSTEM_BLACK_WHITE_ICON,
+                ProgConfig.SYSTEM_GUI_THEME_1,
+                ProgConfig.SYSTEM_ICON_COLOR,
+                ProgConfig.SYSTEM_CSS_ADDER,
 
-                new String[]{"de/p2tools/mtviewer/css/"},
-                new String[]{},
+                new String[]{"de/p2tools/mtviewer/css/mtfx.css"},
+                new String[]{"de/p2tools/mtviewer/css/mtfx-dark.css"},
                 ProgData.getInstance().cssProp,
                 ProgConfig.SYSTEM_FONT_SIZE,
 
