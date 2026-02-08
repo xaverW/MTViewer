@@ -27,6 +27,7 @@ import de.p2tools.mtviewer.controller.filmfilter.ActFilmFilterWorker;
 import de.p2tools.mtviewer.controller.filmfilter.FilmFilterRunner;
 import de.p2tools.mtviewer.controller.starter.StarterClass;
 import de.p2tools.mtviewer.controller.worker.CheckForNewFilmlist;
+import de.p2tools.mtviewer.controller.worker.ColorWorker;
 import de.p2tools.mtviewer.controller.worker.Worker;
 import de.p2tools.mtviewer.gui.FilmGuiPack;
 import de.p2tools.mtviewer.gui.dialog.QuitDialogController;
@@ -80,6 +81,7 @@ public class ProgData {
 
     public DownloadInfos downloadInfos;
     public ReplaceList replaceList;
+    public ColorWorker colorWorker = null;
 
     private ProgData() {
         pEventHandler = new P2EventHandler(false);
@@ -99,6 +101,7 @@ public class ProgData {
         filmFilterRunner = new FilmFilterRunner(this);
         worker = new Worker(this);
         checkForNewFilmlist = new CheckForNewFilmlist(this);
+        colorWorker = new ColorWorker(this);
     }
 
     public synchronized static final ProgData getInstance(String dir) {

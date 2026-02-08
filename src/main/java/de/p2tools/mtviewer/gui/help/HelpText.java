@@ -19,6 +19,33 @@ package de.p2tools.mtviewer.gui.help;
 import de.p2tools.p2lib.P2LibConst;
 
 public class HelpText {
+    public static final String DARK_THEME =
+            "Das Programm kann damit mit einer dunklen oder hellen Programmoberfläche " +
+                    "angezeigt werden.\n" +
+                    "Umschalten kann man das hier in dem " +
+                    "Dialog, mit einem Mausklick mit der RECHTEN Maustaste " +
+                    "auf den Programm-Einstellungs-Button oder im Programm-Menü.\n" +
+                    "Für einige Elemente kann ein " +
+                    "Programmneustart notwendig sein." +
+                    "\n";
+
+    public static final String THEME_ICON =
+            "Die Programmicons können in verschiedenen Farben angezeigt werden.\n" +
+                    "Es können 2 Icon-Themes für das Dark-Theme und 2 für das " +
+                    "Light-Theme vorgegeben werden.\n" +
+                    "Umschalten kann man das hier in dem " +
+                    "Dialog, mit einem DOPPEL-KLICK " +
+                    "auf den Programm-Einstellungs-Button oder im Programm-Menü.\n" +
+                    "Für einige Elemente kann ein " +
+                    "Programmneustart notwendig sein." +
+                    "\n";
+
+    public static final String DARK_THEME_TABLE =
+            "Die Farben in den Tabellen Filme/Downloads für z.B. neue Filme " +
+                    "können hier eingestellt werden. Getrennt für das Dark-Theme und " +
+                    "das Light-Theme." +
+                    "\n";
+    
     public static final String LOAD_FILMLIST_ONLY_MARK_DOUBLE =
             "In der Filmliste sind ~150.000 Filme doppelt enthalten (z.B. bei ARD und BR)." +
                     "\n\n" +
@@ -365,11 +392,11 @@ public class HelpText {
                     "einmal angezeigt wurden." +
                     "\n";
 
-    public static final String DARK_THEME =
-            "Das Programm wird damit mit einer dunklen Programmoberfläche angezeigt. " +
-                    "Damit alle Elemente der Programmoberfläche geändert werden, kann ein " +
-                    "Programmneustart notwendig sein." +
-                    "\n";
+//    public static final String DARK_THEME =
+//            "Das Programm wird damit mit einer dunklen Programmoberfläche angezeigt. " +
+//                    "Damit alle Elemente der Programmoberfläche geändert werden, kann ein " +
+//                    "Programmneustart notwendig sein." +
+//                    "\n";
 
     public static final String BLACK_WHITE_ICON =
             "Die Programmicons werden in Schwarz-Weiß angezeigt. " +
