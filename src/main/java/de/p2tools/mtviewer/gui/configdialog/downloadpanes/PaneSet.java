@@ -22,6 +22,7 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
+import de.p2tools.mtviewer.controller.picon.PIconFactory;
 import de.p2tools.mtviewer.gui.help.HelpText;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.dialogs.P2DirFileChooser;
@@ -70,12 +71,12 @@ public class PaneSet {
         vBoxAll.setSpacing(25);
 
         final Button btnFileDest = new Button();
-        btnFileDest.setGraphic(ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
+        btnFileDest.setGraphic(PIconFactory.PICON.BTN_DIR_OPEN.getFontIcon());
         btnFileDest.setTooltip(new Tooltip("Einen Ordner zum Speichern der Filme auswählen"));
         btnFileDest.setOnAction(event -> P2DirFileChooser.DirChooser(ProgData.getInstance().primaryStage, txtDestPath));
 
         final Button btnFileProgram = new Button();
-        btnFileProgram.setGraphic(ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
+        btnFileProgram.setGraphic(PIconFactory.PICON.BTN_DIR_OPEN.getFontIcon());
         btnFileProgram.setTooltip(new Tooltip("Das Programm für den Download von Streams auswählen"));
         btnFileProgram.setOnAction(event -> P2DirFileChooser.FileChooserOpenFile(ProgData.getInstance().primaryStage, txtProg));
 

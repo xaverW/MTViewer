@@ -41,6 +41,8 @@ public class Table {
     private static StringProperty confUpDown; //Sortierung UP oder Down
     private static StringProperty confVis; //Spalte ist sichtbar
     private static StringProperty confOrder; //"Reihenfolge" der Spalten
+    public static int ROW_HEIGHT_MIN = 18;
+    public static final int ROW_HEIGHT_MAX = 22;
 
     public static void setTable(PTable table) {
         // Tabelle setzen

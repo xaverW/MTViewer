@@ -24,6 +24,7 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
+import de.p2tools.mtviewer.controller.picon.PIconFactory;
 import de.p2tools.p2lib.guitools.P2Open;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -125,7 +126,7 @@ public class CellStartDownload<S, T> extends TableCell<S, T> {
                     btnFilmStart = new Button("");
                     btnFilmStart.getStyleClass().addAll("btnFunction", "btnFuncTable");
                     btnFilmStart.setTooltip(new Tooltip("gespeicherten Film abspielen"));
-                    btnFilmStart.setGraphic(ProgIcons.IMAGE_TABLE_FILM_PLAY.getImageView());
+                    btnFilmStart.setGraphic(PIconFactory.PICON.TABLE_FILM_PLAY.getFontIcon());
                     btnFilmStart.setOnAction((ActionEvent event) -> {
                         DownloadData download = getTableView().getItems().get(getIndex());
                         FilmTools.playFilm(download.getDestPathFile());
@@ -138,7 +139,7 @@ public class CellStartDownload<S, T> extends TableCell<S, T> {
                     btnOpenDirectory.setOnAction((ActionEvent event) -> {
                         DownloadData download = getTableView().getItems().get(getIndex());
                         P2Open.openDir(download.getDestPath(),
-                                ProgConfig.SYSTEM_PROG_OPEN_DIR, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
+                                ProgConfig.SYSTEM_PROG_OPEN_DIR, PIconFactory.PICON.BTN_DIR_OPEN.getFontIcon());
                     });
 
                     if (ProgConfig.SYSTEM_SMALL_ROW_TABLE_DOWNLOAD.get()) {

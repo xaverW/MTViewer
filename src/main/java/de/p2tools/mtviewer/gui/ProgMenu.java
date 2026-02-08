@@ -22,6 +22,7 @@ import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.MTShortcut;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
+import de.p2tools.mtviewer.controller.picon.PIconFactory;
 import de.p2tools.mtviewer.controller.update.SearchProgramUpdate;
 import de.p2tools.mtviewer.gui.configdialog.ConfigDialogController;
 import de.p2tools.mtviewer.gui.dialog.AboutDialogController;
@@ -104,7 +105,7 @@ public class ProgMenu extends MenuButton {
         final MenuItem miUrlHelp = new MenuItem("Anleitung im Web");
         miUrlHelp.setOnAction(event -> {
             P2Open.openURL(ProgConst.URL_WEBSITE_HELP,
-                    ProgConfig.SYSTEM_PROG_OPEN_URL, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
+                    ProgConfig.SYSTEM_PROG_OPEN_URL, PIconFactory.PICON.BTN_DIR_OPEN.getFontIcon());
         });
         final MenuItem miReset = new MenuItem("Alle Programmeinstellungen zurücksetzen");
         miReset.setOnAction(event -> new ResetDialogController(progData));

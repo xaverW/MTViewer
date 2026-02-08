@@ -20,6 +20,7 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.config.ProgInfos;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
+import de.p2tools.mtviewer.controller.picon.PIconFactory;
 import de.p2tools.mtviewer.gui.help.HelpText;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.dialogs.P2DirFileChooser;
@@ -85,7 +86,7 @@ public class PaneLogFile {
         btnFile.setOnAction(event -> {
             P2DirFileChooser.DirChooser(ProgData.getInstance().primaryStage, txtLogFile);
         });
-        btnFile.setGraphic(ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
+        btnFile.setGraphic(PIconFactory.PICON.BTN_DIR_OPEN.getFontIcon());
 
         final Button btnClear = new Button();
         btnClear.setGraphic(ProgIcons.ICON_BUTTON_RESET.getImageView());

@@ -23,6 +23,7 @@ import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.downloadtools.HttpDownloadFactory;
+import de.p2tools.mtviewer.controller.picon.PIconFactory;
 import de.p2tools.p2lib.alert.P2Alert;
 import de.p2tools.p2lib.dialogs.P2DirFileChooser;
 import de.p2tools.p2lib.dialogs.dialog.P2DialogExtra;
@@ -230,7 +231,7 @@ public class DownloadAddDialogController extends P2DialogExtra {
     }
 
     private void initButton() {
-        btnDest.setGraphic(ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
+        btnDest.setGraphic(PIconFactory.PICON.BTN_DIR_OPEN.getFontIcon());
         btnDest.setText("");
         btnDest.setTooltip(new Tooltip("Einen Pfad zum Speichern auswählen."));
         btnDest.setOnAction(event -> P2DirFileChooser.DirChooser(ProgData.getInstance().primaryStage, cboPath));

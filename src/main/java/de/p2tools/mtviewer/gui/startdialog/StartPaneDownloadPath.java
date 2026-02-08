@@ -18,7 +18,7 @@ package de.p2tools.mtviewer.gui.startdialog;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.ProgIcons;
+import de.p2tools.mtviewer.controller.picon.PIconFactory;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.dialogs.P2DirFileChooser;
 import de.p2tools.p2lib.guitools.P2Button;
@@ -71,7 +71,7 @@ public class StartPaneDownloadPath {
         btnFile.setOnAction(event -> {
             P2DirFileChooser.DirChooser(stage, txtPath);
         });
-        btnFile.setGraphic(ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
+        btnFile.setGraphic(PIconFactory.PICON.BTN_DIR_OPEN.getFontIcon());
         btnFile.setTooltip(new Tooltip("Einen Pfad zum Speichern auswählen"));
 
         final Button btnHelp = P2Button.helpButton(stage,

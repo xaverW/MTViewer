@@ -22,6 +22,7 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.data.download.DownloadDataFactory;
+import de.p2tools.mtviewer.controller.picon.PIconFactory;
 import de.p2tools.mtviewer.gui.dialog.DownloadAddDialogController;
 import de.p2tools.mtviewer.gui.dialog.FilmInfoDialogController;
 import de.p2tools.mtviewer.gui.help.table.Table;
@@ -145,7 +146,7 @@ public class PaneDownloadInfo extends AnchorPane {
         }
 
         String s = download.get().getDestPath();
-        P2Open.openDir(s, ProgConfig.SYSTEM_PROG_OPEN_DIR, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
+        P2Open.openDir(s, ProgConfig.SYSTEM_PROG_OPEN_DIR, PIconFactory.PICON.BTN_DIR_OPEN.getFontIcon());
     }
 
     public void showFilmInfo() {

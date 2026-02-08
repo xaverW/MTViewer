@@ -3,7 +3,7 @@ package de.p2tools.mtviewer.gui.help.table;
 import de.p2tools.mtviewer.controller.FilmTools;
 import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
-import de.p2tools.mtviewer.controller.data.ProgIcons;
+import de.p2tools.mtviewer.controller.picon.PIconFactory;
 import de.p2tools.p2lib.mediathek.film.FilmSize;
 import de.p2tools.p2lib.mediathek.filmdata.FilmData;
 import de.p2tools.p2lib.tools.date.P2Date;
@@ -16,6 +16,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.layout.HBox;
 
 public class TableFilmFactory {
+
     private TableFilmFactory() {
 
     }
@@ -153,11 +154,11 @@ public class TableFilmFactory {
 
                 btnPlay = new Button("");
                 btnPlay.getStyleClass().addAll("btnFunction", "btnFuncTable");
-                btnPlay.setGraphic(ProgIcons.IMAGE_TABLE_FILM_PLAY.getImageView());
+                btnPlay.setGraphic(PIconFactory.PICON.TABLE_FILM_PLAY.getFontIcon());
 
                 btnSave = new Button("");
                 btnSave.getStyleClass().addAll("btnFunction", "btnFuncTable");
-                btnSave.setGraphic(ProgIcons.IMAGE_TABLE_FILM_SAVE.getImageView());
+                btnSave.setGraphic(PIconFactory.PICON.TABLE_FILM_SAVE.getFontIcon());
 
                 btnPlay.setOnAction(e -> {
                     getTableView().getSelectionModel().clearSelection();
@@ -183,12 +184,20 @@ public class TableFilmFactory {
                 setGraphic(hbox);
 
                 if (ProgConfig.SYSTEM_SMALL_ROW_TABLE_FILM.get()) {
-                    btnPlay.setMaxHeight(18);
-                    btnPlay.setMinHeight(18);
-                    btnSave.setMaxHeight(18);
-                    btnSave.setMinHeight(18);
-                }
+                    btnPlay.setMaxHeight(Table.ROW_HEIGHT_MIN);
+                    btnPlay.setMinHeight(Table.ROW_HEIGHT_MIN);
+                    btnSave.setMaxHeight(Table.ROW_HEIGHT_MIN);
+                    btnSave.setMinHeight(Table.ROW_HEIGHT_MIN);
 
+                } else {
+                    btnPlay.setMaxHeight(Table.ROW_HEIGHT_MAX);
+                    btnPlay.setMinHeight(Table.ROW_HEIGHT_MAX);
+                    btnSave.setMaxHeight(Table.ROW_HEIGHT_MAX);
+                    btnSave.setMinHeight(Table.ROW_HEIGHT_MAX);
+
+                    btnPlay.setGraphic(PIconFactory.PICON.TABLE_FILM_PLAY_BIG.getFontIcon());
+                    btnSave.setGraphic(PIconFactory.PICON.TABLE_FILM_SAVE_BIG.getFontIcon());
+                }
                 FilmData film = getTableView().getItems().get(getIndex());
                 set(film, this);
             }

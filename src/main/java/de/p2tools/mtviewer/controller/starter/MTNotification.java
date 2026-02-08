@@ -19,6 +19,7 @@ package de.p2tools.mtviewer.controller.starter;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
+import de.p2tools.mtviewer.controller.picon.PIconFactory;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.guitools.P2Open;
 import de.p2tools.p2lib.guitools.pnotification.P2Notification;
@@ -39,10 +40,10 @@ public class MTNotification {
         Button btnFilmStart = new Button();
         btnFilmStart.getStyleClass().addAll("btnFunction", "btnFuncTable");
         btnFilmStart.setTooltip(new Tooltip("Gespeicherten Film abspielen"));
-        btnFilmStart.setGraphic(ProgIcons.IMAGE_TABLE_FILM_PLAY.getImageView());
+        btnFilmStart.setGraphic(PIconFactory.PICON.TABLE_FILM_PLAY.getFontIcon());
         btnFilmStart.setOnAction((ActionEvent event) -> {
             P2Open.playStoredFilm(download.getDestPathFile(),
-                    ProgConfig.SYSTEM_PROG_PLAY, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
+                    ProgConfig.SYSTEM_PROG_PLAY, PIconFactory.PICON.BTN_DIR_OPEN.getFontIcon());
         });
 
         Button btnOpenDirectory = new Button();
@@ -51,7 +52,7 @@ public class MTNotification {
         btnOpenDirectory.setGraphic(ProgIcons.IMAGE_TABLE_DOWNLOAD_OPEN_DIR.getImageView());
         btnOpenDirectory.setOnAction((ActionEvent event) -> {
             P2Open.openDir(download.getDestPath(),
-                    ProgConfig.SYSTEM_PROG_OPEN_DIR, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
+                    ProgConfig.SYSTEM_PROG_OPEN_DIR, PIconFactory.PICON.BTN_DIR_OPEN.getFontIcon());
         });
 
         HBox hBoxBottom = new HBox();

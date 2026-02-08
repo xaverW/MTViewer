@@ -18,9 +18,9 @@ package de.p2tools.mtviewer.controller;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.downloadtools.DownloadProgParameterFactory;
+import de.p2tools.mtviewer.controller.picon.PIconFactory;
 import de.p2tools.mtviewer.gui.dialog.DownloadAddDialogController;
 import de.p2tools.mtviewer.gui.dialog.FilmPlayDialogController;
 import de.p2tools.p2lib.P2LibConst;
@@ -57,7 +57,7 @@ public class FilmTools {
         arrProgCallArray = strProgCallArray.split(TRENNER_PROG_ARRAY);
 
         P2Open.playStoredFilm(arrProgCallArray, ProgConfig.SYSTEM_PROG_PLAY,
-                url, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
+                url, PIconFactory.PICON.BTN_DIR_OPEN.getFontIcon());
     }
 
     public static void playFilm(String pathFile) {
@@ -67,7 +67,7 @@ public class FilmTools {
         arrProgCallArray = strProgCallArray.split(TRENNER_PROG_ARRAY);
 
         P2Open.playStoredFilm(arrProgCallArray, ProgConfig.SYSTEM_PROG_PLAY,
-                pathFile, ProgIcons.ICON_BUTTON_FILE_OPEN.getImageView());
+                pathFile, PIconFactory.PICON.BTN_DIR_OPEN.getFontIcon());
     }
 
     public static synchronized String getStatusInfosFilm() {
