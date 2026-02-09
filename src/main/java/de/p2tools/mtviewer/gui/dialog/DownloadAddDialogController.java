@@ -19,7 +19,6 @@ package de.p2tools.mtviewer.gui.dialog;
 import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.downloadtools.HttpDownloadFactory;
@@ -236,7 +235,7 @@ public class DownloadAddDialogController extends P2DialogExtra {
         btnDest.setTooltip(new Tooltip("Einen Pfad zum Speichern auswählen."));
         btnDest.setOnAction(event -> P2DirFileChooser.DirChooser(ProgData.getInstance().primaryStage, cboPath));
 
-        btnPropose.setGraphic(ProgIcons.ICON_BUTTON_RESET.getImageView());
+        btnPropose.setGraphic(PIconFactory.PICON.BTN_RESET.getFontIcon());
         btnPropose.setText("");
         btnPropose.setTooltip(new Tooltip("Einen Pfad zum Speichern vorschlagen lassen."));
         btnPropose.setOnAction(event -> proposeDestination());
@@ -479,7 +478,7 @@ public class DownloadAddDialogController extends P2DialogExtra {
 
     @Override
     public void close() {
-        if (!filmData.isMark()) {
+        if (filmData == null || !filmData.isMark()) { // todo? ==null
             // wenn kein Film, soll es nicht geändert werden
             ProgConfig.DOWNLOAD_RESOLUTION.set(oldResolution);
         }

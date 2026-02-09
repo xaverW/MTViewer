@@ -19,7 +19,6 @@ package de.p2tools.mtviewer.gui;
 import de.p2tools.mtviewer.controller.FilmTools;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.data.download.DownloadDataFactory;
 import de.p2tools.mtviewer.controller.picon.PIconFactory;
@@ -216,17 +215,17 @@ public class PaneDownloadInfo extends AnchorPane {
 
         hBoxAll.getChildren().addAll(vBoxTable, vBoxButton);
 
-        btnClearFilter.setGraphic(ProgIcons.ICON_BUTTON_RESET.getImageView());
+        btnClearFilter.setGraphic(PIconFactory.PICON.TOOLBAR_DOWNLOAD_BTN_CLEAN.getFontIcon());
         btnClearFilter.setTooltip(new Tooltip("Tabelle aufräumen"));
         btnClearFilter.getStyleClass().add("buttonSmall");
         btnClearFilter.setOnAction(a -> cleanUp());
 
-        btnStartAll.setGraphic(ProgIcons.ICON_BUTTON_START_ALL.getImageView());
+        btnStartAll.setGraphic(PIconFactory.PICON.TOOLBAR_DOWNLOAD_BTN_START_ALL.getFontIcon());
         btnStartAll.setTooltip(new Tooltip("Alle Downloads starten"));
         btnStartAll.getStyleClass().add("buttonSmall");
         btnStartAll.setOnAction(a -> startDownload(true /* alle */));
 
-        btnStopAll.setGraphic(ProgIcons.ICON_BUTTON_STOP_ALL.getImageView());
+        btnStopAll.setGraphic(PIconFactory.PICON.TOOLBAR_DOWNLOAD_BTN_STOP_ALL.getFontIcon());
         btnStopAll.setTooltip(new Tooltip("Alle Downloads stoppen"));
         btnStopAll.getStyleClass().add("buttonSmall");
         btnStopAll.setOnAction(a -> stopDownload(true /* alle */));

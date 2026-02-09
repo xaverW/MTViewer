@@ -21,7 +21,6 @@ import de.p2tools.mtviewer.controller.FilmTools;
 import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.picon.PIconFactory;
@@ -68,7 +67,7 @@ public class CellStartDownload<S, T> extends TableCell<S, T> {
                     btnDownStart = new Button("");
                     btnDownStart.getStyleClass().addAll("btnFunction", "btnFuncTable");
                     btnDownStart.setTooltip(new Tooltip("Download starten"));
-                    btnDownStart.setGraphic(ProgIcons.IMAGE_TABLE_DOWNLOAD_START.getImageView());
+                    btnDownStart.setGraphic(PIconFactory.PICON.TABLE_DOWNLOAD_START.getFontIcon());
                     btnDownStart.setOnAction((ActionEvent event) -> {
                         DownloadData download = getTableView().getItems().get(getIndex());
                         ProgData.getInstance().downloadList.startDownloads(download);
@@ -77,19 +76,27 @@ public class CellStartDownload<S, T> extends TableCell<S, T> {
                     btnDownDel = new Button("");
                     btnDownDel.getStyleClass().addAll("btnFunction", "btnFuncTable");
                     btnDownDel.setTooltip(new Tooltip("Download löschen"));
-                    btnDownDel.setGraphic(ProgIcons.IMAGE_TABLE_DOWNLOAD_DEL.getImageView());
+                    btnDownDel.setGraphic(PIconFactory.PICON.TABLE_DOWNLOAD_DEL.getFontIcon());
                     btnDownDel.setOnAction(event -> {
                         DownloadData download = getTableView().getItems().get(getIndex());
                         ProgData.getInstance().downloadList.delDownloads(download);
                     });
 
                     if (ProgConfig.SYSTEM_SMALL_ROW_TABLE_DOWNLOAD.get()) {
-                        btnDownStart.setMaxHeight(18);
-                        btnDownStart.setMinHeight(18);
-                        btnDownDel.setMaxHeight(18);
-                        btnDownDel.setMinHeight(18);
-                    }
+                        btnDownStart.setMaxHeight(Table.ROW_HEIGHT_MIN);
+                        btnDownStart.setMinHeight(Table.ROW_HEIGHT_MIN);
+                        btnDownDel.setMaxHeight(Table.ROW_HEIGHT_MIN);
+                        btnDownDel.setMinHeight(Table.ROW_HEIGHT_MIN);
 
+                    } else {
+                        btnDownStart.setMaxHeight(Table.ROW_HEIGHT_MAX);
+                        btnDownStart.setMinHeight(Table.ROW_HEIGHT_MAX);
+                        btnDownDel.setMaxHeight(Table.ROW_HEIGHT_MAX);
+                        btnDownDel.setMinHeight(Table.ROW_HEIGHT_MAX);
+
+                        btnDownStart.setGraphic(PIconFactory.PICON.TABLE_DOWNLOAD_START_BIG.getFontIcon());
+                        btnDownDel.setGraphic(PIconFactory.PICON.TABLE_DOWNLOAD_DEL_BIG.getFontIcon());
+                    }
                     hbox.getChildren().addAll(btnDownStart, btnDownDel);
                     setGraphic(hbox);
 
@@ -97,7 +104,7 @@ public class CellStartDownload<S, T> extends TableCell<S, T> {
                     btnDownStop = new Button("");
                     btnDownStop.getStyleClass().addAll("btnFunction", "btnFuncTable");
                     btnDownStop.setTooltip(new Tooltip("Download stoppen"));
-                    btnDownStop.setGraphic(ProgIcons.IMAGE_TABLE_DOWNLOAD_STOP.getImageView());
+                    btnDownStop.setGraphic(PIconFactory.PICON.TABLE_DOWNLOAD_STOP.getFontIcon());
                     btnDownStop.setOnAction((ActionEvent event) -> {
                         DownloadData download = getTableView().getItems().get(getIndex());
                         download.stopDownload();
@@ -106,17 +113,26 @@ public class CellStartDownload<S, T> extends TableCell<S, T> {
                     btnDownDel = new Button("");
                     btnDownDel.getStyleClass().addAll("btnFunction", "btnFuncTable");
                     btnDownDel.setTooltip(new Tooltip("Download löschen"));
-                    btnDownDel.setGraphic(ProgIcons.IMAGE_TABLE_DOWNLOAD_DEL.getImageView());
+                    btnDownDel.setGraphic(PIconFactory.PICON.TABLE_DOWNLOAD_DEL.getFontIcon());
                     btnDownDel.setOnAction(event -> {
                         DownloadData download = getTableView().getItems().get(getIndex());
                         ProgData.getInstance().downloadList.delDownloads(download);
                     });
 
                     if (ProgConfig.SYSTEM_SMALL_ROW_TABLE_DOWNLOAD.get()) {
-                        btnDownStop.setMaxHeight(18);
-                        btnDownStop.setMinHeight(18);
-                        btnDownDel.setMaxHeight(18);
-                        btnDownDel.setMinHeight(18);
+                        btnDownStop.setMaxHeight(Table.ROW_HEIGHT_MIN);
+                        btnDownStop.setMinHeight(Table.ROW_HEIGHT_MIN);
+                        btnDownDel.setMaxHeight(Table.ROW_HEIGHT_MIN);
+                        btnDownDel.setMinHeight(Table.ROW_HEIGHT_MIN);
+
+                    } else {
+                        btnDownStop.setMaxHeight(Table.ROW_HEIGHT_MAX);
+                        btnDownStop.setMinHeight(Table.ROW_HEIGHT_MAX);
+                        btnDownDel.setMaxHeight(Table.ROW_HEIGHT_MAX);
+                        btnDownDel.setMinHeight(Table.ROW_HEIGHT_MAX);
+
+                        btnDownStop.setGraphic(PIconFactory.PICON.TABLE_DOWNLOAD_STOP_BIG.getFontIcon());
+                        btnDownDel.setGraphic(PIconFactory.PICON.TABLE_DOWNLOAD_DEL_BIG.getFontIcon());
                     }
 
                     hbox.getChildren().addAll(btnDownStop, btnDownDel);
@@ -135,7 +151,7 @@ public class CellStartDownload<S, T> extends TableCell<S, T> {
                     btnOpenDirectory = new Button();
                     btnOpenDirectory.getStyleClass().addAll("btnFunction", "btnFuncTable");
                     btnOpenDirectory.setTooltip(new Tooltip("Ordner mit gespeichertem Film öffnen"));
-                    btnOpenDirectory.setGraphic(ProgIcons.IMAGE_TABLE_DOWNLOAD_OPEN_DIR.getImageView());
+                    btnOpenDirectory.setGraphic(PIconFactory.PICON.TABLE_DOWNLOAD_OPEN_DIR.getFontIcon());
                     btnOpenDirectory.setOnAction((ActionEvent event) -> {
                         DownloadData download = getTableView().getItems().get(getIndex());
                         P2Open.openDir(download.getDestPath(),
@@ -143,10 +159,19 @@ public class CellStartDownload<S, T> extends TableCell<S, T> {
                     });
 
                     if (ProgConfig.SYSTEM_SMALL_ROW_TABLE_DOWNLOAD.get()) {
-                        btnFilmStart.setMaxHeight(18);
-                        btnFilmStart.setMinHeight(18);
-                        btnOpenDirectory.setMaxHeight(18);
-                        btnOpenDirectory.setMinHeight(18);
+                        btnFilmStart.setMaxHeight(Table.ROW_HEIGHT_MIN);
+                        btnFilmStart.setMinHeight(Table.ROW_HEIGHT_MIN);
+                        btnOpenDirectory.setMaxHeight(Table.ROW_HEIGHT_MIN);
+                        btnOpenDirectory.setMinHeight(Table.ROW_HEIGHT_MIN);
+
+                    } else {
+                        btnFilmStart.setMaxHeight(Table.ROW_HEIGHT_MAX);
+                        btnFilmStart.setMinHeight(Table.ROW_HEIGHT_MAX);
+                        btnOpenDirectory.setMaxHeight(Table.ROW_HEIGHT_MAX);
+                        btnOpenDirectory.setMinHeight(Table.ROW_HEIGHT_MAX);
+
+                        btnFilmStart.setGraphic(PIconFactory.PICON.TABLE_FILM_PLAY_BIG.getFontIcon());
+                        btnOpenDirectory.setGraphic(PIconFactory.PICON.TABLE_DOWNLOAD_OPEN_DIR_BIG.getFontIcon());
                     }
 
                     hbox.getChildren().addAll(btnFilmStart, btnOpenDirectory);
@@ -156,7 +181,7 @@ public class CellStartDownload<S, T> extends TableCell<S, T> {
                     btnDownStart = new Button("");
                     btnDownStart.getStyleClass().addAll("btnFunction", "btnFuncTable");
                     btnDownStart.setTooltip(new Tooltip("Download wieder starten"));
-                    btnDownStart.setGraphic(ProgIcons.IMAGE_TABLE_DOWNLOAD_START.getImageView());
+                    btnDownStart.setGraphic(PIconFactory.PICON.TABLE_DOWNLOAD_START.getFontIcon());
                     btnDownStart.setOnAction((ActionEvent event) -> {
                         DownloadData download = getTableView().getItems().get(getIndex());
                         List<DownloadData> list = new ArrayList<>();
@@ -167,19 +192,27 @@ public class CellStartDownload<S, T> extends TableCell<S, T> {
                     btnDownDel = new Button("");
                     btnDownDel.getStyleClass().addAll("btnFunction", "btnFuncTable");
                     btnDownDel.setTooltip(new Tooltip("Download löschen"));
-                    btnDownDel.setGraphic(ProgIcons.IMAGE_TABLE_DOWNLOAD_DEL.getImageView());
+                    btnDownDel.setGraphic(PIconFactory.PICON.TABLE_DOWNLOAD_DEL.getFontIcon());
                     btnDownDel.setOnAction(event -> {
                         DownloadData download = getTableView().getItems().get(getIndex());
                         ProgData.getInstance().downloadList.delDownloads(download);
                     });
 
                     if (ProgConfig.SYSTEM_SMALL_ROW_TABLE_DOWNLOAD.get()) {
-                        btnDownStart.setMaxHeight(18);
-                        btnDownStart.setMinHeight(18);
-                        btnDownDel.setMaxHeight(18);
-                        btnDownDel.setMinHeight(18);
-                    }
+                        btnDownStart.setMaxHeight(Table.ROW_HEIGHT_MIN);
+                        btnDownStart.setMinHeight(Table.ROW_HEIGHT_MIN);
+                        btnDownDel.setMaxHeight(Table.ROW_HEIGHT_MIN);
+                        btnDownDel.setMinHeight(Table.ROW_HEIGHT_MIN);
 
+                    } else {
+                        btnDownStart.setMaxHeight(Table.ROW_HEIGHT_MAX);
+                        btnDownStart.setMinHeight(Table.ROW_HEIGHT_MAX);
+                        btnDownDel.setMaxHeight(Table.ROW_HEIGHT_MAX);
+                        btnDownDel.setMinHeight(Table.ROW_HEIGHT_MAX);
+
+                        btnDownStart.setGraphic(PIconFactory.PICON.TABLE_DOWNLOAD_START_BIG.getFontIcon());
+                        btnDownDel.setGraphic(PIconFactory.PICON.TABLE_DOWNLOAD_DEL_BIG.getFontIcon());
+                    }
                     hbox.getChildren().addAll(btnDownStart, btnDownDel);
                     setGraphic(hbox);
 

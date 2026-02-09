@@ -63,7 +63,7 @@ public class ProgData {
     public FilmFilterRunner filmFilterRunner;
     public DownloadList downloadList; // Filme die als "Download" geladen werden sollen
     public StarterClass starterClass; // Klasse zum Ausführen der Programme (für die Downloads): VLC, flvstreamer, ...
-    public ObjectProperty<P2CssFactory.CSS> cssProp = new SimpleObjectProperty<>(P2CssFactory.CSS.CSS_0);
+    public ObjectProperty<P2CssFactory.CSS> cssProp = new SimpleObjectProperty<>(P2CssFactory.CSS.CSS_1);
 
     // Gui
     public Stage primaryStage = null;

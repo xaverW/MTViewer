@@ -66,7 +66,15 @@ public class ProgStartBeforeGui {
                 ProgConfig.SYSTEM_ICON_COLOR,
                 ProgConfig.SYSTEM_CSS_ADDER,
 
-                new String[]{"de/p2tools/mtviewer/css/mtfx.css"},
+                new String[]{
+                        "de/p2tools/mtviewer/css/mtfx.css",
+                        "de/p2tools/mtviewer/css/pFuncBtn.css",
+                        "de/p2tools/mtviewer/css/pFuncMenu.css",
+                        "de/p2tools/mtviewer/css/pFuncTitleBar.css",
+                        "de/p2tools/mtviewer/css/pFuncTable.css",
+                        "de/p2tools/mtviewer/css/pFuncToolBar.css",
+                        "de/p2tools/mtviewer/css/pFuncTips.css",
+                        "de/p2tools/mtviewer/css/pFuncStartDialog.css"},
                 new String[]{"de/p2tools/mtviewer/css/mtfx-dark.css"},
                 ProgData.getInstance().cssProp,
                 ProgConfig.SYSTEM_FONT_SIZE,

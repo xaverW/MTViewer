@@ -42,6 +42,8 @@ public class PIconFactory {
         BTN_SEPARATOR_WIDTH("mdi-ray-start-end", 20),
         BTN_TOP("gmi-vertical-align-top", 20),
         BTN_UP("mdoal-arrow_upward", 20),
+        BTN_FILTER_SET("gmi-keyboard-arrow-up", 20),
+        BTN_FILTER_SAVE("gmi-fiber-manual-record", 20),
         BTN_DOWN("mdoal-arrow_downward", 20),
         BTN_BOTTOM("gmi-vertical-align-bottom", 20),
 
@@ -53,6 +55,11 @@ public class PIconFactory {
         BTN_CLEAR_CBO("gmi-clear", 14),
         BTN_ALERT_FILM_PLAY("gmi-play-arrow", 14),
         BTN_ALERT_DOWNLOAD_OPEN_DIR("mdi2f-folder-open-outline", 14),
+
+        TOOLBAR_DOWNLOAD_BTN_START_ALL("mdi2d-download-multiple-outline", 20),
+        TOOLBAR_DOWNLOAD_BTN_STOP_ALL("gmi-stop", 20),
+        TOOLBAR_DOWNLOAD_BTN_CLEAN("mdoal-cleaning_services", 20),
+
 
         ICON_BOOLEAN_ON("mdral-done_outline", 20),
 
@@ -90,6 +97,7 @@ public class PIconFactory {
         TOOLBAR_BTN_DOWNLOAD_UNDO("mdi2a-arrow-left-top-bold", 25),
         TOOLBAR_BTN_DOWNLOAD_REFRESH("mdi-rotate-3d", 25),
         TOOLBAR_BTN_DOWNLOAD_START_ALL("mdi2d-download-multiple-outline", 25),
+        TOOLBAR_BTN_DOWNLOAD_STOP_ALL("gmi-stop", 25),
         TOOLBAR_BTN_DOWNLOAD_START_TIME("mdmz-more_time", 25),
         TOOLBAR_BTN_ABO_CONFIG("mdomz-settings", 25),
         TOOLBAR_BTN_ABO_ADD("gmi-add", 25),

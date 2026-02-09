@@ -20,7 +20,7 @@ public class FilmGuiTop extends HBox {
         getChildren().addAll(btnFilmlist, P2GuiTools.getHBoxGrower(), new ProgMenu());
         setAlignment(Pos.CENTER_RIGHT);
         setPadding(new Insets(5, 15, 5, 15));
-        btnFilmlist.getStyleClass().addAll("btnFunction", "btnFunc-4");
+        btnFilmlist.getStyleClass().addAll("pFuncBtn", "btnFilmlist");
 
         btnFilmlist.setTooltip(new Tooltip("Eine neue Filmliste laden.\n" +
                 "Wenn die Filmliste nicht zu alt ist, wird nur ein Update geladen.\n" +
@@ -36,6 +36,13 @@ public class FilmGuiTop extends HBox {
             }
             if (mouseEvent.getButton().equals(MouseButton.MIDDLE)) {
                 LoadAudioFactory.loadAudioListButton();
+            }
+        });
+        progData.checkForNewFilmlist.foundNewListProperty().addListener((u, o, n) -> {
+            if (progData.checkForNewFilmlist.isFoundNewList()) {
+                btnFilmlist.getStyleClass().add("btnFilmlistNewList");
+            } else {
+                btnFilmlist.getStyleClass().remove("btnFilmlistNewList");
             }
         });
     }

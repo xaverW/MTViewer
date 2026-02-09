@@ -18,7 +18,7 @@ package de.p2tools.mtviewer.gui;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.ProgIcons;
+import de.p2tools.mtviewer.controller.picon.PIconFactory;
 import de.p2tools.mtviewer.gui.help.HelpText;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.guitools.P2Button;
@@ -95,11 +95,11 @@ public class PaneFilmFilter extends VBox {
     }
 
     private void initButton() {
-        btnGoBack.setGraphic(ProgIcons.ICON_BUTTON_BACKWARD.getImageView());
+        btnGoBack.setGraphic(PIconFactory.PICON.BTN_BACK.getFontIcon());
         btnGoBack.setOnAction(a -> progData.actFilmFilterWorker.goBackward());
         btnGoBack.disableProperty().bind(progData.actFilmFilterWorker.backwardPossibleProperty().not());
         btnGoBack.setTooltip(new Tooltip("letzte Filtereinstellung wieder herstellen"));
-        btnGoForward.setGraphic(ProgIcons.ICON_BUTTON_FORWARD.getImageView());
+        btnGoForward.setGraphic(PIconFactory.PICON.BTN_FORWARD.getFontIcon());
         btnGoForward.setOnAction(a -> progData.actFilmFilterWorker.goForward());
         btnGoForward.disableProperty().bind(progData.actFilmFilterWorker.forwardPossibleProperty().not());
         progData.actFilmFilterWorker.forwardPossibleProperty().addListener((v, o, n) -> System.out.println(progData.actFilmFilterWorker.forwardPossibleProperty().getValue().toString()));
@@ -117,25 +117,25 @@ public class PaneFilmFilter extends VBox {
         tglAudiothek.selectedProperty().addListener((u, o, n) ->
                 progData.actFilmFilterWorker.getActFilterSettings().setListAudio(tglAudiothek.isSelected()));
 
-        btnFilter1.setGraphic(ProgIcons.ICON_BUTTON_UP.getImageView());
+        btnFilter1.setGraphic(PIconFactory.PICON.BTN_FILTER_SET.getFontIcon());
         btnFilter1.getStyleClass().add("buttonVerySmall");
         btnFilter1.setTooltip(new Tooltip("Gespeicherten Filter setzen"));
         btnFilter1.setOnAction(a -> {
             progData.actFilmFilterWorker.setStoredFilter(1);
         });
-        btnFilter2.setGraphic(ProgIcons.ICON_BUTTON_UP.getImageView());
+        btnFilter2.setGraphic(PIconFactory.PICON.BTN_FILTER_SET.getFontIcon());
         btnFilter2.getStyleClass().add("buttonVerySmall");
         btnFilter2.setTooltip(new Tooltip("Gespeicherten Filter setzen"));
         btnFilter2.setOnAction(a -> {
             progData.actFilmFilterWorker.setStoredFilter(2);
         });
-        btnFilter3.setGraphic(ProgIcons.ICON_BUTTON_UP.getImageView());
+        btnFilter3.setGraphic(PIconFactory.PICON.BTN_FILTER_SET.getFontIcon());
         btnFilter3.getStyleClass().add("buttonVerySmall");
         btnFilter3.setTooltip(new Tooltip("Gespeicherten Filter setzen"));
         btnFilter3.setOnAction(a -> {
             progData.actFilmFilterWorker.setStoredFilter(3);
         });
-        btnFilter4.setGraphic(ProgIcons.ICON_BUTTON_UP.getImageView());
+        btnFilter4.setGraphic(PIconFactory.PICON.BTN_FILTER_SET.getFontIcon());
         btnFilter4.getStyleClass().add("buttonVerySmall");
         btnFilter4.setTooltip(new Tooltip("Gespeicherten Filter setzen"));
         btnFilter4.setOnAction(a -> {
@@ -150,7 +150,7 @@ public class PaneFilmFilter extends VBox {
             btnAddFilter4.getStyleClass().removeAll("animated-button");
         });
 
-        btnAddFilter1.setGraphic(ProgIcons.ICON_BUTTON_REC.getImageView());
+        btnAddFilter1.setGraphic(PIconFactory.PICON.BTN_FILTER_SAVE.getFontIcon());
         btnAddFilter1.getStyleClass().add("buttonVerySmall");
         btnAddFilter1.setTooltip(new Tooltip("Aktuellen Filter speichern"));
         btnAddFilter1.setOnAction(a -> {
@@ -159,7 +159,7 @@ public class PaneFilmFilter extends VBox {
             setEffect(btnAddFilter1);
             progData.actFilmFilterWorker.storeFilter(1);
         });
-        btnAddFilter2.setGraphic(ProgIcons.ICON_BUTTON_REC.getImageView());
+        btnAddFilter2.setGraphic(PIconFactory.PICON.BTN_FILTER_SAVE.getFontIcon());
         btnAddFilter2.getStyleClass().add("buttonVerySmall");
         btnAddFilter2.setTooltip(new Tooltip("Aktuellen Filter speichern"));
         btnAddFilter2.setOnAction(a -> {
@@ -168,7 +168,7 @@ public class PaneFilmFilter extends VBox {
             setEffect(btnAddFilter2);
             progData.actFilmFilterWorker.storeFilter(2);
         });
-        btnAddFilter3.setGraphic(ProgIcons.ICON_BUTTON_REC.getImageView());
+        btnAddFilter3.setGraphic(PIconFactory.PICON.BTN_FILTER_SAVE.getFontIcon());
         btnAddFilter3.getStyleClass().add("buttonVerySmall");
         btnAddFilter3.setTooltip(new Tooltip("Aktuellen Filter speichern"));
         btnAddFilter3.setOnAction(a -> {
@@ -177,7 +177,7 @@ public class PaneFilmFilter extends VBox {
             setEffect(btnAddFilter3);
             progData.actFilmFilterWorker.storeFilter(3);
         });
-        btnAddFilter4.setGraphic(ProgIcons.ICON_BUTTON_REC.getImageView());
+        btnAddFilter4.setGraphic(PIconFactory.PICON.BTN_FILTER_SAVE.getFontIcon());
         btnAddFilter4.getStyleClass().add("buttonVerySmall");
         btnAddFilter4.setTooltip(new Tooltip("Aktuellen Filter speichern"));
         btnAddFilter4.setOnAction(a -> {
