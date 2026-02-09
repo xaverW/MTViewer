@@ -19,7 +19,6 @@ package de.p2tools.mtviewer.gui.configdialog.configpanes;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.config.ProgInfos;
-import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.picon.PIconFactory;
 import de.p2tools.mtviewer.gui.help.HelpText;
 import de.p2tools.p2lib.P2LibConst;
@@ -89,7 +88,7 @@ public class PaneLogFile {
         btnFile.setGraphic(PIconFactory.PICON.BTN_DIR_OPEN.getFontIcon());
 
         final Button btnClear = new Button();
-        btnClear.setGraphic(ProgIcons.ICON_BUTTON_RESET.getImageView());
+        btnClear.setGraphic(PIconFactory.PICON.BTN_RESET.getFontIcon());
         btnClear.setTooltip(new Tooltip("Pfad löschen"));
         btnClear.setOnAction(event -> {
             txtLogFile.setText("");

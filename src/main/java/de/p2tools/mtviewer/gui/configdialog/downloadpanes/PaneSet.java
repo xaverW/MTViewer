@@ -21,7 +21,6 @@ import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.picon.PIconFactory;
 import de.p2tools.mtviewer.gui.help.HelpText;
 import de.p2tools.p2lib.P2LibConst;
@@ -81,22 +80,22 @@ public class PaneSet {
         btnFileProgram.setOnAction(event -> P2DirFileChooser.FileChooserOpenFile(ProgData.getInstance().primaryStage, txtProg));
 
         final Button btnDestPathReset = new Button();
-        btnDestPathReset.setGraphic(ProgIcons.ICON_BUTTON_RESET.getImageView());
+        btnDestPathReset.setGraphic(PIconFactory.PICON.BTN_RESET.getFontIcon());
         btnDestPathReset.setTooltip(new Tooltip("Die Init-Parameter wieder herstellen"));
         btnDestPathReset.setOnAction(event -> txtDestPath.setText(ProgConfig.DOWNLOAD_FILE_PATH_INIT));
 
         final Button btnDestReset = new Button();
-        btnDestReset.setGraphic(ProgIcons.ICON_BUTTON_RESET.getImageView());
+        btnDestReset.setGraphic(PIconFactory.PICON.BTN_RESET.getFontIcon());
         btnDestReset.setTooltip(new Tooltip("Die Init-Parameter wieder herstellen"));
         btnDestReset.setOnAction(event -> txtDestName.setText(ProgConfig.DOWNLOAD_FILE_NAME_INIT));
 
         final Button btnParameterReset = new Button();
-        btnParameterReset.setGraphic(ProgIcons.ICON_BUTTON_RESET.getImageView());
+        btnParameterReset.setGraphic(PIconFactory.PICON.BTN_RESET.getFontIcon());
         btnParameterReset.setTooltip(new Tooltip("Die Init-Parameter wieder herstellen"));
         btnParameterReset.setOnAction(event -> txtParameter.setText(ProgConfig.SYSTEM_PROG_SAVE_PARAMETER_INIT));
 
         final Button btnProgramReset = new Button();
-        btnProgramReset.setGraphic(ProgIcons.ICON_BUTTON_RESET.getImageView());
+        btnProgramReset.setGraphic(PIconFactory.PICON.BTN_RESET.getFontIcon());
         btnProgramReset.setTooltip(new Tooltip("Die Init-Parameter wieder herstellen"));
         btnProgramReset.setOnAction(event -> txtProg.setText(ProgConfig.SYSTEM_PROG_SAVE_INIT));
 

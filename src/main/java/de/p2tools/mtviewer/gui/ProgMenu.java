@@ -21,7 +21,6 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.MTShortcut;
-import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.picon.PIconFactory;
 import de.p2tools.mtviewer.controller.update.SearchProgramUpdate;
 import de.p2tools.mtviewer.gui.configdialog.ConfigDialogController;
@@ -32,6 +31,7 @@ import de.p2tools.p2lib.guitools.P2Open;
 import de.p2tools.p2lib.tools.shortcut.P2ShortcutWorker;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 
 public class ProgMenu extends MenuButton {
@@ -44,27 +44,22 @@ public class ProgMenu extends MenuButton {
         ProgData progData = ProgData.getInstance();
 
         setOnMouseClicked(mouseEvent -> {
-            if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
-                if (!ProgConfig.SYSTEM_DARK_THEME.get() && !ProgConfig.SYSTEM_BLACK_WHITE_ICON.get()) {
-                    ProgConfig.SYSTEM_DARK_THEME.set(true);
-
-                } else if (ProgConfig.SYSTEM_DARK_THEME.get() && !ProgConfig.SYSTEM_BLACK_WHITE_ICON.get()) {
-                    ProgConfig.SYSTEM_DARK_THEME.set(false);
-                    ProgConfig.SYSTEM_BLACK_WHITE_ICON.set(true);
-
-                } else if (!ProgConfig.SYSTEM_DARK_THEME.get() && ProgConfig.SYSTEM_BLACK_WHITE_ICON.get()) {
-                    ProgConfig.SYSTEM_DARK_THEME.set(true);
-
-                } else if (ProgConfig.SYSTEM_DARK_THEME.get() && ProgConfig.SYSTEM_BLACK_WHITE_ICON.get()) {
-                    ProgConfig.SYSTEM_DARK_THEME.set(false);
-                    ProgConfig.SYSTEM_BLACK_WHITE_ICON.set(false);
+            if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                if (mouseEvent.getClickCount() > 1) {
+                    ProgConfig.SYSTEM_GUI_THEME_1.set(!ProgConfig.SYSTEM_GUI_THEME_1.get());
                 }
+            }
+
+            if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
+                ProgConfig.SYSTEM_DARK_THEME.set(!ProgConfig.SYSTEM_DARK_THEME.get());
             }
         });
 
         setTooltip(new Tooltip("Filmmenü anzeigen"));
-        setGraphic(ProgIcons.FX_ICON_TOOLBAR_MENU_TOP.getImageView());
-        getStyleClass().addAll("btnFunction", "btnFunc-1");
+        FontIcon node = PIconFactory.PICON.PROG_MENU.getFontIcon();
+        node.setScaleX(1.5);
+        setGraphic(node);
+        getStyleClass().addAll("pFuncBtn", "btnProgMenu");
 
         //=========================
         //Filme

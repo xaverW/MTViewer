@@ -19,7 +19,7 @@ package de.p2tools.mtviewer.gui.dialog;
 
 import de.p2tools.mtviewer.controller.ProgQuit;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.ProgIcons;
+import de.p2tools.mtviewer.controller.picon.PIconFactory;
 import de.p2tools.p2lib.dialogs.dialog.P2DialogExtra;
 import de.p2tools.p2lib.guitools.P2BigButton;
 import de.p2tools.p2lib.guitools.pmask.P2MaskerPane;
@@ -58,21 +58,21 @@ public class QuitDialogController extends P2DialogExtra {
         headerLabel.setStyle("-fx-font-size: 1.5em;");
 
         //nicht beenden
-        P2BigButton cancelButton = new P2BigButton(ProgIcons.ICON_BUTTON_QUIT.getImageView(),
+        P2BigButton cancelButton = new P2BigButton(PIconFactory.PICON.BTN_QUIT_DIALOG.getFontIcon(),
                 "Nicht beenden", "");
         cancelButton.setOnAction(e -> {
             close();
         });
 
         //beenden
-        P2BigButton quitButton = new P2BigButton(ProgIcons.ICON_BUTTON_QUIT.getImageView(),
+        P2BigButton quitButton = new P2BigButton(PIconFactory.PICON.BTN_QUIT_DIALOG.getFontIcon(),
                 "Beenden", "Alle Downloads abbrechen und das Programm beenden.");
         quitButton.setOnAction(e -> {
             ProgQuit.quit();
         });
 
         //warten, dann beenden
-        P2BigButton waitButton = new P2BigButton(ProgIcons.ICON_BUTTON_QUIT.getImageView(),
+        P2BigButton waitButton = new P2BigButton(PIconFactory.PICON.BTN_QUIT_DIALOG.getFontIcon(),
                 "Warten", "Alle Downloads abwarten und dann das Programm beenden.");
         waitButton.setOnAction(e -> startWaiting());
         cbxShutDown.setSelected(false);
@@ -84,7 +84,7 @@ public class QuitDialogController extends P2DialogExtra {
             }
         });
 
-        gridPane.add(ProgIcons.IMAGE_ACHTUNG_64.getImageView(), 0, 0, 1, 1);
+        gridPane.add(PIconFactory.PICON.ATTENTION.getFontIcon(), 0, 0, 1, 1);
         gridPane.add(headerLabel, 1, 0);
         gridPane.add(cancelButton, 1, 1);
         gridPane.add(quitButton, 1, 2);

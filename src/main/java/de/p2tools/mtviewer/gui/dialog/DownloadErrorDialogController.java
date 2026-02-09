@@ -18,8 +18,8 @@ package de.p2tools.mtviewer.gui.dialog;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.ProgIcons;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
+import de.p2tools.mtviewer.controller.picon.PIconFactory;
 import de.p2tools.p2lib.dialogs.dialog.P2DialogExtra;
 import de.p2tools.p2lib.guitools.grid.P2GridConstraints;
 import javafx.animation.KeyFrame;
@@ -83,8 +83,6 @@ public class DownloadErrorDialogController extends P2DialogExtra {
             quit();
         });
 
-        imageView.setImage(ProgIcons.IMAGE_ACHTUNG_64.getImage());
-
         //start the countdown...
         lblTime.setText("");
         timeline = new Timeline();
@@ -100,7 +98,7 @@ public class DownloadErrorDialogController extends P2DialogExtra {
 
         VBox vBox = new VBox();
         vBox.setPadding(new Insets(20));
-        vBox.getChildren().add(imageView);
+        vBox.getChildren().add(PIconFactory.PICON.ATTENTION.getFontIcon());
 
 
         gridPane.setMaxWidth(Double.MAX_VALUE);

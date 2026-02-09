@@ -17,7 +17,7 @@
 package de.p2tools.mtviewer.gui.startdialog;
 
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.controller.data.ProgIcons;
+import de.p2tools.mtviewer.controller.picon.PIconFactory;
 import de.p2tools.p2lib.dialogs.dialog.P2DialogExtra;
 import de.p2tools.p2lib.guitools.P2Button;
 import javafx.geometry.Pos;
@@ -224,7 +224,7 @@ public class StartDialogController extends P2DialogExtra {
         btnCancel = new Button("_Abbrechen");
         btnCancel.setOnAction(a -> closeDialog(false));
 
-        btnNext = P2Button.getButton(ProgIcons.ICON_BUTTON_NEXT.getImageView(), "nächste Seite");
+        btnNext = P2Button.getButton(PIconFactory.PICON.BTN_NEXT.getFontIcon(), "nächste Seite");
         btnNext.setOnAction(event -> {
             switch (aktState) {
                 case START_1:
@@ -256,7 +256,7 @@ public class StartDialogController extends P2DialogExtra {
             }
             selectActPane();
         });
-        btnPrev = P2Button.getButton(ProgIcons.ICON_BUTTON_PREV.getImageView(), "vorherige Seite");
+        btnPrev = P2Button.getButton(PIconFactory.PICON.BTN_PREV.getFontIcon(), "vorherige Seite");
         btnPrev.setOnAction(event -> {
             switch (aktState) {
                 case START_1:
