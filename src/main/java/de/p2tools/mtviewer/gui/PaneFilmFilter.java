@@ -21,7 +21,6 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.picon.PIconFactory;
 import de.p2tools.mtviewer.gui.help.HelpText;
 import de.p2tools.p2lib.P2LibConst;
-import de.p2tools.p2lib.guitools.P2Button;
 import de.p2tools.p2lib.guitools.P2ButtonClearFilterFactory;
 import de.p2tools.p2lib.guitools.P2GuiTools;
 import de.p2tools.p2lib.guitools.pcbo.P2CboCheckBoxListString;
@@ -95,11 +94,13 @@ public class PaneFilmFilter extends VBox {
     }
 
     private void initButton() {
-        btnGoBack.setGraphic(PIconFactory.PICON.BTN_BACK.getFontIcon());
+        btnGoBack.setGraphic(PIconFactory.PICON.BTN_BACK_SMALL.getFontIcon());
+        btnGoBack.getStyleClass().add("btnSmall");
         btnGoBack.setOnAction(a -> progData.actFilmFilterWorker.goBackward());
         btnGoBack.disableProperty().bind(progData.actFilmFilterWorker.backwardPossibleProperty().not());
         btnGoBack.setTooltip(new Tooltip("letzte Filtereinstellung wieder herstellen"));
-        btnGoForward.setGraphic(PIconFactory.PICON.BTN_FORWARD.getFontIcon());
+        btnGoForward.setGraphic(PIconFactory.PICON.BTN_FORWARD_SMALL.getFontIcon());
+        btnGoForward.getStyleClass().add("btnSmall");
         btnGoForward.setOnAction(a -> progData.actFilmFilterWorker.goForward());
         btnGoForward.disableProperty().bind(progData.actFilmFilterWorker.forwardPossibleProperty().not());
         progData.actFilmFilterWorker.forwardPossibleProperty().addListener((v, o, n) -> System.out.println(progData.actFilmFilterWorker.forwardPossibleProperty().getValue().toString()));
@@ -329,7 +330,7 @@ public class PaneFilmFilter extends VBox {
     }
 
     private void addFilter() {
-        final Button btnHelpFilter = P2Button.helpButton(progData.primaryStage, "Infos über die Filter",
+        final Button btnHelpFilter = PIconFactory.getHelpButtonSmall(progData.primaryStage, "Infos über die Filter",
                 HelpText.FILTER_INFO);
 
         final VBox vBox = new VBox();
@@ -402,7 +403,7 @@ public class PaneFilmFilter extends VBox {
         hBoxClear.setAlignment(Pos.CENTER_RIGHT);
         hBoxClear.getChildren().addAll(btnGoBack, btnGoForward,
                 P2GuiTools.getHBoxGrower(),
-                btnClearFilter, btnHelpFilter);
+                btnHelpFilter, btnClearFilter);
 
 
         // ===============

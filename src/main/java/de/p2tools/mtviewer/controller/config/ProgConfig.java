@@ -130,7 +130,7 @@ public class ProgConfig extends P2DataProgConfig {
     public static IntegerProperty SYSTEM_CONFIG_DIALOG_FILM = new SimpleIntegerProperty(-1);
     public static IntegerProperty SYSTEM_CONFIG_DIALOG_DOWNLOAD = new SimpleIntegerProperty(-1);
     public static IntegerProperty SYSTEM_CONFIG_DIALOG_PLAY = new SimpleIntegerProperty(-1);
-    public static BooleanProperty SYSTEM_SMALL_ROW_TABLE_FILM = addBoolProp("system-small-row-table-film", Boolean.FALSE);
+    public static BooleanProperty SYSTEM_SMALL_ROW_TABLE_FILM = addBoolProp("system-small-row-table-film", Boolean.TRUE);
     public static BooleanProperty SYSTEM_SMALL_ROW_TABLE_DOWNLOAD = addBoolProp("system-small-row-table-download", Boolean.TRUE);
 
     // Configs
@@ -229,8 +229,6 @@ public class ProgConfig extends P2DataProgConfig {
     public static StringProperty SYSTEM_GUI_TITLE_BAR_SEL_DARK_2 = addStrProp("system-gui-title-bar-sel-dark-2", ProgConst.GUI_TITLE_BAR_SEL_DARK_2);
     public static StringProperty SYSTEM_GUI_TITLE_BAR_SEL_LIGHT_1 = addStrProp("system-gui-title-bar-sel-light-1", ProgConst.GUI_TITLE_BAR_SEL_LIGHT_1);
     public static StringProperty SYSTEM_GUI_TITLE_BAR_SEL_LIGHT_2 = addStrProp("system-gui-title-bar-sel-light2", ProgConst.GUI_TITLE_BAR_SEL_LIGHT_2);
-
-
     // Einstellungen Filmliste
     public static BooleanProperty SYSTEM_LOAD_FILMS_ON_START = addBoolProp("system-load-films-on-start", Boolean.TRUE);
     public static StringProperty SYSTEM_LOAD_NOT_SENDER = addStrProp("system-load-not-sender", "");
@@ -240,6 +238,7 @@ public class ProgConfig extends P2DataProgConfig {
     // Fenstereinstellungen
     public static StringProperty SYSTEM_SIZE_GUI = addStrProp("system-size-gui", "1000:800");
     public static StringProperty SYSTEM_SIZE_DIALOG_FILMINFO = addStrProp("system-size-dialog-filminfo", "600:800");
+    public static BooleanProperty SYSTEM_GUI_LAST_START_WAS_MAXIMISED = addBoolProp("system-gui-last-start-was-maximised", Boolean.FALSE); // Programm wurde Maximised beendet
 
     // INFO
     public static BooleanProperty INFO__IS_SHOWING = addBoolProp("info--is-showing", Boolean.TRUE);

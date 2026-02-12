@@ -18,13 +18,17 @@ package de.p2tools.mtviewer;
 import de.p2tools.mtviewer.controller.ProgQuit;
 import de.p2tools.mtviewer.controller.ProgStartAfterGui;
 import de.p2tools.mtviewer.controller.ProgStartBeforeGui;
-import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.p2lib.css.P2CssFactory;
+import de.p2tools.p2lib.dialogs.dialog.P2DialogExtra;
 import de.p2tools.p2lib.guitools.P2GuiSize;
+import de.p2tools.p2lib.tools.P2InfoFactory;
 import de.p2tools.p2lib.tools.duration.P2Duration;
+import de.p2tools.p2lib.tools.log.P2Log;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -32,8 +36,8 @@ public class MTViewer extends Application {
 
     private static final String LOG_TEXT_PROGRAMSTART = "Dauer Programmstart";
     protected ProgData progData;
-    Scene scene = null;
     private Stage primaryStage;
+    private boolean done = false;
 
     public static void main(String[] args) {
         launch(args);
@@ -64,7 +68,7 @@ public class MTViewer extends Application {
         try {
             progData.mtViewerController = new MTViewerController();
 
-            scene = new Scene(progData.mtViewerController,
+            Scene scene = new Scene(progData.mtViewerController,
                     P2GuiSize.getSceneSize(ProgConfig.SYSTEM_SIZE_GUI, true),
                     P2GuiSize.getSceneSize(ProgConfig.SYSTEM_SIZE_GUI, false));
             primaryStage.setScene(scene);
@@ -74,18 +78,52 @@ public class MTViewer extends Application {
                 ProgQuit.quit();
             });
 
-            //Pos setzen
-            P2GuiSize.setPos(ProgConfig.SYSTEM_SIZE_GUI, primaryStage);
-            scene.heightProperty().addListener((v, o, n) -> P2GuiSize.getSize(ProgConfig.SYSTEM_SIZE_GUI, primaryStage));
-            scene.widthProperty().addListener((v, o, n) -> P2GuiSize.getSize(ProgConfig.SYSTEM_SIZE_GUI, primaryStage));
-            primaryStage.xProperty().addListener((v, o, n) -> P2GuiSize.getSize(ProgConfig.SYSTEM_SIZE_GUI, primaryStage));
-            primaryStage.yProperty().addListener((v, o, n) -> P2GuiSize.getSize(ProgConfig.SYSTEM_SIZE_GUI, primaryStage));
 
-            P2CssFactory.addP2CssToScene(scene); // und jetzt noch CSS einstellen
-            ProgConfig.SYSTEM_DARK_THEME.addListener((u, o, n) -> {
-                ProgColorList.setColorTheme();
+            if (P2InfoFactory.getOs() == P2InfoFactory.OperatingSystemType.LINUX) {
+                // braucht's bei aktuellem GNOME
+                if (ProgData.firstProgramStart) {
+                    P2Log.sysLog("FirstProgramStart & LINUX: Resizable: false");
+                    primaryStage.setResizable(false);
+                    scene.setOnMouseEntered(mouseEvent -> {
+                        Platform.runLater(() -> {
+                            if (!done) {
+                                done = true;
+                                P2GuiSize.setSizePos(ProgConfig.SYSTEM_SIZE_GUI, primaryStage, null);
+                                primaryStage.setResizable(true);
+                                P2Log.sysLog("FirstProgramStart & LINUX: Resizable: true");
+                            }
+                        });
+                    });
+                }
+            }
+
+            if (ProgConfig.SYSTEM_GUI_LAST_START_WAS_MAXIMISED.get()) {
+                //========= MAXIMISED ===========
+                // dann wars maximiert oder soll immer so gestartet werden
+                P2GuiSize.setPos(ProgConfig.SYSTEM_SIZE_GUI, primaryStage);
+                primaryStage.setMaximized(true);
+
+                if (P2InfoFactory.getOs() == P2InfoFactory.OperatingSystemType.LINUX) {
+                    primaryStage.setOnShown(e -> {
+                        startMaximised();
+                    });
+                }
+
+            } else {
+                //========= !MAXIMISED ===========
+                primaryStage.setOnShowing(e -> P2GuiSize.setSizePos(ProgConfig.SYSTEM_SIZE_GUI, primaryStage, null));
+                primaryStage.setOnShown(e -> P2GuiSize.setSizePos(ProgConfig.SYSTEM_SIZE_GUI, primaryStage, null));
+            }
+            primaryStage.setOnCloseRequest(e -> {
+                //beim Beenden
+                e.consume();
+                ProgQuit.quit();
             });
 
+            P2CssFactory.addP2CssToScene(scene); // und jetzt noch CSS einstellen
+            primaryStage.iconifiedProperty().addListener((u, o, n) -> {
+                P2DialogExtra.getDialogList().forEach(d -> d.getStage().setIconified(n));
+            });
             primaryStage.show();
 
             if (ProgData.firstProgramStart) {
@@ -96,5 +134,26 @@ public class MTViewer extends Application {
         } catch (final Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void startMaximised() {
+        // KDE braucht da ein EXTRA!
+        new Thread(new Task<Void>() {
+            @Override
+            protected Void call() {
+                try {
+                    wait(1_000);
+                } catch (Exception ignore) {
+                }
+                Platform.runLater(() -> {
+                    if (ProgData.getInstance().primaryStage.isShowing()) {
+                        P2GuiSize.getSize(ProgConfig.SYSTEM_SIZE_GUI, ProgData.getInstance().primaryStage);
+                        P2GuiSize.setSizePos(ProgConfig.SYSTEM_SIZE_GUI, primaryStage, null);
+                        // primaryStage.setMaximized(false); // geht in GNOME wieder nicht
+                    }
+                });
+                return null;
+            }
+        }).start();
     }
 }

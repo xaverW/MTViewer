@@ -45,6 +45,7 @@ public class ProgStartAfterGui {
         //die gespeicherte Filmliste laden
         LoadFilmFactory.loadFilmListProgStart();
         LoadAudioFactory.loadAudioListProgStart();
+        ProgData.getInstance().colorWorker.setColor(); // Farben einrichten
     }
 
     public static void startMsg() {

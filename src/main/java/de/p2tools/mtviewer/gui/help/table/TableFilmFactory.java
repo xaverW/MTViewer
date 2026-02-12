@@ -153,11 +153,11 @@ public class TableFilmFactory {
                 final Button btnSave;
 
                 btnPlay = new Button("");
-                btnPlay.getStyleClass().addAll("btnFunction", "btnFuncTable");
+                btnPlay.getStyleClass().addAll("pFuncBtn", "btnTable");
                 btnPlay.setGraphic(PIconFactory.PICON.TABLE_FILM_PLAY.getFontIcon());
 
                 btnSave = new Button("");
-                btnSave.getStyleClass().addAll("btnFunction", "btnFuncTable");
+                btnSave.getStyleClass().addAll("pFuncBtn", "btnTable");
                 btnSave.setGraphic(PIconFactory.PICON.TABLE_FILM_SAVE.getFontIcon());
 
                 btnPlay.setOnAction(e -> {

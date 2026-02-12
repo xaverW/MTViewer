@@ -16,7 +16,10 @@
 
 package de.p2tools.mtviewer.controller;
 
-import de.p2tools.mtviewer.controller.config.*;
+import de.p2tools.mtviewer.controller.config.ProgConfig;
+import de.p2tools.mtviewer.controller.config.ProgConst;
+import de.p2tools.mtviewer.controller.config.ProgData;
+import de.p2tools.mtviewer.controller.config.ProgInfos;
 import de.p2tools.mtviewer.gui.startdialog.StartDialogController;
 import de.p2tools.p2lib.P2LibInit;
 import de.p2tools.p2lib.configfile.ConfigFile;
@@ -74,8 +77,13 @@ public class ProgStartBeforeGui {
                         "de/p2tools/mtviewer/css/pFuncTable.css",
                         "de/p2tools/mtviewer/css/pFuncToolBar.css",
                         "de/p2tools/mtviewer/css/pFuncTips.css",
-                        "de/p2tools/mtviewer/css/pFuncStartDialog.css"},
-                new String[]{"de/p2tools/mtviewer/css/mtfx-dark.css"},
+                        "de/p2tools/mtviewer/css/pFuncStartDialog.css"
+                },
+
+                new String[]{
+                        "de/p2tools/mtviewer/css/mtfx-dark.css"
+                },
+
                 ProgData.getInstance().cssProp,
                 ProgConfig.SYSTEM_FONT_SIZE,
 
@@ -147,6 +155,6 @@ public class ProgStartBeforeGui {
 
     private static void initAfterLoad() {
         ProgConfigUpdate.update(); // falls es ein Programmupdate gab, Configs anpassen
-        ProgColorList.setColorTheme(); // Farben einrichten
+//        ProgColorList.setColorTheme(); // Farben einrichten
     }
 }

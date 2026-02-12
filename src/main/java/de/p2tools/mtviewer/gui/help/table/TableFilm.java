@@ -140,6 +140,7 @@ public class TableFilm extends PTable<FilmData> {
         senderColumn.setPrefWidth(80);
         themeColumn.setPrefWidth(180);
         titleColumn.setPrefWidth(230);
+        startColumn.setPrefWidth(120);
 
         getColumns().addAll(
                 markColumn, nrColumn,

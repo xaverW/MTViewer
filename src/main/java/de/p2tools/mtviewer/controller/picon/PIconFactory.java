@@ -32,6 +32,8 @@ public class PIconFactory {
         BTN_EDIT("mdomz-settings", 20),
         BTN_BACK("gmi-arrow-back-ios", 20),
         BTN_FORWARD("gmi-arrow-forward-ios", 20),
+        BTN_BACK_SMALL("gmi-arrow-back-ios"),
+        BTN_FORWARD_SMALL("gmi-arrow-forward-ios"),
         BTN_QUIT_DIALOG("mdoal-forward", 20),
         BTN_PLAY("gmi-play-arrow", 20),
         BTN_UP_DOWN_H("mdi2p-pan-horizontal", 20),
@@ -179,6 +181,10 @@ public class PIconFactory {
 
     public static Button getHelpButton(Stage stage, String header, String helpText) {
         return P2Button.helpButton(stage, PICON.BTN_HELP.getFontIcon(), header, helpText);
+    }
+
+    public static Button getHelpButtonSmall(Stage stage, String header, String helpText) {
+        return P2Button.helpButtonSmall(stage, header, helpText);
     }
 
     public static Button getHelpButton(ObjectProperty<Stage> stage, String header, String helpText) {
