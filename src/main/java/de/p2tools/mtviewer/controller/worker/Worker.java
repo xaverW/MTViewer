@@ -23,7 +23,6 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.film.FilmListMtc;
 import de.p2tools.mtviewer.controller.filmfilter.FilmFilter;
-import de.p2tools.mtviewer.gui.help.TipOfDayFactory;
 import de.p2tools.p2lib.mediathek.film.P2FilmlistFactory;
 import de.p2tools.p2lib.mediathek.filmdata.FilmData;
 import de.p2tools.p2lib.mediathek.filmlistload.P2LoadFilmlist;
@@ -105,7 +104,6 @@ public class Worker {
                 if (!doneAtProgramStart) {
                     doneAtProgramStart = true;
                     UpdateCheckFactory.checkProgUpdate();
-                    TipOfDayFactory.showDialog(ProgData.getInstance(), false);
                 }
                 // MARK markiert dass es die Filmliste ist!
                 progData.filmlist.forEach(f -> f.setMark(true));

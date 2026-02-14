@@ -50,8 +50,10 @@ public class ControllerPlay extends P2AccordionPane {
     @Override
     public Collection<TitledPane> createPanes() {
         Collection<TitledPane> result = new ArrayList<TitledPane>();
+
         panePlay = new PanePlay(stage);
         panePlay.make(result);
+
         paneEditFilter = new PaneEditFilter(stage);
         paneEditFilter.make(result);
 

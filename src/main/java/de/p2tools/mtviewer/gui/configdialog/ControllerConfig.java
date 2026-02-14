@@ -66,24 +66,34 @@ public class ControllerConfig extends P2AccordionPane {
     @Override
     public Collection<TitledPane> createPanes() {
         Collection<TitledPane> result = new ArrayList<TitledPane>();
+
         paneConfig = new PaneConfig(stage);
         paneConfig.make(result);
+
         paneColorGui = new PaneColorGui(stage);
         paneColorGui.make(result);
+
         paneColorTable = new PaneColorTable(stage);
         paneColorTable.make(result);
+
         paneGeo = new PaneGeo(stage);
         paneGeo.make(result);
+
         paneKeySize = new PaneKeySize(stage, progData);
         paneKeySize.make(result);
+
         paneShortcut = new PaneShortcut(stage);
         paneShortcut.make(result);
+
         paneProg = new PaneProg(stage);
         paneProg.make(result);
+
         paneLog = new PaneLogFile(stage);
         paneLog.make(result);
+
         paneUpdate = new PaneUpdate(stage);
         paneUpdate.make(result);
+
         return result;
     }
 }

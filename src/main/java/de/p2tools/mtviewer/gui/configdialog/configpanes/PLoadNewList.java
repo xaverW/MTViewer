@@ -16,38 +16,41 @@
 
 package de.p2tools.mtviewer.gui.configdialog.configpanes;
 
+import de.p2tools.mtviewer.controller.load.LoadAudioFactory;
 import de.p2tools.mtviewer.controller.load.LoadFilmFactory;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.guitools.P2GuiTools;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.TitledPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 
-public class PaneStation {
+public class PLoadNewList extends VBox {
 
-    private PStation pStation;
-
-    public PaneStation(Stage stage) {
-        pStation = new PStation(stage);
+    public PLoadNewList() {
+        make();
     }
 
     public void close() {
-        pStation.close();
     }
 
-    public TitledPane make() {
-        Button btnLoad = new Button("_Filmliste mit diesen Einstellungen neu laden");
-        btnLoad.setTooltip(new Tooltip("Eine komplette neue Filmliste laden.\n" +
-                "Geänderte Einstellungen für das Laden der Filmliste werden so sofort übernommen"));
-        btnLoad.setOnAction(event -> LoadFilmFactory.loadFilmListButton(true));
-        HBox hBox = new HBox(P2LibConst.SPACING_HBOX);
-        hBox.getChildren().add(btnLoad);
-        hBox.setAlignment(Pos.CENTER_RIGHT);
-        pStation.getChildren().addAll(P2GuiTools.getVBoxGrower(), hBox);
+    private void make() {
+        Button btnLoadFilm = new Button("_Filmliste mit diesen Einstellungen neu laden");
+        btnLoadFilm.setTooltip(new Tooltip("Eine komplette neue Filmliste laden.\n" +
+                "Geänderte Einstellungen für das Laden der Liste werden so sofort übernommen"));
+        btnLoadFilm.setOnAction(event -> LoadFilmFactory.loadFilmListButton(true));
 
-        return new TitledPane("Sender die nicht interessieren, abschalten", pStation);
+        Button btnLoadAudio = new Button("_Audioliste mit diesen Einstellungen neu laden");
+        btnLoadAudio.setTooltip(new Tooltip("Eine komplette neue Audioliste laden.\n" +
+                "Geänderte Einstellungen für das Laden der Liste werden so sofort übernommen"));
+        btnLoadAudio.setOnAction(event -> LoadAudioFactory.loadAudioListButton());
+
+        HBox hBox = new HBox(P2LibConst.SPACING_HBOX);
+        hBox.getChildren().addAll(btnLoadAudio, btnLoadFilm);
+        hBox.setAlignment(Pos.CENTER_RIGHT);
+        this.getChildren().addAll(P2GuiTools.getVBoxGrower(), hBox);
+        VBox.setVgrow(this, Priority.ALWAYS);
     }
 }

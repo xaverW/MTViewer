@@ -16,66 +16,76 @@
 
 package de.p2tools.mtviewer.gui.configdialog.configpanes;
 
-import de.p2tools.mtviewer.controller.load.LoadAudioFactory;
-import de.p2tools.mtviewer.controller.load.LoadFilmFactory;
+import de.p2tools.mtviewer.controller.config.ProgConfig;
+import de.p2tools.mtviewer.gui.help.HelpText;
 import de.p2tools.p2lib.P2LibConst;
-import de.p2tools.p2lib.guitools.P2GuiTools;
+import de.p2tools.p2lib.guitools.P2Button;
 import de.p2tools.p2lib.guitools.grid.P2GridConstraints;
+import de.p2tools.p2lib.guitools.ptoggleswitch.P2ToggleSwitch;
 import javafx.beans.property.BooleanProperty;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.Collection;
 
 public class PaneFilmLoad {
 
-    private final PFilmLoad pFilmLoad;
+    private final P2ToggleSwitch tglLoad = new P2ToggleSwitch("Filmliste/Audioliste beim Programmstart laden");
+    private final P2ToggleSwitch tglRemoveDiacritic = new P2ToggleSwitch("Diakritische Zeichen ändern");
+    private final BooleanProperty diacriticChanged;
+    private final Stage stage;
 
     public PaneFilmLoad(Stage stage, BooleanProperty diacriticChanged) {
-        this.pFilmLoad = new PFilmLoad(stage, diacriticChanged);
+        this.stage = stage;
+        this.diacriticChanged = diacriticChanged;
     }
 
     public void close() {
-        pFilmLoad.close();
+        tglLoad.selectedProperty().unbindBidirectional(ProgConfig.SYSTEM_LOAD_FILMS_ON_START);
+        tglRemoveDiacritic.selectedProperty().unbindBidirectional(ProgConfig.SYSTEM_REMOVE_DIACRITICS);
     }
 
     public TitledPane make(Collection<TitledPane> result) {
-        Button btnLoadFilm = new Button("_Filmliste mit diesen Einstellungen neu laden");
-        btnLoadFilm.setTooltip(new Tooltip("Eine komplette neue Filmliste laden.\n" +
-                "Geänderte Einstellungen für das Laden der Liste werden so sofort übernommen"));
-        btnLoadFilm.setOnAction(event -> LoadFilmFactory.loadFilmListButton(true));
-
-        Button btnLoadAudio = new Button("_Audioliste mit diesen Einstellungen neu laden");
-        btnLoadAudio.setTooltip(new Tooltip("Eine komplette neue Audioliste laden.\n" +
-                "Geänderte Einstellungen für das Laden der Liste werden so sofort übernommen"));
-        btnLoadAudio.setOnAction(event -> LoadAudioFactory.loadAudioListButton());
+        final VBox vBox = new VBox(10);
+        vBox.setPadding(new Insets(P2LibConst.PADDING));
 
         final GridPane gridPane = new GridPane();
         gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
         gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
-        gridPane.setPadding(new Insets(P2LibConst.PADDING));
-        gridPane.getColumnConstraints().addAll(P2GridConstraints.getCcPrefSize());
 
-        gridPane.add(btnLoadFilm, 0, 0);
-        gridPane.add(btnLoadAudio, 0, 1);
+        tglLoad.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_LOAD_FILMS_ON_START);
+        final Button btnHelpLoad = P2Button.helpButton(stage, "Filmliste/Audioliste laden",
+                HelpText.LOAD_FILMLIST_PROGRAMSTART);
 
-        btnLoadFilm.setMaxWidth(Double.MAX_VALUE);
-        GridPane.setVgrow(btnLoadFilm, Priority.ALWAYS);
-        HBox hBox = new HBox();
-        hBox.getChildren().add(gridPane);
-        hBox.setAlignment(Pos.CENTER_RIGHT);
+        //Diacritic
+        tglRemoveDiacritic.setMaxWidth(Double.MAX_VALUE);
+        tglRemoveDiacritic.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_REMOVE_DIACRITICS);
+        tglRemoveDiacritic.selectedProperty().addListener((u, o, n) -> diacriticChanged.setValue(true));
+        final Button btnHelpDia = P2Button.helpButton(stage, "Diakritische Zeichen",
+                HelpText.DIAKRITISCHE_ZEICHEN);
 
-        pFilmLoad.getChildren().addAll(P2GuiTools.getVBoxGrower(), hBox);
+        int row = 0;
+        gridPane.add(tglLoad, 0, row);
+        gridPane.add(btnHelpLoad, 1, row);
 
-        TitledPane tpConfig = new TitledPane("Filmliste/Audioliste laden", pFilmLoad);
-        result.add(tpConfig);
+        ++row;
+        gridPane.add(tglRemoveDiacritic, 0, ++row);
+        gridPane.add(btnHelpDia, 1, row);
+        gridPane.getColumnConstraints().addAll(P2GridConstraints.getCcComputedSizeAndHgrow(),
+                P2GridConstraints.getCcPrefSize()
+        );
+
+        vBox.getChildren().add(gridPane);
+        vBox.getChildren().add(new PLoadNewList());
+
+        TitledPane tpConfig = new TitledPane("Filmliste/Audioliste laden", vBox);
+        if (result != null) {
+            result.add(tpConfig);
+        }
         return tpConfig;
     }
 }

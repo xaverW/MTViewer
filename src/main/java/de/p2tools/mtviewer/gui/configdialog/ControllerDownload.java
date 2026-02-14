@@ -53,12 +53,16 @@ public class ControllerDownload extends P2AccordionPane {
     @Override
     public Collection<TitledPane> createPanes() {
         Collection<TitledPane> titledPanes = new ArrayList<>();
+
         paneDownload = new PaneDownload(stage);
         paneDownload.makePane(titledPanes);
+
         paneSet = new PaneSet(stage);
         paneSet.makePane(titledPanes);
+
         paneReplace = new PaneReplace(stage);
         paneReplace.makePane(titledPanes);
+
         return titledPanes;
     }
 }

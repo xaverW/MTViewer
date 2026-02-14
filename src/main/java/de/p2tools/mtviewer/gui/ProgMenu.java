@@ -26,7 +26,6 @@ import de.p2tools.mtviewer.controller.update.SearchProgramUpdate;
 import de.p2tools.mtviewer.gui.configdialog.ConfigDialogController;
 import de.p2tools.mtviewer.gui.dialog.AboutDialogController;
 import de.p2tools.mtviewer.gui.dialog.ResetDialogController;
-import de.p2tools.mtviewer.gui.help.TipOfDayFactory;
 import de.p2tools.p2lib.guitools.P2Open;
 import de.p2tools.p2lib.tools.shortcut.P2ShortcutWorker;
 import javafx.scene.control.*;
@@ -104,15 +103,13 @@ public class ProgMenu extends MenuButton {
         });
         final MenuItem miReset = new MenuItem("Alle Programmeinstellungen zurücksetzen");
         miReset.setOnAction(event -> new ResetDialogController(progData));
-        final MenuItem miToolTip = new MenuItem("Tip des Tages");
-        miToolTip.setOnAction(a -> TipOfDayFactory.showDialog(progData, true));
         final MenuItem miSearchUpdate = new MenuItem("Gibt's ein Update?");
         miSearchUpdate.setOnAction(a -> new SearchProgramUpdate(progData, progData.primaryStage).searchNewProgramVersion(true));
         final MenuItem miAbout = new MenuItem("Über dieses Programm");
         miAbout.setOnAction(event -> new AboutDialogController(ProgData.getInstance()).showDialog());
 
         final Menu mHelp = new Menu("Hilfe");
-        mHelp.getItems().addAll(miUrlHelp, miReset, miToolTip, miSearchUpdate, new SeparatorMenuItem(), miAbout);
+        mHelp.getItems().addAll(miUrlHelp, miReset, miSearchUpdate, new SeparatorMenuItem(), miAbout);
         getItems().addAll(mHelp);
 
         //=========================
