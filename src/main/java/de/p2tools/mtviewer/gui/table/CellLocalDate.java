@@ -15,37 +15,34 @@
  */
 
 
-package de.p2tools.mtviewer.gui.help.table;
+package de.p2tools.mtviewer.gui.table;
 
-import de.p2tools.mtviewer.controller.config.ProgConst;
-import de.p2tools.mtviewer.controller.data.download.DownloadData;
+import de.p2tools.p2lib.tools.date.P2LDateFactory;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
 
-public class CellNo<S, T> extends TableCell<S, T> {
+import java.time.LocalDate;
 
-    public final Callback<TableColumn<DownloadData, Integer>, TableCell<DownloadData, Integer>> cellFactory
-            = (final TableColumn<DownloadData, Integer> param) -> {
+public class CellLocalDate<S, T> extends TableCell<S, T> {
 
-        final TableCell<DownloadData, Integer> cell = new TableCell<DownloadData, Integer>() {
+    public final Callback<TableColumn<S, LocalDate>, TableCell<S, LocalDate>> cellFactory
+            = (final TableColumn<S, LocalDate> param) -> {
+
+        final TableCell<S, LocalDate> cell = new TableCell<>() {
 
             @Override
-            public void updateItem(Integer item, boolean empty) {
+            public void updateItem(LocalDate item, boolean empty) {
                 super.updateItem(item, empty);
+
                 if (item == null || empty) {
                     setGraphic(null);
                     setText(null);
                     return;
                 }
 
-                if (item == ProgConst.NUMBER_NOT_EXISTS) {
-                    setGraphic(null);
-                    setText(null);
-                } else {
-                    setGraphic(null);
-                    setText(item + "");
-                }
+                setGraphic(null);
+                setText(P2LDateFactory.toString(item));
             }
         };
         return cell;

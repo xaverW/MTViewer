@@ -15,7 +15,7 @@
  */
 
 
-package de.p2tools.mtviewer.gui.help.table;
+package de.p2tools.mtviewer.gui.table;
 
 import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;

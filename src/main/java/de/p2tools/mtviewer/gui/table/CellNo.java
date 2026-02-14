@@ -15,18 +15,20 @@
  */
 
 
-package de.p2tools.mtviewer.gui.help.table;
+package de.p2tools.mtviewer.gui.table;
 
+import de.p2tools.mtviewer.controller.config.ProgConst;
+import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
 
-public class CellDuration<S, T> extends TableCell<S, T> {
+public class CellNo<S, T> extends TableCell<S, T> {
 
-    public final Callback<TableColumn<S, Integer>, TableCell<S, Integer>> cellFactory
-            = (final TableColumn<S, Integer> param) -> {
+    public final Callback<TableColumn<DownloadData, Integer>, TableCell<DownloadData, Integer>> cellFactory
+            = (final TableColumn<DownloadData, Integer> param) -> {
 
-        final TableCell<S, Integer> cell = new TableCell<>() {
+        final TableCell<DownloadData, Integer> cell = new TableCell<DownloadData, Integer>() {
 
             @Override
             public void updateItem(Integer item, boolean empty) {
@@ -37,7 +39,7 @@ public class CellDuration<S, T> extends TableCell<S, T> {
                     return;
                 }
 
-                if (item == 0) {
+                if (item == ProgConst.NUMBER_NOT_EXISTS) {
                     setGraphic(null);
                     setText(null);
                 } else {
