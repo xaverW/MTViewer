@@ -23,6 +23,7 @@ import de.p2tools.p2lib.mediathek.filmdata.FilmDataXml;
 import de.p2tools.p2lib.tools.duration.P2Duration;
 import javafx.beans.property.ListProperty;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -31,6 +32,15 @@ public class FilmToolsFactory {
     private static int countDouble = 0;
 
     private FilmToolsFactory() {
+    }
+
+    /**
+     * liefert die String-Liste der Sender die _NICHT_ geladen werden sollen
+     *
+     * @return
+     */
+    public static ArrayList<String> getSenderListNotToLoad() {
+        return new ArrayList<>(Arrays.asList(ProgConfig.SYSTEM_LOAD_NOT_SENDER.getValue().split(",")));
     }
 
     public static int markFilms(List<String> logList, ListProperty<? extends FilmData> filmList) {

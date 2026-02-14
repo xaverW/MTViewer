@@ -17,19 +17,12 @@
 package de.p2tools.mtviewer.gui.startdialog;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
-import de.p2tools.mtviewer.gui.help.HelpText;
 import de.p2tools.p2lib.P2LibConst;
-import de.p2tools.p2lib.guitools.P2Button;
 import de.p2tools.p2lib.guitools.P2GuiTools;
 import de.p2tools.p2lib.guitools.grid.P2GridConstraints;
-import de.p2tools.p2lib.guitools.ptoggleswitch.P2ToggleSwitch;
-import javafx.event.EventHandler;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -38,78 +31,46 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class StartPaneColorMode {
-    private final Stage stage;
-    private final P2ToggleSwitch tglDarkTheme = new P2ToggleSwitch("Dunkles Erscheinungsbild der Programmoberfläche");
-    private final P2ToggleSwitch tglBlackWhiteIcon = new P2ToggleSwitch("Schwarz-Weiße Icons");
-    private final HBox hBoxImage0 = new HBox(); // !weiß / !dark
-    private final HBox hBoxImage1 = new HBox(); // weiß / !dark
-    private final HBox hBoxImage2 = new HBox(); // !weiß / dark
-    private final HBox hBoxImage3 = new HBox(); // weiß / dark
+public class StartPaneColorMode extends VBox {
+    private final HBox hBoxLight1 = new HBox();
+    private final HBox hBoxLight2 = new HBox();
+    private final HBox hBoxDark1 = new HBox();
+    private final HBox hBoxDark2 = new HBox();
 
     public StartPaneColorMode(Stage stage) {
-        this.stage = stage;
     }
 
     public void close() {
-        tglDarkTheme.selectedProperty().unbindBidirectional(ProgConfig.SYSTEM_DARK_THEME_START);
-        tglBlackWhiteIcon.selectedProperty().unbindBidirectional(ProgConfig.SYSTEM_BLACK_WHITE_ICON_START);
     }
 
-    public TitledPane make() {
+    public void make() {
         makeImage();
         setHBox();
-        VBox vBox = new VBox(10);
 
         HBox hBox = new HBox();
-        hBox.getStyleClass().add("extra-pane");
+        hBox.getStyleClass().add("startInfo_2");
         hBox.setPadding(new Insets(P2LibConst.PADDING));
         Label lbl = new Label("Wie soll die Programmoberfläche aussehen?");
         lbl.setWrapText(true);
         lbl.setPrefWidth(500);
         hBox.getChildren().add(lbl);
-        vBox.getChildren().addAll(P2GuiTools.getVDistance(5), hBox);
+        getChildren().addAll(StartFactory.getTitle("Farbe"), hBox, P2GuiTools.getHDistance(20));
 
-        tglDarkTheme.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_DARK_THEME_START);
-        final Button btnHelpTheme = P2Button.helpButton(stage, "Erscheinungsbild der Programmoberfläche",
-                HelpText.DARK_THEME);
-        tglBlackWhiteIcon.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_BLACK_WHITE_ICON_START);
-        final Button btnHelpIcon = P2Button.helpButton(stage, "Erscheinungsbild der Programmoberfläche",
-                HelpText.BLACK_WHITE_ICON);
-
-        ProgConfig.SYSTEM_DARK_THEME_START.addListener((u, o, n) -> {
+        ProgConfig.SYSTEM_GUI_THEME_1_START.addListener((u, o, n) -> {
             setHBox();
         });
-        ProgConfig.SYSTEM_BLACK_WHITE_ICON_START.addListener((u, o, n) -> {
+        ProgConfig.SYSTEM_DARK_START.addListener((u, o, n) -> {
             setHBox();
         });
-
-        int row = 0;
-        final GridPane gridPane = new GridPane();
-        gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
-        gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
-
-        gridPane.add(tglDarkTheme, 0, row);
-        gridPane.add(btnHelpTheme, 1, row);
-        GridPane.setHalignment(btnHelpTheme, HPos.RIGHT);
-
-        gridPane.add(tglBlackWhiteIcon, 0, ++row);
-        gridPane.add(btnHelpIcon, 1, row);
-        GridPane.setHalignment(btnHelpIcon, HPos.RIGHT);
-
-        gridPane.getColumnConstraints().addAll(P2GridConstraints.getCcComputedSizeAndHgrow(),
-                P2GridConstraints.getCcPrefSize());
-        vBox.getChildren().add(gridPane);
 
         final GridPane gridPaneGui = new GridPane();
-        gridPaneGui.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
-        gridPaneGui.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
-        gridPaneGui.setPadding(new Insets(P2LibConst.PADDING));
+        gridPaneGui.setHgap(3);
+        gridPaneGui.setVgap(3);
 
-        gridPaneGui.add(hBoxImage0, 0, 0);
-        gridPaneGui.add(hBoxImage1, 1, 0);
-        gridPaneGui.add(hBoxImage2, 0, 1);
-        gridPaneGui.add(hBoxImage3, 1, 1);
+        gridPaneGui.add(hBoxLight1, 0, 0);
+        gridPaneGui.add(hBoxLight2, 1, 0);
+        gridPaneGui.add(hBoxDark1, 0, 1);
+        gridPaneGui.add(hBoxDark2, 1, 1);
 
         gridPaneGui.getColumnConstraints().addAll(P2GridConstraints.getCcPrefSize(),
                 P2GridConstraints.getCcPrefSize());
@@ -117,118 +78,88 @@ public class StartPaneColorMode {
         HBox hBoxColor = new HBox();
         hBoxColor.setAlignment(Pos.CENTER);
         hBoxColor.getChildren().add(gridPaneGui);
-        vBox.getChildren().add(hBoxColor);
-
-        return new TitledPane("Farbe", vBox);
+        getChildren().add(hBoxColor);
     }
 
     private void setHBox() {
-        int i;
-        if (!ProgConfig.SYSTEM_BLACK_WHITE_ICON_START.get() && !ProgConfig.SYSTEM_DARK_THEME_START.get()) {
-            i = 0;
-        } else if (ProgConfig.SYSTEM_BLACK_WHITE_ICON_START.get() && !ProgConfig.SYSTEM_DARK_THEME_START.get()) {
-            i = 1;
-        } else if (!ProgConfig.SYSTEM_BLACK_WHITE_ICON_START.get() && ProgConfig.SYSTEM_DARK_THEME_START.get()) {
-            i = 2;
-        } else {
-            i = 3;
-        }
-
         final String colorSel = "#4682B4;";
         final String color = "transparent;";
 
-        switch (i) {
-            case 0 -> {
-                hBoxImage0.setStyle("-fx-border-color: " + colorSel + " -fx-border-style: solid; -fx-border-width: 8;");
-                hBoxImage1.setStyle("-fx-border-color: " + color + " -fx-border-style: solid; -fx-border-width: 8;");
-                hBoxImage2.setStyle("-fx-border-color: " + color + " -fx-border-style: solid; -fx-border-width: 8;");
-                hBoxImage3.setStyle("-fx-border-color: " + color + " -fx-border-style: solid; -fx-border-width: 8;");
-            }
-            case 1 -> {
-                hBoxImage0.setStyle("-fx-border-color: " + color + " -fx-border-style: solid; -fx-border-width: 8;");
-                hBoxImage1.setStyle("-fx-border-color: " + colorSel + " -fx-border-style: solid; -fx-border-width: 8;");
-                hBoxImage2.setStyle("-fx-border-color: " + color + " -fx-border-style: solid; -fx-border-width: 8;");
-                hBoxImage3.setStyle("-fx-border-color: " + color + " -fx-border-style: solid; -fx-border-width: 8;");
-            }
-            case 2 -> {
-                hBoxImage0.setStyle("-fx-border-color: " + color + " -fx-border-style: solid; -fx-border-width: 8;");
-                hBoxImage1.setStyle("-fx-border-color: " + color + " -fx-border-style: solid; -fx-border-width: 8;");
-                hBoxImage2.setStyle("-fx-border-color: " + colorSel + " -fx-border-style: solid; -fx-border-width: 8;");
-                hBoxImage3.setStyle("-fx-border-color: " + color + " -fx-border-style: solid; -fx-border-width: 8;");
-            }
-            case 3 -> {
-                hBoxImage0.setStyle("-fx-border-color: " + color + " -fx-border-style: solid; -fx-border-width: 8;");
-                hBoxImage1.setStyle("-fx-border-color: " + color + " -fx-border-style: solid; -fx-border-width: 8;");
-                hBoxImage2.setStyle("-fx-border-color: " + color + " -fx-border-style: solid; -fx-border-width: 8;");
-                hBoxImage3.setStyle("-fx-border-color: " + colorSel + " -fx-border-style: solid; -fx-border-width: 8;");
-            }
+        if (!ProgConfig.SYSTEM_DARK_START.get() && ProgConfig.SYSTEM_GUI_THEME_1_START.get()) {
+            hBoxLight1.setStyle("-fx-border-color: " + colorSel + " -fx-border-style: solid; -fx-border-width: 8;");
+            hBoxLight2.setStyle("-fx-border-color: " + color + " -fx-border-style: solid; -fx-border-width: 8;");
+            hBoxDark1.setStyle("-fx-border-color: " + color + " -fx-border-style: solid; -fx-border-width: 8;");
+            hBoxDark2.setStyle("-fx-border-color: " + color + " -fx-border-style: solid; -fx-border-width: 8;");
+        } else if (!ProgConfig.SYSTEM_DARK_START.get() && !ProgConfig.SYSTEM_GUI_THEME_1_START.get()) {
+            hBoxLight1.setStyle("-fx-border-color: " + color + " -fx-border-style: solid; -fx-border-width: 8;");
+            hBoxLight2.setStyle("-fx-border-color: " + colorSel + " -fx-border-style: solid; -fx-border-width: 8;");
+            hBoxDark1.setStyle("-fx-border-color: " + color + " -fx-border-style: solid; -fx-border-width: 8;");
+            hBoxDark2.setStyle("-fx-border-color: " + color + " -fx-border-style: solid; -fx-border-width: 8;");
+        } else if (ProgConfig.SYSTEM_DARK_START.get() && ProgConfig.SYSTEM_GUI_THEME_1_START.get()) {
+            hBoxLight1.setStyle("-fx-border-color: " + color + " -fx-border-style: solid; -fx-border-width: 8;");
+            hBoxLight2.setStyle("-fx-border-color: " + color + " -fx-border-style: solid; -fx-border-width: 8;");
+            hBoxDark1.setStyle("-fx-border-color: " + colorSel + " -fx-border-style: solid; -fx-border-width: 8;");
+            hBoxDark2.setStyle("-fx-border-color: " + color + " -fx-border-style: solid; -fx-border-width: 8;");
+        } else {
+            hBoxLight1.setStyle("-fx-border-color: " + color + " -fx-border-style: solid; -fx-border-width: 8;");
+            hBoxLight2.setStyle("-fx-border-color: " + color + " -fx-border-style: solid; -fx-border-width: 8;");
+            hBoxDark1.setStyle("-fx-border-color: " + color + " -fx-border-style: solid; -fx-border-width: 8;");
+            hBoxDark2.setStyle("-fx-border-color: " + colorSel + " -fx-border-style: solid; -fx-border-width: 8;");
         }
     }
 
     private void makeImage() {
-        final int size = 350;
-        ImageView iv0 = new ImageView();
-        hBoxImage0.getChildren().add(iv0);
-        String path = "/de/p2tools/mtviewer/res/startdialog/gui_color_" + 0 + ".png";
+        final int size = 250;
+        ImageView ivLight1 = new ImageView();
+        hBoxLight1.getChildren().add(ivLight1);
+        String path = "/de/p2tools/mtviewer/res/startdialog/gui_light_1.png";
         Image image = new Image(path, size, size, true, true);
-        iv0.setSmooth(true);
-        iv0.setImage(image);
-        iv0.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                tglBlackWhiteIcon.setSelected(false);
-                tglDarkTheme.setSelected(false);
-                setHBox();
-                event.consume();
-            }
+        ivLight1.setSmooth(true);
+        ivLight1.setImage(image);
+        ivLight1.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            ProgConfig.SYSTEM_DARK_START.setValue(false);
+            ProgConfig.SYSTEM_GUI_THEME_1_START.setValue(true);
+            setHBox();
+            event.consume();
         });
 
-        ImageView iv1 = new ImageView();
-        hBoxImage1.getChildren().add(iv1);
-        path = "/de/p2tools/mtviewer/res/startdialog/gui_color_" + 1 + ".png";
+        ImageView ivLight2 = new ImageView();
+        hBoxLight2.getChildren().add(ivLight2);
+        path = "/de/p2tools/mtviewer/res/startdialog/gui_light_2.png";
         image = new Image(path, size, size, true, true);
-        iv1.setSmooth(true);
-        iv1.setImage(image);
-        iv1.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                tglBlackWhiteIcon.setSelected(true);
-                tglDarkTheme.setSelected(false);
-                setHBox();
-                event.consume();
-            }
+        ivLight2.setSmooth(true);
+        ivLight2.setImage(image);
+        ivLight2.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            ProgConfig.SYSTEM_DARK_START.setValue(false);
+            ProgConfig.SYSTEM_GUI_THEME_1_START.setValue(false);
+            setHBox();
+            event.consume();
         });
 
-        ImageView iv2 = new ImageView();
-        hBoxImage2.getChildren().add(iv2);
-        path = "/de/p2tools/mtviewer/res/startdialog/gui_color_" + 2 + ".png";
+        ImageView ivDark1 = new ImageView();
+        path = "/de/p2tools/mtviewer/res/startdialog/gui_dark_1.png";
         image = new Image(path, size, size, true, true);
-        iv2.setSmooth(true);
-        iv2.setImage(image);
-        iv2.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                tglBlackWhiteIcon.setSelected(false);
-                tglDarkTheme.setSelected(true);
-                setHBox();
-                event.consume();
-            }
+        ivDark1.setSmooth(true);
+        ivDark1.setImage(image);
+        ivDark1.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            ProgConfig.SYSTEM_DARK_START.setValue(true);
+            ProgConfig.SYSTEM_GUI_THEME_1_START.setValue(true);
+            setHBox();
+            event.consume();
         });
+        hBoxDark1.getChildren().add(ivDark1);
 
-        ImageView iv3 = new ImageView();
-        hBoxImage3.getChildren().add(iv3);
-        path = "/de/p2tools/mtviewer/res/startdialog/gui_color_" + 3 + ".png";
+        ImageView ivDark2 = new ImageView();
+        hBoxDark2.getChildren().add(ivDark2);
+        path = "/de/p2tools/mtviewer/res/startdialog/gui_dark_2.png";
         image = new Image(path, size, size, true, true);
-        iv3.setSmooth(true);
-        iv3.setImage(image);
-        iv3.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                tglBlackWhiteIcon.setSelected(true);
-                tglDarkTheme.setSelected(true);
-                setHBox();
-                event.consume();
-            }
+        ivDark2.setSmooth(true);
+        ivDark2.setImage(image);
+        ivDark2.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            ProgConfig.SYSTEM_DARK_START.setValue(true);
+            ProgConfig.SYSTEM_GUI_THEME_1_START.setValue(false);
+            setHBox();
+            event.consume();
         });
     }
 }

@@ -21,18 +21,20 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.picon.PIconFactory;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.dialogs.P2DirFileChooser;
-import de.p2tools.p2lib.guitools.P2Button;
 import de.p2tools.p2lib.guitools.P2GuiTools;
 import de.p2tools.p2lib.guitools.grid.P2GridConstraints;
 import javafx.geometry.Insets;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class StartPaneDownloadPath {
+public class StartPaneDownloadPath extends VBox {
     private final TextField txtPath = new TextField();
     private final Stage stage;
 
@@ -44,11 +46,9 @@ public class StartPaneDownloadPath {
         txtPath.textProperty().unbindBidirectional(ProgConfig.DOWNLOAD_FILE_PATH);
     }
 
-    public TitledPane make() {
-        VBox vBox = new VBox(10);
-
+    public void make() {
         HBox hBox = new HBox();
-        hBox.getStyleClass().add("extra-pane");
+        hBox.getStyleClass().add("startInfo_2");
         hBox.setPadding(new Insets(P2LibConst.PADDING));
         hBox.setMaxWidth(Double.MAX_VALUE);
         hBox.setMinHeight(Region.USE_PREF_SIZE);
@@ -56,10 +56,10 @@ public class StartPaneDownloadPath {
         lbl.setWrapText(true);
         lbl.setPrefWidth(500);
         hBox.getChildren().add(lbl);
-        vBox.getChildren().addAll(P2GuiTools.getVDistance(5), hBox, P2GuiTools.getVDistance(20));
+        getChildren().addAll(StartFactory.getTitle("Pfad für die Downloads"), hBox, P2GuiTools.getHDistance(20));
 
         GridPane gridPane = new GridPane();
-        gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
+        gridPane.setHgap(15);
         gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
 
         if (ProgData.debug) {
@@ -74,10 +74,11 @@ public class StartPaneDownloadPath {
         btnFile.setGraphic(PIconFactory.PICON.BTN_DIR_OPEN.getFontIcon());
         btnFile.setTooltip(new Tooltip("Einen Pfad zum Speichern auswählen"));
 
-        final Button btnHelp = P2Button.helpButton(stage,
+        final Button btnHelp = PIconFactory.getHelpButton(stage,
                 "Zielverzeichnis",
                 "Hier kann das Verzeichnis angegeben werden, " +
-                        "in dem die Downloads gespeichert werden.");
+                        "in dem die Downloads gespeichert werden. Das Verzeichnis " +
+                        "kann aber auch später wieder geändert werden.");
 
         int row = 0;
         gridPane.add(new Label("Pfad:"), 0, row);
@@ -85,8 +86,6 @@ public class StartPaneDownloadPath {
         gridPane.add(btnFile, 2, row);
         gridPane.add(btnHelp, 3, row);
         gridPane.getColumnConstraints().addAll(P2GridConstraints.getCcPrefSize(), P2GridConstraints.getCcComputedSizeAndHgrow());
-        vBox.getChildren().add(gridPane);
-
-        return new TitledPane("Pfad für die Downloads", vBox);
+        getChildren().add(gridPane);
     }
 }

@@ -19,14 +19,15 @@ package de.p2tools.mtviewer.gui.startdialog;
 import de.p2tools.p2lib.P2LibConst;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class StartPane {
+public class StartPane extends VBox {
     private final Stage stage;
+    final int picSize = 450;
 
     public StartPane(Stage stage) {
         this.stage = stage;
@@ -35,17 +36,16 @@ public class StartPane {
     public void close() {
     }
 
-    public TitledPane makeStart1() {
+    public void makeStart1() {
         HBox hBox = new HBox();
         hBox.setSpacing(25);
-        hBox.setPadding(new Insets(20));
+        hBox.setPadding(new Insets(20, 10, 0, 10));
 
         ImageView iv = new ImageView();
         Image im = getHelpScreen1();
         iv.setSmooth(true);
         iv.setImage(im);
 
-        hBox.getChildren().addAll(iv);
         Label text = new Label("1) Hier kann eine neue Filmliste\n" +
                 "geladen werden." +
 
@@ -71,23 +71,20 @@ public class StartPane {
                 "6) Infos zum Ausgewählten\n" +
                 "Film werden hier angezeigt.");
 
-        hBox.getChildren().add(text);
-
-        TitledPane tpConfig = new TitledPane("Infos zur Programmoberfläche", hBox);
-        return tpConfig;
+        hBox.getChildren().addAll(iv, text);
+        getChildren().addAll(StartFactory.getTitle("Infos zur Programmoberfläche"), hBox);
     }
 
-    public TitledPane makeStart2() {
+    public void makeStart2() {
         HBox hBox = new HBox();
         hBox.setSpacing(25);
-        hBox.setPadding(new Insets(20));
+        hBox.setPadding(new Insets(20, 10, 0, 10));
 
         ImageView iv = new ImageView();
         Image im = getHelpScreen2();
         iv.setSmooth(true);
         iv.setImage(im);
 
-        hBox.getChildren().addAll(iv);
 
         Label text = new Label("1) Mit dem Pluszeichen können" + P2LibConst.LINE_SEPARATOR +
                 "Spalten in der Tabelle" + P2LibConst.LINE_SEPARATOR +
@@ -105,9 +102,8 @@ public class StartPane {
                 "4) Das ist die Liste aller" + P2LibConst.LINE_SEPARATOR +
                 "angelegter Downloads.");
 
-        hBox.getChildren().add(text);
-        TitledPane tpConfig = new TitledPane("Infos zur Programmoberfläche", hBox);
-        return tpConfig;
+        hBox.getChildren().addAll(iv, text);
+        getChildren().addAll(StartFactory.getTitle("Infos zur Programmoberfläche"), hBox);
     }
 
     private javafx.scene.image.Image getHelpScreen1() {

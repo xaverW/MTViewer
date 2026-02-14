@@ -20,13 +20,13 @@ import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.picon.PIconFactory;
 import de.p2tools.p2lib.dialogs.dialog.P2DialogExtra;
 import de.p2tools.p2lib.guitools.P2Button;
+import de.p2tools.p2lib.guitools.P2GuiTools;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
-import javafx.scene.control.TitledPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 
@@ -43,33 +43,19 @@ public class StartDialogController extends P2DialogExtra {
     private static final String STR_DOWN = "Ziel";
     private static final String STR_PATH = "Pfade";
 
-    private final ProgData progData;
-    private boolean ok = false;
+    private final Button btnStart1 = new Button(STR_START_1);
+    private final Button btnStart2 = new Button(STR_START_2);
+    private final Button btnColorMode = new Button(STR_COLOR_MODE);
+    private final Button btnUpdate = new Button(STR_UPDATE);
+    private final Button btnGeo = new Button(STR_GEO);
+    private final Button btnFilm = new Button(STR_FILM);
+    private final Button btnStation = new Button(STR_STATION);
+    private final Button btnDown = new Button(STR_DOWN);
+    private final Button btnPath = new Button(STR_PATH);
 
-    private TilePane tilePane = new TilePane();
-    private StackPane stackpane;
-    private Button btnOk, btnCancel;
-    private Button btnPrev, btnNext;
-
-    private Button btnStart1 = new Button(STR_START_1), btnStart2 = new Button(STR_START_2),
-            btnColorMode = new Button(STR_COLOR_MODE),
-            btnUpdate = new Button(STR_UPDATE),
-            btnGeo = new Button(STR_GEO),
-            btnFilm = new Button(STR_FILM),
-            btnStation = new Button(STR_STATION),
-            btnDown = new Button(STR_DOWN),
-            btnPath = new Button(STR_PATH);
+    private enum State {START_1, START_2, COLOR_MODE, UPDATE, GEO, FILM, STATION, DOWN, PATH;}
 
     private State aktState = State.START_1;
-    private TitledPane tStart1;
-    private TitledPane tStart2;
-    private TitledPane tColorMode;
-    private TitledPane tUpdate;
-    private TitledPane tGeo;
-    private TitledPane tFilm;
-    private TitledPane tStation;
-    private TitledPane tDown;
-    private TitledPane tPath;
 
     private StartPane startPane1;
     private StartPane startPane2;
@@ -80,9 +66,16 @@ public class StartDialogController extends P2DialogExtra {
     private StartPaneStation startPaneStation;
     private StartPaneDownloadPath startPaneDownloadPath;
     private StartPanePath startPanePath;
+    private final VBox vBoxCont = new VBox();
+
+    private boolean ok = false;
+    private Button btnOk, btnCancel;
+    private Button btnPrev, btnNext;
+    private final ProgData progData;
 
     public StartDialogController() {
-        super(null, null, "Starteinstellungen");
+        super(null, null, "Starteinstellungen",
+                true, false, false, DECO.BORDER_VERY_SMALL);
 
         this.progData = ProgData.getInstance();
         init(true);
@@ -120,13 +113,11 @@ public class StartDialogController extends P2DialogExtra {
         tilePane1.setAlignment(Pos.CENTER);
         tilePane1.setHgap(10);
         tilePane1.setVgap(10);
-        getVBoxCont().getChildren().add(tilePane1);
 
         final TilePane tilePane2 = new TilePane();
         tilePane2.setAlignment(Pos.CENTER);
         tilePane2.setHgap(10);
         tilePane2.setVgap(10);
-        getVBoxCont().getChildren().add(tilePane2);
 
         tilePane1.getChildren().addAll(btnStart1, btnStart2);
         tilePane2.getChildren().addAll(btnColorMode, btnUpdate, btnGeo, btnFilm, btnStation, btnDown, btnPath);
@@ -140,10 +131,14 @@ public class StartDialogController extends P2DialogExtra {
         initTopButton(btnStation, State.STATION);
         initTopButton(btnDown, State.DOWN);
         initTopButton(btnPath, State.PATH);
+
+        VBox.setVgrow(vBoxCont, Priority.ALWAYS);
+        getVBoxCont().setPadding(new Insets(5));
+        getVBoxCont().getChildren().addAll(tilePane1, tilePane2, P2GuiTools.getHDistance(5), vBoxCont);
     }
 
     private void initTopButton(Button btn, State state) {
-        btn.getStyleClass().addAll("btnFunction", "btnFuncStartDialog");
+        btn.getStyleClass().addAll("btnStartDialog");
         btn.setAlignment(Pos.CENTER);
         btn.setMaxWidth(Double.MAX_VALUE);
         btn.setOnAction(a -> {
@@ -153,65 +148,41 @@ public class StartDialogController extends P2DialogExtra {
     }
 
     private void initStack() {
-        stackpane = new StackPane();
-        VBox.setVgrow(stackpane, Priority.ALWAYS);
-        getVBoxCont().getChildren().add(stackpane);
-
         //startPane 1
         startPane1 = new StartPane(getStage());
-        tStart1 = startPane1.makeStart1();
-        tStart1.setMaxHeight(Double.MAX_VALUE);
-        tStart1.setCollapsible(false);
+        startPane1.makeStart1();
 
         //startPane 2
         startPane2 = new StartPane(getStage());
-        tStart2 = startPane2.makeStart2();
-        tStart2.setMaxHeight(Double.MAX_VALUE);
-        tStart2.setCollapsible(false);
+        startPane2.makeStart2();
 
         //colorModePane
         startPaneColorMode = new StartPaneColorMode(this.getStage());
-        tColorMode = startPaneColorMode.make();
-        tColorMode.setMaxHeight(Double.MAX_VALUE);
-        tColorMode.setCollapsible(false);
+        startPaneColorMode.make();
 
         //updatePane
         startPaneUpdate = new StartPaneUpdate(this);
-        tUpdate = startPaneUpdate.makeStart();
-        tUpdate.setMaxHeight(Double.MAX_VALUE);
-        tUpdate.setCollapsible(false);
+        startPaneUpdate.makeStart();
 
         //geoPane
         startPaneGeo = new StartPaneGeo(getStage());
-        tGeo = startPaneGeo.make();
-        tGeo.setMaxHeight(Double.MAX_VALUE);
-        tGeo.setCollapsible(false);
+        startPaneGeo.make();
 
         //filmPane
         startPaneFilm = new StartPaneFilm(getStage());
-        tFilm = startPaneFilm.make();
-        tFilm.setMaxHeight(Double.MAX_VALUE);
-        tFilm.setCollapsible(false);
+        startPaneFilm.make();
 
         // stationPane
         startPaneStation = new StartPaneStation(getStage());
-        tStation = startPaneStation.make();
-        tStation.setMaxHeight(Double.MAX_VALUE);
-        tStation.setCollapsible(false);
+        startPaneStation.make();
 
         // downloadPane
         startPaneDownloadPath = new StartPaneDownloadPath(getStage());
-        tDown = startPaneDownloadPath.make();
-        tDown.setMaxHeight(Double.MAX_VALUE);
-        tDown.setCollapsible(false);
+        startPaneDownloadPath.make();
 
         //pathPane
         startPanePath = new StartPanePath(getStage());
-        tPath = startPanePath.makePath();
-        tPath.setMaxHeight(Double.MAX_VALUE);
-        tPath.setCollapsible(false);
-
-        stackpane.getChildren().addAll(tStart1, tStart2, tColorMode, tUpdate, tGeo, tFilm, tStation, tDown, tPath);
+        startPanePath.makePath();
     }
 
     private void initButton() {
@@ -256,6 +227,7 @@ public class StartDialogController extends P2DialogExtra {
             }
             selectActPane();
         });
+
         btnPrev = P2Button.getButton(PIconFactory.PICON.BTN_PREV.getFontIcon(), "vorherige Seite");
         btnPrev.setOnAction(event -> {
             switch (aktState) {
@@ -302,56 +274,65 @@ public class StartDialogController extends P2DialogExtra {
             case START_1:
                 btnPrev.setDisable(true);
                 btnNext.setDisable(false);
-                tStart1.toFront();
+                vBoxCont.getChildren().clear();
+                vBoxCont.getChildren().add(startPane1);
                 setButtonStyle(btnStart1);
                 break;
             case START_2:
                 btnPrev.setDisable(false);
                 btnNext.setDisable(false);
-                tStart2.toFront();
+                vBoxCont.getChildren().clear();
+                vBoxCont.getChildren().add(startPane2);
                 setButtonStyle(btnStart2);
                 break;
             case COLOR_MODE:
                 btnPrev.setDisable(false);
                 btnNext.setDisable(false);
-                tColorMode.toFront();
+                vBoxCont.getChildren().clear();
+                vBoxCont.getChildren().add(startPaneColorMode);
                 setButtonStyle(btnColorMode);
                 break;
             case UPDATE:
                 btnPrev.setDisable(false);
                 btnNext.setDisable(false);
-                tUpdate.toFront();
+                vBoxCont.getChildren().clear();
+                vBoxCont.getChildren().add(startPaneUpdate);
                 setButtonStyle(btnUpdate);
                 break;
             case GEO:
                 btnPrev.setDisable(false);
                 btnNext.setDisable(false);
-                tGeo.toFront();
+                vBoxCont.getChildren().clear();
+                vBoxCont.getChildren().add(startPaneGeo);
                 setButtonStyle(btnGeo);
                 break;
             case FILM:
                 btnPrev.setDisable(false);
                 btnNext.setDisable(false);
-                tFilm.toFront();
+                vBoxCont.getChildren().clear();
+                vBoxCont.getChildren().add(startPaneFilm);
                 setButtonStyle(btnFilm);
                 break;
             case STATION:
                 btnPrev.setDisable(false);
                 btnNext.setDisable(false);
-                tStation.toFront();
+                vBoxCont.getChildren().clear();
+                vBoxCont.getChildren().add(startPaneStation);
                 setButtonStyle(btnStation);
                 break;
             case DOWN:
                 btnPrev.setDisable(false);
                 btnNext.setDisable(false);
-                tDown.toFront();
+                vBoxCont.getChildren().clear();
+                vBoxCont.getChildren().add(startPaneDownloadPath);
                 setButtonStyle(btnDown);
                 break;
             case PATH:
                 btnPrev.setDisable(false);
                 btnNext.setDisable(true);
                 btnOk.setDisable(false);
-                tPath.toFront();
+                vBoxCont.getChildren().clear();
+                vBoxCont.getChildren().add(startPanePath);
                 setButtonStyle(btnPath);
                 break;
             default:
@@ -360,16 +341,16 @@ public class StartDialogController extends P2DialogExtra {
     }
 
     private void setButtonStyle(Button btnSel) {
-        btnStart1.getStyleClass().setAll("btnFunction", "btnFuncStartDialog");
-        btnStart2.getStyleClass().setAll("btnFunction", "btnFuncStartDialog");
-        btnColorMode.getStyleClass().setAll("btnFunction", "btnFuncStartDialog");
-        btnUpdate.getStyleClass().setAll("btnFunction", "btnFuncStartDialog");
-        btnGeo.getStyleClass().setAll("btnFunction", "btnFuncStartDialog");
-        btnFilm.getStyleClass().setAll("btnFunction", "btnFuncStartDialog");
-        btnStation.getStyleClass().setAll("btnFunction", "btnFuncStartDialog");
-        btnDown.getStyleClass().setAll("btnFunction", "btnFuncStartDialog");
-        btnPath.getStyleClass().setAll("btnFunction", "btnFuncStartDialog");
-        btnSel.getStyleClass().setAll("btnFunction", "btnFuncStartDialogSel");
+        btnStart1.getStyleClass().setAll("btnStartDialog");
+        btnStart2.getStyleClass().setAll("btnStartDialog");
+        btnColorMode.getStyleClass().setAll("btnStartDialog");
+        btnUpdate.getStyleClass().setAll("btnStartDialog");
+        btnGeo.getStyleClass().setAll("btnStartDialog");
+        btnFilm.getStyleClass().setAll("btnStartDialog");
+        btnStation.getStyleClass().setAll("btnStartDialog");
+        btnDown.getStyleClass().setAll("btnStartDialog");
+        btnPath.getStyleClass().setAll("btnStartDialog");
+        btnSel.getStyleClass().setAll("btnStartDialog", "btnStartDialogSel");
     }
 
     private void initTooltip() {
@@ -395,6 +376,4 @@ public class StartDialogController extends P2DialogExtra {
         btnNext.setTooltip(new Tooltip("Nächste Einstellmöglichkeit"));
         btnPrev.setTooltip(new Tooltip("Vorherige Einstellmöglichkeit"));
     }
-
-    private enum State {START_1, START_2, COLOR_MODE, UPDATE, GEO, FILM, STATION, DOWN, PATH}
 }

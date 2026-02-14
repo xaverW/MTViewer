@@ -23,7 +23,6 @@ import de.p2tools.mtviewer.controller.picon.PIconFactory;
 import de.p2tools.mtviewer.gui.help.HelpText;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.dialogs.P2DirFileChooser;
-import de.p2tools.p2lib.guitools.P2Button;
 import de.p2tools.p2lib.guitools.P2GuiTools;
 import de.p2tools.p2lib.guitools.P2Hyperlink;
 import de.p2tools.p2lib.guitools.grid.P2GridConstraints;
@@ -33,7 +32,10 @@ import javafx.beans.property.StringProperty;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -45,7 +47,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StartPanePath {
+public class StartPanePath extends VBox {
     private final GridPane gridPane = new GridPane();
     private int row = 0;
     private final Stage stage;
@@ -76,11 +78,9 @@ public class StartPanePath {
         unbindList.forEach(UnBind::unbind);
     }
 
-    public TitledPane makePath() {
-        VBox vBox = new VBox(10);
-
+    public void makePath() {
         HBox hBox = new HBox();
-        hBox.getStyleClass().add("extra-pane");
+        hBox.getStyleClass().add("startInfo_2");
         hBox.setPadding(new Insets(P2LibConst.PADDING));
         hBox.setMaxWidth(Double.MAX_VALUE);
         hBox.setMinHeight(Region.USE_PREF_SIZE);
@@ -89,9 +89,9 @@ public class StartPanePath {
         lbl.setWrapText(true);
         lbl.setPrefWidth(500);
         hBox.getChildren().add(lbl);
-        vBox.getChildren().addAll(P2GuiTools.getVDistance(5), hBox, P2GuiTools.getVDistance(20));
+        getChildren().addAll(StartFactory.getTitle("Programmpfade"), hBox, P2GuiTools.getHDistance(20));
 
-        gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
+        gridPane.setHgap(15);
         gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
         gridPane.getColumnConstraints().addAll(P2GridConstraints.getCcComputedSizeAndHgrow());
 
@@ -109,13 +109,11 @@ public class StartPanePath {
                 addPlayer(PLAYER.FFMPEG);
         }
 
-        final Button btnHelp = P2Button.helpButton(stage,
+        final Button btnHelp = PIconFactory.getHelpButton(stage,
                 "Videoplayer", HelpText.PROG_PATHS);
         gridPane.add(btnHelp, 2, ++row);
         GridPane.setHalignment(btnHelp, HPos.RIGHT);
-        vBox.getChildren().add(gridPane);
-
-        return new TitledPane("Programmpfade", vBox);
+        getChildren().add(gridPane);
     }
 
     private void addPlayer(PLAYER player) {
@@ -153,7 +151,7 @@ public class StartPanePath {
                 break;
         }
 
-        text.setStyle("-fx-font-weight: bold");
+        text.setStyle("-fx-font-weight: bold;");
 
         txtPlayer.textProperty().addListener((observable, oldValue, newValue) -> {
             File file = new File(txtPlayer.getText());
