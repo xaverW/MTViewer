@@ -28,7 +28,6 @@ import de.p2tools.p2lib.guitools.P2Hyperlink;
 import de.p2tools.p2lib.guitools.grid.P2GridConstraints;
 import de.p2tools.p2lib.mediathek.download.GetProgramStandardPath;
 import de.p2tools.p2lib.tools.P2InfoFactory;
-import javafx.beans.property.StringProperty;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -44,41 +43,31 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 public class StartPanePath extends VBox {
     private final GridPane gridPane = new GridPane();
     private int row = 0;
     private final Stage stage;
+    private TextField txtVlc = null;
+    private TextField txtFFmpeg = null;
+
 
     private enum PLAYER {VLC, FFMPEG}
-
-    private static class UnBind {
-        private final TextField txt;
-        private final StringProperty property;
-
-        UnBind(TextField txt, StringProperty property) {
-            this.txt = txt;
-            this.property = property;
-        }
-
-        void unbind() {
-            txt.textProperty().unbindBidirectional(property);
-        }
-    }
-
-    private final List<UnBind> unbindList = new ArrayList<>();
 
     public StartPanePath(Stage stage) {
         this.stage = stage;
     }
 
     public void close() {
-        unbindList.forEach(UnBind::unbind);
+        if (txtVlc != null) {
+            txtVlc.textProperty().bindBidirectional(ProgConfig.SYSTEM_PROG_PLAY);
+        }
+        if (txtFFmpeg != null) {
+            txtFFmpeg.textProperty().bindBidirectional(ProgConfig.SYSTEM_PROG_SAVE);
+        }
     }
 
-    public void makePath() {
+    public void make() {
         HBox hBox = new HBox();
         hBox.getStyleClass().add("startInfo_2");
         hBox.setPadding(new Insets(P2LibConst.PADDING));
@@ -102,7 +91,7 @@ public class StartPanePath extends VBox {
                 addPlayer(PLAYER.VLC);
                 break;
             default:
-                // da brauchs alles
+                // da braucht es alles
                 addPlayer(PLAYER.VLC);
                 gridPane.add(new Label(" "), 0, ++row);
                 ++row;
@@ -118,16 +107,19 @@ public class StartPanePath extends VBox {
 
     private void addPlayer(PLAYER player) {
         Text text;
+        TextField txtPlayer;
         P2Hyperlink hyperlink;
-        StringProperty property;
-        TextField txtPlayer = new TextField();
         final Button btnFind = new Button("suchen");
 
         switch (player) {
             case FFMPEG:
+                txtFFmpeg = new TextField();
+                txtPlayer = txtFFmpeg;
+                txtPlayer.textProperty().bindBidirectional(ProgConfig.SYSTEM_PROG_SAVE);
+
                 text = new Text("Pfad zum ffmpeg-Player auswählen");
                 text.getStyleClass().add("downloadGuiMediaText");
-                property = ProgConfig.SYSTEM_PROG_SAVE;
+
                 btnFind.setOnAction(event -> {
                     ProgConfig.SYSTEM_PROG_SAVE.setValue("");
                     txtPlayer.setText(GetProgramStandardPath.getTemplatePathFFmpeg());
@@ -136,11 +128,16 @@ public class StartPanePath extends VBox {
                         ProgConst.ADRESSE_WEBSITE_FFMPEG,
                         ProgConfig.SYSTEM_PROG_OPEN_URL);
                 break;
+
             case VLC:
             default:
+                txtVlc = new TextField();
+                txtPlayer = txtVlc;
+                txtPlayer.textProperty().bindBidirectional(ProgConfig.SYSTEM_PROG_PLAY);
+
                 text = new Text("Pfad zum VLC-Player auswählen");
                 text.getStyleClass().add("downloadGuiMediaText");
-                property = ProgConfig.SYSTEM_PROG_PLAY;
+
                 btnFind.setOnAction(event -> {
                     ProgConfig.SYSTEM_PROG_PLAY.setValue("");
                     txtPlayer.setText(GetProgramStandardPath.getTemplatePathVlc());
@@ -161,12 +158,9 @@ public class StartPanePath extends VBox {
                 txtPlayer.setStyle("");
             }
         });
-        txtPlayer.textProperty().bindBidirectional(property);
         if (txtPlayer.getText().isEmpty()) {
             txtPlayer.setStyle(ProgColorList.DOWNLOAD_NAME_ERROR.getCssBackground());
         }
-
-        unbindList.add(new UnBind(txtPlayer, property));
 
         final Button btnFile = new Button();
         btnFile.setOnAction(event -> {

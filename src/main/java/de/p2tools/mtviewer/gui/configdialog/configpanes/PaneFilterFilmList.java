@@ -38,7 +38,7 @@ import javafx.stage.Stage;
 
 import java.util.Collection;
 
-public class PaneFilm {
+public class PaneFilterFilmList {
 
     private final Slider slDays = new Slider();
     private final Slider slDuration = new Slider();
@@ -47,7 +47,7 @@ public class PaneFilm {
     private final Label lblDouble = new Label();
     private final Stage stage;
 
-    public PaneFilm(Stage stage) {
+    public PaneFilterFilmList(Stage stage) {
         this.stage = stage;
     }
 

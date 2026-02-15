@@ -35,7 +35,7 @@ public class UpdateCheckFactory {
     public static void checkProgUpdate() {
         // Prüfen obs ein Programmupdate gibt
         P2Duration.onlyPing("checkProgUpdate");
-        if (ProgConfig.SYSTEM_UPDATE_SEARCH_ACT.getValue() &&
+        if (ProgConfig.SYSTEM_SEARCH_UPDATE.getValue() &&
                 !updateCheckTodayDone()) {
             // nach Updates suchen
             runUpdateCheck(false);
@@ -44,7 +44,7 @@ public class UpdateCheckFactory {
             // will der User nicht --oder-- wurde heute schon gemacht
             List list = new ArrayList(5);
             list.add("Kein Update-Check:");
-            if (!ProgConfig.SYSTEM_UPDATE_SEARCH_ACT.getValue()) {
+            if (!ProgConfig.SYSTEM_SEARCH_UPDATE.getValue()) {
                 list.add("  der User will nicht");
             }
             if (updateCheckTodayDone()) {

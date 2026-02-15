@@ -17,14 +17,12 @@
 package de.p2tools.mtviewer.gui.configdialog.configpanes;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
-import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.data.film.FilmToolsFactory;
 import de.p2tools.mtviewer.controller.picon.PIconFactory;
 import de.p2tools.mtviewer.gui.help.HelpText;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.guitools.P2GuiTools;
 import de.p2tools.p2lib.guitools.P2Text;
-import de.p2tools.p2lib.guitools.grid.P2GridConstraints;
 import de.p2tools.p2lib.mediathek.filmlistload.P2LoadConst;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -40,10 +38,6 @@ import java.util.Collection;
 
 public class PaneFilmeStation {
 
-    private final Slider slDays = new Slider();
-    private final Slider slDuration = new Slider();
-    private final Label lblDays = new Label("");
-    private final Label lblDuration = new Label("");
     final Button btnSetAll = new Button("_Alle Sender laden");
     final Button btnClearAll = new Button("_Keinen Sender laden");
     private final Stage stage;
@@ -53,54 +47,30 @@ public class PaneFilmeStation {
     }
 
     public void close() {
-        slDays.valueProperty().unbindBidirectional(ProgConfig.SYSTEM_LOAD_FILMLIST_MAX_DAYS);
-        slDuration.valueProperty().unbindBidirectional(ProgConfig.SYSTEM_LOAD_FILMLIST_MIN_DURATION);
     }
 
     public TitledPane make(Collection<TitledPane> result) {
-        initSlider();
         final VBox vBox = new VBox(10);
         vBox.setPadding(new Insets(P2LibConst.PADDING));
 
-        makeOnly(vBox);
-        makeSender(vBox);
+        HBox hBox = new HBox();
+        hBox.setPadding(new Insets(P2LibConst.PADDING));
+        hBox.getStyleClass().add("extra-pane");
+        hBox.setMaxWidth(Double.MAX_VALUE);
+        hBox.setMinHeight(Region.USE_PREF_SIZE);
+        Label lbl = new Label("Hier können die Sender ausgewählt werden, die geladen werden sollen.");
+        lbl.setWrapText(true);
+        lbl.setPrefWidth(500);
+        hBox.getChildren().add(lbl);
+        vBox.getChildren().addAll(hBox, P2GuiTools.getVDistance(20));
 
+        makeSender(vBox);
         vBox.getChildren().add(new PLoadNewList());
-        TitledPane tpConfig = new TitledPane("Liste bereits beim Laden filtern", vBox);
+        TitledPane tpConfig = new TitledPane("Sender auswählen", vBox);
         if (result != null) {
             result.add(tpConfig);
         }
         return tpConfig;
-    }
-
-    private void makeOnly(VBox vBox) {
-        final Button btnHelpDays = PIconFactory.getHelpButton(stage, "Film/Audio-Liste beim Laden filtern",
-                HelpText.LOAD_ONLY_FILMS);
-
-        final GridPane gridPane = new GridPane();
-        gridPane.setHgap(P2LibConst.DIST_GRIDPANE_HGAP);
-        gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
-        gridPane.setPadding(new Insets(0));
-
-        int row = 0;
-        gridPane.add(new Label("Nur Beiträge der letzten Tage laden:"), 0, row, 2, 1);
-        gridPane.add(new Label("Filme laden:"), 0, ++row);
-        gridPane.add(slDays, 1, row);
-        gridPane.add(lblDays, 2, row);
-        gridPane.add(btnHelpDays, 3, row, 1, 2);
-
-        gridPane.add(new Label(), 0, ++row);
-        gridPane.add(new Label("Nur Beiträge mit Mindestlänge laden:"), 0, ++row, 2, 1);
-        gridPane.add(new Label("Filme laden:"), 0, ++row);
-        gridPane.add(slDuration, 1, row);
-        gridPane.add(lblDuration, 2, row);
-
-        gridPane.getColumnConstraints().addAll(P2GridConstraints.getCcPrefSize(),
-                P2GridConstraints.getCcPrefSize(),
-                P2GridConstraints.getCcComputedSizeAndHgrow(),
-                P2GridConstraints.getCcPrefSize());
-
-        vBox.getChildren().add(gridPane);
     }
 
     private void makeSender(VBox vBox) {
@@ -108,7 +78,7 @@ public class PaneFilmeStation {
                 HelpText.LOAD_FILMLIST_SENDER);
         HBox hBox = new HBox(P2LibConst.DIST_BUTTON);
         hBox.setAlignment(Pos.CENTER_LEFT);
-        hBox.getChildren().addAll(P2Text.getLblTextBold("Sender auswählen die geladen werden sollen:"));
+        hBox.getChildren().addAll(P2Text.getLblTextBold("Sender die geladen werden:"));
 
         HBox hBoxB = new HBox(P2LibConst.DIST_BUTTON);
         hBoxB.getChildren().addAll(btnClearAll, btnSetAll, P2GuiTools.getHBoxGrower(), btnHelpSender);
@@ -160,36 +130,6 @@ public class PaneFilmeStation {
         checkPropSender(aListCb);
 
         return gridPane;
-    }
-
-    private void initSlider() {
-        slDays.setMin(0);
-        slDays.setMax(ProgConst.SYSTEM_LOAD_FILMLIST_MAX_DAYS);
-        slDays.setShowTickLabels(false);
-        slDays.setMajorTickUnit(100);
-        slDays.setBlockIncrement(5);
-
-        slDays.valueProperty().bindBidirectional(ProgConfig.SYSTEM_LOAD_FILMLIST_MAX_DAYS);
-        slDays.valueProperty().addListener((observable, oldValue, newValue) -> setValueSlider());
-
-        slDuration.setMin(0);
-        slDuration.setMax(ProgConst.SYSTEM_LOAD_FILMLIST_MIN_DURATION);
-        slDuration.setShowTickLabels(false);
-        slDuration.setMajorTickUnit(10);
-        slDuration.setBlockIncrement(1);
-
-        slDuration.valueProperty().bindBidirectional(ProgConfig.SYSTEM_LOAD_FILMLIST_MIN_DURATION);
-        slDuration.valueProperty().addListener((observable, oldValue, newValue) -> setValueSlider());
-
-        setValueSlider();
-    }
-
-    private void setValueSlider() {
-        int days = (int) slDays.getValue();
-        lblDays.setText(days == 0 ? "alles laden" : "nur Beiträge der letzten " + days + " Tage");
-
-        int duration = (int) slDuration.getValue();
-        lblDuration.setText(duration == 0 ? "alles laden" : "nur Beiträge mit mindestens " + duration + " Minuten Länge");
     }
 
     private void checkPropSender(ArrayList<CheckBox> aListCb) {

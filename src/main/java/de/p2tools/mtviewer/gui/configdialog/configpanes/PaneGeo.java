@@ -17,9 +17,9 @@
 package de.p2tools.mtviewer.gui.configdialog.configpanes;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
+import de.p2tools.mtviewer.controller.picon.PIconFactory;
 import de.p2tools.mtviewer.gui.help.HelpText;
 import de.p2tools.p2lib.P2LibConst;
-import de.p2tools.p2lib.guitools.P2Button;
 import de.p2tools.p2lib.guitools.grid.P2GridConstraints;
 import de.p2tools.p2lib.guitools.ptoggleswitch.P2ToggleSwitch;
 import de.p2tools.p2lib.mediathek.filmdata.FilmData;
@@ -32,6 +32,7 @@ import java.util.Collection;
 
 public class PaneGeo {
     private final RadioButton rbDe = new RadioButton("DE - Deutschland");
+    private final RadioButton rbFr = new RadioButton("FR - Frankreich");
     private final RadioButton rbCh = new RadioButton("CH - Schweiz");
     private final RadioButton rbAt = new RadioButton("AT - Österreich");
     private final RadioButton rbEu = new RadioButton("EU (EBU - European Broadcasting Union)");
@@ -54,12 +55,15 @@ public class PaneGeo {
 
     public TitledPane make(Collection<TitledPane> result) {
         tglGeo.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_MARK_GEO);
-        final Button btnHelpGeo = P2Button.helpButton(stage, "Geogeblockte Filme", HelpText.CONFIG_GEO);
+        final Button btnHelpGeo = PIconFactory.getHelpButton(stage, "Geogeblockte Filme", HelpText.CONFIG_GEO);
 
         ToggleGroup tg = new ToggleGroup();
-        tg.getToggles().addAll(rbDe, rbCh, rbAt, rbEu, rbSonst);
+        tg.getToggles().addAll(rbDe, rbFr, rbCh, rbAt, rbEu, rbSonst);
 
         switch (ProgConfig.SYSTEM_GEO_HOME_PLACE.get()) {
+            case FilmData.GEO_FR:
+                rbFr.setSelected(true);
+                break;
             case FilmData.GEO_CH:
                 rbCh.setSelected(true);
                 break;
@@ -77,6 +81,9 @@ public class PaneGeo {
         }
         rbDe.setOnAction(e -> {
             ProgConfig.SYSTEM_GEO_HOME_PLACE.setValue(FilmData.GEO_DE);
+        });
+        rbFr.setOnAction(e -> {
+            ProgConfig.SYSTEM_GEO_HOME_PLACE.setValue(FilmData.GEO_FR);
         });
         rbCh.setOnAction(e -> {
             ProgConfig.SYSTEM_GEO_HOME_PLACE.setValue(FilmData.GEO_CH);
@@ -106,6 +113,7 @@ public class PaneGeo {
         gridPane.add(new Label("Mein Standort:"), 0, ++row);
 
         gridPane.add(rbDe, 1, row);
+        gridPane.add(rbFr, 1, ++row);
         gridPane.add(rbCh, 1, ++row);
         gridPane.add(rbAt, 1, ++row);
         gridPane.add(rbEu, 1, ++row);

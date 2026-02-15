@@ -56,7 +56,12 @@ public class PaneSet {
     }
 
     public void close() {
-        unBindProgData();
+        txtDestPath.textProperty().unbindBidirectional(ProgConfig.DOWNLOAD_FILE_PATH);
+        txtDestName.textProperty().unbindBidirectional(ProgConfig.DOWNLOAD_FILE_NAME);
+        txtProg.textProperty().unbindBidirectional(ProgConfig.SYSTEM_PROG_SAVE);
+        txtParameter.textProperty().unbindBidirectional(ProgConfig.SYSTEM_PROG_SAVE_PARAMETER);
+        slCut.valueProperty().unbindBidirectional(ProgConfig.SYSTEM_SAVE_MAX_SIZE);
+        slCutField.valueProperty().unbindBidirectional(ProgConfig.SYSTEM_SAVE_MAX_FIELD);
     }
 
     public void makePane(Collection<TitledPane> result) {
@@ -213,16 +218,17 @@ public class PaneSet {
         lb.setText(pre + (days == 0 ? "Nicht\nbeschränken" : "Auf " + days + "\nZeichen beschränken"));
     }
 
-    public void bindProgData() {
-        unBindProgData();
+    private void bindProgData() {
         txtDestPath.textProperty().bindBidirectional(ProgConfig.DOWNLOAD_FILE_PATH);
         if (txtDestPath.getText().isEmpty()) {
             txtDestPath.setText(P2InfoFactory.getStandardDownloadPath());
         }
+
         txtDestName.textProperty().bindBidirectional(ProgConfig.DOWNLOAD_FILE_NAME);
         if (txtDestName.getText().isEmpty()) {
             txtDestName.setText(ProgConfig.DOWNLOAD_FILE_NAME_INIT);
         }
+
         txtProg.textProperty().bindBidirectional(ProgConfig.SYSTEM_PROG_SAVE);
         if (txtProg.getText().isEmpty()) {
             txtProg.setText(ProgConfig.SYSTEM_PROG_SAVE_INIT);
@@ -242,12 +248,5 @@ public class PaneSet {
         }
         slCut.valueProperty().bindBidirectional(ProgConfig.SYSTEM_SAVE_MAX_SIZE);
         slCutField.valueProperty().bindBidirectional(ProgConfig.SYSTEM_SAVE_MAX_FIELD);
-    }
-
-    void unBindProgData() {
-        txtDestPath.textProperty().unbindBidirectional(ProgConfig.DOWNLOAD_FILE_PATH);
-        txtDestName.textProperty().unbindBidirectional(ProgConfig.DOWNLOAD_FILE_NAME);
-        slCut.valueProperty().unbindBidirectional(ProgConfig.SYSTEM_SAVE_MAX_SIZE);
-        slCutField.valueProperty().unbindBidirectional(ProgConfig.SYSTEM_SAVE_MAX_FIELD);
     }
 }

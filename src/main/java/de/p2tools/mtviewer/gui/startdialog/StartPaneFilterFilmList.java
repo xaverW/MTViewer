@@ -35,7 +35,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class StartPaneFilm extends VBox {
+public class StartPaneFilterFilmList extends VBox {
 
     private final Slider slDays = new Slider();
     private final Slider slDuration = new Slider();
@@ -43,7 +43,7 @@ public class StartPaneFilm extends VBox {
     private final Label lblDuration = new Label("");
     private final Stage stage;
 
-    public StartPaneFilm(Stage stage) {
+    public StartPaneFilterFilmList(Stage stage) {
         this.stage = stage;
     }
 

@@ -18,9 +18,9 @@ package de.p2tools.mtviewer.gui.configdialog;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
-import de.p2tools.mtviewer.gui.configdialog.configpanes.PaneFilm;
 import de.p2tools.mtviewer.gui.configdialog.configpanes.PaneFilmLoad;
 import de.p2tools.mtviewer.gui.configdialog.configpanes.PaneFilmeStation;
+import de.p2tools.mtviewer.gui.configdialog.configpanes.PaneFilterFilmList;
 import de.p2tools.p2lib.dialogs.accordion.P2AccordionPane;
 import javafx.beans.property.BooleanProperty;
 import javafx.scene.control.TitledPane;
@@ -34,7 +34,7 @@ public class ControllerFilm extends P2AccordionPane {
     private final ProgData progData;
     private final Stage stage;
     private PaneFilmLoad paneFilmLoad;
-    private PaneFilm paneFilm;
+    private PaneFilterFilmList paneFilterFilmList;
     private PaneFilmeStation paneFilmeStation;
     private final BooleanProperty diacriticChanged;
 
@@ -51,7 +51,7 @@ public class ControllerFilm extends P2AccordionPane {
     public void close() {
         super.close();
         paneFilmLoad.close();
-        paneFilm.close();
+        paneFilterFilmList.close();
         paneFilmeStation.close();
     }
 
@@ -62,8 +62,8 @@ public class ControllerFilm extends P2AccordionPane {
         paneFilmLoad = new PaneFilmLoad(stage, diacriticChanged);
         paneFilmLoad.make(result);
 
-        paneFilm = new PaneFilm(stage);
-        paneFilm.make(result);
+        paneFilterFilmList = new PaneFilterFilmList(stage);
+        paneFilterFilmList.make(result);
 
         paneFilmeStation = new PaneFilmeStation(stage);
         paneFilmeStation.make(result);

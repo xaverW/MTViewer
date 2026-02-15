@@ -65,7 +65,6 @@ public class StartPaneStation extends VBox {
         hBox.getChildren().add(lbl);
         getChildren().addAll(StartFactory.getTitle("Filmliste bereits beim Laden filtern"), hBox, P2GuiTools.getHDistance(20));
 
-
         final Button btnHelpSender = PIconFactory.getHelpButton(stage, "Filmliste beim Laden filtern",
                 HelpText.LOAD_FILMLIST_SENDER_STARTDIALOG);
         HBox hBoxStation = new HBox(15);
@@ -94,8 +93,6 @@ public class StartPaneStation extends VBox {
             cb.setSelected(true); // beim Start alle Sender laden
             cb.setOnAction(a -> {
                 makePropSender(aListCb);
-                // und noch prüfen, dass nicht alle ausgeschaltet sind
-                // FilmToolsFactory.checkAllSenderSelectedNotToLoad(stage);
             });
 
             tilePaneSender.getChildren().add(cb);

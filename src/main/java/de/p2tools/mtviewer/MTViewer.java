@@ -128,8 +128,8 @@ public class MTViewer extends Application {
 
             if (ProgData.firstProgramStart) {
                 // dann gabs den Startdialog
-                ProgConfig.SYSTEM_DARK_THEME.set(ProgConfig.SYSTEM_DARK_THEME_START.get());
-                ProgConfig.SYSTEM_BLACK_WHITE_ICON.set(ProgConfig.SYSTEM_BLACK_WHITE_ICON_START.get());
+                ProgConfig.SYSTEM_DARK_THEME.set(ProgConfig.SYSTEM_DARK_START.get());
+                ProgConfig.SYSTEM_GUI_THEME_1.set(ProgConfig.SYSTEM_GUI_THEME_1_START.get());
             }
         } catch (final Exception e) {
             e.printStackTrace();

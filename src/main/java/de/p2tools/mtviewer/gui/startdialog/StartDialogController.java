@@ -62,7 +62,7 @@ public class StartDialogController extends P2DialogExtra {
     private StartPaneColorMode startPaneColorMode;
     private StartPaneUpdate startPaneUpdate;
     private StartPaneGeo startPaneGeo;
-    private StartPaneFilm startPaneFilm;
+    private StartPaneFilterFilmList startPaneFilterFilmList;
     private StartPaneStation startPaneStation;
     private StartPaneDownloadPath startPaneDownloadPath;
     private StartPanePath startPanePath;
@@ -97,7 +97,7 @@ public class StartDialogController extends P2DialogExtra {
         startPaneColorMode.close();
         startPaneUpdate.close();
         startPaneGeo.close();
-        startPaneFilm.close();
+        startPaneFilterFilmList.close();
         startPaneStation.close();
         startPaneDownloadPath.close();
         startPanePath.close();
@@ -169,8 +169,8 @@ public class StartDialogController extends P2DialogExtra {
         startPaneGeo.make();
 
         //filmPane
-        startPaneFilm = new StartPaneFilm(getStage());
-        startPaneFilm.make();
+        startPaneFilterFilmList = new StartPaneFilterFilmList(getStage());
+        startPaneFilterFilmList.make();
 
         // stationPane
         startPaneStation = new StartPaneStation(getStage());
@@ -182,7 +182,7 @@ public class StartDialogController extends P2DialogExtra {
 
         //pathPane
         startPanePath = new StartPanePath(getStage());
-        startPanePath.makePath();
+        startPanePath.make();
     }
 
     private void initButton() {
@@ -310,7 +310,7 @@ public class StartDialogController extends P2DialogExtra {
                 btnPrev.setDisable(false);
                 btnNext.setDisable(false);
                 vBoxCont.getChildren().clear();
-                vBoxCont.getChildren().add(startPaneFilm);
+                vBoxCont.getChildren().add(startPaneFilterFilmList);
                 setButtonStyle(btnFilm);
                 break;
             case STATION:

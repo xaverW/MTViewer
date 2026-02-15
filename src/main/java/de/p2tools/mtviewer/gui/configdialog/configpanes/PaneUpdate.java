@@ -51,9 +51,9 @@ public class PaneUpdate {
     private final CheckBox chkDaily = new CheckBox("Zwischenschritte (Dailys) mit einbeziehen");
     private final Button btnNow = new Button("_Jetzt suchen");
     private final Stage stage;
-    BooleanProperty propUpdateSearch = ProgConfig.SYSTEM_UPDATE_SEARCH_ACT;
-    BooleanProperty propUpdateBetaSearch = ProgConfig.SYSTEM_UPDATE_SEARCH_BETA;
-    BooleanProperty propUpdateDailySearch = ProgConfig.SYSTEM_UPDATE_SEARCH_DAILY;
+    private final BooleanProperty propUpdateSearch = ProgConfig.SYSTEM_SEARCH_UPDATE;
+    private final BooleanProperty propUpdateBetaSearch = ProgConfig.SYSTEM_UPDATE_SEARCH_BETA;
+    private final BooleanProperty propUpdateDailySearch = ProgConfig.SYSTEM_UPDATE_SEARCH_DAILY;
     private Button btnHelpBeta;
 
     public PaneUpdate(Stage stage) {

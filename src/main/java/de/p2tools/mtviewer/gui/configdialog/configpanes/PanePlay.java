@@ -27,7 +27,6 @@ import de.p2tools.p2lib.guitools.P2Button;
 import de.p2tools.p2lib.guitools.grid.P2GridConstraints;
 import de.p2tools.p2lib.mediathek.download.GetProgramStandardPath;
 import de.p2tools.p2lib.mediathek.filmdata.FilmData;
-import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -43,14 +42,16 @@ public class PanePlay {
     private final RadioButton rbHd = new RadioButton("Film in HD abspielen");
     private final RadioButton rbHeight = new RadioButton("Film in hoher Auflösung abspielen");
     private final RadioButton rbLow = new RadioButton("Film in kleiner Auflösung abspielen");
-    StringProperty propProgram = ProgConfig.SYSTEM_PROG_PLAY;
-    StringProperty propParameter = ProgConfig.SYSTEM_PROG_PLAY_PARAMETER;
+    private final TextField txtPlay = new TextField();
+    private final TextField txtParameter = new TextField();
 
     public PanePlay(Stage stage) {
         this.stage = stage;
     }
 
     public void close() {
+        txtPlay.textProperty().unbindBidirectional(ProgConfig.SYSTEM_PROG_PLAY);
+        txtParameter.textProperty().unbindBidirectional(ProgConfig.SYSTEM_PROG_PLAY_PARAMETER);
     }
 
     public TitledPane make(Collection<TitledPane> result) {
@@ -71,8 +72,7 @@ public class PanePlay {
     }
 
     private int addVideoPlayer(GridPane gridPane, int row) {
-        TextField txtPlay = new TextField();
-        txtPlay.textProperty().bindBidirectional(propProgram);
+        txtPlay.textProperty().bindBidirectional(ProgConfig.SYSTEM_PROG_PLAY);
         txtPlay.textProperty().addListener((l, o, n) -> {
             File file = new File(txtPlay.getText());
             if (!file.exists() || !file.isFile()) {
@@ -82,8 +82,7 @@ public class PanePlay {
             }
         });
 
-        TextField txtParameter = new TextField();
-        txtParameter.textProperty().bindBidirectional(propParameter);
+        txtParameter.textProperty().bindBidirectional(ProgConfig.SYSTEM_PROG_PLAY_PARAMETER);
 
         final Button btnFile = new Button();
         btnFile.setOnAction(event -> {

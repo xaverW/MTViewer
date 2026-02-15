@@ -35,12 +35,14 @@ import java.util.Collection;
 public class PaneEditFilter {
 
     private final Stage stage;
+    private final CheckBox cbkReturn = new CheckBox("Suchbeginn erst mit \"Return\" starten");
 
     public PaneEditFilter(Stage stage) {
         this.stage = stage;
     }
 
     public void close() {
+        cbkReturn.selectedProperty().unbindBidirectional(ProgConfig.SYSTEM_FILTER_RETURN);
     }
 
     public TitledPane make(Collection<TitledPane> result) {
@@ -51,7 +53,6 @@ public class PaneEditFilter {
 
     private GridPane init() {
         //Wartezeit
-        CheckBox cbkReturn = new CheckBox("Suchbeginn erst mit \"Return\" starten");
         cbkReturn.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_FILTER_RETURN);
 
         Label lblValue = new Label();

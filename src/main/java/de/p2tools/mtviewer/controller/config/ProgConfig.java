@@ -106,7 +106,7 @@ public class ProgConfig extends P2DataProgConfig {
 
     // Configs zum Aktualisieren beim Programmupdate
     public static StringProperty SYSTEM_UPDATE_DATE = addStrProp("system-update-date"); // Datum der letzten Prüfung
-    public static BooleanProperty SYSTEM_UPDATE_SEARCH_ACT = addBoolProp("system-update-search-act", Boolean.TRUE); //Infos und Programm
+    //    public static BooleanProperty SYSTEM_UPDATE_SEARCH_ACT = addBoolProp("system-update-search-act", Boolean.TRUE); //Infos und Programm
     public static StringProperty SYSTEM_SEARCH_UPDATE_LAST_DATE = addStrProp("system-search-update-last-date"); // Datum der letzten Prüfung
     public static BooleanProperty SYSTEM_SEARCH_UPDATE = addBoolProp("system-search-update" + P2Data.TAGGER + "system-update-search-act", Boolean.TRUE); // nach einem Update suchen
     public static BooleanProperty SYSTEM_UPDATE_SEARCH_BETA = addBoolProp("system-update-search-beta", Boolean.FALSE); //beta suchen
@@ -145,8 +145,8 @@ public class ProgConfig extends P2DataProgConfig {
     public static StringProperty SYSTEM_PROG_SAVE_PARAMETER = addStrProp("system-prog-save-parameter", SYSTEM_PROG_SAVE_PARAMETER_INIT);
     public static IntegerProperty SYSTEM_SAVE_MAX_SIZE = addIntProp("system-save-max-size", 150);
     public static IntegerProperty SYSTEM_SAVE_MAX_FIELD = addIntProp("system-save-max-field", 50);
-    public static BooleanProperty SYSTEM_DARK_THEME_START = addBoolProp("system-dark-theme-start", Boolean.FALSE);
-    public static BooleanProperty SYSTEM_BLACK_WHITE_ICON_START = addBoolProp("system-black-white-icon-start", Boolean.FALSE);
+//    public static BooleanProperty SYSTEM_DARK_THEME_START = addBoolProp("system-dark-theme-start", Boolean.FALSE);
+//    public static BooleanProperty SYSTEM_BLACK_WHITE_ICON_START = addBoolProp("system-black-white-icon-start", Boolean.FALSE);
 
     public static StringProperty SYSTEM_FILMLIST_DATE = addStrProp("system-filmlist-date", "");
     public static StringProperty SYSTEM_USERAGENT = addStrProp("system-useragent", ProgConst.USER_AGENT_DEFAULT); //Useragent für direkte Downloads
