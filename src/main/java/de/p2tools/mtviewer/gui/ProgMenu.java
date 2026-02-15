@@ -22,6 +22,7 @@ import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.MTShortcut;
 import de.p2tools.mtviewer.controller.picon.PIconFactory;
+import de.p2tools.mtviewer.controller.tips.TipsDialog;
 import de.p2tools.mtviewer.controller.update.SearchProgramUpdate;
 import de.p2tools.mtviewer.gui.configdialog.ConfigDialogController;
 import de.p2tools.mtviewer.gui.dialog.AboutDialogController;
@@ -96,6 +97,9 @@ public class ProgMenu extends MenuButton {
 
         //=========================
         //Hilfe
+        final MenuItem miTipps = new MenuItem("Hilfedialog");
+        miTipps.setOnAction(a -> new TipsDialog(progData));
+
         final MenuItem miUrlHelp = new MenuItem("Anleitung im Web");
         miUrlHelp.setOnAction(event -> {
             P2Open.openURL(ProgConst.URL_WEBSITE_HELP,
@@ -109,7 +113,8 @@ public class ProgMenu extends MenuButton {
         miAbout.setOnAction(event -> new AboutDialogController(ProgData.getInstance()).showDialog());
 
         final Menu mHelp = new Menu("Hilfe");
-        mHelp.getItems().addAll(miUrlHelp, miReset, miSearchUpdate, new SeparatorMenuItem(), miAbout);
+        mHelp.getItems().addAll(miTipps,
+                new SeparatorMenuItem(), miUrlHelp, miReset, miSearchUpdate, new SeparatorMenuItem(), miAbout);
         getItems().addAll(mHelp);
 
         //=========================

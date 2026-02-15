@@ -19,6 +19,11 @@ package de.p2tools.mtviewer.gui.help;
 import de.p2tools.p2lib.P2LibConst;
 
 public class HelpText {
+    public static final String SHOW_TIPS =
+            "Beim Programmstart wird der Hilfe-Dialog mit Tipps zur Verwendung " +
+                    "des Programms angezeigt." +
+                    "\n";
+
     public static final String DARK_THEME =
             "Das Programm kann damit mit einer dunklen oder hellen Programmoberfläche " +
                     "angezeigt werden.\n" +
@@ -45,7 +50,7 @@ public class HelpText {
                     "können hier eingestellt werden. Getrennt für das Dark-Theme und " +
                     "das Light-Theme." +
                     "\n";
-    
+
     public static final String LOAD_FILMLIST_ONLY_MARK_DOUBLE =
             "In der Filmliste sind ~150.000 Filme doppelt enthalten (z.B. bei ARD und BR)." +
                     "\n\n" +

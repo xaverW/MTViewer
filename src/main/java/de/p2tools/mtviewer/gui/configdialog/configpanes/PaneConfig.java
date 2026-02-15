@@ -19,6 +19,7 @@ package de.p2tools.mtviewer.gui.configdialog.configpanes;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgConst;
 import de.p2tools.mtviewer.controller.config.ProgData;
+import de.p2tools.mtviewer.controller.picon.PIconFactory;
 import de.p2tools.mtviewer.gui.help.HelpText;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.guitools.P2Button;
@@ -40,7 +41,7 @@ public class PaneConfig {
 
     private final ProgData progData;
 
-    private final P2ToggleSwitch tglTipOfDay = new P2ToggleSwitch("Tip des Tages anzeigen");
+    private final P2ToggleSwitch tglShowTips = new P2ToggleSwitch("Tipps beim Programmstart anzeigen");
     private final Stage stage;
     private TextField txtUserAgent;
 
@@ -50,7 +51,7 @@ public class PaneConfig {
     }
 
     public void close() {
-        tglTipOfDay.selectedProperty().unbindBidirectional(ProgConfig.TIP_OF_DAY_SHOW);
+        tglShowTips.selectedProperty().unbindBidirectional(ProgConfig.SYSTEM_SHOW_TIPS);
         txtUserAgent.textProperty().unbindBidirectional(ProgConfig.SYSTEM_USERAGENT);
     }
 
@@ -60,9 +61,9 @@ public class PaneConfig {
         gridPane.setVgap(P2LibConst.DIST_GRIDPANE_VGAP);
         gridPane.setPadding(new Insets(P2LibConst.PADDING));
 
-        tglTipOfDay.selectedProperty().bindBidirectional(ProgConfig.TIP_OF_DAY_SHOW);
-        final Button btnHelpTipOfDay = P2Button.helpButton(stage, "Tip des Tages anzeigen",
-                HelpText.TIP_OF_DAY);
+        tglShowTips.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_SHOW_TIPS);
+        final Button btnHelpTipOfDay = PIconFactory.getHelpButton(stage, "Tip des Tages anzeigen",
+                HelpText.SHOW_TIPS);
         GridPane.setHalignment(btnHelpTipOfDay, HPos.RIGHT);
 
         final Button btnHelpUserAgent = P2Button.helpButton(stage, "User Agent festlegen",
@@ -96,7 +97,7 @@ public class PaneConfig {
         txtUserAgent.textProperty().bindBidirectional(ProgConfig.SYSTEM_USERAGENT);
 
         int row = 0;
-        gridPane.add(tglTipOfDay, 0, row, 2, 1);
+        gridPane.add(tglShowTips, 0, row, 2, 1);
         gridPane.add(btnHelpTipOfDay, 2, row);
 
         gridPane.add(new Label(" "), 0, ++row);

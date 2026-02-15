@@ -23,6 +23,7 @@ import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.film.FilmListMtc;
 import de.p2tools.mtviewer.controller.filmfilter.FilmFilter;
+import de.p2tools.mtviewer.controller.tips.TipsDialog;
 import de.p2tools.p2lib.mediathek.film.P2FilmlistFactory;
 import de.p2tools.p2lib.mediathek.filmdata.FilmData;
 import de.p2tools.p2lib.mediathek.filmlistload.P2LoadFilmlist;
@@ -62,6 +63,17 @@ public class Worker {
     }
 
     private void addMediathek() {
+        progData.pEventHandler.addListener(new P2Listener(P2Events.EVENT_TIMER_ONE_MINUTE) {
+            @Override
+            public void pingGui() {
+                // startet alles das einmal nach dem Start laufen soll
+                if (ProgConfig.SYSTEM_SHOW_TIPS.get() && !TipsDialog.TIPS_DIALOG_OPEN) {
+                    // dann sollen Tipps angezeigt werden, und nur wenn noch nicht offen
+                    new TipsDialog(progData);
+                }
+            }
+        });
+        
         // =================
         // Mediathek
         progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_FILMLIST_LOAD_START) {

@@ -116,6 +116,15 @@ public class ProgConfig extends P2DataProgConfig {
         addEmptyLine();
     }
 
+    // Tips
+    static {
+        addComment("Tips");
+    }
+
+    public static BooleanProperty SYSTEM_SHOW_TIPS = addBoolProp("system-show-tips", Boolean.TRUE); // Dialog Tips wurde schon mal gezeigt
+    public static StringProperty TIPS_DIALOG_SIZE = addStrProp("tips-dialog-size", "800:600");
+
+
     public static StringProperty SYSTEM_AUDIOLIST_DATE_TIME = addStrProp("system-audiolist-date", ""); // DateTimeFormatter DT_FORMATTER_dd_MM_yyyy___HH__mm
     public static BooleanProperty SYSTEM_AFTER_UPDATE_FILTER = addBoolProp("system-after-update-filter", Boolean.FALSE);
     public static BooleanProperty SYSTEM_CHANGE_LOG_DIR = addBoolProp("system-change-log-dir", Boolean.FALSE);
