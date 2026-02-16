@@ -77,8 +77,11 @@ public class ProgMenu extends MenuButton {
 
         //=========================
         // Info, Einstellungen
-        final CheckMenuItem miDarkMode = new CheckMenuItem("Dark Mode");
+        final CheckMenuItem miDarkMode = new CheckMenuItem("Dunkle Oberfläche");
         miDarkMode.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_DARK_THEME);
+
+        final CheckMenuItem miColorMode = new CheckMenuItem("Farb-Modus-1");
+        miColorMode.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_GUI_THEME_1);
 
         final CheckMenuItem miShowInfo = new CheckMenuItem("Infobereich anzeigen");
         miShowInfo.selectedProperty().bindBidirectional(ProgConfig.INFO__IS_SHOWING);
@@ -93,7 +96,7 @@ public class ProgMenu extends MenuButton {
 
         final MenuItem miConfig = new MenuItem("Einstellungen");
         miConfig.setOnAction(e -> new ConfigDialogController(ProgData.getInstance()).showDialog());
-        getItems().addAll(mFilm, miDarkMode, miShowInfo, miShowFilter, miConfig, new SeparatorMenuItem());
+        getItems().addAll(mFilm, miDarkMode, miColorMode, miShowInfo, miShowFilter, miConfig, new SeparatorMenuItem());
 
         //=========================
         //Hilfe

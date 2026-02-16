@@ -37,43 +37,15 @@ public class TipListGui {
         TipData pToolTip = new TipData(text, image);
         pToolTipList.add(pToolTip);
 
-
         text = "Alle Infofelder und Filter können " +
                 "mit dem Symbol \"x\" ausgeblendet " +
-                "werden. Mit dem Symbol \"Dreieck\" " +
+                "werden (ein- und ausblenden ist auch über " +
+                "das Menü möglich). Mit dem Symbol \"Dreieck\" " +
                 "kann man sie \"abreißen\" und " +
                 "in einem Extrafenster anzeigen.";
         image = "/de/p2tools/mtviewer/res/tips/gui/gui-2.png";
         pToolTip = new TipData(text, image);
         pToolTipList.add(pToolTip);
-
-
-        text = "Mit einem Klick auf einen Tab wird dieser " +
-                "ausgewählt." +
-                "\n\n" +
-                "Mit einem weitern Klick, kann das Filterfeld links " +
-                "ein- und ausgeblendet werden. Ein klick mit der " +
-                "RECHTEN Maustaste blendet das Infofeld unten ein- und aus.";
-        image = "/de/p2tools/mtviewer/res/tips/gui/gui-7.png";
-        pToolTip = new TipData(text, image);
-        pToolTipList.add(pToolTip);
-
-
-        text = "Im Programm sind immer zwei " +
-                "Menüs sichtbar." +
-                "\n\n" +
-                "Das obere enthält Menüpunkte, " +
-                "die für das ganze Programm " +
-                "wichtig sind." +
-                "\n\n" +
-                "Das untere Menü ist immer " +
-                "für den jeweils angezeigten " +
-                "Tab (Filme, Audios, " +
-                "Live, Downloads, Abos).";
-        image = "/de/p2tools/mtviewer/res/tips/gui/gui-4.png";
-        pToolTip = new TipData(text, image);
-        pToolTipList.add(pToolTip);
-
 
         text = "Das Programm kann in verschiedenen " +
                 "Farben angezeigt werden." +
@@ -87,11 +59,11 @@ public class TipListGui {
         pToolTip = new TipData(text, image);
         pToolTipList.add(pToolTip);
 
-
-        text = "Mit einem Klick " +
+        text = "Mit einem Klick auf das Menü " +
                 "(RECHTE-Maustaste) kann das " +
                 "Gui zwischen Hell- und " +
-                "Dunkel umgeschaltet werden. " +
+                "Dunkel umgeschaltet werden." +
+                "\n\n" +
                 "Ein Doppelklick schaltet " +
                 "zwischen den beiden Farbmodi um. " +
                 "Im Menü selbst, gibt es auch " +
@@ -99,25 +71,6 @@ public class TipListGui {
         image = "/de/p2tools/mtviewer/res/tips/gui/gui-5.png";
         pToolTip = new TipData(text, image);
         pToolTipList.add(pToolTip);
-
-
-        text = "In den Tabellen können mit der " +
-                "Maus Zeilen selektiert werden. " +
-                "Dazu einfach in die erste " +
-                "Zeile klicken (Maustaste geklickt " +
-                "halten) und dann die Maus " +
-                "nach unten ziehen." +
-                "\n\n" +
-                "In den Tabellen kann " +
-                "mit der Leertaste nach " +
-                "unten \"geblättert\" werden. " +
-                "Jeder Klick auf die Leertaste " +
-                "schiebt den Tabelleninhalt " +
-                "um eine Seite nach unten.";
-        image = "/de/p2tools/mtviewer/res/tips/gui/gui-6.png";
-        pToolTip = new TipData(text, image);
-        pToolTipList.add(pToolTip);
-
 
         return pToolTipList;
     }

@@ -10,7 +10,6 @@ public class TipsFactory {
         FILME("Filme", TipListFilm.getTips()),
         DOWNLOAD("Downloads", TipListDownload.getTips()),
         FILTER("Filter", TipListFilter.getTips()),
-        SEARCH("Suchen", TipListSearch.getTips()),
         SET("Sets", TipListSet.getTips());
 
         private final String name;

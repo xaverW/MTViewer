@@ -54,7 +54,6 @@ public class TipsDialog extends P2DialogExtra {
     private final Button btnFilm = new Button(TipsFactory.TIPPS.FILME.getName());
     private final Button btnDownload = new Button(TipsFactory.TIPPS.DOWNLOAD.getName());
     private final Button btnFilter = new Button(TipsFactory.TIPPS.FILTER.getName());
-    private final Button btnSearch = new Button(TipsFactory.TIPPS.SEARCH.getName());
     private final Button btnSet = new Button(TipsFactory.TIPPS.SET.getName());
 
 
@@ -177,17 +176,6 @@ public class TipsDialog extends P2DialogExtra {
         });
         btnFilter.setMaxWidth(Double.MAX_VALUE);
 
-        btnSearch.getStyleClass().add("pFuncBtn");
-        btnSearch.setOnAction(a -> {
-            tips = TipsFactory.TIPPS.SEARCH;
-            lblTipsName.setText(tips.getName());
-            actTipNo = 0;
-            TipData to = tips.getTipsList().get(actTipNo);
-            tipBox.setTips(to);
-            setSel(btnSearch);
-        });
-        btnSearch.setMaxWidth(Double.MAX_VALUE);
-
         btnSet.getStyleClass().add("pFuncBtn");
         btnSet.setOnAction(a -> {
             tips = TipsFactory.TIPPS.SET;
@@ -210,7 +198,6 @@ public class TipsDialog extends P2DialogExtra {
         gridPane1.add(btnFilm, 0, ++row, 2, 1);
         gridPane1.add(btnDownload, 0, ++row, 2, 1);
         gridPane1.add(btnFilter, 0, ++row, 2, 1);
-        gridPane1.add(btnSearch, 0, ++row, 2, 1);
         gridPane1.add(btnSet, 0, ++row, 2, 1);
 
 
@@ -256,7 +243,6 @@ public class TipsDialog extends P2DialogExtra {
         btnFilm.getStyleClass().remove("btnTipsDialogSel");
         btnDownload.getStyleClass().remove("btnTipsDialogSel");
         btnFilter.getStyleClass().remove("btnTipsDialogSel");
-        btnSearch.getStyleClass().remove("btnTipsDialogSel");
         btnSet.getStyleClass().remove("btnTipsDialogSel");
 
         btn.getStyleClass().add("btnTipsDialogSel");

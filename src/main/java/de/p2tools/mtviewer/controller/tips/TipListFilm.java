@@ -28,22 +28,27 @@ public class TipListFilm {
     public static List<TipData> getTips() {
         List<TipData> pToolTipList = new ArrayList<>();
 
-
-        String text = "Im Tab \"Filme\" wird die Liste " +
-                "aller Filme angezeigt." +
+        String text = "Hier wird die Liste " +
+                "aller Filme und Audios angezeigt." +
                 "\n\n" +
                 "Links neben " +
                 "der Tabelle sind die Filter, mit " +
                 "denen die Filme gefiltert werden " +
                 "können." +
                 "\n\n" +
-                "In der Tabelle und rechts " +
-                "daneben, können Filme gestartet " +
+                "In der Tabelle können Filme gestartet " +
                 "und gespeichert werden. Unter der " +
                 "Tabelle sind Infos zum " +
                 "ausgewählten Film.";
         String image = "/de/p2tools/mtviewer/res/tips/film/film-1.png";
         TipData pToolTip = new TipData(text, image);
+        pToolTipList.add(pToolTip);
+
+        text = "Mit den Button in der Tabelle können Filme gestartet " +
+                "(Dreieck) " +
+                "und gespeichert (Kreis) werden.";
+        image = "/de/p2tools/mtviewer/res/tips/film/film-2.png";
+        pToolTip = new TipData(text, image);
         pToolTipList.add(pToolTip);
 
         return pToolTipList;

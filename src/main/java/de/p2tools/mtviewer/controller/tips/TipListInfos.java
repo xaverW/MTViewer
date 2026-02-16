@@ -37,11 +37,6 @@ public class TipListInfos {
                 "von Programmeinstellungen " +
                 "erreichbar." +
                 "\n\n" +
-                "Zuerst sollten nur die " +
-                "Einstellungen zum Abspielen " +
-                "und Aufzeichnen zurückgesetzt " +
-                "werden." +
-                "\n\n" +
                 "Wenn gar nichts mehr geht, " +
                 "kann das Programm komplett " +
                 "zurückgesetzt werden." +

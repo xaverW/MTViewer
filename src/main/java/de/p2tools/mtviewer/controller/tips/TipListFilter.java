@@ -28,7 +28,7 @@ public class TipListFilter {
     public static List<TipData> getTips() {
         List<TipData> pToolTipList = new ArrayList<>();
 
-        String text = "Der Filter der Filme ist in " +
+        String text = "Der Filter ist in " +
                 "mehrere Bereiche geteilt. " +
                 "Oben sind die Textfilter " +
                 "(z.B.: Thema oder Titel)." +
@@ -38,14 +38,29 @@ public class TipListFilter {
                 "Filmeigenschaften (z.B.: " +
                 "Filmlänge) suchen." +
                 "\n\n" +
-                "Unten sind die Einstellungen " +
-                "der Filter. Dort kann ausgewählt " +
-                "werden, welche Filter angezeigt " +
-                "werden sollen. Dort können auch Filtereinstellungen " +
-                "in Profilen gespeichert und " +
+                "Unten können Filtereinstellungen " +
+                "gespeichert und " +
                 "wieder abgerufen werden.";
         String image = "/de/p2tools/mtviewer/res/tips/filter/filter-1.png";
         TipData pToolTip = new TipData(text, image);
+        pToolTipList.add(pToolTip);
+
+        text = "Mit dem Button (Kreis) werden die aktuellen Filtereinstellungen " +
+                "gespeichert. Der Button darüber (Pfeil nach oben) stellt die gespeicherten " +
+                "Einstellungen wieder her." +
+                "\n\n" +
+                "Mit den beiden Pfeilen unter (rechts, links) kann in den verwendeten " +
+                "Filter zurück- und vor geblättert werden. Der rechte Button unten löscht " +
+                "den Filter.";
+        image = "/de/p2tools/mtviewer/res/tips/filter/filter-2.png";
+        pToolTip = new TipData(text, image);
+        pToolTipList.add(pToolTip);
+
+        text = "In den Textfiltern kann auch mit RegEx gesucht werden. Die Farbe " +
+                "gibt dann an, ob die RegEx korrekt ist. Weitere Infos dazu gibts " +
+                "in der Anleitung auf der Website.";
+        image = "/de/p2tools/mtviewer/res/tips/filter/filter-3.png";
+        pToolTip = new TipData(text, image);
         pToolTipList.add(pToolTip);
 
 

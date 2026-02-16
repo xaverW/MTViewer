@@ -28,21 +28,41 @@ public class TipListDownload {
     public static List<TipData> getTips() {
         List<TipData> pToolTipList = new ArrayList<>();
 
-        String text = "Im Tab Download werden alle aktuellen " +
+        String text = "Unter der Tabelle im Tab Download werden alle aktuellen " +
                 "Downloads angezeigt. Hier können " +
                 "Downloads gestartet und gelöscht " +
-                "oder geändert werden." +
-                "\n\n" +
-                "In dem Infobereich unter der Tabelle " +
-                "werden Infos dazu angezeigt. " +
-                "Links neben der Tabelle kann dieselbe " +
-                "gefiltert werden." +
-                "\n\n" +
-                "Unter den Filtern sind noch ein " +
-                "paar Einstellungen für die Downloads: " +
-                "Z.B.: die Download-Bandbreite.";
+                "oder geändert werden.";
         String image = "/de/p2tools/mtviewer/res/tips/download/download-1.png";
         TipData pToolTip = new TipData(text, image);
+        pToolTipList.add(pToolTip);
+
+        text = "Mit den Button in der Tabelle der Downloads können Downloads gestartet (Dreieck nach unten), " +
+                "gestoppt (Pause-Zeichen) und gelöscht (X) werden." +
+                "\n\n" +
+                "Ist der Download abgeschlossen, kann der " +
+                "Filme abgespielt (Dreieck nach rechts) werden. Der Button mit dem Ordnersymbol " +
+                "öffnet den Speicherordner." +
+                "\n\n" +
+                "Solange der Download noch nicht läuft, kann er mit einem Doppelklick geändert werden.";
+        image = "/de/p2tools/mtviewer/res/tips/download/download-2.png";
+        pToolTip = new TipData(text, image);
+        pToolTipList.add(pToolTip);
+
+        text = "Mit den Button neben der Tabelle werden alle Downloads " +
+                "gestartet (erster Button). Der zweite Button stoppt alle Downloads und " +
+                "der letzte Button (Besen) räumt die Tabelle auf. Es werden abgeschlossene " +
+                "Downloads entfernt und fehlerhafte zurückgesetzt.";
+        image = "/de/p2tools/mtviewer/res/tips/download/download-3.png";
+        pToolTip = new TipData(text, image);
+        pToolTipList.add(pToolTip);
+
+        text = "Wird ein neuer Download angelegt oder ein Download geändert, erscheint " +
+                "dieser Dialog. Dort kann oben die Auflösung (HD, Normal, Klein) ausgewählt werden." +
+                "\n\n" +
+                "Im mittleren Feld wird der Dateiname angezeigt und kann angepasst werden. Unten wird der Speicherordner " +
+                "angezeigt und kann auch geändert werden.";
+        image = "/de/p2tools/mtviewer/res/tips/download/download-4.png";
+        pToolTip = new TipData(text, image);
         pToolTipList.add(pToolTip);
 
         return pToolTipList;
