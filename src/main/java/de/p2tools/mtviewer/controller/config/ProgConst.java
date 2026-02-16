@@ -96,7 +96,7 @@ public class ProgConst {
     public static final String GUI_TITLE_BAR_DARK_1 = "#666666";
     public static final String GUI_TITLE_BAR_DARK_2 = "#000080";
     public static final String GUI_TITLE_BAR_LIGHT_1 = "#d8d8d8";
-    public static final String GUI_TITLE_BAR_LIGHT_2 = "#99b3ff";
+    public static final String GUI_TITLE_BAR_LIGHT_2 = "#8096ee";
 
     public static final String GUI_TITLE_BAR_SEL_DARK_1 = "#333333";
     public static final String GUI_TITLE_BAR_SEL_DARK_2 = "#414180";
@@ -118,5 +118,5 @@ public class ProgConst {
     public static final boolean GUI_TITLE_BAR_SEL_TRANSPARENT_LIGHT_1 = false;
     public static final boolean GUI_TITLE_BAR_SEL_TRANSPARENT_LIGHT_2 = false;
 
-    
+
 }

@@ -58,15 +58,15 @@ public class PaneColorGui {
     private final CheckBox chkTitleBarEmptyLight1 = new CheckBox("Transparent");
     private final CheckBox chkTitleBarEmptyLight2 = new CheckBox("Transparent");
 
-    private final CheckBox chkTitleBarSelEmptyDark1 = new CheckBox("Transparent");
-    private final CheckBox chkTitleBarSelEmptyDark2 = new CheckBox("Transparent");
-    private final CheckBox chkTitleBarSelEmptyLight1 = new CheckBox("Transparent");
-    private final CheckBox chkTitleBarSelEmptyLight2 = new CheckBox("Transparent");
+//    private final CheckBox chkTitleBarSelEmptyDark1 = new CheckBox("Transparent");
+//    private final CheckBox chkTitleBarSelEmptyDark2 = new CheckBox("Transparent");
+//    private final CheckBox chkTitleBarSelEmptyLight1 = new CheckBox("Transparent");
+//    private final CheckBox chkTitleBarSelEmptyLight2 = new CheckBox("Transparent");
 
     private final String ICONS = "Icons";
     private final String GUI = "Programmfarbe";
     private final String BACKGROUND = "Hintergrund";
-    private final String TITLE_BAR = "Schalter Titelzeile";
+    private final String TITLE_BAR = "Schalter Filmliste";
     private final String TITLE_BAR_SEL = "Schalter Titelzeile, ausgewählt";
 
     private final String DARK_1 = "Dunkel, Gui-Farben 1";
@@ -99,10 +99,10 @@ public class PaneColorGui {
         chkTitleBarEmptyLight1.selectedProperty().unbindBidirectional(ProgConfig.SYSTEM_GUI_TITLE_BAR_TRANSPARENT_LIGHT_1);
         chkTitleBarEmptyLight2.selectedProperty().unbindBidirectional(ProgConfig.SYSTEM_GUI_TITLE_BAR_TRANSPARENT_LIGHT_2);
 
-        chkTitleBarSelEmptyDark1.selectedProperty().unbindBidirectional(ProgConfig.SYSTEM_GUI_TITLE_BAR_SEL_TRANSPARENT_DARK_1);
-        chkTitleBarSelEmptyDark2.selectedProperty().unbindBidirectional(ProgConfig.SYSTEM_GUI_TITLE_BAR_SEL_TRANSPARENT_DARK_2);
-        chkTitleBarSelEmptyLight1.selectedProperty().unbindBidirectional(ProgConfig.SYSTEM_GUI_TITLE_BAR_SEL_TRANSPARENT_LIGHT_1);
-        chkTitleBarSelEmptyLight2.selectedProperty().unbindBidirectional(ProgConfig.SYSTEM_GUI_TITLE_BAR_SEL_TRANSPARENT_LIGHT_2);
+//        chkTitleBarSelEmptyDark1.selectedProperty().unbindBidirectional(ProgConfig.SYSTEM_GUI_TITLE_BAR_SEL_TRANSPARENT_DARK_1);
+//        chkTitleBarSelEmptyDark2.selectedProperty().unbindBidirectional(ProgConfig.SYSTEM_GUI_TITLE_BAR_SEL_TRANSPARENT_DARK_2);
+//        chkTitleBarSelEmptyLight1.selectedProperty().unbindBidirectional(ProgConfig.SYSTEM_GUI_TITLE_BAR_SEL_TRANSPARENT_LIGHT_1);
+//        chkTitleBarSelEmptyLight2.selectedProperty().unbindBidirectional(ProgConfig.SYSTEM_GUI_TITLE_BAR_SEL_TRANSPARENT_LIGHT_2);
     }
 
     public void make(Collection<TitledPane> result) {
@@ -258,10 +258,10 @@ public class PaneColorGui {
         chkTitleBarEmptyLight1.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_GUI_TITLE_BAR_TRANSPARENT_LIGHT_1);
         chkTitleBarEmptyLight2.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_GUI_TITLE_BAR_TRANSPARENT_LIGHT_2);
 
-        chkTitleBarSelEmptyDark1.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_GUI_TITLE_BAR_SEL_TRANSPARENT_DARK_1);
-        chkTitleBarSelEmptyDark2.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_GUI_TITLE_BAR_SEL_TRANSPARENT_DARK_2);
-        chkTitleBarSelEmptyLight1.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_GUI_TITLE_BAR_SEL_TRANSPARENT_LIGHT_1);
-        chkTitleBarSelEmptyLight2.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_GUI_TITLE_BAR_SEL_TRANSPARENT_LIGHT_2);
+//        chkTitleBarSelEmptyDark1.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_GUI_TITLE_BAR_SEL_TRANSPARENT_DARK_1);
+//        chkTitleBarSelEmptyDark2.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_GUI_TITLE_BAR_SEL_TRANSPARENT_DARK_2);
+//        chkTitleBarSelEmptyLight1.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_GUI_TITLE_BAR_SEL_TRANSPARENT_LIGHT_1);
+//        chkTitleBarSelEmptyLight2.selectedProperty().bindBidirectional(ProgConfig.SYSTEM_GUI_TITLE_BAR_SEL_TRANSPARENT_LIGHT_2);
 
         VBox innerVbox = new VBox();
         innerVbox.getStyleClass().add("pBorder-1");
@@ -287,10 +287,10 @@ public class PaneColorGui {
         hBox = addColor(ProgConfig.SYSTEM_GUI_TITLE_BAR_DARK_1, chkTitleBarEmptyDark1);
         gridDark1.add(hBox, 2, 4);
 
-        gridDark1.add(new Label(TITLE_BAR_SEL), 0, 5);
-        gridDark1.add(chkTitleBarSelEmptyDark1, 1, 5);
-        hBox = addColor(ProgConfig.SYSTEM_GUI_TITLE_BAR_SEL_DARK_1, chkTitleBarSelEmptyDark1);
-        gridDark1.add(hBox, 2, 5);
+//        gridDark1.add(new Label(TITLE_BAR_SEL), 0, 5);
+//        gridDark1.add(chkTitleBarSelEmptyDark1, 1, 5);
+//        hBox = addColor(ProgConfig.SYSTEM_GUI_TITLE_BAR_SEL_DARK_1, chkTitleBarSelEmptyDark1);
+//        gridDark1.add(hBox, 2, 5);
 
         innerVbox.getChildren().add(gridDark1);
         VBox.setVgrow(gridDark1, Priority.ALWAYS);
@@ -319,10 +319,10 @@ public class PaneColorGui {
         hBox = addColor(ProgConfig.SYSTEM_GUI_TITLE_BAR_DARK_2, chkTitleBarEmptyDark2);
         gridDark2.add(hBox, 2, 4);
 
-        gridDark2.add(new Label(TITLE_BAR_SEL), 0, 5);
-        gridDark2.add(chkTitleBarSelEmptyDark2, 1, 5);
-        hBox = addColor(ProgConfig.SYSTEM_GUI_TITLE_BAR_SEL_DARK_2, chkTitleBarSelEmptyDark2);
-        gridDark2.add(hBox, 2, 5);
+//        gridDark2.add(new Label(TITLE_BAR_SEL), 0, 5);
+//        gridDark2.add(chkTitleBarSelEmptyDark2, 1, 5);
+//        hBox = addColor(ProgConfig.SYSTEM_GUI_TITLE_BAR_SEL_DARK_2, chkTitleBarSelEmptyDark2);
+//        gridDark2.add(hBox, 2, 5);
 
         gridDark2.visibleProperty().bind(ProgConfig.SYSTEM_DARK_THEME.and(ProgConfig.SYSTEM_GUI_THEME_1.not()));
         gridDark2.managedProperty().bind(ProgConfig.SYSTEM_DARK_THEME.and(ProgConfig.SYSTEM_GUI_THEME_1.not()));
@@ -352,10 +352,10 @@ public class PaneColorGui {
         hBox = addColor(ProgConfig.SYSTEM_GUI_TITLE_BAR_LIGHT_1, chkTitleBarEmptyLight1);
         gridLight1.add(hBox, 2, 4);
 
-        gridLight1.add(new Label(TITLE_BAR_SEL), 0, 5);
-        gridLight1.add(chkTitleBarSelEmptyLight1, 1, 5);
-        hBox = addColor(ProgConfig.SYSTEM_GUI_TITLE_BAR_SEL_LIGHT_1, chkTitleBarSelEmptyLight1);
-        gridLight1.add(hBox, 2, 5);
+//        gridLight1.add(new Label(TITLE_BAR_SEL), 0, 5);
+//        gridLight1.add(chkTitleBarSelEmptyLight1, 1, 5);
+//        hBox = addColor(ProgConfig.SYSTEM_GUI_TITLE_BAR_SEL_LIGHT_1, chkTitleBarSelEmptyLight1);
+//        gridLight1.add(hBox, 2, 5);
 
         gridLight1.visibleProperty().bind(ProgConfig.SYSTEM_DARK_THEME.not().and(ProgConfig.SYSTEM_GUI_THEME_1));
         gridLight1.managedProperty().bind(ProgConfig.SYSTEM_DARK_THEME.not().and(ProgConfig.SYSTEM_GUI_THEME_1));
@@ -385,10 +385,10 @@ public class PaneColorGui {
         hBox = addColor(ProgConfig.SYSTEM_GUI_TITLE_BAR_LIGHT_2, chkTitleBarEmptyLight2);
         gridLight2.add(hBox, 2, 4);
 
-        gridLight2.add(new Label(TITLE_BAR_SEL), 0, 5);
-        gridLight2.add(chkTitleBarSelEmptyLight2, 1, 5);
-        hBox = addColor(ProgConfig.SYSTEM_GUI_TITLE_BAR_SEL_LIGHT_2, chkTitleBarSelEmptyLight2);
-        gridLight2.add(hBox, 2, 5);
+//        gridLight2.add(new Label(TITLE_BAR_SEL), 0, 5);
+//        gridLight2.add(chkTitleBarSelEmptyLight2, 1, 5);
+//        hBox = addColor(ProgConfig.SYSTEM_GUI_TITLE_BAR_SEL_LIGHT_2, chkTitleBarSelEmptyLight2);
+//        gridLight2.add(hBox, 2, 5);
 
         gridLight2.visibleProperty().bind(ProgConfig.SYSTEM_DARK_THEME.not().and(ProgConfig.SYSTEM_GUI_THEME_1.not()));
         gridLight2.managedProperty().bind(ProgConfig.SYSTEM_DARK_THEME.not().and(ProgConfig.SYSTEM_GUI_THEME_1.not()));

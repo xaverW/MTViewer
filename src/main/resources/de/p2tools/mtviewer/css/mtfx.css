@@ -181,3 +181,68 @@
     -fx-border-width: 3;
     -fx-padding: 2 9 2 9;
 }
+
+
+
+/* tabPane */
+.tab-pane {
+    -fx-border-color: transparent;
+    -fx-border-width: 1;
+}
+
+.tab .tab-label {
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-text-fill: -pBackgroundTextColor;
+}
+.tab:selected .tab-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: -pBackgroundTextColor;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab {
+    -fx-background-color: -pBackgroundColor;
+    -fx-border-width: 1 1 0 1;
+    -fx-border-insets: 5 5 0 5;
+
+    -fx-border-radius: 5 5 0 0;
+    -fx-border-color: -pGuiColor;
+
+    -fx-background-insets: 6 6 0 6;
+    -fx-background-radius: 5 5 0 0;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected {
+    -fx-border-width: 4 4 0 4;
+    -fx-border-insets: 2 2 0 2;
+    -fx-border-color: -pGuiColor;
+
+    -fx-padding: 3 15 3 15;
+    -fx-background-insets: 6 6 0 6;
+}
+.tab-pane > .tab-header-area > .headers-region > .tab:hover {
+    -fx-border-width: 4 4 0 4;
+    -fx-border-insets: 2 2 0 2;
+    -fx-border-color: -pGuiColor ;
+
+    -fx-background-insets: 6 6 0 6;
+}
+.tab-pane > .tab-header-area > .headers-region > .tab:pressed {
+    -fx-border-width: 4 4 0 4;
+    -fx-border-insets: 2 2 0 2;
+    -fx-border-color: -pGuiColor;
+
+    -fx-background-insets: 6 6 0 6;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected  .focus-indicator {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.tab-pane > .tab-content-area {
+    -fx-border-color: -pGuiColor;
+    -fx-border-width: 10 3 3 3;
+    -fx-padding: 0;
+}
+
