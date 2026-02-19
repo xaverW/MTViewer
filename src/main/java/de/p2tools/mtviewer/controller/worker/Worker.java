@@ -52,6 +52,16 @@ public class Worker {
 
     public Worker(ProgData progData) {
         this.progData = progData;
+        progData.pEventHandler.addListener(new P2Listener(P2Events.EVENT_TIMER_ONE_MINUTE) {
+            @Override
+            public void pingGui() {
+                // startet alles das einmal nach dem Start laufen soll
+                if (ProgConfig.SYSTEM_SHOW_TIPS.get() && !TipsDialog.TIPS_DIALOG_OPEN) {
+                    // dann sollen Tipps angezeigt werden, und nur wenn noch nicht offen
+                    new TipsDialog(progData);
+                }
+            }
+        });
         ProgConfig.SYSTEM_SHOW_MEDIATHEK.addListener((u, o, n) -> setList());
         ProgConfig.SYSTEM_SHOW_AUDIOTHEK.addListener((u, o, n) -> setList());
         addMediathek();
@@ -63,17 +73,6 @@ public class Worker {
     }
 
     private void addMediathek() {
-        progData.pEventHandler.addListener(new P2Listener(P2Events.EVENT_TIMER_ONE_MINUTE) {
-            @Override
-            public void pingGui() {
-                // startet alles das einmal nach dem Start laufen soll
-                if (ProgConfig.SYSTEM_SHOW_TIPS.get() && !TipsDialog.TIPS_DIALOG_OPEN) {
-                    // dann sollen Tipps angezeigt werden, und nur wenn noch nicht offen
-                    new TipsDialog(progData);
-                }
-            }
-        });
-        
         // =================
         // Mediathek
         progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_FILMLIST_LOAD_START) {
@@ -100,7 +99,7 @@ public class Worker {
         progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_FILMLIST_LOAD_LOADED) {
             @Override
             public void pingGui() {
-//                progData.maskerPane.setMaskerVisible(true, true, true);
+                progData.maskerPane.setMaskerVisible(true, true, false);
                 progData.maskerPane.setMaskerProgress(PROGRESS_INDETERMINATE, "Filmliste verarbeiten");
             }
         });
@@ -143,27 +142,37 @@ public class Worker {
             public void pingGui(P2Event event) {
                 progData.filmlistUsed.clear(); // muss dann ja auf jeden Fall gebaut werden
 
-                if (event.getAct() == PROGRESS_INDETERMINATE) {
-                    // ist dann die gespeicherte Audioliste
-                    progData.maskerPane.setMaskerVisible();
-                }
-                progData.maskerPane.setMaskerProgress(event.getAct(), event.getText());
+                if (!ProgData.FILMLIST_IS_DOWNLOADING.get()) {
+                    // dann wird auch die Filmliste geladen, dann nix mit dem masker
 
-                // the channel combo will be reseted, therefore save the filter
-                progData.worker.saveFilter();
+                    if (event.getAct() == PROGRESS_INDETERMINATE) {
+                        // ist dann die gespeicherte Audioliste
+                        progData.maskerPane.setMaskerVisible();
+                    }
+                    progData.maskerPane.setMaskerProgress(event.getAct(), event.getText());
+
+                    // the channel combo will be reseted, therefore save the filter
+                    progData.worker.saveFilter();
+                }
             }
         });
         progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_AUDIO_LIST_LOAD_PROGRESS) {
             @Override
             public void pingGui(P2Event event) {
-                progData.maskerPane.setMaskerProgress(event.getAct(), event.getText());
+                if (!ProgData.FILMLIST_IS_DOWNLOADING.get()) {
+                    // dann wird auch die Filmliste geladen, dann nix mit dem masker
+                    progData.maskerPane.setMaskerProgress(event.getAct(), event.getText());
+                }
             }
         });
         progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_AUDIO_LIST_LOAD_LOADED) {
             @Override
             public void pingGui(P2Event event) {
-//                progData.maskerPane.setMaskerVisible(true, true, true);
-                progData.maskerPane.setMaskerProgress(PROGRESS_INDETERMINATE, "Audioliste verarbeiten");
+                if (!ProgData.FILMLIST_IS_DOWNLOADING.get()) {
+                    // dann wird auch die Filmliste geladen, dann nix mit dem masker
+                    progData.maskerPane.setMaskerVisible(true, true, false);
+                    progData.maskerPane.setMaskerProgress(PROGRESS_INDETERMINATE, "Audioliste verarbeiten");
+                }
             }
         });
         progData.pEventHandler.addListener(new P2Listener(PEvents.EVENT_AUDIO_LIST_LOAD_FINISHED) {
@@ -172,10 +181,11 @@ public class Worker {
                 if (ProgData.firstProgramStart) {
                     ProgSave.saveAll(); // damit nichts verloren geht
                 }
-                // MARK markiert dass es die Filmliste ist!
+                // MARK markiert dass es die Audioliste ist!
                 progData.audioList.forEach(f -> f.setMark(false));
 
                 ProgData.AUDIOLIST_IS_DOWNLOADING.set(false);
+
                 if (!ProgData.FILMLIST_IS_DOWNLOADING.get()) {
                     setNo();
                     setList();
