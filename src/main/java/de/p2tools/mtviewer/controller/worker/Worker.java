@@ -31,9 +31,12 @@ import de.p2tools.p2lib.p2event.P2Event;
 import de.p2tools.p2lib.p2event.P2Events;
 import de.p2tools.p2lib.p2event.P2Listener;
 import de.p2tools.p2lib.tools.duration.P2Duration;
+import de.p2tools.p2lib.tools.log.P2Log;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -62,8 +65,30 @@ public class Worker {
                 }
             }
         });
+
+        progData.pEventHandler.addListener(new P2Listener(P2Events.EVENT_TIMER_SECOND) {
+            @Override
+            public void pingGui() {
+                // startet alles das einmal nach dem Start laufen soll
+                if (ProgConfig.SYSTEM_CHANGE_THEME_TIME.get()) {
+                    final int hourOn = ProgConfig.SYSTEM_CHANGE_TO_DARK_THEME_HOUR.get();
+                    final int minuteOn = ProgConfig.SYSTEM_CHANGE_TO_DARK_THEME_MINUTE.get();
+                    final int hour = LocalTime.now().getHour();
+                    final int minute = LocalTime.now().getMinute();
+
+                    if (hour >= hourOn && minute >= minuteOn && !ProgData.themeChangeDark) {
+                        // dann dark einschalten
+                        P2Log.sysLog("Timer: Change to DARK");
+                        ProgData.themeChangeDark = true; // nicht sofort nochmal
+                        Platform.runLater(() -> ProgConfig.SYSTEM_DARK_THEME.set(true));
+                    }
+                }
+            }
+        });
+
         ProgConfig.SYSTEM_SHOW_MEDIATHEK.addListener((u, o, n) -> setList());
         ProgConfig.SYSTEM_SHOW_AUDIOTHEK.addListener((u, o, n) -> setList());
+
         addMediathek();
         addAudiothek();
     }

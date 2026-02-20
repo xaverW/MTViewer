@@ -45,6 +45,10 @@ public class ProgStartAfterGui {
         //die gespeicherte Filmliste laden
         LoadFilmFactory.loadFilmListProgStart();
         LoadAudioFactory.loadAudioListProgStart();
+        if (ProgConfig.SYSTEM_CHANGE_THEME_TIME.get() && ProgConfig.SYSTEM_DARK_THEME.get()) {
+            // wenn Auto eingestellt und DARK dann immer mit das Light-Theme starten
+            ProgConfig.SYSTEM_DARK_THEME.set(false);
+        }
         ProgData.getInstance().colorWorker.setColor(); // Farben einrichten
     }
 

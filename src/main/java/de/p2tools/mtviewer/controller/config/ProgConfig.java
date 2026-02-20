@@ -182,6 +182,10 @@ public class ProgConfig extends P2DataProgConfig {
     public static BooleanProperty SYSTEM_FILMLIST_DOUBLE_WITH_THEME_TITLE = addBoolProp("system-filmlist-double-with-theme-title", Boolean.FALSE);
 
     // CSS-Color
+    public static BooleanProperty SYSTEM_CHANGE_THEME_TIME = addBoolProp("system-change-theme-time", Boolean.FALSE);
+    public static IntegerProperty SYSTEM_CHANGE_TO_DARK_THEME_HOUR = addIntProp("system-change-to-dark-theme-hour", 20);
+    public static IntegerProperty SYSTEM_CHANGE_TO_DARK_THEME_MINUTE = addIntProp("system-change-to-dark-theme-minute", 0);
+
     public static IntegerProperty SYSTEM_FONT_SIZE = addIntProp("system-style-size", 0);
     public static BooleanProperty SYSTEM_FONT_SIZE_CHANGE = addBoolProp("system-font-size-change", Boolean.FALSE); // für die Schriftgröße
 
