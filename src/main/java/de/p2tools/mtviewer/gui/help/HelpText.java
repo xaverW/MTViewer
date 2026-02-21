@@ -52,7 +52,7 @@ public class HelpText {
                     "\n";
 
     public static final String LOAD_FILMLIST_ONLY_MARK_DOUBLE =
-            "In der Filmliste sind ~150.000 Filme doppelt enthalten (z.B. bei ARD und BR)." +
+            "In der Filmliste sind einige Filme doppelt enthalten (z.B. bei ARD und BR)." +
                     "\n\n" +
                     "Doppelte können bereits beim Laden der Filmliste ausgefiltert werden. Da die Filmliste " +
                     "inzwischen sehr lang ist, wäre das eine " +
@@ -103,7 +103,7 @@ public class HelpText {
                     "\n";
 
     public static final String LOAD_FILMLIST_SENDER_STARTDIALOG =
-            "Filme der markierten Sender werden beim Laden der Filmliste ausgeschlossen.\n" +
+            "Sender die nicht markiert sind, werden beim Laden der Filmliste ausgeschlossen.\n" +
                     "\n";
 
     public static final String FILTER_INFO =
@@ -114,7 +114,7 @@ public class HelpText {
 
                     "Mit dem Filter \"Sender\" können ein oder mehrere Sender vorgegeben werden, " +
                     "in denen die Sendungen gesucht werden." +
-                    "\n" +
+                    "\n\n" +
                     "Die Filter \"Thema\" und \"Titel\" suchen im jeweiligen Feld: Thema oder Titel." +
                     "\n" +
                     "Der Filter \"Irgendwo\" sucht in den Felder: Thema, Titel, Beschreibung und " +
@@ -130,8 +130,8 @@ public class HelpText {
                     "\n" +
 
 
-                    "Mit den Textfeldern kann nach einem wörtlichen Suchtext (Suchtext muss enthalten sein/" +
-                    "oder darf nicht enthalten sein) oder nach " +
+                    "Mit den Textfeldern kann nach einem wörtlichen Suchtext (Suchtext muss enthalten sein) " +
+                    "oder mit " +
                     "regulären Ausdrücken (RegExp) gesucht werden.\n" +
                     "\n" +
                     "Groß- und Kleinschreibung wird bei beiden Arten der Suche nicht unterschieden.\n" +
@@ -146,47 +146,20 @@ public class HelpText {
                     "\n" +
                     "\n" +
 
-                    "-- Wörtlicher Suchtext darf nicht enthalten sein --\n" +
-                    "Der Suchtext muss mit '!:' (ohne die ' ') beginnen.\n" +
-                    "Ein wörtlicher Suchtext schließt alle Dateien aus, bei denen der Suchtext an beliebiger " +
-                    "Stelle im durchsuchten Bereich enthalten ist.\n" +
-                    "\n" +
-                    "Um mehrere Begriffe auszuschließen, müssen diese durch Komma oder Doppelpunkt " +
-                    "getrennt werden. Das Komma verknüpft die Begriffe mit ODER (=> mindestens einer der Begriffe " +
-                    "muss enthalten sein). Der Doppelpunkt verknüpft die Begriffe mit UND " +
-                    "(=> alle Begriffe müssen enthalten sein, damit der Beitrag ein Treffer ist).\n" +
-                    "\n" +
-                    "\n" +
-
                     "Suchtext und Suchbegriffe dürfen Leerzeichen enthalten, aber kein Komma und keinen Doppelpunkt.\n" +
                     "\n" +
-                    "Beispiele:\n" +
-                    "'Tagesschau' findet u.a. 'Tagesschau, 12:00 Uhr', 'ARD Tagesschau Livestream', 'Bei Logo und der Tagesschau'.\n" +
+                    "Beispiele:" +
+                    "\n\n" +
+                    "'Tagesschau' findet u.a. 'Tagesschau, 12:00 Uhr', 'ARD Tagesschau Livestream'." +
+                    "\n\n" +
                     "'Sport,Fussball' (Komma-getrennt) findet Filme bei denen 'Sport' oder 'Fussball' " +
-                    "oder beides vorkommt, u.a. 'Wintersport im Mumintal' und 'Wie wird man Fussballprofi?'.\n" +
+                    "oder beides vorkommt, u.a. 'Wintersport im Mumintal' und 'Wie wird man Fussballprofi?'." +
+                    "\n\n" +
                     "'Sport:Fussball' (Doppelpunkt-getrennt) findet nur Dateien bei denen " +
-                    "beides ('Sport' und 'Fussball') vorkommt, z.B. 'Wintersport, Fussball und Formel 1'.\n" +
-                    "\n" +
-                    "'!:Auto,Motorrad', es werden nur Beiträge gefunden, die weder \"Auto\" noch \"Motorrad\" " +
-                    "enthalten.\n" +
-                    "'!:Auto:Motorrad', es werden Beiträge gefunden, die \"Auto\" *und* \"Motorrad\" " +
-                    "*nicht* enthalten.\n" +
-
-                    "\n" +
-                    "-- Reguläre Ausdrücke --\n" +
-                    "Ein Suchtext aus regulären Ausdrücken (RegExp) muss mit '#:' (ohne die ' ') beginnen.\n" +
-                    "\n" +
-                    "Beliebige Zeichen mit in die Suche aufnehmen (als '.+', '.*' oder '.?'') macht einen Unterschied!\n" +
-                    "\n" +
-                    "Beispiele:\n" +
-                    "'#:Burger' oder '#:^burger$' -- beide finden 'Burger' und 'burger' und nichts sonst.\n" +
-                    "'#:Burger.+' findet nicht 'Burger', aber alles was nach 'Burger' noch Zeichen " +
-                    "enthält (z.B. 'Burger für die Straubing Tigers').\n" +
-                    "'#:.+burger' findet alles was auf 'burger' oder 'Burger' " +
-                    "endet (z.B. 'Der Hamburger' und '1. Burger').\n" +
-                    "\n" +
-                    "Mehr zu regulären Ausdrücken:\n" +
-                    "https://de.wikipedia.org/wiki/Regul%C3%A4rer_Ausdruck" +
+                    "beides ('Sport' und 'Fussball') vorkommt, z.B. 'Wintersport, Fussball und Formel 1'." +
+                    "\n\n" +
+                    "Weitere Infos gibts auf der Website:\n" +
+                    "https://www.p2tools.de/mtviewer/" +
                     "\n";
 
     public static final String PROG_PATH_VLC =
@@ -358,8 +331,8 @@ public class HelpText {
                     "\n";
 
     public static final String LOAD_FILMLIST_SENDER =
-            "Filme der markierten Sender werden aus der Filmliste ausgeschlossen.\n" +
-                    "\n" +
+            "Sender die nicht markiert sind, werden beim Laden der Filmliste ausgeschlossen." +
+                    "\n\n" +
                     "Wirksam erst nach dem Neuladen der kompletten Filmliste." +
                     "\n";
 
@@ -441,11 +414,8 @@ public class HelpText {
                     "\n";
 
     public static final String VIDEOPLAYER =
-            "Um einen Film in einem Videoplayer abzuspielen, kann hier ein Player angegeben werden. " +
-                    "Empfohlen ist der VLC.\n\n" +
-                    "Wird nichts angegeben, wird versucht den Videoplayer des " +
-                    "Betriebssystems zu verwenden. Klappt das aber nicht, können die Filme nicht abgespielt " +
-                    "werden." +
+            "Um einen Film in einem Videoplayer abzuspielen, muss hier ein Player angegeben werden. " +
+                    "Empfohlen ist der VLC." +
                     "\n";
 
     public static final String PLAY_FILE_HELP_PARAMETER =
@@ -567,19 +537,8 @@ public class HelpText {
                     "%a Zielverzeichnis des Downloads\n" +
                     "%b Dateiname des Downloads\n" +
                     "** (= zwei Sterne) Zielpfad (= Zielverzeichnis mit Dateiname)\n" +
-                    "'**' ist identisch mit '%a/%b' (Windows: '%a\\%b')\n" +
-                    "\n" +
-                    "Beispiel für VLC:\n" +
-                    "===============\n" +
-                    "Programm: '/usr/bin/vlc' (Windows: '%PROGRAMFILES%\\VideoLAN\\VLC\\vlc.exe')\n" +
-                    "Parameter: '%f :sout=#standard{access=file,mux=ts,dst=**} -I dummy --play-and-exit'\n" +
-                    "Dateiname: '%t-%T.ts'\n" +
-                    "\n" +
-                    "Hier wird %f durch die URL des Films ersetzt. %t und %T werden durch Thema und Titel als " +
-                    "Dateinamen ersetzt und in den Programmschalter mit dem Pfad anstatt der '**' eingesetzt. Als " +
-                    "Downloaddatei resultiert:\n" +
-                    "'Volumes/Pfad/Thema-Titel.ts' bzw. 'C:\\Pfad\\Thema-Titel.ts'.\n" +
-                    "\n" +
+                    "'**' ist identisch mit '%a/%b' (Windows: '%a\\%b')" +
+                    "\n\n" +
                     "Beispiel für ffmpeg:\n" +
                     "=====================\n" +
                     "Windows:\n" +

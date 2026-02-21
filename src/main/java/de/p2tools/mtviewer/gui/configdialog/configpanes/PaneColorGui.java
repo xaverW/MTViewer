@@ -123,13 +123,9 @@ public class PaneColorGui {
                 "** Hintergrund **\n" +
                 " Die Hintergrundfarbe der Icons, Buttons, .. wird damit eingestellt." +
                 "\n\n" +
-                "** Schalter Titelzeile **\n" +
-                "Das sind die Schalter ganz oben mit denen die Ansicht der \"Filmliste\", \"Audios\", .. umgeschaltet wird. " +
+                "** Schalter Filmliste **\n" +
+                "Das ist der Button zum Laden der Filmliste. " +
                 "Die Hintergrundfarbe kann damit eingestellt werden." +
-                "\n\n" +
-                "** Schalter Titelzeile, ausgewählt **\n" +
-                "Das ist der jeweils aktive/ausgewählte Schalter. Dessen Hintergrundfarbe " +
-                "kann damit separat eingestellt werden." +
                 "\n\n");
         btnReset.setOnAction(a -> reset());
         btnResetAll.setOnAction(a -> resetAll());

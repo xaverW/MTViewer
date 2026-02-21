@@ -102,7 +102,8 @@ public class TipsDialog extends P2DialogExtra {
         Button btnOk = new Button("OK");
         final Button btnHelp = PIconFactory.getHelpButton(getStage(), "Hilfe-Dialog",
                 "In dem Dialog werden Tipps zum Programm angezeigt. Wenn nicht " +
-                        "abgeschaltet, wird der Dialog beim Start angezeigt.");
+                        "abgeschaltet (in den Einstellungen oder unten im Dialog), " +
+                        "wird der Dialog beim Start angezeigt.");
         addOkButton(btnOk);
         addHlpButton(btnHelp);
         btnOk.setOnAction(a -> {
