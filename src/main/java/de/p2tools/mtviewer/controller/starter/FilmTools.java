@@ -14,7 +14,7 @@
  * not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.p2tools.mtviewer.controller;
+package de.p2tools.mtviewer.controller.starter;
 
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
@@ -26,6 +26,7 @@ import de.p2tools.mtviewer.gui.dialog.FilmPlayDialogController;
 import de.p2tools.p2lib.P2LibConst;
 import de.p2tools.p2lib.alert.P2Alert;
 import de.p2tools.p2lib.guitools.P2Open;
+import de.p2tools.p2lib.guitools.P2RuntimeExecPlay;
 import de.p2tools.p2lib.mediathek.filmdata.FilmData;
 
 import java.text.NumberFormat;
@@ -38,6 +39,7 @@ public class FilmTools {
     private static final NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.GERMANY);
 
     public static void playFilm(FilmData film) {
+        // Button, Table, URL abspielen
         String resolution = ProgConfig.FILM_RESOLUTION.getValueSafe();
 
         if (resolution.equals(FilmData.RESOLUTION_ASK)) {
@@ -53,11 +55,13 @@ public class FilmTools {
 
         String strProgCallArray = "";
         strProgCallArray = DownloadProgParameterFactory.getProgParameterArray(url);
-        String[] arrProgCallArray = null;
-        arrProgCallArray = strProgCallArray.split(TRENNER_PROG_ARRAY);
+        String[] arrProgCallArray = strProgCallArray.split(TRENNER_PROG_ARRAY);
 
-        P2Open.playStoredFilm(arrProgCallArray, ProgConfig.SYSTEM_PROG_PLAY,
-                url, PIconFactory.PICON.BTN_DIR_OPEN.getFontIcon());
+//        P2Open.playStoredFilm(arrProgCallArray, ProgConfig.SYSTEM_PROG_PLAY,
+//                url, PIconFactory.PICON.BTN_DIR_OPEN.getFontIcon());
+
+        // damit werden die OutputStreams umgeleitet
+        new P2RuntimeExecPlay(arrProgCallArray).exec();
     }
 
     public static void playFilm(String pathFile) {

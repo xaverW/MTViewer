@@ -16,9 +16,9 @@
 
 package de.p2tools.mtviewer.gui;
 
-import de.p2tools.mtviewer.controller.FilmTools;
 import de.p2tools.mtviewer.controller.config.PEvents;
 import de.p2tools.mtviewer.controller.config.ProgData;
+import de.p2tools.mtviewer.controller.starter.FilmTools;
 import de.p2tools.mtviewer.gui.dialog.FilmInfoDialogController;
 import de.p2tools.mtviewer.gui.table.Table;
 import de.p2tools.mtviewer.gui.table.TableFilm;

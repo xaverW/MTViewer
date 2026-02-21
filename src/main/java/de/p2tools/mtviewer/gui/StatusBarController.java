@@ -16,9 +16,9 @@
 
 package de.p2tools.mtviewer.gui;
 
-import de.p2tools.mtviewer.controller.FilmTools;
 import de.p2tools.mtviewer.controller.config.PEvents;
 import de.p2tools.mtviewer.controller.config.ProgData;
+import de.p2tools.mtviewer.controller.starter.FilmTools;
 import de.p2tools.p2lib.p2event.P2Event;
 import de.p2tools.p2lib.p2event.P2Listener;
 import de.p2tools.p2lib.tools.log.P2Log;

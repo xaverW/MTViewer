@@ -17,13 +17,13 @@
 
 package de.p2tools.mtviewer.gui.table;
 
-import de.p2tools.mtviewer.controller.FilmTools;
 import de.p2tools.mtviewer.controller.config.ProgColorList;
 import de.p2tools.mtviewer.controller.config.ProgConfig;
 import de.p2tools.mtviewer.controller.config.ProgData;
 import de.p2tools.mtviewer.controller.data.download.DownloadConstants;
 import de.p2tools.mtviewer.controller.data.download.DownloadData;
 import de.p2tools.mtviewer.controller.picon.PIconFactory;
+import de.p2tools.mtviewer.controller.starter.FilmTools;
 import de.p2tools.p2lib.guitools.P2Open;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
