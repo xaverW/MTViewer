@@ -67,7 +67,8 @@ public class PaneChangeColorTime {
 
         timePickerDark.hourPropProperty().addListener((u, o, n) -> resetDone());
         timePickerDark.minutePropProperty().addListener((u, o, n) -> resetDone());
-
+        chkSwitch.setOnAction(a -> resetDone());
+        
         makeGrid();
         TitledPane tpColor = new TitledPane("Wechsel zum Dark-Theme nach Uhrzeit", vBox);
         result.add(tpColor);
