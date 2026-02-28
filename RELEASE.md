@@ -1,6 +1,19 @@
 # MTViewer
 
 
+
+**Version 6**
+* Anpassungen für eine MAC-Version
+* Das Programm hat ein ganz neues Icon-Set bekommen. Das sind jetzt Vektorgrafiken. Diese lassen sich verlustfrei skalieren und farblich anpassen. So kann die Optik im Programm an vielen Stellen jetzt geändert werden (Einstellungen)
+* Start-Dialog beim ersten Start: Wurde für kleinere Bildschirme angepasst
+* Es gibt einen neuen Hilfe-Dialog (Menü-Hilfe)
+* Er merkt sich die alte verwendete Auflösung bei Downloads
+* Sender vom Laden ausnehmen: Neue Sender hinzugefügt, Auswahl jetzt was man sehen will, nicht mehr was nicht
+* Es kann eine Uhrzeit vorgegeben werden, wann das GUI auf das Dark-Theme wechseln soll (Einstellungen)
+* Der Start von externen Programmen (Playern) wurde überarbeitet
+* ...
+
+
 **Version 5**
 * Anpassungen für den Raspberry
 * Installationspaket für Windows
